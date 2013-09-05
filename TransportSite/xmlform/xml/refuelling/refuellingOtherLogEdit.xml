@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="windows-1251"?>
+
+
+<form>
+
+  <params>
+
+    <input name="_fuelId" caption="топливо" size="10"/>
+    <input name="_groupAccId" caption="группа" size="10"/>
+    <input name="_oSheetNumber" caption="No" size="10"/>
+
+  </params>
+
+  
+  <title>АЗС НАФТАН</title>
+  
+  <grid>
+
+    <columns>
+
+      <column name="oSheetNumber" field="oSheetNumber"   align="right"   caption="ведомость No"  size="10" readonly="true" />
+
+      <column name="groupAccCode" field="groupAccCode"   align="right"   caption="код"  size="5" readonly="true"/>
+      <column name="groupAccName" field="groupAccName"   align="right"   caption="группа"  size="60" readonly="true"/>
+
+      <column name="fuelName" field="fuelName"   align="right"   caption="марка ГСМ"  size="60" readonly="true" />
+      <column name="quantity" field="quantity"  align="center"  caption="количество"   size="10" readonly="true"/>
+
+    </columns>
+
+  </grid>
+
+  <provider>
+
+    <selectSQL>
+SELECT
+  s.oSheetNumber,
+  s.fuelId,
+  f.fuelName,
+  s.groupAccId,
+  g.groupAccCode,
+  g.groupAccName,
+  CASE s.sheetState WHEN 1 THEN 'закрыта' ELSE ' ' END sheetState,
+  sum(quantity) quantity
+FROM otherRefuellingSheets s
+INNER JOIN otherRefuelling r ON s.oSheetNumber=r.oSheetNumber AND s.fuelId=r.fuelId AND s.groupAccId=r.groupAccId
+LEFT JOIN groupAcc g ON g.groupAccId = s.groupAccId
+LEFT JOIN fuel f ON f.fuelId = s.fuelId
+WHERE
+  s.fuelId = {_fuelId} AND s.groupAccId = {_groupAccId} AND s.oSheetNumber = {_oSheetNumber}
+GROUP BY s.oSheetNumber, s.fuelId, f.fuelName, s.groupAccId, g.groupAccCode, g.groupAccName,  s.sheetState
+    </selectSQL>
+
+    <deleteSQL caption="закрыть ведомость">
+      UPDATE otherRefuellingSheets
+      SET sheetState = 1
+      WHERE fuelId = {_fuelId} AND groupAccId = {_groupAccId} AND oSheetNumber = {_oSheetNumber}
+    </deleteSQL>
+
+
+  </provider>
+
+</form>

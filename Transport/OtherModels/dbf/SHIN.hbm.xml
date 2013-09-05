@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="Transport" namespace="Transport.OtherModels.dbf">
+
+  <class name ="SHIN" table="SHIN" lazy="false">
+
+     <id name="ZAWNOM"/>     
+     
+     <property name="GAR_N"/>
+     <property name="GOS_N"/>
+     <property name="MODELAV"/>
+     
+     <property name="OBOZN"/>
+     <property name="MODEL"/>
+     <property name="GOST"/>
+     <property name="NORMSL"/>
+     <property name="NORMPROB"/>
+     <property name="STOIM"/>
+     <property name="IZGOT"/>
+     <property name="NAIMPR"/>
+     <property name="KT"/>
+
+
+  </class>
+
+</hibernate-mapping>

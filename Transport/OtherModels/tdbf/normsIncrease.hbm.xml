@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="Transport" namespace="Transport.OtherModels.tdbf" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="normsIncrease" table="normsIncreases" lazy="false" >
+    <id name="normIncreaseId">
+      <generator class="identity" />
+    </id>
+    <property name="normIncreaseName">
+      <column name="normIncreaseName" sql-type="char" not-null="true" />
+    </property>
+    <property name="increase">
+      <column name="increase" sql-type="decimal" not-null="true" />
+    </property>
+    <property name="hidden">
+      <column name="hidden" sql-type="tinyint" not-null="false" />
+    </property>
+  </class>
+</hibernate-mapping>

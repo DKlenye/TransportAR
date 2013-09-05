@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="windows-1251"?>
+
+
+<form>
+
+  <params>
+
+    <select name="_fuel" value="fuelId" text="fuelName" caption="топливо">
+      SELECT *
+      FROM vf_fuel
+      ORDER BY oilGroupId, fuelId
+    </select>
+
+    <select name="_group" value="groupAccId" text="groupAccName" caption="группа">
+      SELECT 
+        groupAccId,
+        groupAccCode +' : '+ groupAccName groupAccName
+      FROM vf_groupAcc
+      ORDER BY groupAccCode
+    </select>
+
+  </params>
+
+  
+  <title>АЗС НАФТАН</title>
+  
+  <header src="xml/refuelling/refuellingOther.xml.header.html" />
+
+  <grid>
+
+    <columns>
+
+      <column name="refuellingDate" field="refuellingDate"  align="center"  caption="дата заправки" size="10" readonly="true" />
+
+      <column name="oSheetNumber" field="oSheetNumber"   align="right"   caption="ведомость No"  size="5" readonly="true" />
+
+      <column name="string" field="string"   align="right"   caption="водитель"  size="60" readonly="true" />
+
+      <column name="department" field="department"   align="right"   caption="цех, фамилия"  size="2" />
+      <column name="personId" field="personId"   align="right"   caption=""  size="5" readonly="true" />
+
+      <column name="quantity" field="quantity"  align="center"  caption="количество"   size="10" />
+
+    </columns>
+
+  </grid>
+
+  <provider>
+
+    <selectSQL>
+
+DECLARE @date1 SMALLDATETIME;
+DECLARE @sheet1 INT;
+
+IF NOT EXISTS ( SELECT * FROM otherRefuellingSheets WHERE fuelId = {_fuel} AND groupAccId = {_group} AND sheetState = 0)
+	BEGIN
+
+    SET @date1 = CONVERT(SMALLDATETIME, dbo.getParameterByName('REFUELLING_DATE'), 104);
+
+	  INSERT INTO otherRefuellingSheets (fuelId, groupAccId, refuellingDate)
+	  VALUES ( {_fuel}, {_group}, @date1);
+
+	END
+
+
+SELECT TOP 1
+	@sheet1 = s.oSheetNumber,
+	@date1 = s.refuellingDate
+FROM otherRefuellingSheets s
+WHERE
+	s.fuelId = 0{_fuel} AND
+	groupAccId = {_group} AND
+	sheetState = 0
+ORDER BY oSheetNumber DESC;
+
+SELECT 
+  refuellingDate = @date1,
+  personId = 0,
+  string = '',
+  department = '  ',
+  oSheetNumber = @sheet1,
+  quantity = 0
+    </selectSQL>
+
+
+    <procedures>
+      <procedure name="proc1" caption="выдать" close="true">
+        INSERT INTO otherRefuelling (
+                  oSheetNumber, fuelId, groupAccId, refuellingDate,
+                  personId, quantity)
+        VALUES({oSheetNumber}, {_fuel}, {_group}, getDate(),{personId}, REPLACE('{quantity}',',','.'));
+      </procedure>
+    </procedures>
+
+  </provider>
+
+</form>

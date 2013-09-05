@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="Transport" namespace="Transport.OtherModels.tdbf" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="transportFacility" table="transportFacilities"  lazy="false">
+    <composite-id>
+      <key-property name="ownerId" column="ownerId" />
+      <key-property name="garageNumber" column="garageNumber" />
+    </composite-id>
+
+    <property name="model">
+      <column name="model" sql-type="varchar" not-null="true" />
+    </property>
+
+     <property name="fondModel">
+        <column name="fondModel" sql-type="varchar" not-null="false" />
+     </property>
+
+     <property name="registrationNumber">
+      <column name="registrationNumber" sql-type="char" not-null="true" />
+    </property>
+    <property name="inventory">
+      <column name="inventory" sql-type="char" not-null="true" />
+    </property>
+    <property name="makeYear">
+      <column name="makeYear" sql-type="smallint" not-null="false" />
+    </property>
+    <property name="inputsDebit">
+      <column name="inputsDebit" sql-type="char" not-null="false" />
+    </property>
+    <property name="inputsCredit">
+      <column name="inputsCredit" sql-type="char" not-null="true" />
+    </property>
+    <property name="engineNo">
+      <column name="engineNo" sql-type="varchar" not-null="false" />
+    </property>
+    <property name="bodyNo">
+      <column name="bodyNo" sql-type="varchar" not-null="false" />
+    </property>
+    <property name="capacityTonns">
+      <column name="capacityTonns" sql-type="decimal" not-null="false" />
+    </property>
+    <property name="capacityPassengers">
+      <column name="capacityPassengers" sql-type="smallint" not-null="false" />
+    </property>
+    <property name="dimensionWidth">
+      <column name="dimensionWidth" sql-type="decimal" not-null="false" />
+    </property>
+    <property name="dimensionLength">
+      <column name="dimensionLength" sql-type="decimal" not-null="false" />
+    </property>
+    <property name="dimensionHeight">
+      <column name="dimensionHeight" sql-type="decimal" not-null="false" />
+    </property>
+    <property name="arrowSweep">
+      <column name="arrowSweep" sql-type="decimal" not-null="false" />
+    </property>
+    <property name="shovelVol">
+      <column name="shovelVol" sql-type="decimal" not-null="false" />
+    </property>
+    <property name="engineVol">
+      <column name="engineVol" sql-type="smallint" not-null="false" />
+    </property>
+    <property name="power">
+      <column name="power" sql-type="decimal" not-null="false" />
+    </property>
+    <property name="selfMass">
+      <column name="selfMass" sql-type="int" not-null="false" />
+    </property>
+    <property name="fullMass">
+      <column name="fullMass" sql-type="int" not-null="false" />
+    </property>
+    <property name="coolVol">
+      <column name="coolVol" sql-type="decimal" not-null="false" />
+    </property>
+    <property name="fuelVol">
+      <column name="fuelVol" sql-type="decimal" not-null="false" />
+    </property>
+    <property name="engineOilVol">
+      <column name="engineOilVol" sql-type="decimal" not-null="false" />
+    </property>
+    <property name="hydraVol">
+      <column name="hydraVol" sql-type="decimal" not-null="false" />
+    </property>
+    <property name="plastOilVol">
+      <column name="plastOilVol" sql-type="decimal" not-null="false" />
+    </property>
+    <property name="groupId">
+      <column name="groupId" sql-type="int" not-null="false" />
+    </property>
+    
+    <property name="groupMainId">
+      <column name="groupMainId" sql-type="int" not-null="false" />
+    </property>
+    
+    <property name="groupAccId">
+      <column name="groupAccId" sql-type="int" not-null="false" />
+    </property>
+    
+    <property name="groupLimitId">
+      <column name="groupLimitId" sql-type="int" not-null="false" />
+    </property>
+    
+    <property name="groupServiceId">
+      <column name="groupServiceId" sql-type="int" not-null="false" />
+    </property>
+    
+    <property name="waybillTypeId">
+      <column name="waybillTypeId" sql-type="int" not-null="false" />
+    </property>
+    
+    <property name="waybillPackageId">
+      <column name="waybillPackageId" sql-type="int" not-null="false" />
+    </property>
+    <property name="shiftBegin">
+      <column name="shiftBegin" sql-type="decimal" not-null="true" />
+    </property>
+    <property name="shiftDuration">
+      <column name="shiftDuration" sql-type="decimal" not-null="true" />
+    </property>
+    
+    <property name="regimeId">
+      <column name="regimeId" sql-type="int" not-null="false" />
+    </property>
+    
+    <property name="customerId">
+      <column name="customerId" sql-type="int" not-null="false" />
+    </property>
+    
+    <property name="trailerGarageNumber">
+      <column name="trailerGarageNumber" sql-type="int" not-null="false" />
+    </property>
+    <property name="_kminvalid">
+      <column name="_kminvalid" sql-type="tinyint" not-null="false" />
+    </property>
+    <property name="_mhinvalid">
+      <column name="_mhinvalid" sql-type="tinyint" not-null="false" />
+    </property>
+    <property name="service1">
+      <column name="service1" sql-type="smallint" not-null="false" />
+    </property>
+    <property name="service2">
+      <column name="service2" sql-type="smallint" not-null="false" />
+    </property>
+    <property name="serviceDocNo">
+      <column name="serviceDocNo" sql-type="varchar" not-null="false" />
+    </property>
+    <property name="RegSertificate">
+      <column name="RegSertificate" sql-type="varchar" not-null="false" />
+    </property>
+    <property name="RegFinish">
+      <column name="RegFinish" sql-type="smalldatetime" not-null="false" />
+    </property>
+    
+    <property name="bodyTypeId">
+      <column name="bodyTypeId" sql-type="int" not-null="false" />
+    </property>
+    
+    <property name="scheduleId">
+      <column name="scheduleId" sql-type="int" not-null="true" />
+    </property>
+    <property name="disposal">
+      <column name="disposal" sql-type="varchar" not-null="false" />
+    </property>
+    <property name="nextInspection">
+      <column name="nextInspection" sql-type="smalldatetime" not-null="false" />
+    </property>
+    <property name="oilOwnerId">
+      <column name="oilOwnerId" sql-type="int" not-null="false" />
+    </property>
+    
+    <property name="subOwnerId">
+      <column name="subOwnerId" sql-type="int" not-null="false" />
+    </property>
+    <property name="writeOff">
+      <column name="writeOff" sql-type="smalldatetime" not-null="false" />
+    </property>
+    <property name="startFuelId">
+      <column name="startFuelId" sql-type="int" not-null="false" />
+    </property>
+    <property name="startRemain">
+      <column name="startRemain" sql-type="decimal" not-null="false" />
+    </property>
+    <property name="startKm">
+      <column name="startKm" sql-type="decimal" not-null="false" />
+    </property>
+    <property name="startMh">
+      <column name="startMh" sql-type="decimal" not-null="false" />
+    </property>
+    <property name="TransportId" insert="false" update="false">
+      <column name="TransportId" sql-type="int" not-null="true"  />
+    </property>
+    <property name="ExpenseListFlag">
+      <column name="ExpenseListFlag" sql-type="bit" not-null="false" />
+    </property>
+    
+  </class>
+</hibernate-mapping>

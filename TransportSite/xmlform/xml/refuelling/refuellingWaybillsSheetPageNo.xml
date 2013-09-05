@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="windows-1251"?>
+
+
+<form>
+
+  <params>
+
+    <input name="_sheet" caption="ВЕДОМОСТЬ No " size="5" />
+
+  </params>
+
+  
+  <title>АЗС НАФТАН - ведомость учета выдачи ГСМ</title>
+  
+
+  <header>
+  <script language="JavaScript">
+ 	function LoadedFinish() {
+ 		parent.setCurrentPageNumber(document.forms[0].pageNo.value);
+ 	}
+  </script>
+  </header>
+
+  <grid>
+
+    <columns>
+      <column name="sheetNo" field="sheetNo" caption="вед.No" size="10" readonly="true"/>
+      <column name="pageNo" field="pageNo" caption="стр." size="10" readonly="true"/>
+    </columns>
+
+  </grid>
+
+  <provider>
+
+    <selectSQL>
+		SELECT
+			pageNo = dbo.getCurrentPageOfSheet({_sheet}, 8),
+			sheetNo = {_sheet}
+    </selectSQL>
+
+  </provider>
+
+</form>

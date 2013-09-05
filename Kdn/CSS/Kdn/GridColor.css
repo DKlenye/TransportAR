@@ -1,0 +1,114 @@
+﻿
+
+.notActual .x-grid3-cell{
+   color:silver;
+}
+
+.x-grid3-row.red
+{
+    background-color:#FFE6E6;
+}
+
+.x-grid3-row.x-grid3-row-alt.red
+{
+    background-color:#FFE0E0;
+}
+
+.x-form-text.x-form-field.red
+{
+    background-color:#FFE6E6;
+    background-image:none;
+    text-align:center;
+    font-size:11pt;
+}
+
+.red.x-grid3-row-selected
+{
+    background-color:#FFE6E6 !important;
+    border : 1px dotted;
+    border-color: #505050;
+}
+
+
+.x-grid3-row.green
+{
+    background-color:#E6FFE9;
+}
+
+.x-grid3-row.x-grid3-row-alt.green
+{
+    background-color:#E0FFE4;
+}
+
+.x-form-text.x-form-field.green
+{
+    background-color:#E6FFE9;
+    background-image:none;
+    text-align:center;
+    font-size:11pt;
+}
+
+
+.green.x-grid3-row-selected
+{
+    background-color:#E6FFE9 !important;
+    border : 1px dotted;
+    border-color: #505050;
+}
+
+
+.x-grid3-row.yellow
+{
+    background-color:#FEFFE6;
+}
+
+.x-grid3-row.x-grid3-row-alt.yellow
+{
+    background-color:#FDFFE0;
+}
+
+.x-form-text.x-form-field.yellow
+{
+    background-color:#FEFFE6;
+    background-image:none;
+    text-align:center;
+    font-size:11pt;
+}
+
+.yellow.x-grid3-row-selected
+{
+    background-color:#FEFFE6 !important;   
+    border : 1px dotted;
+    border-color: #505050;
+}
+
+.x-grid3-row.orange
+{
+    background-color:#FFECD4;
+}
+
+.x-grid3-row.x-grid3-row-alt.orange
+{
+    background-color:#FFEFD9;
+}
+
+
+.x-form-text.x-form-field.orange
+{
+    background-color:#FFECD4;
+    background-image:none;
+    text-align:center;
+    font-size:11pt;
+}
+
+.orange.x-grid3-row-selected
+{
+    background-color:#FFECD4 !important;   
+    border : 1px dotted;
+    border-color: #505050;
+}
+
+.editedColumn
+{
+	background-color: #F5EEDF;
+}

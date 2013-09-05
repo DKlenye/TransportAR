@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="Transport" namespace="Transport.OtherModels.kdrPolymir">
+
+  <class name="BIBPOLIM" lazy="false" where="nomer!='0'">
+
+    <id name="nomer"/>
+
+     <property name="nomer"/>
+     <property name="zex"/>
+     <property name="fam"/>
+     <property name="ima"/>
+     <property name="otc"/>
+     <property name="data_pr"/>
+     <property name="data_uv"/>
+     <property name="dol"/>
+
+  </class>
+
+</hibernate-mapping>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="Transport" namespace="Transport.OtherModels.tdbf">
+
+  <class name="BasePeople" table="People" lazy="false" >
+
+    <id name="EmployeeId"/>
+     
+      <property name="LastName"/>
+      <property name="FirstName"/>
+      <property name="MiddleName"/>
+   
+    
+    <property name="EmployeeNumber"/>
+    <property name="Department"/>
+    <property name="DSC"/>
+
+  </class>
+
+</hibernate-mapping>

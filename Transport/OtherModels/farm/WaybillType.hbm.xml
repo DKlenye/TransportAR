@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="Transport" namespace="Transport.OtherModels.farm">
+
+  <class name="WaybillType"  lazy="false">
+    
+    <id name="WaybillTypeId" >
+      <generator class="native"/>
+    </id>       
+    
+    <property name="WaybillTypeName" />
+    <property name="PrintTemplate" />
+    
+  </class>
+
+</hibernate-mapping>

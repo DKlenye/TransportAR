@@ -1,0 +1,29 @@
+﻿.x-toolbar.main-menu
+{
+    background-image:none;
+}
+
+.main-menu .x-btn button {
+    font: normal 15px tahoma,verdana,helvetica;
+    /*font-weight:bold;*/
+}
+
+.big-menu .x-menu-list-item {
+    font: 15px arial,tahoma,sans-serif;
+}
+
+.big-menu  a.x-menu-item {
+    line-height: 24px;
+    /*font-weight:bold;*/
+}
+
+.big-menu .x-menu-item-active
+{
+    background-image:url(../images/item-over.gif);
+}
+
+.big-menu .x-menu-item-icon
+{
+     top: 7px;
+}
+

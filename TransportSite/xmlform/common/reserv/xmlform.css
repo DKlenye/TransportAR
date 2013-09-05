@@ -1,0 +1,248 @@
+BODY, TD, TH {
+  FONT-SIZE: 11px;
+  COLOR: windowtext;
+  FONT-FAMILY: xVerdana, xHelvetica, xTahoma, Arial, MS Sans serif;
+  BACKGROUND-COLOR: window;
+
+  /*
+    виртуальный класс. не применяется сам по себе, но используется
+    для назначения и переназначения свойств
+    color
+    background-color
+  */
+  inputReadonlyBackgroundColor: THREEDFACE;
+  inputReadonlyColor: BUTTONTEXT;
+}
+
+A {
+  COLOR: BUTTONTEXT;
+  FONT-WEIGHT: bold;
+}
+
+/*
+//
+//
+//
+*/
+  .activepagetab {
+  BORDER-RIGHT: white 2px outset;
+  BORDER-TOP: white 2px outset;
+  BORDER-LEFT: white 2px outset;
+  BORDER-BOTTOM: lightgrey 2px solid;
+  BACKGROUND-COLOR: lightgrey;
+}
+
+  .passivpagetab {
+  BORDER-RIGHT: white 1px outset;
+  BORDER-TOP: white 1px outset;
+  BORDER-LEFT: white 1px outset;
+  BORDER-BOTTOM: white 1px inset;
+  BACKGROUND-COLOR: lightgrey;
+}
+
+/*
+//
+//
+//
+*/
+.ddTable {
+  BORDER: THREEDHIGHLIGHT 2px outset;
+  COLOR: BUTTONTEXT;
+  BACKGROUND-COLOR: THREEDFACE;
+}
+.ddHeader {
+  BORDER: THREEDFACE 2px solid;
+  FONT-WEIGHT: bold;
+  COLOR: CAPTIONTEXT;
+  BACKGROUND-COLOR: ACTIVECAPTION;
+}
+.ddBody {
+  BORDER: THREEDHIGHLIGHT 2px outset;
+  PADDING: 4px;
+  COLOR: BUTTONTEXT;
+  BACKGROUND-COLOR: THREEDFACE
+}
+
+.ddTd {
+  COLOR: BUTTONTEXT;
+  BACKGROUND-COLOR: THREEDFACE;
+}
+  .flatBtn {
+  BORDER: black 1px solid;
+  FONT-SIZE: 10px;
+  BACKGROUND-COLOR: THREEDHIGHLIGHT;
+  TEXT-DECORATION: underline
+}
+/*
+//
+//
+*/
+/* */
+.tdparamscaption { background-color: THREEDFACE; color: BUTTONTEXT; }
+.tdparamsinput { background-color: THREEDFACE; }
+  .inputparams { border: 1px inset white; color: black; background-color: white; }
+.tdparamsbuttoncaption { background-color: THREEDFACE; }
+.tdparamsbuttoninput { background-color: THREEDFACE; }
+  .buttonparams     { color: THREEDDARKSHADOW; background-color: THREEDFACE; border: 1px outset white; width: 86px;}
+  .buttonparamsopen { color: THREEDDARKSHADOW; background-color: THREEDHIGHLIGHT; border: 1px outset white; width: 86px;}
+/*
+//
+//
+//
+*/
+/* */
+.tdcaption { background-color: THREEDFACE; color: BUTTONTEXT; }
+.tdinput { background-color: THREEDFACE; }
+
+/*
+//
+//  SAVE DELETE INSERT
+//
+*/
+#xmlformsavebutton {  background-color: THREEDFACE; color: BUTTONTEXT; border: 1px outset THREEDHIGHLIGHT; }
+#xmlformdeletebutton { background-color: THREEDFACE; color: BUTTONTEXT; border: 1px outset THREEDHIGHLIGHT;  }
+#xmlformnewbutton {  background-color: THREEDFACE; color: BUTTONTEXT; border: 1px outset THREEDHIGHLIGHT; }
+  #xmlformaddbutton {  background-color: THREEDFACE; color: BUTTONTEXT; border: 1px outset THREEDHIGHLIGHT; }
+  #xmlformcancelbutton {  background-color: THREEDFACE; color: BUTTONTEXT; border: 1px outset THREEDHIGHLIGHT; }
+  .xmlformcancelbutton {  background-color: THREEDFACE; color: BUTTONTEXT; border: 1px outset THREEDHIGHLIGHT; }
+/*
+//
+//
+//
+*/
+.buttonscaption {  background-color: THREEDFACE; }
+.buttonsinput {  background-color: THREEDFACE; }
+/*
+//
+//
+//
+*/
+.invisible { visibility: hidden;  color: #B9B9B9; border: 1px solid white; background-color: white; }
+.hide { display: none; }
+
+
+/*
+//
+//
+//
+*/
+.normalscroll {
+  /*
+  xscrollbar-face-color: THREEDFACE; 
+  xscrollbar-highlight-color: whitesmoke; 
+  xscrollbar-3dlight-color: THREEDFACE;
+  xscrollbar-shadow-color: darkgray; 
+  xscrollbar-arrow-color: black; 
+  xscrollbar-darkshadow-color: THREEDFACE; 
+  */
+  /*scrollbar-track-color: cyan; */
+  scrollbar-base-color: THREEDFACE;
+}
+
+.info {
+  padding: 2px 4px;
+  background-color: INFOBACKGROUND;
+  color: INFOTEXT;
+  border: 1px solid THREEDSHADOW;
+}
+
+/*
+***
+*** SEARCH
+***
+*/
+.searchBoxTop {
+  COLOR: BUTTONTEXT;
+  BACKGROUND-COLOR: THREEDFACE;
+  padding: 2px 8 px;
+  border-top: 2px groove white;
+  border-left: 2px groove white;
+  border-right: 2px groove white;
+}
+.searchBoxBottom {
+  COLOR: BUTTONTEXT;
+  BACKGROUND-COLOR: THREEDFACE;
+  padding: 2px 8 px;
+  border-bottom: 2px groove white;
+  border-left: 2px groove white;
+  border-right: 2px groove white;
+}
+.searchBoxMiddle {
+  COLOR: BUTTONTEXT;
+  BACKGROUND-COLOR: THREEDFACE;
+  padding: 2px 8 px;
+  border-left: 2px groove white;
+  border-right: 2px groove white;
+}
+
+.searchElement {
+  color: black;
+  background-color: #def;
+  border: 1px solid blue;
+  margin-right: 4px;
+}
+
+.searchButton {
+  color: navy;
+  background-color: LIGHTSKYBLUE;
+  border: 1px  solid blue;
+  text-decoration: none;
+}
+
+/*
+
+
+*/
+.helpButton {
+  color: yellow;
+  background-color: green;
+  border: 1px outset lightgreen;
+  font-weight: bold;
+  padding: 0px 4px;
+}
+
+/*
+
+  BUTTONS
+
+*/
+span.button {
+  border: 1px solid navi;
+}
+
+a.button {
+  xxborder: 2px solid #9DBCEB;
+  xxbackground-color: #FFFFF0;
+
+  text-decoration: none;
+  padding: 1px 8px;
+  text-align: center;
+
+  border-top: 2px solid #CEE7FF;
+  border-left: 2px solid #A1BEEC;
+  border-right: 2px solid #A1BEEC;
+  border-bottom: 2px solid #8989E4;
+  background-color: #E9EBF5;
+
+}
+
+a.button:hover {
+  border: 2px solid #FFC73C;
+  background-color: #FFFFF0;
+}
+
+/*
+a.button {
+  border: 2px solid #9DBCEB;
+  text-decoration: none;
+}
+*/
+
+/*
+button {
+  border: 0;
+  background-color: #F8F8FF;
+  width: 78px;
+  height: 18px;
+}
+*/

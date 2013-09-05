@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="windows-1251"?>
+
+
+<form>
+
+  <params>
+
+  	<input name="_date1" caption="" size="7" readonly="true" />
+  	<input name="_recordId" caption="No" size="7" readonly="true" />
+    <input name="_garnom" caption="гаражный номер" size="7" autopostback="true" />
+
+    <select name="_waybill" value="waybillNumber" text="waybillText" caption=" путевой лист: дата No ">
+      SELECT TOP 31
+        waybillNumber,
+        isNull(convert(CHAR(12),departureDate,104), '--.--.----') + ' * No : ' + CAST(formNumber AS CHAR(12)) waybillText
+      FROM waybills
+      WHERE
+        garageNumber = 0{_garnom} AND
+        waybillState NOT IN(2)
+        AND
+        (   DATEDIFF(dd, departureDate, GETDATE()) &lt; 31
+         OR DATEDIFF(dd, returnDate, GETDATE()) &lt; 31 )
+      ORDER BY departureDate DESC
+    </select>
+
+  </params>
+
+    <note>
+    </note>
+
+    
+  <title>АЗС НАФТАН</title>
+  
+  <header src="xml/refuelling/refuellingWaybillsCorrectionNew.xml.header.html" />
+
+  <grid>
+
+    <columns>
+
+      <column name="groupAccName" field="groupAccName"  align="center"  caption="группа"   size="60"  readonly="true"/>
+      <column name="facility" field="facility"  align="center"  caption="автомобиль"   size="80"  readonly="true"/>
+
+      <column name="refuellingDate" field="refuellingDate"  align="center"  caption="дата заправки" size="10" />
+
+      <column name="sheetNumber" field="sheetNumber"   align="right"   caption="ведомость No"  size="6" target="fuelSelect" readonly="true">
+        <select name="fuelSelect" caption=".." value="sheetNumber" text="fuelName">
+          SELECT
+            s.sheetNumber,
+            f.fuelName
+          FROM waybillsRefuellingSheets s
+          INNER JOIN fuel f ON s.fuelId = f.fuelId
+          WHERE s.sheetNumber = (SELECT sheetNumber FROM waybillsRefuelling WHERE recordId={_recordId} )
+        </select>
+      </column>
+
+      <column name="driverId" field="driverId"   align="right"   caption="водитель"  size="5" target="driverIdSelect" readonly="true">
+        <select name="driverIdSelect" caption=".." value="driverId" text="driverName">
+          SELECT
+            0 rorder,
+            0 driverId,
+            '-- выберите водителя --' driverName
+          UNION
+          SELECT
+            1 rorder,
+            w.driverId,
+            '*' + d.string driverName
+          FROM waybillsDrivers w
+          LEFT JOIN drivers d ON d.driverId = w.driverId
+          WHERE
+            w.garageNumber = 0{_garnom} AND
+            w.waybillNumber = 0{_waybill} AND
+            EXISTS (
+              SELECT * FROM waybillsDriversResponse r
+              WHERE r.garageNumber = w.garageNumber AND r.waybillNumber = w.waybillNumber AND r.driverId = w.driverId
+            )
+          UNION ALL
+          SELECT
+            2 rorder,
+            w.driverId,
+            d.string driverName
+          FROM waybillsDrivers w
+          LEFT JOIN drivers d ON d.driverId = w.driverId
+          WHERE
+            w.garageNumber = 0{_garnom} AND
+            w.waybillNumber = 0{_waybill} AND
+            NOT EXISTS (
+              SELECT * FROM waybillsDriversResponse r
+              WHERE r.garageNumber = w.garageNumber AND r.waybillNumber = w.waybillNumber AND r.driverId = w.driverId
+            )
+          ORDER BY rorder, driverName
+        </select>
+      </column>
+
+      <column name="quantity" field="quantity"  align="center"  caption="количество"   size="10" />
+
+    </columns>
+
+  </grid>
+
+  <provider>
+
+    <selectSQL>
+
+SELECT 
+  facility = (SELECT model+' '+registrationNumber FROM transportFacilities WHERE garageNumber = {_garnom} and ownerId = dbo.getCurrentOwner()),
+  groupAccName = (SELECT groupAccName FROM transportFacilities t, groupAcc g WHERE garageNumber = {_garnom} AND g.groupAccId = t.groupAccId and ownerId = dbo.getCurrentOwner()),
+  refuellingDate = dbo.getParameterByName('REFUELLING_DATE'),
+  driverId = (SELECT isNull(driverId, 0) FROM waybillsDriversResponse WHERE garageNumber = {_garnom} AND waybillNumber = {_waybill} and ownerId = dbo.getCurrentOwner()),
+  sheetNumber = (SELECT sheetNumber FROM waybillsRefuelling WHERE recordId={_recordId} ),
+  quantity = 0
+
+    </selectSQL>
+
+    <procedures>
+      <procedure name="proc1" caption="выдать" close="true">
+      IF (0{quantity} &gt; 0) BEGIN
+
+        DECLARE @fuelId INT;
+        SELECT @fuelId = fuelId FROM waybillsRefuelling WHERE recordId =0{_recordId};
+
+      declare @owner int
+       set @owner = dbo.getCurrentOwner()
+
+        INSERT INTO waybillsRefuelling (
+          refuellingDate,
+          ownerId,
+          waybillNumber,
+          garageNumber,
+          sheetNumber,
+          fuelId,
+          refuellingId,
+          driverId,
+          quantity,
+          correctionId)
+        VALUES(
+          convert(smalldatetime,'{refuellingDate}',104),
+          @owner,
+          0{_waybill},
+          0{_garnom},
+          {sheetNumber},
+          @fuelId,
+          0,
+          {driverId},
+          {quantity},
+          {_recordId});
+
+        UPDATE waybillsRefuelling
+        SET
+        	quantity = 0
+        WHERE recordId = 0{_recordId}
+
+      END
+      
+      
+      </procedure>
+    </procedures>
+
+  </provider>
+
+</form>

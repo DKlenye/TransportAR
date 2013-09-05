@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="Transport" namespace="Transport.OtherModels.dbf">
+
+  <class name ="PolymirRefuelling" table="Vhm00zv" lazy="false">
+
+
+     <composite-id>
+        <key-property name ="GAR_N"/>
+        <key-property name ="NPL"/>
+     </composite-id>
+
+     <property name="SHP"/>
+     <property name="SHG"/>
+     <property name="NAIMG"/>
+     <property name="GOSN"/>
+
+
+     <property name="TABN"/>
+     <property name="KOLG"/>
+
+     <property name="REP"/>
+     <property name="PV"/>
+
+  </class>
+
+</hibernate-mapping>

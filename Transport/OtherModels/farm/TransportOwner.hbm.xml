@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="Transport" namespace="Transport.OtherModels.farm">
+
+  <class name="TransportOwner" lazy="false">
+    <id name="OwnerId">
+      <generator class="native"/>
+    </id>
+
+    <property name="OwnerName" length="50"/>
+    
+  </class>
+
+</hibernate-mapping>

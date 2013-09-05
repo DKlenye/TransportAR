@@ -1,0 +1,103 @@
+.label {
+padding: 1px 4px 2px;
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px;
+}
+
+.label, .badge {
+font-size: 11.844px;
+font-weight: bold;
+line-height: 14px;
+color: #fff;
+text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+white-space: nowrap;
+vertical-align: baseline;
+background-color: #AAA;
+}
+
+.label-success, .badge-success {
+background-color: #468847;
+}
+
+.label-black {
+    background-color: #222222;
+    color:White;
+}
+.label-gray {
+    background-color: #999;
+    color:White;
+}
+
+
+.label-warning, .badge-warning {
+background-color: #f89406;
+}
+.label-important, .badge-important {
+background-color: #b94a48;
+}
+
+.x-grid-panel .x-grid3-row-expanded {
+    height: auto !important;
+}
+table.freight {
+	border-width: 1px;
+	border-spacing: 2px;
+	border-style: outset;
+	border-color: gray;
+	border-collapse: collapse;
+	background-color: rgb(255, 255, 240);
+}
+table.freight th {
+	border-width: 1px;
+	padding: 1px;
+	border-style: dotted;
+	border-color: gray;
+    color:gray;
+    background-color: rgb(240, 240, 240);
+}
+table.freight td {
+	border-width: 1px;
+	padding: 1px;
+	border-style: dotted;
+	border-color: gray;    
+	background-color: rgb(255, 255, 240);
+    font-weight:bold;
+}
+
+table.freight td.first {
+	border-width: 1px;
+	padding: 1px;
+	border-style: dotted;
+	border-color: gray;
+    color:gray;
+    background-color: rgb(240, 240, 240);
+    font-weight:bold;
+}
+
+div.freight {
+    border: 1px solid gray;  
+    padding:5px;
+}
+
+.request-editor .x-grid3-cell-inner, .request-editor .x-list-body dt, .request-detail .x-grid3-cell-inner{
+    white-space: normal; 
+}
+
+.request-editor .x-list-body dt em, .request-editor .x-list-header-inner div em  {
+    font: normal 13px arial, tahoma, helvetica, sans-serif;
+}
+.request-editor .x-list-header-inner div em {
+    font-weight:bold;
+}
+
+.request-editor .x-panel-header, .request-detail .x-panel-header{
+    font-size:12px;
+}
+
+
+.vehicleOrderGrid .x-grid3-cell-first .x-grid3-cell-inner {
+    padding-left: 0px;
+}
+
+

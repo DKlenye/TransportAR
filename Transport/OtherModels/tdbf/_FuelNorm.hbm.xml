@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="Transport" namespace="Transport.OtherModels.tdbf">
+
+  <class name="FuelNorm" table="fuelNorms" lazy="false">
+    <id name="FuelNormId" column="fuelNormId">
+      <generator class="native"/>
+    </id>
+
+    <property name="basicNorm"/>
+    <property name="note"/>
+    <property name="coefficientMh"/>
+    <property name="notInMetters"/>
+    <property name="normType"/>
+    <property name="additional"/>
+    <property name="FuelId"/>
+
+
+    <join table="fuelNormsStatus" fetch="join" optional="true" >
+      <key>
+        <column name="fuelNormId"/>
+      </key>
+      <property name="enabled"/>
+      <property name="startingDate"/>
+      <property name="dateOfTerm"/>
+      <property name="garageNumber"/>
+      <property name="ownerId"/>
+    </join>
+    
+  </class>
+
+</hibernate-mapping>

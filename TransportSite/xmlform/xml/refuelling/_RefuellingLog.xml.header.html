@@ -1,0 +1,58 @@
+<div class="info" style="margin-right: 18px;">
+<b>ВЕДОМОСТЬ&nbsp;УЧЕТА&nbsp;ВЫДАЧИ&nbsp;ГСМ</b><br/> доступна в двух режимах:
+<ul style="padding-left:0px; margin-left: 16px;">
+  <li><a href="javascript:openCartWindow()">полная версия</a> в виде отчета, без подписей водителей и итогов по странице</li>
+  <li><a href="javascript:openLogWindow()">рабочая версия</a>(&nbsp;стр.<select id="pageNumber"><option value="1">1</option></select>&nbsp;), для печати ведомости
+    на подпись водителей или итогов, с итогами по странице и всего по ведомости
+    </li>
+</ul>
+</div>
+
+<script language="JavaScript">
+window_on_load = window.onload;
+window.onload = this_Loaded;
+
+function this_Loaded() {
+  
+  document.getElementById("_fuel").style.width = "176px";
+  document.getElementById("_group").style.width = "282px";
+
+  //
+  //
+  if (window_on_load) window_on_load();
+  //
+  //
+  document.getElementById("_dataGrid").AfterClick = setPageNumberOptions;
+  setPageNumberOptions();
+
+}
+
+//
+//
+//
+var PAGENOCOLINDEX = 8;
+function setPageNumberOptions() {
+
+  var obj = document.getElementById("_dataGrid");
+  var sel = document.getElementById("pageNumber");
+  while(sel.options.length>0) {
+    sel.options.remove(0);
+  }
+
+  if (obj.selectedRow) {
+    // 7
+    var int = parseInt(obj.selectedRow.cells(PAGENOCOLINDEX).innerText);
+  }
+  else {
+    var int = 1;
+  }
+
+  for (var i=1; i<=int; i++) {
+    var el = document.createElement("option");
+    el.value = i;
+    el.appendChild(document.createTextNode(" "+i+" "));
+    sel.appendChild(el);
+  }
+
+}
+</script>

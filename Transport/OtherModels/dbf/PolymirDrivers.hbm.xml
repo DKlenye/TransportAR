@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="Transport" namespace="Transport.OtherModels.dbf">
+
+  <class name ="PolymirDrivers" table="Shm00v" lazy="false">
+
+    <id name="TABN"/>
+
+     <property name="FIO"/>
+     <property name="IO"/>
+     <property name="NVU"/>
+     <property name="KL"/>
+
+  </class>
+
+</hibernate-mapping>

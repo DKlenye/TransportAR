@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="windows-1251"?>
+
+
+<form>
+	
+	<title/>
+
+  <params>
+
+    <input name="_sheet" caption="ВЕДОМОСТЬ No " size="5" />
+    <input name="_fuel" caption="топливо: " size="10" />
+    <input name="_group" caption="группа: " size="30" />
+    <input name="_page" caption="стр: " size="2" />
+
+    <input name="_date" caption="дата" size="3" />
+
+  </params>
+
+  <xslheader src="xml/refuelling/refuellingSheet1header.xsl"/>
+  <xslfooter src="xml/refuelling/refuellingSheet1footer.xsl"/>
+
+  <delete src="refuellingOtherSheetDeleteRecord" />
+  <close src="refuellingOtherSheetClose" />
+
+  <grid>
+
+    <columns>
+      <column name="recordId1" field="recordId1"  align="center"  caption="No" size="10" readonly="true" />
+      <column name="model" field="model"  align="center"  caption="Автомобиль гар. ном. модель"   size="10"  readonly="true"/>
+      <column name="registrationNumber" field="registrationNumber"  align="center"  caption="гос.номер"   size="10"  readonly="true"/>
+      <column name="waybillNumber" field="waybillNumber"  align="center"  caption="No п.л."   size="10"  readonly="true"/>
+      <column name="fio" field="fio"  align="center"  caption="Фамилия И.О."   size="10"  readonly="true"/>
+      <column name="zextab" field="zextab"  align="center"  caption="цех, таб."   size="10"  readonly="true"/>
+      <column name="quantity" field="quantity"  align="center"  caption="выдано"   size="10" />
+      <column name="sign" field="sign" caption="расписка в получении" />
+
+    </columns>
+
+  </grid>
+
+  <provider>
+
+    <selectSQL>
+SELECT
+  CASE WHEN r.recordId >= 2147483646 THEN NULL ELSE r.recordId END recordId1,
+  waybillNumber = NULL,
+  model = NULL,
+  registrationNumber = NULL,
+  CASE WHEN r.recordId = 2147483647 THEN 'ИТОГО ПО ВЕДОМОСТИ :' WHEN r.recordId = 2147483646 THEN '= ИТОГО ПО СТРАНИЦЕ =' ELSE isNull(d.fio,'') END fio,
+  isNull(d.zex,'')+' '+ isNull(d.tab,'') zextab,
+  r.quantity,
+  CASE WHEN r.recordId >= 2147483646 THEN NULL ELSE '____________' END sign
+FROM dbo.getOtherRefuellingSheet({_sheet}, 8, {_page}) r
+LEFT JOIN persons d ON d.id_men = r.personId
+ORDER BY r.recordId
+
+    </selectSQL>
+
+  </provider>
+
+</form>

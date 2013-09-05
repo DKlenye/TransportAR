@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="windows-1251"?>
+
+
+<form>
+
+  <params>
+
+    <input name="_record" caption="No: " size="7" comment="для удаления записи"/>
+
+  </params>
+
+  <title>АЗС НАФТАН - ведомость учета выдачи ГСМ</title>
+  
+  <grid>
+
+    <columns>
+      <column name="recordId" field="recordId"  align="center"  caption="No" size="10" readonly="true" />
+
+      <column name="refuellingDate" field="refuellingDate1"  align="center"  caption="дата заправки" size="10" readonly="true" />
+
+      <column name="zex" field="zex"  align="center"  caption="цех"   size="10" readonly="true"/>
+      <column name="tab" field="tab"  align="center"  caption="таб."   size="10"  readonly="true"/>
+      <column name="fio" field="fio"  align="center"  caption="Фамилия И.О."   size="50"  readonly="true"/>
+
+      <column name="quantity" field="quantity"  align="center"  caption="количество"   size="10" readonly="true"/>
+
+    </columns>
+
+  </grid>
+
+  <provider>
+
+    <selectSQL>
+
+DECLARE @sheet  INT;
+
+SELECT @sheet=oSheetNumber
+FROM otherRefuelling
+WHERE recordId = 0{_record}
+
+SELECT
+  d.zex,
+  d.tab,
+  d.fio,
+  r.*,
+  convert(CHAR(12), refuellingDate, 104) refuellingDate1
+FROM dbo.getOtherRefuellingSheet(@sheet, 10, -1) r
+LEFT JOIN persons d ON d.Id_men = r.personId
+WHERE r.recordId = 0{_record}
+
+
+    </selectSQL>
+
+    <deleteSQL>
+      DELETE FROM otherRefuelling
+      WHERE recordId = 0{_record}
+    </deleteSQL>
+
+
+  </provider>
+
+</form>

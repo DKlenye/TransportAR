@@ -1,0 +1,417 @@
+/* позиции */
+
+/*
+	форма 3(п)
+*/
+
+
+#prn_garageNumber{ position: absolute; top: 40mm; left: 196mm; }
+#prn_model{ position: absolute; top: 40mm; left: 76mm; }
+#prn_registrationNumber{ position: absolute; top: 40mm; left: 164mm; }
+#prn_licenceCart{ position: absolute; top: 26mm; left: 86mm; }
+#prn_waybillNumber{ position: absolute; top: 11mm; left: 81mm; }
+#prn_formNumber{ position: absolute; top: 21mm; left: 148mm; }
+#prn_schedule{ position: absolute; top: 34mm; left: 76mm; }
+#prn1_model{ position: absolute; top: 34mm; left: 246mm; }
+#prn1_registrationNumber{ position: absolute; top: 40mm; left: 246mm; }
+#prn_departureDate{ position: absolute; top: 21mm; left: 67mm; }
+#prn_departureTime{ position: absolute; top: 86mm; left: 36mm; }
+#prn_departureKm{ position: absolute; top: 86mm; left: 66mm; }
+#prn_departureMh{ position: absolute; top: 0mm; left: 0mm; }
+#prn_fuelRemains{ position: absolute; top: 133mm; left: 42mm; }
+#prn1_departureDate{ position: absolute; top: 21mm; left: 236mm; }
+#prn_returnDate{ position: absolute; top: 0mm; left: 0mm; }
+#prn_returnTime{ position: absolute; top: 101mm; left: 36mm; }
+#prn_drivers{ position: absolute; top: 46mm; left: 76mm; }
+#prn_customerId{ position: absolute; top: 86mm; left: 111mm; }
+#prn_customerName{ position: absolute; top: 91mm; left: 111mm; }
+#prn1_customerName{ position: absolute; top: 56mm; left: 226mm; }
+
+#prn_way{ position: absolute; top: 133mm; left: 172mm; }
+
+#prn_waybillType { position: absolute; top: 140mm; left: 1mm; }
+
+/*
+	21 февраля 2008 г. 11:19:18
+*/
+#prn_garageNumber{ position: absolute; top: 40mm; left: 196mm; }
+#prn_model{ position: absolute; top: 40mm; left: 76mm; }
+#prn_registrationNumber{ position: absolute; top: 40mm; left: 164mm; }
+#prn_licenceCart{ position: absolute; top: 26mm; left: 86mm; }
+#prn_waybillNumber{ position: absolute; top: 11mm; left: 81mm; }
+#prn_formNumber{ position: absolute; top: 21mm; left: 148mm; }
+#prn_schedule{ position: absolute; top: 34mm; left: 76mm; }
+#prn1_model{ position: absolute; top: 34mm; left: 246mm; }
+#prn1_registrationNumber{ position: absolute; top: 40mm; left: 246mm; }
+#prn_departureDate{ position: absolute; top: 21mm; left: 67mm; }
+#prn_departureTime{ position: absolute; top: 86mm; left: 36mm; }
+#prn_departureKm{ position: absolute; top: 86mm; left: 66mm; }
+#prn_fuelRemains{ position: absolute; top: 133mm; left: 42mm; }
+#prn1_departureDate{ position: absolute; top: 21mm; left: 236mm; }
+#prn_returnTime{ position: absolute; top: 101mm; left: 36mm; }
+#prn_drivers{ position: absolute; top: 46mm; left: 76mm; }
+#prn_customerId{ position: absolute; top: 86mm; left: 111mm; }
+#prn_customerName{ position: absolute; top: 91mm; left: 111mm; }
+#prn1_customerName{ position: absolute; top: 56mm; left: 226mm; }
+#prn_trailer{ position: absolute; top: 59mm; left: 76mm; }
+#prn1_trailer{ position: absolute; top: 46mm; left: 237mm; }
+#prn_way{ position: absolute; top: 133mm; left: 172mm; }
+#prn_formfeed{ position: absolute; top: 140mm; left: 1mm; }
+
+/*
+	22 февраля 2008 г. 11:07:57
+*/
+#prn_garageNumber{ position: absolute; top: 40mm; left: 196mm; }
+#prn_model{ position: absolute; top: 40mm; left: 76mm; }
+#prn_registrationNumber{ position: absolute; top: 40mm; left: 164mm; }
+#prn_licenceCart{ position: absolute; top: 26mm; left: 86mm; }
+#prn_waybillNumber{ position: absolute; top: 7mm; left: 6mm; }
+#prn_formNumber{ position: absolute; top: 21mm; left: 148mm; }
+#prn_schedule{ position: absolute; top: 34mm; left: 76mm; }
+#prn1_model{ position: absolute; top: 34mm; left: 246mm; }
+#prn1_registrationNumber{ position: absolute; top: 40mm; left: 246mm; }
+#prn_departureDate{ position: absolute; top: 21mm; left: 67mm; }
+#prn_departureTime{ position: absolute; top: 86mm; left: 36mm; }
+#prn_departureKm{ position: absolute; top: 86mm; left: 66mm; }
+#prn_fuelRemains{ position: absolute; top: 133mm; left: 42mm; }
+#prn1_departureDate{ position: absolute; top: 21mm; left: 236mm; }
+#prn_returnTime{ position: absolute; top: 101mm; left: 36mm; }
+#prn_drivers{ position: absolute; top: 46mm; left: 76mm; }
+#prn_customerId{ position: absolute; top: 86mm; left: 111mm; }
+#prn_customerName{ position: absolute; top: 91mm; left: 111mm; }
+#prn1_customerName{ position: absolute; top: 56mm; left: 226mm; }
+#prn_trailer{ position: absolute; top: 59mm; left: 76mm; }
+#prn1_trailer{ position: absolute; top: 46mm; left: 237mm; }
+#prn_way{ position: absolute; top: 133mm; left: 172mm; }
+#prn_formfeed{ position: absolute; top: 140mm; left: 1mm; }
+
+/*
+	22 февраля 2008 г. 14:07:49
+*/
+#prn_waybillType{ position: absolute; top: 7mm; left: 33mm; }
+#prn_garageNumber{ position: absolute; top: 40mm; left: 196mm; }
+#prn_model{ position: absolute; top: 40mm; left: 76mm; }
+#prn_registrationNumber{ position: absolute; top: 40mm; left: 164mm; }
+#prn_licenceCart{ position: absolute; top: 26mm; left: 86mm; }
+#prn_waybillNumber{ position: absolute; top: 7mm; left: 6mm; }
+#prn_formNumber{ position: absolute; top: 21mm; left: 148mm; }
+#prn_schedule{ position: absolute; top: 34mm; left: 76mm; }
+#prn1_model{ position: absolute; top: 34mm; left: 246mm; }
+#prn1_registrationNumber{ position: absolute; top: 40mm; left: 246mm; }
+#prn_departureDate{ position: absolute; top: 21mm; left: 67mm; }
+#prn_departureTime{ position: absolute; top: 86mm; left: 36mm; }
+#prn_departureKm{ position: absolute; top: 86mm; left: 66mm; }
+#prn_fuelRemains{ position: absolute; top: 133mm; left: 42mm; }
+#prn1_departureDate{ position: absolute; top: 21mm; left: 236mm; }
+#prn_returnTime{ position: absolute; top: 101mm; left: 36mm; }
+#prn_drivers{ position: absolute; top: 46mm; left: 76mm; }
+#prn_customerId{ position: absolute; top: 86mm; left: 111mm; }
+#prn_customerName{ position: absolute; top: 91mm; left: 111mm; }
+#prn1_customerName{ position: absolute; top: 56mm; left: 226mm; }
+#prn_trailer{ position: absolute; top: 59mm; left: 76mm; }
+#prn1_trailer{ position: absolute; top: 46mm; left: 237mm; }
+#prn_way{ position: absolute; top: 133mm; left: 172mm; }
+
+/*
+	22 февраля 2008 г. 14:09:06
+*/
+#prn_waybillType{ position: absolute; top: 27mm; left: 33mm; }
+#prn_garageNumber{ position: absolute; top: 40mm; left: 196mm; }
+#prn_model{ position: absolute; top: 40mm; left: 76mm; }
+#prn_registrationNumber{ position: absolute; top: 40mm; left: 164mm; }
+#prn_licenceCart{ position: absolute; top: 26mm; left: 86mm; }
+#prn_waybillNumber{ position: absolute; top: 27mm; left: 6mm; }
+#prn_formNumber{ position: absolute; top: 21mm; left: 148mm; }
+#prn_schedule{ position: absolute; top: 34mm; left: 76mm; }
+#prn1_model{ position: absolute; top: 34mm; left: 246mm; }
+#prn1_registrationNumber{ position: absolute; top: 40mm; left: 246mm; }
+#prn_departureDate{ position: absolute; top: 21mm; left: 67mm; }
+#prn_departureTime{ position: absolute; top: 86mm; left: 36mm; }
+#prn_departureKm{ position: absolute; top: 86mm; left: 66mm; }
+#prn_fuelRemains{ position: absolute; top: 133mm; left: 42mm; }
+#prn1_departureDate{ position: absolute; top: 21mm; left: 236mm; }
+#prn_returnTime{ position: absolute; top: 101mm; left: 36mm; }
+#prn_drivers{ position: absolute; top: 46mm; left: 76mm; }
+#prn_customerId{ position: absolute; top: 86mm; left: 111mm; }
+#prn_customerName{ position: absolute; top: 91mm; left: 111mm; }
+#prn1_customerName{ position: absolute; top: 56mm; left: 226mm; }
+#prn_trailer{ position: absolute; top: 59mm; left: 76mm; }
+#prn1_trailer{ position: absolute; top: 46mm; left: 237mm; }
+#prn_way{ position: absolute; top: 133mm; left: 172mm; }
+
+/*
+	22 февраля 2008 г. 14:20:32
+*/
+#prn_waybillType{ position: absolute; top: 16mm; left: 33mm; }
+#prn_garageNumber{ position: absolute; top: 40mm; left: 196mm; }
+#prn_model{ position: absolute; top: 40mm; left: 76mm; }
+#prn_registrationNumber{ position: absolute; top: 40mm; left: 164mm; }
+#prn_licenceCart{ position: absolute; top: 26mm; left: 86mm; }
+#prn_waybillNumber{ position: absolute; top: 16mm; left: 6mm; }
+#prn_formNumber{ position: absolute; top: 16mm; left: 43mm; }
+#prn_schedule{ position: absolute; top: 34mm; left: 76mm; }
+#prn1_model{ position: absolute; top: 34mm; left: 246mm; }
+#prn1_registrationNumber{ position: absolute; top: 40mm; left: 246mm; }
+#prn_departureDate{ position: absolute; top: 21mm; left: 67mm; }
+#prn_departureTime{ position: absolute; top: 86mm; left: 36mm; }
+#prn_departureKm{ position: absolute; top: 86mm; left: 66mm; }
+#prn_fuelRemains{ position: absolute; top: 133mm; left: 42mm; }
+#prn1_departureDate{ position: absolute; top: 21mm; left: 236mm; }
+#prn_returnTime{ position: absolute; top: 101mm; left: 36mm; }
+#prn_drivers{ position: absolute; top: 46mm; left: 76mm; }
+#prn_customerId{ position: absolute; top: 86mm; left: 111mm; }
+#prn_customerName{ position: absolute; top: 91mm; left: 111mm; }
+#prn1_customerName{ position: absolute; top: 56mm; left: 226mm; }
+#prn_trailer{ position: absolute; top: 59mm; left: 76mm; }
+#prn1_trailer{ position: absolute; top: 46mm; left: 237mm; }
+#prn_way{ position: absolute; top: 133mm; left: 172mm; }
+
+/*
+	22 февраля 2008 г. 14:21:33
+*/
+#prn_waybillType{ position: absolute; top: 16mm; left: 33mm; }
+#prn_garageNumber{ position: absolute; top: 40mm; left: 196mm; }
+#prn_model{ position: absolute; top: 40mm; left: 76mm; }
+#prn_registrationNumber{ position: absolute; top: 40mm; left: 164mm; }
+#prn_licenceCart{ position: absolute; top: 26mm; left: 86mm; }
+#prn_waybillNumber{ position: absolute; top: 16mm; left: 6mm; }
+#prn_formNumber{ position: absolute; top: 16mm; left: 43mm; }
+#prn_schedule{ position: absolute; top: 34mm; left: 76mm; }
+#prn1_model{ position: absolute; top: 34mm; left: 246mm; }
+#prn1_registrationNumber{ position: absolute; top: 40mm; left: 246mm; }
+#prn_departureDate{ position: absolute; top: 21mm; left: 67mm; }
+#prn_departureTime{ position: absolute; top: 86mm; left: 36mm; }
+#prn_departureKm{ position: absolute; top: 86mm; left: 66mm; }
+#prn_fuelRemains{ position: absolute; top: 133mm; left: 42mm; }
+#prn1_departureDate{ position: absolute; top: 21mm; left: 236mm; }
+#prn_returnTime{ position: absolute; top: 101mm; left: 36mm; }
+#prn_drivers{ position: absolute; top: 46mm; left: 76mm; }
+#prn_customerId{ position: absolute; top: 86mm; left: 111mm; }
+#prn_customerName{ position: absolute; top: 91mm; left: 111mm; }
+#prn1_customerName{ position: absolute; top: 56mm; left: 226mm; }
+#prn_trailer{ position: absolute; top: 59mm; left: 76mm; }
+#prn1_trailer{ position: absolute; top: 46mm; left: 237mm; }
+#prn_way{ position: absolute; top: 133mm; left: 172mm; }
+
+/*
+	18 марта 2008 г. 10:18:27
+*/
+#prn_waybillType{ position: absolute; top: 21mm; left: 33mm; }
+#prn_garageNumber{ position: absolute; top: 45mm; left: 196mm; }
+#prn_model{ position: absolute; top: 45mm; left: 76mm; }
+#prn_registrationNumber{ position: absolute; top: 45mm; left: 164mm; }
+#prn_licenceCart{ position: absolute; top: 31mm; left: 86mm; }
+#prn_waybillNumber{ position: absolute; top: 21mm; left: 6mm; }
+#prn_formNumber{ position: absolute; top: 21mm; left: 43mm; }
+#prn_schedule{ position: absolute; top: 39mm; left: 76mm; }
+#prn1_model{ position: absolute; top: 39mm; left: 246mm; }
+#prn1_registrationNumber{ position: absolute; top: 45mm; left: 246mm; }
+#prn_departureDate{ position: absolute; top: 26mm; left: 67mm; }
+#prn_departureTime{ position: absolute; top: 91mm; left: 36mm; }
+#prn_departureKm{ position: absolute; top: 91mm; left: 66mm; }
+#prn_fuelRemains{ position: absolute; top: 138mm; left: 42mm; }
+#prn1_departureDate{ position: absolute; top: 26mm; left: 236mm; }
+#prn_returnTime{ position: absolute; top: 106mm; left: 36mm; }
+#prn_drivers{ position: absolute; top: 51mm; left: 76mm; }
+#prn_customerId{ position: absolute; top: 91mm; left: 111mm; }
+#prn_customerName{ position: absolute; top: 96mm; left: 111mm; }
+#prn1_customerName{ position: absolute; top: 61mm; left: 226mm; }
+#prn_trailer{ position: absolute; top: 64mm; left: 76mm; }
+#prn1_trailer{ position: absolute; top: 51mm; left: 237mm; }
+#prn_way{ position: absolute; top: 138mm; left: 172mm; }
+
+/*
+	18 марта 2008 г. 10:26:36
+*/
+#prn_waybillType{ position: absolute; top: 21mm; left: 33mm; }
+#prn_garageNumber{ position: absolute; top: 47mm; left: 196mm; }
+#prn_model{ position: absolute; top: 47mm; left: 76mm; }
+#prn_registrationNumber{ position: absolute; top: 47mm; left: 164mm; }
+#prn_licenceCart{ position: absolute; top: 31mm; left: 86mm; }
+#prn_waybillNumber{ position: absolute; top: 21mm; left: 6mm; }
+#prn_formNumber{ position: absolute; top: 21mm; left: 43mm; }
+#prn_schedule{ position: absolute; top: 39mm; left: 81mm; }
+#prn1_model{ position: absolute; top: 39mm; left: 246mm; }
+#prn1_registrationNumber{ position: absolute; top: 45mm; left: 246mm; }
+#prn_departureDate{ position: absolute; top: 26mm; left: 79mm; }
+#prn_departureTime{ position: absolute; top: 94mm; left: 36mm; }
+#prn_departureKm{ position: absolute; top: 94mm; left: 66mm; }
+#prn_fuelRemains{ position: absolute; top: 138mm; left: 42mm; }
+#prn1_departureDate{ position: absolute; top: 26mm; left: 236mm; }
+#prn_returnTime{ position: absolute; top: 106mm; left: 36mm; }
+#prn_drivers{ position: absolute; top: 55mm; left: 76mm; }
+#prn_customerId{ position: absolute; top: 95mm; left: 118mm; }
+#prn_customerName{ position: absolute; top: 100mm; left: 118mm; }
+#prn1_customerName{ position: absolute; top: 69mm; left: 230mm; }
+#prn_trailer{ position: absolute; top: 69mm; left: 76mm; }
+#prn1_trailer{ position: absolute; top: 51mm; left: 237mm; }
+#prn_way{ position: absolute; top: 138mm; left: 172mm; }
+
+/*
+	18 марта 2008 г. 10:30:41
+*/
+#prn_waybillType{ position: absolute; top: 21mm; left: 33mm; }
+#prn_garageNumber{ position: absolute; top: 47mm; left: 196mm; }
+#prn_model{ position: absolute; top: 47mm; left: 76mm; }
+#prn_registrationNumber{ position: absolute; top: 47mm; left: 164mm; }
+#prn_licenceCart{ position: absolute; top: 31mm; left: 86mm; }
+#prn_waybillNumber{ position: absolute; top: 21mm; left: 6mm; }
+#prn_formNumber{ position: absolute; top: 21mm; left: 43mm; }
+#prn_schedule{ position: absolute; top: 39mm; left: 81mm; }
+#prn1_model{ position: absolute; top: 39mm; left: 246mm; }
+#prn1_registrationNumber{ position: absolute; top: 45mm; left: 246mm; }
+#prn_departureDate{ position: absolute; top: 21mm; left: 79mm; }
+#prn_departureTime{ position: absolute; top: 94mm; left: 36mm; }
+#prn_departureKm{ position: absolute; top: 94mm; left: 66mm; }
+#prn_fuelRemains{ position: absolute; top: 138mm; left: 42mm; }
+#prn1_departureDate{ position: absolute; top: 26mm; left: 236mm; }
+#prn_returnTime{ position: absolute; top: 106mm; left: 36mm; }
+#prn_drivers{ position: absolute; top: 55mm; left: 76mm; }
+#prn_customerId{ position: absolute; top: 95mm; left: 118mm; }
+#prn_customerName{ position: absolute; top: 100mm; left: 118mm; }
+#prn1_customerName{ position: absolute; top: 69mm; left: 230mm; }
+#prn_trailer{ position: absolute; top: 69mm; left: 76mm; }
+#prn1_trailer{ position: absolute; top: 51mm; left: 237mm; }
+#prn_way{ position: absolute; top: 138mm; left: 172mm; }
+
+/*
+	18 марта 2008 г. 10:31:15
+*/
+#prn_waybillType{ position: absolute; top: 21mm; left: 33mm; }
+#prn_garageNumber{ position: absolute; top: 47mm; left: 196mm; }
+#prn_model{ position: absolute; top: 47mm; left: 76mm; }
+#prn_registrationNumber{ position: absolute; top: 47mm; left: 164mm; }
+#prn_licenceCart{ position: absolute; top: 31mm; left: 86mm; }
+#prn_waybillNumber{ position: absolute; top: 21mm; left: 6mm; }
+#prn_formNumber{ position: absolute; top: 21mm; left: 43mm; }
+#prn_schedule{ position: absolute; top: 39mm; left: 81mm; }
+#prn1_model{ position: absolute; top: 39mm; left: 246mm; }
+#prn1_registrationNumber{ position: absolute; top: 45mm; left: 246mm; }
+#prn_departureDate{ position: absolute; top: 25mm; left: 79mm; }
+#prn_departureTime{ position: absolute; top: 94mm; left: 36mm; }
+#prn_departureKm{ position: absolute; top: 94mm; left: 66mm; }
+#prn_fuelRemains{ position: absolute; top: 138mm; left: 42mm; }
+#prn1_departureDate{ position: absolute; top: 26mm; left: 236mm; }
+#prn_returnTime{ position: absolute; top: 106mm; left: 36mm; }
+#prn_drivers{ position: absolute; top: 55mm; left: 76mm; }
+#prn1_drivers{ position: absolute; top: 55mm; left: 76mm; }
+#prn_customerId{ position: absolute; top: 95mm; left: 118mm; }
+#prn_customerName{ position: absolute; top: 100mm; left: 118mm; }
+#prn1_customerName{ position: absolute; top: 69mm; left: 230mm; }
+#prn_way{ position: absolute; top: 138mm; left: 172mm; }
+#prn_returnDate{ position: absolute; top: 42mm; left: 215mm; }
+#prn_wayStart{ position: absolute; top: 135mm; left: 81mm; }
+
+/*
+	27 марта 2008 г. 16:30:51
+*/
+#prn_waybillType{ position: absolute; top: 21mm; left: 33mm; }
+#prn_garageNumber{ position: absolute; top: 50mm; left: 70mm; }
+#prn_model{ position: absolute; top: 43mm; left: 20mm; }
+#prn_registrationNumber{ position: absolute; top: 50mm; left: 33mm; }
+#prn_licenceCart{ position: absolute; top: 33mm; left: 100mm; }
+#prn_waybillNumber{ position: absolute; top: 21mm; left: 6mm; }
+#prn_formNumber{ position: absolute; top: 21mm; left: 43mm; }
+#prn_schedule{ position: absolute; top: 55mm; left: 50mm; }
+#prn1_model{ position: absolute; top: 42mm; left: 240mm; }
+#prn1_registrationNumber{ position: absolute; top: 49mm; left: 240mm; }
+#prn_departureDate{ position: absolute; top: 50mm; left: 84mm; }
+#prn_departureTime{ position: absolute; top: 41mm; left: 153mm; }
+#prn_departureKm{ position: absolute; top: 41mm; left: 185mm; }
+#prn_fuelRemains{ position: absolute; top: 120mm; left: 55mm; }
+#prn1_departureDate{ position: absolute; top: 27mm; left: 234mm; }
+#prn_returnDate{ position: absolute; top: 55mm; left: 97mm; }
+#prn_returnTime{ position: absolute; top: 51mm; left: 153mm; }
+#prn_drivers{ position: absolute; top: 80mm; left: 22mm; }
+#prn1_drivers{ position: absolute; top: 60mm; left: 230mm; }
+#prn_customerId{ position: absolute; top: 162mm; left: 21mm; }
+#prn_customerName{ position: absolute; top: 168mm; left: 21mm; }
+#prn1_customerName{ position: absolute; top: 135mm; left: 230mm; }
+#prn_wayStart{ position: absolute; top: 162mm; left: 93mm; }
+#prn_way{ position: absolute; top: 162mm; left: 124mm; }
+
+/*
+	27 марта 2008 г. 16:36:02
+*/
+#prn_waybillType{ position: absolute; top: 21mm; left: 28mm; }
+#prn_garageNumber{ position: absolute; top: 50mm; left: 65mm; }
+#prn_model{ position: absolute; top: 43mm; left: 15mm; }
+#prn_registrationNumber{ position: absolute; top: 50mm; left: 28mm; }
+#prn_licenceCart{ position: absolute; top: 33mm; left: 95mm; }
+#prn_waybillNumber{ position: absolute; top: 21mm; left: 1mm; }
+#prn_formNumber{ position: absolute; top: 21mm; left: 38mm; }
+#prn_schedule{ position: absolute; top: 55mm; left: 45mm; }
+#prn1_model{ position: absolute; top: 42mm; left: 235mm; }
+#prn1_registrationNumber{ position: absolute; top: 49mm; left: 235mm; }
+#prn_departureDate{ position: absolute; top: 50mm; left: 79mm; }
+#prn_departureTime{ position: absolute; top: 41mm; left: 148mm; }
+#prn_departureKm{ position: absolute; top: 41mm; left: 180mm; }
+#prn_fuelRemains{ position: absolute; top: 120mm; left: 50mm; }
+#prn1_departureDate{ position: absolute; top: 27mm; left: 229mm; }
+#prn_returnDate{ position: absolute; top: 55mm; left: 92mm; }
+#prn_returnTime{ position: absolute; top: 51mm; left: 148mm; }
+#prn_drivers{ position: absolute; top: 80mm; left: 17mm; }
+#prn1_drivers{ position: absolute; top: 60mm; left: 225mm; }
+#prn_customerId{ position: absolute; top: 162mm; left: 16mm; }
+#prn_customerName{ position: absolute; top: 168mm; left: 16mm; }
+#prn1_customerName{ position: absolute; top: 135mm; left: 225mm; }
+#prn_wayStart{ position: absolute; top: 162mm; left: 88mm; }
+#prn_way{ position: absolute; top: 162mm; left: 119mm; }
+
+/*
+	27 марта 2008 г. 16:37:27
+*/
+#prn_waybillType{ position: absolute; top: 21mm; left: 30mm; }
+#prn_garageNumber{ position: absolute; top: 50mm; left: 67mm; }
+#prn_model{ position: absolute; top: 43mm; left: 17mm; }
+#prn_registrationNumber{ position: absolute; top: 50mm; left: 30mm; }
+#prn_licenceCart{ position: absolute; top: 33mm; left: 97mm; }
+#prn_waybillNumber{ position: absolute; top: 21mm; left: 3mm; }
+#prn_formNumber{ position: absolute; top: 21mm; left: 40mm; }
+#prn_schedule{ position: absolute; top: 55mm; left: 47mm; }
+#prn1_model{ position: absolute; top: 42mm; left: 237mm; }
+#prn1_registrationNumber{ position: absolute; top: 49mm; left: 237mm; }
+#prn_departureDate{ position: absolute; top: 50mm; left: 81mm; }
+#prn_departureTime{ position: absolute; top: 41mm; left: 150mm; }
+#prn_departureKm{ position: absolute; top: 41mm; left: 182mm; }
+#prn_fuelRemains{ position: absolute; top: 120mm; left: 52mm; }
+#prn1_departureDate{ position: absolute; top: 27mm; left: 231mm; }
+#prn_returnDate{ position: absolute; top: 55mm; left: 94mm; }
+#prn_returnTime{ position: absolute; top: 51mm; left: 150mm; }
+#prn_drivers{ position: absolute; top: 80mm; left: 19mm; }
+#prn1_drivers{ position: absolute; top: 60mm; left: 227mm; }
+#prn_customerId{ position: absolute; top: 162mm; left: 18mm; }
+#prn_customerName{ position: absolute; top: 168mm; left: 18mm; }
+#prn1_customerName{ position: absolute; top: 135mm; left: 227mm; }
+#prn_wayStart{ position: absolute; top: 162mm; left: 90mm; }
+#prn_way{ position: absolute; top: 162mm; left: 121mm; }
+
+/*
+	27 марта 2008 г. 16:41:40
+*/
+#prn_waybillType{ position: absolute; top: 21mm; left: 33mm; }
+#prn_garageNumber{ position: absolute; top: 50mm; left: 70mm; }
+#prn_model{ position: absolute; top: 43mm; left: 20mm; }
+#prn_registrationNumber{ position: absolute; top: 50mm; left: 33mm; }
+#prn_licenceCart{ position: absolute; top: 33mm; left: 100mm; }
+#prn_waybillNumber{ position: absolute; top: 21mm; left: 6mm; }
+#prn_formNumber{ position: absolute; top: 21mm; left: 43mm; }
+#prn_schedule{ position: absolute; top: 55mm; left: 50mm; }
+#prn1_model{ position: absolute; top: 42mm; left: 240mm; }
+#prn1_registrationNumber{ position: absolute; top: 49mm; left: 240mm; }
+#prn_departureDate{ position: absolute; top: 50mm; left: 84mm; }
+#prn_departureTime{ position: absolute; top: 41mm; left: 153mm; }
+#prn_departureKm{ position: absolute; top: 41mm; left: 185mm; }
+#prn_fuelRemains{ position: absolute; top: 120mm; left: 55mm; }
+#prn1_departureDate{ position: absolute; top: 27mm; left: 234mm; }
+#prn_returnDate{ position: absolute; top: 55mm; left: 97mm; }
+#prn_returnTime{ position: absolute; top: 51mm; left: 153mm; }
+#prn_drivers{ position: absolute; top: 80mm; left: 22mm; }
+#prn1_drivers{ position: absolute; top: 60mm; left: 230mm; }
+#prn_customerId{ position: absolute; top: 162mm; left: 21mm; }
+#prn_customerName{ position: absolute; top: 168mm; left: 21mm; }
+#prn1_customerName{ position: absolute; top: 135mm; left: 230mm; }
+#prn_wayStart{ position: absolute; top: 162mm; left: 93mm; }
+#prn_way{ position: absolute; top: 162mm; left: 124mm; }
+
+

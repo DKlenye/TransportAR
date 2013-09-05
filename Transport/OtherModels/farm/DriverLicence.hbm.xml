@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="Transport" namespace="Transport.OtherModels.farm">
+
+  <class name="DriverLicence">
+
+    <id name="LicenceId">
+      <generator class="native"/>
+    </id>
+
+    <property name="Serial"/>
+    <property name="Number"/>
+    <property name="DateOfTerm"/>
+    <property name="Category"/>
+    
+    <many-to-one name ="Driver" class="Driver" column="DriverId" not-null="true" outer-join="true" fetch="join"/>
+
+  </class>
+
+</hibernate-mapping>

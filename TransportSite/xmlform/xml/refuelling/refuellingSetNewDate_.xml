@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="windows-1251"?>
+
+<form>
+
+  
+  <title>АЗС НАФТАН</title>
+  
+  <params>
+
+    <select name="_param" value="paramId" text="paramName" caption="текущий день :">
+      SELECT paramId = dbo.getParameterByName('REFUELLING_DATE'), paramName = dbo.getParameterByName('REFUELLING_DATE')
+    </select>
+
+  </params>
+
+  SELECT
+  0 closeOtherId,
+  'НЕ ЗАКРЫВАТЬ ведомости по выдаче ГСМ по группам' closeOtherName
+  UNION
+  SELECT
+  0 closeWaybillId,
+  'НЕ ЗАКРЫВАТЬ ведомости по выдаче ГСМ по путевым листам' closeWaybillName
+  UNION
+  SELECT
+  0 closeOilId,
+  'НЕ ЗАКРЫВАТЬ ведомости по выдаче масел и смазок по гаражным номерам' closeWaybillName
+  <header>
+
+<style type="text/css">
+#text1 { border: 0px; }
+#date1 {  border: 0px; font-weight: bold; }
+</style>
+
+<div style="border: 1px solid gray; background: #FF6347; color: yellow; padding: 8px 10px; font-size: x-large; margin-right: 15px;">
+ВНИМАНИЕ!
+<div>При закрытии суток все ведомости закрываются автоматически.</div>
+</div>
+
+<div class="info" style="margin-right: 15px; margin-top: 20px;">
+Убедитесь, что получены все необходимые отчеты и данные проверены.
+После закрытия суток изменения данных станут невозможны.
+</div>
+
+
+</header>
+
+  <grid>
+
+    <columns>
+
+      <column name="date1" field="date1"  align="center"  caption="новая дата :" size="10" readonly="true" />
+      <column name="text1" field="text1"  align="center"  caption="" size="75" readonly="true" />
+
+      <column name="closeOther"  field="closeOther"  align=""  caption=""   size="1" target="closeOtherText" >
+        <select name="closeOtherText" caption="" value="closeOtherId" text="closeOtherName">
+          SELECT
+            1 closeOtherId,
+            'ЗАКРЫТЬ все ведомости по выдаче ГСМ по группам' closeOtherName
+          ORDER BY 1
+        </select>
+      </column>
+
+      <column name="closeWaybill"  field="closeWaybill"  align=""  caption=""   size="1" target="closeWaybillText" >
+        <select name="closeWaybillText" caption="" value="closeWaybillId" text="closeWaybillName">
+          SELECT
+            1 closeWaybillId,
+            'ЗАКРЫТЬ все ведомости по выдаче ГСМ по путевым листам' closeWaybillName
+          ORDER BY 1
+        </select>
+      </column>
+      <column name="closeOil"  field="closeOil"  align=""  caption=""   size="1" target="closeOilText" >
+        <select name="closeOilText" caption="" value="closeOilId" text="closeOilName">
+          SELECT
+          1 closeOilId,
+          'ЗАКРЫТЬ все ведомости по выдаче масел и смазок по гаражным номерам' closeOilName
+          ORDER BY 1
+        </select>
+      </column>
+
+    </columns>
+
+  </grid>
+
+  <provider>
+
+    <selectSQL>
+SELECT
+  date1 = CONVERT(CHAR(10), DATEADD(day, 1,CONVERT(SMALLDATETIME, '{_param}', 104  )), 104),
+  text1 = 'дополнительные параметры:',
+  closeOther = 1,
+  closeWaybill = 1,
+  closeOil=1
+    </selectSQL>
+
+    IF {closeOther} = 1
+    IF {closeWaybill} = 1
+    IF {closeOil} = 1
+
+    <procedures>
+      <procedure name="proc1" caption="закрыть сутки" close="true" confirm="закрыть текущий день?">
+        EXECUTE refuellingSetNewDate
+
+        UPDATE otherRefuellingSheets
+        SET sheetState = 1
+        WHERE sheetState = 0;
+
+        UPDATE waybillsRefuellingSheets
+        SET sheetState = 1
+        WHERE sheetState = 0;
+
+        UPDATE reoilsheets
+        SET sheetState = 1
+        WHERE sheetState = 0;
+
+      </procedure>
+    </procedures>
+
+  </provider>
+
+</form>

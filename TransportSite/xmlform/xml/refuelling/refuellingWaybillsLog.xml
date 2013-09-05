@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="windows-1251"?>
+
+
+<form>
+
+  <params>
+
+    <select name="_fuel" value="fuelId" text="fuelName" caption="топливо">
+      SELECT CAST(fuelId AS CHAR(25)) fuelId, fuelName
+      FROM fuel 
+      UNION 
+      SELECT ' SELECT fuelId FROM fuel ' fuelId, '- все виды ГСМ -'
+      ORDER BY fuelName
+    </select>
+
+    <select name="_group" value="groupAccId" text="groupAccName" caption="группа">
+      SELECT CAST(groupAccId AS CHAR(34)) groupAccId,  groupAccCode +' : '+ groupAccName groupAccName
+      FROM vf_groupAcc
+      UNION
+      SELECT ' SELECT groupAccId FROM vf_groupAcc ' groupAccId, '- все группы -' groupAccName
+      ORDER BY groupAccName
+    </select>
+
+  </params>
+
+  
+  <title>АЗС НАФТАН - РЕЕСТР</title>
+  
+  <header src="xml/refuelling/_RefuellingLog.xml.header.html" />
+  <footer src="xml/refuelling/refuellingWaybillsLog.xml.footer.html" />
+
+  <edit name="refuelling/refuellingWaybillsLogEdit.xml" />
+
+  <grid width="700">
+
+    <columns>
+
+      <column name="sheetNumber" field="sheetNumber"   align="right"   caption="No"  size="5" readonly="true" parameter="_sheetNumber" />
+
+      <column name="rdate" field="rdate"   align="right"   caption="дата"  size="6" parameter="_date"/>
+
+      <column name="groupAccId" field="groupAccId"   align="right"   caption="..."  size="6" parameter="_groupAccId"/>
+
+      <column name="groupAccCode" field="groupAccCode"   align="right"   caption="код"  size="6" />
+      <column name="groupAccName" field="groupAccName"   align="right"   caption="группа"  size="6" />
+
+      <column name="fuelId" field="fuelId"   align="right"   caption="..."  size="60" readonly="true" parameter="_fuelId" />
+
+      <column name="fuelName" field="fuelName"   align="right"   caption="марка ГСМ"  size="60" readonly="true" />
+      <column name="quantity" field="quantity"  align="center"  caption="количество"   size="10" />
+
+      <column name="pageCount" field="pageCount"   align="right"   caption="стр."  size="5" readonly="true" />
+      <column name="sheetState" field="sheetState"   align="right"   caption=""  size="5" readonly="true" />
+    </columns>
+
+  </grid>
+
+  <provider>
+
+    <selectSQL>
+       SELECT
+       s.sheetNumber,
+       CONVERT(CHAR(10), s.refuellingDate, 104) rdate,
+       s.fuelId,
+       f.fuelName,
+       s.groupAccId,
+       g.groupAccCode,
+       g.groupAccName,
+       CASE s.sheetState WHEN 1 THEN 'закрыта' ELSE ' ' END sheetState,
+       sum(quantity) quantity,
+       pageCount = ( CEILING(CAST((SELECT count(*) FROM VehicleRefuelling o1 WHERE o1.sheetNumber = s.sheetNumber) AS DECIMAL)/CAST(8 AS DECIMAL)) )
+       FROM waybillsRefuellingSheets s
+       INNER JOIN VehicleRefuelling r ON s.sheetNumber=r.sheetNumber AND s.fuelId=r.fuelId
+       LEFT JOIN vf_groupAcc g ON g.groupAccId = s.groupAccId
+       LEFT JOIN fuel f ON f.fuelId = s.fuelId
+       WHERE
+       s.fuelId IN ({_fuel})
+       AND
+       s.groupAccId IN ({_group})
+       GROUP BY s.sheetNumber, s.refuellingDate, s.fuelId, f.fuelName, s.groupAccId, g.groupAccCode, g.groupAccName,  s.sheetState
+       ORDER BY s.sheetNumber DESC
+    </selectSQL>
+
+    <deleteSQL caption="закрыть ведомость" />
+    <updateSQL caption="открыть ведомость" />
+
+  </provider>
+
+</form>

@@ -1,0 +1,80 @@
+<div class="info" style="margin-right: 12px;">
+<h3>Исправление ведомости</h3>
+Выберите строку для изменения. Нажмите кнопку <b>исправить</b>.
+<br/>
+
+<br/>
+<br/>
+Внесите исправления для выбранной записи.
+Неверная запись будет обнулена.
+<br/><br/>
+Новые значения будут напечатаны в ведомости.
+</div>
+
+<style type="text/css">
+.bigBoldFont {
+  font-size: 22px;
+  font-weight: bold;
+  border: 1px solid black;
+  padding: 2px 4px;
+}
+.boldFont {
+  font-size: 16px;
+  font-weight: bold;
+  border: 1px solid black;
+  padding: 2px 4px;
+}
+
+.boldFont1 {
+  font-weight: bold;
+  border: 0px solid black;
+  padding: 2px 4px;
+}
+
+.findTop {
+  background-color: infobackground;
+  color: infotext;
+  padding: 2px 8 px;
+  border: 1px solid black;
+}
+
+</style>
+
+
+<script language="JavaScript" src="common/xmlcookies.js"></script>
+<script language="JavaScript">
+
+window_on_load = window.onload;
+window.onload = this_Loaded;
+
+//
+//
+//
+function this_Loaded() {
+  //
+  //
+  if (window_on_load) window_on_load();
+  //
+  //
+  if (document.getElementById("xmlformsavebutton")) {
+  	document.getElementById("xmlformsavebutton").onclick = makeCorrection;
+  }
+}
+
+function makeCorrection() {
+
+  var obj = document.getElementById("_dataGrid");
+  if (obj.selectedRow == null) return;
+  
+  //  параметры привязаны к таблице.
+  //  если меняется вид таблицы, то проверить индекс
+
+	var str = "xmlform.aspx?xml=refuelling/refuellingWaybillsCorrectionNew.xml&_date1="+obj.selectedRow.cells(1).innerText+"&_recordId="+obj.selectedRow.cells(0).innerText;
+  var wnd = window.open(str,"refuellingCart","tools=no, resizable=yes, scrollbars=yes");
+  wnd.focus();
+
+  document.getElementById("__PARAMS_OPEN_BUTTON").click();
+
+}
+
+</script>

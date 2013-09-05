@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="windows-1251"?>
+
+
+<form>
+
+  <params>
+
+    <input name="_sheet" caption="ВЕДОМОСТЬ No " size="5" />
+    <input name="_fuel" caption="топливо: " size="10" />
+    <input name="_group" caption="группа: " size="30" />
+    <input name="_page" caption="стр: " size="2" />
+
+  </params>
+
+  
+  <title>АЗС НАФТАН - ведомость учета выдачи ГСМ</title>
+  
+  <header src="xml/refuelling/refuellingWaybillsCorrectionSheet.xml.header.html" />
+
+  <grid>
+
+    <columns>
+
+      <column name="recordId1" field="recordId1"  align="center"  caption="No" size="10" readonly="true" />
+      <column name="refuellingDate1" field="refuellingDate1"  align="center"  caption="дата заправки" size="10" readonly="true" />
+      <column name="waybillNumber" field="waybillNumber"  align="center"  caption="No п.л."   size="10"  readonly="true"/>
+      <column name="model" field="model"  align="center"  caption="Автомобиль"   size="10"  readonly="true"/>
+      <column name="fio" field="fio"  align="center"  caption="Фамилия И.О."   size="10"  readonly="true"/>
+      <column name="quantity" field="quantity"  align="center"  caption="количество"   size="10" />
+      <column name="sign" field="sign" caption="подпись" />
+
+    </columns>
+
+  </grid>
+
+  <provider>
+
+    <selectSQL>
+SELECT
+  CASE WHEN s.recordId >= 2147483646 THEN NULL ELSE s.recordId END recordId1,
+  convert(CHAR(12), s.refuellingDate, 104) refuellingDate1,
+  s.waybillNumber,
+  CAST(s.garageNumber AS CHAR(4))+' '+t.model+' '+t.registrationNumber model,
+  isNull(d.zex,'')+' '+ isNull(d.tab,'')+' '+CASE WHEN s.recordId = 2147483647 THEN 'ИТОГО ПО ВЕДОМОСТИ :' WHEN s.recordId = 2147483646 THEN '= ИТОГО ПО СТРАНИЦЕ =' ELSE isNull(d.fio,'') END fio,
+  s.quantity,
+  CASE WHEN s.recordId >= 2147483646 THEN NULL ELSE '________________' END + CASE WHEN correctionId IS NULL THEN '__________' ELSE '/корр.'+CAST(correctionId AS CHAR(8))+'/' END sign
+FROM getWaybillsRefuellingSheet(0{_sheet},10, {_page}) s
+LEFT JOIN transportFacilities t ON t.garageNumber  =s.garageNumber and t.ownerId = dbo.getCurrentOwner()
+LEFT JOIN drivers d ON d.driverId = s.driverId
+WHERE refuellingId = 0 OR refuellingId IS NULL
+ORDER BY s.recordId
+    </selectSQL>
+
+  </provider>
+
+</form>

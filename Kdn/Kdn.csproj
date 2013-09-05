@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{644CB925-F10B-4F8B-A050-8F480BE4C2B5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Kdn</RootNamespace>
+    <AssemblyName>Kdn</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\TransportSite\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.ActiveRecord, Version=3.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\resources\NHibernate\CastleActiveRecord\Castle.ActiveRecord.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.ActiveRecord.Web, Version=0.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\resources\NHibernate\CastleActiveRecord\Castle.ActiveRecord.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Components.Validator, Version=2.5.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\resources\NHibernate\CastleActiveRecord\Castle.Components.Validator.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core, Version=2.5.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\resources\NHibernate\CastleActiveRecord\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Ext.Direct, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\resources\Direct\Ext.Direct.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\resources\NHibernate\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\resources\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=3.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\resources\NewtonSoft\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=3.2.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\resources\NHibernate\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite, Version=1.0.76.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\resources\SQLite\System.Data.SQLite.DLL</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Attributes\ARdummyModelAttribute.cs" />
+    <Compile Include="DateUtils.cs" />
+    <Compile Include="Direct\DataSerializer.cs" />
+    <Compile Include="Direct\Direct.cs" />
+    <Compile Include="Direct\ListConverter.cs" />
+    <Compile Include="Ext\Attributes\ColumnAttribute.cs" />
+    <Compile Include="Ext\Attributes\AllowBlankAttribute.cs" />
+    <Compile Include="Ext\Attributes\ModelAttribute.cs" />
+    <Compile Include="Ext\Attributes\IdPropertyAttribute.cs" />
+    <Compile Include="Ext\data\Field.cs" />
+    <Compile Include="Ext\data\Model.cs" />
+    <Compile Include="Ext\ExtFunction.cs" />
+    <Compile Include="Ext\ModelConverter.cs" />
+    <Compile Include="CommonModels\Menu.cs" />
+    <Compile Include="CommonModels\Permission.cs" />
+    <Compile Include="CommonModels\PermissionObject.cs" />
+    <Compile Include="CommonModels\User.cs" />
+    <Compile Include="CommonModels\UserGroup.cs" />
+    <Compile Include="Interfaces\IUser.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SQLite\SqliteAsc.cs" />
+    <Compile Include="Web\Handlers\CSS.cs" />
+    <Compile Include="Web\Handlers\JS.cs" />
+    <Compile Include="Web\ScriptReader.cs" />
+    <Compile Include="Web\WebApplication.cs" />
+    <Compile Include="Web\WebHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Ext\adapter\ext\ext-base-debug.js" />
+    <EmbeddedResource Include="JS\Ext\adapter\ext\ext-base.js" />
+    <EmbeddedResource Include="JS\Ext\ext-all-debug.js" />
+    <EmbeddedResource Include="JS\Ext\ext-all.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Ext\ux\ext-lang-ru.js" />
+    <EmbeddedResource Include="JS\Ext\ux\slidingtabs.js" />
+    <EmbeddedResource Include="CSS\Kdn\ChromeFix.css" />
+    <EmbeddedResource Include="JS\Ext\ux\PagingStore.js" />
+    <EmbeddedResource Include="CSS\Kdn\FilterRow.css" />
+    <EmbeddedResource Include="JS\Ext\ux\FilterRow.js" />
+    <EmbeddedResource Include="CSS\Kdn\Trigger.css" />
+    <EmbeddedResource Include="JS\Ext\ux\Ext.ux.PanelCollapsedTitle.js" />
+    <EmbeddedResource Include="CSS\Kdn\Waybill.css" />
+    <EmbeddedResource Include="CSS\Kdn\GridColor.css" />
+    <EmbeddedResource Include="JS\Ext\ux\Exporter-all.js" />
+    <EmbeddedResource Include="JS\Ext\ux\monthpicker.js" />
+    <EmbeddedResource Include="JS\Ext\ux\Focus.js" />
+    <EmbeddedResource Include="JS\Ext\ux\GridSummary.js" />
+    <EmbeddedResource Include="CSS\Kdn\Request.css" />
+    <EmbeddedResource Include="JS\Ext\ux\DateTimeField.js" />
+    <EmbeddedResource Include="CSS\Kdn\superboxselect.css" />
+    <EmbeddedResource Include="JS\Ext\ux\SuperBoxSelect.js" />
+    <Content Include="JS\Ext\ux\ux-all-debug.js" />
+    <EmbeddedResource Include="JS\Kdn\form\DateTimeField.js" />
+    <EmbeddedResource Include="JS\Kdn\editor\FullTimeField.js" />
+    <EmbeddedResource Include="JS\Kdn\view\Report.js" />
+    <EmbeddedResource Include="JS\Kdn\view\MasterDetails.js" />
+    <EmbeddedResource Include="JS\Kdn\Renderer.js" />
+    <EmbeddedResource Include="JS\Kdn\app\Permission.js" />
+    <EmbeddedResource Include="JS\Kdn\grid\LocalGridCellSelectionModel.js" />
+    <EmbeddedResource Include="JS\Kdn\grid\LocalGridSelectionModel.js" />
+    <EmbeddedResource Include="JS\Kdn\editor\LocalGrid.js" />
+    <EmbeddedResource Include="JS\Kdn\form\DateField.js" />
+    <EmbeddedResource Include="JS\Kdn\form\ComboGrid.js" />
+    <EmbeddedResource Include="JS\Kdn\grid\MappingColumn.js" />
+    <EmbeddedResource Include="JS\Kdn\data\ModelCfg.js" />
+    <EmbeddedResource Include="JS\Kdn\toolbar\ModelValidationStatus.js" />
+    <None Include="JS\Kdn\plugins\ModelEditorValidation.js" />
+    <EmbeddedResource Include="JS\Kdn\button\Save.js" />
+    <EmbeddedResource Include="JS\Kdn\editor\ModelEditor.js" />
+    <EmbeddedResource Include="JS\Kdn\grid\_PropertyGrid.js" />
+    <EmbeddedResource Include="JS\Kdn\grid\PropertyEditor.js" />
+    <EmbeddedResource Include="JS\Kdn\editor\LocalEditor.js" />
+    <EmbeddedResource Include="JS\Kdn\editor\BaseModelEditor.js" />
+    <EmbeddedResource Include="JS\Kdn\grid\_EditorGridPanel.js" />
+    <EmbeddedResource Include="JS\Kdn\grid\LocalEditorGrid.js" />
+    <EmbeddedResource Include="JS\Kdn\button\Remove.js" />
+    <EmbeddedResource Include="JS\Kdn\button\Add.js" />
+    <EmbeddedResource Include="JS\Kdn\grid\PagingGridView.js" />
+    <EmbeddedResource Include="JS\Kdn\grid\PagingRowSelModel.js" />
+    <EmbeddedResource Include="JS\Kdn\grid\PagingToolbar.js" />
+    <EmbeddedResource Include="JS\Kdn\editor\TimeField.js" />
+    <EmbeddedResource Include="JS\Kdn\data\PagingDirectStore.js" />
+    <EmbeddedResource Include="JS\Kdn\grid\CheckColumn.js" />
+    <EmbeddedResource Include="JS\Kdn\form\ComboBox.js" />
+    <EmbeddedResource Include="JS\Kdn\editor\Id.js" />
+    <EmbeddedResource Include="JS\Kdn\app\TabItem.js" />
+    <EmbeddedResource Include="JS\Kdn\editor\UserGroup.js" />
+    <EmbeddedResource Include="JS\Kdn\plugins\AutoSizeColumns.js" />
+    <EmbeddedResource Include="JS\Kdn\editor\BooleanField.js" />
+    <EmbeddedResource Include="JS\Kdn\editor\DateField.js" />
+    <EmbeddedResource Include="JS\Kdn\editor\DecimalField.js" />
+    <EmbeddedResource Include="JS\Kdn\editor\NumberField.js" />
+    <EmbeddedResource Include="JS\Kdn\editor\TextField.js" />
+    <EmbeddedResource Include="JS\Kdn\view\BaseGrid.js" />
+    <EmbeddedResource Include="JS\Kdn\data\DirectProxy.js" />
+    <EmbeddedResource Include="JS\Kdn\data\DirectStore.js" />
+    <EmbeddedResource Include="JS\Kdn\data\Reader.js" />
+    <EmbeddedResource Include="JS\Kdn\data\Writer.js" />
+    <EmbeddedResource Include="JS\Kdn\view\Menu.js" />
+    <EmbeddedResource Include="JS\Ext\ux\ux-all.js" />
+    <EmbeddedResource Include="JS\Kdn\ChromeFrame.js" />
+    <EmbeddedResource Include="JS\Kdn\common.js" />
+    <EmbeddedResource Include="JS\Kdn\overrides.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\ExtNet\Net.js" />
+    <EmbeddedResource Include="JS\ExtNet\Net1.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CSS\ext-all.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CSS\ux-all.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CSS\Kdn\Common.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CSS\Kdn\LoadingIndicator.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Kdn\onReady.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Kdn\data\ModelFactory.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Kdn\data\Model.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Kdn\app\Application.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Kdn\app\Menu.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CSS\Kdn\Menu.css" />
+    <EmbeddedResource Include="JS\Kdn\view\User.js" />
+    <EmbeddedResource Include="JS\Kdn\view\UserGroup.js" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

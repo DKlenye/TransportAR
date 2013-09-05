@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="Transport" namespace="Transport.OtherModels.kdr">
+
+  <class name="personal1" lazy="false">
+
+    <id name="ID_MEN"/>
+
+     <property name="ZEX"/>
+     <property name="tab"/>
+     <property name="fio"/>
+     <property name="DATA_PR"/>
+     <property name="DATA_UV"/>
+     <property name="dol"/>
+
+  </class>
+
+</hibernate-mapping>

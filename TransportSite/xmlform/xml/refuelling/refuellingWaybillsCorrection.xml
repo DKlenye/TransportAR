@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="windows-1251"?>
+
+
+<form>
+
+  <params>
+
+    <input name="_sheet" caption="ВЕДОМОСТЬ No " size="5" />
+
+  </params>
+
+  
+  <title>АЗС НАФТАН - ведомость учета выдачи ГСМ</title>
+  
+  <header src="xml/refuelling/refuellingWaybillsCorrection.xml.header.html" />
+
+  <grid>
+
+    <columns>
+
+      <column name="recordId" field="recordId"  align="center"  caption="No" size="10" readonly="true" parameter="_recordId"/>
+      <column name="refuellingDate1" field="refuellingDate1"  align="center"  caption="дата заправки" size="10" readonly="true" parameter="_date1"/>
+      <column name="waybillNumber" field="waybillNumber"  align="center"  caption="No п.л."   size="10"  readonly="true"/>
+      <column name="garageNumber" field="garageNumber"  align="center"  caption="гар."   size="10"  readonly="true"/>
+      <column name="model" field="model"  align="center"  caption="Автомобиль"   size="10"  readonly="true"/>
+      <column name="fio" field="fio"  align="center"  caption="Фамилия И.О."   size="10"  readonly="true"/>
+      <column name="quantity" field="quantity"  align="center"  caption="количество"   size="10" />
+
+    </columns>
+
+  </grid>
+
+  <provider>
+
+    <selectSQL>
+IF EXISTS (SELECT * FROM waybillsRefuellingSheets WHERE sheetNumber=0{_sheet} AND sheetState=0)
+	SELECT
+	  s.recordId,
+	  convert(CHAR(12), s.refuellingDate, 104) refuellingDate1,
+	  s.waybillNumber,
+    s.garageNumber,
+	  t.model+' '+t.registrationNumber model,
+	  left(isNull(d.zex,'')+' '+ isNull(d.tab,'')+' '+ d.fio, 25) fio,
+	  s.quantity
+	FROM waybillsRefuelling s
+	LEFT JOIN transportFacilities t ON t.garageNumber  =s.garageNumber and t.ownerId = s.ownerId
+	LEFT JOIN drivers d ON d.driverId = s.driverId
+	WHERE (refuellingId = 0 OR refuellingId IS NULL) AND s.sheetNumber = 0{_sheet}
+	ORDER BY s.recordId
+ELSE
+BEGIN 
+  IF EXISTS (SELECT * FROM waybillsRefuellingSheets WHERE sheetNumber=0{_sheet} AND sheetState=1)
+		SELECT 
+			NULL recordId,
+			NULL refuellingDate1,
+			NULL waybillNumber,
+			'Ведомость No '+'{_sheet}'+' закрыта' model,
+			' ' fio,
+			NULL quantity
+	ELSE
+		SELECT
+			NULL recordId,
+			NULL refuellingDate1,
+			NULL waybillNumber,
+			'Ведомость No '+'{_sheet}'+' не существует' model,
+			' ' fio,
+			NULL quantity
+END
+
+    </selectSQL>
+
+    <updateSQL caption=" исправить " />
+
+  </provider>
+
+</form>

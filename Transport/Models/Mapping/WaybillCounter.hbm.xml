@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"  assembly="Transport" namespace="Transport.Models" default-lazy="false">
+    
+    <class name="WaybillCounter">
+
+        <composite-id>
+            <key-property name="WaybillId"/>
+            <key-property name="CounterId"/>
+        </composite-id>
+
+        <property name="Departure" column="DepartureCount"/>
+        <property name="Return" column="ReturnCount"/>
+        <property name="isBroken"  />       
+
+    </class>
+  
+  
+</hibernate-mapping>

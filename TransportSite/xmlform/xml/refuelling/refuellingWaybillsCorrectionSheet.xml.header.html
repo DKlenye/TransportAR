@@ -1,0 +1,325 @@
+<style type="text/css">
+A {
+  color: blue;
+  text-decoration: underline;
+  xfont-weight: normal;
+}
+
+@media screen {
+  /* */
+  .nameplate {
+    position: absolute; top:100; left:270; visibility: hidden; filter: Shadow(color=666666, direction=135, strength=4); padding:5px;
+  }
+  .info {
+    padding:4px 8px; border-top: 1px solid black; border-left: 1px solid black; border-right: 3px outset white; border-bottom: 3px outset white; background-color: #FFFFE1; color: black;
+  }
+  .newPage {
+    padding: 4px 6px;
+    border: 1px solid black;
+    background-color: red;
+    color: white;
+    xfont-weight: bold;
+    font-size: large;
+  }
+}
+
+@media print {
+  /* */
+  .nameplate { display: none; }
+  .info { display: none; }
+  .newPage { display: none; }
+}
+</style>
+
+<style type="text/css" id="style0" comment="когда уже много записей на странице">
+
+body, td {  background-color: white; }
+
+.ddtable {  background-color: white; border: 0px; }
+.ddBody {  background-color: white;  border: 0px; }
+.ddTd {  background-color: white;  border: 0px; }
+.printBlack { color: black; font-weight: bold; padding: 18px 8px; }
+
+@media screen {
+
+
+  .ddHeader {  background-color: white;  color: gray;  border: 0px; }
+  .tdparamscaption { background-color: white;  color: gray; }
+  .tdparamsinput { background-color: white;  color: gray; }
+  .inputparams { background-color: white;  color: gray; }
+  .boldFont { font-weight: bold;  border: 0px solid white;  }
+
+  .printHeader { color: gray; border: 1px solid black; padding: 8px 8px; font-weight: bold; }
+
+  .printGray { color: gray; padding: 18px 8px; }
+
+  .printHidden { border: 2px outset white; background-color: MENU; color: MENUTEXT; padding: 18px 8px;}
+
+}
+
+@media print {
+
+  .ddHeader {  visibility: hidden; border: 0px; }
+  .tdparamscaption { visibility: hidden; }
+  .tdparamsinput { visibility: hidden; }
+  .inputparams { visibility: hidden; }
+  .boldFont { visibility: hidden;  font-weight: bold;  border: 0px solid white; }
+
+  .printHeader { visibility: hidden; border: 1px solid black; padding: 8px 8px; font-weight: bold; }
+
+  .printGray { visibility: hidden; padding: 18px 8px; font-weight: bold; }
+
+  a { display: none; }
+  .printHidden { display: none; }
+
+}
+
+</style>
+
+<style type="text/css" id="style1" disabled comment="когда только одна запись на странице - нужна шапка">
+
+body, td {  background-color: white; }
+
+.ddtable {  background-color: white; border: 0px; }
+.ddBody {  background-color: white;  border: 0px; }
+.ddTd {  background-color: white;  border: 0px; }
+
+.printBlack { color: black; font-weight: bold; padding: 18px 8px; }
+
+.ddHeader {  background-color: white;  color: black;  border: 0px; }
+
+.tdparamscaption { background-color: white;  color: black; }
+.tdparamsinput { background-color: white;  color: black; }
+.inputparams { background-color: white;  color: black; }
+
+.boldFont { font-weight: bold;  border: 0px solid white; color: black; }
+
+.printHeader { color: black; border: 1px solid black; padding: 8px 8px; font-weight: bold; }
+
+@media screen {
+
+  .printGray { color: gray; padding: 18px 8px; }
+
+  .printHidden { border: 2px outset white; background-color: MENU; color: MENUTEXT; padding: 18px 8px;}
+
+}
+
+@media print {
+
+  .printHidden { display: none; }
+
+  .printGray { visibility: hidden; padding: 18px 8px; font-weight: bold; }
+
+  a { display: none; }
+}
+
+</style>
+
+<style type="text/css" id="styleA" disabled comment="когда нужно перепечатать все">
+
+body, td {  background-color: white; }
+
+.ddtable {  background-color: white; border: 0px; }
+.ddBody {  background-color: white;  border: 0px; }
+.ddTd {  background-color: white;  border: 0px; }
+
+.printBlack { color: black; font-weight: bold; padding: 18px 8px; }
+
+.ddHeader {  background-color: white;  color: black;  border: 0px; }
+
+.tdparamscaption { background-color: white;  color: black; }
+.tdparamsinput { background-color: white;  color: black; }
+.inputparams { background-color: white;  color: black; }
+
+.boldFont { font-weight: bold;  border: 0px solid white; color: black; }
+
+.printHeader { color: black; border: 1px solid black; padding: 8px 8px; font-weight: bold; }
+
+.printGray { color: black; padding: 18px 8px; }
+
+@media screen {
+  .printHidden { border: 2px outset white; background-color: MENU; color: MENUTEXT; padding: 18px 8px;}
+}
+
+@media print {
+  .printHidden { display: none; }
+  a { display: none; }
+}
+</style>
+
+<script language="JavaScript">
+
+window_on_load = window.onload;
+window.onload = this_Loaded;
+
+function this_Loaded() {
+
+  document.body.topMargin = 0;
+  document.body.leftMargin = 0;
+
+  document.getElementById("_sheet").className = "boldFont";
+  document.getElementById("_fuel").className = "boldFont";
+  document.getElementById("_group").className = "boldFont";
+  document.getElementById("_page").className = "boldFont";
+
+  document.getElementById("__PARAMS_OPEN_BUTTON").style.display = "none";
+
+  document.getElementById("datagrid").style.overflow = "auto";
+  document.getElementById("datagrid").style.width = "750px";
+  document.getElementById("datagrid").style.height = "100%";
+
+  //
+  //
+  //
+  var grid = document.getElementById("_dataGrid");
+  //
+  if (grid.rows.length == 3) {
+    document.getElementById("style0").disabled = true;
+    document.getElementById("style1").disabled = false;
+    document.getElementById("newPage").style.display = "block";
+  }
+
+  for (var c=0; c<grid.rows(0).cells.length; c++) {
+    grid.rows(0).cells(c).className = "printHeader";
+  }
+  //
+  for (var i=1; i<grid.rows.length; i++) {
+    for (var c=0; c<grid.rows(i).cells.length; c++) {
+      grid.rows(i).cells(c).className = "printGray";
+    }
+  }
+  //
+  for (var c=0; c<grid.rows(grid.rows.length-2).cells.length; c++) {
+    grid.rows(grid.rows.length-2).cells(c).className = "printBlack";
+  }
+
+  if (grid.rows(grid.rows.length-2).cells(4).innerText.indexOf(" =")>0) {
+    // итого по странице
+    for (var c=0; c<grid.rows(grid.rows.length-2-1).cells.length; c++) {
+      grid.rows(grid.rows.length-2-1).cells(c).className = "printBlack";
+      grid.rows(grid.rows.length-2).cells(c).style.fontSize = "larger";
+    }
+  }
+
+  if (grid.rows(grid.rows.length-2).cells(4).innerText.indexOf(" :")>0) {
+    // итого по ведомости
+    for (var c=0; c<grid.rows(grid.rows.length-2-1).cells.length; c++) {
+      grid.rows(grid.rows.length-2).cells(c).style.fontSize = "larger";
+    }
+  }
+
+  //
+  // клавиши
+  //
+  document.onkeyup = function() {
+
+    switch(event.keyCode) {
+      case 13: // Enter
+        Print1();
+        break;
+      case 27: // ESC
+        Exit();
+        break;
+    }
+  }
+
+  //if (window_on_load) window_on_load();
+  //  *** не делать onload!
+  //  *** из-за gridNavigation
+  //  *** вместо этого см.ниже
+  setForm1Visible();
+
+
+}
+
+//
+//
+//
+function Exit() {
+  if (opener != null) {
+    if (!opener.closed) {
+      opener.firstInputFocus();
+      window.close();
+    }
+  }
+}
+
+//
+//
+//
+function PrintAll() {
+
+  if (confirm("Вы хотите печатать всю карточку?\n\nУстановите в принтер чистый лист бумаги.")) {
+
+    showClock();
+
+    var st1 = document.getElementById("style0").disabled;
+    var st2 = document.getElementById("style1").disabled;
+  
+    document.getElementById("style0").disabled = true;
+    document.getElementById("style1").disabled = true;
+    document.getElementById("styleA").disabled = false;
+  
+    window.print();
+  
+    document.getElementById("styleA").disabled = true;
+    document.getElementById("style0").disabled = st1;
+    document.getElementById("style1").disabled = st2;
+
+
+    hideClock();
+
+  }
+}
+//
+function Print1() {
+  showClock();
+  window.print();
+  hideClock();
+//  Exit();
+}
+//
+function showClock() {
+  var el = document.getElementById("nameplate");
+  el.style.posTop = (document.body.clientHeight-el.offsetHeight)/2;
+  el.style.posLeft = (document.body.clientWidth-el.offsetWidth)/2;
+  el.style.visibility = "visible";
+}
+//
+function hideClock() {
+  document.getElementById("nameplate").style.visibility = "hidden";
+}
+
+</script>
+
+<br><br><br><br>
+<div id="nameplate" class= "nameplate"><div style="background-color: infobackground; color: infotext; border: 1px solid black;">&nbsp;<br>&nbsp;&nbsp;обработка&nbsp;данных...&nbsp;&nbsp;<br>&nbsp;</div></div>
+
+<div class="info">
+
+<b style="font-size: larger;">Печать</b>
+<br><br>
+принтер:
+<div style="border: 1px solid black; padding: 9px 9px; color: black; background-color: white;">
+<b style="font-size: 16px">HP 1160</b>
+</div>
+<br/>
+<div class="newPage" id="newPage" style="display: none;"><div style="width: 19px; height: 2px; border: 1px solid black; float: left; background-color: white;"></div><!--table align="left"><td><table><td height="10" width="7">&nbsp;</td></table></td></table--><div style="margin-left: 25px;">Установите в принтер новый лист бумаги</div></div>
+
+<p>
+&nbsp;<a href="javascript: Print1()">[Enter]</a>&nbsp;Печатать&nbsp;последнюю&nbsp;строку.
+Выделена жирным шрифтом. Заголовок таблицы печатается если это первая строка на странице.
+<br><br>
+Установите в принтер лист ведомости с соответствующим номером.
+</p>
+
+<p>
+<a href="javascript: PrintAll()">Печатать&nbsp;всю&nbsp;ведомость</a><br>Установите в принтер чистый лист.
+</p>
+
+</div>
+
+<br>
+<div class="info">
+&nbsp;<a href="javascript: Exit()">[ESC]</a>&nbsp;Закрыть это окно, вернуться в окно выдачи ГСМ.
+</div>

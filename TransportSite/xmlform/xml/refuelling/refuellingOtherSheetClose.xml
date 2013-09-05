@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="windows-1251"?>
+
+
+<form>
+
+  <params>
+
+    <input name="_sheet" caption="ведомость: " size="7" comment="для закрытия ведомости"/>
+
+  </params>
+
+  <title>АЗС НАФТАН - ведомость учета выдачи ГСМ</title>
+  
+  <grid>
+
+    <columns>
+
+      <column name="oSheetNumber" field="oSheetNumber"  align="center"  caption="ВЕДОМОСТЬ No" size="10" readonly="true" />
+      <column name="fuelName" field="fuelName"  align="center"  caption="топливо" size="30" readonly="true" />
+      <column name="quantity" field="quantity"  align="center"  caption="количество"   size="10" readonly="true"/>
+
+    </columns>
+
+  </grid>
+
+  <provider>
+
+    <selectSQL>
+SELECT
+  r.oSheetNumber,
+  r.fuelId,
+  f.fuelName,
+  SUM(r.quantity) AS quantity
+FROM otherRefuelling r
+INNER JOIN fuel f ON f.fuelId = r.fuelId
+WHERE r.oSheetNumber = 0{_sheet}
+GROUP BY r.oSheetNumber, r.fuelId, f.fuelName
+    </selectSQL>
+
+    <deleteSQL caption="Закрыть ведомость">
+UPDATE otherRefuellingSheets
+SET sheetState = 1
+WHERE oSheetNumber = 0{_sheet};
+/*
+INSERT INTO otherRefuellingSheets (fuelId, groupAccId)
+SELECT fuelId, groupAccId
+FROM otherRefuellingSheets
+WHERE oSheetNumber = 0{_sheet};
+*/
+    </deleteSQL>
+
+
+  </provider>
+
+</form>

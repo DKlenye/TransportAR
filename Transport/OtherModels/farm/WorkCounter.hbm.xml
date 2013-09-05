@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="Transport" namespace="Transport.OtherModels.farm">
+  
+  <class name="WorkCounter" lazy="false">
+    <id name="CounterId">
+      <generator class="native"/>
+    </id>
+    <property name="CounterName" length="50" not-null="true"/>
+  </class>
+
+</hibernate-mapping>

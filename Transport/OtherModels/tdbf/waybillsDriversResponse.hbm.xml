@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="Transport" namespace="Transport.OtherModels.tdbf" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="waybillsDriversResponse" table="waybillsDriversResponse" lazy="false" >
+    <composite-id>
+      <key-property name="ownerId" column="ownerId" />
+      <key-property name="waybillNumber" column="waybillNumber" />
+      <key-property name="garageNumber" column="garageNumber" />
+      <key-property name="driverId" column="driverId" />
+    </composite-id>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="windows-1251"?>
+
+
+<form>
+
+  <params>
+
+    <input name="_garnom" caption="гаражный номер" size="7" autopostback="true" />
+
+    <select name="_waybill" value="waybillNumber" text="waybillText" caption=" путевой лист: дата No ">
+       exec refuelling_selectWaybills 0{_garnom}
+    </select>
+
+  </params>
+
+    <note>
+    </note>
+
+    
+  <title>АЗС НАФТАН</title>
+  
+  <header src="xml/refuelling/refuellingWaybills.xml.header.html" />
+
+  <grid>
+
+      <column name="waybillNumber" field="waybillNumber"  align="center"  caption="номер путевого листа"   size="10" readonly="true"/>
+
+      <column name="departureDate" field="departureDate"  align="center"  caption="дата путевого листа"   size="10"  readonly="true"/>
+      <column name="formNumber" field="formNumber"  align="center"  caption="номер бланка"   size="10"  readonly="true"/>
+
+    <columns>
+
+      <column name="groupAccName" field="groupAccName"  align="center"  caption="группа"   size="60"  readonly="true"/>
+      <column name="facility" field="facility"  align="center"  caption="автомобиль"   size="80"  readonly="true"/>
+
+      <column name="refuellingDate" field="refuellingDate"  align="center"  caption="дата заправки" size="10" readonly="true" parameter="_date"/>
+
+      <column name="sheetNumber" field="sheetNumber"   align="right"   caption="ведомость No"  size="6" target="fuelSelect" readonly="true">
+        <select name="fuelSelect" caption=".." value="sheetNumber" text="fuelName">
+           refuelling_sheetsSelect 0{_garnom}
+        </select>
+      </column>
+
+      <column name="driverId" field="driverId"   align="right"   caption="водитель"  size="5" target="driverIdSelect" readonly="true">
+        <select name="driverIdSelect" caption=".." value="driverId" text="driverName">
+
+           refuelling_selectDrivers 0{_garnom},0{_waybill}
+        </select>
+      </column>
+
+      <column name="remFuel" field="remFuel"  align="center"  caption="остаток_по_лимиту"   size="60" xreadonly="true" />
+      <column name="textFuel" field="textFuel"  align="center"  caption=""   size="60" readonly="true" />
+
+      <column name="quantity" field="quantity"  align="center"  caption="количество"   size="10" />
+
+    </columns>
+
+  </grid>
+
+  <provider>
+
+    <selectSQL>
+
+       refuelling_SelectRefuellingInfo 0{_garnom},0{_waybill}
+
+    </selectSQL>
+
+
+  string = '',
+  department = '  ',
+  oSheetNumber = (SELECT TOP 1 s.oSheetNumber FROM otherRefuellingSheets s WHERE s.fuelId = 0{_fuel} AND groupAccId = {_group} AND sheetState = 0 ORDER BY oSheetNumber DESC),
+
+    <procedures>
+      <procedure name="proc1" caption="выдать" close="true">
+
+         refuelling_Insert 0{quantity},0{sheetNumber},{driverId},0{_waybill}, 0{_garnom}
+
+      </procedure>
+    </procedures>
+
+  </provider>
+
+</form>

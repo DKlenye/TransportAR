@@ -1,0 +1,29 @@
+<script language="JavaScript">
+PAGENOCOLINDEX = 8;
+//
+//
+//
+function openCartWindow() {
+  var obj = document.getElementById("_dataGrid");
+
+  if (obj.selectedRow) {
+    var wnd = window.open("http://appsrv/transport.net/reports/html/reportWaybillsRefuelling.html?N:@sheetNumber="+obj.selectedRow.cells(0).innerText,"report1243","tools=no, resizable=yes, scrollbars=yes");
+    wnd.focus();
+  }
+}
+//
+//
+//
+function openLogWindow() {
+
+  var obj = document.getElementById("_dataGrid");
+  var dat = new Date();
+
+  if (obj.selectedRow) {
+    // var wnd = window.open("xmlgrid.aspx?xml=refuelling/refuellingWaybillsSheet.xml&__ACTION=true&_page="+document.getElementById("pageNumber").value+"&_sheet="+obj.selectedRow.cells(0).innerText+"&_fuel="+obj.selectedRow.cells(6).innerText+"&_group="+obj.selectedRow.cells(3).innerText+":"+obj.selectedRow.cells(4).innerText+"&_date="+obj.selectedRow.cells(1).innerText+"&refresh="+dat.getTime(),"report124356","tools=no, resizable=yes, scrollbars=yes");
+  	var wnd = window.open("refuellingSheet.aspx?xml=refuelling/refuellingWaybillsSheet1.xml&__ACTION=true&_page="+document.getElementById("pageNumber").value+"&_sheet="+obj.selectedRow.cells(0).innerText+"&_fuel="+obj.selectedRow.cells(6).innerText+"&_group="+obj.selectedRow.cells(3).innerText+":"+obj.selectedRow.cells(4).innerText+"&_date="+obj.selectedRow.cells(1).innerText+"&refresh="+dat.getTime(),"report124356","tools=no, resizable=yes, scrollbars=yes");
+    wnd.focus();
+  }
+
+}
+</script>

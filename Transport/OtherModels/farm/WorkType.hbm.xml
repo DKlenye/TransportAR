@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+					   assembly="Transport"
+					   namespace="Transport.OtherModels.farm">
+
+  <class name="WorkType" lazy="false">
+    <id name="WorkTypeId">
+      <generator class="native"/>
+    </id>
+    <property name="WorkTypeName" length="50" not-null="true"/>
+    <property name="OwnerId"/>
+    <many-to-one name="NormType" column="NormTypeId" class="NormType" fetch="join" outer-join="true" lazy="false"/>
+
+  </class>
+
+</hibernate-mapping>

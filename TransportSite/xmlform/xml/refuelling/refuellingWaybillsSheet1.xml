@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="windows-1251"?>
+
+
+<form>
+	
+	<title/>
+
+  <params>
+
+    <input name="_sheet" caption="ВЕДОМОСТЬ No " size="5" />
+    <input name="_fuel" caption="топливо: " size="10" />
+    <input name="_group" caption="группа: " size="30" />
+    <input name="_page" caption="стр: " size="2" />
+
+    <input name="_date" caption="дата" size="3" />
+
+  </params>
+
+  <xslheader src="xml/refuelling/refuellingSheet1header.xsl"/>
+  <xslfooter src="xml/refuelling/refuellingSheet1footer.xsl"/>
+
+  <delete src="refuellingWaybillsSheetDeleteRecord" />
+  <close src="refuellingWaybillsSheetClose" />
+
+  <grid>
+
+    <columns>
+      <column name="recordId1" field="recordId1"  align="center"  caption="No" size="10" readonly="true" />
+      <column name="model" field="model"  align="center"  caption="Автомобиль гар. ном. модель"   size="10"  readonly="true"/>
+      <column name="registrationNumber" field="registrationNumber"  align="center"  caption="гос.номер"   size="10"  readonly="true"/>
+      <column name="waybillNumber" field="waybillNumber"  align="center"  caption="No п.л."   size="10"  readonly="true"/>
+      <column name="fio" field="fio"  align="center"  caption="Фамилия И.О."   size="10"  readonly="true"/>
+      <column name="zextab" field="zextab"  align="center"  caption="цех, таб."   size="10"  readonly="true"/>
+      <column name="quantity" field="quantity"  align="center"  caption="выдано"   size="10" />
+      <column name="sign" field="sign" caption="расписка в получении" />
+
+    </columns>
+
+  </grid>
+
+  <provider>
+
+    <selectSQL>
+	
+SELECT
+  CASE WHEN s.recordId >= 2147483646 THEN NULL ELSE s.recordId END recordId1,
+  cast (s.waybillNumber as varchar(15)) + ' (бланк_№'+www.formnumber+')' waybillNumber,
+  CAST(s.garageNumber AS CHAR(10))+' '+t.model model,
+  t.registrationNumber,
+  CASE WHEN s.recordId = 2147483647 THEN 'ИТОГО :' WHEN s.recordId = 2147483646 THEN '= ИТОГО ПО СТРАНИЦЕ =' ELSE e.LastName+' '+e.FirstName+' '+e.MiddleName END fio,
+  isNull(e.Department,'')+' '+ isNull(e.EmployeeNumber,'') zextab,
+  s.quantity,
+  CASE WHEN s.recordId >= 2147483646 THEN NULL ELSE '____________' END + CASE WHEN correctionId IS NULL THEN '______' ELSE '/корр.'+CAST(correctionId AS CHAR(8))+'/' END sign
+FROM getWaybillsRefuellingSheet(0{_sheet}, 8, {_page}) s
+LEFT JOIN Vehicle t ON t.garageNumber  =s.garageNumber and t.ownerId = 1
+left join Waybill www on www.WaybillId = s.waybillnumber
+LEFT JOIN Driver d ON d.driverId = s.driverId
+left join Employee e on e.EmployeeId = d.EmployeeId
+WHERE RefuellingId = 4
+ORDER BY s.recordId
+
+    </selectSQL>
+
+  </provider>
+
+</form>

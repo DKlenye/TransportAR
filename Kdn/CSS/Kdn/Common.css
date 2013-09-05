@@ -1,0 +1,90 @@
+
+.x-row-editor .x-form-check-wrap
+{
+    text-align:center;
+}
+
+.x-toolbar label {
+    font: 12px arial,tahoma,helvetica,sans-serif;
+}
+
+.x-small-editor .x-form-field {
+    font: 12px arial,tahoma,helvetica,sans-serif;
+}
+
+.x-tab-strip span.x-tab-strip-text {
+    font: 12px tahoma, arial, helvetica;
+}
+.x-tab-strip-active span.x-tab-strip-text {
+    font-weight: bold;
+}
+
+.x-tab-strip .x-tab-with-icon span.x-tab-strip-text {
+    background-position: 0 5px;
+}
+
+.x-grid3-hd-row td {
+    font: bold 13px/15px arial,tahoma,helvetica,sans-serif;
+}
+
+.x-grid3-row td, .x-grid3-summary-row td {
+    font: 13px/15px arial,tahoma,helvetica,sans-serif;
+}
+
+.x-btn button {
+    font: 12px arial,tahoma,verdana,helvetica;
+}
+
+.x-combo-list {
+    font: 12px tahoma,arial,helvetica,sans-serif;
+}
+
+.x-toolbar td, .x-toolbar span, .x-toolbar input, .x-toolbar div, .x-toolbar select, .x-toolbar label {
+    font: 12px arial,tahoma,helvetica,sans-serif;
+}
+
+.x-status-error-list
+{
+ background-color:Yellow;
+}
+
+.x-combo-list-inner
+{
+    font-size:12px;
+}
+
+.ext-webkit .x-small-editor .x-form-field {
+font: normal 12px arial, tahoma, helvetica, sans-serif;
+}
+
+
+.CFnotify .x-window-mc{
+font: normal 15px tahoma,arial,helvetica,sans-serif;
+}
+
+
+.xtb-text.center-text
+{
+    text-align:center;
+}
+
+
+.x-grid3-row td
+{
+    vertical-align:middle;
+}
+
+.x-props-grid .x-grid3-body .x-grid3-td-name {
+    background-color: rgb(220, 233, 252) !important;
+}
+
+.kdn-accordion .x-panel-header{
+   font-size:14px;
+   font-weight:bold;
+   color:rgb(21, 66, 139);
+}
+
+
+.icon-column div{
+   background-repeat:no-repeat;
+}

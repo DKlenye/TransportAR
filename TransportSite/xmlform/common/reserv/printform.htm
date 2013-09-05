@@ -1,0 +1,211 @@
+<html>
+<head>
+<title>&nbsp;</title>
+<META HTTP-EQUIV="expires" CONTENT="Sun, 28 Dec 1997 09:32:45 GMT">
+<meta http-equiv="content-type" content="text/html; charset=windows-1251">
+</head>
+
+<script language="JavaScript" src="xmlcookies.js"></script>
+<script language="JavaScript">
+
+var pageBreak = '<div style="color: white; page-break-after: always;">-</div>'
+//--------------------------------------------------------------------------
+function printGrid() {
+//--------------------------------------------------------------------------
+  //
+  //
+  setButtonPos();
+
+  //  Interface to parent form
+  //
+  var AGrid    = null;
+  var ACaption = null;
+  var wnd = window.opener;
+
+  if (wnd) {
+    if (wnd.getGrid) AGrid = wnd.getGrid();
+    if (wnd.getHeader) ACaption = wnd.getHeader();
+  }
+  else
+    return;
+
+  if (AGrid==null || ACaption==null) {
+    document.write('Interface not found');
+    return;
+  }
+
+  //
+  //  Default for page size 210x297 mm
+  //
+  var APageWidth  = 210;
+  var APageHeight = 297;
+  var mLeft   = 21;
+  var mTop    = 21;
+  var mRight  = 21;
+  var mBottom = 21;
+
+  var mOrientation = 0;
+
+  //  read cookie and set DIV size
+  //
+  APageWidth  = loadDefault("pageSizeWidth",APageWidth);
+  APageHeight = loadDefault("pageSizeHeight",APageHeight);
+
+  mLeft   = loadDefault("marginLeft", mLeft);
+  mTop    = loadDefault("marginTop", mTop);
+  mRight  = loadDefault("marginRight", mRight);
+  mBottom = loadDefault("marginBottom", mBottom);
+
+  mOrientation = loadDefault("pageOrientation",mOrientation);
+
+  if (mOrientation == 1) {
+    var tmp = APageWidth;
+    APageWidth = APageHeight;
+    APageHeight = tmp;
+  }
+
+  var pWidth  = APageWidth-mLeft-mRight;
+  var pHeight = (APageHeight-mTop-mBottom) * 0.85;  // diff. between screen and print device (may be this is bug)
+
+  var Ind = 0;
+  var ARow = 1;
+
+  var _loop = true;
+  var wpr;
+  while (_loop) {
+
+    //
+    wpr = window.open("","process","toolbar=no, width=220, height=40, left="+((screen.width-220)/2)+" top="+((screen.height-60)/2)+"");
+    wpr.document.write("<html><head><meta http-equiv='content-type' content='text/html; charset=windows-1251'></head><body bgcolor='#DDDDDD'><pre>Обработка документа:<br>           страница "+(Ind+1)+"</pre></body></html>");
+    wpr.document.close();
+    wpr.window.focus();
+
+
+    _loop = false;
+      
+    // let's create DIV for each page
+    var str = '<div id="div'+Ind+'" style="background-color: white; width: 200mm; height: 290mm;"></div>'
+    document.body.insertAdjacentHTML("BeforeEnd",str);
+    var objDiv = document.all['div'+Ind];
+
+    objDiv.style.posWidth= pWidth;
+    objDiv.style.posHeight=pHeight;
+    //
+    var FHeight = objDiv.style.pixelHeight;
+
+    //  report(page) Header
+    objDiv.insertAdjacentHTML("BeforeEnd",'<div style="background-color:white;">'+ACaption.outerHTML+'</div>');
+
+    //  insert Grid
+    str = '<div style="background-color: whitesmoke;"><table width="'+(AGrid.width * 0.75)+'" border="0" cellpadding="2"  cellspacing="1" id="Grid'+Ind+'"></table></div>'
+    objDiv.insertAdjacentHTML("BeforeEnd",str);
+    var objGrid = document.all['Grid'+Ind];
+
+    // Grid header -- THead
+    //
+    var th = objGrid.createTHead();
+    var tr = th.insertRow();
+    var td;
+    for (var i=0; i<AGrid.rows(0).cells.length; i++) {
+      td = tr.insertCell(); td.innerText=AGrid.rows(0).cells.item(i).innerText;
+      td.align=AGrid.rows(1).cells.item(i).align; td.style.fontWeight="bold";
+    }
+
+
+    // Grid contents into TFOOT
+    //
+    var tb = objGrid.createTFoot();
+    var r;
+    for (r=ARow; r<AGrid.rows.length; r++) {
+
+      tr = tb.insertRow();
+      for (var c=0; c<AGrid.rows(0).cells.length; c++) {
+        td = tr.insertCell();
+        td.style.pixelWidth = (AGrid.rows(r).cells.item(c).offsetWidth * 0.75);
+        td.align=AGrid.rows(r).cells.item(c).align;
+        td.style.fontWeight=AGrid.rows(r).cells.item(c).style.fontWeight;
+        td.innerText = AGrid.rows(r).cells.item(c).innerText;
+      }
+
+      if (objGrid.offsetHeight > FHeight) {
+        // end of page && not end of grid
+        //
+        ARow = r+1;
+        _loop = (ARow<AGrid.rows.length);
+        break;
+      }
+
+    }
+
+    //
+    //
+    if (_loop) document.body.insertAdjacentHTML("BeforeEnd",pageBreak);
+    //
+    Ind++;
+    
+  }
+
+  if (wpr)
+    if (wpr.close)
+      wpr.close();
+
+  return;
+
+}
+
+function loadDefault(AName, AExp) {
+  var tmp = parseFloat(getCookie(AName));
+  if(isNaN(tmp))
+    return parseFloat(AExp);
+  else
+    return tmp;
+}
+
+function setButtonPos() {
+  var btn = document.all['btn'];
+  btn.style.posLeft = document.body.offsetWidth - btn.style.posWidth - 24 + document.body.scrollLeft;
+  btn.style.posTop = document.body.scrollTop;
+}
+
+</script>
+
+<style type="text/css">
+@media screen {
+
+  BODY ,TD {
+    background-color: white;
+    color: black;
+    font-family: Arial;
+    font-size: 8px;
+  }
+  H3 {
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+}
+
+@media print {
+
+  BODY ,TD {
+    background-color: white;
+    color: black;
+    font-family: Arial;
+    font-size: 8px;
+  }
+  H3 {
+    font-size: 12px;
+    font-weight: bold;
+  }
+  BUTTON {
+    display: none;
+  }
+}
+
+</style>
+
+<body style="margin-top: 0px;" onscroll="setButtonPos()" onload="printGrid()" onresize="setButtonPos()">
+<button id="btn" style="position: absolute; top:0; left:0px; width: 45px;" onclick="javascript: document.all.btn.style.display='none'; if(window.print)  window.print(); else alert('IE 5.0 needed!'); document.all.btn.style.display='block';">print</button>
+
+</body>
+</html>

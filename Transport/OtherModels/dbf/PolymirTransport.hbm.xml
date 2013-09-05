@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="Transport" namespace="Transport.OtherModels.dbf">
+
+  <class name ="PolymirTransport" table="Shm00t" lazy="false">
+
+     <id name="GAR_N"/>
+     
+     <property name="SHC"/>
+     <property name="SHU"/>
+
+     <property name="INVN"/>
+     <property name="GOSN"/>
+
+     <property name="NAIMM"/>
+     <property name="NAIMM1"/>
+
+     <property name="TABN"/>
+
+     <property name="NOR_OB"/>
+
+     <property name="NOR_ML_L"/>
+     <property name="NOR_ML_Z"/>
+     
+     
+     <property name="NOR_OTOP"/>
+     <property name="NOR_OTOPZ"/>
+     <property name="NOR_TKM_L"/>
+     <property name="NOR_TKM_Z"/>
+     
+     <property name="ZIMA"/>
+     <property name="TRASS"/>
+     <property name="MLN"/>
+     <property name="KOND"/>
+     
+     <property name="NOR_GOR_L"/>
+     <property name="NOR_GOR_Z"/>
+     <property name="NOR_ZG_L"/>
+     <property name="NOR_ZG_Z"/>
+     <property name="NOR_MC_L"/>
+     <property name="NOR_MC_Z"/>
+     
+     <property name="NORSUSL_L"/>
+     <property name="NORSUSL_Z"/>
+     
+     <property name="NOR_KOSA"/>
+     <property name="NOR_FREZA"/>
+     <property name="NOR_PGRUNT"/>
+     <property name="NOR_EGRUNT"/>
+     <property name="NOR_MOYKA"/>
+     <property name="NOR_METLA"/>
+     <property name="NOR_POLIV"/>
+     <property name="NOR_SNEG"/>
+     <property name="NOR_PESOK"/>
+     <property name="NOR_NASOS"/>
+
+     <property name="NOR_SLIV"/>
+     <property name="NOR_K"/>
+     <property name="NOR_NETK"/>
+     <property name="NOR_EZD"/>
+     <property name="NOR_KAR"/>
+     <property name="NOR_FEN"/>
+     <property name="NOR_EK"/>
+     <property name="NOR_SPIRT"/>
+     <property name="NOR_SPIRTS"/>
+     <property name="N_L_KART"/>
+     <property name="SHG"/>
+     <property name="TIP_SHG"/>
+     <property name="PLOT_SHG"/>
+     <property name="TIP"/>
+     <property name="SHG_OTOP"/>
+     <property name="GR_POD"/>
+
+     <property name="NOR_MOTOR"/>
+     <property name="NOR_TRANS"/>
+     <property name="NOR_SPEC"/>
+     <property name="NOR_SMAZ"/>
+     
+     <property name="NOR_PR"/>
+     <property name="DV"/>
+     <property name="DS"/>
+     
+     
+  </class>
+
+</hibernate-mapping>

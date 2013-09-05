@@ -1,0 +1,12 @@
+.x-form-field-wrap .x-form-clear-trigger {
+    background-image: url("../images/clear-trigger.gif");
+}
+.x-form-field-wrap .x-form-ellipsis-trigger {
+    background-image: url("../images/ellipsis-trigger.gif");
+}
+.x-form-field-wrap .x-form-left-trigger {
+    background-image: url("../images/left-trigger.gif");
+}
+.x-form-field-wrap .x-form-right-trigger {
+    background-image: url("../images/right-trigger.gif");
+}

@@ -1,0 +1,89 @@
+ .waybill-page, .page-separator{
+        width: 280mm;
+        height :186mm;
+ }
+ .waybill-page{
+        font-size:8pt;
+        font-family:Times New Roman;
+ }
+ .waybill-page table{
+        width:100%;
+        border-collapse:collapse;
+}
+ .page-break{
+        page-break-before: always;
+        font-size: 1pt;
+        height: 0;
+ }
+ .data{
+        border: 1pt solid #CCC;
+	    border-collapse:collapse;
+}
+
+.data td{
+        font-size: 9pt;
+        text-align:center;
+        vertical-align:middle;
+	     border: 1pt solid #CCC;
+}
+.pre-lined{
+        position: relative;
+        top: 1pt;
+        width:1mm;
+        white-space:nowrap;
+}
+.lined{
+        border-bottom: 1pt solid #CCC;
+        text-align:center;
+}
+
+.subscript{
+	font-size: 7pt;
+	color:Gray;
+	vertical-align: top;
+	text-align: center;
+	white-space: nowrap;
+	line-height: 1.1;
+	height:1mm;
+}
+
+.data .rectangle td, td.rectangle, .data .header .rectangle, .data .rectangle
+{
+    border: 1pt solid black;
+}
+
+
+ @media screen{
+
+     body { margin: 5mm; }
+
+     .waybill-page{
+        border: 1pt solid blue;
+    }
+    .page-separator
+    {
+        height: 1mm;
+        border-top: dashed 1pt black;
+        font-size: 1pt;
+        margin-top: 5mm;
+        margin-bottom: 5mm;
+    }
+
+ }
+ 
+
+@media print{
+    body { text-align: center; }
+
+    .waybill-page{
+        border: 0pt;
+    }
+    .page-separator{
+        display:none;
+        border:0pt;
+    }
+    .waybillPage{
+        margin: 0 auto 0 auto;
+        border-width:0pt;
+    }   
+}

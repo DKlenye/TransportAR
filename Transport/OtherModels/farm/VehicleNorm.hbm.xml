@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+					   assembly="Transport"
+					   namespace="Transport.OtherModels.farm">
+    
+    <class name="VehicleNorm" lazy="false">
+    <id name="VehicleNormId" type="int">
+      <generator class="native"/>
+    </id>
+    <property name="Consumption"/>
+    <property name="isMain"/>
+    <property name="VehicleId"/>
+     
+    <property name="StartDate"/>
+    <property name="EndDate"/>
+    <property name="MachineHourCoef"/>
+
+
+    <many-to-one name="WorkType" class="WorkType" column="WorkTypeId" fetch="join" outer-join="true" lazy="false"/>
+ 
+ 
+    <bag name="VehicleNormFuels" inverse="false" lazy="false" fetch="join" outer-join="true">
+      <key column="VehicleNormId"/>
+        <many-to-many class="Fuel" column="FuelId"/>
+    </bag>
+      
+    <bag name="VehicleNormIncreases" inverse="false" cascade="all" lazy="false">
+      <key column="VehicleNormId"/>
+      <element column="IncreaseId" />
+    </bag>
+    
+  </class>
+  
+  
+</hibernate-mapping>

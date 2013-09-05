@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" default-lazy="false" assembly="Transport" namespace="Transport.Models">
+   
+   <class name="Temperature">
+      <composite-id>
+         <key-property name="Date"/>
+         <key-property name="OwnerId"/>
+      </composite-id>
+
+      <property name="Temp" precision="5" scale="2"/>
+
+   </class>
+    
+</hibernate-mapping>

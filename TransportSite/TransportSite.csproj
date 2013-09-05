@@ -1,0 +1,1077 @@
+﻿<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5FBA4C2A-3B26-44DB-93B5-E46366B2AB85}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TransportSite</RootNamespace>
+    <AssemblyName>TransportSite</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.ActiveRecord, Version=3.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\resources\NHibernate\CastleActiveRecord\Castle.ActiveRecord.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.ActiveRecord.Web, Version=0.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\resources\NHibernate\CastleActiveRecord\Castle.ActiveRecord.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Components.Validator, Version=2.5.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\resources\NHibernate\CastleActiveRecord\Castle.Components.Validator.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core, Version=2.5.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\resources\NHibernate\CastleActiveRecord\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Ext.Direct, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\resources\Direct\Ext.Direct.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\resources\NHibernate\Iesi.Collections.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Kdn, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\resources\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=3.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\resources\Direct\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=3.2.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\resources\NHibernate\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.Mapping.Attributes, Version=3.2.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\resources\NHibernate\NHibernate.Mapping.Attributes.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.Entity">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.Services">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.Services.Client">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.SQLite, Version=1.0.76.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\resources\SQLite\System.Data.SQLite.DLL</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceModel.Web">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Mobile" />
+    <Reference Include="Transport, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Handlers\CSS.ashx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Handlers\Direct.ashx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Global.asax" />
+    <Content Include="Handlers\JS.ashx" />
+    <Content Include="images\access\box\corners-blue.gif" />
+    <Content Include="images\access\box\corners.gif" />
+    <Content Include="images\access\box\l-blue.gif" />
+    <Content Include="images\access\box\l.gif" />
+    <Content Include="images\access\box\r-blue.gif" />
+    <Content Include="images\access\box\r.gif" />
+    <Content Include="images\access\box\tb-blue.gif" />
+    <Content Include="images\access\box\tb.gif" />
+    <Content Include="images\access\button\arrow.gif" />
+    <Content Include="images\access\button\btn.gif" />
+    <Content Include="images\access\button\group-cs.gif" />
+    <Content Include="images\access\button\group-lr.gif" />
+    <Content Include="images\access\button\group-tb.gif" />
+    <Content Include="images\access\button\s-arrow-b-noline.gif" />
+    <Content Include="images\access\button\s-arrow-b.gif" />
+    <Content Include="images\access\button\s-arrow-bo.gif" />
+    <Content Include="images\access\button\s-arrow-noline.gif" />
+    <Content Include="images\access\button\s-arrow-o.gif" />
+    <Content Include="images\access\button\s-arrow.gif" />
+    <Content Include="images\access\editor\tb-sprite.gif" />
+    <Content Include="images\access\form\checkbox.gif" />
+    <Content Include="images\access\form\clear-trigger.gif" />
+    <Content Include="images\access\form\date-trigger.gif" />
+    <Content Include="images\access\form\error-tip-corners.gif" />
+    <Content Include="images\access\form\exclamation.gif" />
+    <Content Include="images\access\form\radio.gif" />
+    <Content Include="images\access\form\search-trigger.gif" />
+    <Content Include="images\access\form\text-bg.gif" />
+    <Content Include="images\access\form\trigger-tpl.gif" />
+    <Content Include="images\access\form\trigger.gif" />
+    <Content Include="images\access\grid\arrow-left-white.gif" />
+    <Content Include="images\access\grid\arrow-right-white.gif" />
+    <Content Include="images\access\grid\col-move-bottom.gif" />
+    <Content Include="images\access\grid\col-move-top.gif" />
+    <Content Include="images\access\grid\columns.gif" />
+    <Content Include="images\access\grid\dirty.gif" />
+    <Content Include="images\access\grid\done.gif" />
+    <Content Include="images\access\grid\drop-no.gif" />
+    <Content Include="images\access\grid\drop-yes.gif" />
+    <Content Include="images\access\grid\footer-bg.gif" />
+    <Content Include="images\access\grid\grid-blue-hd.gif" />
+    <Content Include="images\access\grid\grid-blue-split.gif" />
+    <Content Include="images\access\grid\grid-hrow.gif" />
+    <Content Include="images\access\grid\grid-loading.gif" />
+    <Content Include="images\access\grid\grid-split.gif" />
+    <Content Include="images\access\grid\grid-vista-hd.gif" />
+    <Content Include="images\access\grid\grid3-hd-btn.gif" />
+    <Content Include="images\access\grid\grid3-hrow-over.gif" />
+    <Content Include="images\access\grid\grid3-hrow.gif" />
+    <Content Include="images\access\grid\grid3-special-col-bg.gif" />
+    <Content Include="images\access\grid\grid3-special-col-sel-bg.gif" />
+    <Content Include="images\access\grid\group-by.gif" />
+    <Content Include="images\access\grid\group-collapse.gif" />
+    <Content Include="images\access\grid\group-expand-sprite.gif" />
+    <Content Include="images\access\grid\group-expand.gif" />
+    <Content Include="images\access\grid\hd-pop.gif" />
+    <Content Include="images\access\grid\hmenu-asc.gif" />
+    <Content Include="images\access\grid\hmenu-desc.gif" />
+    <Content Include="images\access\grid\hmenu-lock.gif" />
+    <Content Include="images\access\grid\hmenu-lock.png" />
+    <Content Include="images\access\grid\hmenu-unlock.gif" />
+    <Content Include="images\access\grid\hmenu-unlock.png" />
+    <Content Include="images\access\grid\invalid_line.gif" />
+    <Content Include="images\access\grid\loading.gif" />
+    <Content Include="images\access\grid\mso-hd.gif" />
+    <Content Include="images\access\grid\nowait.gif" />
+    <Content Include="images\access\grid\page-first-disabled.gif" />
+    <Content Include="images\access\grid\page-first.gif" />
+    <Content Include="images\access\grid\page-last-disabled.gif" />
+    <Content Include="images\access\grid\page-last.gif" />
+    <Content Include="images\access\grid\page-next-disabled.gif" />
+    <Content Include="images\access\grid\page-next.gif" />
+    <Content Include="images\access\grid\page-prev-disabled.gif" />
+    <Content Include="images\access\grid\page-prev.gif" />
+    <Content Include="images\access\grid\pick-button.gif" />
+    <Content Include="images\access\grid\refresh.gif" />
+    <Content Include="images\access\grid\row-check-sprite.gif" />
+    <Content Include="images\access\grid\row-expand-sprite.gif" />
+    <Content Include="images\access\grid\row-over.gif" />
+    <Content Include="images\access\grid\row-sel.gif" />
+    <Content Include="images\access\grid\sort-hd.gif" />
+    <Content Include="images\access\grid\sort_asc.gif" />
+    <Content Include="images\access\grid\sort_desc.gif" />
+    <Content Include="images\access\grid\wait.gif" />
+    <Content Include="images\access\menu\checked.gif" />
+    <Content Include="images\access\menu\group-checked.gif" />
+    <Content Include="images\access\menu\item-over.gif" />
+    <Content Include="images\access\menu\menu-parent.gif" />
+    <Content Include="images\access\menu\menu.gif" />
+    <Content Include="images\access\menu\unchecked.gif" />
+    <Content Include="images\access\panel\corners-sprite.gif" />
+    <Content Include="images\access\panel\left-right.gif" />
+    <Content Include="images\access\panel\light-hd.gif" />
+    <Content Include="images\access\panel\tool-sprite-tpl.gif" />
+    <Content Include="images\access\panel\tool-sprites.gif" />
+    <Content Include="images\access\panel\tools-sprites-trans.gif" />
+    <Content Include="images\access\panel\top-bottom.gif" />
+    <Content Include="images\access\panel\white-corners-sprite.gif" />
+    <Content Include="images\access\panel\white-left-right.gif" />
+    <Content Include="images\access\panel\white-top-bottom.gif" />
+    <Content Include="images\access\progress\progress-bg.gif" />
+    <Content Include="images\access\qtip\close.gif" />
+    <Content Include="images\access\qtip\tip-anchor-sprite.gif" />
+    <Content Include="images\access\qtip\tip-sprite.gif" />
+    <Content Include="images\access\shared\glass-bg.gif" />
+    <Content Include="images\access\shared\hd-sprite.gif" />
+    <Content Include="images\access\shared\left-btn.gif" />
+    <Content Include="images\access\shared\right-btn.gif" />
+    <Content Include="images\access\sizer\e-handle-dark.gif" />
+    <Content Include="images\access\sizer\e-handle.gif" />
+    <Content Include="images\access\sizer\ne-handle-dark.gif" />
+    <Content Include="images\access\sizer\ne-handle.gif" />
+    <Content Include="images\access\sizer\nw-handle-dark.gif" />
+    <Content Include="images\access\sizer\nw-handle.gif" />
+    <Content Include="images\access\sizer\s-handle-dark.gif" />
+    <Content Include="images\access\sizer\s-handle.gif" />
+    <Content Include="images\access\sizer\se-handle-dark.gif" />
+    <Content Include="images\access\sizer\se-handle.gif" />
+    <Content Include="images\access\sizer\square.gif" />
+    <Content Include="images\access\sizer\sw-handle-dark.gif" />
+    <Content Include="images\access\sizer\sw-handle.gif" />
+    <Content Include="images\access\slider\slider-bg.png" />
+    <Content Include="images\access\slider\slider-thumb.png" />
+    <Content Include="images\access\slider\slider-v-bg.png" />
+    <Content Include="images\access\slider\slider-v-thumb.png" />
+    <Content Include="images\access\tabs\scroll-left.gif" />
+    <Content Include="images\access\tabs\scroll-right.gif" />
+    <Content Include="images\access\tabs\tab-btm-inactive-left-bg.gif" />
+    <Content Include="images\access\tabs\tab-btm-inactive-right-bg.gif" />
+    <Content Include="images\access\tabs\tab-btm-left-bg.gif" />
+    <Content Include="images\access\tabs\tab-btm-right-bg.gif" />
+    <Content Include="images\access\tabs\tab-close.gif" />
+    <Content Include="images\access\tabs\tab-strip-bg.gif" />
+    <Content Include="images\access\tabs\tab-strip-btm-bg.gif" />
+    <Content Include="images\access\tabs\tabs-sprite.gif" />
+    <Content Include="images\access\toolbar\bg.gif" />
+    <Content Include="images\access\toolbar\btn-arrow-light.gif" />
+    <Content Include="images\access\toolbar\btn-arrow.gif" />
+    <Content Include="images\access\toolbar\btn-over-bg.gif" />
+    <Content Include="images\access\toolbar\gray-bg.gif" />
+    <Content Include="images\access\toolbar\more.gif" />
+    <Content Include="images\access\toolbar\s-arrow-bo.gif" />
+    <Content Include="images\access\toolbar\tb-btn-sprite.gif" />
+    <Content Include="images\access\toolbar\tb-xl-btn-sprite.gif" />
+    <Content Include="images\access\toolbar\tb-xl-sep.gif" />
+    <Content Include="images\access\tree\arrows.gif" />
+    <Content Include="images\access\tree\drop-add.gif" />
+    <Content Include="images\access\tree\drop-between.gif" />
+    <Content Include="images\access\tree\drop-no.gif" />
+    <Content Include="images\access\tree\drop-over.gif" />
+    <Content Include="images\access\tree\drop-under.gif" />
+    <Content Include="images\access\tree\drop-yes.gif" />
+    <Content Include="images\access\tree\elbow-end-minus-nl.gif" />
+    <Content Include="images\access\tree\elbow-end-minus.gif" />
+    <Content Include="images\access\tree\elbow-end-plus-nl.gif" />
+    <Content Include="images\access\tree\elbow-end-plus.gif" />
+    <Content Include="images\access\tree\elbow-end.gif" />
+    <Content Include="images\access\tree\elbow-line.gif" />
+    <Content Include="images\access\tree\elbow-minus-nl.gif" />
+    <Content Include="images\access\tree\elbow-minus.gif" />
+    <Content Include="images\access\tree\elbow-plus-nl.gif" />
+    <Content Include="images\access\tree\elbow-plus.gif" />
+    <Content Include="images\access\tree\elbow.gif" />
+    <Content Include="images\access\tree\folder-open.gif" />
+    <Content Include="images\access\tree\folder.gif" />
+    <Content Include="images\access\tree\leaf.gif" />
+    <Content Include="images\access\tree\loading.gif" />
+    <Content Include="images\access\tree\s.gif" />
+    <Content Include="images\access\window\icon-error.gif" />
+    <Content Include="images\access\window\icon-info.gif" />
+    <Content Include="images\access\window\icon-question.gif" />
+    <Content Include="images\access\window\icon-warning.gif" />
+    <Content Include="images\access\window\left-corners.png" />
+    <Content Include="images\access\window\left-right.png" />
+    <Content Include="images\access\window\right-corners.png" />
+    <Content Include="images\access\window\top-bottom.png" />
+    <Content Include="images\default\box\corners-blue.gif" />
+    <Content Include="images\default\box\corners.gif" />
+    <Content Include="images\default\box\l-blue.gif" />
+    <Content Include="images\default\box\l.gif" />
+    <Content Include="images\default\box\r-blue.gif" />
+    <Content Include="images\default\box\r.gif" />
+    <Content Include="images\default\box\tb-blue.gif" />
+    <Content Include="images\default\box\tb.gif" />
+    <Content Include="images\default\button\arrow.gif" />
+    <Content Include="images\default\button\btn.gif" />
+    <Content Include="images\default\button\group-cs.gif" />
+    <Content Include="images\default\button\group-lr.gif" />
+    <Content Include="images\default\button\group-tb.gif" />
+    <Content Include="images\default\button\s-arrow-b-noline.gif" />
+    <Content Include="images\default\button\s-arrow-b.gif" />
+    <Content Include="images\default\button\s-arrow-bo.gif" />
+    <Content Include="images\default\button\s-arrow-noline.gif" />
+    <Content Include="images\default\button\s-arrow-o.gif" />
+    <Content Include="images\default\button\s-arrow.gif" />
+    <Content Include="images\default\dd\drop-add.gif" />
+    <Content Include="images\default\dd\drop-no.gif" />
+    <Content Include="images\default\dd\drop-yes.gif" />
+    <Content Include="images\default\editor\tb-sprite.gif" />
+    <Content Include="images\default\form\checkbox.gif" />
+    <Content Include="images\default\form\clear-trigger.gif" />
+    <Content Include="images\default\form\date-trigger.gif" />
+    <Content Include="images\default\form\ellipsis-trigger.gif" />
+    <Content Include="images\default\form\error-tip-corners.gif" />
+    <Content Include="images\default\form\exclamation.gif" />
+    <Content Include="images\default\form\radio.gif" />
+    <Content Include="images\default\form\search-trigger.gif" />
+    <Content Include="images\default\form\text-bg.gif" />
+    <Content Include="images\default\form\trigger-square.gif" />
+    <Content Include="images\default\form\trigger-tpl.gif" />
+    <Content Include="images\default\form\trigger.gif" />
+    <Content Include="images\default\gradient-bg.gif" />
+    <Content Include="images\default\grid\arrow-left-white.gif" />
+    <Content Include="images\default\grid\arrow-right-white.gif" />
+    <Content Include="images\default\grid\col-move-bottom.gif" />
+    <Content Include="images\default\grid\col-move-top.gif" />
+    <Content Include="images\default\grid\columns.gif" />
+    <Content Include="images\default\grid\dirty.gif" />
+    <Content Include="images\default\grid\done.gif" />
+    <Content Include="images\default\grid\drop-no.gif" />
+    <Content Include="images\default\grid\drop-yes.gif" />
+    <Content Include="images\default\grid\footer-bg.gif" />
+    <Content Include="images\default\grid\grid-blue-hd.gif" />
+    <Content Include="images\default\grid\grid-blue-split.gif" />
+    <Content Include="images\default\grid\grid-hrow.gif" />
+    <Content Include="images\default\grid\grid-loading.gif" />
+    <Content Include="images\default\grid\grid-split.gif" />
+    <Content Include="images\default\grid\grid-vista-hd.gif" />
+    <Content Include="images\default\grid\grid3-hd-btn.gif" />
+    <Content Include="images\default\grid\grid3-hrow-over.gif" />
+    <Content Include="images\default\grid\grid3-hrow.gif" />
+    <Content Include="images\default\grid\grid3-rowheader.gif" />
+    <Content Include="images\default\grid\grid3-special-col-bg.gif" />
+    <Content Include="images\default\grid\grid3-special-col-sel-bg.gif" />
+    <Content Include="images\default\grid\group-by.gif" />
+    <Content Include="images\default\grid\group-collapse.gif" />
+    <Content Include="images\default\grid\group-expand-sprite.gif" />
+    <Content Include="images\default\grid\group-expand.gif" />
+    <Content Include="images\default\grid\hd-pop.gif" />
+    <Content Include="images\default\grid\hmenu-asc.gif" />
+    <Content Include="images\default\grid\hmenu-desc.gif" />
+    <Content Include="images\default\grid\hmenu-lock.gif" />
+    <Content Include="images\default\grid\hmenu-lock.png" />
+    <Content Include="images\default\grid\hmenu-unlock.gif" />
+    <Content Include="images\default\grid\hmenu-unlock.png" />
+    <Content Include="images\default\grid\invalid_line.gif" />
+    <Content Include="images\default\grid\loading.gif" />
+    <Content Include="images\default\grid\mso-hd.gif" />
+    <Content Include="images\default\grid\nowait.gif" />
+    <Content Include="images\default\grid\page-first-disabled.gif" />
+    <Content Include="images\default\grid\page-first.gif" />
+    <Content Include="images\default\grid\page-last-disabled.gif" />
+    <Content Include="images\default\grid\page-last.gif" />
+    <Content Include="images\default\grid\page-next-disabled.gif" />
+    <Content Include="images\default\grid\page-next.gif" />
+    <Content Include="images\default\grid\page-prev-disabled.gif" />
+    <Content Include="images\default\grid\page-prev.gif" />
+    <Content Include="images\default\grid\pick-button.gif" />
+    <Content Include="images\default\grid\refresh-disabled.gif" />
+    <Content Include="images\default\grid\refresh.gif" />
+    <Content Include="images\default\grid\row-check-sprite.gif" />
+    <Content Include="images\default\grid\row-expand-sprite.gif" />
+    <Content Include="images\default\grid\row-over.gif" />
+    <Content Include="images\default\grid\row-sel.gif" />
+    <Content Include="images\default\grid\sort-hd.gif" />
+    <Content Include="images\default\grid\sort_asc.gif" />
+    <Content Include="images\default\grid\sort_desc.gif" />
+    <Content Include="images\default\grid\wait.gif" />
+    <Content Include="images\default\layout\collapse.gif" />
+    <Content Include="images\default\layout\expand.gif" />
+    <Content Include="images\default\layout\gradient-bg.gif" />
+    <Content Include="images\default\layout\mini-bottom.gif" />
+    <Content Include="images\default\layout\mini-left.gif" />
+    <Content Include="images\default\layout\mini-right.gif" />
+    <Content Include="images\default\layout\mini-top.gif" />
+    <Content Include="images\default\layout\ns-collapse.gif" />
+    <Content Include="images\default\layout\ns-expand.gif" />
+    <Content Include="images\default\layout\panel-close.gif" />
+    <Content Include="images\default\layout\panel-title-bg.gif" />
+    <Content Include="images\default\layout\panel-title-light-bg.gif" />
+    <Content Include="images\default\layout\stick.gif" />
+    <Content Include="images\default\layout\stuck.gif" />
+    <Content Include="images\default\layout\tab-close-on.gif" />
+    <Content Include="images\default\layout\tab-close.gif" />
+    <Content Include="images\default\menu\checked.gif" />
+    <Content Include="images\default\menu\group-checked.gif" />
+    <Content Include="images\default\menu\item-over.gif" />
+    <Content Include="images\default\menu\menu-parent.gif" />
+    <Content Include="images\default\menu\menu.gif" />
+    <Content Include="images\default\menu\unchecked.gif" />
+    <Content Include="images\default\panel\corners-sprite.gif" />
+    <Content Include="images\default\panel\left-right.gif" />
+    <Content Include="images\default\panel\light-hd.gif" />
+    <Content Include="images\default\panel\tool-sprite-tpl.gif" />
+    <Content Include="images\default\panel\tool-sprites.gif" />
+    <Content Include="images\default\panel\tools-sprites-trans.gif" />
+    <Content Include="images\default\panel\top-bottom.gif" />
+    <Content Include="images\default\panel\top-bottom.png" />
+    <Content Include="images\default\panel\white-corners-sprite.gif" />
+    <Content Include="images\default\panel\white-left-right.gif" />
+    <Content Include="images\default\panel\white-top-bottom.gif" />
+    <Content Include="images\default\progress\progress-bg.gif" />
+    <Content Include="images\default\qtip\bg.gif" />
+    <Content Include="images\default\qtip\close.gif" />
+    <Content Include="images\default\qtip\tip-anchor-sprite.gif" />
+    <Content Include="images\default\qtip\tip-sprite.gif" />
+    <Content Include="images\default\s.gif" />
+    <Content Include="images\default\shadow-c.png" />
+    <Content Include="images\default\shadow-lr.png" />
+    <Content Include="images\default\shadow.png" />
+    <Content Include="images\default\shared\blue-loading.gif" />
+    <Content Include="images\default\shared\calendar.gif" />
+    <Content Include="images\default\shared\glass-bg.gif" />
+    <Content Include="images\default\shared\hd-sprite.gif" />
+    <Content Include="images\default\shared\large-loading.gif" />
+    <Content Include="images\default\shared\left-btn.gif" />
+    <Content Include="images\default\shared\loading-balls.gif" />
+    <Content Include="images\default\shared\right-btn.gif" />
+    <Content Include="images\default\shared\warning.gif" />
+    <Content Include="images\default\sizer\e-handle-dark.gif" />
+    <Content Include="images\default\sizer\e-handle.gif" />
+    <Content Include="images\default\sizer\ne-handle-dark.gif" />
+    <Content Include="images\default\sizer\ne-handle.gif" />
+    <Content Include="images\default\sizer\nw-handle-dark.gif" />
+    <Content Include="images\default\sizer\nw-handle.gif" />
+    <Content Include="images\default\sizer\s-handle-dark.gif" />
+    <Content Include="images\default\sizer\s-handle.gif" />
+    <Content Include="images\default\sizer\se-handle-dark.gif" />
+    <Content Include="images\default\sizer\se-handle.gif" />
+    <Content Include="images\default\sizer\square.gif" />
+    <Content Include="images\default\sizer\sw-handle-dark.gif" />
+    <Content Include="images\default\sizer\sw-handle.gif" />
+    <Content Include="images\default\slider\slider-bg.png" />
+    <Content Include="images\default\slider\slider-thumb.png" />
+    <Content Include="images\default\slider\slider-v-bg.png" />
+    <Content Include="images\default\slider\slider-v-thumb.png" />
+    <Content Include="images\default\tabs\scroll-left.gif" />
+    <Content Include="images\default\tabs\scroll-right.gif" />
+    <Content Include="images\default\tabs\scroller-bg.gif" />
+    <Content Include="images\default\tabs\tab-btm-inactive-left-bg.gif" />
+    <Content Include="images\default\tabs\tab-btm-inactive-right-bg.gif" />
+    <Content Include="images\default\tabs\tab-btm-left-bg.gif" />
+    <Content Include="images\default\tabs\tab-btm-over-left-bg.gif" />
+    <Content Include="images\default\tabs\tab-btm-over-right-bg.gif" />
+    <Content Include="images\default\tabs\tab-btm-right-bg.gif" />
+    <Content Include="images\default\tabs\tab-close.gif" />
+    <Content Include="images\default\tabs\tab-strip-bg.gif" />
+    <Content Include="images\default\tabs\tab-strip-bg.png" />
+    <Content Include="images\default\tabs\tab-strip-btm-bg.gif" />
+    <Content Include="images\default\tabs\tabs-sprite.gif" />
+    <Content Include="images\default\toolbar\bg.gif" />
+    <Content Include="images\default\toolbar\btn-arrow-light.gif" />
+    <Content Include="images\default\toolbar\btn-arrow.gif" />
+    <Content Include="images\default\toolbar\btn-over-bg.gif" />
+    <Content Include="images\default\toolbar\gray-bg.gif" />
+    <Content Include="images\default\toolbar\more.gif" />
+    <Content Include="images\default\toolbar\tb-bg.gif" />
+    <Content Include="images\default\toolbar\tb-btn-sprite.gif" />
+    <Content Include="images\default\toolbar\tb-xl-btn-sprite.gif" />
+    <Content Include="images\default\toolbar\tb-xl-sep.gif" />
+    <Content Include="images\default\tree\arrows.gif" />
+    <Content Include="images\default\tree\drop-add.gif" />
+    <Content Include="images\default\tree\drop-between.gif" />
+    <Content Include="images\default\tree\drop-no.gif" />
+    <Content Include="images\default\tree\drop-over.gif" />
+    <Content Include="images\default\tree\drop-under.gif" />
+    <Content Include="images\default\tree\drop-yes.gif" />
+    <Content Include="images\default\tree\elbow-end-minus-nl.gif" />
+    <Content Include="images\default\tree\elbow-end-minus.gif" />
+    <Content Include="images\default\tree\elbow-end-plus-nl.gif" />
+    <Content Include="images\default\tree\elbow-end-plus.gif" />
+    <Content Include="images\default\tree\elbow-end.gif" />
+    <Content Include="images\default\tree\elbow-line.gif" />
+    <Content Include="images\default\tree\elbow-minus-nl.gif" />
+    <Content Include="images\default\tree\elbow-minus.gif" />
+    <Content Include="images\default\tree\elbow-plus-nl.gif" />
+    <Content Include="images\default\tree\elbow-plus.gif" />
+    <Content Include="images\default\tree\elbow.gif" />
+    <Content Include="images\default\tree\folder-open.gif" />
+    <Content Include="images\default\tree\folder.gif" />
+    <Content Include="images\default\tree\leaf.gif" />
+    <Content Include="images\default\tree\loading.gif" />
+    <Content Include="images\default\tree\s.gif" />
+    <Content Include="images\default\window\icon-error.gif" />
+    <Content Include="images\default\window\icon-info.gif" />
+    <Content Include="images\default\window\icon-question.gif" />
+    <Content Include="images\default\window\icon-warning.gif" />
+    <Content Include="images\default\window\left-corners.png" />
+    <Content Include="images\default\window\left-right.png" />
+    <Content Include="images\default\window\right-corners.png" />
+    <Content Include="images\default\window\top-bottom.png" />
+    <Content Include="images\extanim32.gif" />
+    <Content Include="images\filter-row-hrow.gif" />
+    <Content Include="images\filter-row-icon.png" />
+    <Content Include="images\gray\button\btn-arrow.gif" />
+    <Content Include="images\gray\button\btn-sprite.gif" />
+    <Content Include="images\gray\button\btn.gif" />
+    <Content Include="images\gray\button\group-cs.gif" />
+    <Content Include="images\gray\button\group-lr.gif" />
+    <Content Include="images\gray\button\group-tb.gif" />
+    <Content Include="images\gray\button\s-arrow-bo.gif" />
+    <Content Include="images\gray\button\s-arrow-o.gif" />
+    <Content Include="images\gray\form\clear-trigger.gif" />
+    <Content Include="images\gray\form\date-trigger.gif" />
+    <Content Include="images\gray\form\search-trigger.gif" />
+    <Content Include="images\gray\form\trigger-square.gif" />
+    <Content Include="images\gray\form\trigger.gif" />
+    <Content Include="images\gray\gradient-bg.gif" />
+    <Content Include="images\gray\grid\col-move-bottom.gif" />
+    <Content Include="images\gray\grid\col-move-top.gif" />
+    <Content Include="images\gray\grid\grid3-hd-btn.gif" />
+    <Content Include="images\gray\grid\grid3-hrow-over.gif" />
+    <Content Include="images\gray\grid\grid3-hrow-over2.gif" />
+    <Content Include="images\gray\grid\grid3-hrow.gif" />
+    <Content Include="images\gray\grid\grid3-hrow2.gif" />
+    <Content Include="images\gray\grid\grid3-special-col-bg.gif" />
+    <Content Include="images\gray\grid\grid3-special-col-bg2.gif" />
+    <Content Include="images\gray\grid\grid3-special-col-sel-bg.gif" />
+    <Content Include="images\gray\grid\group-collapse.gif" />
+    <Content Include="images\gray\grid\group-expand-sprite.gif" />
+    <Content Include="images\gray\grid\group-expand.gif" />
+    <Content Include="images\gray\grid\page-first.gif" />
+    <Content Include="images\gray\grid\page-last.gif" />
+    <Content Include="images\gray\grid\page-next.gif" />
+    <Content Include="images\gray\grid\page-prev.gif" />
+    <Content Include="images\gray\grid\refresh.gif" />
+    <Content Include="images\gray\grid\row-expand-sprite.gif" />
+    <Content Include="images\gray\grid\sort-hd.gif" />
+    <Content Include="images\gray\grid\sort_asc.gif" />
+    <Content Include="images\gray\grid\sort_desc.gif" />
+    <Content Include="images\gray\menu\group-checked.gif" />
+    <Content Include="images\gray\menu\item-over-disabled.gif" />
+    <Content Include="images\gray\menu\item-over.gif" />
+    <Content Include="images\gray\menu\menu-parent.gif" />
+    <Content Include="images\gray\panel\corners-sprite.gif" />
+    <Content Include="images\gray\panel\left-right.gif" />
+    <Content Include="images\gray\panel\light-hd.gif" />
+    <Content Include="images\gray\panel\tool-sprite-tpl.gif" />
+    <Content Include="images\gray\panel\tool-sprites.gif" />
+    <Content Include="images\gray\panel\tools-sprites-trans.gif" />
+    <Content Include="images\gray\panel\top-bottom.gif" />
+    <Content Include="images\gray\panel\top-bottom.png" />
+    <Content Include="images\gray\panel\white-corners-sprite.gif" />
+    <Content Include="images\gray\panel\white-left-right.gif" />
+    <Content Include="images\gray\panel\white-top-bottom.gif" />
+    <Content Include="images\gray\progress\progress-bg.gif" />
+    <Content Include="images\gray\qtip\bg.gif" />
+    <Content Include="images\gray\qtip\close.gif" />
+    <Content Include="images\gray\qtip\tip-anchor-sprite.gif" />
+    <Content Include="images\gray\qtip\tip-sprite.gif" />
+    <Content Include="images\gray\s.gif" />
+    <Content Include="images\gray\shared\hd-sprite.gif" />
+    <Content Include="images\gray\shared\left-btn.gif" />
+    <Content Include="images\gray\shared\right-btn.gif" />
+    <Content Include="images\gray\sizer\e-handle.gif" />
+    <Content Include="images\gray\sizer\ne-handle.gif" />
+    <Content Include="images\gray\sizer\nw-handle.gif" />
+    <Content Include="images\gray\sizer\s-handle.gif" />
+    <Content Include="images\gray\sizer\se-handle.gif" />
+    <Content Include="images\gray\sizer\square.gif" />
+    <Content Include="images\gray\sizer\sw-handle.gif" />
+    <Content Include="images\gray\slider\slider-thumb.png" />
+    <Content Include="images\gray\slider\slider-v-thumb.png" />
+    <Content Include="images\gray\tabs\scroll-left.gif" />
+    <Content Include="images\gray\tabs\scroll-right.gif" />
+    <Content Include="images\gray\tabs\scroller-bg.gif" />
+    <Content Include="images\gray\tabs\tab-btm-inactive-left-bg.gif" />
+    <Content Include="images\gray\tabs\tab-btm-inactive-right-bg.gif" />
+    <Content Include="images\gray\tabs\tab-btm-left-bg.gif" />
+    <Content Include="images\gray\tabs\tab-btm-over-left-bg.gif" />
+    <Content Include="images\gray\tabs\tab-btm-over-right-bg.gif" />
+    <Content Include="images\gray\tabs\tab-btm-right-bg.gif" />
+    <Content Include="images\gray\tabs\tab-close.gif" />
+    <Content Include="images\gray\tabs\tab-strip-bg.gif" />
+    <Content Include="images\gray\tabs\tab-strip-bg.png" />
+    <Content Include="images\gray\tabs\tab-strip-btm-bg.gif" />
+    <Content Include="images\gray\tabs\tabs-sprite.gif" />
+    <Content Include="images\gray\toolbar\bg.gif" />
+    <Content Include="images\gray\toolbar\btn-arrow-light.gif" />
+    <Content Include="images\gray\toolbar\btn-arrow.gif" />
+    <Content Include="images\gray\toolbar\btn-over-bg.gif" />
+    <Content Include="images\gray\toolbar\gray-bg.gif" />
+    <Content Include="images\gray\toolbar\more.gif" />
+    <Content Include="images\gray\toolbar\tb-bg.gif" />
+    <Content Include="images\gray\toolbar\tb-btn-sprite.gif" />
+    <Content Include="images\gray\tree\arrows.gif" />
+    <Content Include="images\gray\tree\elbow-end-minus-nl.gif" />
+    <Content Include="images\gray\tree\elbow-end-minus.gif" />
+    <Content Include="images\gray\tree\elbow-end-plus-nl.gif" />
+    <Content Include="images\gray\tree\elbow-end-plus.gif" />
+    <Content Include="images\gray\window\icon-error.gif" />
+    <Content Include="images\gray\window\icon-info.gif" />
+    <Content Include="images\gray\window\icon-question.gif" />
+    <Content Include="images\gray\window\icon-warning.gif" />
+    <Content Include="images\gray\window\left-corners.png" />
+    <Content Include="images\gray\window\left-right.png" />
+    <Content Include="images\gray\window\right-corners.png" />
+    <Content Include="images\gray\window\top-bottom.png" />
+    <Content Include="images\icons\32\book_error.png" />
+    <Content Include="images\icons\32\book_open.png" />
+    <Content Include="images\icons\32\cog.png" />
+    <Content Include="images\icons\32\console.png" />
+    <Content Include="images\icons\32\help.png" />
+    <Content Include="images\icons\32\page_white.png" />
+    <Content Include="images\icons\32\page_white_add.png" />
+    <Content Include="images\icons\32\page_white_gear.png" />
+    <Content Include="images\icons\32\printer.png" />
+    <Content Include="images\icons\32\report.png" />
+    <Content Include="images\icons\32\setting_tools.png" />
+    <Content Include="images\icons\32\table.png" />
+    <Content Include="images\icons\32\toolbox.png" />
+    <Content Include="images\icons\accept.png" />
+    <Content Include="images\icons\add.png" />
+    <Content Include="images\icons\balance_unbalance.png" />
+    <Content Include="images\icons\book_error.png" />
+    <Content Include="images\icons\book_open.png" />
+    <Content Include="images\icons\brick.png" />
+    <Content Include="images\icons\bricks.png" />
+    <Content Include="images\icons\calendar.png" />
+    <Content Include="images\icons\cart.png" />
+    <Content Include="images\icons\client_account_template.png" />
+    <Content Include="images\icons\clock_select_remain.png" />
+    <Content Include="images\icons\cog.png" />
+    <Content Include="images\icons\collapse-all.gif" />
+    <Content Include="images\icons\customers.png" />
+    <Content Include="images\icons\delete.png" />
+    <Content Include="images\icons\draw_island.png" />
+    <Content Include="images\icons\driver.png" />
+    <Content Include="images\icons\drivers.png" />
+    <Content Include="images\icons\edit.png" />
+    <Content Include="images\icons\error.png" />
+    <Content Include="images\icons\exclamation.gif" />
+    <Content Include="images\icons\expand-all.gif" />
+    <Content Include="images\icons\gas.png" />
+    <Content Include="images\icons\group.png" />
+    <Content Include="images\icons\health.png" />
+    <Content Include="images\icons\layer-resize.png" />
+    <Content Include="images\icons\lock-unlock.png" />
+    <Content Include="images\icons\lock.png" />
+    <Content Include="images\icons\lorry.png" />
+    <Content Include="images\icons\lorry_flatbed.png" />
+    <Content Include="images\icons\magic_wand_2.png" />
+    <Content Include="images\icons\msn_messenger.png" />
+    <Content Include="images\icons\norm.png" />
+    <Content Include="images\icons\opera.png" />
+    <Content Include="images\icons\page_add.png" />
+    <Content Include="images\icons\page_delete.png" />
+    <Content Include="images\icons\page_save.png" />
+    <Content Include="images\icons\page_white_add.png" />
+    <Content Include="images\icons\page_white_edit.png" />
+    <Content Include="images\icons\page_white_go.png" />
+    <Content Include="images\icons\page_white_stack.png" />
+    <Content Include="images\icons\paintcan.png" />
+    <Content Include="images\icons\participation_rate.png" />
+    <Content Include="images\icons\pilcrow.png" />
+    <Content Include="images\icons\printer.png" />
+    <Content Include="images\icons\refresh.gif" />
+    <Content Include="images\icons\reseller_account.png" />
+    <Content Include="images\icons\size_horizontal.png" />
+    <Content Include="images\icons\speedometer.png" />
+    <Content Include="images\icons\steering.png" />
+    <Content Include="images\icons\temperature_4.png" />
+    <Content Include="images\icons\tick.png" />
+    <Content Include="images\icons\toolbox.png" />
+    <Content Include="images\icons\update.png" />
+    <Content Include="images\icons\user.png" />
+    <Content Include="images\icons\vcard.png" />
+    <Content Include="images\icons\waybill.png" />
+    <Content Include="images\item-over.gif" />
+    <Content Include="images\ux\accept.png" />
+    <Content Include="images\ux\bottom2.gif" />
+    <Content Include="images\ux\down2.gif" />
+    <Content Include="images\ux\elbow-minus-nl.gif" />
+    <Content Include="images\ux\elbow-plus-nl.gif" />
+    <Content Include="images\ux\exclamation.gif" />
+    <Content Include="images\ux\left2.gif" />
+    <Content Include="images\ux\panel-handle.gif" />
+    <Content Include="images\ux\right2.gif" />
+    <Content Include="images\ux\row-editor-bg.gif" />
+    <Content Include="images\ux\row-editor-btns.gif" />
+    <Content Include="images\ux\spinner-split.gif" />
+    <Content Include="images\ux\spinner.gif" />
+    <Content Include="images\ux\summary-bg.gif" />
+    <Content Include="images\ux\summary-group-bg.gif" />
+    <Content Include="images\ux\top2.gif" />
+    <Content Include="images\ux\up2.gif" />
+    <Content Include="images\ux\x-grouptabs-corners.gif" />
+    <Content Include="images\vista\basic-dialog\bg-center.gif" />
+    <Content Include="images\vista\basic-dialog\bg-left.gif" />
+    <Content Include="images\vista\basic-dialog\bg-right.gif" />
+    <Content Include="images\vista\basic-dialog\close.gif" />
+    <Content Include="images\vista\basic-dialog\collapse.gif" />
+    <Content Include="images\vista\basic-dialog\dlg-bg.gif" />
+    <Content Include="images\vista\basic-dialog\e-handle.gif" />
+    <Content Include="images\vista\basic-dialog\expand.gif" />
+    <Content Include="images\vista\basic-dialog\hd-sprite.gif" />
+    <Content Include="images\vista\basic-dialog\s-handle.gif" />
+    <Content Include="images\vista\basic-dialog\se-handle.gif" />
+    <Content Include="images\vista\basic-dialog\w-handle.gif" />
+    <Content Include="images\vista\gradient-bg.gif" />
+    <Content Include="images\vista\grid\grid-split.gif" />
+    <Content Include="images\vista\grid\grid-vista-hd.gif" />
+    <Content Include="images\vista\layout\collapse.gif" />
+    <Content Include="images\vista\layout\expand.gif" />
+    <Content Include="images\vista\layout\gradient-bg.gif" />
+    <Content Include="images\vista\layout\ns-collapse.gif" />
+    <Content Include="images\vista\layout\ns-expand.gif" />
+    <Content Include="images\vista\layout\panel-close.gif" />
+    <Content Include="images\vista\layout\panel-title-bg.gif" />
+    <Content Include="images\vista\layout\panel-title-light-bg.gif" />
+    <Content Include="images\vista\layout\stick.gif" />
+    <Content Include="images\vista\layout\tab-close-on.gif" />
+    <Content Include="images\vista\layout\tab-close.gif" />
+    <Content Include="images\vista\qtip\bg.gif" />
+    <Content Include="images\vista\qtip\tip-sprite.gif" />
+    <Content Include="images\vista\s.gif" />
+    <Content Include="images\vista\sizer\e-handle-dark.gif" />
+    <Content Include="images\vista\sizer\e-handle.gif" />
+    <Content Include="images\vista\sizer\ne-handle-dark.gif" />
+    <Content Include="images\vista\sizer\ne-handle.gif" />
+    <Content Include="images\vista\sizer\nw-handle-dark.gif" />
+    <Content Include="images\vista\sizer\nw-handle.gif" />
+    <Content Include="images\vista\sizer\s-handle-dark.gif" />
+    <Content Include="images\vista\sizer\s-handle.gif" />
+    <Content Include="images\vista\sizer\se-handle-dark.gif" />
+    <Content Include="images\vista\sizer\se-handle.gif" />
+    <Content Include="images\vista\sizer\sw-handle-dark.gif" />
+    <Content Include="images\vista\sizer\sw-handle.gif" />
+    <Content Include="images\vista\tabs\tab-btm-inactive-left-bg.gif" />
+    <Content Include="images\vista\tabs\tab-btm-inactive-right-bg.gif" />
+    <Content Include="images\vista\tabs\tab-btm-left-bg.gif" />
+    <Content Include="images\vista\tabs\tab-btm-right-bg.gif" />
+    <Content Include="images\vista\tabs\tab-sprite.gif" />
+    <Content Include="images\vista\toolbar\gray-bg.gif" />
+    <Content Include="images\vista\toolbar\tb-btn-sprite.gif" />
+    <Content Include="images\yourtheme\box\corners-blue.gif" />
+    <Content Include="images\yourtheme\box\corners.gif" />
+    <Content Include="images\yourtheme\box\l-blue.gif" />
+    <Content Include="images\yourtheme\box\l.gif" />
+    <Content Include="images\yourtheme\box\r-blue.gif" />
+    <Content Include="images\yourtheme\box\r.gif" />
+    <Content Include="images\yourtheme\box\tb-blue.gif" />
+    <Content Include="images\yourtheme\box\tb.gif" />
+    <Content Include="images\yourtheme\button\arrow.gif" />
+    <Content Include="images\yourtheme\button\btn.gif" />
+    <Content Include="images\yourtheme\button\group-cs.gif" />
+    <Content Include="images\yourtheme\button\group-lr.gif" />
+    <Content Include="images\yourtheme\button\group-tb.gif" />
+    <Content Include="images\yourtheme\button\s-arrow-b-noline.gif" />
+    <Content Include="images\yourtheme\button\s-arrow-b.gif" />
+    <Content Include="images\yourtheme\button\s-arrow-bo.gif" />
+    <Content Include="images\yourtheme\button\s-arrow-noline.gif" />
+    <Content Include="images\yourtheme\button\s-arrow-o.gif" />
+    <Content Include="images\yourtheme\button\s-arrow.gif" />
+    <Content Include="images\yourtheme\dd\drop-add.gif" />
+    <Content Include="images\yourtheme\dd\drop-no.gif" />
+    <Content Include="images\yourtheme\dd\drop-yes.gif" />
+    <Content Include="images\yourtheme\editor\tb-sprite.gif" />
+    <Content Include="images\yourtheme\form\checkbox.gif" />
+    <Content Include="images\yourtheme\form\clear-trigger.gif" />
+    <Content Include="images\yourtheme\form\date-trigger.gif" />
+    <Content Include="images\yourtheme\form\error-tip-corners.gif" />
+    <Content Include="images\yourtheme\form\exclamation.gif" />
+    <Content Include="images\yourtheme\form\radio.gif" />
+    <Content Include="images\yourtheme\form\search-trigger.gif" />
+    <Content Include="images\yourtheme\form\text-bg.gif" />
+    <Content Include="images\yourtheme\form\trigger-square.gif" />
+    <Content Include="images\yourtheme\form\trigger-tpl.gif" />
+    <Content Include="images\yourtheme\form\trigger.gif" />
+    <Content Include="images\yourtheme\gradient-bg.gif" />
+    <Content Include="images\yourtheme\grid\arrow-left-white.gif" />
+    <Content Include="images\yourtheme\grid\arrow-right-white.gif" />
+    <Content Include="images\yourtheme\grid\col-move-bottom.gif" />
+    <Content Include="images\yourtheme\grid\col-move-top.gif" />
+    <Content Include="images\yourtheme\grid\columns.gif" />
+    <Content Include="images\yourtheme\grid\dirty.gif" />
+    <Content Include="images\yourtheme\grid\done.gif" />
+    <Content Include="images\yourtheme\grid\drop-no.gif" />
+    <Content Include="images\yourtheme\grid\drop-yes.gif" />
+    <Content Include="images\yourtheme\grid\footer-bg.gif" />
+    <Content Include="images\yourtheme\grid\grid-blue-hd.gif" />
+    <Content Include="images\yourtheme\grid\grid-blue-split.gif" />
+    <Content Include="images\yourtheme\grid\grid-hrow.gif" />
+    <Content Include="images\yourtheme\grid\grid-loading.gif" />
+    <Content Include="images\yourtheme\grid\grid-split.gif" />
+    <Content Include="images\yourtheme\grid\grid-vista-hd.gif" />
+    <Content Include="images\yourtheme\grid\grid3-hd-btn.gif" />
+    <Content Include="images\yourtheme\grid\grid3-hrow-over.gif" />
+    <Content Include="images\yourtheme\grid\grid3-hrow.gif" />
+    <Content Include="images\yourtheme\grid\grid3-special-col-bg.gif" />
+    <Content Include="images\yourtheme\grid\grid3-special-col-sel-bg.gif" />
+    <Content Include="images\yourtheme\grid\group-by.gif" />
+    <Content Include="images\yourtheme\grid\group-collapse.gif" />
+    <Content Include="images\yourtheme\grid\group-expand-sprite.gif" />
+    <Content Include="images\yourtheme\grid\group-expand.gif" />
+    <Content Include="images\yourtheme\grid\hd-pop.gif" />
+    <Content Include="images\yourtheme\grid\hmenu-asc.gif" />
+    <Content Include="images\yourtheme\grid\hmenu-desc.gif" />
+    <Content Include="images\yourtheme\grid\hmenu-lock.gif" />
+    <Content Include="images\yourtheme\grid\hmenu-lock.png" />
+    <Content Include="images\yourtheme\grid\hmenu-unlock.gif" />
+    <Content Include="images\yourtheme\grid\hmenu-unlock.png" />
+    <Content Include="images\yourtheme\grid\invalid_line.gif" />
+    <Content Include="images\yourtheme\grid\loading.gif" />
+    <Content Include="images\yourtheme\grid\mso-hd.gif" />
+    <Content Include="images\yourtheme\grid\nowait.gif" />
+    <Content Include="images\yourtheme\grid\page-first-disabled.gif" />
+    <Content Include="images\yourtheme\grid\page-first.gif" />
+    <Content Include="images\yourtheme\grid\page-last-disabled.gif" />
+    <Content Include="images\yourtheme\grid\page-last.gif" />
+    <Content Include="images\yourtheme\grid\page-next-disabled.gif" />
+    <Content Include="images\yourtheme\grid\page-next.gif" />
+    <Content Include="images\yourtheme\grid\page-prev-disabled.gif" />
+    <Content Include="images\yourtheme\grid\page-prev.gif" />
+    <Content Include="images\yourtheme\grid\pick-button.gif" />
+    <Content Include="images\yourtheme\grid\refresh.gif" />
+    <Content Include="images\yourtheme\grid\row-check-sprite.gif" />
+    <Content Include="images\yourtheme\grid\row-expand-sprite.gif" />
+    <Content Include="images\yourtheme\grid\row-over.gif" />
+    <Content Include="images\yourtheme\grid\row-sel.gif" />
+    <Content Include="images\yourtheme\grid\sort-hd.gif" />
+    <Content Include="images\yourtheme\grid\sort_asc.gif" />
+    <Content Include="images\yourtheme\grid\sort_desc.gif" />
+    <Content Include="images\yourtheme\grid\wait.gif" />
+    <Content Include="images\yourtheme\layout\collapse.gif" />
+    <Content Include="images\yourtheme\layout\expand.gif" />
+    <Content Include="images\yourtheme\layout\gradient-bg.gif" />
+    <Content Include="images\yourtheme\layout\mini-bottom.gif" />
+    <Content Include="images\yourtheme\layout\mini-left.gif" />
+    <Content Include="images\yourtheme\layout\mini-right.gif" />
+    <Content Include="images\yourtheme\layout\mini-top.gif" />
+    <Content Include="images\yourtheme\layout\ns-collapse.gif" />
+    <Content Include="images\yourtheme\layout\ns-expand.gif" />
+    <Content Include="images\yourtheme\layout\panel-close.gif" />
+    <Content Include="images\yourtheme\layout\panel-title-bg.gif" />
+    <Content Include="images\yourtheme\layout\panel-title-light-bg.gif" />
+    <Content Include="images\yourtheme\layout\stick.gif" />
+    <Content Include="images\yourtheme\layout\stuck.gif" />
+    <Content Include="images\yourtheme\layout\tab-close-on.gif" />
+    <Content Include="images\yourtheme\layout\tab-close.gif" />
+    <Content Include="images\yourtheme\menu\checked.gif" />
+    <Content Include="images\yourtheme\menu\group-checked.gif" />
+    <Content Include="images\yourtheme\menu\item-over.gif" />
+    <Content Include="images\yourtheme\menu\menu-parent.gif" />
+    <Content Include="images\yourtheme\menu\menu.gif" />
+    <Content Include="images\yourtheme\menu\unchecked.gif" />
+    <Content Include="images\yourtheme\panel\corners-sprite.gif" />
+    <Content Include="images\yourtheme\panel\left-right.gif" />
+    <Content Include="images\yourtheme\panel\light-hd.gif" />
+    <Content Include="images\yourtheme\panel\tool-sprite-tpl.gif" />
+    <Content Include="images\yourtheme\panel\tool-sprites.gif" />
+    <Content Include="images\yourtheme\panel\tools-sprites-trans.gif" />
+    <Content Include="images\yourtheme\panel\top-bottom.gif" />
+    <Content Include="images\yourtheme\panel\top-bottom.png" />
+    <Content Include="images\yourtheme\panel\white-corners-sprite.gif" />
+    <Content Include="images\yourtheme\panel\white-left-right.gif" />
+    <Content Include="images\yourtheme\panel\white-top-bottom.gif" />
+    <Content Include="images\yourtheme\progress\progress-bg.gif" />
+    <Content Include="images\yourtheme\qtip\bg.gif" />
+    <Content Include="images\yourtheme\qtip\close.gif" />
+    <Content Include="images\yourtheme\qtip\tip-anchor-sprite.gif" />
+    <Content Include="images\yourtheme\qtip\tip-sprite.gif" />
+    <Content Include="images\yourtheme\README.txt" />
+    <Content Include="images\yourtheme\s.gif" />
+    <Content Include="images\yourtheme\shadow-c.png" />
+    <Content Include="images\yourtheme\shadow-lr.png" />
+    <Content Include="images\yourtheme\shadow.png" />
+    <Content Include="images\yourtheme\shared\blue-loading.gif" />
+    <Content Include="images\yourtheme\shared\calendar.gif" />
+    <Content Include="images\yourtheme\shared\glass-bg.gif" />
+    <Content Include="images\yourtheme\shared\hd-sprite.gif" />
+    <Content Include="images\yourtheme\shared\large-loading.gif" />
+    <Content Include="images\yourtheme\shared\left-btn.gif" />
+    <Content Include="images\yourtheme\shared\loading-balls.gif" />
+    <Content Include="images\yourtheme\shared\right-btn.gif" />
+    <Content Include="images\yourtheme\shared\warning.gif" />
+    <Content Include="images\yourtheme\sizer\e-handle-dark.gif" />
+    <Content Include="images\yourtheme\sizer\e-handle.gif" />
+    <Content Include="images\yourtheme\sizer\ne-handle-dark.gif" />
+    <Content Include="images\yourtheme\sizer\ne-handle.gif" />
+    <Content Include="images\yourtheme\sizer\nw-handle-dark.gif" />
+    <Content Include="images\yourtheme\sizer\nw-handle.gif" />
+    <Content Include="images\yourtheme\sizer\s-handle-dark.gif" />
+    <Content Include="images\yourtheme\sizer\s-handle.gif" />
+    <Content Include="images\yourtheme\sizer\se-handle-dark.gif" />
+    <Content Include="images\yourtheme\sizer\se-handle.gif" />
+    <Content Include="images\yourtheme\sizer\square.gif" />
+    <Content Include="images\yourtheme\sizer\sw-handle-dark.gif" />
+    <Content Include="images\yourtheme\sizer\sw-handle.gif" />
+    <Content Include="images\yourtheme\slider\slider-bg.png" />
+    <Content Include="images\yourtheme\slider\slider-thumb.png" />
+    <Content Include="images\yourtheme\slider\slider-v-bg.png" />
+    <Content Include="images\yourtheme\slider\slider-v-thumb.png" />
+    <Content Include="images\yourtheme\tabs\scroll-left.gif" />
+    <Content Include="images\yourtheme\tabs\scroll-right.gif" />
+    <Content Include="images\yourtheme\tabs\scroller-bg.gif" />
+    <Content Include="images\yourtheme\tabs\tab-btm-inactive-left-bg.gif" />
+    <Content Include="images\yourtheme\tabs\tab-btm-inactive-right-bg.gif" />
+    <Content Include="images\yourtheme\tabs\tab-btm-left-bg.gif" />
+    <Content Include="images\yourtheme\tabs\tab-btm-over-left-bg.gif" />
+    <Content Include="images\yourtheme\tabs\tab-btm-over-right-bg.gif" />
+    <Content Include="images\yourtheme\tabs\tab-btm-right-bg.gif" />
+    <Content Include="images\yourtheme\tabs\tab-close.gif" />
+    <Content Include="images\yourtheme\tabs\tab-strip-bg.gif" />
+    <Content Include="images\yourtheme\tabs\tab-strip-bg.png" />
+    <Content Include="images\yourtheme\tabs\tab-strip-btm-bg.gif" />
+    <Content Include="images\yourtheme\tabs\tabs-sprite.gif" />
+    <Content Include="images\yourtheme\toolbar\bg.gif" />
+    <Content Include="images\yourtheme\toolbar\btn-arrow-light.gif" />
+    <Content Include="images\yourtheme\toolbar\btn-arrow.gif" />
+    <Content Include="images\yourtheme\toolbar\btn-over-bg.gif" />
+    <Content Include="images\yourtheme\toolbar\gray-bg.gif" />
+    <Content Include="images\yourtheme\toolbar\more.gif" />
+    <Content Include="images\yourtheme\toolbar\tb-bg.gif" />
+    <Content Include="images\yourtheme\toolbar\tb-btn-sprite.gif" />
+    <Content Include="images\yourtheme\toolbar\tb-xl-btn-sprite.gif" />
+    <Content Include="images\yourtheme\toolbar\tb-xl-sep.gif" />
+    <Content Include="images\yourtheme\tree\arrows.gif" />
+    <Content Include="images\yourtheme\tree\drop-add.gif" />
+    <Content Include="images\yourtheme\tree\drop-between.gif" />
+    <Content Include="images\yourtheme\tree\drop-no.gif" />
+    <Content Include="images\yourtheme\tree\drop-over.gif" />
+    <Content Include="images\yourtheme\tree\drop-under.gif" />
+    <Content Include="images\yourtheme\tree\drop-yes.gif" />
+    <Content Include="images\yourtheme\tree\elbow-end-minus-nl.gif" />
+    <Content Include="images\yourtheme\tree\elbow-end-minus.gif" />
+    <Content Include="images\yourtheme\tree\elbow-end-plus-nl.gif" />
+    <Content Include="images\yourtheme\tree\elbow-end-plus.gif" />
+    <Content Include="images\yourtheme\tree\elbow-end.gif" />
+    <Content Include="images\yourtheme\tree\elbow-line.gif" />
+    <Content Include="images\yourtheme\tree\elbow-minus-nl.gif" />
+    <Content Include="images\yourtheme\tree\elbow-minus.gif" />
+    <Content Include="images\yourtheme\tree\elbow-plus-nl.gif" />
+    <Content Include="images\yourtheme\tree\elbow-plus.gif" />
+    <Content Include="images\yourtheme\tree\elbow.gif" />
+    <Content Include="images\yourtheme\tree\folder-open.gif" />
+    <Content Include="images\yourtheme\tree\folder.gif" />
+    <Content Include="images\yourtheme\tree\leaf.gif" />
+    <Content Include="images\yourtheme\tree\loading.gif" />
+    <Content Include="images\yourtheme\tree\s.gif" />
+    <Content Include="images\yourtheme\window\icon-error.gif" />
+    <Content Include="images\yourtheme\window\icon-info.gif" />
+    <Content Include="images\yourtheme\window\icon-question.gif" />
+    <Content Include="images\yourtheme\window\icon-warning.gif" />
+    <Content Include="images\yourtheme\window\left-corners.png" />
+    <Content Include="images\yourtheme\window\left-right.png" />
+    <Content Include="images\yourtheme\window\right-corners.png" />
+    <Content Include="images\yourtheme\window\top-bottom.png" />
+    <Content Include="index.aspx" />
+    <Content Include="print\Car7.aspx" />
+    <Content Include="print\Car6.aspx" />
+    <Content Include="print\Build.aspx" />
+    <Content Include="print\Bus.aspx" />
+    <Content Include="print\Freight.aspx" />
+    <Content Include="print\WaybillTemplate.css" />
+    <Content Include="print\WaybillTemplate_IE.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="db\Farm.db" />
+    <Content Include="db\Menu.js" />
+    <Content Include="images\icons\clear.png" />
+    <Content Include="images\icons\close.png" />
+    <Content Include="images\icons\expand.png" />
+    <Content Include="print\16.aspx" />
+    <Content Include="print\17.aspx" />
+    <Content Include="print\14.aspx" />
+    <Content Include="print\15.aspx" />
+    <Content Include="print\18.aspx" />
+    <Content Include="print\19.aspx" />
+    <Content Include="print\Tractor.aspx" />
+    <Content Include="print\waybillsIssue_16.css" />
+    <Content Include="WaybillTemplate.css" />
+    <Content Include="WaybillTemplate_IE.css" />
+    <None Include="db\SHM00R.CDX" />
+    <None Include="db\SHM00R.DBF" />
+    <None Include="db\SHM00T.CDX" />
+    <None Include="db\SHM00T.DBF" />
+    <None Include="db\SHM00V.CDX" />
+    <None Include="db\SHM00V.DBF" />
+    <None Include="db\SHM00Z.CDX" />
+    <None Include="db\SHM00Z.DBF" />
+    <None Include="db\Transport.db" />
+    <None Include="db\VHM00PL.CDX" />
+    <None Include="db\VHM00PL.DBF" />
+    <None Include="db\VHM00ZV.CDX" />
+    <None Include="db\VHM00ZV.DBF" />
+    <None Include="db\ZAKAZ.CDX" />
+    <None Include="db\ZAKAZ.DBF" />
+    <None Include="fonts\Cuprum_typefamily.zip" />
+    <None Include="fonts\Russo.zip" />
+    <None Include="images\access\form\clear-trigger.psd" />
+    <None Include="images\access\form\date-trigger.psd" />
+    <None Include="images\access\form\search-trigger.psd" />
+    <None Include="images\access\form\trigger.psd" />
+    <None Include="images\default\form\clear-trigger.psd" />
+    <None Include="images\default\form\date-trigger.psd" />
+    <None Include="images\default\form\search-trigger.psd" />
+    <None Include="images\default\form\trigger-square.psd" />
+    <None Include="images\default\form\trigger.psd" />
+    <None Include="images\default\window\left-corners.psd" />
+    <None Include="images\default\window\left-right.psd" />
+    <None Include="images\default\window\right-corners.psd" />
+    <None Include="images\default\window\top-bottom.psd" />
+    <None Include="images\yourtheme\form\clear-trigger.psd" />
+    <None Include="images\yourtheme\form\date-trigger.psd" />
+    <None Include="images\yourtheme\form\search-trigger.psd" />
+    <None Include="images\yourtheme\form\trigger-square.psd" />
+    <None Include="images\yourtheme\form\trigger.psd" />
+    <None Include="images\yourtheme\window\left-corners.psd" />
+    <None Include="images\yourtheme\window\left-right.psd" />
+    <None Include="images\yourtheme\window\right-corners.psd" />
+    <None Include="images\yourtheme\window\top-bottom.psd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="images\vista\dd\" />
+    <Folder Include="images\vista\tree\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>64829</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

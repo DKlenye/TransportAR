@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="Transport" namespace="Transport.OtherModels.tdbf" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="fuelNormsEx" table="fuelNormsEx" lazy="false" >
+  
+     <id name="fuelNormExId">
+        <generator class="identity" />
+     </id>
+     
+    <property name="ownerId">
+      <column name="ownerId" sql-type="tinyint" not-null="true" />
+    </property>
+    
+    <property name="garageNumber">
+      <column name="garageNumber" sql-type="int" not-null="true" />
+    </property>
+    
+    <property name="fuelNormId">
+      <column name="fuelNormId" sql-type="int" not-null="true" />
+    </property>
+    
+    <property name="description">
+      <column name="description" sql-type="varchar" not-null="true" />
+    </property>
+    <property name="extraNormPrcn">
+      <column name="extraNormPrcn" sql-type="decimal" not-null="true" />
+    </property>
+    
+    <property name="normIncreaseId">
+      <column name="normIncreaseId" sql-type="int" not-null="false" />
+    </property>
+    
+  </class>
+</hibernate-mapping>

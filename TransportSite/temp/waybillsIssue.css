@@ -1,0 +1,334 @@
+body, td  {
+	font-size: 12px;
+	font-family: Courier New;
+	background-color: white;
+	color: black;
+	margin-top: 0;
+	margin-left: 0;
+}
+
+b {
+	font-family: Verdana, Arial;
+	color: navy;
+}
+
+i {
+	font-family: Verdana, Arial;
+	font-weight: bold;
+	font-style: normal;
+	color: tomato;
+}
+      .LockOff { 
+         display: none; 
+         visibility: hidden; 
+      } 
+
+      .LockOn { 
+         display: block; 
+         visibility: visible; 
+         position: absolute; 
+         z-index: 999; 
+         top: 0px; 
+         left: 0px; 
+         width: 105%; 
+         height: 105%; 
+         background-color: #ccc; 
+         text-align: center; 
+         padding-top: 20%; 
+         filter: alpha(opacity=75); 
+         opacity: 0.75; 
+      } 
+.message {
+  padding: 1px 4px;
+	color: white;
+	border: 1px solid yellow;
+	background-color: orangered;
+	font-family: Verdana;
+	font-weight: bold;
+}
+.Limmessage {
+  padding: 1px 4px;
+	color: yellow;
+	border: 1px solid black;
+	background-color: orangered;
+	font-family: Verdana;
+	font-weight: bold;
+	font-size:15px;
+}
+
+.warning {
+  padding: 1px 4px;
+	color: black;
+	border: 1px solid red;
+	background-color: gold;
+	font-family: Verdana;
+	font-weight: bold;
+}
+
+.info {
+  padding: 1px 4px;
+	color: black;
+	border: 1px solid gray;
+	background-color: #FFFFF1;
+	font-family: Verdana;
+	font-weight: bold;
+}
+
+.help {
+  padding: 4px 9px;
+	color: black;
+	border: 1px solid gray;
+	background-color: #FFFFF1;
+	font-family: Verdana;
+}
+
+input {
+	font-weight: bold;
+	font-size: 16px;
+	color: black;
+
+  border: 2px solid #89E489;
+	background-color: #dfe;
+
+  xborder: 2px solid #FFC73C;
+  xbackground-color: #FFFFF0;
+}
+
+input.focus {
+
+	border: 2px solid orange;
+
+  font-weight: bold;
+	font-size: 16px;
+	color: black;
+	background-color:	gold;
+}
+
+input.noedit {
+	border: 1px solid lightgrey;
+	font-weight: bold;
+	color: blue;
+	background-color: white;
+}
+
+select {
+	border: 1px solid lightgrey;
+	background-color: whitesmoke;
+	font-weight: bold;
+}
+
+input.button {
+  border-top: 2px solid #CEE7FF;
+  border-left: 2px solid #A1BEEC;
+  border-right: 2px solid #A1BEEC;
+  border-bottom: 2px solid #8989E4;
+
+  background-color: #E9EBF5;
+
+	font-size: smaller;
+}
+
+input.buttonQuit {
+  border-top: 2px solid tomato;
+  border-left: 2px solid tomato;
+  border-right: 2px solid red;
+  border-bottom: 2px solid indianred;
+
+  background-color: white;
+  color: darkred;
+
+	font-size: smaller;
+}
+
+/*
+	SPAN
+
+.sfocus {
+  border: 2px solid gray;
+}
+*/
+
+/*
+	DIV
+*/
+.dfocus {
+  border: 2px solid orange;
+  padding: 5px;
+	background-color: gold;
+	color: navy;
+}
+.dblur {
+  padding: 5px;
+	color: black;
+
+  /* green */
+  border: 2px solid #89E489;
+	background-color: #dfe;
+
+  /* yellow */
+  xborder: 2px solid #FFC73C;
+  xbackground-color: #FFFFF0;
+}
+
+.d1focus {
+  border: 2px solid orange;
+  padding: 5px;
+	background-color: gold;
+	color: navy;
+}
+.d1blur {
+  padding: 5px;
+	color: black;
+
+  /* yellow */
+  border: 2px solid #FFC73C;
+  background-color: #FFFFF0;
+}
+
+/*
+	SELECT
+*/
+.sfocus {
+	background-color: gold;
+}
+.sblur {
+	background-color: #dfe;
+}
+
+
+.s1blur {
+	background-color: #FFFFF0;
+}
+.s1focus {
+	background-color: gold;
+}
+
+/*
+	/DIV
+*/
+
+input.buttonActive {
+  border: 2px solid #FFC73C;
+  background-color: #FFFFF0;
+	font-size: smaller;
+}
+
+a {
+	text-decoration: none;
+	color: blue;
+	font-weight: bold;
+	font-family: Verdana;
+	border: 1px solid navy;
+}
+
+
+legend {
+	color: green;
+	font-weight: bold;
+	font-family: Verdana;
+}
+fieldset {
+	padding: 3px;
+}
+
+/*
+		button ¬€ƒ¿“‹
+*/
+span.button {
+  border-top: 0px solid lightgrey;
+  border-left: 0px solid lightgrey;
+  border-bottom: 6px solid lightgrey;
+  border-right: 6px solid lightgrey;
+}
+
+a.button {
+  padding: 6px 16px;
+
+  font-family: Verdana;
+  font-size: 12px;
+  font-weight: bold;
+
+  color: navy;
+
+  text-decoration: none;
+  text-align: center;
+
+  border: 2px solid #89E489;
+  background-color: #dfe;
+
+  xborder: 2px solid #FFC73C;
+  xbackground-color: #FFFFF0;
+
+}
+
+a.button:hover {
+  border: 2px solid #FFC73C;
+  background-color: #FFFFF0;
+}
+
+a.button:active {
+  border: 2px solid darkorange;
+  background-color: gold;
+}
+
+
+buttonActive {
+  padding: 6px 16px;
+
+  font-family: Verdana;
+  font-size: 12px;
+  font-weight: bold;
+
+  color: navy;
+
+  text-decoration: none;
+  text-align: center;
+
+  border: 2px solid darkorange;
+  background-color: gold;
+
+}
+
+a.button1 {
+  padding: 2px 4px;
+
+  font-family: Verdana;
+  font-size: 9px;
+  font-weight: bold;
+
+  color: navy;
+
+  text-decoration: none;
+  text-align: center;
+
+  border-top: 2px solid #CEE7FF;
+  border-left: 2px solid #A1BEEC;
+  border-right: 2px solid #A1BEEC;
+  border-bottom: 2px solid #8989E4;
+  background-color: #E9EBF5;
+
+}
+
+.print {
+	background: white;
+	color: black;
+	font-size: 12px;
+	font-family: Courier New;
+
+  xpage-break-after: always;
+}
+
+.messageNumber {
+	font-size: larger;
+	xborder: 2px solid coral;
+	background: gold;
+	padding: 4px;
+}
+
+@media screen {
+	.screen { margin-left: 8px; }
+}
+
+@media print {
+	.screen { display: none; }
+}
