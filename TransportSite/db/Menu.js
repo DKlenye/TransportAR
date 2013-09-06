@@ -584,6 +584,11 @@ Kdn.Menu = [{
           iconCls:'icon-reseller_programm'
       },
       {
+          text: 'Список лиц для утверждения заявок (по должностям)',
+          Handler: 'createView',
+          HandlerCfg: "{xtype:'view.v_requestemployee',single:true}"
+      },
+      {
           text: 'Журнал заявок',
           Handler: 'createView',
           HandlerCfg: "{xtype:'view.requestmagazine',single:true}",
