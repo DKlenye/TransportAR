@@ -149,7 +149,10 @@ namespace Transport.Models
                  }
               }
 
-              if(Temperature!=null && Temperature < 0 && norm.isMain && TaskDepartureDate.Month < 3) {
+            var targetWinterDate = DateTime.Parse("25.11.2013");
+
+            if (Temperature != null && Temperature < 0 && norm.isMain && (TaskDepartureDate.Month < 3 || TaskDepartureDate > targetWinterDate))
+            {
                  if( taskWinterIncrease == null ) {
 
                     if( TaskIncreases == null ) TaskIncreases = new List<WaybillTaskIncrease>();
@@ -163,7 +166,7 @@ namespace Transport.Models
               }
               else {
                  if( taskWinterIncrease != null ) {
-                    //TaskIncreases.Remove(taskWinterIncrease);
+                    TaskIncreases.Remove(taskWinterIncrease);
                  }
               }
            
@@ -378,6 +381,60 @@ namespace Transport.Models
      }
 
 
+       public decimal? CalculateAmount()
+       {
+           decimal? AMOUNT = null;
+
+           if (NormConsumptionId != null && FuelId != null && Consumption != null)
+           {
+
+               var normCounsumption = NormConsumption.Find(NormConsumptionId);
+               var norm = Norm.Find(normCounsumption.NormId);
+               var workType = WorkType.Find(norm.WorkTypeId);
+               var workUnit = WorkUnit.Find(workType.WorkUnitId);
+
+               var increaseMap = Increase.getMap();
+
+               int increasePrcn = 0;
+               int increasePrcnWeight = 0;
+
+
+               if (TaskIncreases != null)
+               {
+                   foreach (var increase in TaskIncreases)
+                   {
+                       increasePrcn += increase.Prcn;
+                       var i = increaseMap[increase.IncreaseId];
+                       if (!i.isNormConstant) increasePrcnWeight += increase.Prcn;
+                   }
+               }
+
+               decimal increaseK = (decimal) 1.0 + (decimal) (increasePrcn/100.0);
+               decimal increaseKWeight = (decimal) 1.0 + (decimal) (increasePrcnWeight/100.0);
+
+               var consumption = normCounsumption.Consumption;
+
+               if (workUnit.WorkUnitId != KmUnitId)
+               {
+                   var MTMk = norm.MotoToMachineKoef ?? 1;
+                   var MH = decimal.Round((WorkAmount.Value/MTMk), 3, MidpointRounding.AwayFromZero);
+                   decimal consumption100 = Decimal.Round((consumption*increaseK), 2, MidpointRounding.AwayFromZero);
+                   AMOUNT = decimal.Round(Consumption.Value/consumption100*MTMk,2, MidpointRounding.AwayFromZero);
+               }
+               else
+               {
+                   decimal consumption100 = Decimal.Round((consumption*increaseK), 2, MidpointRounding.AwayFromZero);
+                   AMOUNT = Consumption.Value*workUnit.Coefficient/consumption100;
+               }
+
+           }
+
+           if (AMOUNT != null ) AMOUNT = Decimal.Round(AMOUNT.Value, 2, MidpointRounding.AwayFromZero);
+           return AMOUNT;  
+    
+       }
+
+
         public void CheckDefaultIncreases()
         {
 
@@ -440,7 +497,7 @@ namespace Transport.Models
                  }
                  else
                  {
-                    if (!taskMap.ContainsKey(i))
+                    if (!taskMap.ContainsKey(i) && i!=63/*fucking hard code, it's OAO NAFTAN baby*/)
                     {
                        var newIncrease = new WaybillTaskIncrease()
                        {

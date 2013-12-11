@@ -20,7 +20,7 @@ reportName: 'DriverWork',
                 objectValue: false,
                 width: 400,
                 dataIndex: 'driverId'
-            },
+            }
    ],
 
     buildReportParams: function(params) {

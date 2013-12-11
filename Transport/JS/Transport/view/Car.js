@@ -297,6 +297,14 @@
                 return null;
             }
             
+        },
+            
+        {
+            dataIndex: 'ModelHeater',
+            hidden:true,
+            header: 'Марка отопителя',
+            width: 100,
+            editor: { xtype: 'kdn.editor.textfield', allowBlank: true }
         }
 
         ]);

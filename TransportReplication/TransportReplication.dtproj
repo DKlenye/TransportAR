@@ -162,5 +162,10 @@
       <FullPath>Package3.dtsx</FullPath>
       <References />
     </DtsPackage>
+    <DtsPackage FormatVersion="3">
+      <Name>Package4.dtsx</Name>
+      <FullPath>Package4.dtsx</FullPath>
+      <References />
+    </DtsPackage>
   </DTSPackages>
 </Project>

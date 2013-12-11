@@ -998,7 +998,10 @@
     <Content Include="print\15.aspx" />
     <Content Include="print\18.aspx" />
     <Content Include="print\19.aspx" />
+    <Content Include="print\20.aspx" />
+    <Content Include="print\503APK.aspx" />
     <Content Include="print\Tractor.aspx" />
+    <Content Include="print\tst.aspx" />
     <Content Include="print\waybillsIssue_16.css" />
     <Content Include="WaybillTemplate.css" />
     <Content Include="WaybillTemplate_IE.css" />
@@ -1061,7 +1064,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>2020</DevelopmentServerPort>
+          <DevelopmentServerPort>23313</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

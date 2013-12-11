@@ -191,7 +191,7 @@
                         <td colspan="2">Возвращение от заказчика</td>
                         <td style="font-size:7pt; width:20mm;">Тракторная техника технически (не) исправна</td>
                         <td colspan="5">ДВИЖЕНИЕ ТОПЛИВА</td>
-                        <td rowspan="3">"Остатки сверены" Механик(уполномоченное лицо)</td>
+                        <td rowspan="3" style="width:20mm;">"Остатки сверены" Механик (упол<br/>номочен<br/>ное<br/>лицо)</td>
                     </tr>
                     <tr class="header rectangle">
                         <td rowspan="2" style="width:10mm;">время</td>
@@ -202,13 +202,13 @@
                         <td style="font-size:7pt; width:20mm;">принял, механик (уполномоченное лицо)</td>
                         <td rowspan="2">наличие при выезде</td>
                         <td colspan="3">выдано</td>
-                        <td rowspan="2">наличие при возвращение</td>
+                        <td rowspan="2" style="width:15mm;">наличие при возвращение</td>
                     </tr>
                     <tr class="header rectangle">
                         <td style="font-size:7pt; width:20mm;">принял, машинист (уполномоченное лицо)</td>
                         <td style="font-size:7pt; width:20mm;">сдал, машинист (уполномоченное лицо)</td>
                         <td>марка топлива</td>
-                        <td>количество топлива, л</td>
+                        <td>количество<br/>топлива, л</td>
                         <td>подпись заправщика</td>
                     </tr>
                     <tr>

@@ -66,7 +66,8 @@ reportName: 'ExpenseCostCode',
         var p = {};
         p.month = params.period.getMonth() + 1;
         p.year = params.period.getFullYear();
-        p.accGroupId = params.accGroupId || 0;
+        p.accGroupId = params.accGroupId || 0;        
+        
         Ext.copyTo(p, params, 'costCode,accountingId');
 
         return p;

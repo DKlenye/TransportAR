@@ -242,7 +242,7 @@
 						<tr class="rectangle">
 							<td rowspan="3">Число</td>
 							<td colspan="3">Время, час., мин.</td>
-							<td colspan="2">Показания спидометра</td>
+						    <td colspan="2">Показания<br/>спидометра</td>
 							<td rowspan="3">Пробег,<br/>км</td>
 							<td colspan="4">Движение топлива</td>
 							<td colspan="3">Расход топлива, л</td>
@@ -255,7 +255,7 @@
 							<td rowspan="2">вы-<br/>езда</td>
 							<td rowspan="2">возвра-<br/>щения</td>
 							<td rowspan="2">в наряде</td>
-							<td rowspan="2">при выезде</td>
+						    <td rowspan="2">при<br/>выезде</td>
 							<td rowspan="2">при возвра-<br/>щении</td>
 							<td colspan="2">остаток топлива,л</td>
 							<td colspan="2">заправлено топлива</td>
@@ -271,20 +271,20 @@
 							<td>при выезде</td>
 							<td>при возвра-<br/>щении</td>
 							<td>коли-<br/>чество, л</td>
-							<td style="font-size:7pt;">подпись(штамп) уполно-<br/>моченного лица (дата и № чека АЗС)</td>
+							<td style="font-size:7pt;">подпись(штамп) уполно-<br/>моченного лица<br/>(дата и № чека АЗС)</td>
 						</tr>
 						<tr class="rectangle">							
 							<td style="width:10mm">1</td>
 							<td style="width:10mm">2</td>
 							<td style="width:10mm">3</td>
 							<td>4</td>
-							<td style="width:20mm">5</td>
-							<td style="width:20mm">6</td>
+							<td style="width:18mm">5</td>
+							<td style="width:18mm">6</td>
 							<td>7</td>
-							<td>8</td>
-							<td>9</td>
+							<td style="width:16mm;font-size:7pt;">8</td>
+							<td style="width:16mm;">9</td>
 							<td>10</td>
-							<td>11</td>
+							<td style="width:20">11</td>
 							<td style="width:13mm;">12</td>
 							<td style="width:13mm;">13</td>
 							<td>14</td>
@@ -296,7 +296,7 @@
 							<td>20</td>
 						</tr>
 						<tr>							
-							<td>&nbsp;</td><td>&nbsp;<span class="dataText"><%Response.Write(DepartureDate("HH:mm")); %></span></td><td>&nbsp;<span class="dataText"><%Response.Write(ReturnDate("HH:mm")); %></span></td><td>&nbsp;</td><td>&nbsp;<span class="dataText"><%Response.Write(DepartureKm()); %></span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;<span class="dataText"><%Response.Write(FuelRemains()); %></span></td><td>&nbsp;</td><td style="font-size:7pt;">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+							<td>&nbsp;</td><td>&nbsp;<span class="dataText"><%Response.Write(DepartureDate("HH:mm")); %></span></td><td>&nbsp;<span class="dataText"><%Response.Write(ReturnDate("HH:mm")); %></span></td><td>&nbsp;</td><td>&nbsp;<span class="dataText"><%Response.Write(DepartureKm()); %></span></td><td>&nbsp;</td><td>&nbsp;</td><td style="font-size:7pt;">&nbsp;<span class="dataText"><%Response.Write(AllFuelRemains(true)); %></span></td><td>&nbsp;</td><td style="font-size:7pt;">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 						</tr>						
 						<tr>							
 							<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>

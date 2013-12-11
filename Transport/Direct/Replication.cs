@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 using System.Web;
 using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
+using Castle.Core;
 using Ext.Direct;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -398,10 +400,8 @@ namespace Transport.Direct {
          var farmSession = buildCustomSession(FarmSettings);
 
 
-
-
          var Waybills = farmSession.QueryOver<Farm.Waybill>()
-                        .Where(new BetweenExpression("DepartureDate", Kdn.DateUtils.FirstDayOfMonth(5, 2013), Kdn.DateUtils.LastDayOfMonth(5, 2013)))
+                        .Where(new BetweenExpression("DepartureDate", Kdn.DateUtils.FirstDayOfMonth(11, 2013), Kdn.DateUtils.LastDayOfMonth(11, 2013)))
                         .OrderBy(x => x.Position).Asc
                         .List();
 
@@ -2924,7 +2924,6 @@ namespace Transport.Direct {
 
                if( packMap.ContainsKey(pack.waybillPackageId) ) {
                   p.PackageTypeId = packMap[pack.waybillPackageId].PackageTypeId;
-
                   p.Save();
                }
 
@@ -2959,7 +2958,7 @@ namespace Transport.Direct {
           
          ISession tdbfSession = buildCustomSession(TDBFSettings);
 
-         var waybills = Waybill.FindAll(Order.Asc("DepartureDate"), Expression.Where<Waybill>(x => (x.ReturnDate > DateTime.Parse("01.08.2013") && x.ReturnDate < DateTime.Parse("03.09.2013") && x.Car == Car.FindFirst(Expression.Eq("GarageNumber",gn)))));
+         var waybills = Waybill.FindAll(Order.Asc("DepartureDate"), Expression.Where<Waybill>(x => (x.ReturnDate > DateTime.Parse("01.10.2013") && x.ReturnDate < DateTime.Parse("25.10.2013") /*&& x.Car == Car.FindFirst(Expression.Eq("GarageNumber",gn))*/)));
                     
          using( new SessionScope(FlushAction.Never) ) {
 
@@ -3354,6 +3353,51 @@ namespace Transport.Direct {
 
           return "";
       }
-      
+
+      [DirectMethod]
+      [ParseAsJson]
+       public string CalcWaybillsTime(JObject o)
+      {
+          Waybill[] waybills;
+          using (new SessionScope(FlushAction.Never))
+          {
+              waybills = Waybill.FindAll(Expression.Where<Waybill>(x => x.WaybillState == 2 && x.ReturnDate > DateTime.Parse("01.08.2013")));
+              waybills.ForEach(x =>
+              {
+                  x.ClearWorkingTime();
+                  x.CalcWorkingTime();
+                  SessionScope.Current.Flush();
+              });
+          }
+          
+
+          return waybills.Count().ToString();
+      }
+
+       [DirectMethod]
+       [ParseAsJson]
+       public string CalcWaybillsWork(JObject o)
+       {
+           Waybill[] waybills;
+           var counter = 0;
+           using (new SessionScope(FlushAction.Never))
+           {
+               waybills = Waybill.FindAll(Expression.Where<Waybill>(x => x.WaybillState == 2 && x.ReturnDate > DateTime.Parse("01.11.2013") && x.ReturnDate <= DateTime.Parse("01.12.2013")));
+               waybills.ForEach(x =>
+               {
+                   x.ClearWaybillWork();
+                   x.CalcWaybillWork();
+                   counter++;
+                   if (counter%100 == 0)
+                   {
+                       SessionScope.Current.Flush();
+                   }
+               });
+               SessionScope.Current.Flush();
+           }
+           
+           return waybills.Count().ToString();
+       }
+
    }
 }

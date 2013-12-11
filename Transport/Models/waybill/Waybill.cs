@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Castle.ActiveRecord;
 using Castle.ActiveRecord.Queries;
 using System.Text;
+using Castle.Core;
 using Kdn.Ext.Attributes;
 using NHibernate.Hql;
 using NHibernate.Criterion;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Transport.Models.waybill;
 
 namespace Transport.Models {
 
@@ -238,7 +241,7 @@ namespace Transport.Models {
 
       }
 
-
+      
 
 
       public JObject FullInfo()
@@ -412,9 +415,11 @@ namespace Transport.Models {
          if( next != null) {
             MoveRemains(next);
          }
-         this.WaybillState = 2;
-         this.UserClose = ((User)User.GetCurrent(typeof(User))).UserId;
-         this.WhenClose = DateTime.Now;
+         WaybillState = 2;
+         UserClose = ((User)User.GetCurrent(typeof(User))).UserId;
+         WhenClose = DateTime.Now;
+         CalcWorkingTime();
+          CalcWaybillWork();
          SaveAndFlush();
       }
 
@@ -424,10 +429,14 @@ namespace Transport.Models {
 
          foreach( var next in nextWaybills ) {
             next.WaybillState = 1;
+            next.ClearWorkingTime();
+             next.ClearWaybillWork();
             next.SaveAndFlush();
          }
 
          WaybillState = 1;
+         ClearWorkingTime();
+          ClearWaybillWork();
          SaveAndFlush();
 
       }
@@ -491,7 +500,194 @@ namespace Transport.Models {
       }
 
 
+       public void ClearWorkingTime()
+       {
+           var query = String.Format(
+            @" Delete from WaybillWorkingTime where WaybillId = {0} ",
+            WaybillId
+         );
 
+           var s = ActiveRecordMediator.GetSessionFactoryHolder().CreateSession(typeof(Waybill));
+           s.CreateQuery(query).ExecuteUpdate();
+       }
+
+       public void ClearWaybillWork()
+       {
+           var query = String.Format(
+            @" Delete from WaybillWork where WaybillId = {0} ",
+            WaybillId
+         );
+
+           var s = ActiveRecordMediator.GetSessionFactoryHolder().CreateSession(typeof(Waybill));
+           s.CreateQuery(query).ExecuteUpdate();
+       }
+
+       public void CalcWorkingTime()
+       {
+           var minutes = (int) (ReturnDate - DepartureDate).TotalMinutes;
+           var daycount = (int) (ReturnDate - DepartureDate).TotalDays;
+
+           var _return = ReturnDate;
+           var _departure = DepartureDate;
+
+           var returnTime = TimeSpan.Parse("16:45");
+           var departureTime = TimeSpan.Parse("08:00");
+
+           if (ScheduleId != null)
+           {
+               if (ScheduleId == 6)
+               {
+                   if (minutes < 60*20)
+                   {
+                       new WaybillWorkingTime(WaybillId, DepartureDate, minutes).SaveAndFlush();
+                   }
+                   else
+                   {
+                       var i = 0;
+                       while (i != daycount)
+                       {
+                           var min = 8*60;
+
+                           if (i == 0)
+                           {
+                               if (DepartureDate.TimeOfDay > returnTime)
+                               {
+                                   min = (int) (DepartureDate.AddDays(1).Date - DepartureDate).TotalMinutes;
+                               }
+                               else
+                               {
+                                   min = (int) (DepartureDate.Date.Add(returnTime) - DepartureDate).TotalMinutes;
+                               }
+                           }
+                           else if (i == daycount)
+                           {
+                               if (ReturnDate.TimeOfDay < departureTime)
+                               {
+                                   min = (int) (ReturnDate - ReturnDate.Date).TotalMinutes;
+                               }
+                               else
+                               {
+                                   min = (int) (ReturnDate - ReturnDate.Date.Add(departureTime)).TotalMinutes;
+                               }
+                           }
+
+                           new WaybillWorkingTime(WaybillId, DepartureDate.Date.AddDays(i), min).SaveAndFlush();
+                           i++;
+                       }
+                   }
+               }
+
+               else if(ScheduleId == 3 || ScheduleId==4)
+               {
+                   if (minutes < 60*20)
+                   {
+                       new WaybillWorkingTime(WaybillId, DepartureDate, minutes).SaveAndFlush();
+                   }
+                   else
+                   {
+                       var Dates = new List<DateTime>();
+
+                       WaybillTask.FindAll(Expression.Where<WaybillTask>(x => x.WaybillId == WaybillId)).ForEach(x =>
+                       {
+                           if (!Dates.Contains(x.TaskDepartureDate))
+                           {
+                               new WaybillWorkingTime(WaybillId, x.TaskDepartureDate, 12*60).SaveAndFlush();
+                               Dates.Add(x.TaskDepartureDate);
+                           }
+                       });
+                   }
+               }
+
+               else if (ScheduleId == 1 || ScheduleId == 7)
+               {
+                   if (minutes < 60 * 20)
+                   {
+                       new WaybillWorkingTime(WaybillId, DepartureDate, minutes).SaveAndFlush();
+                   }
+                   else
+                   {
+                       var Dates = new List<DateTime>();
+
+                       WaybillTask.FindAll(Expression.Where<WaybillTask>(x => x.WaybillId == WaybillId)).ForEach(x =>
+                       {
+                           var _date = x.TaskDepartureDate.Date;
+
+                           if (!Dates.Contains(_date))
+                           {
+                               new WaybillWorkingTime(WaybillId, _date, 8 * 60).SaveAndFlush();
+                               Dates.Add(_date);
+                           }
+                       });
+                   }
+               }
+
+               else if (ScheduleId == 5)
+               {
+                   new WaybillWorkingTime(WaybillId, DepartureDate, 12*60).SaveAndFlush();
+               }
+           }
+       }
+
+
+       public void CalcWaybillWork()
+       {
+           var Tasks = WaybillTask.FindAll(Expression.Where<WaybillTask>(x => x.WaybillId == WaybillId));
+           if (Tasks.Length == 0) return;
+
+           var waybillWork = new WaybillWork()
+           {
+               VehicleId = Car.VehicleId,
+               WaybillId = WaybillId,
+               WorkDate = ReturnDate,
+               Km=0,
+               FactConsumption=0,
+               MachineHour=0,
+               MotoHour=0,
+               NormConsumption=0
+           };
+
+           var workTypeMap = WorkType.getMap();
+           var workUnitMap = WorkUnit.getMap();
+           var Norms = Norm.FindAll(Expression.Where<Norm>(x => x.Car == Car));
+           var NormsMap = new Dictionary<int, Norm>();
+           Norms.ForEach(x=>NormsMap.Add(x.NormId,x));
+           
+           Tasks.ForEach(x =>
+           {
+               var consumption = NormConsumption.FindByPrimaryKey(x.NormConsumptionId);
+               var norm = NormsMap[consumption.NormId];
+               var workType = workTypeMap[norm.WorkTypeId];
+               var workUnit = workUnitMap[workType.WorkUnitId];
+
+               if (workUnit.WorkUnitId == 1)
+               {
+                   waybillWork.Km += (x.WorkAmount ?? 0);
+               }
+               else if (workUnit.WorkUnitId == 2 || workUnit.WorkUnitId == 3)
+               {
+                   var isMotoHour = norm.MotoToMachineKoef != null && norm.MotoToMachineKoef<1;
+
+                   if (isMotoHour)
+                   {
+                       waybillWork.MotoHour += (x.WorkAmount ?? 0);
+                       waybillWork.MachineHour += (x.WorkAmount ?? 0)/norm.MotoToMachineKoef.Value;
+                   }
+                   else
+                   {
+                       waybillWork.MachineHour += (x.WorkAmount ?? 0);
+                       waybillWork.MotoHour +=  (x.WorkAmount ?? 0)* (decimal)0.7;
+                   }
+               }
+               waybillWork.NormConsumption += x.Consumption ?? 0;
+           });
+
+           var departureRemain = WaybillFuelRemain.findByWaybillId(WaybillId).Sum(x => x.DepartureRemain??0);
+           var returnRemain = WaybillFuelRemain.findByWaybillId(WaybillId).Sum(x => x.ReturnRemain??0);
+           var refuelling = VehicleRefuelling.FindAll(Expression.Where<VehicleRefuelling>(x => x.WaybillId == WaybillId)).Sum(x=>x.Quantity);
+           waybillWork.FactConsumption = departureRemain + refuelling - returnRemain;
+           waybillWork.SaveAndFlush();
+       }
+   
    }
 
 

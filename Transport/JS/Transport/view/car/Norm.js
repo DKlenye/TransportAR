@@ -4,6 +4,12 @@
         
         
         var normGrid = new Kdn.grid.LocalEditorGrid({
+            viewConfig:{
+                getRowClass: function(record, rowIndex, rp, ds){
+                    var cls = 'notActual';
+                    return record.get('Enabled')?'':cls;
+                }
+            },
             colModel: new T.colModel.Norm(),
             store:Kdn.ModelFactory.getModel('Norm').buildStore({
                autoLoad:false,
@@ -17,7 +23,7 @@
             loadMask:true,
             region:'center',
             split:true,
-            margins:'2 0 2 2'            
+            margins:'2 0 2 2'          
         });
                 
         

@@ -140,7 +140,7 @@
                                                             </tr>
                                                             <tr>
                                                                 <td>
-                                                                    транспортных документов
+                                                                    путевого листа строительной машины
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -150,7 +150,7 @@
                                                             </tr>
                                                             <tr>
                                                                 <td style="text-align:left;">
-                                                                    Приказ генерального директора от 08.02.2012 № 213
+                                                                    Приказ генерального директора от 18.04.2012 № 640
                                                                 </td>
                                                             </tr>
                                                         </tbody>
@@ -195,7 +195,7 @@
                                 <table cellpadding="0" cellspacing="0">
                                     <tr>
                                         <td valign="top" rowspan="2" class="pre-lined">Машинист</td>
-                                        <td class="lined" style="text-align:left;">&nbsp;&nbsp;&nbsp;<span class="dataText"><%Response.Write(DriverFio(1));%>&nbsp;<%Response.Write(DriverLicence(1));%></span></td>
+                                        <td class="lined" style="text-align:left;">&nbsp;&nbsp;&nbsp;<span class="dataText" style="font-size:6pt;"><%Response.Write(DriverFio(1));%>&nbsp;<%Response.Write(DriverLicence(1));%>, <%Response.Write(DriverFio(2));%>&nbsp;<%Response.Write(DriverLicence(2));%></span></td>
                                         <td valign="top" rowspan="2"class="pre-lined">&nbsp;Стажер</td>
                                         <td class="lined">&nbsp;</td>
                                     </tr>
@@ -209,7 +209,7 @@
                                 <table cellpadding="0" cellspacing="0">
                                     <tr>
                                         <td valign="top" rowspan="2" class="pre-lined">Арендатор</td>
-                                        <td class="lined">&nbsp;</td>
+                                        <td class="lined">&nbsp <%Response.Write(CustomerName()); %></td>
                                     </tr>
                                     <tr>
                                     <td class="subscript">наименование</td>
@@ -250,7 +250,7 @@
                                                         <td>прибытия на объект</td>
                                                         <td>убытия с объекта</td>
                                                     </tr>
-                                                    <tr><td style="text-align:left;">Выезд<br/>на объект</td><td><span class="dataText"><% Response.Write(DepartureKm());%></span></td><td>&nbsp;</td><td><span class="dataText"><% Response.Write(DepartureDate("HH:mm"));%></span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                                    <tr><td style="text-align:left;">Выезд<br/>на объект</td><td><span class="dataText"><% Response.Write(DepartureKm());%><br/><% Response.Write(DepartureMh());%></span></td><td>&nbsp;</td><td><span class="dataText"><% Response.Write(DepartureDate("HH:mm"));%></span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
                                                     <tr><td style="text-align:left;">Возвращение<br/>с объекта</td><td>&nbsp;</td><td>&nbsp;</td><td><span class="dataText"><% Response.Write(ReturnDate("HH:mm"));%></span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
                                                 </tbody>
                                             </table>
@@ -513,7 +513,7 @@
                                         <tbody>
                                             <tr>
                                                 <td rowspan="2" class="pre-lined" style="vertical-align:top;">Машинист&nbsp;</td>
-                                                <td class="lined"><span style="font-size:7pt;" class="dataText"><% Response.Write(DriverFio(1));%></span></td>
+                                                <td class="lined"><span style="font-size:5pt;" class="dataText"><% Response.Write(DriverFio(1));%><br/><% Response.Write(DriverFio(2));%></span></td>
                                             </tr>
                                             <tr>                                                
                                                 <td class="subscript">фамилия инициалы</td>
@@ -528,7 +528,7 @@
                                         <tbody>
                                             <tr>
                                                 <td rowspan="2" class="pre-lined" style="vertical-align:top;">Арендатор&nbsp;</td>
-                                                <td class="lined">&nbsp;</td>
+                                                <td class="lined">&nbsp;<%Response.Write(CustomerName()); %></td>
                                             </tr>
                                             <tr>                                                
                                                 <td class="subscript">наименование организации</td>
@@ -639,7 +639,7 @@
                                         <tbody>
                                             <tr>
                                                 <td rowspan="2" class="pre-lined" style="vertical-align:top;">Машинист&nbsp;</td>
-                                                <td class="lined"><span style="font-size:7pt;" class="dataText"><% Response.Write(DriverFio(1));%></span></td>
+                                                <td class="lined"><span style="font-size:5pt;" class="dataText"><% Response.Write(DriverFio(1));%><br/><% Response.Write(DriverFio(2));%></span></td>
                                             </tr>
                                             <tr>                                                
                                                 <td class="subscript">фамилия инициалы</td>
@@ -654,7 +654,7 @@
                                         <tbody>
                                             <tr>
                                                 <td rowspan="2" class="pre-lined" style="vertical-align:top;">Арендатор&nbsp;</td>
-                                                <td class="lined">&nbsp;</td>
+                                                <td class="lined">&nbsp;<%Response.Write(CustomerName()); %></td>
                                             </tr>
                                             <tr>                                                
                                                 <td class="subscript">наименование организации</td>

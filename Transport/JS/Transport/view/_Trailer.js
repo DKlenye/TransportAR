@@ -211,7 +211,7 @@
                         header: 'Грузоподъёмность, т',
                         width: 120,
                         'hidden':true,
-                        editor: { xtype: 'kdn.editor.numberfield',allowBlank:true }
+                        editor: { xtype: 'kdn.editor.numberfield',allowBlank:true, decimalPrecision:3 }
                     },
                     {
                         dataIndex: 'WriteOffDate',

@@ -363,6 +363,12 @@ Kdn.Menu = [{
           Handler: 'createView',
           HandlerCfg: "{xtype:'view.report.vehiclerun',single:true}"
       },
+      {        
+            text: 'Пробег транспорта (ежедневный)',
+            iconCls: 'icon-blue-document-word',
+            Handler: 'createView',
+            HandlerCfg: "{xtype:'view.report.vehiclerundetails',single:true}"
+      },
       {
           text: 'Реестры путевых листов',
           iconCls: 'icon-report-white',
@@ -403,6 +409,12 @@ Kdn.Menu = [{
                 Handler: 'createView',
                 HandlerCfg: "{xtype:'view.report.expensecode',single:true}"
             },
+              {
+                text: 'Реестр по коду затрат(+ водители)',
+                iconCls: 'icon-blue-document-word',
+                Handler: 'createView',
+                HandlerCfg: "{xtype:'view.report.expensecodedriver',single:true}"
+            },
             {
                 text: 'Затраты по заказчику',
                 iconCls: 'icon-blue-document-word',
@@ -441,7 +453,13 @@ Kdn.Menu = [{
            Handler: 'createView',
            HandlerCfg: "{xtype:'view.report.12trdaycount',single:true}"
        },
+        {           
+          text: 'Информация 4-тр',
+          iconCls: 'icon-blue-document-word',
+          Handler: 'createView',
+          HandlerCfg: "{xtype:'view.report.4trinfo',single:true}"
        
+        },
        {
         text: 'Списки транспорта',
         iconCls: 'icon-report-white',
@@ -463,10 +481,21 @@ Kdn.Menu = [{
                   iconCls: 'icon-blue-document-word',
                   Handler: 'createView',
                   HandlerCfg: "{xtype:'view.report.vehicleinfobygroup',single:true}"
-              }
+              },
+            {                
+                 text: 'Список неиспользуемого транспорта',
+                  iconCls: 'icon-blue-document-word',
+                  Handler: 'createView',
+                  HandlerCfg: "{xtype:'view.report.vehiclenotusing',single:true}"
+            }
         ]
        },    
-      
+       {
+          text: 'Список норм',
+          iconCls: 'icon-blue-document-word',
+          Handler: 'createView',
+          HandlerCfg: "{xtype:'view.report.vehiclenorms',single:true}"
+      },
       {
           text: 'Список водителей экспедиторов',
           iconCls: 'icon-blue-document-word',
@@ -491,12 +520,45 @@ Kdn.Menu = [{
           Handler: 'createView',
           HandlerCfg: "{xtype:'view.report.polymirvehiclework',single:true}"
       },
+    {
+        text: 'Отчёты по водителям',
+        iconCls: 'icon-report-white',
+        Child: [{
+            text: 'Ведомость учёта отработанного времени по п.л.',
+            iconCls: 'icon-blue-document-word',
+            Handler: 'createView',
+            HandlerCfg: "{xtype:'view.report.driverworkingtime',single:true}"
+        },
+        {
+             text: 'Работа водителей',
+             iconCls: 'icon-blue-document-word',
+             Handler: 'createView',
+             HandlerCfg: "{xtype:'view.report.driverwork',single:true}"
+         }
+        ]
+    },
      {
-         text: 'Работа водителей',
-         iconCls: 'icon-blue-document-word',
-         Handler: 'createView',
-         HandlerCfg: "{xtype:'view.report.driverwork',single:true}"
-     }
+		text: 'Инвентаризация',
+        iconCls: 'icon-report-white',
+        Child: [
+			{
+				text: 'Комиссия',
+				Handler: 'createView',
+				HandlerCfg: "{xtype:'view.inventorycomission',single:true}"
+			},
+			{
+				text: 'Описи',
+				iconCls: 'icon-blue-document-word',
+				Handler: 'createView',
+				HandlerCfg: "{xtype:'view.report.inventory',single:true}"
+			}
+        ]
+     },
+        {
+            text: 'Коэффициент выхода транспорта на линию',
+            Handler: 'createView',
+            HandlerCfg: "{xtype:'view.report.vehicleworkkoefficient',single:true}"
+        }
     ]
 },
 {
@@ -566,6 +628,18 @@ Kdn.Menu = [{
                  iconCls: 'icon-blue-document-word',
                  Handler: 'createView',
                  HandlerCfg: "{xtype:'view.report.batterywarrantlyend',single:true}"
+            },
+            {
+                 text: 'Cписок АКБ, снятых с ТС',
+                 iconCls: 'icon-blue-document-word',
+                 Handler: 'createView',
+                 HandlerCfg: "{xtype:'view.report.batteryremove',single:true}"
+            },
+            {
+                 text: 'Cписок АКБ, полученных со склада',
+                 iconCls: 'icon-blue-document-word',
+                 Handler: 'createView',
+                 HandlerCfg: "{xtype:'view.report.batteryumtu',single:true}"
             }
         ]
       }

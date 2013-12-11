@@ -12,52 +12,71 @@ using Iesi.Collections.Generic;
 
 namespace Transport.Models {
 
-   [Model, ActiveRecord]
-   public class Norm : ActiveRecordBase<Norm>, Interfaces.IOwnered {
+    [Model, ActiveRecord]
+    public class Norm : ActiveRecordBase<Norm>, Interfaces.IOwnered
+    {
 
 
-      public Norm() {
-         NormConsumption = new SortedSet<NormConsumption>();
-         NormFuels = new List<int>();
-         NormIncreases = new List<int>();
-      }
+        public Norm()
+        {
+            NormConsumption = new SortedSet<NormConsumption>();
+            NormFuels = new List<int>();
+            NormIncreases = new List<int>();
+        }
 
-      [IdProperty,PrimaryKey]
-      public int NormId { get; set; }
-      [BelongsTo("VehicleId")]
-      public BaseVehicle Car { get; set; }
-      [Property]
-      public int WorkTypeId { get; set; }
-      [Property]
-      public bool isMain { get; set; }
-      [Property]
-      public int? CounterId { get; set; }
-      [Property]
-      public decimal? MotoToMachineKoef { get; set; }
+        [IdProperty, PrimaryKey]
+        public int NormId { get; set; }
 
-      [AllowBlank, HasMany(Table = "NormIncreases", Element = "IncreaseId", ColumnKey = "NormId")]
-      public ICollection<int> NormIncreases { get; set; }
+        [BelongsTo("VehicleId")]
+        public BaseVehicle Car { get; set; }
 
-      [AllowBlank, HasMany(Table = "NormFuels", Element = "FuelId", ColumnKey = "NormId")]
-      public ICollection<int> NormFuels { get; set; }
+        [Property]
+        public int WorkTypeId { get; set; }
 
-      [AllowBlank, HasMany(Table="NormConsumption", ColumnKey = "NormId", OrderBy = "ConsumptionStartDate DESC",Inverse=true,Cascade=ManyRelationCascadeEnum.Delete,Fetch=FetchEnum.SubSelect)]
-      public ISet<NormConsumption> NormConsumption { get; set; }
-      
-      #region Owner
-      public void setOwner(int OwnerId) { }
-      public void readWithOwner(DetachedCriteria c, int owner) {
-         c.CreateAlias("Car", "Car").Add(Expression.Eq("Car.OwnerId", owner));
-      }
-      #endregion
+        [Property]
+        public bool isMain { get; set; }
+
+        [Property]
+        public int? CounterId { get; set; }
+
+        [Property]
+        public decimal? MotoToMachineKoef { get; set; }
+
+        [Property]
+        public bool Enabled { get; set; }
+
+        [AllowBlank, HasMany(Table = "NormIncreases", Element = "IncreaseId", ColumnKey = "NormId")]
+        public ICollection<int> NormIncreases { get; set; }
+
+        [AllowBlank, HasMany(Table = "NormFuels", Element = "FuelId", ColumnKey = "NormId")]
+        public ICollection<int> NormFuels { get; set; }
+
+        [AllowBlank,
+         HasMany(Table = "NormConsumption", ColumnKey = "NormId", OrderBy = "ConsumptionStartDate DESC", Inverse = true,
+             Cascade = ManyRelationCascadeEnum.Delete, Fetch = FetchEnum.SubSelect)]
+        public ISet<NormConsumption> NormConsumption { get; set; }
+
+        #region Owner
+
+        public void setOwner(int OwnerId)
+        {
+        }
+
+        public void readWithOwner(DetachedCriteria c, int owner)
+        {
+            c.CreateAlias("Car", "Car").Add(Expression.Eq("Car.OwnerId", owner));
+        }
+
+        #endregion
 
 
-      public WorkType GetWorkType(){
-         return WorkType.Find(WorkTypeId);
-      }
-   }
+        public WorkType GetWorkType()
+        {
+            return WorkType.Find(WorkTypeId);
+        }
+    }
 
-   [ActiveRecord("Norm")]
+    [ActiveRecord("Norm")]
    public class relation_Norm {
       [PrimaryKey]
       public int NormId { get; set; }

@@ -125,8 +125,14 @@
                            }
                            return a;
                         }
-                    }                
-                    
+                    },
+                    {
+                     header:'Актуальна',
+                     align:'center',
+                     dataIndex:'Enabled',
+                     xtype:'checkcolumn',
+                     width:100
+                  }
           ]
    }
    

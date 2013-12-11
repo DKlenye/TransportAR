@@ -141,8 +141,6 @@ T.view.waybill.WaybillFuelRemain = Ext.extend(Kdn.editor.LocalGrid, {
 
     onBeforeEdit: function(e) {
 
-      var polymirFlag = this.mainView.vehicle.GarageNumber>20000;
-
     if (this.mainView.isDispClosed()) return false;
     
         if (e.field == 'ZeroDiff'){
@@ -154,7 +152,7 @@ T.view.waybill.WaybillFuelRemain = Ext.extend(Kdn.editor.LocalGrid, {
         }
         
         
-        if(e.field == 'DepartureRemain' && !polymirFlag){
+        if(e.field == 'DepartureRemain'){
             return false;
         }
         

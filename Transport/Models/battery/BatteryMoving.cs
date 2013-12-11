@@ -141,7 +141,7 @@ namespace Transport.Models
       public override void UpdateAndFlush()
       {          
           base.UpdateAndFlush();
-          setBatGarageNumber();
+          //setBatGarageNumber();
       }
 
       public override void Delete()

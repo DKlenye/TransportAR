@@ -75,7 +75,7 @@ T.view.CarEditor = Ext.extend(Kdn.editor.ModelEditor, {
 	                  buildPropEditor(['Customer', 'WaybillTypeId', 'TrailerId', 'PackageTypeId', 'ScheduleId', 'StartWork', 'EndWork', 'GroupRequestId'],
 	                     {iconCls:'icon-roadworks',title:'Закрепление, настройки работы'}
 	                  ),
-	                  buildPropEditor(['BodyNumber','BodyTypeId','Category','EngineModel','EngineNumber','ChassisNumber','CabinNumber','Color','EnginePower','EngineVolume','EngineTypeId','EcologyClassId'],
+	                  buildPropEditor(['BodyNumber','BodyTypeId','Category','EngineModel','EngineNumber','ChassisNumber','CabinNumber','Color','EnginePower','EngineVolume','EngineTypeId','EcologyClassId','ModelHeater'],
 	                     {iconCls:'icon-gear_in',title:'Кузов, Двигатель'}
 	                  ),	
 	                  buildPropEditor(['FuelVolume','CoolantVolume','EngineOilVolume','HydraulicOilVolume'],

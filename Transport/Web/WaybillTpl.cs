@@ -320,6 +320,31 @@ namespace Transport.Web
             return "";
         }
 
+        public string AllFuelRemains(bool withName)
+        {
+            var r = new List<string>();
+
+            if (waybill != null && remains != null)
+            {
+                foreach (var rem in remains)
+                {
+                    if (rem.FuelId == 7) continue; //Не печатаем керосин
+
+                    if (rem.DepartureRemain != null)
+                    {
+                        var fuelName = "";
+                        if (withName)
+                        {
+                            fuelName = Fuel.Find(rem.FuelId).FuelName;
+                        }
+                        r.Add(String.Format("{0} {1}", fuelName, rem.DepartureRemain.Value.ToString("#####.##")));
+                    }
+                }
+            }
+            return String.Join("<br/>", r.ToArray());
+        }
+
+
         public string TrailerModel()
         {
            return trailer==null?"":trailer.Model;

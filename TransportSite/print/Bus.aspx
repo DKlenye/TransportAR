@@ -145,9 +145,9 @@
                                     <table class="data" cellpadding="0" cellspacing="0">
                                     <tbody>
                                         <tr class="rectangle"><td colspan="7"><b>Автобус</b></td></tr>
-                                        <tr class="rectangle">
+                                        <tr class="rectangle" style="font-size:7pt;">
                                             <td rowspan="2">Марка автобуса</td>
-                                            <td rowspan="2">Регистрационный<br/>знак</td>
+                                            <td rowspan="2">Регистраци<br/> онный знак</td>
                                             <td rowspan="2">Гаражный<br/>номер</td>
                                             <td colspan="2">Номер була</td>
                                             <td rowspan="2">Режим</td>
@@ -167,7 +167,7 @@
                                             <td>7</td>
                                         </tr>
                                         <tr>
-                                            <td><span class="dataText"><%Response.Write(VehicleModel()); %></span>&nbsp;</td>
+                                            <td><span class="dataText" style="font-size:6pt;"><%Response.Write(VehicleModel()); %></span>&nbsp;</td>
                                             <td><span class="dataText"><%Response.Write(VehicleRegistrationNumber()); %></span></td>
                                             <td><span class="dataText"><%Response.Write(VehicleGarageNumber()); %></span></td>
                                             <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
@@ -196,7 +196,7 @@
                                             </tr>
                                             <tr>
                                                 <td>1</td>
-                                                    <td><span class="dataText" style="font-size:7pt;"><%Response.Write(DriverFio(1));%></span>&nbsp;</td><td><span class="dataText"><%Response.Write(DriverTab(1));%></span>&nbsp;</td><td><span class="dataText"><%Response.Write(DriverLicence(1));%></span>&nbsp;</td>
+                                                    <td><span class="dataText" style="font-size:6pt;"><%Response.Write(DriverFio(1));%></span>&nbsp;</td><td><span class="dataText"><%Response.Write(DriverTab(1));%></span>&nbsp;</td><td><span class="dataText"><%Response.Write(DriverLicence(1));%></span>&nbsp;</td>
                                                     <td>&nbsp;</td>
                                             </tr>
                                             <tr>
@@ -281,11 +281,11 @@
                                             </tr>
                                             <tr>
                                                 <td style="text-align:left">Выезд на линию</td>
-                                                <td><span class="dataText"><%Response.Write(DepartureKm()); %></span>&nbsp;</td><td><span class="dataText"><%Response.Write(DepartureDate("dd.MM.yyyy HH:mm",true)); %></span>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+                                                <td><span class="dataText"><%Response.Write(DepartureKm()); %></span>&nbsp;</td><td><span class="dataText" style="font-size:7pt;"><%Response.Write(DepartureDate("dd.MM.yyyy HH:mm",true)); %></span>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align:left">Возвращение с линии</td>
-                                                <td>&nbsp;</td><td><span class="dataText"><%Response.Write(ReturnDate("dd.MM.yyyy HH:mm",true)); %></span>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+                                                <td>&nbsp;</td><td><span class="dataText" style="font-size:7pt;"><%Response.Write(ReturnDate("dd.MM.yyyy HH:mm",true)); %></span>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -416,7 +416,7 @@
                             <td>51</td>
                             <td>52</td>
                         </tr>
-                        <tr><td><%Response.Write(CustomerName()); %>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                        <tr><td style="font-size:6pt"><%Response.Write(CustomerName()); %>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
                         <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
                     </tbody>                
                 </table>

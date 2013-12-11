@@ -224,7 +224,7 @@ namespace Transport.Models {
 
       [AllowBlank, Property(Length=30)]
       public string CabinNumber { get; set; }
-
+      
       [Property]
       public int? PackageTypeId { get; set; }
 
@@ -285,8 +285,11 @@ namespace Transport.Models {
 
       [AllowBlank,Property(Length=50)]
       public string Disposal { get; set; }
+       
+       [AllowBlank,Property(Length=50)]
+       public string ModelHeater { get; set; }
 
-      public JObject Info()
+       public JObject Info()
       {
          var obj = JObject.FromObject(this);
 

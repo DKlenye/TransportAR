@@ -217,33 +217,48 @@ namespace Transport.Direct
                   fuelId = f;
                   break;
                }
+             
+
             }
-            
 
-           var task = new WaybillTask() {
-               WaybillId = waybill.WaybillId,
-               TaskDepartureDate = waybill.DepartureDate,
-               Customer = _Customer,
-               NormConsumptionId = normConsumptionId,
-               FuelId = fuelId,
-               CargoName = _CargoName,
-               DstRoutPoint = _DstRoutePoint,
-               SrcRoutPoint = _SrcRoutePoint,
-               TrailerId = waybill.TrailerId,
-               isTruck = waybill.Car.BodyTypeId == 18 || waybill.Car.BodyTypeId == 36
-            };
+          WaybillTask task = null;
+          if (norm != null)
+          {
 
-            task.Save();
+              task = new WaybillTask()
+              {
+                  WaybillId = waybill.WaybillId,
+                  TaskDepartureDate = waybill.DepartureDate,
+                  Customer = _Customer,
+                  NormConsumptionId = normConsumptionId,
+                  FuelId = fuelId,
+                  CargoName = _CargoName,
+                  DstRoutPoint = _DstRoutePoint,
+                  SrcRoutPoint = _SrcRoutePoint,
+                  TrailerId = waybill.TrailerId,
+                  isTruck = waybill.Car.BodyTypeId == 18 || waybill.Car.BodyTypeId == 36
+              };
 
-            if( norm != null && norm.NormIncreases.Count > 0 ) {
+              task.Save();
+          }
+
+
+
+          if( norm != null && norm.NormIncreases.Count > 0 ) {
                foreach( var incr in norm.NormIncreases ) {
 
-                  new WaybillTaskIncrease() {
-                     IncreaseId = incr,
-                     TaskId = task.TaskId,
-                     Prcn = mapVehicleIncreases.ContainsKey(incr) ? mapVehicleIncreases[incr].Prcn : mapIncreases[incr].Prcn
-                  }.Save();
-
+                   if (incr != 63 /*fucking hard code, it's OAO NAFTAN baby*/ /*and copypast from Models/WaybillTask.cs*/)
+                   {
+                       new WaybillTaskIncrease()
+                       {
+                           IncreaseId = incr,
+                           TaskId = task.TaskId,
+                           Prcn =
+                               mapVehicleIncreases.ContainsKey(incr)
+                                   ? mapVehicleIncreases[incr].Prcn
+                                   : mapIncreases[incr].Prcn
+                       }.Save();
+                   }
                }
          }
 
@@ -409,6 +424,13 @@ namespace Transport.Direct
          else {
             waybill.SaveAndFlush();
          }
+
+          if (waybill.WaybillState == 2)
+          {
+              waybill.ClearWorkingTime();
+              waybill.CalcWorkingTime();
+          }
+
 
          var JO = JObject.FromObject(waybill);
 

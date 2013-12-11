@@ -60,7 +60,6 @@ body, td  {
 #prn_customerName{ position: absolute; top: 130mm; left: 27mm; }
 #prn_trailer{ position: absolute; top: 63mm; left: 44mm; }
 #prn_way{ position: absolute; top: 95mm; left: 22mm; }
-
 #prn_cargo{ position: absolute; top: 135mm; left: 184mm; }
 
 #prn_src{ position: absolute; top: 135mm; left: 99mm; }

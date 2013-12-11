@@ -561,10 +561,10 @@
                     width: 75,
                     dataIndex: 'Consumption',
                     align: 'center',
-                    /* editor: {
+                    editor: {
                     xtype: 'kdn.editor.decimalfield',
                     allowNegative: false
-                    },*/
+                    },
                     renderer: function(v, meta)
                     {
                         meta.css = 'waybill-task-consumption'; return v;
@@ -920,13 +920,19 @@
 
         switch (e.field)
         {
-
-
+            
+            case 'Consumption':
+                {
+                    this.store.autoSave = false;
+                    this.store.proxy.api.update = Kdn.Direct.WaybillTaskConsumptionUpdate;
+                    break;
+                }
+            
             case 'TaskDepartureDate':
                 {
 
                     this.store.autoSave = false;
-
+                    this.store.proxy.api.update = Kdn.Direct.WaybillTaskDateUpdate;
                     break;
                 }
             case 'Weight':
@@ -964,7 +970,7 @@
                         });
 
                         this.store.autoSave = false;
-
+                        this.store.proxy.api.update = Kdn.Direct.WaybillTaskNormUpdate;
                         /*if (consumptionEditorStore.getCount()<=1) {
                         this.startEditing.defer(20,this,[e.row,e.column+1]);
                         return false;
@@ -1031,6 +1037,15 @@
 
         switch (e.field)
         {
+        
+         case 'Consumption':
+             {
+                 this.store.save();
+                 this.store.autoSave = true;
+                 this.store.proxy.api.update = Kdn.Direct.WaybillTaskUpdate;
+                 break;
+             }
+        
             case 'TaskDepartureDate':
                 {
                     if (e.value != e.originalValue)
@@ -1073,10 +1088,11 @@
                             rec.set('FuelId', null);
                             rec.endEdit();
                         }
-                        this.store.save()
+                        this.store.save();
                     }
 
                     this.store.autoSave = true;
+                    this.store.proxy.api.update = Kdn.Direct.WaybillTaskUpdate;
                     break;
                 }
             case 'NormConsumptionId':
@@ -1087,11 +1103,13 @@
                         var norm = vehicle.norms.get(vehicle.consumption.get(e.value)["NormId"]);
                         rec.beginEdit();
                         rec.set('FuelId', norm.NormFuels.length > 0 ? norm.NormFuels[0] : null);
+                        rec.set('TaskIncreases', []);
                         rec.endEdit();
                         this.store.save();
                     }
 
                     this.store.autoSave = true;
+                    this.store.proxy.api.update = Kdn.Direct.WaybillTaskUpdate;
 
                     break;
                 }
@@ -1109,7 +1127,6 @@
                     }
 
                     this.store.autoSave = true;
-
                     break;
                 }
 

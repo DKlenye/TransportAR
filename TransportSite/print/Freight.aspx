@@ -64,8 +64,7 @@
 Открытое акционерное общество <br/>
 "НАФТАН"<br/>
 Республика Беларусь,Витебская обл.<br/>
-211440,г.Новополоцк<br/>
-тел. <%Response.Write(Phone()); %>
+211440,г.Новополоцк,тел. <%Response.Write(Phone()); %>
 </div>
                         </td>                        
                         
@@ -188,20 +187,20 @@
                                         <tr class="header rectangle">
                                             <td rowspan="2">Операция</td>
                                             <td rowspan="2">Показания<br/>спидометра</td>
-                                            <td style="font-size:7pt;" colspan="2">Дата(число,месяц),<br/>время(час.,мин.)</td>                                            
+                                            <td style="font-size:7pt;" colspan="2">Дата(число,месяц),время(час.,мин.)</td>                                            
                                             <td colspan="2">Время работы, час</td>
                                         </tr>
                                         <tr class="header rectangle">
                                             <td>по графику</td>
                                             <td>фактически</td>
                                             <td>двигателя</td>
-                                            <td style="font-size:7pt;">спец-<br/>оборудования</td>
+                                            <td style="font-size:6pt;">спец-<br/>оборудования</td>
                                         </tr>
                                         <tr class="header rectangle"><td class="style1">9</td><td class="style1">10</td>
                                             <td class="style1">11</td><td class="style1">12</td><td class="style1">13</td>
                                             <td class="style1">14</td></tr>
-                                        <tr><td style="text-align:left;">Выезд<br/>на линию</td><td>&nbsp;<b><span><%Response.Write(DepartureKm()); %></span></b></td><td>&nbsp;<b><span><%Response.Write(DepartureDate("dd.MM.yyyy HH:mm",true)); %></span></b></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                                        <tr><td style="text-align:left;">Возвращение<br/>с линии</td><td>&nbsp;</td><td>&nbsp;<b><span><%Response.Write(ReturnDate("dd.MM.yyyy HH:mm",true)); %></span></b></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                        <tr><td style="text-align:left; font-size:8pt;">Выезд на линию</td><td>&nbsp;<b><span><%Response.Write(DepartureKm()); %></span></b></td><td style="font-size:7pt;">&nbsp;<b><span><%Response.Write(DepartureDate("dd.MM.yyyy HH:mm",true)); %></span></b></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                        <tr><td style="text-align:left; font-size:8pt;">Возвращение с линии</td><td>&nbsp;</td><td style="font-size:7pt";>&nbsp;<b><span><%Response.Write(ReturnDate("dd.MM.yyyy HH:mm",true)); %></span></b></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
                                     </tbody>
                                     </table>
                                 </td>
@@ -228,7 +227,7 @@
                                             <td>при возвращении</td>
                                         </tr>
                                         <tr class="header rectangle"><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td style="width:18mm;">21</td><td>22</td></tr>
-                                        <tr><td style="height:10mm;">&nbsp;</td><td>&nbsp;</td><td style="font-size:7pt;">&nbsp;<b><span><%Response.Write(FuelName()); %></span></b></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;<b><span><%Response.Write(FuelRemains()); %></span></b></td><td>&nbsp;</td></tr>
+                                        <tr><td style="height:8mm;">&nbsp;</td><td>&nbsp;</td><td style="font-size:7pt;">&nbsp;<b><span><%Response.Write(FuelName()); %></span></b></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;<b><span><%Response.Write(FuelRemains()); %></span></b></td><td>&nbsp;</td></tr>
                                         <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td colspan="2">Подписи(штамп)</td></tr>
                                         <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>механик</td><td>механик</td></tr>
                                         <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
