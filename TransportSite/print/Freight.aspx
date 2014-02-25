@@ -227,7 +227,7 @@
                                             <td>при возвращении</td>
                                         </tr>
                                         <tr class="header rectangle"><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td style="width:18mm;">21</td><td>22</td></tr>
-                                        <tr><td style="height:8mm;">&nbsp;</td><td>&nbsp;</td><td style="font-size:7pt;">&nbsp;<b><span><%Response.Write(FuelName()); %></span></b></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;<b><span><%Response.Write(FuelRemains()); %></span></b></td><td>&nbsp;</td></tr>
+                                        <tr><td style="height:8mm;">&nbsp;</td><td>&nbsp;</td><td style="font-size:7pt;">&nbsp;<b><span><%Response.Write(AllFuelName()); %></span></b></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;<b><span><%Response.Write(AllFuelRemains(false)); %></span></b></td><td>&nbsp;</td></tr>
                                         <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td colspan="2">Подписи(штамп)</td></tr>
                                         <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>механик</td><td>механик</td></tr>
                                         <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>

@@ -310,6 +310,24 @@ namespace Transport.Web
             return "";
         }
 
+        public string AllFuelName()
+        {
+            if (waybill != null && remain != null)
+            {
+                var r = new List<string>();
+                foreach (var rem in remains)
+                {
+                    if (rem.DepartureRemain != null)
+                    {
+                        var fuelName = Fuel.Find(rem.FuelId).FuelName;
+                        r.Add(fuelName);
+                    }
+                }
+                return String.Join("<br/>", r.ToArray());
+            }
+            return "";
+        }
+
         public string FuelRemains()
         {
            if (waybill != null && remain != null)
@@ -328,7 +346,7 @@ namespace Transport.Web
             {
                 foreach (var rem in remains)
                 {
-                    if (rem.FuelId == 7) continue; //Не печатаем керосин
+                    //if (rem.FuelId == 7) continue; //Не печатаем керосин
 
                     if (rem.DepartureRemain != null)
                     {

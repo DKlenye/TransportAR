@@ -8,7 +8,12 @@
       T.colModel.Insurance.superclass.constructor.call(this,cfg);
    },
    
-   getColumns:function(){
+   getColumns:function() {
+
+       var vehicleIncreases = Kdn.ModelFactory.getModel('VehicleIncrease').buildStore({
+           autoSave: false
+       });
+   
       return [
                      {
                         dataIndex: 'NormId',
@@ -94,17 +99,26 @@
                         dataIndex:'NormIncreases',
                         header:'Надбавки',
                         width: 200,
-                        renderer:function(o){
+                        renderer:function(o,metaData, record, rowIndex, colIndex, store){
                            if(!o) return o;
                            var a = [],
+                               vehicleId = record.get('Car').VehicleId,
                                tpl = '{0} {1}%',
                                sum = 0,
                                store = Kdn.ModelFactory.getStore('Increase');
+                           
                            Ext.iterate(o,function(e){
                               var rec = store.getById(e);
-                                  sum+=rec.data.Prcn;
-                              a.push(String.format(tpl,rec.data.IncreaseName,rec.data.Prcn))
+                              var findId = vehicleId + "_" + rec.id;
+                              var VIncrease = vehicleIncreases.getById(findId);
+
+                               var increase = VIncrease ? VIncrease.get('Prcn') : rec.data.Prcn;
+
+                               sum += increase;
+
+                               a.push(String.format(tpl, rec.data.IncreaseName, increase));
                            });
+                           
                            if (a.length>1){
                               a = a.concat(String.format('<b>Всего {0}%<b>',sum));
                            }                           

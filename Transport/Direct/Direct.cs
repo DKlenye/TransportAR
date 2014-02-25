@@ -7,11 +7,7 @@ using Ext.Direct;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Castle.ActiveRecord;
-using Kdn.CommonModels;
 using NHibernate;
-using NHibernate.Transform;
-using NHibernate.Hql;
-using NHibernate.Criterion.Lambda;
 using NHibernate.Criterion;
 using Kdn.Direct;
 

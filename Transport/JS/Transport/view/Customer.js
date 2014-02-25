@@ -33,6 +33,19 @@
                         editor: { xtype: 'kdn.editor.textfield' }
                     },
                     {
+                        dataIndex: 'isPolymir',
+                        header: 'Заказчик Полимира',
+                        width: 200,
+                        renderer: Ext.ux.grid.CheckColumn.prototype.renderer,
+                        editor: { 
+                           xtype: 'kdn.editor.booleanfield',
+                           renderer: function(v) {
+                            if (!Ext.isBoolean(v)) return v;
+                            return (!!v) ? 'Да' : 'Нет';
+                           }
+                        }
+                    },
+                    {
                         dataIndex: 'PolymirCostCode',
                         header: 'Код затрат (Полимир)',
                         width: 160,

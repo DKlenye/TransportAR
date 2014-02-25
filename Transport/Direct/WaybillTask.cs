@@ -1,17 +1,8 @@
-﻿using System;
-using System.Web;
-using System.Reflection;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Ext.Direct;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Castle.ActiveRecord;
 using Castle.ActiveRecord.Queries;
-using Kdn.CommonModels;
-using NHibernate;
-using NHibernate.Hql;
-using NHibernate.Criterion.Lambda;
 using NHibernate.Criterion;
 using Kdn.Direct;
 using Transport.Models;
@@ -122,7 +113,8 @@ namespace Transport.Direct
              {
                  if (task.Temperature == null)
                  {
-                     task.CheckWinter(); 
+                     task.CheckDefaultIncreases();
+                     task.CheckWinter();
                  }
 
                 task.Consumption = task.CalculateConsumption();
@@ -154,6 +146,7 @@ namespace Transport.Direct
 
              if (waybillstate == 1)
              {
+                 task.isTruck = false;
                  task.Save();
                  task.WorkAmount = task.CalculateAmount();
              }
@@ -253,6 +246,7 @@ namespace Transport.Direct
            }
            return new DataSerializer(rezult);
        }
+
 
     }
 }

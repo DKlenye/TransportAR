@@ -119,9 +119,9 @@
                                         <tbody>
                                             <tr>
                                             <td align="center"><div style="border: 2px solid #88A1C0; text-align: center; font: normal 11px Times New Roman;z-index:10000; width:150pt;" >
-Открытое акционерное общество "НАФТАН"<br/>
-Республика Беларусь,Витебская обл.<br/>
-211440,г.Новополоцк, тел. 59-83-09
+                                                Открытое акционерное общество &quot;НАФТАН&quot;<br/>
+                                                Республика Беларусь,Витебская обл.<br/>
+                                                211440,г.Новополоцк, тел. 59-83-09
 </div></td>
                                                 <td style="width:40mm;"></td>
                                                 <td style="width:30mm;text-align:center; font-family: Tahoma; font-size:12pt;"><span><%Response.Write(WaybillCode());%></span></td>
@@ -161,14 +161,15 @@
                                     </table>
                                 </td>
                             </tr>
-                           <tr><td align="center" style="font-size:12pt;"><b>ПУТЕВОЙ ЛИСТ № <span><%Response.Write(WaybillNumber());%></span><br/>строительной машины</b></td></tr>
+                           <tr><td align="center" style="font-size:12pt;"><b>ПУТЕВОЙ ЛИСТ № <span><%Response.Write(WaybillNumber());%></span><br/>
+                               строительной машины</b></td></tr>
                            <tr> <td align="center"><b>
                                                     <table  cellpadding="0" cellspacing="0" style="width:50mm;">
 																		<tbody>	
 																			<tr>
-																				<td class="pre-lined">"</td>
+																				<td class="pre-lined">&quot;</td>
 																				<td class="lined" style="width:7mm">&nbsp;<span><%Response.Write(DepartureDate("dd")); %></span></td>
-																				<td class="pre-lined">"&nbsp;</td>
+																				<td class="pre-lined">&quot;&nbsp;</td>
 																				<td class="lined" style="width:25mm">&nbsp;<span><%Response.Write(DepartureDate("MMMM")); %></span></td>
 																				<td class="pre-lined"></td>
 																				<td class="lined" style="width:15mm">&nbsp;<span><%Response.Write(DepartureDate("yyyy")); %></span></td>
@@ -209,7 +210,7 @@
                                 <table cellpadding="0" cellspacing="0">
                                     <tr>
                                         <td valign="top" rowspan="2" class="pre-lined">Арендатор</td>
-                                        <td class="lined">&nbsp <%Response.Write(CustomerName()); %></td>
+                                        <td class="lined">&nbsp; <%Response.Write(CustomerName()); %></td>
                                     </tr>
                                     <tr>
                                     <td class="subscript">наименование</td>
@@ -250,8 +251,11 @@
                                                         <td>прибытия на объект</td>
                                                         <td>убытия с объекта</td>
                                                     </tr>
-                                                    <tr><td style="text-align:left;">Выезд<br/>на объект</td><td><span class="dataText"><% Response.Write(DepartureKm());%><br/><% Response.Write(DepartureMh());%></span></td><td>&nbsp;</td><td><span class="dataText"><% Response.Write(DepartureDate("HH:mm"));%></span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                                                    <tr><td style="text-align:left;">Возвращение<br/>с объекта</td><td>&nbsp;</td><td>&nbsp;</td><td><span class="dataText"><% Response.Write(ReturnDate("HH:mm"));%></span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                                    <tr><td style="text-align:left;">Выезд<br/>на объект</td><td><span class="dataText"><% Response.Write(DepartureKm());%><br/></span></td><td>
+                                                        &nbsp;</td><td><span class="dataText"><% Response.Write(DepartureDate("HH:mm"));%></span></td><td>
+                                                        &nbsp;</td><td>&nbsp;</td><td>&nbsp;<% Response.Write(DepartureMh());%></td></tr>
+                                                    <tr><td style="text-align:left;">Возвращение<br/>с объекта</td><td>&nbsp;</td><td>&nbsp;</td><td><span class="dataText"><% Response.Write(ReturnDate("HH:mm"));%></span></td><td>
+                                                        &nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
                                                 </tbody>
                                             </table>
                                             <table class="data" cellpadding="0" cellspacing="0">
@@ -275,9 +279,13 @@
                                                         <td style="width:15mm;">фактически</td>
                                                         <td style="width:15mm;">по норме</td>
                                                     </tr>
-                                                    <tr><td>&nbsp;</td><td>&nbsp;</td><td><span class="dataText" style="font-size:7pt;"><% Response.Write(FuelName());%></span></td><td>&nbsp;</td><td>&nbsp;</td><td><span class="dataText"><% Response.Write(FuelRemains());%></span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                                                    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                                                    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                                    <tr><td>&nbsp;</td><td>&nbsp;</td><td><span class="dataText" style="font-size:7pt;"><% Response.Write(FuelName());%></span></td><td>
+                                                        &nbsp;</td><td>&nbsp;</td><td><span class="dataText"><% Response.Write(FuelRemains());%></span></td><td>
+                                                        &nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                                    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>
+                                                        &nbsp;</td></tr>
+                                                    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>
+                                                        &nbsp;</td></tr>
                                                     </tbody>
                                             </table>
                                             <table class="footer" cellpadding="0" cellspacing="0" width="100%">
@@ -296,11 +304,11 @@
                                                                         <tbody>
                                                                             <tr>
                                                                                 <td valign="top" rowspan="2" class="pre-lined"><b>Диспетчер</b></td>
-                                                                                <td class="lined">&nbsp</td>
-                                                                                <td style="width:70mm;" class="lined">&nbsp</td>
+                                                                                <td class="lined">&nbsp;</td>
+                                                                                <td style="width:70mm;" class="lined">&nbsp;</td>
                                                                             </tr>
                                                                             <tr>
-                                                                                <td>&nbsp</td>
+                                                                                <td>&nbsp;</td>
                                                                                 <td class="subscript">подпись, фамилия, инициалы</td>
                                                                             </tr>
                                                                         </tbody>
@@ -316,11 +324,11 @@
                                                                         <tbody>
                                                                             <tr>
                                                                                 <td valign="top" rowspan="2" class="pre-lined"><b>Врач</b></td>
-                                                                                <td class="lined">&nbsp</td>
-                                                                                <td style="width:70mm;" class="lined">&nbsp</td>
+                                                                                <td class="lined">&nbsp;</td>
+                                                                                <td style="width:70mm;" class="lined">&nbsp;</td>
                                                                             </tr>
                                                                             <tr>
-                                                                                <td>&nbsp</td>
+                                                                                <td>&nbsp;</td>
                                                                                 <td class="subscript">подпись, фамилия, инициалы</td>
                                                                             </tr>
                                                                         </tbody>
@@ -336,11 +344,11 @@
                                                                         <tbody>
                                                                             <tr>
                                                                                 <td valign="top" rowspan="2" class="pre-lined"><b>Механик</b></td>
-                                                                                <td class="lined">&nbsp</td>
-                                                                                <td style="width:70mm;" class="lined">&nbsp</td>
+                                                                                <td class="lined">&nbsp;</td>
+                                                                                <td style="width:70mm;" class="lined">&nbsp;</td>
                                                                             </tr>
                                                                             <tr>
-                                                                                <td>&nbsp</td>
+                                                                                <td>&nbsp;</td>
                                                                                 <td class="subscript">подпись, фамилия, инициалы</td>
                                                                             </tr>
                                                                         </tbody>
@@ -356,11 +364,11 @@
                                                                         <tbody>
                                                                             <tr>
                                                                                 <td valign="top" rowspan="2" class="pre-lined"><b>Машинист</b></td>
-                                                                                <td class="lined">&nbsp</td>
-                                                                                <td style="width:70mm;" class="lined">&nbsp</td>
+                                                                                <td class="lined">&nbsp;</td>
+                                                                                <td style="width:70mm;" class="lined">&nbsp;</td>
                                                                             </tr>
                                                                             <tr>
-                                                                                <td>&nbsp</td>
+                                                                                <td>&nbsp;</td>
                                                                                 <td class="subscript">подпись, фамилия, инициалы</td>
                                                                             </tr>
                                                                         </tbody>
@@ -375,7 +383,8 @@
                                                         <table cellpadding="0" cellspacing="0">
                                                             <tbody>
                                                                 <tr>
-                                                                    <td align="left">При возвращении строймашина исправна/неисправна (ненужное зачеркнуть)</td>
+                                                                    <td align="left">При возвращении строймашина исправна/неисправна (ненужное 
+                                                                        зачеркнуть)</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>
@@ -383,7 +392,7 @@
                                                                         <tbody>
                                                                             <tr>
                                                                                 <td valign="top" rowspan="2" class="pre-lined"><b>Сдал&nbsp;машинист</b></td>
-                                                                                <td class="lined">&nbsp</td>
+                                                                                <td class="lined">&nbsp;</td>
                                                                             </tr>
                                                                             <tr>
                                                                                 <td class="subscript">подпись</td>
@@ -398,7 +407,7 @@
                                                                         <tbody>
                                                                             <tr>
                                                                                 <td valign="top" rowspan="2" class="pre-lined"><b>Принял&nbsp;механик</b></td>
-                                                                                <td class="lined">&nbsp</td>
+                                                                                <td class="lined">&nbsp;</td>
                                                                             </tr>
                                                                             <tr>
                                                                                 <td class="subscript">подпись</td>
@@ -426,9 +435,11 @@
                                                     <tr><td class="lined">&nbsp;</td></tr>
                                                     <tr><td class="lined">&nbsp;</td></tr>
                                                     <tr><td class="lined">&nbsp;</td></tr>
-                                                    <tr><td align="center" style="font-size:12pt; font-weight:bold"><span style="text-decoration:underline">ЗАПРЕЩАЕТСЯ</span> РАБОТАТЬ БЛИЖЕ 30 МЕТРОВ ОТ ЛЭП БЕЗ НАРЯД-ДОПУСКА!</td></tr>
+                                                    <tr><td align="center" style="font-size:12pt; font-weight:bold"><span style="text-decoration:underline">
+                                                        ЗАПРЕЩАЕТСЯ</span> РАБОТАТЬ БЛИЖЕ 30 МЕТРОВ ОТ ЛЭП БЕЗ НАРЯД-ДОПУСКА!</td></tr>
                                                     <tr><td>&nbsp;</td></tr>
-                                                    <tr><td align="center" style="font-size:12pt; font-weight:bold"><span style="text-decoration:underline">ЗАПРЕЩАЕТСЯ</span> РАБОТАТЬ БЕЗ АТТЕСТОВАННЫХ СТРОПАЛЬЩИКОВ!</td></tr>
+                                                    <tr><td align="center" style="font-size:12pt; font-weight:bold"><span style="text-decoration:underline">
+                                                        ЗАПРЕЩАЕТСЯ</span> РАБОТАТЬ БЕЗ АТТЕСТОВАННЫХ СТРОПАЛЬЩИКОВ!</td></tr>
                                                     <tr><td>&nbsp;</td></tr>
                                                     <tr><td>
                                                         <table class="data" cellpadding="0" cellspacing="0" width="100%">
@@ -441,14 +452,14 @@
                                                                     <td>Номер удостоверения</td>
                                                                     <td>Проверил</td>
                                                                 </tr>
-                                                                <tr><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td></tr>
-                                                                <tr><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td></tr>
-                                                                <tr><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td></tr>
-                                                                <tr><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td></tr>
-                                                                <tr><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td></tr>
-                                                                <tr><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td></tr>
-                                                                <tr><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td></tr>
-                                                                <tr><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td></tr>
+                                                                <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                                                <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                                                <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                                                <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                                                <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                                                <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                                                <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                                                <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
                                                             </tbody>
                                                         </table>
                                                     </td></tr>
@@ -478,7 +489,7 @@
                                         <tbody>
                                             <tr>
                                                 <td class="pre-lined">Арендодатель</td>
-                                                <td class="lined">&nbsp;</td>
+                                                <td class="lined">ОАО&quot;Нафтан&quot;&nbsp;</td>
                                             </tr>
                                             <tr>
                                                 <td class="subscript">&nbsp;</td>
@@ -604,7 +615,7 @@
                                         <tbody>
                                             <tr>
                                                 <td class="pre-lined">Арендодатель</td>
-                                                <td class="lined">&nbsp;</td>
+                                                <td class="lined">ОАО&quot;Нафтан&quot;&nbsp;</td>
                                             </tr>
                                             <tr>
                                                 <td class="subscript">&nbsp;</td>
@@ -752,7 +763,9 @@
                                                                          </table>
                                                                      </td>
                                                                 </tr>
-                                                                <tr><td style="font-size:11pt; font-weight:bold;" align="center">Установку строймашины на указанном мною месте проверил.<br/>Работу разрешаю. Ответственый за безопасное производство работ.</td></tr>
+                                                                <tr><td style="font-size:11pt; font-weight:bold;" align="center">Установку 
+                                                                    строймашины на указанном мною месте проверил.<br/>Работу разрешаю. Ответственый 
+                                                                    за безопасное производство работ.</td></tr>
                                                                  <tr>
                                                                     <td>
                                                                         <table class="data" cellpadding="0" cellspacing="0">

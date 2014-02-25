@@ -598,8 +598,7 @@
                         width: 50,
                         dataIndex: 'isTruck',
                         xtype: 'checkcolumn',
-                        checkHandler: (function(rec)
-                        {
+                        checkHandler: (function(rec) {
                             //this.calculateNormConsumption(rec); 
                             //this.refreshMain();
                         }).createDelegate(this),
@@ -923,6 +922,7 @@
             
             case 'Consumption':
                 {
+                    if (rec.get('isTruck')) return false;
                     this.store.autoSave = false;
                     this.store.proxy.api.update = Kdn.Direct.WaybillTaskConsumptionUpdate;
                     break;

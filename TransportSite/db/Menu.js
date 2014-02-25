@@ -487,7 +487,32 @@ Kdn.Menu = [{
                   iconCls: 'icon-blue-document-word',
                   Handler: 'createView',
                   HandlerCfg: "{xtype:'view.report.vehiclenotusing',single:true}"
-            }
+            },
+            {                
+                 text: 'Список безномерного транспорта',
+                  iconCls: 'icon-blue-document-word',
+                  Handler: 'createView',
+                  HandlerCfg: "{xtype:'view.report.vehiclesbyregistrationnumber',single:true}"
+            },
+            {                
+                 text: 'Количество транспорта по группам заправки',
+                  iconCls: 'icon-blue-document-word',
+                  Handler: 'createView',
+                  HandlerCfg: "{xtype:'view.report.vehiclebyrefuellinggroup',single:true}"
+            }, 
+            {
+                  text: ' Сведения о транспорте юридического лица',
+                  iconCls: 'icon-blue-document-word',
+                  Handler: 'createView',
+                  HandlerCfg: "{xtype:'view.report.vehiclecountinfo',single:true}"
+              },
+             {
+                 text: ' Сведения о транспорте юридического лица (детализация)',
+                 iconCls: 'icon-blue-document-word',
+                 Handler: 'createView',
+                 HandlerCfg: "{xtype:'view.report.vehiclecountinfodetails',single:true}"
+
+             }
         ]
        },    
        {
@@ -502,24 +527,42 @@ Kdn.Menu = [{
           Handler: 'createView',
           HandlerCfg: "{xtype:'view.report.forwarddrivers',single:true}"
       },
-      {
-          text: 'Работа транспорта',
-          iconCls: 'icon-blue-document-word',
-          Handler: 'createView',
-          HandlerCfg: "{xtype:'view.report.vehiclework',single:true}"
-      },
-      {
-          text: 'Работа транспорта (по группам)',
-          iconCls: 'icon-blue-document-word',
-          Handler: 'createView',
-          HandlerCfg: "{xtype:'view.report.vehicleworkbygroup',single:true}"
-      },
-      {
-          text: 'Работа транспорта Полимира до (01.03.2013)',
-          iconCls: 'icon-blue-document-word',
-          Handler: 'createView',
-          HandlerCfg: "{xtype:'view.report.polymirvehiclework',single:true}"
-      },
+    {
+        text: 'Отчёты по трансопрту',
+        iconCls: 'icon-report-white',
+        Child: [
+              {
+                  text: 'Работа транспорта',
+                  iconCls: 'icon-blue-document-word',
+                  Handler: 'createView',
+                  HandlerCfg: "{xtype:'view.report.vehiclework',single:true}"
+              },
+              {
+                  text: 'Работа транспорта (по группам)',
+                  iconCls: 'icon-blue-document-word',
+                  Handler: 'createView',
+                  HandlerCfg: "{xtype:'view.report.vehicleworkbygroup',single:true}"
+              },
+              {
+                  text: 'Работа транспорта Полимира до (01.03.2013)',
+                  iconCls: 'icon-blue-document-word',
+                  Handler: 'createView',
+                  HandlerCfg: "{xtype:'view.report.polymirvehiclework',single:true}"
+              },
+              {
+                  text: 'Суммарная информация о работе транспорта за период',
+                  iconCls: 'icon-blue-document-word',
+                  Handler: 'createView',
+                  HandlerCfg: "{xtype:'view.report.vehicleworksummary',single:true}"
+              },
+              {
+                  text: 'Работа транспорта (ежедневная)',
+                  iconCls: 'icon-blue-document-word',
+                  Handler: 'createView',
+                  HandlerCfg: "{xtype:'view.report.vehicledaywork',single:true}"
+              }
+        ]
+    },
     {
         text: 'Отчёты по водителям',
         iconCls: 'icon-report-white',

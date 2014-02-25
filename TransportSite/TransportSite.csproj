@@ -1013,13 +1013,8 @@
     <None Include="db\SHM00V.DBF" />
     <None Include="db\SHM00Z.CDX" />
     <None Include="db\SHM00Z.DBF" />
+    <None Include="db\Tran.dbf" />
     <None Include="db\Transport.db" />
-    <None Include="db\VHM00PL.CDX" />
-    <None Include="db\VHM00PL.DBF" />
-    <None Include="db\VHM00ZV.CDX" />
-    <None Include="db\VHM00ZV.DBF" />
-    <None Include="db\ZAKAZ.CDX" />
-    <None Include="db\ZAKAZ.DBF" />
     <None Include="fonts\Cuprum_typefamily.zip" />
     <None Include="fonts\Russo.zip" />
     <None Include="images\access\form\clear-trigger.psd" />
@@ -1064,7 +1059,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>23313</DevelopmentServerPort>
+          <DevelopmentServerPort>53130</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

@@ -419,17 +419,59 @@ namespace Transport.Models
                    var MTMk = norm.MotoToMachineKoef ?? 1;
                    var MH = decimal.Round((WorkAmount.Value/MTMk), 3, MidpointRounding.AwayFromZero);
                    decimal consumption100 = Decimal.Round((consumption*increaseK), 2, MidpointRounding.AwayFromZero);
-                   AMOUNT = decimal.Round(Consumption.Value/consumption100*MTMk,2, MidpointRounding.AwayFromZero);
+                   AMOUNT = Consumption.Value/consumption100*MTMk;
                }
                else
                {
-                   decimal consumption100 = Decimal.Round((consumption*increaseK), 2, MidpointRounding.AwayFromZero);
-                   AMOUNT = Consumption.Value*workUnit.Coefficient/consumption100;
+                   decimal weightConsumption = 0;
+                   decimal TrailerWeight = 0;
+                   decimal tkmConsumption = TonneKilometerConsumption;
+
+
+                   var VehicleId = new ScalarQuery<int>(typeof (Waybill),
+                       @" SELECT c.VehicleId
+                     FROM Car as c, Waybill as w
+                     WHERE c.VehicleId = w.Car.VehicleId AND w.WaybillId = ?",
+                       WaybillId
+                       ).Execute();
+
+
+                   var tkmNorm =
+                       Norm.FindFirst(
+                           Expression.Where<Norm>(x => x.Car.VehicleId == VehicleId && x.WorkTypeId == TkmWorkId));
+
+                   if (tkmNorm != null)
+                   {
+                       foreach (var cons in tkmNorm.NormConsumption)
+                       {
+                           if (TaskDepartureDate >= cons.ConsumptionStartDate)
+                           {
+                               tkmConsumption = cons.Consumption;
+                               break;
+                           }
+                       }
+                   }
+
+                   weightConsumption = ((WeightKm ?? 0)*(Weight ?? 0))*(tkmConsumption/(decimal) 100.0)*increaseKWeight;
+
+                   if (TrailerId != null)
+                   {
+                       TrailerWeight = new ScalarQuery<decimal?>(typeof (FullTrailer),
+                           @" SELECT t.SelfMass
+                        FROM FullTrailer as t WHERE t.VehicleId = ?",
+                           TrailerId
+                           ).Execute() ?? 0;
+                          
+                   }
+                   decimal consumption100 = Decimal.Round((consumption * increaseK), 2, MidpointRounding.AwayFromZero);
+                   AMOUNT = (Consumption.Value - weightConsumption) * workUnit.Coefficient /
+                                (consumption100 + TrailerWeight * (tkmConsumption / (decimal)100.0) * increaseKWeight);
+                   //AMOUNT = Consumption.Value*workUnit.Coefficient/consumption100;
                }
 
            }
 
-           if (AMOUNT != null ) AMOUNT = Decimal.Round(AMOUNT.Value, 2, MidpointRounding.AwayFromZero);
+           if (AMOUNT != null ) AMOUNT = Decimal.Round(AMOUNT.Value, 1, MidpointRounding.AwayFromZero);
            return AMOUNT;  
     
        }

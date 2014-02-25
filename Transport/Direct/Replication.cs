@@ -1697,9 +1697,10 @@ namespace Transport.Direct {
       public string ReplicateCustomer(JObject o) {
 
          ISession tdbfSession = buildCustomSession(TDBFSettings);
-         var tdbfCustomers = tdbfSession.QueryOver<Tdbf.Customer>().Where(x => x.customerId >= 929814 && x.customerId < 929818).List();
+         var tdbfCustomers = tdbfSession.QueryOver<Tdbf.Customer>().Where(x => x.ownerId==1).List();
          int counter = 0;
 
+          /*
          using( new SessionScope(FlushAction.Never) ) {
             foreach( var c in tdbfCustomers ) {
 
@@ -1731,8 +1732,32 @@ namespace Transport.Direct {
                }
 
             }
+           * */
 
-            SessionScope.Current.Flush();
+          using (new SessionScope(FlushAction.Never))
+          {
+              foreach (var c in Customer.FindAll().Where(x=>x.ReplicationId==null))
+              {
+                  var newCustomer = new Tdbf.Customer()
+                  {
+                      customerName = c.CustomerName,
+                      hide = 0,
+                      ownerId = 1,
+                      inputsDebit = c.CostCode,
+                      excessCredit                      = "",
+                      excessDebit                      = ""
+
+                  };
+
+                  tdbfSession.SaveOrUpdate(newCustomer);
+
+                  c.ReplicationSource = ReplicationSource.dbsrv2;
+                  c.ReplicationId = newCustomer.customerId;
+                  c.Update();
+              }
+
+
+          SessionScope.Current.Flush();
          }
 
          return "";

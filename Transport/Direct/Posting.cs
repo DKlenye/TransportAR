@@ -1,23 +1,11 @@
 ﻿using System;
-using System.Web;
-using System.Reflection;
-using System.Collections;
 using System.Collections.Generic;
 using Ext.Direct;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Castle.ActiveRecord;
-using Castle.ActiveRecord.Queries;
-using Kdn.CommonModels;
-using NHibernate;
-using NHibernate.Hql;
-using NHibernate.Criterion.Lambda;
-using NHibernate.Criterion;
 using Kdn.Direct;
 using Transport.Models;
 using System.Data.SqlClient;
 using System.Data;
-using System.Data.OleDb;
 
 namespace Transport.Direct
 {
@@ -121,18 +109,16 @@ namespace Transport.Direct
          string nameFile = "";
 
          if( accountingId == 1 ) {
-            nameFile = "prov1901";
+            nameFile = "prov0601";
          }
          else if( accountingId == 2 ) {
-            nameFile = "prov1911";
+            nameFile = "prov0646";
          }
                   
-
          string message = _sendProv(_data, nameFile, year.ToString(), month.ToString());
          if( message == "" ) return "Выполнено успешно";
          else return "Ошибки: " + message;
-      }
-
+      }     
 
 
       string _sendProv(string Data,string nameFile,string accyear,string accmonth)

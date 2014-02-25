@@ -30,6 +30,9 @@ namespace Transport.Models
 
         [Property]
         public bool notActual { get; set; }
+        
+        [Property,AllowBlank]
+        public bool isPolymir { get; set; }
 
         [AllowBlank,Property]
         public int OwnerId { get; set; }

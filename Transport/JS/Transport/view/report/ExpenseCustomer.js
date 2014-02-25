@@ -25,7 +25,7 @@ reportName: 'ExpenseCustomer',
             },
             'Код затрат:',
             {
-                xtype: 'numberfield',
+                xtype: 'textfield',
                 dataIndex: 'costCode',
                 objectValue: false,
                 width: 120

@@ -3,64 +3,62 @@
     server:'db2.lan.naftan.by',
     reportName:'',
     params:[],
+    afterParams:[],
     
     initComponent:function(){
       
       
-      var tbar = this.params;      
-      
-      var defaultItems = [
+      var tbar = this.params;
+
+        var defaultItems = [
             '-',
             {
-               text:'Открыть',
-               iconCls:'icon-blue-document-word',
-               handler:this.report,
-               scope:this
+                text: 'Открыть',
+                iconCls: 'icon-blue-document-word',
+                handler: this.report,
+                scope: this
             },
             '-',
             {
-               xtype:'tbspacer',
-               width:50
+                xtype: 'tbspacer',
+                width: 50
             },
             {
-               xtype:'combo',
-               width:70,
-               typeAhead: true,
-               triggerAction: 'all',
-               lazyRender:true,
-               mode: 'local',
-               store: new Ext.data.ArrayStore({
-                   fields: ['format'],
-                   data: [['Excel'],['Word'],['Pdf']]
+                xtype: 'combo',
+                width: 70,
+                typeAhead: true,
+                triggerAction: 'all',
+                lazyRender: true,
+                mode: 'local',
+                store: new Ext.data.ArrayStore({
+                    fields: ['format'],
+                    data: [['Excel'], ['Word'], ['Pdf']]
                 }),
-                value:'Excel',
+                value: 'Excel',
                 valueField: 'format',
                 displayField: 'format',
-                dataIndex:'format'                
+                dataIndex: 'format'
             },
             {
-               text:'Сохранить',
-               iconCls:'icon-save',
-               handler:this.reportExport,
-               scope:this
+                text: 'Сохранить',
+                iconCls: 'icon-save',
+                handler: this.reportExport,
+                scope: this
             }
-         
-      ]
-      
-      
-      
-      
-      Ext.apply(this,{
-         layout:'form',
-         bodyCfg: {
-             tag: 'iframe',
-             src: 'about:blank',
-             style:{
-               'background-color':'white'
-             }
-         },
-         tbar:tbar.concat(defaultItems)
-      });
+        ];
+
+
+        Ext.apply(this, {
+            layout: 'form',
+            bodyCfg: {
+                tag: 'iframe',
+                src: 'about:blank',
+                style: {
+                    'background-color': 'white'
+                }
+            },
+            tbar: tbar.concat(defaultItems).concat(this.afterParams)
+    });
       
      Kdn.view.Report.superclass.initComponent.call(this);
     },
