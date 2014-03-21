@@ -23,7 +23,11 @@
             loadMask:true,
             region:'center',
             split:true,
-            margins:'2 0 2 2'          
+            margins:'2 0 2 2'  ,
+            listeners: {
+                scope: this,
+                beforeedit: this.onBeforeEditNorm
+            }        
         });
                 
         
@@ -94,6 +98,27 @@
          
          
         T.view.car.Norm.superclass.constructor.call(this, cfg);
+    },
+
+    onBeforeEditNorm: function(e) {
+        switch (e.field) {
+        case 'MainFuelId':
+        {
+            var editor = e.grid.colModel.getCellEditor(e.column);
+            var editorStore = editor.field.store;
+            var fuelCount = e.record.data.NormFuels.length;
+            var fuelStore = Kdn.ModelFactory.getStore('Fuel');
+
+            editorStore.removeAll();
+            
+            Ext.iterate(e.record.data.NormFuels, function(f) {
+                var fuel = fuelStore.getById(f);
+                if (fuel) editorStore.add(new editorStore.recordType(fuel.json));
+            });
+                break;
+            }
+        }
+
     },
     
     onBeforeEditConsumption:function(e){

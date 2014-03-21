@@ -870,7 +870,7 @@
             if (NormConsumptionId)
             {
                 NormConsumptionId = NormConsumptionId.RecId;
-                FuelId = norm.NormFuels.length == 0 ? null : norm.NormFuels[0];
+                FuelId = norm.MainFuelId || (norm.NormFuels.length == 0 ? null : norm.NormFuels[0]);
                 WaybillTaskNormIncreases = norm.NormIncreases;
             }
         }
@@ -1078,7 +1078,7 @@
                         {
                             rec.beginEdit();
                             rec.set('NormConsumptionId', newCons['RecId']);
-                            if (!rec.get('FuelId')) rec.set('FuelId', norm.NormFuels.length > 0 ? norm.NormFuels[0] : null);
+                            if (!rec.get('FuelId')) rec.set('FuelId',norm.MainFuelId ||(norm.NormFuels.length > 0 ? norm.NormFuels[0] : null));
                             rec.endEdit();
                         }
                         else
@@ -1102,7 +1102,7 @@
                     {
                         var norm = vehicle.norms.get(vehicle.consumption.get(e.value)["NormId"]);
                         rec.beginEdit();
-                        rec.set('FuelId', norm.NormFuels.length > 0 ? norm.NormFuels[0] : null);
+                        rec.set('FuelId', norm.MainFuelId || (norm.NormFuels.length > 0 ? norm.NormFuels[0] : null));
                         rec.set('TaskIncreases', []);
                         rec.endEdit();
                         this.store.save();

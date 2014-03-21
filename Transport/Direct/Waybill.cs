@@ -3,6 +3,7 @@ using System.Web;
 using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
+using Castle.Core;
 using Ext.Direct;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -213,11 +214,20 @@ namespace Transport.Direct
             int fuelId = 0;
 
             if( norm != null ) {
-               foreach( var f in norm.NormFuels ) {
-                  fuelId = f;
-                  break;
-               }
-             
+
+                if (norm.MainFuelId == null)
+                {
+                    foreach (var f in norm.NormFuels)
+                    {
+                        fuelId = f;
+                        break;
+                    }
+                }
+                else
+                {
+                    fuelId = norm.MainFuelId.Value;
+                }
+
 
             }
 
@@ -247,7 +257,7 @@ namespace Transport.Direct
           if( norm != null && norm.NormIncreases.Count > 0 ) {
                foreach( var incr in norm.NormIncreases ) {
 
-                   if (incr != 63 /*fucking hard code, it's OAO NAFTAN baby*/ /*and copypast from Models/WaybillTask.cs*/)
+                   if (incr != 63 /*fucking hard code, it's OAO NAFTAN baby*/ /*and copy->past from Models/WaybillTask.cs*/)
                    {
                        new WaybillTaskIncrease()
                        {
@@ -519,6 +529,14 @@ namespace Transport.Direct
                
                waybill.DepartureDate = date;
                waybill.ReturnDate = waybill.ReturnDate.AddDays(time.Days);
+
+               var tasks = WaybillTask.FindAll(Expression.Where<WaybillTask>(x => x.WaybillId == w.Value<int>()));
+                
+               tasks.ForEach(x =>
+               {
+                   x.TaskDepartureDate = x.TaskDepartureDate.AddDays(time.Days);
+                   x.SaveAndFlush();
+               });
 
                var savePosition = waybill.Position;
 

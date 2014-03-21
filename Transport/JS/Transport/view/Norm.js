@@ -41,11 +41,11 @@
                 ]
             })
         });
-
+        
         T.view.Norm.superclass.constructor.call(this, cfg);
 
     },
-
+    
     _getStore: function()
     {
         Kdn.ModelFactory.getStore('Increase');

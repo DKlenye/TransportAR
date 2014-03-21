@@ -18,12 +18,47 @@ using NHibernate.Criterion;
 using Kdn.Direct;
 using Transport.Models;
 using System.Data.SqlClient;
+using Transport.Models.info;
 
 
 namespace Transport.Direct
 {
    public partial class Direct:Kdn.Direct.Direct
     {
+
+       [DirectMethod]
+       [ParseAsJson]
+       public DataSerializer DriverFuelExcessInfoRead(JObject o)
+       {
+
+           JToken p;
+           int month = 0, year = 0;
+           Driver driver = null;
+
+           if (o.TryGetValue("period", out p) && p.Value<DateTime?>() != null)
+           {
+               month = p.Value<DateTime>().Month;
+               year = p.Value<DateTime>().Year;
+           }
+           if (o.TryGetValue("Driver", out p) )
+           {
+               try
+               {
+                   driver = JsonConvert.DeserializeObject<Driver>(o["Driver"].ToString());
+               }
+               catch
+               {}
+           }
+
+           var db = new PetaPoco.Database("db2");
+           var rez = db.Query<DriverFuelExcessInfo>(";EXEC DriverFuelExcessInfo_Read @0,@1,@2",
+                month,
+                year,
+                driver==null?null:(int?)driver.DriverId
+              );
+           return new DataSerializer(new List<DriverFuelExcessInfo>(rez));
+       }
+
 
       [DirectMethod]
       [ParseAsJson]
@@ -48,6 +83,8 @@ namespace Transport.Direct
             );
          return new DataSerializer(new List<DriverFuelExcess>(rez));
       }
+
+
 
       [DirectMethod]
       [ParseAsJson]

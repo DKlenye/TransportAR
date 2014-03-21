@@ -32,7 +32,7 @@ namespace Transport.OtherModels.ogmnew
         [Property]
         public string nakt { get; set; }
         [Property]
-        public DateTime dakt { get; set; }
+        public DateTime? dakt { get; set; }
         [Property]
         public decimal sumv1 { get; set; }
         [Property]
@@ -72,19 +72,19 @@ namespace Transport.OtherModels.ogmnew
         [Property]
         public decimal cen { get; set; }
         [Property]
-        public DateTime datp { get; set; }
+        public DateTime? datp { get; set; }
         [Property]
         public int nprih { get; set; }
         [Property]
-        public DateTime datpe { get; set; }
+        public DateTime? datpe { get; set; }
         [Property]
         public decimal smat { get; set; }
         [Property]
-        public DateTime dsfn { get; set; }
+        public DateTime? dsfn { get; set; }
         [Property]
-        public DateTime psfn { get; set; }
+        public DateTime? psfn { get; set; }
         [Property]
-        public DateTime dat_pl { get; set; }
+        public DateTime? dat_pl { get; set; }
         [Property]
         public int id31 { get; set; }
         [Property]

@@ -156,7 +156,17 @@ T.view.waybill.WaybillFuelRemain = Ext.extend(Kdn.editor.LocalGrid, {
             return false;
         }
         
-    }        
+    },
+    
+    setNullRemains:function() {
+        this.store.each(function(r) {
+           if (r.get('ReturnRemain') == null) {
+               r.beginEdit();
+               r.set('ReturnRemain', 0);
+               r.endEdit();
+           }
+        });
+    }
         
 });
 

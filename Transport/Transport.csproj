@@ -121,6 +121,7 @@
     <Compile Include="Models\battery\BatteryRemoveReason.cs" />
     <Compile Include="Models\battery\v_Battery.cs" />
     <Compile Include="Models\ExpenseList.cs" />
+    <Compile Include="Models\info\DriverFuelExcessInfo.cs" />
     <Compile Include="Models\InventoryComission.cs" />
     <Compile Include="Models\Kaprem_Info.cs" />
     <Compile Include="Models\request\v_RequestEmployee.cs" />
@@ -909,6 +910,15 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\report\VehicleCountInfoDetails.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\combo\Petrol.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\VehicleGroupAccInfo.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\info\DriverFuelExcess.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

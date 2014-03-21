@@ -145,19 +145,38 @@
                   xtype: 'button.remove', 
                   handler: this.remove,
                   scope: this
-              }, '-', 
+              }, '-',
               '->',
+              '-',
+                {
+                  xtype:'button',
+                  scope: this,
+                  iconCls: 'icon-water--exclamation',
+                  text:'Перерасход',
+                  handler:function() {
+                    var sel = this.getSelectionModel().getSelected();
+                    if (!sel) {
+                        sel = this.store.getAt(0);
+                    }
+                    if (sel){
+                      var driver = sel.data.Driver;
+                        var date = this.mainView.waybillproperty.getSource()['ReturnDate'];
+                        this.openExcess(driver,date);
+                    }
+                  }
+                },
+              '-',
               {
                   xtype:'button',
                   scope:this,
                   text:'Закреплённые',
                   iconCls:'icon-driver',
-                  handler:function(btn){                     
-                    
-                     var drivers = this.mainView.vehicle.Drivers,
-	                      driverStore = this.vehicleDriversStore
+                  handler:function(btn) {
+
+                      var drivers = this.mainView.vehicle.Drivers,
+                          driverStore = this.vehicleDriversStore;
                	       
-	                   driverStore.removeAll();
+	                  driverStore.removeAll();
                       driverStore.modified = [];
                       driverStore.removed  = [];
                       
@@ -258,8 +277,9 @@
             r.endEdit();         
             refStore.add(r);
          }
-      });
-      
+     });
+   
+
    },
    
    remove: function(btn, ev)
@@ -313,6 +333,41 @@
          this.view.refresh();
          
       }
+    },
+    
+    isResponsibleExist:function() {
+        var exist = false;
+        this.store.each(function(r) {
+            if (r.get('isResponsible')) {
+                exist = true;
+            }
+        });
+        return exist;
+    },
+    
+    openExcess:function(driver,date){
+      
+      var ExcessView = Kdn.Application.viewTab.get('view.info.driverfuelexcess_view');
+      
+      var filter = {
+            driver: driver,
+            date: date
+      };
+
+      if (ExcessView) {
+          Kdn.Application.viewTab.activate(ExcessView);
+          ExcessView.items.itemAt(0).applyFilter(filter);
+      }
+      else{
+         Kdn.Application.createView({         
+            xtype:'view.info.driverfuelexcess',
+            single: true,
+            iconCls: "icon-water--exclamation",
+            text: 'Информация по перерасходу',
+            filter:filter        
+         });
+      }   
+      
     }
     
     

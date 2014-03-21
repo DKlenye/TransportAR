@@ -442,20 +442,17 @@
  initComponent:function(){  
 	   Kdn.editor.ModelEditor.superclass.initComponent.call(this);	 
 	},
- 
-      
-   onAfterRender:function(){
-      this.FocusMgr = new T.view.waybill.FocusMgr(this);
-      
-	   this.FocusMgr.add('drivers',this.drivers);
-	   this.FocusMgr.add('counters',this.counters);
-      this.FocusMgr.add('fueltab',this.fueltab);
-      this.FocusMgr.add('remains',this.remains);
-      this.FocusMgr.add('refuelling',this.refuelling);
-      this.FocusMgr.add('summary',this.summary);
-      this.FocusMgr.add('tasks',this.tasks);
-      this.FocusMgr.add('waybillproperty',this.waybillproperty);
-   
+
+
+	onAfterRender: function() {
+	    var me = this;
+        var fm = new T.view.waybill.FocusMgr(me);
+        me.FocusMgr = fm;
+
+	    Ext.iterate(['drivers', 'counters', 'fueltab', 'remains', 'refuelling', 'summary', 'tasks', 'waybillproperty'], function(e) {
+	        fm.add(e, me[e]);
+	    });
+        
     this.body.mask();
     
     var me = this,
@@ -996,13 +993,15 @@
           combo.reset();
         }
      }
-     
-     
-     
-      var $ = this,
-            data = {},
-            errorMesage = [];
 
+
+       var $ = this,
+           data = {},
+           errorMesage = [],
+           departureDate = $.waybillproperty.getSource()['DepartureDate'],
+           returnDate = $.waybillproperty.getSource()['ReturnDate'];
+        
+        
         $.tasks.store.each(function(r) {
             var consumptionId = r.get('NormConsumptionId');
             if(consumptionId){
@@ -1013,13 +1012,16 @@
                 } 
             }
             
-                        
             var Customer = r.get('Customer');
             if(!Customer){
                errorMesage.push('Не внесены данные по <b>заказчику</b>');
             }
-            
-            
+
+            var taskDate = r.get('TaskDepartureDate');
+            if (taskDate.clearTime() < departureDate || taskDate.clearTime() > returnDate) {
+                errorMesage.push('Неверная дата задания <b>' + taskDate.format('d.m.Y')+'</b>');
+            }
+
         });
 
         $.counters.store.each(function(r) {
@@ -1028,14 +1030,20 @@
                                     
             if(count!=counterCount){
                if(r.get('CounterId')==1){
-                 errorMesage.push(String.format("Не совпадение пробега.<br/> по счётчику <b>{0}</b>,<br/> в таблице <b>{1}</b>",counterCount,count));                  
+                  errorMesage.push(String.format("Не совпадение пробега.<br/> по счётчику <b>{0}</b>,<br/> в таблице <b>{1}</b>",counterCount,count));                  
                }               
                else{
                   errorMesage.push(String.format("Не совпадение м.часов <br/> по счётчику <b>{0}</b>,<br/> в таблице <b>{1}</b>",counterCount,count));                     
                }            
             }
-            
-        }); 
+
+        });
+
+        if (!$.drivers.isResponsibleExist()) {
+            errorMesage.push("Не установлен материально ответственный водитель");
+        }
+
+       $.remains.setNullRemains();
         
         if(errorMesage.length>0){
          Ext.Msg.alert('Сообщение',errorMesage.join("</br>"));

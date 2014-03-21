@@ -1,6 +1,6 @@
 ﻿T.view.Car = Ext.extend(T.view.Trailer, {
 
-    requireModels: 'WaybillType,Department,TransportColumn,BodyType,WorkType,WorkUnit,GroupAcc',
+    requireModels: 'WaybillType,Department,TransportColumn,BodyType,WorkType,WorkUnit,GroupAcc,Fuel',
     modelName: 'FullCar',
     editor: 'view.careditor',
     pageMode: 'remote',

@@ -93,7 +93,30 @@
                         },
                         editor:{
                            xtype:'combo.multifuel'
-                        }                        
+                        }
+                    },
+                    {
+                        dataIndex:'MainFuelId',
+                        header:'Осн. Топливо',
+                        width: 110,
+                        renderer: function(o) {
+                            if (!o) return o;
+                            var store = Kdn.ModelFactory.getStore('Fuel'),
+                              rec = store.getById(o);
+                            if (rec) {
+                                return rec.data.FuelName;
+                            }
+                            return o;
+                        },
+                        editor: {
+                            xtype: 'combo.petrol',
+                            objectValue:false,
+                            store: Kdn.ModelFactory.getModel('Petrol').buildStore({
+                                autoDestroy: true,
+                                autoLoad: false,
+                                autoSave: false
+                            })
+                        }
                     },
                     {
                         dataIndex:'NormIncreases',

@@ -45,6 +45,9 @@ namespace Transport.Models {
         [Property]
         public bool Enabled { get; set; }
 
+        [Property]
+        public int? MainFuelId { get; set; }
+
         [AllowBlank, HasMany(Table = "NormIncreases", Element = "IncreaseId", ColumnKey = "NormId")]
         public ICollection<int> NormIncreases { get; set; }
 

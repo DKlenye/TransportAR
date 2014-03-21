@@ -303,7 +303,14 @@ Kdn.Menu = [{
                 "HandlerCfg": "'Build'"
             }
         ]
-     }
+        },
+                                {
+                                    "text": "Информация по перерасходу",
+                                    "iconCls": "icon-water--exclamation",
+                                 "Handler": "createView",
+                                 "HandlerCfg": "{xtype:'view.info.driverfuelexcess',single:true}"
+                                    
+                                }
 
     ]
 },
@@ -511,6 +518,13 @@ Kdn.Menu = [{
                  iconCls: 'icon-blue-document-word',
                  Handler: 'createView',
                  HandlerCfg: "{xtype:'view.report.vehiclecountinfodetails',single:true}"
+
+             },
+             {
+                 text: 'Группировка ТС в соответствии с технико-эксплуатационными характеристиками',
+                 iconCls: 'icon-blue-document-word',
+                 Handler: 'createView',
+                 HandlerCfg: "{xtype:'view.report.vehiclegroupaccinfo',single:true}"
 
              }
         ]
