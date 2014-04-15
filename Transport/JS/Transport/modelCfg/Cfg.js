@@ -38,6 +38,12 @@
               field: 'RequestId',
               direction: 'DESC'
           }
+      },
+      MaintenanceRequest: {
+        sortInfo: {
+          field: 'MaintenanceRequestId',
+          direction: 'DESC'
+        }
       }
    });
    

@@ -169,7 +169,27 @@
                      dataIndex:'Enabled',
                      xtype:'checkcolumn',
                      width:100
-                  }
+                 },
+            {
+                header: 'Действует с',
+                align: 'center',
+                dataIndex: 'StartDate',
+                xtype: 'datecolumn',
+                width: 100,
+                editor: {
+                xtype: 'kdn.form.datefield'
+                }
+            },
+            {
+                header: 'Действует по',
+                align: 'center',
+                dataIndex: 'EndDate',
+                xtype: 'datecolumn',
+                width: 100,
+                editor: {
+                xtype: 'kdn.form.datefield'
+                }
+            }
           ]
    }
    

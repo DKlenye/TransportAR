@@ -960,7 +960,7 @@
                         vehicle.norms.each(function(n)
                         {
                             var consumption = $.getNormConsumption(n, date);
-                            if (consumption && n.WorkTypeId != TkmWorkId)
+                            if (consumption && n.WorkTypeId != TkmWorkId && n.Enabled)
                             {
                                 consumptionEditorStore.add(new consumptionEditorStore.recordType({
                                     id: consumption.RecId,

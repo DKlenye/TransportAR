@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using Castle.ActiveRecord;
+using Castle.ActiveRecord.Queries;
 using Castle.Core;
 using Ext.Direct;
 using Newtonsoft.Json.Linq;
@@ -19,6 +21,9 @@ namespace Transport.Direct
     
             var db = new PetaPoco.Database("dbsrv2");
             var list = db.Query<Kaprem_Info>(String.Format("execute Kaprem_Info_Get {0},{1}", date.Month, date.Year));
+
+            var s = ActiveRecordMediator.GetSessionFactoryHolder().CreateSession(typeof(kaprem));
+            s.CreateSQLQuery("SET NULL OFF").ExecuteUpdate();
 
             var kList = kaprem.FindAll();
 

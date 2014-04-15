@@ -14,6 +14,7 @@ namespace Transport.Models {
       public int AccGroupId { get; set; }
       [Property]
       public string AccGroupName { get; set; }
-
+      [Property]
+      public string CostCode { get; set; }
    }
 }

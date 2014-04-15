@@ -278,7 +278,7 @@
                 if (!v) return v;
                 var store = Kdn.ModelFactory.getStore('AccGroup'),
                   rec = store.getById(v);
-                if (rec) return rec.get('AccGroupName');
+                if (rec) return rec.get('AccGroupName')+"("+rec.get("CostCode")+")";
                 return null;
             }
         },

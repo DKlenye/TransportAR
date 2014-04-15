@@ -46,6 +46,13 @@ namespace Transport.Models {
         public bool Enabled { get; set; }
 
         [Property]
+        public DateTime? StartDate { get; set; }
+        [Property]
+        public DateTime? EndDate { get; set; }
+        [Property]
+        public decimal? Consumption { get; set; }
+
+        [Property]
         public int? MainFuelId { get; set; }
 
         [AllowBlank, HasMany(Table = "NormIncreases", Element = "IncreaseId", ColumnKey = "NormId")]

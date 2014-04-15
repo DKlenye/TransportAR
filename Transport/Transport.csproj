@@ -92,6 +92,8 @@
     <Compile Include="Direct\AccRefuelling.cs" />
     <Compile Include="Direct\Battery.cs" />
     <Compile Include="Direct\Azs.cs" />
+    <Compile Include="Direct\DayInspection.cs" />
+    <Compile Include="Direct\MaintenanceRequest.cs" />
     <Compile Include="Direct\ExpenseList.cs" />
     <Compile Include="Direct\ServiceRegistry.cs" />
     <Compile Include="Direct\Test.cs" />
@@ -120,10 +122,13 @@
     <Compile Include="Models\battery\BatteryCard.cs" />
     <Compile Include="Models\battery\BatteryRemoveReason.cs" />
     <Compile Include="Models\battery\v_Battery.cs" />
+    <Compile Include="Models\car\Inspection.cs" />
     <Compile Include="Models\ExpenseList.cs" />
     <Compile Include="Models\info\DriverFuelExcessInfo.cs" />
+    <Compile Include="Models\dayInspection\VehicleDayInspection.cs" />
     <Compile Include="Models\InventoryComission.cs" />
     <Compile Include="Models\Kaprem_Info.cs" />
+    <Compile Include="Models\MaintenanceRequest.cs" />
     <Compile Include="Models\request\v_RequestEmployee.cs" />
     <Compile Include="Models\GroupRequest.cs" />
     <Compile Include="Models\EcologyClass.cs" />
@@ -919,6 +924,18 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\info\DriverFuelExcess.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\MaintenanceRequest.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\combo\Car2.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\MaintenanceRequestEditor.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\inspection\VehicleDayInspection.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

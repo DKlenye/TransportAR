@@ -23,6 +23,12 @@ Kdn.grid.PropertyEditor = Ext.extend(Kdn.grid.PropertyGrid, {
    
    onBeforeEdit: function(e) {
       var i = e.record.data.name;
+      if (this.customRenderers[i] == Kdn.CheckRenderer) {
+          this.setProperty(i, !this.getSource()[i]);
+          this.stopEditing();
+          return false;
+      }
+      
       if (i && this.customEditors[i] && this.customEditors[i].field.readOnly) return false;
     },
    

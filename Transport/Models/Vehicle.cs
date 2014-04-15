@@ -294,7 +294,7 @@ namespace Transport.Models {
          var obj = JObject.FromObject(this);
 
          var norms = Norm.FindAll(Expression.Where<Norm>(x => x.Car.VehicleId == this.VehicleId));
-
+           
          obj["Norms"] = JArray.FromObject(norms);
          obj["Drivers"] = JArray.FromObject(VehicleDriver.FindAll(Expression.Where<VehicleDriver>(x => x.Car.VehicleId == this.VehicleId)));
          obj["Increases"] = JArray.FromObject(VehicleIncrease.FindAll(Expression.Where<VehicleDriver>(x => x.Car.VehicleId == this.VehicleId)));

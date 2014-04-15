@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 using System.Reflection;
 using System.Collections;
 using System.Collections.Specialized;
@@ -250,6 +251,21 @@ namespace Transport.Web
                 {
                     var d = waybillDrivers[i - 1].Driver.Employee;
                     return String.Format("{0} {1} {2}", d.LastName, d.FirstName, d.MiddleName);
+                }
+            }
+            return "";
+
+        }
+
+        public string DriverFioShort(int i)
+        {
+
+            if (waybill != null)
+            {
+                if (waybillDrivers.Count >= i)
+                {
+                    var d = waybillDrivers[i - 1].Driver.Employee;
+                    return String.Format("{0} {1}. {2}.", d.LastName, d.FirstName[0], d.MiddleName[0]);
                 }
             }
             return "";

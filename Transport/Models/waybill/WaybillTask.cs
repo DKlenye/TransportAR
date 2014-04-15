@@ -149,9 +149,9 @@ namespace Transport.Models
                  }
               }
 
-            var targetWinterDate = DateTime.Parse("25.11.2013");
+            var targetWinterDate = DateTime.Parse("25.11.2014");
 
-            if (Temperature != null && Temperature < 0 && norm.isMain && (TaskDepartureDate.Month < 3 || TaskDepartureDate > targetWinterDate))
+            if (Temperature != null && Temperature < 0 && norm.isMain && (TaskDepartureDate.Month <= 3 || TaskDepartureDate > targetWinterDate))
             {
                  if( taskWinterIncrease == null ) {
 

@@ -135,15 +135,15 @@ namespace Transport.Models
       [Property]
       public string CargoName { get; set; }              //наимнование груза
       [Property]
-      public decimal Weight { get; set; }                //вес,т
+      public decimal? Weight { get; set; }                //вес,т
       [Property]
-      public decimal Length { get; set; }                //длина, см
+      public decimal? Length { get; set; }                //длина, см
       [Property]
-      public decimal Width { get; set; }                 //ширина, см
+      public decimal? Width { get; set; }                 //ширина, см
       [Property]
-      public decimal Height { get; set; }                //высота, см
+      public decimal? Height { get; set; }                //высота, см
       [Property]
-      public decimal Volume { get; set; }                //объём, см
+      public decimal? Volume { get; set; }                //объём, см
       [Property]
       public bool IsDeleted { get; set; }
 

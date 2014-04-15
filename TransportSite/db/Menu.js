@@ -3,7 +3,7 @@
 Kdn.Menu = [{
     "MenuId": 0,
     "text": "Программа",
-    "iconCls": "icon-setting_tools32",
+    "iconCls": "icon-application_xp32",
     "Child": [{
         "text": "Пользователи",
         "iconCls": "icon-user",
@@ -750,6 +750,25 @@ Kdn.Menu = [{
         ]
       }
     
+    ]
+  },
+{
+    "text": "ТО",
+    "iconCls": "icon-setting_tools32",
+    "Handler": null,
+    "HandlerCfg": null,
+    "Child": [
+      {
+          text: 'Заявки на ТО',
+          Handler: 'createView',
+          HandlerCfg: "{xtype:'view.maintenancerequest',single:true}",
+         
+      },
+        {
+          text: 'Контроль выхода транспорта на линию',
+          Handler: 'createView',
+          HandlerCfg: "{xtype:'view.inspection.vehicledayinspection',single:true}",
+        }
     ]
 },
 {

@@ -182,7 +182,7 @@ namespace Transport.Direct
                mapIncreases.Add(inc.IncreaseId, inc);
             }
 
-            var norms = Norm.FindAll(Expression.Where<Norm>(x => x.Car.VehicleId == waybill.Car.VehicleId));
+            var norms = Norm.FindAll(Expression.Where<Norm>(x => x.Car.VehicleId == waybill.Car.VehicleId && x.Enabled));
             Norm norm = null;            
             foreach( var n in norms ) {
                if( n.isMain ) {

@@ -25,7 +25,10 @@ namespace Transport.Models
       [Property]
       //не может быть изменена в обработке путевого листа
       public bool isNormConstant { get; set; }
-      
+
+      //общая надбавка, доступная для всех
+      public bool? isCommon { get; set; }
+
       [Property]
       public short Prcn { get; set; }
 
