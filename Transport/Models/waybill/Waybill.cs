@@ -654,32 +654,41 @@ namespace Transport.Models {
            
            Tasks.ForEach(x =>
            {
-               var consumption = NormConsumption.FindByPrimaryKey(x.NormConsumptionId);
-               var norm = NormsMap[consumption.NormId];
-               var workType = workTypeMap[norm.WorkTypeId];
-               var workUnit = workUnitMap[workType.WorkUnitId];
+               // var consumption = NormConsumption.FindByPrimaryKey(x.NormConsumptionId);
 
-               if (workUnit.WorkUnitId == 1)
+               if (x.NormConsumptionId == null)
                {
-                   waybillWork.Km += (x.WorkAmount ?? 0);
-               }
-               else if (workUnit.WorkUnitId == 2 || workUnit.WorkUnitId == 3)
-               {
-                   var isMotoHour = norm.MotoToMachineKoef != null && norm.MotoToMachineKoef<1;
 
-                   if (isMotoHour)
-                   {
-                       waybillWork.MotoHour += (x.WorkAmount ?? 0);
-                       waybillWork.MachineHour += (x.WorkAmount ?? 0)/norm.MotoToMachineKoef.Value;
-                   }
-                   else
-                   {
-                       waybillWork.MachineHour += (x.WorkAmount ?? 0);
-                       waybillWork.MotoHour +=  (x.WorkAmount ?? 0)* (decimal)0.7;
-                   }
                }
-               waybillWork.NormConsumption += x.Consumption ?? 0;
+               else
+               {
+                   var norm = NormsMap[x.NormConsumptionId.Value];
+                   var workType = workTypeMap[norm.WorkTypeId];
+                   var workUnit = workUnitMap[workType.WorkUnitId];
+
+                   if (workUnit.WorkUnitId == 1)
+                   {
+                       waybillWork.Km += (x.WorkAmount ?? 0);
+                   }
+                   else if (workUnit.WorkUnitId == 2 || workUnit.WorkUnitId == 3)
+                   {
+                       var isMotoHour = norm.MotoToMachineKoef != null && norm.MotoToMachineKoef < 1;
+
+                       if (isMotoHour)
+                       {
+                           waybillWork.MotoHour += (x.WorkAmount ?? 0);
+                           waybillWork.MachineHour += (x.WorkAmount ?? 0)/norm.MotoToMachineKoef.Value;
+                       }
+                       else
+                       {
+                           waybillWork.MachineHour += (x.WorkAmount ?? 0);
+                           waybillWork.MotoHour += (x.WorkAmount ?? 0)*(decimal) 0.7;
+                       }
+                   }
+                   waybillWork.NormConsumption += x.Consumption ?? 0;
+               }
            });
+           
 
            var departureRemain = WaybillFuelRemain.findByWaybillId(WaybillId).Sum(x => x.DepartureRemain??0);
            var returnRemain = WaybillFuelRemain.findByWaybillId(WaybillId).Sum(x => x.ReturnRemain??0);

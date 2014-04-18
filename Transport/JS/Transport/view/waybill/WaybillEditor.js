@@ -570,33 +570,14 @@
 	      TkmWorkId = T.config.TkmWorkId;
 	      
 	  if(v){
-	      
 	      //делаем маппинг норм и их изменений для более быстрой работы
 	      norms = new mc();
-	      consumption = new mc();
-	      	      	      
 	      Ext.iterate(v.Norms||[],function(n){
-	         
-	         if(n.WorkTypeId == TkmWorkId){
-	          var tkmcons = n.NormConsumption.shift();
-	          if(tkmcons){
-	            v.TkmNorm = tkmcons.Consumption;
-	          }
+	         if(n.WorkTypeId != TkmWorkId){
+	             norms.add(n['NormId'], n);
 	         }
-	         else{
-	            norms.add(n['NormId'],n);
-	         
-	            Ext.iterate(n.NormConsumption||[],function(c){
-	               consumption.add(c['RecId'],c);      
-	            });
-	         }
-	                 	         
-	      
 	      });
-	      	      
 	      v.norms=norms;
-	      v.consumption=consumption;
-	      	      
 	      //
 	      
 	      //формируем эдитор в заправке для разрешённых видов топлива

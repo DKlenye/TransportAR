@@ -20,13 +20,12 @@
                         align: 'center',
                         header: 'Код',
                         width: 80,
-                        hidden:true,
                         editor: { xtype: 'kdn.editor.id' }
                     },
                     {
                         dataIndex: 'WorkTypeId',
                         header: 'Вид работы',
-                        width: 200,
+                        width: 280,
                         editor:{
                            xtype:'combo.worktype',
                            objectValue:false,
@@ -37,8 +36,11 @@
                             var store = Kdn.ModelFactory.getStore('WorkType'),
                                 unitStore = Kdn.ModelFactory.getStore('WorkUnit'),
                                 record = store.getById(o),
-                                unit= unitStore.getById(record.get('WorkUnitId'));                              
-                                if (record) return String.format("{0} (<span style='color:blue'>{1}</span>)",record.get('WorkTypeName'),unit.get('UnitName'));                              
+                                unit= unitStore.getById(record.get('WorkUnitId'));
+                            if (record) return String.format("{0} (<span style='color:blue'>л/<b>{1}</b> {2}</span>)",
+                                record.get('WorkTypeName'),
+                                unit.get('Coefficient'),
+                                unit.get('UnitName'));                              
                                 return o;
                         }
                     },
@@ -153,15 +155,14 @@
                         }                        
                     },
                     {
-                        dataIndex:'NormConsumption',
+                        dataIndex:'Consumption',
                         header:'Норма, л',
-                        width: 130,
-                        renderer:function(a){
-                           if(a && a.length>0){
-                              return String.format('<b>{0}</b> (<span style="color:green;font-size:9pt;">{1}</span>)',a[0].Consumption,a[0].ConsumptionStartDate.format('d.m.Y'));
-                           }
-                           return a;
-                        }
+                        width: 80,
+                        align:'center',
+                        editor: {
+                            xtype: 'kdn.editor.decimalfield'
+                        }  
+                        
                     },
                     {
                      header:'Актуальна',
@@ -175,7 +176,7 @@
                 align: 'center',
                 dataIndex: 'StartDate',
                 xtype: 'datecolumn',
-                width: 100,
+                width: 110,
                 editor: {
                 xtype: 'kdn.form.datefield'
                 }
@@ -185,11 +186,19 @@
                 align: 'center',
                 dataIndex: 'EndDate',
                 xtype: 'datecolumn',
-                width: 100,
+                width: 110,
                 editor: {
                 xtype: 'kdn.form.datefield'
                 }
-            }
+            },
+          {
+              header: 'Примечание',
+              dataIndex: 'Description',
+              width: 200,
+               editor: {
+                   xtype: 'textfield'
+               }
+          }
           ]
    }
    

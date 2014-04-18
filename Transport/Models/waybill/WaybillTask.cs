@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Castle.ActiveRecord;
 using Castle.ActiveRecord.Queries;
 using System.Text;
@@ -46,7 +47,11 @@ namespace Transport.Models
 
         [Property]
         public int? NormConsumptionId { get; set; }
+
         [Property]
+        public int? NormId { get; set; }
+
+       [Property]
         public int? FuelId { get; set; }
 
         [Property]
@@ -106,8 +111,8 @@ namespace Transport.Models
 
            if(NormConsumptionId == null) return;
 
-           var normCounsumption = NormConsumption.Find(NormConsumptionId);
-           var norm = Norm.Find(normCounsumption.NormId);
+          // var normCounsumption = NormConsumption.Find(NormConsumptionId);
+           var norm = Norm.Find(NormConsumptionId);
 
            var query = new ScalarQuery<DateTime>(typeof(Waybill),
               @" SELECT DepartureDate
@@ -186,8 +191,8 @@ namespace Transport.Models
 
            if( NormConsumptionId != null && FuelId != null && WorkAmount !=null ) {
 
-              var normCounsumption = NormConsumption.Find(NormConsumptionId);
-              var norm = Norm.Find(normCounsumption.NormId);
+              //var normCounsumption = NormConsumption.Find(NormConsumptionId);
+              var norm = Norm.Find(NormConsumptionId);
               var workType = WorkType.Find(norm.WorkTypeId);
               var workUnit = WorkUnit.Find(workType.WorkUnitId);
 
@@ -210,7 +215,7 @@ namespace Transport.Models
               decimal increaseK = (decimal)1.0 + (decimal)(increasePrcn / 100.0 );
               decimal increaseKWeight = (decimal)1.0 + (decimal)( increasePrcnWeight / 100.0 );
 
-              var consumption = normCounsumption.Consumption;
+               var consumption = norm.Consumption;
 
               if (workUnit.WorkUnitId != KmUnitId)
               {
@@ -252,21 +257,15 @@ namespace Transport.Models
                     WaybillId
                  ).Execute();
 
-
-                 var tkmNorm = Norm.FindFirst(Expression.Where<Norm>(x => x.Car.VehicleId == VehicleId && x.WorkTypeId == TkmWorkId));
-
-                 if( tkmNorm != null ) {
-                    foreach( var cons in tkmNorm.NormConsumption ) {
-                       if( TaskDepartureDate >= cons.ConsumptionStartDate ) { 
-                          tkmConsumption = cons.Consumption;
-                          break;
-                       }
-                    }
-                 }
+                  var tkmNorm = Norm.FindActualNorms(VehicleId, TaskDepartureDate).FirstOrDefault(x => x.WorkTypeId == TkmWorkId);
+                  
+                  if (tkmNorm != null)
+                  {
+                      tkmConsumption = tkmNorm.Consumption;
+                  }
 
 
-                 
-              if(isTruck !=null && isTruck.Value){
+                  if(isTruck !=null && isTruck.Value){
                      
                      var Qv = new ScalarQuery<decimal>(typeof(Waybill),
                        @" SELECT c.CapacityTonns
@@ -388,8 +387,8 @@ namespace Transport.Models
            if (NormConsumptionId != null && FuelId != null && Consumption != null)
            {
 
-               var normCounsumption = NormConsumption.Find(NormConsumptionId);
-               var norm = Norm.Find(normCounsumption.NormId);
+              // var normCounsumption = NormConsumption.Find(NormConsumptionId);
+               var norm = Norm.Find(NormConsumptionId);
                var workType = WorkType.Find(norm.WorkTypeId);
                var workUnit = WorkUnit.Find(workType.WorkUnitId);
 
@@ -412,7 +411,7 @@ namespace Transport.Models
                decimal increaseK = (decimal) 1.0 + (decimal) (increasePrcn/100.0);
                decimal increaseKWeight = (decimal) 1.0 + (decimal) (increasePrcnWeight/100.0);
 
-               var consumption = normCounsumption.Consumption;
+               var consumption = norm.Consumption;
 
                if (workUnit.WorkUnitId != KmUnitId)
                {
@@ -434,22 +433,13 @@ namespace Transport.Models
                      WHERE c.VehicleId = w.Car.VehicleId AND w.WaybillId = ?",
                        WaybillId
                        ).Execute();
+                                     
 
-
-                   var tkmNorm =
-                       Norm.FindFirst(
-                           Expression.Where<Norm>(x => x.Car.VehicleId == VehicleId && x.WorkTypeId == TkmWorkId));
+                   var tkmNorm = Norm.FindActualNorms(VehicleId, TaskDepartureDate).FirstOrDefault(x => x.WorkTypeId == TkmWorkId);
 
                    if (tkmNorm != null)
                    {
-                       foreach (var cons in tkmNorm.NormConsumption)
-                       {
-                           if (TaskDepartureDate >= cons.ConsumptionStartDate)
-                           {
-                               tkmConsumption = cons.Consumption;
-                               break;
-                           }
-                       }
+                       tkmConsumption = tkmNorm.Consumption;
                    }
 
                    weightConsumption = ((WeightKm ?? 0)*(Weight ?? 0))*(tkmConsumption/(decimal) 100.0)*increaseKWeight;
@@ -483,8 +473,8 @@ namespace Transport.Models
            if (NormConsumptionId != null)
            {
 
-              var normCounsumption = NormConsumption.Find(NormConsumptionId);
-              var norm = Norm.Find(normCounsumption.NormId);
+              //var normCounsumption = NormConsumption.Find(NormConsumptionId);
+              var norm = Norm.Find(NormConsumptionId);
 
               var VehicleId = new ScalarQuery<int>(typeof(Waybill),
                        @" SELECT c.VehicleId

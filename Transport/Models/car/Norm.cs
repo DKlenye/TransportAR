@@ -1,25 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using Castle.ActiveRecord;
-using System.Text;
-using Kdn.Attributes;
 using Kdn.Ext.Attributes;
-using Newtonsoft.Json;
-using Kdn.Direct;
 using NHibernate.Criterion;
 using Iesi.Collections.Generic;
 
 
 namespace Transport.Models {
 
-    [Model, ActiveRecord]
+    [Model, ActiveRecord("_Norm")]
     public class Norm : ActiveRecordBase<Norm>, Interfaces.IOwnered
     {
 
 
         public Norm()
         {
-            NormConsumption = new SortedSet<NormConsumption>();
+            //NormConsumption = new SortedSet<NormConsumption>();
             NormFuels = new List<int>();
             NormIncreases = new List<int>();
         }
@@ -50,21 +46,27 @@ namespace Transport.Models {
         [Property]
         public DateTime? EndDate { get; set; }
         [Property]
-        public decimal? Consumption { get; set; }
+        public decimal Consumption { get; set; }
+
+        [Property,AllowBlank]
+        public string Description { get; set; }
 
         [Property]
         public int? MainFuelId { get; set; }
 
-        [AllowBlank, HasMany(Table = "NormIncreases", Element = "IncreaseId", ColumnKey = "NormId")]
+        [AllowBlank, HasMany(Table = "_NormIncreases", Element = "IncreaseId", ColumnKey = "NormId")]
         public ICollection<int> NormIncreases { get; set; }
 
-        [AllowBlank, HasMany(Table = "NormFuels", Element = "FuelId", ColumnKey = "NormId")]
+        [AllowBlank, HasMany(Table = "_NormFuels", Element = "FuelId", ColumnKey = "NormId")]
         public ICollection<int> NormFuels { get; set; }
 
+        /*
         [AllowBlank,
          HasMany(Table = "NormConsumption", ColumnKey = "NormId", OrderBy = "ConsumptionStartDate DESC", Inverse = true,
              Cascade = ManyRelationCascadeEnum.Delete, Fetch = FetchEnum.SubSelect)]
         public ISet<NormConsumption> NormConsumption { get; set; }
+
+         * */
 
         #region Owner
 
@@ -84,15 +86,24 @@ namespace Transport.Models {
         {
             return WorkType.Find(WorkTypeId);
         }
+
+        public static Norm[] FindActualNorms(int VehicleId, DateTime Date)
+        {
+            return FindAll(
+                Restrictions.Where<Norm>(
+                    x => x.Car.VehicleId == VehicleId && x.Enabled && (x.StartDate==null || x.StartDate<=Date) && (x.EndDate == null || x.EndDate.Value >= Date)));
+        }
+
+
     }
 
-    [ActiveRecord("Norm")]
+    [ActiveRecord("_Norm")]
    public class relation_Norm {
       [PrimaryKey]
       public int NormId { get; set; }
-      [HasAndBelongsToMany(typeof(Increase),Table="NormIncreases", ColumnKey="NormId", ColumnRef="IncreaseId")]
+      [HasAndBelongsToMany(typeof(Increase),Table="_NormIncreases", ColumnKey="NormId", ColumnRef="IncreaseId")]
       public ISet<Increase> NormIncreases { get; set; }
-      [HasAndBelongsToMany(typeof(Fuel),Table="NormFuels", ColumnKey="NormId", ColumnRef="FuelId")]
+      [HasAndBelongsToMany(typeof(Fuel),Table="_NormFuels", ColumnKey="NormId", ColumnRef="FuelId")]
       public ISet<Fuel> NormFuels { get; set; }
       [BelongsTo("CounterId")]
       public WorkCounter Counter { get; set; }
@@ -100,6 +111,7 @@ namespace Transport.Models {
       public WorkType WorkType { get; set; }
    }
    
+    /*
    [Model,ActiveRecord]
    public class NormConsumption : ActiveRecordBase<NormConsumption>,IComparable<NormConsumption> {
       [IdProperty,PrimaryKey]
@@ -116,5 +128,5 @@ namespace Transport.Models {
       }
 
    }
-
+    */
 }

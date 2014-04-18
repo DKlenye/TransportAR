@@ -714,26 +714,23 @@
     },
 
     //Полная информация о норме расхода топлива 
-    getConsumptionInfo: function(ConsumptionId)
-    {
+    getConsumptionInfo: function(ConsumptionId) {
 
-        var vehicle = this.mainView.vehicle,
-         consumption = vehicle.consumption.get(ConsumptionId);
+        var vehicle = this.mainView.vehicle;
 
-        if (!consumption) return null;
+        if (!ConsumptionId) return null;
 
-        var norm = vehicle.norms.get(consumption.NormId),
+        var norm = vehicle.norms.get(ConsumptionId),
          workTypeStore = Kdn.ModelFactory.getStore('WorkType'),
          workUnitStore = Kdn.ModelFactory.getStore('WorkUnit'),
          work = workTypeStore.getById(norm.WorkTypeId),
          unit = workUnitStore.getById(work.get('WorkUnitId'));
 
         return {
-            consumption: consumption,
             norm: norm,
             work: work,
             unit: unit
-        }
+        };
 
     },
 
@@ -761,7 +758,7 @@
 
         var str = String.format((!meta ? notagTpl : tpl),
             info.work.get('WorkTypeName'),
-            info.consumption.Consumption,
+            info.norm.Consumption,
             info.unit.get('Coefficient'),
             info.unit.get('UnitName'),
             kmtm
@@ -776,20 +773,18 @@
 
     },
 
-    getNormConsumption: function(norm, date)
+    getActualNorms: function(date)
     {
-
-        var consumption = null;
-        Ext.iterate(norm['NormConsumption'], function(c)
-        {
-            if (c.ConsumptionStartDate <= date)
-            {
-                consumption = c;
-                return false;
+        var vehicle = this.mainView.vehicle;
+        var actualNorms = [];
+        Ext.iterate(vehicle.Norms, function(n) {
+            var startDate = n.StartDate || date;
+            var endDate = n.EndDate || date;
+            if (n.Enabled && startDate <= date && endDate >= date) {
+                actualNorms.push(n);
             }
         });
-        return consumption;
-
+        return actualNorms;
     },
 
     beforeRemove: function(selections)
@@ -849,30 +844,21 @@
 
         if (norms.length < 1) return;
 
-        Ext.iterate(norms, function(n)
-        {
-            if (n.isMain && n.WorkTypeId != tkmWorkId)
-            {
-                norm = n; return false;
+
+        var actualNorms = this.getActualNorms(TaskDepartureDate) || [];
+        Ext.iterate(actualNorms, function(n) {
+            if (n.isMain) {
+                norm = n;
             }
         });
-
-
-        if (!norm)
-        {
-            norm = norms[0];
-        }
-
-
+        
+        norm = norm || actualNorms.shift();
+        
         if (norm)
         {
-            NormConsumptionId = this.getNormConsumption(norm, TaskDepartureDate);
-            if (NormConsumptionId)
-            {
-                NormConsumptionId = NormConsumptionId.RecId;
+                NormConsumptionId = norm.NormId;
                 FuelId = norm.MainFuelId || (norm.NormFuels.length == 0 ? null : norm.NormFuels[0]);
                 WaybillTaskNormIncreases = norm.NormIncreases;
-            }
         }
 
         Ext.apply(cfg, {
@@ -957,14 +943,15 @@
                     else
                     {
                         consumptionEditorStore.removeAll();
-                        vehicle.norms.each(function(n)
-                        {
-                            var consumption = $.getNormConsumption(n, date);
-                            if (consumption && n.WorkTypeId != TkmWorkId && n.Enabled)
+                        vehicle.norms.each(function(n) {
+                            var startDate = n.StartDate || date;
+                            var endDate = n.EndDate || date;
+                            
+                            if (n.WorkTypeId != TkmWorkId && n.Enabled && startDate<=date && endDate>=date)
                             {
                                 consumptionEditorStore.add(new consumptionEditorStore.recordType({
-                                    id: consumption.RecId,
-                                    display: $.consumptionRenderer(consumption.RecId)
+                                    id: n.NormId,
+                                    display: $.consumptionRenderer(n.NormId)
                                 }));
                             }
                         });
@@ -1048,37 +1035,37 @@
         
             case 'TaskDepartureDate':
                 {
-                    if (e.value != e.originalValue)
-                    {
-                        var consId = rec.data['NormConsumptionId'],
-                  norm,
-                  newCons = null;
-
-                        if (!consId)
-                        {
-                            Ext.iterate(vehicle.Norms, function(n)
-                            {
-                                if (n.isMain)
-                                {
-                                    norm = n; return false;
+                    if (e.value != e.originalValue) {
+                    
+                        var normId = rec.data['NormConsumptionId'],
+                            norm,
+                            newNorm = null;
+                        
+                        if (!normId) {
+                            var actualNorms = this.getActualNorms(e.value) || [];
+                            Ext.iterate(actualNorms, function(n) {
+                                if (n.isMain) {
+                                    norm = n;
                                 }
                             });
                         }
                         else
                         {
-                            norm = vehicle.norms.get(vehicle.consumption.get(consId)["NormId"]);
+                            oldNorm = vehicle.norms.get(normId);
+                            var actualNorms = this.getActualNorms(e.value) || [];
+                            Ext.iterate(actualNorms, function(n) {
+                                if (n.WorkTypeId == oldNorm.WorkTypeId) {
+                                    newNorm = n;
+                                    return false;
+                                }
+                            });
                         }
 
-                        if (norm)
-                        {
-                            newCons = $.getNormConsumption(norm, e.value);
-                        }
-
-                        if (newCons)
+                        if (newNorm)
                         {
                             rec.beginEdit();
-                            rec.set('NormConsumptionId', newCons['RecId']);
-                            if (!rec.get('FuelId')) rec.set('FuelId',norm.MainFuelId ||(norm.NormFuels.length > 0 ? norm.NormFuels[0] : null));
+                            rec.set('NormConsumptionId', newNorm['NormId']);
+                            if (!rec.get('FuelId')) rec.set('FuelId', newNorm.MainFuelId || (newNorm.NormFuels.length > 0 ? newNorm.NormFuels[0] : null));
                             rec.endEdit();
                         }
                         else
@@ -1097,10 +1084,9 @@
                 }
             case 'NormConsumptionId':
                 {
-
                     if (e.value != '' && e.value != e.originalValue)
                     {
-                        var norm = vehicle.norms.get(vehicle.consumption.get(e.value)["NormId"]);
+                        var norm = vehicle.norms.get(e.value);
                         rec.beginEdit();
                         rec.set('FuelId', norm.MainFuelId || (norm.NormFuels.length > 0 ? norm.NormFuels[0] : null));
                         rec.set('TaskIncreases', []);

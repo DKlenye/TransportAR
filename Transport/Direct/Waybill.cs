@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web;
 using System.Reflection;
 using System.Collections;
@@ -183,6 +184,13 @@ namespace Transport.Direct
             }
 
             var norms = Norm.FindAll(Expression.Where<Norm>(x => x.Car.VehicleId == waybill.Car.VehicleId && x.Enabled));
+
+           var norm = norms.OrderBy(x => x.StartDate).FirstOrDefault(x=>x.isMain && x.StartDate<waybill.DepartureDate);
+          if (norm == null)
+          {
+              norm = norms.OrderBy(x => x.StartDate).FirstOrDefault(x => x.StartDate < waybill.DepartureDate);
+          }
+          /*
             Norm norm = null;            
             foreach( var n in norms ) {
                if( n.isMain ) {
@@ -199,8 +207,9 @@ namespace Transport.Direct
                      break;
                }
             }
+           * */
 
-            int normConsumptionId=0;
+            /*int normConsumptionId=0;
             if( norm != null ) {
                foreach( var cons in norm.NormConsumption ) {
                   if( cons.ConsumptionStartDate < waybill.DepartureDate )
@@ -210,6 +219,13 @@ namespace Transport.Direct
                   }
                }
             }
+             * */
+          int normConsumptionId = 0;
+          if (norm != null)
+          {
+              normConsumptionId = norm.NormId;
+          }      
+
 
             int fuelId = 0;
 

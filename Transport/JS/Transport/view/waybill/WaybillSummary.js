@@ -44,8 +44,8 @@
       taskStore.each(function(task){
          var NormConsumptionId = task.get('NormConsumptionId');
          if(NormConsumptionId){
-            var normConsumption = vehicle.consumption.get(NormConsumptionId);
-            if(normConsumption){
+            var norm = vehicle.norms.get(NormConsumptionId);
+            if (norm) {
             
                   var info = main.tasks.getConsumptionInfo(NormConsumptionId),
                       workId = info.work.get('WorkTypeId'),
