@@ -3,24 +3,23 @@
   constructor:function(cfg){
       cfg = cfg||{};
       Ext.apply(cfg,{
-         columns: ((cfg.columns||[]).concat(this.getColumns()))
+      columns: ((cfg.columns || []).concat(this.getColumns(cfg.increaseRenderer))),
+         defaults: {
+             sortable:false
+         }
       });
       T.colModel.Insurance.superclass.constructor.call(this,cfg);
    },
    
-   getColumns:function() {
+   getColumns:function(increaseRenderer) {
 
-       var vehicleIncreases = Kdn.ModelFactory.getModel('VehicleIncrease').buildStore({
-           autoSave: false
-       });
-   
+  
       return [
                      {
                         dataIndex: 'NormId',
                         align: 'center',
                         header: 'Код',
-                        width: 80,
-                        editor: { xtype: 'kdn.editor.id' }
+                        width: 80
                     },
                     {
                         dataIndex: 'WorkTypeId',
@@ -124,7 +123,7 @@
                         dataIndex:'NormIncreases',
                         header:'Надбавки',
                         width: 200,
-                        renderer:function(o,metaData, record, rowIndex, colIndex, store){
+                        renderer: increaseRenderer/*function(o,metaData, record, rowIndex, colIndex, store){
                            if(!o) return o;
                            var a = [],
                                vehicleId = record.get('Car').VehicleId,
@@ -149,10 +148,7 @@
                            }                           
                            return a.join('<br/>');                         
                            
-                        },
-                        editor:{
-                           xtype:'combo.multiincrease'
-                        }                        
+                        }     */                
                     },
                     {
                         dataIndex:'Consumption',

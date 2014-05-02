@@ -116,7 +116,6 @@ T.view.CarEditor = Ext.extend(Kdn.editor.ModelEditor, {
 	            {iconCls:'icon-insurance',title:'Страховка',xtype:'view.car.insurance'},
 	            {iconCls:'icon-co2',title:'Проверка СО',xtype:'view.car.checkco'},
 	            {iconCls:'icon-norm',title:'Нормы расхода топлива',xtype:'view.car.norm'},
-	            {iconCls:'icon-draw_island',title:'Надбавки ',xtype:'view.car.vehicleincrease'},
 	            {iconCls:'icon-TO',title:'Техосмотр',xtype:'panel'} 
 	         ]
 	      }
@@ -237,8 +236,13 @@ T.view.CarEditor = Ext.extend(Kdn.editor.ModelEditor, {
 	
 	commitChanges:	function(){
       T.view.CarEditor.superclass.commitChanges.call(this);
+
+      this.tab.items.each(function(e) {
       
-      this.tab.items.each(function(e){
+         if (e.save) {
+             e.save();
+         }
+      
          if (e.store){
             e.store.save();
          }

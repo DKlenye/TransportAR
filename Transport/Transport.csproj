@@ -123,6 +123,7 @@
     <Compile Include="Models\battery\BatteryRemoveReason.cs" />
     <Compile Include="Models\battery\v_Battery.cs" />
     <Compile Include="Models\car\Inspection.cs" />
+    <Compile Include="Models\car\NormIncrease.cs" />
     <Compile Include="Models\ExpenseList.cs" />
     <Compile Include="Models\info\DriverFuelExcessInfo.cs" />
     <Compile Include="Models\dayInspection\VehicleDayInspection.cs" />
@@ -207,7 +208,6 @@
     <Compile Include="Mapping.cs" />
     <Compile Include="Models\BodyType.cs" />
     <Compile Include="Models\car\CheckCO.cs" />
-    <Compile Include="Models\car\VehicleIncrease.cs" />
     <Compile Include="Models\car\VehicleDriver.cs" />
     <Compile Include="Models\RoutePoint.cs" />
     <Compile Include="Models\Route.cs" />
@@ -501,9 +501,6 @@
   <ItemGroup>
     <EmbeddedResource Include="OtherModels\tdbf\waybillsTasks.hbm.xml" />
     <EmbeddedResource Include="OtherModels\tdbf\WaybillTaskIncrease.hbm.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="JS\Transport\view\car\VehicleIncrease.js" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\combo\Car.js" />

@@ -489,6 +489,7 @@
                             return o['CustomerName']; 
                             */
 
+                            debugger;
 
                             var increases = o,
                                a = [],
@@ -510,8 +511,8 @@
 
                                 if (a.length > 1)
                                 {
-                                    a = a.concat(String.format('<br/><b>Всего {0}%<b>', sum));
-                                    aQtip = aQtip.concat(String.format('<br/><b>Всего {0}%<b>', sum));
+                                    a = a.concat(String.format('<br/><b>Всего {0}%<b/>', sum));
+                                    aQtip = aQtip.concat(String.format('<br/><b>Всего {0}%<b/>', sum));
                                 }
 
                                 m.attr = 'ext:qtip="' + aQtip.join('</br>') + '"';
@@ -977,7 +978,7 @@
                     }
                     else
                     {
-                        var norm = vehicle.norms.get(vehicle.consumption.get(id)['NormId']),
+                        var norm = vehicle.norms.get(id),
                    fuelStore = Kdn.ModelFactory.getStore('Fuel'),
                    NormFuels = norm.NormFuels;
                         //если топлива нет или одно то эдитор не открывать
@@ -1006,6 +1007,39 @@
                     column = cm.getColumnAt(e.column),
                     editor = column.getEditor();
                     editor.field.taskRecord = e.record;
+
+                    var norm = vehicle.norms.get(e.record.get('NormConsumptionId'));
+
+                    var taskIncreaseStore = this.IncreasesEditor.store,
+                        increaseStore = Kdn.ModelFactory.getStore('Increase');
+
+                    taskIncreaseStore.removeAll();
+
+                    if (norm.isMain) {
+                        increaseStore.each(function(i) {
+                            if (i.get('isCommon')) {
+                                taskIncreaseStore.add(new taskIncreaseStore.recordType(Kdn.clone(i.data), i.id));
+                            }
+                        });
+                    }
+
+                    Ext.iterate(norm.increases, function(i) {
+
+                        if (!i.Const) {
+
+                            var increase = increaseStore.getById(i.IncreaseId);
+                            var data = Kdn.clone(i);
+                            data.IncreaseName = increase.get('IncreaseName');
+
+
+                            var defaultIncrease = taskIncreaseStore.getById(data.IncreaseId);
+                            if (defaultIncrease) {
+                                defaultIncrease.set('Prcn', data.Prcn);
+                            } else {
+                                taskIncreaseStore.add(new taskIncreaseStore.recordType(data, data.IncreaseId));
+                            }
+                        }
+                    });
                     break;
                 }
 

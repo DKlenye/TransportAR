@@ -1,14 +1,15 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection;
 using Castle.ActiveRecord;
 using Castle.ActiveRecord.Queries;
-using System.Text;
 using Kdn.Ext.Attributes;
-using Kdn.Attributes;
 using Newtonsoft.Json;
 using NHibernate.Criterion;
-using Iesi.Collections.Generic;
+using Transport.Models.car;
 
 namespace Transport.Models
 {
@@ -25,7 +26,6 @@ namespace Transport.Models
 
       public WaybillTask() {
          TaskIncreases = new List<WaybillTaskIncrease>();
-
       }
 
         [IdProperty,AllowBlank,PrimaryKey]
@@ -51,7 +51,7 @@ namespace Transport.Models
         [Property]
         public int? NormId { get; set; }
 
-       [Property]
+        [Property]
         public int? FuelId { get; set; }
 
         [Property]
@@ -122,8 +122,7 @@ namespace Transport.Models
            );
            var DepartureDate = query.Execute();
 
-
-           var OwnerId = new ScalarQuery<int>(typeof(Waybill),
+            var OwnerId = new ScalarQuery<int>(typeof(Waybill),
               @" SELECT c.OwnerId
                FROM Car as c, Waybill as w
                WHERE c.VehicleId = w.Car.VehicleId AND w.WaybillId = ?",
@@ -137,8 +136,7 @@ namespace Transport.Models
                   Expression.Where<Temperature>(t => t.key.Date <= targetDate && t.key.Date > Kdn.DateUtils.TodayStart(targetDate) && t.key.OwnerId == OwnerId)
            );
 
-
-         //  if( Temperature != null && Temperature.Value == temperature.Temp ) return;
+            //  if( Temperature != null && Temperature.Value == temperature.Temp ) return;
 
               Temperature = temperature==null?null:(decimal?)temperature.Temp;
               var winterIncrease = Increase.Find(WinterIncreaseId);
@@ -154,8 +152,8 @@ namespace Transport.Models
                  }
               }
 
-            var targetWinterDate = DateTime.Parse("25.11.2014");
-
+             var targetWinterDate = DateTime.Parse("25.11.2014");
+            
             if (Temperature != null && Temperature < 0 && norm.isMain && (TaskDepartureDate.Month <= 3 || TaskDepartureDate > targetWinterDate))
             {
                  if( taskWinterIncrease == null ) {
@@ -240,9 +238,7 @@ namespace Transport.Models
                   CONSUMPTION = WorkAmount / workUnit.Coefficient * consumption100;
               }
 
-
-              
-
+               
               if( workUnit.WorkUnitId == KmUnitId ) {
 
                  decimal weightConsumption = 0;
@@ -290,9 +286,6 @@ namespace Transport.Models
                      
                   }
 
-
-
-
                  weightConsumption = ( (WeightKm ?? 0) * (Weight ?? 0) ) * (tkmConsumption/(decimal)100.0 ) * increaseKWeight;
 
                  if( TrailerId != null ) {
@@ -307,9 +300,7 @@ namespace Transport.Models
                  }
                  
                  CONSUMPTION += weightConsumption + trailerConsumption;
-
               }
-
            }
 
            if( CONSUMPTION != null ) CONSUMPTION = Decimal.Round(CONSUMPTION.Value, 2, MidpointRounding.AwayFromZero);
@@ -470,87 +461,62 @@ namespace Transport.Models
         public void CheckDefaultIncreases()
         {
 
-           if (NormConsumptionId != null)
-           {
 
-              //var normCounsumption = NormConsumption.Find(NormConsumptionId);
-              var norm = Norm.Find(NormConsumptionId);
+        
+         if (NormConsumptionId != null)
+         {
+             var norm = Norm.Find(NormConsumptionId);
+             var normIncreases = NormIncrease.FindByNorm(norm.NormId);
+             var taskMap = new Dictionary<int, WaybillTaskIncrease>();
+             var increaseMap = Increase.getMap();
 
-              var VehicleId = new ScalarQuery<int>(typeof(Waybill),
-                       @" SELECT c.VehicleId
-                     FROM Car as c, Waybill as w
-                     WHERE c.VehicleId = w.Car.VehicleId AND w.WaybillId = ?",
-                       WaybillId
-             ).Execute();
+             var removeList = new Dictionary<int, WaybillTaskIncrease>();
 
-
-              var vehicleIncreases = VehicleIncrease.FindAll(Expression.Where<VehicleIncrease>(x => x.Car.VehicleId == VehicleId));
-              var vehicleMap = new Dictionary<int, VehicleIncrease>();
-              var taskMap = new Dictionary<int, WaybillTaskIncrease>();
-
-              foreach (var i in vehicleIncreases)
-              {
-                 vehicleMap.Add(i.IncreaseId, i);
-              }
-
-              var increaseMap = Increase.getMap();
-
-              var removeList = new Dictionary<int,WaybillTaskIncrease>();
-              if (TaskIncreases == null) TaskIncreases = new List<WaybillTaskIncrease>();
-              foreach (var i in TaskIncreases)
-              {
+             if (TaskIncreases == null) TaskIncreases = new List<WaybillTaskIncrease>();
+             foreach (var i in TaskIncreases)
+             {
                  if (increaseMap[i.IncreaseId].isNormConstant)
                  {
-                    removeList.Add(i.IncreaseId, i);
+                     removeList.Add(i.IncreaseId, i);
                  }
 
                  taskMap.Add(i.IncreaseId, i);
-              }
+             }
 
 
-              foreach (var i in norm.NormIncreases)
-              {
-                 if (increaseMap[i].isNormConstant)
+             foreach (var i in normIncreases)
+             {
+                 if ((i.Const != null && i.Const.Value) || (i.Force != null && i.Force.Value))
                  {
-                    if (taskMap.ContainsKey(i))
-                    {
-                       removeList.Remove(i);
-                    }
-                    else
-                    {
-                       var newIncrease = new WaybillTaskIncrease()
-                       {
-                          IncreaseId = i,
-                          TaskId = TaskId,
-                          Prcn = vehicleMap.ContainsKey(i) ? vehicleMap[i].Prcn : increaseMap[i].Prcn
-                       };
-                       TaskIncreases.Add(newIncrease);
-                    }                    
+                     if (taskMap.ContainsKey(i.IncreaseId))
+                     {
+                         removeList.Remove(i.IncreaseId);
+                     }
+                     else
+                     {
+                         var newIncrease = new WaybillTaskIncrease()
+                         {
+                             IncreaseId = i.IncreaseId,
+                             TaskId = TaskId,
+                             Prcn = i.Prcn
+                         };
+                         newIncrease.SaveAndFlush();
+                         TaskIncreases.Add(newIncrease);
+                     }
                  }
-                 else
-                 {
-                    if (!taskMap.ContainsKey(i) && i!=63/*fucking hard code, it's OAO NAFTAN baby*/)
-                    {
-                       var newIncrease = new WaybillTaskIncrease()
-                       {
-                          IncreaseId = i,
-                          TaskId = TaskId,
-                          Prcn = vehicleMap.ContainsKey(i) ? vehicleMap[i].Prcn : increaseMap[i].Prcn
-                       };
-                       TaskIncreases.Add(newIncrease);
-                    }
-                 }
-              }
+             }
 
-              foreach (var i in removeList)
-              {
+             foreach (var i in removeList)
+             {
                  TaskIncreases.Remove(i.Value);
-              }
+             }
 
 
-              Save();
+            Save();
+            
+            
 
-           }           
+ }           
 
         }
 
@@ -570,7 +536,7 @@ namespace Transport.Models
 
       public override int GetHashCode()
       {
-         return TaskId ^ IncreaseId;
+         return TaskId^IncreaseId;
       }
 
       public override bool Equals(object obj)
@@ -579,7 +545,7 @@ namespace Transport.Models
          {
             return true;
          }
-         WaybillTaskIncreaseKey key = obj as WaybillTaskIncreaseKey;
+         var key = obj as WaybillTaskIncreaseKey;
          if (key == null)
          {
             return false;

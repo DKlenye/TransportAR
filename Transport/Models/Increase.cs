@@ -27,6 +27,7 @@ namespace Transport.Models
       public bool isNormConstant { get; set; }
 
       //общая надбавка, доступная для всех
+       [Property]
       public bool? isCommon { get; set; }
 
       [Property]

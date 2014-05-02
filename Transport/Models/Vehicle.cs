@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Castle.ActiveRecord;
 using Castle.ActiveRecord.Queries;
 using System.Text;
@@ -9,6 +10,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NHibernate.Criterion;
 using Iesi.Collections.Generic;
+using Transport.Models.car;
 
 namespace Transport.Models {
    /*
@@ -297,7 +299,14 @@ namespace Transport.Models {
            
          obj["Norms"] = JArray.FromObject(norms);
          obj["Drivers"] = JArray.FromObject(VehicleDriver.FindAll(Expression.Where<VehicleDriver>(x => x.Car.VehicleId == this.VehicleId)));
-         obj["Increases"] = JArray.FromObject(VehicleIncrease.FindAll(Expression.Where<VehicleDriver>(x => x.Car.VehicleId == this.VehicleId)));
+
+         var increases = new List<NormIncrease>();
+
+          foreach (var norm in norms)
+          {
+              increases = increases.Concat(NormIncrease.FindByNorm(norm.NormId)).ToList();
+          }
+          obj["Increases"] = JArray.FromObject(increases);
 
          var fuels = new List<int>();
          var counters = new List<int>();

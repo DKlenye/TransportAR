@@ -575,10 +575,16 @@
 	      Ext.iterate(v.Norms||[],function(n){
 	         if(n.WorkTypeId != TkmWorkId){
 	             norms.add(n['NormId'], n);
+	             n.increases = [];
 	         }
 	      });
 	      v.norms=norms;
-	      //
+
+	      //делаем маппинг надбавок к нормам
+	      Ext.iterate(v.Increases || [], function(i) {
+	          var n = norms.get(i.NormId);
+	          n.increases.push(i);
+	      });
 	      
 	      //формируем эдитор в заправке для разрешённых видов топлива
 	      
@@ -593,7 +599,7 @@
          });
          
          //формируем эдитор для надбавок с учётом поправок на транспортное средство
-         
+         /*
          var taskIncreaseStore = this.tasks.IncreasesEditor.store,
             increaseStore = Kdn.ModelFactory.getStore('Increase');
          
@@ -616,6 +622,7 @@
             rec['Prcn']=i.Prcn;
             
          });   
+         */
 	      	      
 	  }
 	},

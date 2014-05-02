@@ -95,7 +95,8 @@ Ext.override(Ext.data.Field, {
 
 
 Ext.override(Ext.data.Store,{
-
+   
+  
    singleSort: function(fieldName, dir) {
 
         var field = this.fields.get(fieldName) || fieldName;

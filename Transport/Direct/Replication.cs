@@ -2303,6 +2303,38 @@ namespace Transport.Direct {
 
       [DirectMethod]
       [ParseAsJson]
+      public string FixTasks(JObject o)
+      {
+
+          var waybills = Waybill.FindAll(Expression.Where<Waybill>(x => x.WaybillState < 2));
+          foreach (var waybill in waybills)
+          {
+              var tasks = WaybillTask.FindAll(Expression.Where<WaybillTask>(x => x.WaybillId == waybill.WaybillId));
+              foreach (var task in tasks)
+              {
+                  if (task.NormConsumptionId != null && task.NormConsumptionId.Value > 0)
+                  {
+                      try
+                      {
+                          var taskNorm = Norm.Find(task.NormConsumptionId);
+                          var checkNorm =
+                              Norm.FindActualNorms(waybill.Car.VehicleId, task.TaskDepartureDate)
+                                  .FirstOrDefault(x => x.WorkTypeId == taskNorm.WorkTypeId);
+
+                          task.NormConsumptionId = checkNorm.NormId;
+                          task.SaveAndFlush();
+                      }
+                      catch{}
+                  }
+              }
+
+          }
+
+          return "";
+      }
+
+      [DirectMethod]
+      [ParseAsJson]
        public string CalcWaybillsTime(JObject o)
       {
           Waybill[] waybills;

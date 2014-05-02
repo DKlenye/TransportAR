@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Castle.ActiveRecord;
+using Castle.ActiveRecord.Queries;
 using Kdn.Ext.Attributes;
 using NHibernate.Criterion;
 using Iesi.Collections.Generic;
@@ -17,7 +18,6 @@ namespace Transport.Models {
         {
             //NormConsumption = new SortedSet<NormConsumption>();
             NormFuels = new List<int>();
-            NormIncreases = new List<int>();
         }
 
         [IdProperty, PrimaryKey]
@@ -54,8 +54,6 @@ namespace Transport.Models {
         [Property]
         public int? MainFuelId { get; set; }
 
-        [AllowBlank, HasMany(Table = "_NormIncreases", Element = "IncreaseId", ColumnKey = "NormId")]
-        public ICollection<int> NormIncreases { get; set; }
 
         [AllowBlank, HasMany(Table = "_NormFuels", Element = "FuelId", ColumnKey = "NormId")]
         public ICollection<int> NormFuels { get; set; }
@@ -94,15 +92,25 @@ namespace Transport.Models {
                     x => x.Car.VehicleId == VehicleId && x.Enabled && (x.StartDate==null || x.StartDate<=Date) && (x.EndDate == null || x.EndDate.Value >= Date)));
         }
 
+        public override void Delete()
+        {
+            var query = String.Format(
+                @" Delete from NormIncrease where NormId = {0} ",
+                NormId
+            );
 
+            var s = ActiveRecordMediator.GetSessionFactoryHolder().CreateSession(typeof(Norm));
+            s.CreateQuery(query).ExecuteUpdate(); 
+
+            base.DeleteAndFlush();
+        }
+        
     }
 
     [ActiveRecord("_Norm")]
    public class relation_Norm {
       [PrimaryKey]
       public int NormId { get; set; }
-      [HasAndBelongsToMany(typeof(Increase),Table="_NormIncreases", ColumnKey="NormId", ColumnRef="IncreaseId")]
-      public ISet<Increase> NormIncreases { get; set; }
       [HasAndBelongsToMany(typeof(Fuel),Table="_NormFuels", ColumnKey="NormId", ColumnRef="FuelId")]
       public ISet<Fuel> NormFuels { get; set; }
       [BelongsTo("CounterId")]

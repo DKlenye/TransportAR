@@ -16,6 +16,7 @@ using NHibernate.Criterion.Lambda;
 using NHibernate.Criterion;
 using Kdn.Direct;
 using Transport.Models;
+using Transport.Models.car;
 
 
 namespace Transport.Direct
@@ -170,56 +171,9 @@ namespace Transport.Direct
          if( o.TryGetValue("SrcRoutePoint", out srcRoutePoint) ) {
             _SrcRoutePoint = srcRoutePoint.Value<int>();
          }
-
-            var vehicleIncreases = VehicleIncrease.FindAll(Expression.Where<VehicleIncrease>(x => x.Car.VehicleId == waybill.Car.VehicleId));
-            var mapVehicleIncreases = new Dictionary<int, VehicleIncrease>();
-            var mapIncreases = new Dictionary<int, Increase>();
-
-            foreach( var inc in vehicleIncreases ) {
-               mapVehicleIncreases.Add(inc.IncreaseId, inc);
-            }
-
-            foreach( var inc in Increase.FindAll() ) {
-               mapIncreases.Add(inc.IncreaseId, inc);
-            }
-
-            var norms = Norm.FindAll(Expression.Where<Norm>(x => x.Car.VehicleId == waybill.Car.VehicleId && x.Enabled));
-
-           var norm = norms.OrderBy(x => x.StartDate).FirstOrDefault(x=>x.isMain && x.StartDate<waybill.DepartureDate);
-          if (norm == null)
-          {
-              norm = norms.OrderBy(x => x.StartDate).FirstOrDefault(x => x.StartDate < waybill.DepartureDate);
-          }
-          /*
-            Norm norm = null;            
-            foreach( var n in norms ) {
-               if( n.isMain ) {
-                  norm = n;
-                  break;
-               }
-            }
-
-            if (norm == null)
-            {
-               foreach (var n in norms)
-               {
-                     norm = n;
-                     break;
-               }
-            }
-           * */
-
-            /*int normConsumptionId=0;
-            if( norm != null ) {
-               foreach( var cons in norm.NormConsumption ) {
-                  if( cons.ConsumptionStartDate < waybill.DepartureDate )
-                  {
-                     normConsumptionId = cons.RecId;
-                     break;
-                  }
-               }
-            }
-             * */
+           
+          var norm = Norm.FindActualNorms(waybill.Car.VehicleId, waybill.DepartureDate).FirstOrDefault(x => x.isMain == true);        
+         
           int normConsumptionId = 0;
           if (norm != null)
           {
@@ -266,27 +220,9 @@ namespace Transport.Direct
               };
 
               task.Save();
+              task.CheckDefaultIncreases();
           }
 
-
-
-          if( norm != null && norm.NormIncreases.Count > 0 ) {
-               foreach( var incr in norm.NormIncreases ) {
-
-                   if (incr != 63 /*fucking hard code, it's OAO NAFTAN baby*/ /*and copy->past from Models/WaybillTask.cs*/)
-                   {
-                       new WaybillTaskIncrease()
-                       {
-                           IncreaseId = incr,
-                           TaskId = task.TaskId,
-                           Prcn =
-                               mapVehicleIncreases.ContainsKey(incr)
-                                   ? mapVehicleIncreases[incr].Prcn
-                                   : mapIncreases[incr].Prcn
-                       }.Save();
-                   }
-               }
-         }
 
          return waybill; 
       }
@@ -320,7 +256,7 @@ namespace Transport.Direct
          }
          else if (o.TryGetValue("WaybillId", out p) && p.Value<int?>() != null)
          {
-            car = (FullCar)FullCar.GetByWaybill(p.Value<int>());
+            car = FullCar.GetByWaybill(p.Value<int>());
          }
          else
          {
@@ -382,14 +318,6 @@ namespace Transport.Direct
          return waybill.FullInfo();
 
       }
-
-
-
-
-      
-
-
-
 
 
 
