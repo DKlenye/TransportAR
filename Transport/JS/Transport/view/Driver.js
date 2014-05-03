@@ -106,6 +106,32 @@
 
         T.view.Driver.superclass.constructor.call(this, cfg);
 
+    },
+    
+    _getStore: function()
+    {
+         var cfg={};         
+         if(this.pageSize && this.pageMode!='local'){
+            Ext.apply(cfg,{
+               baseParams:{
+                  start:0,
+                  limit:this.pageSize
+               },
+               remoteSort:true
+            });
+         }
+        
+        
+        var provider = Kdn.Direct;
+
+        cfg.api = {
+            create: provider['Create'],
+            read: provider['ReadDriver'],
+            update: provider['Update'],
+            destroy: provider['Destroy']
+        };
+        
+        return Kdn.ModelFactory.getStore(this.modelName, cfg);
     }
 });
 

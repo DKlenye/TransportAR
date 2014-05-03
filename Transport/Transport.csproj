@@ -93,6 +93,7 @@
     <Compile Include="Direct\Battery.cs" />
     <Compile Include="Direct\Azs.cs" />
     <Compile Include="Direct\DayInspection.cs" />
+    <Compile Include="Direct\Driver.cs" />
     <Compile Include="Direct\MaintenanceRequest.cs" />
     <Compile Include="Direct\ExpenseList.cs" />
     <Compile Include="Direct\ServiceRegistry.cs" />
