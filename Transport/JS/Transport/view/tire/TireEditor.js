@@ -24,7 +24,7 @@
 	      if(rec){      
 	      
 	         var source = this.getSource();
-	         Ext.apply(source,{	         
+	         Ext.apply(source, {	        
 	            KmNorm:rec.get('KmNorm'),
 	            Season:rec.get('Season'),
 	            TireMakerId:rec.get('TireMakerId'),

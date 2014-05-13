@@ -4,6 +4,7 @@ using Castle.ActiveRecord;
 using System.Text;
 using Kdn.Ext.Attributes;
 using NHibernate.Criterion;
+using Transport.Models.tire;
 
 
 namespace Transport.Models
@@ -23,14 +24,11 @@ namespace Transport.Models
       [Property]
       public int WeightIndex { get; set; } //норма слойности или индекс грузоподъёмности 
 
-      [Property]
-      public short Diameter { get; set; }
-
       [Property(Length = 20)]
       public string Size { get; set; }
 
-      [Property(Length = 6)]
-      public string Season { get; set; }
+      [Property]
+      public TireSeason Season { get; set; }
 
       [Property]
       public int KmNorm { get; set; }

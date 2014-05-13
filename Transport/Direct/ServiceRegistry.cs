@@ -23,12 +23,13 @@ namespace Transport.Direct
             var list = db.Query<Kaprem_Info>(String.Format("execute Kaprem_Info_Get {0},{1}", date.Month, date.Year));
 
             var s = ActiveRecordMediator.GetSessionFactoryHolder().CreateSession(typeof(kaprem));
-            s.CreateSQLQuery("SET NULL OFF").ExecuteUpdate();
+            
 
             var kList = kaprem.FindAll();
 
             list.ForEach(x =>
             {
+
                 var k = kList.AsQueryable().FirstOrDefault(xx => xx.idrees == x.scoreNo) ?? new kaprem() { idrees = x.scoreNo };
                 k.kpost1 = x.kgr.ToString().PadRight(5);
                 k.sbs = "";
@@ -57,6 +58,13 @@ namespace Transport.Direct
                 k.snu = "";
                 k.idtar = "";
                 k.klv = 0;
+
+
+                k.datp = new DateTime();            
+                k.datpe = new DateTime();
+                k.dsfn = new DateTime();
+                k.psfn = new DateTime();
+                k.dat_pl = new DateTime();
 
                 k.SaveAndFlush();
 

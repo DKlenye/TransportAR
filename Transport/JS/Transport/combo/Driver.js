@@ -23,14 +23,14 @@
       if(m){
        var qtipTpl = "<span style='font-size:14px;'><b>{0} {1} {2}</b></span>";       
        m.attr = 'ext:qtip="'+String.format(qtipTpl,employee.LastName,employee.FirstName,employee.MiddleName)+'"';
-      }        
-         return String.format('[Цех:{0} Таб:{1}] {2} {3}.{4}.',
-            employee.Department,
-            employee.EmployeeNumber,
-            employee.LastName,
-            employee.FirstName[0],
-            employee.MiddleName[0]     
-         )
+      }
+          return String.format('[Цех:{0} Таб:{1}] {2} {3}.{4}.',
+              employee.Department,
+              employee.EmployeeNumber,
+              employee.LastName,
+              employee.FirstName[0],
+              employee.MiddleName[0]
+          );
       }
       return '';
    },
@@ -66,10 +66,24 @@
       }
    ],
    initComponent:function(){
+
+   var provider = Kdn.Direct;
+
+       var cfg = {
+           api: {
+               create: provider['Create'],
+               read: provider['ReadDriver'],
+               update: provider['Update'],
+               destroy: provider['Destroy']
+           }
+       };
+
+   var store =  Kdn.ModelFactory.getStore('Driver', cfg);
       
       Ext.apply(this,{
-         store:Kdn.ModelFactory.getStore('Driver')
-      });
+         store:store
+     });
+      
       T.combo.Driver.superclass.initComponent.call(this);
    }   
 });

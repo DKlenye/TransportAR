@@ -148,6 +148,8 @@
     <Compile Include="Models\request\v_Request.cs" />
     <Compile Include="Models\request\RequestDTO.cs" />
     <Compile Include="Models\request\RequestApprover.cs" />
+    <Compile Include="Models\tire\TireSeason.cs" />
+    <Compile Include="Models\tire\TireWork.cs" />
     <Compile Include="Models\Umtu.cs" />
     <Compile Include="Models\v_Driver.cs" />
     <Compile Include="Models\waybill\WaybillWork.cs" />
@@ -344,6 +346,7 @@
     <None Include="app.config" />
     <None Include="Models\Mapping\nhibernate-configuration.xsd" />
     <None Include="Models\Mapping\nhibernate-mapping.xsd" />
+    <None Include="Models\tire\Tires.cd" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\combo\Increase.js" />

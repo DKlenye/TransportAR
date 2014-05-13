@@ -321,16 +321,16 @@ T.view.BatteryGrid = Ext.extend(Kdn.view.BaseGrid, {
                         renderer: function( v, metaData, record, rowIndex, colIndex, store ) {
                            
                            if (!Ext.isNumber(v)) return null;
-                                                                                      
-                           var tpl = '<div class="x-progress-wrap" style="height: 16px;">'+
-                                    '<div class="x-progress-inner">'+
-                                        '<div class="x-progress-bar" style="height: 16px; width: {0}%;">'+                                            
-                                        '</div>'+
-                                        '<div class="x-progress-text x-progress-text-back" style="width:100%; color:black">'+
-                                            '<div style="width:100%" height: 18px;">{0}%</div>'+
-                                        '</div>'+
-                                    '</div>'+
-                                '</div>'
+
+                            var tpl = '<div class="x-progress-wrap" style="height: 16px;">' +
+                                '<div class="x-progress-inner">' +
+                                '<div class="x-progress-bar" style="height: 16px; width: {0}%;">' +
+                                '</div>' +
+                                '<div class="x-progress-text x-progress-text-back" style="width:100%; color:black">' +
+                                '<div style="width:100%" height: 18px;">{0}%</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>';
                         
                             return String.format(tpl,v);                        
                         }                      

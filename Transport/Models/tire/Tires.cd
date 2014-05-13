@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Transport.Models.Tire">
+    <Position X="2.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAABgIAQAAgEAAAAACABAAGAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Models\tire\Tire.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Transport.Models.relation_Tire" Collapsed="true">
+    <Position X="0.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\tire\Tire.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Transport.Models.TireMaker">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\tire\TireMaker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Transport.Models.TireModel">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAQAAgEAAAAACAAAAAAABAAAAAAAAAAAQAAI=</HashCode>
+      <FileName>Models\tire\TireModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Transport.Models.relation_TireModel" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAgAAAAAAAAAAI=</HashCode>
+      <FileName>Models\tire\TireModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Transport.Models.TireStandard">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Models\tire\TireStandartd.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Transport.Models.TireMoving">
+    <Position X="4.5" Y="4" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAAAAAAAAAADAAAAAAAAAIAAAAAQAA=</HashCode>
+      <FileName>Models\tire\TireMoving.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Transport.Models.tire.TireWork">
+    <Position X="6.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAgACAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Models\tire\TireWork.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Transport.Models.waybill.WaybillWork">
+    <Position X="8.5" Y="4" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAIAAAAAAAAAAAAAAAAgAEQBAAAACAAEAA=</HashCode>
+      <FileName>Models\waybill\WaybillWork.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="Transport.Models.tire.TireSeason">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>Models\tire\TireSeason.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

@@ -58,8 +58,10 @@
                   workCache.amount +=Kdn.fixDecimal(task.get('WorkAmount')||0); 
                   
                   if(info.unit.get('WorkUnitId')==1){
-                     if(task.get('BYkm')==null|| task.get('BYkm')==='' ){
-                        workCache.BY = Kdn.fixDecimal((workCache.BY||0)+ (task.get('WorkAmount')||0));
+                     if (task.get('BYkm') == null || task.get('BYkm') === '') {
+                         workCache.BY = Kdn.fixDecimal((workCache.BY || 0) + (task.get('WorkAmount') || 0));
+                     } else {
+                        workCache.BY = Kdn.fixDecimal((workCache.BY || 0) + (task.get('BYkm') || 0));
                      }
                   }
                   
