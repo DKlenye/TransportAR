@@ -46,16 +46,16 @@
                         }
                     },
                     {
-                        dataIndex: 'WeightIndex',
-                        header: 'Норма слойности',
-                        width: 120,
-                        editor: { xtype: 'kdn.editor.numberfield' }
-                    },
-                    {
                         dataIndex: 'KmNorm',
                         header: 'Норма на пробег, км',
                         width: 120,
-                        editor: { xtype: 'kdn.editor.numberfield' }
+                        editor: { xtype: 'kdn.editor.numberfield', allowBlank:true }
+                    },
+                    {
+                        dataIndex: 'MonthNorm',
+                        header: 'Норма по времени, мес',
+                        width: 120,
+                        editor: { xtype: 'kdn.editor.numberfield', allowBlank:true }
                     },
                     {
                         dataIndex: 'Size',
@@ -64,23 +64,16 @@
                         editor: { xtype: 'kdn.editor.textfield' }                     
                     },
                     {
-                        dataIndex: 'Diameter',
-                        header: 'Диаметр',
-                        width: 100,
-                        editor: { xtype: 'kdn.editor.numberfield' }                     
-                    },
-                    {
                         dataIndex: 'Season',
                         header: 'Сезонность',
                         width: 100,
                         editor: {xtype:'combo.tireseason', objectValue:false},
                         renderer:function(v){
                            if(!v)return v;
-                           var o = {
-                              all:'Всесезонная',
-                              summer:'Летняя',
-                              winter:'Зимняя'
-                           }
+                            var o = {
+                                1: 'Летняя',
+                                2: 'Зимняя'
+                            };
                            return o[v];
                         }                 
                     }

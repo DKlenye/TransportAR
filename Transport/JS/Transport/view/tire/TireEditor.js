@@ -24,13 +24,12 @@
 	      if(rec){      
 	      
 	         var source = this.getSource();
-	         Ext.apply(source, {	        
-	            KmNorm:rec.get('KmNorm'),
+	         Ext.apply(source, {
+	            KmNorm: rec.get('KmNorm'),
+	            MonthNorm: rec.get('MonthNorm'),
 	            Season:rec.get('Season'),
 	            TireMakerId:rec.get('TireMakerId'),
-	            WeightIndex:rec.get('WeightIndex'),
-	            Size:rec.get('Size'),
-	            Diameter:rec.get('Diameter')        
+	            Size:rec.get('Size')      
 	         });
 	         this.setSource(source);
 	      }

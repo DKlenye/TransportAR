@@ -162,7 +162,7 @@
     <Compile Include="Models\request\Request.cs" />
     <Compile Include="Models\Schedule.cs" />
     <Compile Include="Models\tire\TireMoving.cs" />
-    <Compile Include="Models\tire\TireStandartd.cs" />
+    <Compile Include="Models\tire\TireStandard.cs" />
     <Compile Include="Models\tire\TireModel.cs" />
     <Compile Include="Models\tire\TireMaker.cs" />
     <Compile Include="Models\tire\Tire.cs" />
@@ -937,6 +937,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\inspection\VehicleDayInspection.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\TireUmtu.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

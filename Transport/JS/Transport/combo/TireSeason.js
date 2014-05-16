@@ -5,7 +5,7 @@
             valueField: 'id',
             store: new Ext.data.ArrayStore({
                fields: ['id','text'],
-               data: [['all','Всесезонная'],['summer','Летняя'],['winter','Зимняя']]          
+               data: [[1,'Летняя'],[2,'Зимняя']]          
             })
         });
         

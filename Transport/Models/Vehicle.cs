@@ -288,7 +288,7 @@ namespace Transport.Models {
       [AllowBlank,Property(Length=50)]
       public string Disposal { get; set; }
        
-       [AllowBlank,Property(Length=50)]
+       [AllowBlank,Property(Length=200)]
        public string ModelHeater { get; set; }
 
        public JObject Info()

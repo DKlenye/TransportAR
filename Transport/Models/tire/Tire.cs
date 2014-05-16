@@ -28,25 +28,44 @@ namespace Transport.Models
       public DateTime? WriteOff { get; set; }
       
       [Property]
-      public int Cost { get; set; }
+      public int? Cost { get; set; }
 
       [Property]
       public int? TireMakerId { get; set; }
 
-      [Property]
-      public int WeightIndex { get; set; } //норма слойности или индекс грузоподъёмности 
+     // [Property]
+     // public int WeightIndex { get; set; } //норма слойности или индекс грузоподъёмности 
 
       [Property(Length = 20)]
       public string Size { get; set; }
 
       [Property]
-      public TireSeason Season { get; set; }
+      public TireSeason? Season { get; set; }
+
+       //Номер документа
+       [Property, AllowBlank]
+       public string Doc { get; set; }
+
+       [Property]
+      public int? KmNorm { get; set; }
 
       [Property]
-      public int KmNorm { get; set; }
-
+      public int? MonthNorm { get; set; }
       
-      public void setOwner(int OwnerId) { this.OwnerId = OwnerId; }
+      [Property]
+      public DateTime? InstallDate { get; set; }
+      
+      [BelongsTo("VehicleId")]
+      public BaseVehicle Vehicle { get; set; }
+
+      [Property]
+      public bool IsSpare { get; set; } 
+       [Property]
+      public bool IsNotReplaceable { get; set; } 
+
+       
+
+       public void setOwner(int OwnerId) { this.OwnerId = OwnerId; }
    }
 
 

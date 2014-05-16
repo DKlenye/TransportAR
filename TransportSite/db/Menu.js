@@ -697,6 +697,12 @@ Kdn.Menu = [{
                  iconCls: 'icon-blue-document-word',
                  Handler: 'createView',
                  HandlerCfg: "{xtype:'view.report.batteryumtu',single:true}"
+            },
+            {
+                 text: 'Cписок шин, полученных со склада',
+                 iconCls: 'icon-blue-document-word',
+                 Handler: 'createView',
+                 HandlerCfg: "{xtype:'view.report.tireumtu',single:true}"
             }
         ]
       }

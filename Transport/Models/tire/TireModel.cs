@@ -20,18 +20,19 @@ namespace Transport.Models
       public int? TireMakerId { get; set; }
       [Property]
       public int? TireStandardId { get; set; }
-
-      [Property]
-      public int WeightIndex { get; set; } //норма слойности или индекс грузоподъёмности 
+      
+      //public int WeightIndex { get; set; } //норма слойности или индекс грузоподъёмности 
 
       [Property(Length = 20)]
       public string Size { get; set; }
 
       [Property]
-      public TireSeason Season { get; set; }
+      public int Season { get; set; }
 
       [Property]
-      public int KmNorm { get; set; }
+      public int? KmNorm { get; set; }
+      [Property]
+      public int? MonthNorm { get; set; }
 
    }
 

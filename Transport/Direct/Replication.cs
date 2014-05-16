@@ -1051,7 +1051,7 @@ namespace Transport.Direct {
                      TireMakerId = maker == null ? null : (int?)maker.TireMakerId,
                      TireStandardId = standard == null ? null : (int?)standard.TireStandardId,
                   };
-                  model.WeightIndex = shin.NORMSL;
+                 
                   model.Save();
                }
 
