@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Web;
-using System.Reflection;
-using System.Collections;
 using System.Collections.Generic;
+using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
 using Ext.Direct;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Castle.ActiveRecord;
-using Castle.ActiveRecord.Queries;
 using Kdn.Direct;
-using Transport.Models;
+using NHibernate.Criterion;
+using NHibernate.Linq;
 using Transport.Models.dayInspection;
 
 namespace Transport.Direct
@@ -19,7 +16,7 @@ namespace Transport.Direct
 
        [DirectMethod]
        [ParseAsJson]
-       public DataSerializer VehicleDayInspection(JObject o)
+       public DataSerializer VehicleDayInspectionRead(JObject o)
        {
            JToken p;
 
@@ -71,6 +68,46 @@ namespace Transport.Direct
 
        }
 
+       [DirectMethod]
+       [ParseAsJson]
+       public DataSerializer VehicleDayInspectionUpdate(JObject o)
+       {
+
+           var models = getModels(o);
+           models.ForEach(x =>
+           {
+               var model = JsonConvert.DeserializeObject<VehicleDayInspection>(x.ToString());
+               var inspection =
+                   DayInspectionTime.FindFirst(
+                       Restrictions.Where<DayInspectionTime>(y => y.WaybillId == model.WaybillId));
+
+               if (String.IsNullOrEmpty(model.ReturnTime) && String.IsNullOrEmpty(model.DepartureTime))
+               {
+                   if(inspection!=null) inspection.DeleteAndFlush();
+               }
+               else
+               {
+                   if (inspection == null)
+                   {
+                       inspection = new DayInspectionTime()
+                       {
+                           DepartureTime = model.DepartureTime,
+                           ReturnTime = model.ReturnTime,
+                           WaybillId = model.WaybillId
+                       };
+                       inspection.CreateAndFlush();
+                   }
+                   else
+                   {
+                       inspection.ReturnTime = model.ReturnTime;
+                       inspection.DepartureTime = model.DepartureTime;
+                       inspection.SaveAndFlush();
+                   }
+               }
+           });
+
+           return new DataSerializer(new List<object>());
+       }
        
 
     }

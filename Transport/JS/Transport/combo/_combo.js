@@ -24,7 +24,6 @@ Ext.iterate([
    'WorkUnit',
    'TireMaker',
    'TireStandard',
-   'TireModel',
    'RoutePoint',
    'EcologyClass',
    'EngineType',
@@ -33,7 +32,9 @@ Ext.iterate([
    'Accounting',
    'AccGroup',
    'GroupRequest',
-   'BatteryRemoveReason'
+   'BatteryRemoveReason',
+   'TireRemoveReason',
+   'ServiceGroup'
 ],
 T.combo.buildCombo);
 

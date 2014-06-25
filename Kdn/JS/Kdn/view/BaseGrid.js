@@ -236,6 +236,13 @@
             },
             '-',
             {
+                text: 'Клонировать',
+                iconCls: 'icon-page_copy',
+                handler: this.onClone,
+                scope: this
+            },
+            '-',
+            {
                 text: 'Редактировать',
                 iconCls: 'icon-edit',
                 handler: this.onEdit,

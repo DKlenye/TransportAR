@@ -231,6 +231,9 @@ namespace Transport.Models {
       public int? PackageTypeId { get; set; }
 
       [Property]
+      public int? ServiceGroupId { get; set; }
+
+      [Property]
       public decimal? TkmNorm { get; set; }
 
       #region Двигатель

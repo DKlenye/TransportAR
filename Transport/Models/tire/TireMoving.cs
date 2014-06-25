@@ -23,5 +23,8 @@ namespace Transport.Models
         [Property]
         public DateTime? RemoveDate { get; set; }
 
+        [Property]
+        public int? TireRemoveReasonId { get; set; }
+
     }
 }

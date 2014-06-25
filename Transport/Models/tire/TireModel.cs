@@ -4,6 +4,7 @@ using Castle.ActiveRecord;
 using System.Text;
 using Kdn.Ext.Attributes;
 using NHibernate.Criterion;
+using NHibernate.Util;
 using Transport.Models.tire;
 
 
@@ -16,7 +17,11 @@ namespace Transport.Models
       public int TireModelId { get; set; }
       [Property(Length=50)]
       public string TireModelName { get; set; }
-      [Property]
+      
+       [Property(Length = 50),AllowBlank]
+       public string Description { get; set; }
+
+       [Property]
       public int? TireMakerId { get; set; }
       [Property]
       public int? TireStandardId { get; set; }
@@ -27,12 +32,23 @@ namespace Transport.Models
       public string Size { get; set; }
 
       [Property]
-      public int Season { get; set; }
+      public int? Season { get; set; }
 
       [Property]
       public int? KmNorm { get; set; }
       [Property]
       public int? MonthNorm { get; set; }
+
+       [AllowBlank]
+       public string TireMakerName
+       {
+           get
+           {
+               if (TireMakerId == null) return null;
+               return TireMaker.Find(TireMakerId).TireMakerName;
+           }
+       }
+
 
    }
 
@@ -45,8 +61,6 @@ namespace Transport.Models
       public int TireModelId { get; set; }
       [BelongsTo("TireMakerId")]
       public TireMaker TireMaker { get; set; }
-      [BelongsTo("TireStandardId")]
-      public TireStandard TireStandard { get; set; }
    }
 
    #endregion

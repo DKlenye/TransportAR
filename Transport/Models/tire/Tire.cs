@@ -18,8 +18,8 @@ namespace Transport.Models
       [Property,AllowBlank]
       public int OwnerId { get; set; }
 
-      [Property]
-      public int? TireModelId { get; set; }
+      [BelongsTo("TireModelId"),AllowBlank]
+      public TireModel TireModel { get; set; }
 
       [Property(Length = 30)]
       public string FactoryNumber { get; set; }
@@ -32,9 +32,6 @@ namespace Transport.Models
 
       [Property]
       public int? TireMakerId { get; set; }
-
-     // [Property]
-     // public int WeightIndex { get; set; } //норма слойности или индекс грузоподъёмности 
 
       [Property(Length = 20)]
       public string Size { get; set; }
@@ -57,30 +54,27 @@ namespace Transport.Models
       
       [BelongsTo("VehicleId")]
       public BaseVehicle Vehicle { get; set; }
-
-      [Property]
-      public bool IsSpare { get; set; } 
-       [Property]
-      public bool IsNotReplaceable { get; set; } 
-
        
+      [Property]
+      public DateTime? RemoveDate { get; set; }
+
+       [Property(Length = 150),AllowBlank]
+       public string Description { get; set; }
+
+       [Property,AllowBlank]
+      public bool IsSpare { get; set; } 
+       [Property,AllowBlank]
+      public bool IsNotReplaceable { get; set; }
+       [Property, AllowBlank]
+       public bool IsInStock { get; set; }
+
+       [Property]
+       public int? TireMovingId { get; set; }
+
 
        public void setOwner(int OwnerId) { this.OwnerId = OwnerId; }
    }
 
-
-    #region NHibernate relation
-
-    [ActiveRecord("Tire")]
-    public class relation_Tire
-    {
-       [PrimaryKey]
-       public int TireId { get; set; }
-       [BelongsTo("TireModelId")]
-       public TireModel TireModel { get; set; }
-    }
-
-    #endregion
 
 
  }

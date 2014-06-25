@@ -20,17 +20,10 @@
                         editor: { xtype: 'kdn.editor.textfield' }
                     },
                     {
-                        dataIndex: 'TireStandardId',
-                        header: 'ГОСТ',
+                        dataIndex: 'Description',
+                        header: 'Примечание',
                         width: 200,
-                        editor: { xtype: 'combo.tirestandard',objectValue:false,editable:true,allowBlank:true },
-                        renderer:function(v){
-                           if(!v)return v;
-                           var s = Kdn.ModelFactory.getStore('TireStandard'),
-                               r = s.getById(v);
-                           if(r) return r.get('TireStandardName');
-                           return null;
-                        }
+                        editor: { xtype: 'kdn.editor.textfield', allowBlank:true }
                     },
                     {
                         dataIndex: 'TireMakerId',

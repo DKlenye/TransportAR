@@ -1,6 +1,6 @@
 ﻿T.view.Car = Ext.extend(T.view.Trailer, {
 
-    requireModels: 'WaybillType,Department,TransportColumn,BodyType,WorkType,WorkUnit,GroupAcc,Fuel',
+requireModels: 'WaybillType,Department,TransportColumn,BodyType,WorkType,WorkUnit,GroupAcc,Fuel,ServiceGroup',
     modelName: 'FullCar',
     editor: 'view.careditor',
     pageMode: 'remote',
@@ -279,6 +279,20 @@
                 var store = Kdn.ModelFactory.getStore('AccGroup'),
                   rec = store.getById(v);
                 if (rec) return rec.get('AccGroupName')+"("+rec.get("CostCode")+")";
+                return null;
+            }
+        },
+        {
+            dataIndex: 'ServiceGroupId',
+            header: 'Группа по услугам',
+            width: 100,
+            hidden:true,
+            editor: { xtype: 'combo.servicegroup', objectValue: false, enableClear: true },
+            renderer: function(v) {
+                if (!v) return v;
+                var store = Kdn.ModelFactory.getStore('ServiceGroup'),
+                  rec = store.getById(v);
+                if (rec) return rec.get('ServiceGroupName');
                 return null;
             }
         },

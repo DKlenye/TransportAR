@@ -313,7 +313,7 @@
             stripeRows:true,
             columnLines:true,
             columns:[
-               {header:'Работа',dateIndex:'workName',width:250},
+               {header:'Работа',dateIndex:'workName',width:300},
                {header:'Всего',dateIndex:'amount'},
                {header:'По РБ',dateIndex:'BY'}               
             ],

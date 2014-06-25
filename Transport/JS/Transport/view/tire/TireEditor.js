@@ -15,26 +15,20 @@
 	      scope:prop
 	   });  
 	},
-	
-	onPropertyChange:function(source, recordId, value, oldValue ){
-	   if(recordId=="TireModelId" && !this.record){
-	      var TireModelStore = Kdn.ModelFactory.getStore('TireModel');
-	      var rec = TireModelStore.getById(value);
-	      
-	      if(rec){      
-	      
+
+	onPropertyChange: function(source, recordId, value, oldValue) {
+
+	   if(recordId=="TireModel" && !this.record){
 	         var source = this.getSource();
 	         Ext.apply(source, {
-	            KmNorm: rec.get('KmNorm'),
-	            MonthNorm: rec.get('MonthNorm'),
-	            Season:rec.get('Season'),
-	            TireMakerId:rec.get('TireMakerId'),
-	            Size:rec.get('Size')      
+	            KmNorm: value['KmNorm'],
+	            MonthNorm: value['MonthNorm'],
+	            Season:value['Season'],
+	            TireMakerId:value['TireMakerId'],
+	            Size:value['Size']     
 	         });
 	         this.setSource(source);
 	      }
-	      
-	   }
 	}
    
 });

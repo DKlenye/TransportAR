@@ -317,7 +317,7 @@
                     },
                     {
                         header: 'ед.',
-                        width: 60,
+                        width: 95,
                         dataIndex: 'WorkAmount',
                         align: 'center',
                         editor: {
@@ -325,10 +325,22 @@
                             decimalPrecision: 3,
                             allowNegative: false
                         },
-                        renderer: function(v, meta)
-                        {
-                            meta.css = 'waybill-task-work-bold';
-                            return v;
+                        renderer: {
+                            scope:this,
+                            fn: function(v, meta, rec) {
+
+                                if (!v) return null;
+                                
+                                meta.css = 'waybill-task-work-bold';
+                                
+                                var info = this.getConsumptionInfo(rec.get('NormConsumptionId'));
+                                if (info && info.norm && info.norm.MotoToMachineKoef) {
+                                    var moto = Kdn.fixDecimal(v / info.norm.MotoToMachineKoef);
+                                    return v + '<span style="color:tomato"><i> ' + moto + 'мшч</i></span>';
+                                }
+                                
+                                return v;
+                            }
                         }
                     },
                     {
@@ -488,9 +500,7 @@
                             
                             return o['CustomerName']; 
                             */
-
-                            debugger;
-
+                            
                             var increases = o,
                                a = [],
                                aQtip = [],

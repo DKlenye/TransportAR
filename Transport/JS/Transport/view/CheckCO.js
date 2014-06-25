@@ -13,7 +13,7 @@
                         hideable:false,
                         header:'Транспортное средство',
                         editor:{
-                           xtype:'combo.car'
+                           xtype:'combo.car2'
                         }                                    
                     },
                     {

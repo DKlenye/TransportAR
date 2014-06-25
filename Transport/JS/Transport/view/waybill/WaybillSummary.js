@@ -13,7 +13,7 @@
                   sortable:false                  
                },
                columns:[
-                  {header:'Работа',dateIndex:'workName',width:260},
+                  {header:'Работа',dateIndex:'workName',width:300},
                   {header:'Всего',dateIndex:'amount',width:130},
                   {header:'По РБ',dateIndex:'BY',width:130}
                ]
@@ -43,19 +43,35 @@
       
       taskStore.each(function(task){
          var NormConsumptionId = task.get('NormConsumptionId');
-         if(NormConsumptionId){
+         if (NormConsumptionId) {
+
+             debugger;
+         
             var norm = vehicle.norms.get(NormConsumptionId);
             if (norm) {
             
                   var info = main.tasks.getConsumptionInfo(NormConsumptionId),
                       workId = info.work.get('WorkTypeId'),
                       workName = info.work.get('WorkTypeName');
-                  
+
+                  if (norm.MotoToMachineKoef) {
+                      workName += ' (МОТОЧАСЫ)';
+                  }
+                    
                   var workCache=null;
                   workCache =  mc.get(workId);
                    
                   if(!workCache) workCache=mc.add(workId,{workName:workName,amount:0,BY:null});               
-                  workCache.amount +=Kdn.fixDecimal(task.get('WorkAmount')||0); 
+                  workCache.amount +=Kdn.fixDecimal(task.get('WorkAmount')||0);
+
+
+                  if (norm.MotoToMachineKoef) {
+                      var MotoHourCacheId = -1;
+                      var k = norm.MotoToMachineKoef;
+                      var motoCache = mc.get(MotoHourCacheId);
+                      if (!motoCache) motoCache = mc.add(MotoHourCacheId, { workName: 'МАШИНОЧАСЫ', amount: 0, BY: null });
+                      motoCache.amount = Kdn.fixDecimal(Kdn.fixDecimal(motoCache.amount || 0) + Kdn.fixDecimal((task.get('WorkAmount') || 0) / k));
+                  }
                   
                   if(info.unit.get('WorkUnitId')==1){
                      if (task.get('BYkm') == null || task.get('BYkm') === '') {
@@ -99,7 +115,7 @@
       
       mc.each(function(data){     
          store.add(new store.recordType(data));
-      });
+      });    
       
       if(weightRezult>0){
          store.add(new store.recordType({workName:'Перевезено тонн, т',amount:Kdn.fixDecimal(weightRezult,3),BY:null}));

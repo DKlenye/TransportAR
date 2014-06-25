@@ -84,7 +84,7 @@ T.view.CarEditor = Ext.extend(Kdn.editor.ModelEditor, {
 	                  buildPropEditor(['Length','Width','Height','FullMass','SelfMass','CapacityTonns','CapacityPassengers'],
 	                     {iconCls:'icon-ruler',title:'Габариты, грузоподъёмность'}
 	                  ),
-	                  buildPropEditor(['RefuellingGroupId','AccGroupId','CostCode'],
+	                  buildPropEditor(['RefuellingGroupId','AccGroupId','CostCode','ServiceGroupId'],
 	                     {iconCls:'',title:'Бухг. настройки'}
 	                  )                 
 	               ]	               
@@ -116,7 +116,7 @@ T.view.CarEditor = Ext.extend(Kdn.editor.ModelEditor, {
 	            {iconCls:'icon-insurance',title:'Страховка',xtype:'view.car.insurance'},
 	            {iconCls:'icon-co2',title:'Проверка СО',xtype:'view.car.checkco'},
 	            {iconCls:'icon-norm',title:'Нормы расхода топлива',xtype:'view.car.norm'},
-	            {iconCls:'icon-TO',title:'Техосмотр',xtype:'panel'} 
+	            {iconCls:'icon-TO',title:'Техосмотр',xtype:'panel',xtype:'view.car.inspection'} 
 	         ]
 	      }
 	   ]

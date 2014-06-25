@@ -4,7 +4,28 @@
     enableKeyEvents: true,
     
     checkOnBlur:Ext.emptyFn,
+    
+    constructor:function(cfg) {
+        var listeners = cfg.listeners || {};
+        if (cfg.enableClear) {
 
+            listeners.triggerclick = {
+                fn: function(item, trigger, index, tag, e) {
+                    this.clearValue();
+                    this.fireEvent('select');
+                }
+            };
+
+            Ext.apply(cfg, {
+                triggersConfig: [{ iconCls: "x-form-clear-trigger", qtip: "Очистить"}],
+                listeners: listeners
+            });
+        }
+
+        Kdn.editor.FullTimeField.superclass.constructor.call(this, cfg);
+
+    },
+    
     initComponent: function() {
 
         this.on({

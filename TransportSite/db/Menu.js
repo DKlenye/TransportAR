@@ -107,13 +107,13 @@ Kdn.Menu = [{
             }, {
                 "text": "Группы транспорта",
                 "Child": [{
-                    "text": "Группы(Полимир)",
+                    "text": "Группы по бухгалтерии",
                     "Handler": "createView",
-                    "HandlerCfg": "{xtype:'view.groupacc',single:true}"
+                    "HandlerCfg": "{xtype:'view.accgroup',single:true}"
                 }, {
-                    "text": "Группы(Нафтан)",
+                    "text": "Группы по услугам",
                     "Handler": "createView",
-                    "HandlerCfg": "{xtype:'view.refuellinggroup',single:true}"
+                    "HandlerCfg": "{xtype:'view.servicegroup',single:true}"
                 },
 
 {
@@ -150,8 +150,8 @@ Kdn.Menu = [{
                     }, {
                         "text": "Тех. осмотр",
                         "iconCls": "icon-TO",
-                        "Handler": null,
-                        "HandlerCfg": null
+                        "Handler": "createView",
+                        "HandlerCfg": "{xtype:'view.inspection',single:true}"
                     }, {
                         "text": "Лимиты",
                         "iconCls": "icon-cog_error",
@@ -329,6 +329,151 @@ Kdn.Menu = [{
             HandlerCfg: "{xtype:'view.limit.vehiclefuellimits',single:true}"
         }
     ]
+    },
+{
+    text: 'Учёт материалов',
+    permission: {
+        u: [1, 29, 22]
+    },
+    iconCls: 'icon-layers32',
+    Child: [
+      {
+          text: 'Шины',
+          iconCls: 'icon-tire',
+          Handler: 'createView',
+          HandlerCfg: "{xtype:'view.tire',single:true}"
+      },
+      {
+          text: 'ГОСТы',
+          Handler: 'createView',
+          HandlerCfg: "{xtype:'view.tirestandard',single:true}"
+      },
+      {
+          text: 'Производители Шин',
+          Handler: 'createView',
+          HandlerCfg: "{xtype:'view.tiremaker',single:true}"
+      },
+      {
+          text: 'Модели шин',
+          Handler: 'createView',
+          HandlerCfg: "{xtype:'view.tiremodel',single:true}"
+      },
+      {
+          text: 'АКБ',
+          iconCls: 'icon-battery',
+          Handler: 'createView',
+          HandlerCfg: "{xtype:'view.battery',single:true}"
+      },
+      {
+          text: 'Производители АКБ',
+          iconCls: 'icon-table',
+          Handler: 'createView',
+          HandlerCfg: "{xtype:'view.batterymaker',single:true}"
+      },
+      {
+          text: 'Типы АКБ',
+          iconCls: 'icon-table',
+          Handler: 'createView',
+          HandlerCfg: "{xtype:'view.batterytype',single:true}"
+      },
+      {
+          text: 'Причины снятия АКБ',
+          iconCls: 'icon-table',
+          Handler: 'createView',
+          HandlerCfg: "{xtype:'view.batteryremovereason',single:true}"
+      },
+      {
+          text: 'Отчёты',
+          iconCls: 'icon-report-white',
+          Child: [
+            {
+                text: 'Общий список АКБ',
+                iconCls: 'icon-blue-document-word',
+                Handler: 'createView',
+                HandlerCfg: "{xtype:'view.report.batterylist',single:true}"
+            },
+            {
+                text: 'Cписок АКБ, отработавших гарантийный срок',
+                iconCls: 'icon-blue-document-word',
+                Handler: 'createView',
+                HandlerCfg: "{xtype:'view.report.batterywarrantlyend',single:true}"
+            },
+            {
+                text: 'Cписок АКБ, снятых с ТС',
+                iconCls: 'icon-blue-document-word',
+                Handler: 'createView',
+                HandlerCfg: "{xtype:'view.report.batteryremove',single:true}"
+            },
+            {
+                text: 'Cписок АКБ, полученных со склада',
+                iconCls: 'icon-blue-document-word',
+                Handler: 'createView',
+                HandlerCfg: "{xtype:'view.report.batteryumtu',single:true}"
+            },
+            {
+                text: 'Cписок шин, полученных со склада',
+                iconCls: 'icon-blue-document-word',
+                Handler: 'createView',
+                HandlerCfg: "{xtype:'view.report.tireumtu',single:true}"
+            },
+            {
+                text: 'Cписок шин, полученных со склада по гар.№',
+                iconCls: 'icon-blue-document-word',
+                Handler: 'createView',
+                HandlerCfg: "{xtype:'view.report.tireumtugn',single:true}"
+            }
+        ]
+      }
+   ]
+},
+{
+    "text": "Заявки",
+    "iconCls": "icon-page_gear32",
+    "Handler": null,
+    "HandlerCfg": null,
+    "Child": [
+      {
+          text: 'Список лиц для утверждения заявок',
+          Handler: 'createView',
+          HandlerCfg: "{xtype:'view.requestapprover',single:true}",
+          iconCls: 'icon-reseller_programm'
+      },
+      {
+          text: 'Список лиц для утверждения заявок (по должностям)',
+          Handler: 'createView',
+          HandlerCfg: "{xtype:'view.v_requestemployee',single:true}"
+      },
+      {
+          text: 'Журнал заявок',
+          Handler: 'createView',
+          HandlerCfg: "{xtype:'view.requestmagazine',single:true}",
+          iconCls: 'icon-page_copy'
+      },
+      {
+          text: 'Обработка заявок',
+          Handler: 'createView',
+          HandlerCfg: "{xtype:'view.requesttask',single:true}",
+          iconCls: 'icon-page_go'
+      },
+      {
+          text: 'Разнарядка',
+          Handler: 'createView',
+          HandlerCfg: "{xtype:'view.vehicleorder',single:true}",
+          iconCls: 'icon-document_layout'
+      },
+      {
+          text: 'Отчёты',
+          iconCls: 'icon-report-white',
+          Child: [
+            {
+                text: 'Отчёт о состоянии заявок за период',
+                iconCls: 'icon-blue-document-word',
+                Handler: 'createView',
+                HandlerCfg: "{xtype:'view.report.requestcount',single:true}"
+            }
+        ]
+      }
+    ]
 },
 {
     text: 'Отчёты',
@@ -449,6 +594,12 @@ Kdn.Menu = [{
           HandlerCfg: "{xtype:'view.report.expenselist',single:true}"
       },
       {
+          text: 'Накопительная ведомость(Группы по услугам)',
+          iconCls: 'icon-blue-document-word',
+          Handler: 'createView',
+          HandlerCfg: "{xtype:'view.report.expenselistbygroup',single:true}"
+      },
+      {
           text: 'Информация 12-тр',
           iconCls: 'icon-blue-document-word',
           Handler: 'createView',
@@ -526,7 +677,13 @@ Kdn.Menu = [{
                  Handler: 'createView',
                  HandlerCfg: "{xtype:'view.report.vehiclegroupaccinfo',single:true}"
 
-             }
+             },
+            {
+                 text: 'Список транспорта (группы по услугам)',
+                 iconCls: 'icon-blue-document-word',
+                 Handler: 'createView',
+                 HandlerCfg: "{xtype:'view.report.vehicleservicegroup',single:true}"
+            }
         ]
        },    
        {
@@ -534,12 +691,6 @@ Kdn.Menu = [{
           iconCls: 'icon-blue-document-word',
           Handler: 'createView',
           HandlerCfg: "{xtype:'view.report.vehiclenorms',single:true}"
-      },
-      {
-          text: 'Список водителей экспедиторов',
-          iconCls: 'icon-blue-document-word',
-          Handler: 'createView',
-          HandlerCfg: "{xtype:'view.report.forwarddrivers',single:true}"
       },
     {
         text: 'Отчёты по трансопрту',
@@ -591,7 +742,19 @@ Kdn.Menu = [{
              iconCls: 'icon-blue-document-word',
              Handler: 'createView',
              HandlerCfg: "{xtype:'view.report.driverwork',single:true}"
-         }
+         },
+         {
+             text: 'Список водителей экспедиторов',
+             iconCls: 'icon-blue-document-word',
+             Handler: 'createView',
+             HandlerCfg: "{xtype:'view.report.forwarddrivers',single:true}"
+         },
+          {
+                text: 'Водители в коммандировке',
+                iconCls: 'icon-blue-document-word',
+                Handler: 'createView',
+                HandlerCfg: "{xtype:'view.report.driversbusinesstrip',single:true}"
+            }
         ]
     },
      {
@@ -619,146 +782,6 @@ Kdn.Menu = [{
     ]
 },
 {
-    text: 'Учёт материалов',
-    permission: {
-        u: [1, 29]
-    },
-    iconCls: 'icon-layers32',
-    Child: [
-      {
-          text: 'Шины',
-          iconCls: 'icon-tire',
-          Handler: 'createView',
-          HandlerCfg: "{xtype:'view.tire',single:true}"
-      },
-      {
-          text: 'ГОСТы',
-          Handler: 'createView',
-          HandlerCfg: "{xtype:'view.tirestandard',single:true}"
-      },
-      {
-          text: 'Производители Шин',
-          Handler: 'createView',
-          HandlerCfg: "{xtype:'view.tiremaker',single:true}"
-      },
-      {
-          text: 'Модели шин',
-          Handler: 'createView',
-          HandlerCfg: "{xtype:'view.tiremodel',single:true}"
-      },
-      {
-          text: 'АКБ',
-          iconCls: 'icon-battery',
-          Handler: 'createView',
-          HandlerCfg: "{xtype:'view.battery',single:true}"
-      },
-      {
-          text: 'Производители АКБ',
-          iconCls: 'icon-table',
-          Handler: 'createView',
-          HandlerCfg: "{xtype:'view.batterymaker',single:true}"
-      },
-      {
-          text: 'Типы АКБ',
-          iconCls: 'icon-table',
-          Handler: 'createView',
-          HandlerCfg: "{xtype:'view.batterytype',single:true}"
-      },
-      {
-          text: 'Причины снятия АКБ',
-          iconCls: 'icon-table',
-          Handler: 'createView',
-          HandlerCfg: "{xtype:'view.batteryremovereason',single:true}"
-      },
-      {
-        text: 'Отчёты',
-        iconCls: 'icon-report-white',
-        Child: [
-            {
-                 text: 'Общий список АКБ',
-                 iconCls: 'icon-blue-document-word',
-                 Handler: 'createView',
-                 HandlerCfg: "{xtype:'view.report.batterylist',single:true}"
-            },
-            {
-                 text: 'Cписок АКБ, отработавших гарантийный срок',
-                 iconCls: 'icon-blue-document-word',
-                 Handler: 'createView',
-                 HandlerCfg: "{xtype:'view.report.batterywarrantlyend',single:true}"
-            },
-            {
-                 text: 'Cписок АКБ, снятых с ТС',
-                 iconCls: 'icon-blue-document-word',
-                 Handler: 'createView',
-                 HandlerCfg: "{xtype:'view.report.batteryremove',single:true}"
-            },
-            {
-                 text: 'Cписок АКБ, полученных со склада',
-                 iconCls: 'icon-blue-document-word',
-                 Handler: 'createView',
-                 HandlerCfg: "{xtype:'view.report.batteryumtu',single:true}"
-            },
-            {
-                 text: 'Cписок шин, полученных со склада',
-                 iconCls: 'icon-blue-document-word',
-                 Handler: 'createView',
-                 HandlerCfg: "{xtype:'view.report.tireumtu',single:true}"
-            }
-        ]
-      }
-   ]
-},
-{
-    "text": "Заявки",
-    "iconCls": "icon-page_gear32",
-    "Handler": null,
-    "HandlerCfg": null,
-    "Child": [
-      {
-          text: 'Список лиц для утверждения заявок',
-          Handler: 'createView',
-          HandlerCfg: "{xtype:'view.requestapprover',single:true}",
-          iconCls:'icon-reseller_programm'
-      },
-      {
-          text: 'Список лиц для утверждения заявок (по должностям)',
-          Handler: 'createView',
-          HandlerCfg: "{xtype:'view.v_requestemployee',single:true}"
-      },
-      {
-          text: 'Журнал заявок',
-          Handler: 'createView',
-          HandlerCfg: "{xtype:'view.requestmagazine',single:true}",
-          iconCls:'icon-page_copy'
-      },
-      {
-          text: 'Обработка заявок',
-          Handler: 'createView',
-          HandlerCfg: "{xtype:'view.requesttask',single:true}",
-          iconCls:'icon-page_go'
-      },
-      {
-          text: 'Разнарядка',
-          Handler: 'createView',
-          HandlerCfg: "{xtype:'view.vehicleorder',single:true}",
-          iconCls:'icon-document_layout'        
-      },
-      {
-        text: 'Отчёты',
-        iconCls: 'icon-report-white',
-        Child: [
-            {
-                 text: 'Отчёт о состоянии заявок за период',
-                 iconCls: 'icon-blue-document-word',
-                 Handler: 'createView',
-                 HandlerCfg: "{xtype:'view.report.requestcount',single:true}"
-            }
-        ]
-      }
-    
-    ]
-  },
-{
     "text": "ТО",
     "iconCls": "icon-setting_tools32",
     "Handler": null,
@@ -767,13 +790,12 @@ Kdn.Menu = [{
       {
           text: 'Заявки на ТО',
           Handler: 'createView',
-          HandlerCfg: "{xtype:'view.maintenancerequest',single:true}",
-         
+          HandlerCfg: "{xtype:'view.maintenancerequest',single:true}"
       },
         {
           text: 'Контроль выхода транспорта на линию',
           Handler: 'createView',
-          HandlerCfg: "{xtype:'view.inspection.vehicledayinspection',single:true}",
+          HandlerCfg: "{xtype:'view.inspection.vehicledayinspection',single:true}"
         }
     ]
 },

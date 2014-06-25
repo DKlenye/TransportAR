@@ -16,6 +16,9 @@ namespace Transport.Models
         public BaseVehicle Car { get; set; }
         [Property(ColumnType = "Date")]
         public DateTime DateOfTerm { get; set; }
+        [Property]
+        public int InspectionType { get; set; }
+
 
         #region Owner
         public void setOwner(int OwnerId) { }

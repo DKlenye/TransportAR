@@ -104,6 +104,7 @@
     <Compile Include="Direct\DriverFuelExcess.cs" />
     <Compile Include="Direct\Posting.cs" />
     <Compile Include="Direct\FuelCost.cs" />
+    <Compile Include="Direct\Tire.cs" />
     <Compile Include="Direct\WaybillTask.cs" />
     <Compile Include="Models\acc\Accounting.cs" />
     <Compile Include="Models\acc\AccFuelPrice.cs" />
@@ -125,6 +126,8 @@
     <Compile Include="Models\battery\v_Battery.cs" />
     <Compile Include="Models\car\Inspection.cs" />
     <Compile Include="Models\car\NormIncrease.cs" />
+    <Compile Include="Models\dayInspection\DayInspectionTime.cs" />
+    <Compile Include="Models\ServiceGroup.cs" />
     <Compile Include="Models\ExpenseList.cs" />
     <Compile Include="Models\info\DriverFuelExcessInfo.cs" />
     <Compile Include="Models\dayInspection\VehicleDayInspection.cs" />
@@ -148,6 +151,7 @@
     <Compile Include="Models\request\v_Request.cs" />
     <Compile Include="Models\request\RequestDTO.cs" />
     <Compile Include="Models\request\RequestApprover.cs" />
+    <Compile Include="Models\tire\TireRemoveReason.cs" />
     <Compile Include="Models\tire\TireSeason.cs" />
     <Compile Include="Models\tire\TireWork.cs" />
     <Compile Include="Models\Umtu.cs" />
@@ -162,7 +166,6 @@
     <Compile Include="Models\request\Request.cs" />
     <Compile Include="Models\Schedule.cs" />
     <Compile Include="Models\tire\TireMoving.cs" />
-    <Compile Include="Models\tire\TireStandard.cs" />
     <Compile Include="Models\tire\TireModel.cs" />
     <Compile Include="Models\tire\TireMaker.cs" />
     <Compile Include="Models\tire\Tire.cs" />
@@ -625,16 +628,10 @@
     <EmbeddedResource Include="JS\Transport\view\tire\TireMaker.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="JS\Transport\view\tire\TireStandard.js" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\tire\TireModel.js" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\tire\Tire.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="JS\Transport\view\tire\TireMoving.js" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\EngineType.js" />
@@ -940,6 +937,36 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\report\TireUmtu.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\combo\TireModel.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\ExpenseListByGroup.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\TireUmtuGN.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\ServiceGroup.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\VehicleServiceGroup.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\DriversBusinessTrip.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\car\Inspection.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\colModel\Inspection.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\combo\InspectionType.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\Inspection.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

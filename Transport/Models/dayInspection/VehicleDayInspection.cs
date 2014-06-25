@@ -18,9 +18,12 @@ namespace Transport.Models.dayInspection
             Drivers = new List<DriverInspection>();
         }
 
+        public string Column { get; set; }
         public int WaybillId { get; set; }
         public DateTime DepartureDate { get; set; }
+        public string DepartureTime { get; set; }
         public DateTime ReturnDate { get; set; }
+        public string ReturnTime { get; set; }
         public short Shift { get; set; }
         public int GarageNumber { get; set; }
         public string Model { get; set; }
