@@ -100,7 +100,26 @@ constructor: function(cfg) {
     });
 
 
+    var sm = new Ext.grid.CheckboxSelectionModel({
+        listeners: {
+            selectionChange: this.onVehicleTiresSelect,
+            scope:this,
+            buffer:500
+        }
+    });
+    var VehicleTiresStore = new Ext.data.DirectStore({
+        autoLoad: false,
+        autoSave: false,
+        autoDestroy: true,
+        api: {
+            read: Kdn.Direct.VehicleTiresRead
+        },
+        fields: ['FactoryNumber', 'Season', 'TireMovingId', 'InstallDate', 'RemoveDate'],
+        root: 'data'
+    });
 
+    this.TireWorkStore = new Ext.data.JsonStore();
+    
     Ext.apply(cfg, {
         dataIndexKey: 'TireId',
         master: { xtype: 'view.tiregrid' },
@@ -147,7 +166,7 @@ constructor: function(cfg) {
                          dataIndex: 'y'
                      },
                      {
-                         header: 'км/маш.ч',
+                         header: 'км/мес',
                          dataIndex: 'Work'
                      },
                      {
@@ -172,7 +191,75 @@ constructor: function(cfg) {
                   ]
                  },
                 {
-                    title:'Шины по гар.№'
+                    title:'Шины по гар.№',
+                    xtype: 'panel',
+                    layout: 'border',
+                    store:VehicleTiresStore,
+                    items:[
+                        {
+                            xtype: 'grid',
+                            loadMask: true,
+                            columnLines: true,
+                            stripeRows: true,
+                            region: 'west',
+                            width:500,
+                            split:true,
+                            border:false,
+                            store: VehicleTiresStore,
+                            sm:sm,
+                            columns: [
+                                sm,
+                                 {
+                                    dataIndex: 'FactoryNumber',
+                                    header: 'Заводской №',
+                                    width: 110
+                                },
+                                 {
+                                     dataIndex: 'Season',
+                                     header: 'Сезонность',
+                                     width: 100,
+                                     editor: { xtype: 'combo.tireseason', objectValue: false, allowBlank: true, enableClear: true },
+                                     renderer: function(v) {
+                                         if (!v) return v;
+                                         var o = {
+                                             1: 'Летняя',
+                                             2: 'Зимняя'
+                                         };
+                                         return o[v];
+                                     }
+                                 },
+                                 {
+                                      header: 'Дата установки',
+                                      dataIndex: 'InstallDate',
+                                      xtype: 'datecolumn',
+                                      width: 100
+                                 },
+                                 {
+                                     header: 'Дата снятия',
+                                     dataIndex: 'RemoveDate',
+                                     xtype: 'datecolumn',
+                                     width: 100
+                                 }
+                            ]
+                        },
+                        {
+                            region: 'center',
+                            id:'TireWorkGrid',
+                            split:true,
+                            border: false,
+                            xtype: 'grid',
+                            loadMask: true,
+                            columnLines: true,
+                            stripeRows: true,
+                            store: this.TireWorkStore,
+                            columns: [
+                                {
+                                    header: 'Период',
+                                    width: 150
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
 
@@ -180,7 +267,53 @@ constructor: function(cfg) {
 
     T.view.Tire.superclass.constructor.call(this, cfg);
 
-}  
+},
+
+onVehicleTiresSelect:function(sm) {
+    var sel = sm.getSelections();
+    var a = [];
+    sel.forEach(function(e) { a.push(e.get('TireMovingId')+''); });
+    var filter = {
+        movings: a
+    };
+
+    var fields = ['period'].concat(a);
+
+    console.log(fields);
+
+    var columns = [];
+    columns.push({
+        header:'Период',
+        dataIndex:'period'
+    });
+    a.forEach(function(e) {
+        columns.push({
+            dataIndex:e+'',
+            header:e
+        });
+    });
+    
+    this.TireWorkStore = new Ext.data.DirectStore({
+            autoLoad: false,
+            autoSave: false,
+            autoDestroy: true,
+            api: {
+                read: Kdn.Direct.VehicleTiresWorkRead
+            },
+            fields: fields,
+            root: 'data'
+        });
+        
+        this.TireWorkStore.reload({
+            params: { filter: filter }
+        });
+
+    var colModel = new Ext.grid.ColumnModel({
+        columns: columns
+    });
+
+    Ext.getCmp('TireWorkGrid').reconfigure(this.TireWorkStore, colModel);
+} 
 });
 
 
@@ -411,3 +544,5 @@ editor:'view.tireeditor',
 });
 
 Ext.reg('view.tiregrid', T.view.TireGrid);
+
+

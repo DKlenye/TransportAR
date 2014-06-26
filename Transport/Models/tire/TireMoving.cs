@@ -26,5 +26,12 @@ namespace Transport.Models
         [Property]
         public int? TireRemoveReasonId { get; set; }
 
+        public override void SaveAndFlush()
+        {
+            base.SaveAndFlush();
+            var tire = Tire.Find(TireId);
+            tire.TireMovingId = TireMovingId;
+            tire.SaveAndFlush();
+        }
     }
 }

@@ -355,7 +355,7 @@ Ext.applyIf(this,{"ds":ds,"cm":cm,"sm":new Ext.grid.RowSelectionModel(),autoHeig
 Ext.override(Ext.grid.RowNumberer,{isRowNumberer:true,hideable:false,renderer:function(v,p,record,rowIndex){if(this.grid && this.grid.getRowExpander && this.grid.getRowExpander()){p.cellAttr='rowspan="2"';}
 if(this.rowspan){p.cellAttr='rowspan="'+this.rowspan+'"';}
 var so=record.store.lastOptions,sop=so?so.params:null;return((sop&&sop.start)?sop.start:0)+rowIndex+1;}});
-
+/*
 Ext.override(Ext.grid.CheckboxSelectionModel,{allowDeselect:true,keepSelectionOnClick:"always",hideable:false,onMouseDown:function(e,t){if(e.button!==0||this.isLocked()){return;}
 if(this.checkOnly&&t.className!=="x-grid3-row-checker"){return;}
 if(this.ignoreTargets){var i=0;for(i;i<this.ignoreTargets.length;i++){if(e.getTarget(this.ignoreTargets[i])){return;}}}
@@ -368,7 +368,7 @@ return'<div class="x-grid3-row-checker">&#160;</div>';},onHdMouseDown:function(e
 if(isChecked){hd.removeClass("x-grid3-hd-checker-on");this.clearSelections();}else{hd.addClass("x-grid3-hd-checker-on");this.selectAll();}
 this.fireEvent("aftercheckallclick",this,!isChecked);}},isCheckAllChecked:function(){return Ext.fly(this.grid.getView().innerHd).child(".x-grid3-hd-checker").hasClass("x-grid3-hd-checker-on");},handleMouseDown:function(g,rowIndex,e){this.onMouseDown(e,e.getTarget());}});Ext.grid.CheckboxSelectionModel.prototype.initEvents=Ext.grid.CheckboxSelectionModel.prototype.initEvents.createSequence(function(){if((this.grid.enableDragDrop||this.grid.enableDrag)&&this.checkOnly){this.handleMouseDown=function(g,rowIndex,e){this.onMouseDown(e,e.getTarget());};}
 this.grid.on("rowclick",function(grid,rowIndex,e){if(this.deselectingFlag&&this.grid.enableDragDrop){this.deselectingFlag=false;this.deselectRow(rowIndex);}},this);this.on("rowdeselect",function(){this.uncheckHeader();});this.on("rowselect",function(){if(this.grid.store.getCount()===this.getSelections().length){this.checkHeader();}});this.renderer=this.renderer.createDelegate(this);});
-
+*/
 Ext.grid.ColumnModel.override({defaultSortable:true,isMenuDisabled:function(col){var column=this.config[col];if(Ext.isEmpty(column)){return true;}
 return!!column.menuDisabled;},isSortable:function(col){var column=this.config[col];if(Ext.isEmpty(column)){return false;}
 if(typeof this.config[col].sortable==="undefined"){return this.defaultSortable;}

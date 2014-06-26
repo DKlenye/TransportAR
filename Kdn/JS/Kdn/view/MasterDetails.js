@@ -101,8 +101,10 @@
       this.detailsView.items.each(function(view){
             var store = view.store;
             if(store){
-               store.clearData();
-               view.view.refresh();
+                store.clearData();
+                try {
+                    view.view.refresh();                                        
+                } catch (e) {} 
             }
          });
    },
