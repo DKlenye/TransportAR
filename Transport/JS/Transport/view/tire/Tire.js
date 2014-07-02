@@ -107,6 +107,10 @@ constructor: function(cfg) {
             buffer:500
         }
     });
+
+
+    this.VehicleTiresSM = sm;
+    
     var VehicleTiresStore = new Ext.data.DirectStore({
         autoLoad: false,
         autoSave: false,
@@ -247,7 +251,7 @@ constructor: function(cfg) {
                             id:'TireWorkGrid',
                             split:true,
                             border: false,
-                            xtype: 'grid',
+                            xtype: 'editorgrid',
                             loadMask: true,
                             columnLines: true,
                             stripeRows: true,
@@ -271,27 +275,52 @@ constructor: function(cfg) {
 
 onVehicleTiresSelect:function(sm) {
     var sel = sm.getSelections();
-    var a = [];
-    sel.forEach(function(e) { a.push(e.get('TireMovingId')+''); });
-    var filter = {
-        movings: a
-    };
-
-    var fields = ['period'].concat(a);
-
-    console.log(fields);
-
-    var columns = [];
-    columns.push({
-        header:'Период',
-        dataIndex:'period'
-    });
-    a.forEach(function(e) {
+    var movings = [];
+    var fields = ['period'];
+    var columns = [
+    {
+        header: 'Период',
+        width:110,
+        dataIndex: 'period',
+        renderer:function(v) {
+            return Date.parseDate(v, 'Ym').format('Y F');
+        }
+    }];
+    sel.forEach(function(e) {
+        var id = e.get('TireMovingId') + '';
+        movings.push(id);
+        fields.push(id);
+        fields.push(id + '_sum');
+        fields.push(id + '_isHanded');
+        
         columns.push({
-            dataIndex:e+'',
-            header:e
+            dataIndex: id + '',
+            align: 'center',
+            header: e.get('FactoryNumber'),
+            width: 120,
+            renderer: function(v, meta, r, rI, cI, s) {
+                if (!Ext.isNumber(v)) return null;
+                return String.format(
+                    '<div style="overflow:hidden;width:100px;"><div style="white-space:nowrap;">' +
+                    '<div style="display:inline-block; text-align:right; width:45px;{2}">{0}</div>' +
+                    '<div style="display:inline-block; text-align:right; width:45px; color:blue;">{1}</div>' +
+                    '</div></div>',
+                    v,
+                    r.get(id + '_sum'),
+                    r.get(id+'_isHanded')?"color:red;":""
+                    );
+            },
+            editor: {
+                xtype: 'numberfield',
+                selectOnFocus:true
+            }
         });
+
     });
+    
+    var filter = {
+        movings: movings
+    };
     
     this.TireWorkStore = new Ext.data.DirectStore({
             autoLoad: false,
@@ -300,7 +329,12 @@ onVehicleTiresSelect:function(sm) {
             api: {
                 read: Kdn.Direct.VehicleTiresWorkRead
             },
+            listeners: {
+              update:this.onTireWorkUpdate,
+              scope:this  
+            },
             fields: fields,
+            idProperty:'period',
             root: 'data'
         });
         
@@ -313,7 +347,25 @@ onVehicleTiresSelect:function(sm) {
     });
 
     Ext.getCmp('TireWorkGrid').reconfigure(this.TireWorkStore, colModel);
-} 
+} ,
+
+onTireWorkUpdate: function(s, r) {
+
+    var data = {};
+    Ext.iterate(r.modified, function(key, val) {
+        data.TireMovingId = key;
+    });
+    
+    data.period = r.get('period');
+    data.Km = r.get(data.TireMovingId);
+    if (!Ext.isNumber(data.Km)) data.Km = null;
+    Kdn.Direct.UpdateTireWork(data, this.onTireWorkSave.createDelegate(this));
+},
+
+onTireWorkSave:function() {
+    this.onVehicleTiresSelect(this.VehicleTiresSM);
+}
+
 });
 
 

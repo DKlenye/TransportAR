@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Web.UI.WebControls;
 using Castle.Core;
 using Ext.Direct;
 using Kdn.Direct;
 using Newtonsoft.Json.Linq;
 using NHibernate.Criterion;
+using NHibernate.Linq;
 using Transport.Models;
 using Transport.Models.tire;
 
@@ -65,7 +63,7 @@ namespace Transport.Direct
             if (currentMoving != null)
             {
                 var movings = TireMoving.FindAll(Restrictions.Where<TireMoving>(x => x.Vehicle == currentMoving.Vehicle));
-                movings.ForEach(x =>
+                CollectionExtensions.ForEach(movings, x =>
                 {
                     var tire = Tire.Find(x.TireId);
                     var vt = new VihicleTire()
@@ -96,6 +94,7 @@ namespace Transport.Direct
             public DateTime RemoveDate { get; set; }
             public int work { get; set; }
             public int SumWork { get; set; }
+            public bool isHanded { get; set; }
         }
 
 
@@ -111,7 +110,7 @@ namespace Transport.Direct
             var data = new Dictionary<int, JObject>();
             var db = new PetaPoco.Database("db2");
             
-            idList.ForEach(id=>
+            CollectionExtensions.ForEach(idList, id=>
             {
                 var moving = TireMoving.Find(id.Value<int>());
                 var rez = db.Query<TireWorkVM>(";EXEC VehicleTireWork_Select @TireId",
@@ -121,7 +120,7 @@ namespace Transport.Direct
                      }
                    ).Where(x => x.TireMovingId == id.Value<int>());
                 
-                rez.ForEach(r =>
+                CollectionExtensions.ForEach(rez, r =>
                 {
                     var period = r.y*100 + r.m;
                     JObject record;
@@ -134,15 +133,101 @@ namespace Transport.Direct
                         record = new JObject() { new JProperty("period", period) };
                         data.Add(period,record);
                     }
-                    record[moving.TireMovingId.ToString()] = String.Format("{0} [{1}]", r.work, r.SumWork);
+
+                    record[moving.TireMovingId.ToString()] = r.work;
+                    record[moving.TireMovingId.ToString() + "_sum"] = r.SumWork;
+                    record[moving.TireMovingId.ToString() + "_isHanded"] = r.isHanded;
 
                 });
 
-            });  
-            
-            return new DataSerializer(data.Values.ToList());
+            });
+
+            var datList = data.Values.ToList();
+
+            datList.Sort(delegate(JObject x, JObject y)
+            {
+                if (x == null || y == null) return 0;
+                else
+                {
+                    var _x = x["period"].Value<int>();
+                    var _y = y["period"].Value<int>();
+                    return _x.CompareTo(_y);
+                }
+            });
+
+            return new DataSerializer(datList);
         }
-       
+
+        [DirectMethod]
+        [ParseAsJson]
+        public DataSerializer UpdateTireWork(JObject o)
+        {
+            var TireMovingId = o["TireMovingId"].Value<int>();
+            var Period = o["period"].Value<int>();
+            var Km = o["Km"].Value<int?>();
+
+            var work = TireWork.FindFirst(
+                  Expression.Where<TireWork>(
+                      x => x.key.Period==Period && x.key.TireMovingId==TireMovingId));
+
+            if (Km == null)
+            {
+               if (work != null)
+                {
+                    work.DeleteAndFlush();
+                }
+            }
+            else
+            {
+                if (work == null)
+                {
+                    work = new TireWork()
+                    {
+                        IsAutomatic = false,
+                        Km = Km.Value,
+                        key = new TireWorkKey() {Period = Period, TireMovingId = TireMovingId}
+                    };
+                    work.CreateAndFlush();
+                }
+                else
+                {
+                    work.Km = Km.Value;
+                    work.SaveAndFlush();
+                }
+            }
+
+            return new DataSerializer(new List<object>());
+        }
+
+
+
+
+
+
+        [DirectMethod]
+        [ParseAsJson]
+        public DataSerializer TireRefresh(JObject o)
+        {
+
+            Tire.FindAll().ToList().ForEach(x =>
+            {
+                if (x.InstallDate != null)
+                {
+                    var moving = new TireMoving()
+                    {
+                        InstallDate = x.InstallDate.Value,
+                        TireId = x.TireId,
+                        Vehicle = x.Vehicle
+                    };
+                    moving.SaveAndFlush();
+                }
+            });
+
+            return new DataSerializer(new List<object>());
+        }
+
+
+
 
 
     }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using Castle.ActiveRecord;
-using Castle.ActiveRecord.Queries;
 using Castle.Core;
 using Ext.Direct;
 using Newtonsoft.Json.Linq;
@@ -18,20 +17,14 @@ namespace Transport.Direct
         {
 
            DateTime date = new DateTime(o["year"].Value<int>(), o["month"].Value<int>(), 1);
-    
             var db = new PetaPoco.Database("dbsrv2");
             var list = db.Query<Kaprem_Info>(String.Format("execute Kaprem_Info_Get {0},{1}", date.Month, date.Year));
-
             var s = ActiveRecordMediator.GetSessionFactoryHolder().CreateSession(typeof(kaprem));
-            
-
             var kList = kaprem.FindAll();
-
             list.ForEach(x =>
             {
-
                 var k = kList.AsQueryable().FirstOrDefault(xx => xx.idrees == x.scoreNo) ?? new kaprem() { idrees = x.scoreNo };
-                k.kpost1 = x.kgr.ToString().PadRight(5);
+                k.kpost1 = /*x.kgr.ToString()*/"46716".PadRight(5);
                 k.sbs = "";
                 k.skop = "";
                 k.kodz = "";
@@ -58,7 +51,6 @@ namespace Transport.Direct
                 k.snu = "";
                 k.idtar = "";
                 k.klv = 0;
-
 
                 k.datp = new DateTime();            
                 k.datpe = new DateTime();

@@ -778,6 +778,11 @@ Kdn.Menu = [{
             text: 'Коэффициент выхода транспорта на линию',
             Handler: 'createView',
             HandlerCfg: "{xtype:'view.report.vehicleworkkoefficient',single:true}"
+        },
+        {
+            text: 'Путевые листы с перекрывающимися датами',
+            Handler: 'createView',
+            HandlerCfg: "{xtype:'view.report.waybilldateerrors',single:true}"
         }
     ]
 },
