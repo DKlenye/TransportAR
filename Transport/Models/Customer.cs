@@ -36,7 +36,10 @@ namespace Transport.Models
 
         [AllowBlank,Property]
         public int OwnerId { get; set; }
-       
+
+        [Property]
+        public int? PolymirId { get; set; }
+
         public void setOwner(int OwnerId) { this.OwnerId = OwnerId; }
 
 

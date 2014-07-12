@@ -34,7 +34,8 @@ Ext.iterate([
    'GroupRequest',
    'BatteryRemoveReason',
    'TireRemoveReason',
-   'ServiceGroup'
+   'ServiceGroup',
+   'ReportGroup'
 ],
 T.combo.buildCombo);
 

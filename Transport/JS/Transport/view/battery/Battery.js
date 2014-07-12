@@ -74,8 +74,8 @@
                     text:'Карточка АКБ',
                     iconCls:'icon-excel',
                     scope:movingGrid,
-                    handler:function(){
-                         var url = 'http://db2.lan.naftan.by/ReportServer/Pages/ReportViewer.aspx?/Transport/BatteryCard&rs:Command=Render&rc:Toolbar=false&'
+                    handler:function() {
+                        var url = 'http://db2.lan.naftan.by/ReportServer/Pages/ReportViewer.aspx?/Transport/BatteryCard&rs:Command=Render&rc:Toolbar=false&';
                          
                          var sel = this.getSelectionModel().getSelected();
                          

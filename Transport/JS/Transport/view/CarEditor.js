@@ -72,10 +72,10 @@ T.view.CarEditor = Ext.extend(Kdn.editor.ModelEditor, {
 	                  border:false 
 	               },
 	               items:[
-	                  buildPropEditor(['Customer', 'WaybillTypeId', 'TrailerId', 'PackageTypeId', 'ScheduleId', 'StartWork', 'EndWork', 'GroupRequestId'],
+	                  buildPropEditor(['Customer', 'WaybillTypeId', 'TrailerId', 'PackageTypeId', 'ScheduleId', 'StartWork', 'EndWork'],
 	                     {iconCls:'icon-roadworks',title:'Закрепление, настройки работы'}
 	                  ),
-	                  buildPropEditor(['BodyNumber','BodyTypeId','Category','EngineModel','EngineNumber','ChassisNumber','CabinNumber','Color','EnginePower','EngineVolume','EngineTypeId','EcologyClassId','ModelHeater'],
+	                  buildPropEditor(['BodyNumber','EngineModel','EngineNumber','ChassisNumber','CabinNumber','Color','EnginePower','EngineVolume','EngineTypeId','EcologyClassId','ModelHeater'],
 	                     {iconCls:'icon-gear_in',title:'Кузов, Двигатель'}
 	                  ),	
 	                  buildPropEditor(['FuelVolume','CoolantVolume','EngineOilVolume','HydraulicOilVolume'],
@@ -84,9 +84,12 @@ T.view.CarEditor = Ext.extend(Kdn.editor.ModelEditor, {
 	                  buildPropEditor(['Length','Width','Height','FullMass','SelfMass','CapacityTonns','CapacityPassengers'],
 	                     {iconCls:'icon-ruler',title:'Габариты, грузоподъёмность'}
 	                  ),
-	                  buildPropEditor(['RefuellingGroupId','AccGroupId','CostCode','ServiceGroupId'],
-	                     {iconCls:'',title:'Бухг. настройки'}
-	                  )                 
+	                  buildPropEditor(['CostCode'],
+	                     {iconCls:'icon-coins',title:'Бухг. настройки'}
+	                  ),
+	                  buildPropEditor(['RefuellingGroupId', 'AccGroupId','BodyTypeId','Category', 'ServiceGroupId', 'GroupRequestId','ReportGroupId'],
+	                     { iconCls: 'icon-category-group', title: 'Тип/Категория/Группировка' }
+	                  )   
 	               ]	               
 	            }
 	         ]

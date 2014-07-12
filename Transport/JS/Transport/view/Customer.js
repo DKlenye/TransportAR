@@ -49,7 +49,13 @@
                         dataIndex: 'PolymirCostCode',
                         header: 'Код затрат (Полимир)',
                         width: 160,
-                        editor: { xtype: 'kdn.editor.textfield', allowBlank:true }                        
+                        editor: { xtype: 'kdn.editor.textfield', allowBlank:true }
+                    },
+                    {
+                        dataIndex: 'PolymirId',
+                        header: 'Код заказчика в БД Полимир',
+                        width: 160,
+                        editor: { xtype: 'kdn.editor.numberfield', allowBlank: true }
                     },
                     {
                         dataIndex: 'notActual',

@@ -6,13 +6,12 @@ using Ext.Direct;
 using Kdn.Direct;
 using Newtonsoft.Json.Linq;
 using NHibernate.Criterion;
-using NHibernate.Linq;
 using Transport.Models;
 using Transport.Models.tire;
 
 namespace Transport.Direct
 {
-    public partial class Direct : Kdn.Direct.Direct
+    public partial class Direct
     {
 
         public class VihicleTire

@@ -115,12 +115,16 @@ Kdn.Menu = [{
                     "Handler": "createView",
                     "HandlerCfg": "{xtype:'view.servicegroup',single:true}"
                 },
-
-{
-    "text": "Группы по разнарядке",
-    "Handler": "createView",
-    "HandlerCfg": "{xtype:'view.grouprequest',single:true}"
-}
+                {
+                    "text": "Группы по разнарядке",
+                    "Handler": "createView",
+                    "HandlerCfg": "{xtype:'view.grouprequest',single:true}"
+                },
+                {
+                    "text": "Группы для отчётов",
+                    "Handler": "createView",
+                    "HandlerCfg": "{xtype:'view.reportgroup',single:true}"
+                }
 ]
                 }, {
                     "text": "Транспорт",
@@ -358,6 +362,13 @@ Kdn.Menu = [{
           Handler: 'createView',
           HandlerCfg: "{xtype:'view.tiremodel',single:true}"
       },
+      {
+           text: 'Причины снятия шин',
+           iconCls: 'icon-table',
+           Handler: 'createView',
+           HandlerCfg: "{xtype:'view.tireremovereason',single:true}"
+      },
+      '-',
       {
           text: 'АКБ',
           iconCls: 'icon-battery',
@@ -683,7 +694,14 @@ Kdn.Menu = [{
                  iconCls: 'icon-blue-document-word',
                  Handler: 'createView',
                  HandlerCfg: "{xtype:'view.report.vehicleservicegroup',single:true}"
-            }
+             },
+             {
+                 text: 'Список транспорта (группы для отчёта)',
+                 iconCls: 'icon-blue-document-word',
+                 Handler: 'createView',
+                 HandlerCfg: "{xtype:'view.report.vehiclebyreportgroup',single:true}"
+             }
+           
         ]
        },    
        {

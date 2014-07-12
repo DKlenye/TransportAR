@@ -232,6 +232,8 @@ namespace Transport.Models {
 
       [Property]
       public int? ServiceGroupId { get; set; }
+      [Property]
+      public int? ReportGroupId { get; set; }
 
       [Property]
       public decimal? TkmNorm { get; set; }
