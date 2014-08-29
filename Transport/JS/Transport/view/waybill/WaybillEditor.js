@@ -1153,11 +1153,12 @@
                      win.close();
                   }
                   else {
-                     CheckWindowState.defer(500);
+                     CheckWindowState.defer(700);
                   }
                }
-	            win.print();
-               CheckWindowState();
+
+               setTimeout(function() { win.print(); }, 100);
+               setTimeout(function() { CheckWindowState() ; }, 100);
          },
          failure: function(e) {
             Ext.Msg.show({ width: 800, title: 'Ошибка', buttons: Ext.Msg.OK, msg: e.responseText })

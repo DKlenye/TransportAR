@@ -1,4 +1,5 @@
-﻿T.combo.Employee = Ext.extend(Kdn.form.ComboGrid ,{
+﻿T.combo.Employee = Ext.extend(Kdn.form.ComboGrid, {
+   showDismiss:false,
    listWidth:560,
    pageSize : 20,
    minHeight:600,
@@ -17,17 +18,22 @@
       return '';
    },
    
-   initView:function(){
+   initView:function() {
+
+       var params = {
+            start: 0,
+            limit: 30
+       };
       
-            
+      if (!this.showDismiss) {
+          params.sqlFilter = "DismissDate is null";
+      }
+      
+      
       this.store = Kdn.ModelFactory.getModel('Employee').buildStore({
          autoLoad:true,
          autoSave:false,
-         baseParams:{
-            start:0,
-            limit:30,
-            sqlFilter:"DismissDate is null"
-         },
+         baseParams: params,
          remoteSort:true
       });    
       

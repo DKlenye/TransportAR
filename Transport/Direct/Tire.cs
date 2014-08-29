@@ -198,36 +198,5 @@ namespace Transport.Direct
             return new DataSerializer(new List<object>());
         }
 
-
-
-
-
-
-        [DirectMethod]
-        [ParseAsJson]
-        public DataSerializer TireRefresh(JObject o)
-        {
-
-            Tire.FindAll().ToList().ForEach(x =>
-            {
-                if (x.InstallDate != null)
-                {
-                    var moving = new TireMoving()
-                    {
-                        InstallDate = x.InstallDate.Value,
-                        TireId = x.TireId,
-                        Vehicle = x.Vehicle
-                    };
-                    moving.SaveAndFlush();
-                }
-            });
-
-            return new DataSerializer(new List<object>());
-        }
-
-
-
-
-
     }
 }

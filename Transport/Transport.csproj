@@ -155,6 +155,7 @@
     <Compile Include="Models\tire\TireRemoveReason.cs" />
     <Compile Include="Models\tire\TireSeason.cs" />
     <Compile Include="Models\tire\TireWork.cs" />
+    <Compile Include="Models\tire\v_Tire.cs" />
     <Compile Include="Models\Umtu.cs" />
     <Compile Include="Models\v_Driver.cs" />
     <Compile Include="Models\waybill\WaybillWork.cs" />
@@ -980,6 +981,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\report\VehicleByReportGroup.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\VehicleFuelRemainsByGarageNumber.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\ExpenseListDepartment.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

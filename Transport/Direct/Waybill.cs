@@ -172,7 +172,7 @@ namespace Transport.Direct
             _SrcRoutePoint = srcRoutePoint.Value<int>();
          }
            
-          var norm = Norm.FindActualNorms(waybill.Car.VehicleId, waybill.DepartureDate).FirstOrDefault(x => x.isMain == true);        
+          var norm = Norm.FindActualNorms(waybill.Car.VehicleId, waybill.DepartureDate).FirstOrDefault(x => x.isMain);        
          
           int normConsumptionId = 0;
           if (norm != null)

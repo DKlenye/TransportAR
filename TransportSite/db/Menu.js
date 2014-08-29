@@ -497,6 +497,12 @@ Kdn.Menu = [{
           HandlerCfg: "{xtype:'view.report.fuelremain',single:true}"
       },
       {
+          text: 'Остатки по Гар.№',
+          iconCls: 'icon-blue-document-word',
+          Handler: 'createView',
+          HandlerCfg: "{xtype:'view.report.vehiclefuelremainsbygaragenumber',single:true}"
+      },
+      {
           text: 'Оборотная ведомость',
           iconCls: 'icon-blue-document-word',
           Handler: 'createView',
@@ -603,6 +609,12 @@ Kdn.Menu = [{
           iconCls: 'icon-blue-document-word',
           Handler: 'createView',
           HandlerCfg: "{xtype:'view.report.expenselist',single:true}"
+      },
+      {
+          text: 'Накопительная ведомость(цеховые)',
+          iconCls: 'icon-blue-document-word',
+          Handler: 'createView',
+          HandlerCfg: "{xtype:'view.report.expenselistdepartment',single:true}"
       },
       {
           text: 'Накопительная ведомость(Группы по услугам)',

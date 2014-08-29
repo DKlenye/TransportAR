@@ -1,6 +1,7 @@
 ﻿using System;
 using Castle.ActiveRecord;
 using Kdn.Ext.Attributes;
+using NHibernate.Criterion;
 
 namespace Transport.Models
 {
@@ -26,12 +27,35 @@ namespace Transport.Models
         [Property]
         public int? TireRemoveReasonId { get; set; }
 
+        [Property, AllowBlank]
+        public bool? IsSpare { get; set; }
+        [Property, AllowBlank]
+        public bool? IsNotReplaceable { get; set; }
+
         public override void SaveAndFlush()
         {
             base.SaveAndFlush();
             var tire = Tire.Find(TireId);
             tire.TireMovingId = TireMovingId;
             tire.SaveAndFlush();
+        }
+
+        public override void Delete()
+        {
+            setLastMoving();
+            base.Delete();
+        }
+
+
+        public void setLastMoving()
+        {
+            var moving = FindFirst(Order.Desc(Projections.Property<BatteryMoving>(x => x.InstallDate)),
+                Expression.Where<TireMoving>(
+                  x => x.TireId == TireId && x.TireMovingId != TireMovingId
+            ));
+
+            var tire = Tire.Find(TireId);
+            tire.TireMovingId = moving.TireMovingId;
         }
     }
 }

@@ -148,6 +148,7 @@
                      {
                          fieldLabel: 'Работник',
                          xtype: 'combo.employee',
+                         showDismiss:true,
                          dataIndex: 'employeeId',
                          width: 300,
                          enableClear: true
@@ -258,7 +259,10 @@
     
     print:function(params) {
 
-        var o = {
+    var date = this.getParams().get('inventoryDate').getValue();
+    
+    var o = {
+            date : date,
             columnId: 0,
             departmentId: 0,
             driverId: 0,
@@ -272,7 +276,8 @@
     
     printDetails:function(params) {
 
-        var o = {
+    var o = {
+            date: this.getParams().get('inventoryDate').getValue(),
             columnId: 0,
             departmentId: 0,
             driverId: 0,

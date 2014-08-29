@@ -61,7 +61,7 @@ namespace Transport.Web
                               
                foreach (var rem in remains)
                {
-                  if( rem.FuelId == 7 ) continue; //Не печатаем керосин
+                  if( rem.FuelId == 7 ) continue; //Не печатаем керосин 
 
                      remain = rem;
                      break;
@@ -333,11 +333,9 @@ namespace Transport.Web
                 var r = new List<string>();
                 foreach (var rem in remains)
                 {
-                    if (rem.DepartureRemain != null)
-                    {
-                        var fuelName = Fuel.Find(rem.FuelId).FuelName;
-                        r.Add(fuelName);
-                    }
+                    var fuelName = Fuel.Find(rem.FuelId).FuelName;
+                    r.Add(fuelName);
+                    
                 }
                 return String.Join("<br/>", r.ToArray());
             }

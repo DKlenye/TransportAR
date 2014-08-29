@@ -64,9 +64,7 @@ namespace Transport.Models
         public DateTime? InstallDate { get; set; }
         [Property]
         public DateTime? RemoveDate { get; set; }
-
-
-
+        
         [Property, AllowBlank]
         public string BatGarageNumber { get; set; }
 

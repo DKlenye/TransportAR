@@ -45,6 +45,22 @@ constructor: function(cfg) {
                          editor: { xtype: 'datefield' },
                          width: 120
                      },
+                      {
+                          dataIndex: 'IsSpare',
+                          align: 'center',
+                          header: 'Запаска',
+                          width: 100,
+                          renderer: Kdn.CheckRenderer,
+                          editor: { xtype: 'kdn.editor.booleanfield', renderer: Kdn.CheckRenderer, allowBlank: true }
+                      },
+                   {
+                       dataIndex: 'IsNotReplaceable',
+                       align: 'center',
+                       header: 'Установлены постоянно',
+                       width: 100,
+                       renderer: Kdn.CheckRenderer,
+                       editor: { xtype: 'kdn.editor.booleanfield', renderer: Kdn.CheckRenderer, allowBlank: true }
+                   },
                      {
                          header: 'Дата снятия',
                          xtype: 'datecolumn',
@@ -281,7 +297,43 @@ constructor: function(cfg) {
                                     header: 'Период',
                                     width: 150
                                 }
-                            ]
+                            ],
+                            tbar: [
+                                {
+                                    text: 'Обновить',
+                                    iconCls: 'icon-refresh',
+                                    handler:function() {
+                                        this.onVehicleTiresSelect(this.VehicleTiresSM);
+                                    },
+                                    scope:this
+                                }
+                            ],
+                            listeners: {
+                            keypress: function(e) {
+                                if (e.getKey() == 48) {
+                                        var grid = Ext.getCmp('TireWorkGrid');
+                                        var sel = grid.getSelectionModel().getSelectedCell();
+                                        
+                                        var fieldName = grid.store.fields.itemAt(sel[1] + (sel[1]-1)*2).name;
+                                        var rec = grid.store.getAt(sel[0]);
+                                        rec.beginEdit();
+                                        rec.set(fieldName, 0);
+                                        rec.endEdit();
+                                    }
+
+                                if (e.getKey() == e.SPACE) {
+                                        var grid = Ext.getCmp('TireWorkGrid');
+                                        var sel = grid.getSelectionModel().getSelectedCell();
+                                        var fieldName = grid.store.fields.itemAt(sel[1] + (sel[1] - 1) * 2).name;
+                                        var rec = grid.store.getAt(sel[0]);
+
+                                        rec.beginEdit();
+                                        rec.set(fieldName, null);
+                                        rec.endEdit();
+                                    }
+                                },
+                                scope:this
+                            }
                         }
                     ]
                 }
@@ -320,11 +372,12 @@ onVehicleTiresSelect:function(sm) {
             width: 120,
             renderer: function(v, meta, r, rI, cI, s) {
                 if (!Ext.isNumber(v)) return null;
+
+                var tpl = '<div style="display:inline-block; text-align:right; width:45px;{2}">{0}</div>' +
+                    '<div style="display:inline-block; text-align:right; width:45px; color:blue;">{1}</div>';
+                
                 return String.format(
-                    '<div style="overflow:hidden;width:100px;"><div style="white-space:nowrap;">' +
-                    '<div style="display:inline-block; text-align:right; width:45px;{2}">{0}</div>' +
-                    '<div style="display:inline-block; text-align:right; width:45px; color:blue;">{1}</div>' +
-                    '</div></div>',
+                    tpl,
                     v,
                     r.get(id + '_sum'),
                     r.get(id+'_isHanded')?"color:red;":""
@@ -383,7 +436,7 @@ onTireWorkUpdate: function(s, r) {
 },
 
 onTireWorkSave:function() {
-    this.onVehicleTiresSelect(this.VehicleTiresSM);
+   // this.onVehicleTiresSelect(this.VehicleTiresSM);
 }
 
 });
@@ -395,8 +448,9 @@ Ext.reg('view.tire', T.view.Tire);
 T.view.TireGrid = Ext.extend(Kdn.view.BaseGrid, {
 requireModels:'TireModel,TireStandard,TireMaker',
 editor:'view.tireeditor',
-    modelName: 'Tire',
-    pageSize:50,
+    modelName: 'v_Tire',
+    pageSize: 50,
+    pageMode: 'remote',
     constructor: function(cfg) {
         cfg = cfg || {};
         Ext.apply(cfg, {
@@ -411,8 +465,7 @@ editor:'view.tireeditor',
                         editor: { xtype: 'kdn.editor.id' }
                     },
                     {
-                        dataIndex: 'Vehicle.GarageNumber',
-                        xtype:'mappingcolumn',
+                        dataIndex: 'GarageNumber',
                         header:'Гаражный №',
                         width: 110
                     },
@@ -448,7 +501,7 @@ editor:'view.tireeditor',
                         editor: { xtype: 'combo.tiremodel' },
                         renderer:function(v){
                            if(!v)return v;
-                            return v['TireModelName']+v['Description'];
+                            return v['TireModelName']+' '+ (v['Description']||"");
                         }
                     },
                     {
@@ -516,7 +569,7 @@ editor:'view.tireeditor',
                        header: 'Запаска',
                        width: 100,
                        renderer: Kdn.CheckRenderer,
-                       editor: { xtype: 'kdn.editor.booleanfield', renderer: Kdn.CheckRenderer, allowBlank: true }
+                       editor: { xtype: 'kdn.editor.booleanfield', renderer: Kdn.CheckRenderer, allowBlank: true, value:false }
                    },
                    {
                        dataIndex: 'IsNotReplaceable',
@@ -524,7 +577,7 @@ editor:'view.tireeditor',
                        header: 'Установлены постоянно',
                        width: 100,
                        renderer: Kdn.CheckRenderer,
-                       editor: { xtype: 'kdn.editor.booleanfield', renderer: Kdn.CheckRenderer, allowBlank: true }
+                       editor: { xtype: 'kdn.editor.booleanfield', renderer: Kdn.CheckRenderer, allowBlank: true, value: false }
                    },
                    {
                        dataIndex: 'IsInStock',
@@ -533,13 +586,6 @@ editor:'view.tireeditor',
                        width: 100,
                        renderer: Kdn.CheckRenderer,
                        editor: { xtype: 'kdn.editor.booleanfield', renderer: Kdn.CheckRenderer, allowBlank: true }
-                   },
-                   {
-                       dataIndex: 'RemoveDate',
-                       xtype: 'datecolumn',
-                       editor: { xtype: 'kdn.editor.datefield', allowBlank:true },
-                       header: 'Дата снятия с авто',
-                       width: 110
                    },
                     {
                         dataIndex: 'Description',
