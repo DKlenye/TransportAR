@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Name>DBSRV2</Name>
+  <ConnectionProperties>
+    <Extension>SQL</Extension>
+    <ConnectString>data source=DBSRV2;initial catalog=transport_dbf_store;</ConnectString>
+    <IntegratedSecurity>true</IntegratedSecurity>
+  </ConnectionProperties>
+  <DataSourceID>b2ec1380-a489-44c6-87db-9a50ffc61bf0</DataSourceID>
+</RptDataSource>

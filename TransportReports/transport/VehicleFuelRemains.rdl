@@ -641,7 +641,7 @@ select 0, 'По колоннам'</CommandText>
         <Top>10.00215cm</Top>
         <Left>9.66995cm</Left>
         <Height>1.2cm</Height>
-        <Width>6.82972cm</Width>
+        <Width>6.8297cm</Width>
         <ZIndex>4</ZIndex>
         <Style>
           <Border>
@@ -1859,6 +1859,7 @@ select 0, 'По колоннам'</CommandText>
                       <PaddingBottom>2pt</PaddingBottom>
                     </Style>
                   </Textbox>
+                  <rd:Selected>true</rd:Selected>
                 </CellContents>
               </TablixHeader>
               <TablixMembers>
@@ -2179,7 +2180,7 @@ select 0, 'По колоннам'</CommandText>
         <Top>6.44737cm</Top>
         <Left>0.66715cm</Left>
         <Height>3.3525cm</Height>
-        <Width>27.43356cm</Width>
+        <Width>27.43355cm</Width>
         <ZIndex>27</ZIndex>
         <Style>
           <Border>

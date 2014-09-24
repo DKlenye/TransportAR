@@ -9,33 +9,7 @@ Kdn.Menu = [{
         "iconCls": "icon-user",
         "Handler": "createView",
         "HandlerCfg": "{xtype:'kdn.view.user',single:true}"
-    }, {
-        "text": "Группы пользователей",
-        "iconCls": "icon-group",
-        "Handler": "createView",
-        "HandlerCfg": "{xtype:'kdn.view.usergroup',single:true}"
-    }, {
-        "text": "Меню приложения",
-        "iconCls": "icon-menu",
-        "Handler": "createView",
-        "HandlerCfg": "{xtype:'kdn.view.menu',single:true}"
-    }, {
-        "text": "Обновить схему БД",
-        "iconCls": "icon-database_refresh",
-        "Handler": "updateDatabase"
-
-    }, {
-        "text": "Пересоздать БД",
-        "iconCls": "icon-database_lightning",
-        "Handler": "reCreateDatabase"
-
-    }, {
-        "text": "HQL Analyzer",
-        "iconCls": "icon-sql",
-        "Sequence": 0,
-        "Handler": null,
-        "HandlerCfg": null
-}]
+    }]
     }, {
         "text": "Справочники",
         "iconCls": "icon-book_open32",
@@ -348,11 +322,6 @@ Kdn.Menu = [{
           HandlerCfg: "{xtype:'view.tire',single:true}"
       },
       {
-          text: 'ГОСТы',
-          Handler: 'createView',
-          HandlerCfg: "{xtype:'view.tirestandard',single:true}"
-      },
-      {
           text: 'Производители Шин',
           Handler: 'createView',
           HandlerCfg: "{xtype:'view.tiremaker',single:true}"
@@ -367,6 +336,43 @@ Kdn.Menu = [{
            iconCls: 'icon-table',
            Handler: 'createView',
            HandlerCfg: "{xtype:'view.tireremovereason',single:true}"
+       },
+      
+      {
+          text: 'Отчёты',
+          iconCls: 'icon-report-white',
+          Child: [
+            {
+                text: 'Общий список шин',
+                iconCls: 'icon-blue-document-word',
+                Handler: 'createView',
+                HandlerCfg: "{xtype:'view.report.tirelist',single:true}"
+            },
+            {
+                text: 'Cписок шин, отработавших нормативый срок',
+                iconCls: 'icon-blue-document-word',
+                Handler: 'createView',
+                HandlerCfg: "{xtype:'view.report.tirewarrantlyend',single:true}"
+            },
+            {
+                text: 'Cписок шин, снятых с ТС',
+                iconCls: 'icon-blue-document-word',
+                Handler: 'createView',
+                HandlerCfg: "{xtype:'view.report.tireremove',single:true}"
+            },
+            {
+                text: 'Cписок шин, полученных со склада',
+                iconCls: 'icon-blue-document-word',
+                Handler: 'createView',
+                HandlerCfg: "{xtype:'view.report.tireumtu',single:true}"
+            },
+            {
+                text: 'Cписок шин, полученных со склада по гар.№',
+                iconCls: 'icon-blue-document-word',
+                Handler: 'createView',
+                HandlerCfg: "{xtype:'view.report.tireumtugn',single:true}"
+            }
+        ]
       },
       '-',
       {
@@ -422,16 +428,10 @@ Kdn.Menu = [{
                 HandlerCfg: "{xtype:'view.report.batteryumtu',single:true}"
             },
             {
-                text: 'Cписок шин, полученных со склада',
+                text: 'Cписок АКБ, полученных со склада по гар.№',
                 iconCls: 'icon-blue-document-word',
                 Handler: 'createView',
-                HandlerCfg: "{xtype:'view.report.tireumtu',single:true}"
-            },
-            {
-                text: 'Cписок шин, полученных со склада по гар.№',
-                iconCls: 'icon-blue-document-word',
-                Handler: 'createView',
-                HandlerCfg: "{xtype:'view.report.tireumtugn',single:true}"
+                HandlerCfg: "{xtype:'view.report.batteryumtugn',single:true}"
             }
         ]
       }
@@ -852,6 +852,11 @@ Kdn.Menu = [{
           text: 'Проводки',
           Handler: 'createView',
           HandlerCfg: "{xtype:'view.acc.posting',single:true}"
+      },
+      {
+          text: 'Информация по двойным проводкам',
+          Handler: 'createView',
+          HandlerCfg: "{xtype:'view.report.doublepostinginfo',single:true}"
       },
       {
           text: 'Перерасход топлива',

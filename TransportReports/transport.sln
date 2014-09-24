@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "transport", "transport\transport.rptproj", "{6CBFAEAD-3374-416A-A340-FB130ABF30BC}"
+Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "TransportReports", "transport\TransportReports.rptproj", "{6CBFAEAD-3374-416A-A340-FB130ABF30BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

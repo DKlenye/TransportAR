@@ -4,19 +4,114 @@ Kdn.data.ModelFactory = function() {
     var mc = Ext.util.MixedCollection;
 
     Ext.apply(this, {
-        modelMgr: new mc()
+        modelMgr: new mc(),
+        client:new fm.websync.client("Handlers/Websync.ashx"),
+        channel: "/data"
     });
+    
+    this.client.connect();
+    this.client.subscribe({
+        channel: this.channel,
+        onReceive: this.onReceiveData.createDelegate(this)
+});
 
 };
 
 Ext.extend(Kdn.data.ModelFactory, Ext.util.Observable, {
+   
+   onReceiveData:function(e) {
+       var data = e.getData();
+       var model = this.getModel(data.model);
+       var store = model.store;
+       if (store) {
+           var record = store.getById(data.id); //должно быть так
+           
+           
+           //------------ ѕосле вставки записи индекс в store не обновл€етс€ –ј«ќЅ–ј“№—я!!!
+           if (!record) {
+               var idx = store.findBy(function(r) { return r.id == data.id; });
+               record = store.getAt(idx);
+               if (record) {
+                   store.reMap(record);
+               }
+           }
+           //--------------------------------------------------------------------------
+           
+           
+           var idx = store.findBy(function(r) { return r.id == data.id; });
+           var record = store.getAt(idx);
+           
+           
 
+           switch (data.action) {
+           case 'update':
+           {
+               if (record) {
+                   store.onUpdateRecords(true, record, data.record);
+               }
+               break;
+           }
+           case 'destroy':
+           {
+               if (record) {
+                   record.phantom = true;
+                   store.remove(record);
+               }
+               break;
+           }
+           case 'create':
+           {
+               if (!record) {
+                   record = new store.recordType(data.record, data.id);
+                   record.phantom = false;
+                   record.dirty = false;
+                   store.add(record);
+               }
+               break;
+           }
+
+           }
+       }
+   },
+   
+   publishData:function(data) {
+       this.client.publish({
+           channel: this.channel,
+           returnData: false,
+           data: data
+       });
+   },
+    
    regModel:function(model){
 		this.modelMgr.add(model.name,model);
 	},
 
-    getStore: function(modelName,cfg) {
-        return this.getModel(modelName).getStore(cfg);
+	getStore: function(modelName, cfg) {
+	
+	    var model = this.getModel(modelName),
+	        store = model.store;
+	    if (!store) {
+	        store = model.buildStore(cfg);
+	        model.store = store;
+
+	        store.on({
+	            write: this.onStoreWrite,
+	            scope: this
+	        });
+	    }
+        return store;
+    },
+
+    onStoreWrite: function(store, action, result, res, rec) {
+    
+        var data = {
+            model: store.model.name,
+            action: action,
+            record:rec.data,
+            id:rec.id
+        };
+
+        this.publishData(data);
     },
 
     getModel: function(modelName) {

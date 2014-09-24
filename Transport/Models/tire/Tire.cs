@@ -43,9 +43,11 @@ namespace Transport.Models
       [Property]
       public int? MonthNorm { get; set; }
 
-      
+       [Property]
+       public int? KmStart { get; set; }
+
        [Property(Length = 150),AllowBlank]
-       public string Description { get; set; }
+      public string Description { get; set; }
 
        [Property]
        public bool? IsInStock { get; set; }
@@ -53,6 +55,8 @@ namespace Transport.Models
        [Property]
        public int? TireMovingId { get; set; }
 
+       [Property]
+       public short? Wear { get; set; }
 
        public void setOwner(int OwnerId) { this.OwnerId = OwnerId; }
    }

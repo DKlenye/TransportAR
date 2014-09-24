@@ -519,7 +519,11 @@ namespace Transport.Models
                     {
                         if (taskMap.ContainsKey(i.IncreaseId))
                         {
-                            removeList.Remove(i.IncreaseId);
+                            if (removeList.ContainsKey(i.IncreaseId))
+                            {
+                                removeList[i.IncreaseId].Prcn = i.Prcn; //Если поменялась надбавка
+                                removeList.Remove(i.IncreaseId);
+                            }
                         }
                         else
                         {

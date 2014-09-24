@@ -113,7 +113,7 @@
               <Width>0.98425in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>1.25508in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>0.98425in</Width>
@@ -139,7 +139,7 @@
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.46134in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -261,7 +261,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Дней на предприятии</Value>
+                              <Value>Дней в организации</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -298,7 +298,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Дней в работе</Value>
+                              <Value>Дней в работе (коммерческих)</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -1515,7 +1515,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -1922,8 +1921,8 @@
         <DataSetName>DataSet1</DataSetName>
         <Top>2.1082cm</Top>
         <Left>0.33549cm</Left>
-        <Height>2.4cm</Height>
-        <Width>33.29375cm</Width>
+        <Height>2.9718cm</Height>
+        <Width>33.9816cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1981,7 +1980,7 @@
       <Prompt>year</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <Width>13.23986in</Width>
+  <Width>13.51066in</Width>
   <Page>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>

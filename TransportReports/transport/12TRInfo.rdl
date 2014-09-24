@@ -33,6 +33,10 @@
           <DataField>AllTKM</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
+        <Field Name="CostCode">
+          <DataField>CostCode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="AllWeight">
           <DataField>AllWeight</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
@@ -43,6 +47,10 @@
         </Field>
         <Field Name="VehicleId">
           <DataField>VehicleId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ScheduleId">
+          <DataField>ScheduleId</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="DepartureDate">
@@ -746,7 +754,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Шифр затрат</Value>
+                              <Value>Код затрат</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -1490,7 +1498,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -1799,14 +1806,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="SHZ">
+                    <Textbox Name="CostCode">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!SHZ.Value</Value>
+                              <Value>=Fields!CostCode.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -1815,7 +1822,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>SHZ</rd:DefaultName>
+                      <rd:DefaultName>CostCode</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>

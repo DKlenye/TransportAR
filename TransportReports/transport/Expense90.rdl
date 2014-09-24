@@ -829,7 +829,6 @@ union select '90644500','Аренда(90644500)'</CommandText>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -1584,7 +1583,7 @@ union select '90644500','Аренда(90644500)'</CommandText>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>="Реестр путевых листов за "+Parameters!month.Label+" "+Parameters!year.Value.ToString()+" г."</Value>
+                <Value>="Накопительная ведомость транспортных затрат за "+Parameters!month.Label+" "+Parameters!year.Value.ToString()+" г."</Value>
                 <Style />
               </TextRun>
             </TextRuns>

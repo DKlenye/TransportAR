@@ -184,9 +184,6 @@
 Ext.reg('view.battery', T.view.Battery);
 
 
-
-
-
 T.view.BatteryGrid = Ext.extend(Kdn.view.BaseGrid, {
     requireModels:'BatteryMaker,BatteryType',
     editor:'view.batteryeditor',
@@ -196,7 +193,12 @@ T.view.BatteryGrid = Ext.extend(Kdn.view.BaseGrid, {
     constructor: function(cfg) {
         cfg = cfg || {};
         Ext.apply(cfg, {
-
+            viewConfig:{
+                getRowClass: function(record, rowIndex, rp, ds){
+                    var cls = 'notActual';
+                    return record.get('RemoveDate') ? cls : '';
+                }
+            },
             colModel: new Ext.grid.ColumnModel({
                defaults:{filter:{}},
                 columns: [
@@ -239,7 +241,13 @@ T.view.BatteryGrid = Ext.extend(Kdn.view.BaseGrid, {
                         align:'center',
                         header: 'Стоимость, руб',
                         width: 120,
-                        editor: { xtype: 'kdn.editor.numberfield' }
+                        editor: { xtype: 'kdn.editor.numberfield',allowBlank:true },
+                        renderer:function(v) {
+                            if (Ext.isNumber(v)) {
+                                return v;
+                            }
+                            return "В стоимости техники";
+                        }
                     },
                     {
                         dataIndex: 'WorkUnitId',
@@ -309,13 +317,7 @@ T.view.BatteryGrid = Ext.extend(Kdn.view.BaseGrid, {
                         editor: { xtype: 'kdn.editor.textfield', allowBlank: true }
                     },
                     {
-                        dataIndex: 'RemainCost',
-                        header:'Остаточная стоимость',
-                        align:'center',
-                        width: 120
-                    },
-                    {
-                        dataIndex:'RemainPrcn',
+                        dataIndex:'Wear',
                         header:'Износ, %',
                         width: 120,                        
                         renderer: function( v, metaData, record, rowIndex, colIndex, store ) {
@@ -333,8 +335,28 @@ T.view.BatteryGrid = Ext.extend(Kdn.view.BaseGrid, {
                                 '</div>';
                         
                             return String.format(tpl,v);                        
-                        }                      
-                                                
+                        }
+
+                    },
+                    {
+                        dataIndex: 'IsInStock',
+                        align: 'center',
+                        header: 'На складе',
+                        width: 120,
+                        renderer: Kdn.CheckRenderer,
+                        filter:{
+                           field:new Kdn.form.ComboBox({
+                                    displayField: 'name',
+                                    valueField: 'id',
+                                    objectValue: false,
+                                    enableClear: true,
+                                    store: new Ext.data.ArrayStore({
+                                      fields: ['id','name'],
+                                      data: [[1, 'На складе']]
+                                  })
+                           }),
+                           fieldEvents:["select"]                     
+                        }
                     },
                     {
                         dataIndex: 'RemoveDate',
@@ -424,22 +446,27 @@ T.view.BatteryGrid = Ext.extend(Kdn.view.BaseGrid, {
             {
                 xtype:'tbspacer',
                 width:20
-            },'-',
+            }, '-',
             {
-                text:'Перерасчёт износа'
-            },'-',
-            '->',
-            {
-                xtype:'checkbox'                   
-            }
-            
-            
+                iconCls: 'icon-battery-low',
+                text: 'Показывать списанные',
+                pressed:true,
+                enableToggle: true,
+                scope:this,
+                handler:function(field) {
+                    var store = this.store;
+                    store.reload({
+                            params: {
+                                sqlFilter: field.pressed?"": "RemoveDate is null"
+                            }
+                        });
+                    }
+            },'-'
 
         ]
     },
-    getInsertText: function()
-    {
-        return 'Добавление :: АКБ'
+    getInsertText: function() {
+        return 'Добавление :: АКБ';
     },
 
     getEditText: function()

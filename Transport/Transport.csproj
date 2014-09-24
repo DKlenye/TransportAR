@@ -988,6 +988,21 @@
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\report\ExpenseListDepartment.js" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\BatteryUmtuGN.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\TireList.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\TireRemove.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\DoublePostingInfo.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\TireWarrantlyEnd.js" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

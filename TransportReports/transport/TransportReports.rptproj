@@ -6,8 +6,20 @@
       <Name>DB2.rds</Name>
       <FullPath>DB2.rds</FullPath>
     </ProjectItem>
+    <ProjectItem>
+      <Name>DBSRV2.rds</Name>
+      <FullPath>DBSRV2.rds</FullPath>
+    </ProjectItem>
   </DataSources>
   <Reports>
+    <ProjectItem>
+      <Name>_Temp.rdl</Name>
+      <FullPath>_Temp.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>_Temp1.rdl</Name>
+      <FullPath>_Temp1.rdl</FullPath>
+    </ProjectItem>
     <ProjectItem>
       <Name>12TRDayCount.rdl</Name>
       <FullPath>12TRDayCount.rdl</FullPath>
@@ -15,6 +27,10 @@
     <ProjectItem>
       <Name>12TRInfo.rdl</Name>
       <FullPath>12TRInfo.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>4TRInfo.rdl</Name>
+      <FullPath>4TRInfo.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>AccFuelObReport.rdl</Name>
@@ -45,16 +61,36 @@
       <FullPath>AzsSheetRegister.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>_BatteryCard.rdl</Name>
-      <FullPath>_BatteryCard.rdl</FullPath>
+      <Name>BatteryCard.rdl</Name>
+      <FullPath>BatteryCard.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>BatteryList.rdl</Name>
       <FullPath>BatteryList.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>BatteryRemove.rdl</Name>
+      <FullPath>BatteryRemove.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>BatteryUmtu.rdl</Name>
+      <FullPath>BatteryUmtu.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>BatteryUmtuGN.rdl</Name>
+      <FullPath>BatteryUmtuGN.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>BatteryWarrantlyEnd.rdl</Name>
       <FullPath>BatteryWarrantlyEnd.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>BusPassengers.rdl</Name>
+      <FullPath>BusPassengers.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>DoublePostingInfo.rdl</Name>
+      <FullPath>DoublePostingInfo.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>DriverFuelExcessInfo.rdl</Name>
@@ -63,6 +99,14 @@
     <ProjectItem>
       <Name>DriverFuelExcessSheet.rdl</Name>
       <FullPath>DriverFuelExcessSheet.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>DriversBusinessTrip.rdl</Name>
+      <FullPath>DriversBusinessTrip.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>DriversWorkingTime.rdl</Name>
+      <FullPath>DriversWorkingTime.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>DriverWork.rdl</Name>
@@ -93,12 +137,24 @@
       <FullPath>ExpenseCostCode.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>ExpenseCostCodeWithDriver.rdl</Name>
+      <FullPath>ExpenseCostCodeWithDriver.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>ExpenseCustomer.rdl</Name>
       <FullPath>ExpenseCustomer.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>ExpenseList.rdl</Name>
       <FullPath>ExpenseList.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>ExpenseListByGroup.rdl</Name>
+      <FullPath>ExpenseListByGroup.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>ExpenseListDepartment.rdl</Name>
+      <FullPath>ExpenseListDepartment.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>ExpensePolymirActualWork.rdl</Name>
@@ -117,8 +173,32 @@
       <FullPath>ForwardDrivers.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Inventory.rdl</Name>
+      <FullPath>Inventory.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>InventoryDetails.rdl</Name>
+      <FullPath>InventoryDetails.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Invoice.rdl</Name>
       <FullPath>Invoice.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>KapremList.rdl</Name>
+      <FullPath>KapremList.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>MaintenanceRequest.rdl</Name>
+      <FullPath>MaintenanceRequest.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>MaintenanceRequestList.rdl</Name>
+      <FullPath>MaintenanceRequestList.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>NaftanService.rdl</Name>
+      <FullPath>NaftanService.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>PolymirVehicleWork.rdl</Name>
@@ -157,8 +237,36 @@
       <FullPath>RequestPassengers.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>ServiceScore.rdl</Name>
+      <FullPath>ServiceScore.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>SmallMechFuelConsumption.rdl</Name>
       <FullPath>SmallMechFuelConsumption.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>TireCard.rdl</Name>
+      <FullPath>TireCard.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>TireCard1.rdl</Name>
+      <FullPath>TireCard1.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>TireList.rdl</Name>
+      <FullPath>TireList.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>TireRemove.rdl</Name>
+      <FullPath>TireRemove.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>TireUmtu.rdl</Name>
+      <FullPath>TireUmtu.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>TireUmtuGN.rdl</Name>
+      <FullPath>TireUmtuGN.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>TransportConsumption.rdl</Name>
@@ -169,12 +277,48 @@
       <FullPath>ttn1.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>VehicleByRefuellingGroup.rdl</Name>
+      <FullPath>VehicleByRefuellingGroup.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>VehicleByReportGroup.rdl</Name>
+      <FullPath>VehicleByReportGroup.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>VehicleCountByBodyType.rdl</Name>
+      <FullPath>VehicleCountByBodyType.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>VehicleCountInfo.rdl</Name>
+      <FullPath>VehicleCountInfo.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>VehicleCountInfoDetails.rdl</Name>
+      <FullPath>VehicleCountInfoDetails.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>VehicleDayWork.rdl</Name>
+      <FullPath>VehicleDayWork.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>VehicleFuelRemains.rdl</Name>
       <FullPath>VehicleFuelRemains.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>VehicleFuelRemainsByGarageNumber.rdl</Name>
+      <FullPath>VehicleFuelRemainsByGarageNumber.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>VehicleGroupAccInfo.rdl</Name>
+      <FullPath>VehicleGroupAccInfo.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>VehicleInfo.rdl</Name>
       <FullPath>VehicleInfo.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>VehicleInfo1.rdl</Name>
+      <FullPath>VehicleInfo1.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>VehicleInfoByGroup.rdl</Name>
@@ -187,6 +331,14 @@
     <ProjectItem>
       <Name>VehicleList.rdl</Name>
       <FullPath>VehicleList.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>VehicleNorms.rdl</Name>
+      <FullPath>VehicleNorms.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>VehicleNotUsing.rdl</Name>
+      <FullPath>VehicleNotUsing.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>VehicleOrder.rdl</Name>
@@ -205,6 +357,18 @@
       <FullPath>VehicleRun.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>VehicleRunDetails.rdl</Name>
+      <FullPath>VehicleRunDetails.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>VehiclesByRegistrationNumber.rdl</Name>
+      <FullPath>VehiclesByRegistrationNumber.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>VehicleServiceGroup.rdl</Name>
+      <FullPath>VehicleServiceGroup.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>VehicleWork.rdl</Name>
       <FullPath>VehicleWork.rdl</FullPath>
     </ProjectItem>
@@ -213,12 +377,24 @@
       <FullPath>VehicleWorkByGroup.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>VehicleWorkKoefficient.rdl</Name>
+      <FullPath>VehicleWorkKoefficient.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>VehicleWorkSummary.rdl</Name>
+      <FullPath>VehicleWorkSummary.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>WaybillDateErrors.rdl</Name>
+      <FullPath>WaybillDateErrors.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>WayBillPackage.rdl</Name>
       <FullPath>WayBillPackage.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>BatteryCard.rdl</Name>
-      <FullPath>BatteryCard.rdl</FullPath>
+      <Name>TireWarrantlyEnd.rdl</Name>
+      <FullPath>TireWarrantlyEnd.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>

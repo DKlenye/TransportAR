@@ -114,8 +114,6 @@ Kdn.editor.BaseModelEditor = Ext.extend(Kdn.app.TabItem, {
          store = me.grid.store,
          commitFn = 'commitChanges';
 
-         debugger;
-    
          record = record || new store.recordType();
          record.beginEdit();
          Ext.iterate(me.editors,function(e){

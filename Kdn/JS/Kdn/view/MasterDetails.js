@@ -10,7 +10,7 @@
       this.refreshBuffer = [];
       
       Ext.apply(this.master,{ 
-         margins:'3 3 0 3',
+         //margins:'3 3 0 3',
          region: 'center',
          split:true
       });
@@ -27,13 +27,14 @@
          xtype: 'tabpanel',
          disabled:true,
          activeTab:0,
-         margins:'0 3 3 3',
+        // margins:'0 3 3 3',
          items:this.details
       });
       
       Ext.apply(this,{
-         
-         layout:'border',
+
+      layout: 'border',
+         border:false,
          masterView:masterView,
          detailsView:detailsView,
          items:[

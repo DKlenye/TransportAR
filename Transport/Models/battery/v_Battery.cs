@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using Castle.ActiveRecord;
-using System.Text;
 using Kdn.Ext.Attributes;
-using Kdn.Attributes;
-using Newtonsoft.Json;
-using NHibernate.Criterion;
 
 namespace Transport.Models
 {
@@ -31,7 +26,7 @@ namespace Transport.Models
 
         //Стоимость
         [Property]
-        public decimal Cost { get; set; }
+        public decimal? Cost { get; set; }
 
         //Гарантия мес.
         [Property]
@@ -73,7 +68,13 @@ namespace Transport.Models
         [Property]
         public int? RemainPrcn { get; set; }
 
-        
+        [Property]
+        public bool? IsInStock { get; set; }
+
+        [Property]
+        public short? Wear { get; set; }
+
+
         [BelongsTo("VehicleId")]
         public BaseVehicle Vehicle { get; set; }
 

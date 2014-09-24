@@ -25,6 +25,10 @@
           <DataField>Km</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
+        <Field Name="PolymirId">
+          <DataField>PolymirId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
         <Field Name="WaybillId">
           <DataField>WaybillId</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
@@ -135,7 +139,7 @@
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.54156in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -147,6 +151,21 @@
                           <TextRuns>
                             <TextRun>
                               <Value>Код затрат</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <LeftIndent>0cm</LeftIndent>
+                          <HangingIndent>0cm</HangingIndent>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>(Код заказчика)</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -572,6 +591,21 @@
                               <Value>=Fields!PolymirCostCode.Value</Value>
                               <Style />
                             </TextRun>
+                            <TextRun>
+                              <Value>(</Value>
+                              <Style />
+                            </TextRun>
+                            <TextRun>
+                              <Value>=Fields!PolymirId.Value</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                                <Color>Blue</Color>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>)</Value>
+                              <Style />
+                            </TextRun>
                           </TextRuns>
                           <Style>
                             <TextAlign>Center</TextAlign>
@@ -657,7 +691,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -1485,7 +1518,7 @@
         <DataSetName>DataSet1</DataSetName>
         <Top>2.61091cm</Top>
         <Left>0.28258cm</Left>
-        <Height>2.99999cm</Height>
+        <Height>3.77555cm</Height>
         <Width>27.49309cm</Width>
         <Style>
           <Border>
@@ -1660,7 +1693,7 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>2.29202in</Height>
+    <Height>2.51435in</Height>
     <Style />
   </Body>
   <ReportParameters>

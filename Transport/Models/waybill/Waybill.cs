@@ -514,7 +514,7 @@ namespace Transport.Models {
        public void ClearWaybillWork()
        {
            var query = String.Format(
-            @" Delete from WaybillWork where WaybillId = {0} ",
+            @" Delete from WaybillWork where WaybillId = {0} and ReplicationSource is null ",
             WaybillId
          );
 
@@ -631,20 +631,37 @@ namespace Transport.Models {
 
        public void CalcWaybillWork()
        {
+           var Work = new Dictionary<int, WaybillWork>();
+
+           var getWork = new Func<int, WaybillWork>(VehicleId =>
+           {
+               if (Work.ContainsKey(VehicleId))
+               {
+                   return Work[VehicleId];
+               }
+               var work = new WaybillWork()
+               {
+                   key = new WaybillWorkKey()
+                   {
+                       VehicleId = VehicleId,
+                       WaybillId = WaybillId
+                   },
+                   WorkDate = ReturnDate,
+                   Km = 0,
+                   FactConsumption = 0,
+                   MachineHour = 0,
+                   MotoHour = 0,
+                   NormConsumption = 0
+               };
+
+               Work.Add(VehicleId,work);
+               return work;
+           });
+
+
            var Tasks = WaybillTask.FindAll(Expression.Where<WaybillTask>(x => x.WaybillId == WaybillId));
            if (Tasks.Length == 0) return;
 
-           var waybillWork = new WaybillWork()
-           {
-               VehicleId = Car.VehicleId,
-               WaybillId = WaybillId,
-               WorkDate = ReturnDate,
-               Km=0,
-               FactConsumption=0,
-               MachineHour=0,
-               MotoHour=0,
-               NormConsumption=0
-           };
 
            var workTypeMap = WorkType.getMap();
            var workUnitMap = WorkUnit.getMap();
@@ -656,12 +673,9 @@ namespace Transport.Models {
            {
                // var consumption = NormConsumption.FindByPrimaryKey(x.NormConsumptionId);
 
-               if (x.NormConsumptionId == null)
+               if (x.NormConsumptionId != null)
                {
-
-               }
-               else
-               {
+                   var waybillWork = getWork(Car.VehicleId);
                    var norm = NormsMap[x.NormConsumptionId.Value];
                    var workType = workTypeMap[norm.WorkTypeId];
                    var workUnit = workUnitMap[workType.WorkUnitId];
@@ -686,15 +700,23 @@ namespace Transport.Models {
                        }
                    }
                    waybillWork.NormConsumption += x.Consumption ?? 0;
+                   
+                   if (x.TrailerId != null)
+                   {
+                       var trailerWork = getWork(x.TrailerId.Value);
+                       if (workUnit.WorkUnitId == 1)
+                       {
+                           trailerWork.Km += (x.WorkAmount ?? 0);
+                       }
+                   }
                }
            });
            
-
            var departureRemain = WaybillFuelRemain.findByWaybillId(WaybillId).Sum(x => x.DepartureRemain??0);
            var returnRemain = WaybillFuelRemain.findByWaybillId(WaybillId).Sum(x => x.ReturnRemain??0);
            var refuelling = VehicleRefuelling.FindAll(Expression.Where<VehicleRefuelling>(x => x.WaybillId == WaybillId)).Sum(x=>x.Quantity);
-           waybillWork.FactConsumption = departureRemain + refuelling - returnRemain;
-           waybillWork.SaveAndFlush();
+           getWork(Car.VehicleId).FactConsumption = departureRemain + refuelling - returnRemain;
+           Work.ForEach(x => x.Value.SaveAndFlush());
        }
    
    }

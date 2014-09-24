@@ -40,6 +40,9 @@ namespace Transport.Models
         public int? KmNorm { get; set; }
 
         [Property]
+        public int? KmStart { get; set; }
+
+        [Property]
         public int? MonthNorm { get; set; }
 
         [Property]
@@ -60,6 +63,9 @@ namespace Transport.Models
         public bool? IsNotReplaceable { get; set; }
         [Property, AllowBlank]
         public bool? IsInStock { get; set; }
+
+        [Property]
+        public short? Wear { get; set; }
 
         public void setOwner(int OwnerId) { this.OwnerId = OwnerId; }
 
@@ -86,6 +92,7 @@ namespace Transport.Models
             tire.TireModel = TireModel;
             tire.FactoryNumber = FactoryNumber;
             tire.KmNorm = KmNorm;
+            tire.KmStart = KmStart;
             tire.MonthNorm = MonthNorm;
             tire.Season = Season;
             tire.Size = Size;
@@ -108,6 +115,7 @@ namespace Transport.Models
                 FactoryNumber = FactoryNumber,
                 IsInStock = IsInStock??false,
                 KmNorm = KmNorm,
+                KmStart = KmStart,
                 MonthNorm = MonthNorm,
                 OwnerId = OwnerId,
                 Season = Season,

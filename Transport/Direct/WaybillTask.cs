@@ -239,6 +239,7 @@ namespace Transport.Direct
                if (waybillstate == 1)
                {
                    task.CheckWinter();
+                   task.CheckDefaultIncreases();
                    task.Consumption = task.CalculateConsumption();
                    task.Save();
                }

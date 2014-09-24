@@ -902,8 +902,9 @@
           rec = e.record;
 
         
-        if(main.isAccClosed()){
-        return false;
+        if(main.isAccClosed()) {
+            var allowModifyAccFields = ['SrcRoutPoint', 'DstRoutPoint'];
+            if (allowModifyAccFields.indexOf(e.field) == -1) return false;
         }
         
 

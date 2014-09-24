@@ -30,7 +30,7 @@ namespace Transport.Models
 
         //Стоимость
         [Property]
-        public decimal Cost { get; set; }
+        public decimal? Cost { get; set; }
 
         //Гарантия мес.
         [Property]
@@ -61,5 +61,9 @@ namespace Transport.Models
 
         [Property]
         public int? BatteryMovingId { get; set; }
+
+       [Property]
+       public short? Wear { get; set; }
+
     }
 }

@@ -16,13 +16,8 @@ Ext.override(Kdn.data.Model, {
         return new Kdn.data.DirectStore(this,cfg);
     },
     
-    getStore: function(cfg){
-		var store = this.store;
-		if (!store){
-			store = this.buildStore(cfg);
-		   this.store = store;
-		}
-		return store;
+    getStore: function(cfg) {
+        return Kdn.ModelFactory.getStore(this.name, cfg);
 	}
 
 });

@@ -343,6 +343,7 @@ namespace Transport.Direct {
 
       }
 
+       /*
       [DirectMethod]
       [ParseAsJson]
       public string ReplicateWeather(JObject o) {
@@ -390,7 +391,7 @@ namespace Transport.Direct {
 
          return "";
 
-      }
+      }*/
 
       [DirectMethod]
       [ParseAsJson]
@@ -1021,7 +1022,7 @@ namespace Transport.Direct {
          {7,43}
       };
 
-
+       /*
       [DirectMethod]
       [ParseAsJson]
       public string ReplicateOtherRefuelling(JObject o) {
@@ -1062,9 +1063,9 @@ namespace Transport.Direct {
 
          return "";
       }
+       */
 
-
-
+       /*
       [DirectMethod]
       [ParseAsJson]
       public string ReplicateDB2Refuelling(JObject o) {
@@ -1088,6 +1089,7 @@ namespace Transport.Direct {
             }
 
          }
+        
 
 
          var refuelling = VehicleRefuelling.FindAll(Expression.Where<VehicleRefuelling>(x => x.RefuellingDate > DateTime.Now.AddDays(-1) && x.RefuellingPlaceId == 6));
@@ -1154,7 +1156,7 @@ namespace Transport.Direct {
          return "";
 
       }
-
+       */
 
 
 
@@ -2181,10 +2183,6 @@ namespace Transport.Direct {
       }
 
 
-
-
-
-
       [DirectMethod]
       [ParseAsJson]
       public string UpdateBattery(JObject o)
@@ -2269,7 +2267,7 @@ namespace Transport.Direct {
            var counter = 0;
            using (new SessionScope(FlushAction.Never))
            {
-               waybills = Waybill.FindAll(Expression.Where<Waybill>(x => x.WaybillState == 2 && x.ReturnDate > DateTime.Parse("01.11.2013") && x.ReturnDate <= DateTime.Parse("01.12.2013")));
+               waybills = Waybill.FindAll(Expression.Where<Waybill>(x => x.WaybillState == 2 && (x.AccPeriod>201303||x.AccPeriod == null)));
                waybills.ForEach(x =>
                {
                    x.ClearWaybillWork();

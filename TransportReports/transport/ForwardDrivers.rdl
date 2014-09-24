@@ -469,7 +469,7 @@
                               <Value>=Fields!DepartureDate.Value</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
-                                <Format>dd.MM.yyyy hh:mm</Format>
+                                <Format>dd.MM.yyyy HH:mm</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -490,6 +490,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -504,7 +505,7 @@
                               <Value>=Fields!ReturnDate.Value</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
-                                <Format>dd.MM.yyyy hh:mm</Format>
+                                <Format>dd.MM.yyyy HH:mm</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -799,8 +800,8 @@
         <DataSetName>DataSet1</DataSetName>
         <Top>2.02883cm</Top>
         <Left>0.37042cm</Left>
-        <Height>3cm</Height>
-        <Width>18.00354cm</Width>
+        <Height>2.99999cm</Height>
+        <Width>18.00357cm</Width>
         <Style>
           <Border>
             <Style>None</Style>

@@ -50,6 +50,30 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\resources\Direct\Ext.Direct.dll</HintPath>
     </Reference>
+    <Reference Include="FM, Version=2.5.0.0, Culture=neutral, PublicKeyToken=be2ad24fd77899bf, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Downloads\WebSync.4.Community\Libraries\DotNet35\FM.dll</HintPath>
+    </Reference>
+    <Reference Include="FM.Server, Version=2.5.0.0, Culture=neutral, PublicKeyToken=be2ad24fd77899bf, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Downloads\WebSync.4.Community\Libraries\DotNet35\FM.Server.dll</HintPath>
+    </Reference>
+    <Reference Include="FM.WebSync, Version=4.5.0.0, Culture=neutral, PublicKeyToken=be2ad24fd77899bf, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Downloads\WebSync.4.Community\Libraries\DotNet35\FM.WebSync.dll</HintPath>
+    </Reference>
+    <Reference Include="FM.WebSync.ReturnData, Version=4.5.0.0, Culture=neutral, PublicKeyToken=be2ad24fd77899bf, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Downloads\WebSync.4.Community\Libraries\DotNet35\FM.WebSync.ReturnData.dll</HintPath>
+    </Reference>
+    <Reference Include="FM.WebSync.ReturnData.Server, Version=4.5.0.0, Culture=neutral, PublicKeyToken=be2ad24fd77899bf, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Downloads\WebSync.4.Community\Libraries\DotNet35\FM.WebSync.ReturnData.Server.dll</HintPath>
+    </Reference>
+    <Reference Include="FM.WebSync.Server, Version=4.5.0.0, Culture=neutral, PublicKeyToken=be2ad24fd77899bf, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Downloads\WebSync.4.Community\Libraries\DotNet35\FM.WebSync.Server.dll</HintPath>
+    </Reference>
     <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\resources\NHibernate\Iesi.Collections.dll</HintPath>
@@ -1017,6 +1041,7 @@
     <None Include="db\Transport.db" />
     <None Include="fonts\Cuprum_typefamily.zip" />
     <None Include="fonts\Russo.zip" />
+    <Content Include="Handlers\Websync.ashx" />
     <None Include="images\access\form\clear-trigger.psd" />
     <None Include="images\access\form\date-trigger.psd" />
     <None Include="images\access\form\search-trigger.psd" />
@@ -1059,7 +1084,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>2549</DevelopmentServerPort>
+          <DevelopmentServerPort>11575</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

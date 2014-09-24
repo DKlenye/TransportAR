@@ -13,6 +13,10 @@
           <DataField>FuelName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="FuelId">
+          <DataField>FuelId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
         <Field Name="StartRemainLiter">
           <DataField>StartRemainLiter</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
@@ -217,7 +221,21 @@
                 </Style>
               </TextRun>
               <TextRun>
-                <Value>  2013г.</Value>
+                <Value xml:space="preserve"> </Value>
+                <Style>
+                  <FontSize>11pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>=Parameters!year.Value</Value>
+                <Style>
+                  <FontSize>11pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value> г.</Value>
                 <Style>
                   <FontSize>11pt</FontSize>
                   <FontWeight>Bold</FontWeight>
@@ -1410,7 +1428,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -1692,6 +1709,11 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
+        <SortExpressions>
+          <SortExpression>
+            <Value>=Fields!FuelId.Value</Value>
+          </SortExpression>
+        </SortExpressions>
         <Top>2.03833in</Top>
         <Height>1.42372in</Height>
         <Width>10.4498in</Width>

@@ -524,6 +524,12 @@ editor:'view.tireeditor',
                         editor: { xtype: 'kdn.editor.numberfield',allowBlank:true }
                     },
                     {
+                        dataIndex: 'KmStart',
+                        header: 'Начальный пробег, км',
+                        width: 120,
+                        editor: { xtype: 'kdn.editor.numberfield', allowBlank: true }
+                    },
+                    {
                         dataIndex: 'MonthNorm',
                         header: 'Норма по времени, мес',
                         width: 120,
@@ -587,6 +593,28 @@ editor:'view.tireeditor',
                        renderer: Kdn.CheckRenderer,
                        editor: { xtype: 'kdn.editor.booleanfield', renderer: Kdn.CheckRenderer, allowBlank: true }
                    },
+                    {
+                        dataIndex: 'Wear',
+                        header: 'Износ, %',
+                        width: 120,
+                        renderer: function(v, metaData, record, rowIndex, colIndex, store) {
+
+                            if (!Ext.isNumber(v)) return null;
+
+                            var tpl = '<div class="x-progress-wrap" style="height: 16px;">' +
+                                '<div class="x-progress-inner">' +
+                                '<div class="x-progress-bar" style="height: 16px; width: {0}%;">' +
+                                '</div>' +
+                                '<div class="x-progress-text x-progress-text-back" style="width:100%; color:black">' +
+                                '<div style="width:100%" height: 18px;">{0}%</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>';
+
+                            return String.format(tpl, v);
+                        }
+
+                    },
                     {
                         dataIndex: 'Description',
                         header: 'Примечание',

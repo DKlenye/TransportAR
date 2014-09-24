@@ -124,6 +124,7 @@ namespace Kdn.Direct
            return new DataSerializer(new List<object>()); 
         }*/
 
+        /*
         [DirectMethod]
         [ParseAsJson]
         public DataSerializer UpdateDatabase(JObject o)
@@ -136,6 +137,7 @@ namespace Kdn.Direct
         protected virtual void CreateDefaultModels(){
         
         }
+         * */
         
         
         public override string ProviderName

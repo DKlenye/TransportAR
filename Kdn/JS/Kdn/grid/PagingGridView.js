@@ -139,6 +139,7 @@
         }
         
         row = this.getRow(rowIndex);
+        if (!row) return;
         row.className = '';
         
         if (this.grid.stripeRows && ((rowIndex + 1) % 2 === 0)) {
