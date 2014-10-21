@@ -355,7 +355,7 @@ onVehicleTiresSelect:function(sm) {
         width:110,
         dataIndex: 'period',
         renderer:function(v) {
-            return Date.parseDate(v, 'Ym').format('Y F');
+            return Date.parseDate(v+'01', 'Ymd').format('Y F');
         }
     }];
     sel.forEach(function(e) {

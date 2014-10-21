@@ -1175,7 +1175,7 @@
       var source = wProperty.getSource();
             
       var obj = {};
-      Ext.copyTo(obj,source,'TrailerId,Way,WaybillId,ScheduleId,Shift,PackageId,WaybillTypeId,FormSerial,FormNumber,UnloadDate');
+      Ext.copyTo(obj,source,'TrailerId,Way,WaybillId,ScheduleId,Shift,PackageId,WaybillTypeId,FormNumber,OrderNumber,OrderDate');
       
       Ext.copyTo(obj,$.waybill,'Position,WaybillState,AccPeriod,WaybillNumber,ResponsibleDriver,UserClose,WhenClose');      
       

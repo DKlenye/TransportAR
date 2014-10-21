@@ -3,17 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Castle.ActiveRecord;
 using Castle.ActiveRecord.Queries;
-using System.Text;
 using Castle.Core;
 using Kdn.Ext.Attributes;
-using NHibernate.Hql;
 using NHibernate.Criterion;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Transport.Models.waybill;
 
 namespace Transport.Models {
-
 
    public enum WaybillState{
       Open,DispClose,AccClose
@@ -39,8 +35,6 @@ namespace Transport.Models {
 
       [AllowBlank,Property(Length=20)]
       public string FormNumber { get; set; }
-      [AllowBlank,Property(Length=5)]
-      public string FormSerial { get; set; }
 
       [AllowBlank, Property(Update = false, Insert = false)]
       public int? WaybillNumber { get; set; }
@@ -58,10 +52,7 @@ namespace Transport.Models {
 
       [Property]
       public string Way { get; set; }
-
-      [Property]
-      public DateTime? UnloadDate { get; set; }
-
+       
       [Property]
       public int? TrailerId { get; set; }
 
@@ -78,8 +69,14 @@ namespace Transport.Models {
       [Property]
       public DateTime? WhenClose { get; set; }
 
-            
-      #region Owner
+       [Property]
+       public DateTime? OrderDate { get; set; }
+
+       [Property, AllowBlank]
+       public string OrderNumber { get; set; }
+
+
+       #region Owner
       public void setOwner(int OwnerId) { }
       public void readWithOwner(DetachedCriteria c, int owner) {
          c.CreateAlias("Car", "Car").Add(Expression.Eq("Car.OwnerId", owner));
@@ -416,7 +413,7 @@ namespace Transport.Models {
             MoveRemains(next);
          }
          WaybillState = 2;
-         UserClose = ((User)User.GetCurrent(typeof(User))).UserId;
+         UserClose = (User.GetCurrent()).UserId;
          WhenClose = DateTime.Now;
          CalcWorkingTime();
           CalcWaybillWork();

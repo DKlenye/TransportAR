@@ -28,12 +28,12 @@
                if(rec) return rec.get('WaybillTypeName');
                return null;
             }],  
-            ['FormSerial','Серия',{xtype:'kdn.editor.textfield'}],
             ['FormNumber','№ Бланка',{xtype:'kdn.editor.textfield'}],
             ['TrailerId','Прицеп',{xtype:'combo.trailer',enableClear:true},T.combo.Trailer.prototype.renderTpl],
             ['Way','Маршрут',{xtype:'kdn.editor.textfield'}],
-            ['PackageId','№ Пачки',{xtype:'kdn.editor.numberfield',allowBlank:true}],
-            ['UnloadDate','Дата разгрузки',{xtype:'kdn.editor.datefield',allowBlank:true}]
+            ['PackageId', '№ Пачки', { xtype: 'kdn.editor.numberfield', allowBlank: true}],
+            ['OrderNumber', '№ приказа', { xtype: 'kdn.editor.textfield', allowBlank: true}],
+            ['OrderDate', 'Дата приказа', { xtype: 'kdn.editor.datefield', allowBlank: true}]
                       
         ];
                 
@@ -83,7 +83,7 @@
       
       if(main.isDispClosed()){
          var denyModifyFields = ['DepartureDate','DepartureTime'];
-         if(e.row==1 || e.row==2) return false;
+          if ([1, 2].indexOf(e.row) != -1) return false;
       }
       
     },

@@ -33,9 +33,9 @@ Ext.onReady(function() {
 	    var _user = Kdn.User;
 	    delete Kdn.User;
 
-	    Kdn.getUser = function() {
-	        return Kdn.clone(_user);
-	    }
+        Kdn.getUser = function() {
+            return Kdn.clone(_user);
+        };
 
 
 	    if (Kdn['Application']) {

@@ -96,11 +96,6 @@
     <Compile Include="Ext\data\Model.cs" />
     <Compile Include="Ext\ExtFunction.cs" />
     <Compile Include="Ext\ModelConverter.cs" />
-    <Compile Include="CommonModels\Menu.cs" />
-    <Compile Include="CommonModels\Permission.cs" />
-    <Compile Include="CommonModels\PermissionObject.cs" />
-    <Compile Include="CommonModels\User.cs" />
-    <Compile Include="CommonModels\UserGroup.cs" />
     <Compile Include="Interfaces\IUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLite\SqliteAsc.cs" />

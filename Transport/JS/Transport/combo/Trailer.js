@@ -53,8 +53,6 @@
    onKeyUp:function(e){
     
         if (e.getKey()==e.ENTER){
-    
-         debugger;
             
             var val = this.getEl().dom.value;
             var gn;

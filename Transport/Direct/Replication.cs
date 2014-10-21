@@ -10,13 +10,13 @@ using Ext.Direct;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Castle.ActiveRecord;
-using Kdn.CommonModels;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Hql;
 using NHibernate.Criterion.Lambda;
 using NHibernate.Criterion;
 using Kdn.Direct;
+using NHibernate.Mapping;
 using Transport.Models;
 using Transport.OtherModels.kdr;
 using Transport.OtherModels.dbf;
@@ -532,7 +532,6 @@ namespace Transport.Direct {
 
                   waybill.Car = car;
                   waybill.FormNumber = pw.key.NPL;
-                  waybill.FormSerial = pw.SERIA;
                   waybill.DepartureDate = DepartureDate;
                   waybill.ReturnDate = convertDate(pw.D_VOZ.Value, pw.VR_VOZ);
                   waybill.AccPeriod = int.Parse(pw.REP);
@@ -2284,5 +2283,85 @@ namespace Transport.Direct {
            return waybills.Count().ToString();
        }
 
+       [DirectMethod]
+       [ParseAsJson]
+       public string SetRemainsForNaftanService(JObject o)
+       {
+
+
+
+
+           var GarageNumberList = new List<int>() { o["g"].Value<int>() };
+           
+           foreach (var garageNumber in GarageNumberList)
+           {
+               int number = garageNumber;
+               var vehicle =
+                   (FullCar)Models.FullCar.FindOne(
+                       Restrictions.Where<FullCar>(x => x.GarageNumber == number && x.OwnerId == 1));
+               var lasCloseWaybill = Waybill.LastClose(vehicle.VehicleId);
+
+               var w = new Waybill()
+               {
+                   Car = Car.Find(vehicle.VehicleId),
+                   WaybillState = 1,
+                   DepartureDate = new DateTime(2014, 09, 30),
+                   ReturnDate = new DateTime(2014, 09, 30),
+                   WaybillTypeId = vehicle.WaybillTypeId.Value,
+                   ScheduleId = 1,
+                   Shift = 1,
+                   Way = "Передача в Нафтан-Сервис"
+               };
+
+               w.Save();
+
+            w.Position = Waybill.GetMaxPosition(w.Car.VehicleId);
+            w.WaybillState = 1;
+            w.SaveAndFlush();
+            w.SetPosition();
+               
+               lasCloseWaybill.MoveRemains(w,false);
+
+               var remains = WaybillFuelRemain.findByWaybillId(w.WaybillId);
+
+               foreach (var remain in remains)
+               {
+                   remain.ReturnRemain = 0;
+
+                   if (remain.DepartureRemain != 0)
+                   {
+                       var refuelling = new VehicleRefuelling()
+                       {
+                           WaybillId = w.WaybillId,
+                           Driver = vehicle.ResponsibleDriver,
+                           RefuellingDate = w.ReturnDate,
+                           RefuellingPlaceId = 11,
+                           FuelId = remain.FuelId,
+                           Quantity = remain.DepartureRemain.Value*(-1)
+                       };
+                       refuelling.SaveAndFlush();
+                   }
+
+                   remain.SaveAndFlush();
+               }
+
+               var counters = WaybillCounter.findByWaybillId(w.WaybillId);
+               foreach (var counter in counters)
+               {
+                   counter.Return = counter.Departure;
+                   counter.SaveAndFlush();
+               }
+               
+                w.DispClose();
+
+           }
+
+
+           return "";
+       }
+
    }
+
+
+
 }

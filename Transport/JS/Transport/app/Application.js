@@ -2,7 +2,6 @@
     appNS: 'Transport',
     getMenuItems: function()
     {
-
         Ext.apply(this, {
             Owner: Ext.create(
             {
@@ -23,33 +22,29 @@
         });
 
         return [
-                { xtype: 'tbspacer', width: 10 },
-                '->',
-                {
-                    xtype: 'buttongroup',
-                    title: 'Подразделение',
-                    items: [this.Owner]
-                },
-                {
-                    xtype: 'app.temperaturebutton'
-                },
-                {
-                    xtype: 'button',
-                    scale: 'large',
-                    iconCls: 'icon-help32',
-                    handler: function()
-                    {
-                        window.open('Manual.pdf');
-                    }
+            { xtype: 'tbspacer', width: 10 },
+            '->',
+            {
+                xtype: 'buttongroup',
+                title: 'Подразделение',
+                items: [this.Owner]
+            },
+            {
+                xtype: 'app.temperaturebutton'
+            },
+            {
+                xtype: 'button',
+                scale: 'large',
+                iconCls: 'icon-help32',
+                handler: function() {
+                    window.open('Manual.pdf');
                 }
-       ]
-
+            }
+        ];
     },
 
     afterStart: function()
     {
-
-
         T.modelCfg.Cfg();
 
         var ownerStore = Kdn.ModelFactory.getStore('TransportOwner');
@@ -60,7 +55,6 @@
                 scope: this
             }
         });
-
     },
 
     onOwnerLoad: function(store)
@@ -82,9 +76,8 @@
         this.Owner.setValue(s.getAt(0).id);
 
         Ext.apply(Kdn.data.ExtendParams, {
-            owner: function() { return me.Owner.getValue()['OwnerId'] }
+            owner: function() { return me.Owner.getValue()['OwnerId']; }
         });
-
     },
 
     onOwnerChange: function()
@@ -95,7 +88,6 @@
 
     printWaybillTpl: function(url)
     {
-
         var URL = Ext.urlAppend("print/" + url + ".aspx", Ext.urlEncode({ WaybillId: 0 }));
 
         Ext.Ajax.request({
@@ -120,9 +112,8 @@
                 win.print();
                 CheckWindowState();
             },
-            failure: function(e)
-            {
-                Ext.Msg.show({ width: 800, title: 'Ошибка', buttons: Ext.Msg.OK, msg: e.responseText })
+            failure: function(e) {
+                Ext.Msg.show({ width: 800, title: 'Ошибка', buttons: Ext.Msg.OK, msg: e.responseText });
             }
         });
         

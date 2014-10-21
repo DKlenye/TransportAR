@@ -269,6 +269,10 @@
       <FullPath>TireUmtuGN.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>TireWarrantlyEnd.rdl</Name>
+      <FullPath>TireWarrantlyEnd.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>TransportConsumption.rdl</Name>
       <FullPath>TransportConsumption.rdl</FullPath>
     </ProjectItem>
@@ -377,6 +381,10 @@
       <FullPath>VehicleWorkByGroup.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>VehicleWorkFromStart.rdl</Name>
+      <FullPath>VehicleWorkFromStart.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>VehicleWorkKoefficient.rdl</Name>
       <FullPath>VehicleWorkKoefficient.rdl</FullPath>
     </ProjectItem>
@@ -393,8 +401,8 @@
       <FullPath>WayBillPackage.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>TireWarrantlyEnd.rdl</Name>
-      <FullPath>TireWarrantlyEnd.rdl</FullPath>
+      <Name>WaybillCount.rdl</Name>
+      <FullPath>WaybillCount.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>

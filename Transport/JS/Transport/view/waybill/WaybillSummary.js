@@ -45,9 +45,7 @@
          var NormConsumptionId = task.get('NormConsumptionId');
          if (NormConsumptionId) {
 
-             debugger;
-         
-            var norm = vehicle.norms.get(NormConsumptionId);
+              var norm = vehicle.norms.get(NormConsumptionId);
             if (norm) {
             
                   var info = main.tasks.getConsumptionInfo(NormConsumptionId),

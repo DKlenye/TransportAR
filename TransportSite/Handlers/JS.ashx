@@ -1,1 +1,1 @@
-﻿<%@ WebHandler Language="C#" Class="Shipment.Web.Handlers.JS" %>
+﻿<%@ WebHandler Language="C#" Class="Transport.Web.Handlers.JS" %>

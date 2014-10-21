@@ -166,7 +166,7 @@ namespace Transport.Models
                 }
             }
 
-            var targetWinterDate = DateTime.Parse("25.11.2014");
+            var targetWinterDate = new DateTime(2014, 11, 1);
 
             if (Temperature != null && Temperature < 0 && norm.isMain &&
                 (TaskDepartureDate.Month <= 3 || TaskDepartureDate > targetWinterDate))

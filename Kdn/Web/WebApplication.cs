@@ -2,15 +2,11 @@
 using System.Reflection;
 using System.Collections.Generic;
 using System.Web;
-using System.Web.Security;
-using System.Web.SessionState;
 using Castle.ActiveRecord;
 using Castle.ActiveRecord.Framework;
 using Castle.ActiveRecord.Framework.Internal;
 using Castle.ActiveRecord.Framework.Config;
-using Kdn.CommonModels;
 using Kdn.Attributes;
-using NHibernate.Cfg;
 
 
 namespace Kdn.Web
@@ -48,9 +44,6 @@ namespace Kdn.Web
                   new ActiveRecordModelBuilder().CreateDummyModelFor(type);  
                }               
             };
-
-            dummyTypes.AddRange(GetDefaultTypes());
-
 
 
             //Настраиваем профайлер (логгер) указанный в web.config раздел <log4net>
@@ -96,19 +89,7 @@ namespace Kdn.Web
         protected virtual Assembly GetModelsAssembly()
         {
             return Assembly.GetExecutingAssembly();
-        }
-
-        protected virtual List<Type> GetDefaultTypes()
-        {
-            return new List<Type> {             
-                typeof(Menu),
-                typeof(Permission),
-                typeof(PermissionObject),
-                typeof(User),
-                typeof(UserGroup)            
-            };
-        }
-        
+        }        
 
     }
 }

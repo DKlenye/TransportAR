@@ -755,7 +755,14 @@ Kdn.Menu = [{
                   iconCls: 'icon-blue-document-word',
                   Handler: 'createView',
                   HandlerCfg: "{xtype:'view.report.vehicledaywork',single:true}"
+              },
+              {
+                  text: 'Работа транспорта (с начала эксплуатации)',
+                  iconCls: 'icon-blue-document-word',
+                  Handler: 'createView',
+                  HandlerCfg: "{xtype:'view.report.vehicleworkfromstart',single:true}"
               }
+              
         ]
     },
     {
@@ -813,6 +820,11 @@ Kdn.Menu = [{
             text: 'Путевые листы с перекрывающимися датами',
             Handler: 'createView',
             HandlerCfg: "{xtype:'view.report.waybilldateerrors',single:true}"
+        },
+        {
+            text: 'Количество путевых листов по колоннам',
+            Handler: 'createView',
+            HandlerCfg: "{xtype:'view.report.waybillcount',single:true}"
         }
     ]
 },

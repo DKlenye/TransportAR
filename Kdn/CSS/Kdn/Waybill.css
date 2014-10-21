@@ -5,6 +5,24 @@
    color:tomato;
 }
 
+.task .x-grid3-row td.waybill-task-vehicle-costcode{
+   background-color: #B1FDFA;
+   font: 13px/14px arial,tahoma,helvetica,sans-serif;
+   font-weight: bold;
+}
+
+.task .x-grid3-row td.waybill-task-hand-costcode{
+   background-color: #FDB1B7;
+   font: 13px/14px arial,tahoma,helvetica,sans-serif;
+   font-weight: bold;
+}
+
+.task .x-grid3-row td.waybill-task-vehicle-costcode{
+   background-color: #B1FDFA;
+   font: 13px/14px arial,tahoma,helvetica,sans-serif;
+   font-weight: bold;
+}
+
 .task .x-grid3-row td.waybill-task-customer{
    background-color: #DEF;
    font: 13px/14px arial,tahoma,helvetica,sans-serif;

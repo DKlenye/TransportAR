@@ -2,13 +2,8 @@
 using System.Reflection;
 using System.Collections.Generic;
 using System.Web;
-using System.Text;
 using Kdn.Ext;
-using Kdn.Interfaces;
 using Kdn.Ext.data;
-using Kdn.CommonModels;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Kdn.Web.Handlers
 {
@@ -37,11 +32,9 @@ namespace Kdn.Web.Handlers
 
             context.Response.Write(ScriptReader.GetScripts(String.Format("{0}.{1}", BasePath, "Kdn")));
            
-                        
             try
             {
-                IUser user = User.GetCurrent(UserType);
-                context.Response.Write(String.Format("Kdn.User = {0};", JsonConvert.SerializeObject(user)));
+                context.Response.Write(String.Format("Kdn.User = {0};", GetUser()));
             }catch(Exception ex)
             {
                context.Response.Write(String.Format("Kdn.User = '{0}';", ex.Message));
@@ -52,13 +45,11 @@ namespace Kdn.Web.Handlers
         public virtual List<Model> getModels(){        
           return ModelConverter.ConvertAssembly(Assembly.GetExecutingAssembly());
         }
-
-        public virtual Type UserType
+              
+        
+        public virtual string GetUser()
         {
-            get
-            {
-                return typeof(User);
-            }
+            return "{}";
         }
 
 

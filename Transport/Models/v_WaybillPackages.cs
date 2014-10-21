@@ -41,7 +41,7 @@ namespace Transport.Models {
 
               var package = WaybillPackage.Find(this.PackageId);
               package.CloseDate = DateTime.Now;
-              package.CloseUserId = ((User)User.GetCurrent(typeof(User))).UserId;
+              package.CloseUserId = (User.GetCurrent()).UserId;
 
               package.SaveAndFlush();
 

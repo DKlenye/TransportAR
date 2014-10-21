@@ -80,7 +80,13 @@
                 },
                 {
                     header: 'Дата',
-                    xtype: 'datecolumn',
+                    renderer:function(v) {
+                        if (!v) return null;
+                        if (v.format("H:i") == "00:00") {
+                             return v.format("d.m.Y");
+                        }
+                        return v.format("d.m.Y H:i");
+                    },
                     dataIndex: 'RefuellingDate',
                     editor: {field:DateEditor},
                     width: 130,
@@ -94,8 +100,8 @@
                         if(!o) return o;
                         var store = Kdn.ModelFactory.getStore('Fuel'),
                            rec = store.getById(o);
-                        if(rec){
-                           return rec.data.FuelName
+                        if(rec) {
+                            return rec.data.FuelName;
                         }
                         return o;
                     },
