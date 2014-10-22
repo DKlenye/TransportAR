@@ -112,17 +112,17 @@ namespace Transport.Direct
             var d = JsonConvert.DeserializeObject<List<Driver>>(drivers.ToString());
             var driversCache = new List<WaybillDriver>();
             var car = (Car)Car.Find(waybill.Car.VehicleId);
-            foreach (var _driver in d)
+            foreach (var driver in d)
             {
                var wd = new WaybillDriver()
                {
                   WaybillId = waybill.WaybillId,
-                  Driver = _driver
+                  Driver = driver
                };
                wd.Save();
-               if (car.DriverId == _driver.DriverId)
+               if (car.DriverId == driver.DriverId)
                {
-                  waybill.ResponsibleDriver = _driver;
+                  waybill.ResponsibleDriver = driver;
                   waybill.Save();
                }
                driversCache.Add(wd);
@@ -192,11 +192,9 @@ namespace Transport.Direct
 
             }
 
-          WaybillTask task = null;
           if (norm != null)
           {
-
-              task = new WaybillTask()
+             var task = new WaybillTask()
               {
                   WaybillId = waybill.WaybillId,
                   TaskDepartureDate = waybill.DepartureDate,
@@ -207,7 +205,7 @@ namespace Transport.Direct
                   DstRoutPoint = _DstRoutePoint,
                   SrcRoutPoint = _SrcRoutePoint,
                   TrailerId = waybill.TrailerId,
-                  isTruck = waybill.Car.BodyTypeId == 18 || waybill.Car.BodyTypeId == 36
+                  isTruck = waybill.Car.isTruck()
               };
 
               task.Save();
@@ -340,9 +338,7 @@ namespace Transport.Direct
       [DirectMethod]
       [ParseAsJson] 
       public Temperature GetCurrentTemperature(JObject o) {
-         /*var direct = new Transport.Direct.Direct();
-         direct.ReplicateWeather(new JObject());*/
-           
+         
          var temp = Temperature.FindFirst(
             Order.Desc(Projections.Property<Temperature>(x=>x.key.Date)),
             Expression.Where<Temperature>(t =>  t.key.OwnerId == 1)

@@ -4,10 +4,10 @@ using Newtonsoft.Json.Linq;
 using Kdn.Direct;
 using Transport.Models;
 
-
 namespace Transport.Direct
 {
-   public partial class Direct:Kdn.Direct.Direct
+
+   public partial class Direct
     {
 
        [DirectMethod]

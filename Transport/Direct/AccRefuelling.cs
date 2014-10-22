@@ -1,82 +1,62 @@
 ﻿using System;
 using System.Collections.Generic;
 using Ext.Direct;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Kdn.Direct;
 using Transport.Models;
 
 namespace Transport.Direct
 {
-   public partial class Direct : Kdn.Direct.Direct {
 
-      [DirectMethod]
-      [ParseAsJson]
-      public DataSerializer AccRefuellingRead(JObject o) {
+    public class AccRefuellingReadParams 
+    {
+        public DateTime? period { get; set; }
+        public int? refuellingPlaceId { get; set; }
+        public int accounting { get; set; }
+    }
 
-         JToken p;
-         int month = 0, year = 0, refuellingPlaceId = 0, accountingId = 0;
+    public partial class Direct
+    {
+        [DirectMethod]
+        public DataSerializer AccRefuellingRead(AccRefuellingReadParams par)
+        {
 
-         if( o.TryGetValue("period", out p) && p.Value<DateTime?>() != null ) {
-            month = p.Value<DateTime>().Month;
-            year = p.Value<DateTime>().Year;
-         }
-         if( o.TryGetValue("refuellingPlaceId", out p) && p.Value<int?>() != null ) {
-            refuellingPlaceId = p.Value<int>();
-         }
+            var db = new PetaPoco.Database("db2");
+            var rez =
+                db.Query<Models.AccRefuelling>(
+                    "SELECT * FROM v_AccRefuelling where MONTH(RefuellingDate) = @0 and YEAR(RefuellingDate)= @1 and RefuellingPlaceId = @2 and AccountingId = @3",
+                    par.period == null ? (object) null : par.period.Value.Month,
+                    par.period == null ? (object) null : par.period.Value.Year,
+                    par.refuellingPlaceId,
+                    par.accounting
+                    );
 
-         if( o.TryGetValue("accounting", out p) && !String.IsNullOrEmpty(p.Value<string>()) ) {
-            accountingId = p.Value<int>();
-         }
+            return new DataSerializer(new List<AccRefuelling>(rez));
+        }
 
+        [DirectMethod]
+        [ParseAsJson]
+        public DataSerializer AccRefuellingUpdate(JObject o)
+        {
 
-         var db = new PetaPoco.Database("db2");
-         var rez = db.Query<Models.AccRefuelling>("SELECT * FROM v_AccRefuelling where MONTH(RefuellingDate) = @0 and YEAR(RefuellingDate)= @1 and RefuellingPlaceId = @2 and AccountingId = @3",
-              month,
-              year,
-              refuellingPlaceId,
-              accountingId
-            );
-                              
-         return new DataSerializer(new List<AccRefuelling>(rez));
-      }
+            var rezult = new List<object>();
+            var db = new PetaPoco.Database("db2");
 
+            foreach (var accRefuelling in GetModels<AccRefuelling>(o))
+            {
+                db.Execute(
+                    "Update VehicleRefuelling set CardNumber = @0, AccPeriod = @1, SheetId = @2, TrkId = @3, TankId = @4 where RefuellingId = @5",
+                    accRefuelling.CardNumber,
+                    accRefuelling.AccPeriod,
+                    accRefuelling.SheetId,
+                    accRefuelling.TrkId,
+                    accRefuelling.TankId,
+                    accRefuelling.RefuellingId
+                    );
 
-                                          
-
-      [DirectMethod]
-      [ParseAsJson]
-      public DataSerializer AccRefuellingUpdate(JObject o) {
-
-         JArray models = getModels(o);
-         List<object> rezult = new List<object>();
-
-         var db = new PetaPoco.Database("db2");
-
-         foreach( JObject model in models ) {
-            var AccRefuelling = JsonConvert.DeserializeObject<AccRefuelling>(model.ToString());
-
-            db.Execute("Update VehicleRefuelling set CardNumber = @0, AccPeriod = @1, SheetId = @2, TrkId = @3, TankId = @4 where RefuellingId = @5",               
-                  AccRefuelling.CardNumber,
-                  AccRefuelling.AccPeriod,
-                  AccRefuelling.SheetId,
-                  AccRefuelling.TrkId,
-                  AccRefuelling.TankId,
-                  AccRefuelling.RefuellingId               
-            );
-
-            rezult.Add(AccRefuelling);
-
-         }
-
-         return new DataSerializer(rezult);
-
-
-      }
-   }
-
-
-
-
-
+                rezult.Add(accRefuelling);
+            }
+            return new DataSerializer(rezult);
+        }
+    }
 }

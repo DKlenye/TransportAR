@@ -12,14 +12,16 @@ namespace Transport.Direct
 {
    public partial class Direct:Kdn.Direct.Direct
     {
+       public class VehicleDayInspectionParams
+       {
+           public DateTime Date { get; set; }
+       }
 
        [DirectMethod]
-       [ParseAsJson]
-       public DataSerializer VehicleDayInspectionRead(JObject o)
+       public DataSerializer VehicleDayInspectionRead(VehicleDayInspectionParams par)
        {
            JToken p;
-
-           var date = o["date"].Value<DateTime>();
+           
            var db = new PetaPoco.Database("db2");
 
            var hash = new Dictionary<int, VehicleDayInspection>();
@@ -46,7 +48,7 @@ namespace Transport.Direct
                       return i;
                    },
                    ";exec VehicleDayInspection @0",
-                   date
+                   par.Date
                    );
            }
            catch (Exception ex)
@@ -54,14 +56,6 @@ namespace Transport.Direct
                throw ex;
            }
 
-           /*
-           var requests = db.Fetch<VehicleOrderRequests>(";exec VehicleOrderRequestsSelect @0",date);
-                      
-           foreach (var r in requests)
-           {
-               if (hash.ContainsKey(r.VehicleOrderId))
-               hash[r.VehicleOrderId].Requests.Add(v_Request.Find(r.RequestId));
-           }*/
            
           return new DataSerializer(list);
 

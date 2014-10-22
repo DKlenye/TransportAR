@@ -47,10 +47,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\resources\NHibernate\CastleActiveRecord\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Ext.Direct, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\resources\Direct\Ext.Direct.dll</HintPath>
-    </Reference>
     <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\resources\NHibernate\Iesi.Collections.dll</HintPath>
@@ -1012,6 +1008,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\combo\MultiColumn.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ext.Direct\Ext.Direct.csproj">
+      <Project>{653B211D-FEFA-483B-A284-6431C8598ED4}</Project>
+      <Name>Ext.Direct</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

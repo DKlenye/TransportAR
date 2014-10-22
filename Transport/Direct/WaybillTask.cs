@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Ext.Direct;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Castle.ActiveRecord.Queries;
 using NHibernate.Criterion;
@@ -10,25 +9,21 @@ using Transport.Models;
 
 namespace Transport.Direct
 {
-   public partial class Direct:Kdn.Direct.Direct
+   public partial class Direct
     {
 
        [DirectMethod]
        [ParseAsJson]
        public DataSerializer WaybillTaskCreate(JObject o)
        {
-           JArray models = getModels(o);
-           List<object> rezult = new List<object>();
+           var rezult = new List<object>();
           
-           foreach (JObject model in models)
+           foreach (var task in GetModels<WaybillTask>(o) )
            {
-               var instance = JsonConvert.DeserializeObject<WaybillTask>(model.ToString());
-                             
-               instance.Save();
-                                                          
-               instance.CheckDefaultIncreases();
-               instance.CheckWinter();
-               rezult.Add(instance);
+               task.Save();
+               task.CheckDefaultIncreases();
+               task.CheckWinter();
+               rezult.Add(task);
            }
 
            return new DataSerializer(rezult);
@@ -39,13 +34,10 @@ namespace Transport.Direct
        [ParseAsJson]
        public DataSerializer WaybillTaskIncreasesUpdate(JObject o)
        {
+           var rezult = new List<object>();
 
-           List<object> rezult = new List<object>();
-           JArray models = getModels(o);
-
-           foreach (JObject model in models)
+           foreach (var task in GetModels<WaybillTask>(o))
            {
-               var task = JsonConvert.DeserializeObject<WaybillTask>(model.ToString());
                task.Save();
 
                var waybillstate = new ScalarQuery<short>(typeof(Waybill),
@@ -56,7 +48,7 @@ namespace Transport.Direct
 
                if (waybillstate == 1)
                {
-                   var incr = WaybillTaskIncrease.FindAll(Expression.Where<WaybillTaskIncrease>(x => x.key.TaskId == task.TaskId));
+                   var incr = WaybillTaskIncrease.FindAll(Restrictions.Where<WaybillTaskIncrease>(x => x.key.TaskId == task.TaskId));
 
                    //Убрать все надбавки ??
 
@@ -65,10 +57,7 @@ namespace Transport.Direct
 
                    if (increases != null)
                    {
-                       foreach (var i in increases)
-                       {
-                           increaseList.Add(i);
-                       }
+                       increaseList.AddRange(increases);
                    }
 
                    foreach (var i in incr)
@@ -95,12 +84,10 @@ namespace Transport.Direct
        [ParseAsJson]
        public DataSerializer WaybillTaskUpdate(JObject o) {
 
-          List<object> rezult = new List<object>();
-          JArray models = getModels(o);
+          var rezult = new List<object>();
 
-          foreach (JObject model in models)
+          foreach (var task in GetModels<WaybillTask>(o))
           {
-             var task = JsonConvert.DeserializeObject<WaybillTask>(model.ToString());
              task.Save();
 
              var waybillstate = new ScalarQuery<short>(typeof(Waybill),
@@ -131,13 +118,10 @@ namespace Transport.Direct
        [ParseAsJson]
        public DataSerializer WaybillTaskConsumptionUpdate(JObject o)
        {
+          var rezult = new List<object>();
 
-          List<object> rezult = new List<object>();
-          JArray models = getModels(o);
-
-          foreach (JObject model in models)
+          foreach (var task in GetModels<WaybillTask>(o))
           {
-             var task = JsonConvert.DeserializeObject<WaybillTask>(model.ToString());
              var waybillstate = new ScalarQuery<short>(typeof(Waybill),
                 @" SELECT w.WaybillState FROM Waybill as w
                      WHERE w.WaybillId = ?",
@@ -156,19 +140,16 @@ namespace Transport.Direct
           return new DataSerializer(rezult);
        }
 
-       
 
        [DirectMethod]
        [ParseAsJson]
        public DataSerializer WaybillTaskNormUpdate(JObject o)
        {
 
-           List<object> rezult = new List<object>();
-           JArray models = getModels(o);
+         var rezult = new List<object>();
 
-           foreach (JObject model in models)
+           foreach (var task in GetModels<WaybillTask>(o))
            {
-               var task = JsonConvert.DeserializeObject<WaybillTask>(model.ToString());
                task.Save();
 
                var waybillstate = new ScalarQuery<short>(typeof(Waybill),
@@ -180,7 +161,7 @@ namespace Transport.Direct
                if (waybillstate == 1)
                {
 
-                   var incr = WaybillTaskIncrease.FindAll(Expression.Where<WaybillTaskIncrease>(x => x.key.TaskId == task.TaskId));
+                   var incr = WaybillTaskIncrease.FindAll(Restrictions.Where<WaybillTaskIncrease>(x => x.key.TaskId == task.TaskId));
 
                    //Убрать все надбавки ??
 
@@ -189,10 +170,7 @@ namespace Transport.Direct
 
                    if (increases != null)
                    {
-                       foreach (var i in increases)
-                       {
-                           increaseList.Add(i);
-                       }
+                       increaseList.AddRange(increases);
                    }
 
                    foreach (var i in incr)
@@ -221,13 +199,10 @@ namespace Transport.Direct
        [ParseAsJson]
        public DataSerializer WaybillTaskDateUpdate(JObject o)
        {
+           var rezult = new List<object>();
 
-           List<object> rezult = new List<object>();
-           JArray models = getModels(o);
-
-           foreach (JObject model in models)
+           foreach (var task in GetModels<WaybillTask>(o))
            {
-               var task = JsonConvert.DeserializeObject<WaybillTask>(model.ToString());
                task.Save();
 
                var waybillstate = new ScalarQuery<short>(typeof(Waybill),

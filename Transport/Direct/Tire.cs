@@ -31,20 +31,10 @@ namespace Transport.Direct
         public DataSerializer TireCardRead(JObject o)
         {
 
-            JToken p;
-            int id = 0;
-
-            p = o["filter"];
-
-            id = p["TireId"].Value<int>();
+            var id = o["filter"]["TireId"].Value<int>();
 
             var db = new PetaPoco.Database("db2");
-            var rez = db.Query<Models.BatteryCard>(";EXEC TireCard @TireId",
-                 new
-                 {
-                     TireId = id
-                 }
-               );
+            var rez = db.Query<Models.BatteryCard>(";EXEC TireCard @0", id);
 
             return new DataSerializer(new List<BatteryCard>(rez));
         }
@@ -108,17 +98,14 @@ namespace Transport.Direct
             var idList = JArray.Parse(p["movings"].ToString());
             var data = new Dictionary<int, JObject>();
             var db = new PetaPoco.Database("db2");
-            
-            CollectionExtensions.ForEach(idList, id=>
+
+            CollectionExtensions.ForEach(idList, id =>
             {
                 var moving = TireMoving.Find(id.Value<int>());
-                var rez = db.Query<TireWorkVM>(";EXEC VehicleTireWork_Select @TireId",
-                     new
-                     {
-                         TireId = moving.TireId
-                     }
-                   ).Where(x => x.TireMovingId == id.Value<int>());
-                
+                var rez =
+                    db.Query<TireWorkVM>(";EXEC VehicleTireWork_Select @0", moving.TireId)
+                        .Where(x => x.TireMovingId == id.Value<int>());
+
                 CollectionExtensions.ForEach(rez, r =>
                 {
                     var period = r.y*100 + r.m;
@@ -129,8 +116,8 @@ namespace Transport.Direct
                     }
                     else
                     {
-                        record = new JObject() { new JProperty("period", period) };
-                        data.Add(period,record);
+                        record = new JObject() {new JProperty("period", period)};
+                        data.Add(period, record);
                     }
 
                     record[moving.TireMovingId.ToString()] = r.work;
@@ -146,30 +133,32 @@ namespace Transport.Direct
             datList.Sort(delegate(JObject x, JObject y)
             {
                 if (x == null || y == null) return 0;
-                else
-                {
-                    var _x = x["period"].Value<int>();
-                    var _y = y["period"].Value<int>();
-                    return _x.CompareTo(_y);
-                }
+
+                var _x = x["period"].Value<int>();
+                var _y = y["period"].Value<int>();
+                return _x.CompareTo(_y);
+
             });
 
             return new DataSerializer(datList);
         }
 
-        [DirectMethod]
-        [ParseAsJson]
-        public DataSerializer UpdateTireWork(JObject o)
+        public class UpdateTireWorkParam
         {
-            var TireMovingId = o["TireMovingId"].Value<int>();
-            var Period = o["period"].Value<int>();
-            var Km = o["Km"].Value<int?>();
+            public int TireMovingId { get; set; }
+            public int period { get; set; }
+            public int? Km { get; set; }
+        }
 
+
+        [DirectMethod]
+        public DataSerializer UpdateTireWork(UpdateTireWorkParam par)
+        {
             var work = TireWork.FindFirst(
-                  Expression.Where<TireWork>(
-                      x => x.key.Period==Period && x.key.TireMovingId==TireMovingId));
+                  Restrictions.Where<TireWork>(
+                      x => x.key.Period==par.period && x.key.TireMovingId==par.TireMovingId));
 
-            if (Km == null)
+            if (par.Km == null)
             {
                if (work != null)
                 {
@@ -183,14 +172,14 @@ namespace Transport.Direct
                     work = new TireWork()
                     {
                         IsAutomatic = false,
-                        Km = Km.Value,
-                        key = new TireWorkKey() {Period = Period, TireMovingId = TireMovingId}
+                        Km = par.Km.Value,
+                        key = new TireWorkKey() {Period = par.period, TireMovingId = par.TireMovingId}
                     };
                     work.CreateAndFlush();
                 }
                 else
                 {
-                    work.Km = Km.Value;
+                    work.Km = par.Km.Value;
                     work.SaveAndFlush();
                 }
             }

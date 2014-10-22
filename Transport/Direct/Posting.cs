@@ -89,11 +89,7 @@ namespace Transport.Direct
          var db = new PetaPoco.Database("db2");
 
          List<string> data = db.Fetch<string>(";EXEC AccPosting_XML @month,@year,@accountingId",
-                new {
-                   month = month,
-                   year = year,
-                   accountingId = accountingId
-                }
+                new {month,year,accountingId}
              );
 
 
@@ -108,12 +104,15 @@ namespace Transport.Direct
 
          string nameFile = "";
 
+
+         //--todo Убрать нахрен хардкод!!!
          if( accountingId == 1 ) {
             nameFile = "prov0601";
          }
          else if( accountingId == 2 ) {
             nameFile = "prov0646";
          }
+         //--
                   
          string message = _sendProv(_data, nameFile, year.ToString(), month.ToString());
          if( message == "" ) return "Выполнено успешно";

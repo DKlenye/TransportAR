@@ -55,6 +55,12 @@ namespace Transport.Models {
          this.OwnerId = OwnerId;
       }
       #endregion
+
+       public bool isTruck()
+       {
+           return BodyTypeId == 18 || BodyTypeId == 36;
+       }
+
    }
    
    [Model, ActiveRecord(DiscriminatorValue = "1")]

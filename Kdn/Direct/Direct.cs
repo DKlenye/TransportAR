@@ -40,6 +40,11 @@ namespace Kdn.Direct
             return array;
         }
 
+        protected T[] GetModels<T>(JObject o)
+        {
+            return JsonConvert.DeserializeObject<T[]>(getModels(o).ToString());
+        }
+
 
         public virtual DataSerializer DataAction(JObject o, Action<object> action)
         {

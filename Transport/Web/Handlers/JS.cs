@@ -25,16 +25,6 @@ namespace Transport.Web.Handlers
             {
                context.Response.Write(ExtFunction.create(JObject.FromObject(m)));
             }
-           /*
-            context.Response.Write(String.Format
-                ("Kdn.ModelFactory={0};",
-                    ExtFunction.create(
-                        JObject.FromObject(
-                            new Kdn.Ext.data.ModelFactory(models)
-                        )
-                    )
-                )
-            );*/
 
             ScriptReader.assembly = Assembly.GetExecutingAssembly();
 

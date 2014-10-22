@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
-using System.Web;
 using System.Reflection;
-using System.Collections;
 using System.Collections.Generic;
 using Castle.Core;
 using Ext.Direct;
@@ -12,11 +10,8 @@ using Newtonsoft.Json.Linq;
 using Castle.ActiveRecord;
 using NHibernate;
 using NHibernate.Cfg;
-using NHibernate.Hql;
-using NHibernate.Criterion.Lambda;
 using NHibernate.Criterion;
 using Kdn.Direct;
-using NHibernate.Mapping;
 using Transport.Models;
 using Transport.OtherModels.kdr;
 using Transport.OtherModels.dbf;
@@ -24,7 +19,6 @@ using Transport.OtherModels.kdrPolymir;
 using Farm = Transport.OtherModels.farm;
 using Tdbf = Transport.OtherModels.tdbf;
 using dbf = Transport.OtherModels.dbf;
-using Castle.ActiveRecord.Queries;
 
 namespace Transport.Direct {
 
@@ -809,194 +803,7 @@ namespace Transport.Direct {
          return "";
       }
 
-       /*
-      [DirectMethod]
-      [ParseAsJson]
-      public string ReplicatePolymirTransport(JObject o) {
-
-         var dbfSession = buildCustomSession(DBFSettings);
-         var PolymirVehicles = dbfSession.CreateQuery("from PolymirTransport where GAR_N=44").List<PolymirTransport>();
-
-         int departmentId = 27;//Цех 17 полимир.
-
-         foreach( var pVehicle in PolymirVehicles ) {
-            var tip = int.Parse(pVehicle.TIP);
-
-            GroupAcc group = GroupAcc.FindFirst(Expression.Where<GroupAcc>(x => x.ReplicationId == tip && x.ReplicationSource == ReplicationSource.dbfPolymir));
-
-            if( tip == 30 || tip == 31 )//Прицепы
-            {
-               var trailer = FullTrailer.FindFirst(Expression.Where<Trailer>(x => x.ReplicationId == pVehicle.GAR_N && x.ReplicationSource == ReplicationSource.dbfPolymir));
-
-               if( trailer == null ) trailer = new FullTrailer();
-
-               trailer.ReplicationSource = ReplicationSource.dbfPolymir;
-               trailer.ReplicationId = pVehicle.GAR_N;
-               trailer.PolymirSHU = pVehicle.SHU;
-               trailer.GarageNumber = pVehicle.GAR_N;
-               trailer.OwnerId = 1;
-               trailer.Model = pVehicle.NAIMM.Trim();
-               trailer.RegistrationNumber = pVehicle.GOSN.Trim();
-               trailer.InventoryNumber = pVehicle.INVN.Trim();
-               trailer.WriteOffDate = DateTime.Parse(pVehicle.DS) < DateTime.Parse("01.01.1900") ? null : (DateTime?)DateTime.Parse(pVehicle.DS);
-               trailer.WriteOffDate = DateTime.Parse(pVehicle.DS);
-               trailer.GroupAccId = ( group == null ) ? null : (int?)group.GroupAccId;
-               trailer.DepartmentId = departmentId;
-               trailer.CapacityTonns = pVehicle.GR_POD > 0 ? (decimal?)pVehicle.GR_POD : null;
-               trailer.SaveAndFlush();
-            }
-
-            else {
-
-               var car = (FullCar)FullCar.FindFirst(Expression.Where<FullCar>(x => x.ReplicationId == pVehicle.GAR_N && x.ReplicationSource == ReplicationSource.dbfPolymir));
-               if( car == null ) car = new FullCar();
-
-               car.ReplicationSource = ReplicationSource.dbfPolymir;
-               car.ReplicationId = pVehicle.GAR_N;
-               car.PolymirSHU = pVehicle.SHU;
-               car.GarageNumber = pVehicle.GAR_N;
-               car.OwnerId = 1;
-               car.Model = pVehicle.NAIMM.Trim();
-               car.RegistrationNumber = pVehicle.GOSN.Trim();
-               car.InventoryNumber = pVehicle.INVN.Trim();
-               car.InputDate = DateTime.Parse(pVehicle.DV);
-               car.WriteOffDate = DateTime.Parse(pVehicle.DS) < DateTime.Parse("01.01.1900") ? null : (DateTime?)DateTime.Parse(pVehicle.DS);
-               car.GroupAccId = ( group == null ) ? null : (int?)group.GroupAccId;
-               car.DepartmentId = departmentId;
-               car.CapacityTonns = pVehicle.GR_POD > 0 ? (decimal?)pVehicle.GR_POD : null;
-
-               car.SaveAndFlush();
-
-               BaseVehicle V = BaseVehicle.Find(car.VehicleId);
-
-               int FuelId = 0;
-
-               if( pVehicle.SHG == "Б" ) {
-                  if( PolymirFuelMap.ContainsKey(pVehicle.TIP_SHG.Trim()) ) {
-                     FuelId = PolymirFuelMap[pVehicle.TIP_SHG.Trim()];
-                  }
-               }
-               else if( pVehicle.SHG == "Д" ) {
-                  FuelId = 3;
-               }
-
-
-               foreach( var prop in pVehicle.GetType().GetProperties() ) {
-
-                  if( prop.Name == "NOR_OTOP" && pVehicle.NOR_OTOPZ > 0 ) {
-                     continue;
-                  }
-
-                  #region Надбавки
-                  if( Attribute.GetCustomAttribute(prop, typeof(PolymirTransport.isIncreaseAttribute)) != null ) {
-
-                     var val = (decimal)prop.GetValue(pVehicle, null);
-                     if( prop.Name == "TRASS" ) val = 0 - val;
-
-                     var incr = Increase.GetPolymirIncrease(prop.Name);
-
-                     if( incr != null && val != 0 && ( val * 100 ) != incr.Prcn ) {
-                        var vehicleincrease = VehicleIncrease.FindFirst(Expression.Where<VehicleIncrease>(x => x.Car.VehicleId == car.VehicleId && x.IncreaseId == incr.IncreaseId));
-                        if( vehicleincrease == null ) vehicleincrease = new VehicleIncrease();
-
-                        vehicleincrease.IncreaseId = incr.IncreaseId;
-                        vehicleincrease.Car = V;
-                        vehicleincrease.Prcn = (short)( val * 100 );
-
-                        vehicleincrease.SaveAndFlush();
-                     }
-                  }
-
-                  #endregion
-
-                  #region Нормы
-                  if( Attribute.GetCustomAttribute(prop, typeof(PolymirTransport.isWorkAttribute)) != null ) {
-
-                     decimal val = (decimal)prop.GetValue(pVehicle, null);
-                     var work = WorkType.GetPolymirWork(prop.Name);
-
-                     if( work != null && val > 0 ) {
-                        var norm = Norm.FindFirst(Expression.Where<Norm>(x => x.Car.VehicleId == car.VehicleId && x.WorkTypeId == work.WorkTypeId));
-                        if( norm == null ) norm = new Norm();
-
-                        var workUnit = WorkUnit.Find(work.WorkUnitId);
-
-                        norm.Car = V;
-                        norm.WorkTypeId = work.WorkTypeId;
-                        norm.isMain = ( prop.Name == "NOR_GOR_L" || prop.Name == "NOR_MC_L" );
-                        norm.CounterId = workUnit.CounterId;
-
-                        //если есть NOR_OTOPZ, то основная норма транспорта на газу
-                        if( norm.isMain && pVehicle.NOR_OTOPZ > 0 ) {
-                           FuelId = 5;
-                        }
-                        if( FuelId > 0 && !norm.NormFuels.Contains(FuelId) ) {
-                           norm.NormFuels.Add(FuelId);
-                        }
-
-                        //кондиционер проставляется с нормой постоянно
-                        if( pVehicle.KOND > 0 && norm.isMain ) {
-                           var increase = Increase.GetPolymirIncrease("KOND");
-                           if( !norm.NormIncreases.Contains(increase.IncreaseId) ) {
-                              norm.NormIncreases.Add(increase.IncreaseId);
-                           }
-                        }
-
-                        norm.SaveAndFlush();
-
-                        var cons = NormConsumption.FindFirst(Expression.Where<NormConsumption>(x => x.Consumption == val && x.NormId == norm.NormId));
-                        if( cons == null ) cons = new NormConsumption();
-
-                        cons.NormId = norm.NormId;
-                        cons.Consumption = val;
-                        cons.ConsumptionStartDate = DateTime.Parse("01.01.2013");
-
-                        cons.SaveAndFlush();
-
-                     }
-                  }
-                  #endregion
-
-               }
-
-               //Водитель
-               if( pVehicle.TABN > 0 ) {
-
-                  DetachedCriteria c = DetachedCriteria.For<Driver>()
-                     .CreateAlias("Employee", "Employee")
-                     .Add(Expression.Where<Driver>(x => x.Employee.DSC == 2 && x.Employee.EmployeeNumber == pVehicle.TABN.ToString()));
-
-                  var driver = Driver.FindFirst(c);
-
-                  if( driver != null ) {
-
-                     var vd = VehicleDriver.FindFirst(Expression.Where<VehicleDriver>(x => x.Car.VehicleId == car.VehicleId && x.Driver == driver));
-                     if( vd == null ) {
-                        vd = new VehicleDriver();
-                     }
-
-                     vd.Driver = driver;
-                     vd.Car = V;
-
-                     vd.SaveAndFlush();
-
-                     car.ResponsibleDriver = driver;
-                     car.SaveAndFlush();
-                  }
-               }
-            }
-
-         }
-
-
-         return "";
-      }
-       */
-      
-
-
-
-      #endregion
+            #endregion
 
 
       #region подкачки dbsrv2

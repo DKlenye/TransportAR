@@ -5,18 +5,8 @@ using System.Reflection;
 using System.Collections;
 using System.Collections.Specialized;
 using System.Collections.Generic;
-using System.Data;
-using System.Web;
-using System.Web.Security;
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using NHibernate;
-using NHibernate.Cfg;
 using NHibernate.Criterion;
 using Transport.Models;
-using Castle.ActiveRecord;
 
 
 
@@ -25,7 +15,6 @@ namespace Transport.Web
 
     public class WaybillTpl : System.Web.UI.Page
     {
-
         protected Waybill waybill;
         protected WaybillTask task; 
         protected Vehicle vehicle;

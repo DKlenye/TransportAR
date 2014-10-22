@@ -47,10 +47,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\resources\NHibernate\CastleActiveRecord\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Ext.Direct, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\resources\Direct\Ext.Direct.dll</HintPath>
-    </Reference>
     <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\resources\NHibernate\Iesi.Collections.dll</HintPath>
@@ -78,7 +74,6 @@
       <HintPath>..\resources\SQLite\System.Data.SQLite.DLL</HintPath>
     </Reference>
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -96,7 +91,6 @@
     <Compile Include="Ext\data\Model.cs" />
     <Compile Include="Ext\ExtFunction.cs" />
     <Compile Include="Ext\ModelConverter.cs" />
-    <Compile Include="Interfaces\IUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLite\SqliteAsc.cs" />
     <Compile Include="Web\Handlers\CSS.cs" />
@@ -131,8 +125,8 @@
     <EmbeddedResource Include="CSS\Kdn\superboxselect.css" />
     <EmbeddedResource Include="JS\Ext\ux\SuperBoxSelect.js" />
     <Content Include="JS\Ext\ux\ux-all-debug.js" />
-    <EmbeddedResource Include="JS\Kdn\app\fm.min.js" />
-    <EmbeddedResource Include="JS\Kdn\app\fm.websync.min.js" />
+    <EmbeddedResource Include="JS\Ext\ux\fm.min.js" />
+    <EmbeddedResource Include="JS\Ext\ux\fm.websync.min.js" />
     <EmbeddedResource Include="JS\Kdn\form\DateTimeField.js" />
     <EmbeddedResource Include="JS\Kdn\editor\FullTimeField.js" />
     <EmbeddedResource Include="JS\Kdn\view\Report.js" />
@@ -220,6 +214,12 @@
     <EmbeddedResource Include="CSS\Kdn\Menu.css" />
     <EmbeddedResource Include="JS\Kdn\view\User.js" />
     <EmbeddedResource Include="JS\Kdn\view\UserGroup.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ext.Direct\Ext.Direct.csproj">
+      <Project>{653B211D-FEFA-483B-A284-6431C8598ED4}</Project>
+      <Name>Ext.Direct</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

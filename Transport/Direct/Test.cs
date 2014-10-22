@@ -1,8 +1,5 @@
-﻿using System;
+﻿using System.Globalization;
 using Ext.Direct;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-
 
 namespace Transport.Direct
 {
@@ -10,10 +7,9 @@ namespace Transport.Direct
     {
 
         [DirectMethod]
-        [ParseAsJson]
-        public string getDate(JObject o)
+        public string Calc(int x, int y )
         {
-            return JsonConvert.SerializeObject(DateTime.Now);
+            return (x*y).ToString(CultureInfo.InvariantCulture);
         }
 
 

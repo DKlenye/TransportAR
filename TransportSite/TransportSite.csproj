@@ -46,10 +46,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\resources\NHibernate\CastleActiveRecord\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Ext.Direct, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\resources\Direct\Ext.Direct.dll</HintPath>
-    </Reference>
     <Reference Include="FM, Version=2.5.0.0, Culture=neutral, PublicKeyToken=be2ad24fd77899bf, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Downloads\WebSync.4.Community\Libraries\DotNet35\FM.dll</HintPath>
@@ -1084,7 +1080,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>1409</DevelopmentServerPort>
+          <DevelopmentServerPort>23141</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
