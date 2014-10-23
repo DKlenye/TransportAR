@@ -371,145 +371,7 @@ namespace Transport.Direct {
          {7,43}
       };
 
-       /*
-      [DirectMethod]
-      [ParseAsJson]
-      public string ReplicateOtherRefuelling(JObject o) {
-
-         ISession tdbfSession = buildCustomSession(TDBFSettings);
-         var otherRefuelling = tdbfSession.QueryOver<Tdbf.OtherRefuelling>().Where(x=>x.refuellingDate>DateTime.Now.AddMonths(-3)).OrderBy(x => x.recordId).Asc.List();
-         int counter = 0;
-
-         using( new SessionScope(FlushAction.Never) ) {
-
-            foreach( var rec in otherRefuelling ) {
-
-               if( dbsrv2TOdb2FuelMap.ContainsKey(rec.fuelId) ) {
-
-                  var employee = Employee.FindFirst(Expression.Where<Employee>(x => x.id_men == rec.personId));
-                  if( employee != null ) {
-
-                     var refuelling = Refuelling.FindFirst(Expression.Where<Refuelling>(x => x.ReplicationId == rec.recordId && x.ReplicationSource == ReplicationSource.dbsrv2));
-                     if( refuelling == null ) refuelling = new Refuelling();
-
-                     refuelling.ReplicationSource = ReplicationSource.dbsrv2;
-                     refuelling.ReplicationId = rec.recordId;
-                     refuelling.EmployeeId = employee.EmployeeId;
-                     refuelling.FuelId = dbsrv2TOdb2FuelMap[rec.fuelId];
-                     refuelling.Quantity = rec.quantity;
-                     refuelling.RefuellingDate = rec.refuellingDate;
-                     refuelling.SheetNumber = rec.oSheetNumber;
-
-                     refuelling.Save();
-                  }
-               }
-
-               counter++; if( counter % 500 == 0 ) SessionScope.Current.Flush();
-
-            }
-            SessionScope.Current.Flush();
-         }
-
-         return "";
-      }
-       */
-
-       /*
-      [DirectMethod]
-      [ParseAsJson]
-      public string ReplicateDB2Refuelling(JObject o) {
-
-
-         var sheets = waybillsRefuellingSheets.FindAll(Expression.Where<waybillsRefuellingSheets>(x => x.refuellingDate > DateTime.Now.AddDays(-1) && x.RefuellingPlaceId == 6));
-
-
-         foreach( var s in sheets ) {
-            var f = Tdbf.waybillsRefuellingSheets.Exists<int>(s.sheetNumber);
-
-            if( !f && db2TOdbsrv2FuelMap.ContainsKey(s.fuelId) ) {
-               var _sheet = new Tdbf.waybillsRefuellingSheets() {
-                  fuelId = db2TOdbsrv2FuelMap[s.fuelId],
-                  refuellingDate = s.refuellingDate,
-                  sheetNumber = s.sheetNumber,
-                  sheetState = s.sheetState,
-                  groupAccId = s.groupAccId 
-               };
-               _sheet.CreateAndFlush();
-            }
-
-         }
-        
-
-
-         var refuelling = VehicleRefuelling.FindAll(Expression.Where<VehicleRefuelling>(x => x.RefuellingDate > DateTime.Now.AddDays(-1) && x.RefuellingPlaceId == 6));
-
-
-         foreach( var r in refuelling ) {
-
-            var f = Tdbf.waybillsRefuelling.FindFirst(Expression.Where<Tdbf.waybillsRefuelling>(x => x.correctionId == r.RefuellingId ));
-
-            int GarageNumber = 0;
-
-            if( r.VehicleId != null ) {
-
-                  GarageNumber = new ScalarQuery<int>(typeof(Vehicle),
-                          @" SELECT c.GarageNumber FROM Car as c
-                     WHERE c.VehicleId = ?",
-                          r.VehicleId
-                       ).Execute();
-               
-            }
-
-
-            if( f == null ) {
-               f = new Tdbf.waybillsRefuelling() {
-                  correctionId = r.RefuellingId
-               };
-            }
-
-            f.sheetNumber = r.SheetNumber;
-            f.refuellingDate = r.RefuellingDate;
-            f.ownerId = 1;
-            f.waybillNumber = r.WaybillId.Value;
-            f.garageNumber = GarageNumber;
-            f.fuelId = db2TOdbsrv2FuelMap[r.FuelId];
-            f.refuellingId = 0;
-            f.quantity = r.Quantity;
-            try
-            {
-                f.SaveAndFlush();
-            }
-             catch(Exception ex){
-                var z = 1;
-                throw ex;
-             }
-
-         }
-                  
-         var _refuelling = Tdbf.waybillsRefuelling.FindAll(Expression.Where<Tdbf.waybillsRefuelling>(x => x.refuellingDate > DateTime.Now.AddDays(-1) && x.refuellingId == 0));
-
-
-         foreach( var _r in _refuelling ) {
-
-            if( _r.correctionId != null ) {
-               if( !VehicleRefuelling.Exists<int>(_r.correctionId.Value) ) {
-                  _r.DeleteAndFlush();
-               }
-            }
-         }
-
-
-         SessionScope.Current.Flush();
-
-
-         return "";
-
-      }
-       */
-
-
-
-      [DirectMethod]
+      
       [ParseAsJson]
       public string ReplicateWaybillType(JObject o) {
          ISession tdbfSession = buildCustomSession(TDBFSettings);
@@ -528,7 +390,6 @@ namespace Transport.Direct {
          return "";
       }
 
-      [DirectMethod]
       [ParseAsJson]
       public string ReplicateSchedule(JObject o) {
 
@@ -550,7 +411,6 @@ namespace Transport.Direct {
 
       }
 
-      [DirectMethod]
       [ParseAsJson]
       public string ReplicateDepartment(JObject o) {
 
@@ -582,7 +442,6 @@ namespace Transport.Direct {
          return "";
       }
 
-      [DirectMethod]
       [ParseAsJson]
       public string ReplicateCustomer(JObject o) {
 
@@ -654,7 +513,6 @@ namespace Transport.Direct {
 
       }
 
-      [DirectMethod]
       [ParseAsJson]
       public string ReplicateTransportFacilities(JObject o) {
 
@@ -853,7 +711,6 @@ namespace Transport.Direct {
          return "";
       }
 
-      [DirectMethod]
       [ParseAsJson]
       public string ReplicateTransportTrailers(JObject o) {
 
@@ -905,7 +762,6 @@ namespace Transport.Direct {
          return "";
       }
 
-      [DirectMethod]
       [ParseAsJson]
       public string ReplicateGroupAcc(JObject o) {
 
@@ -939,7 +795,6 @@ namespace Transport.Direct {
          return "";
       }
 
-      [DirectMethod]
       [ParseAsJson]
       public string ReplicateIncreases(JObject o) {
 
@@ -974,8 +829,6 @@ namespace Transport.Direct {
 
       }
 
-
-      [DirectMethod]
       [ParseAsJson]
       public string ReplicateRefuellingPlace(JObject o) {
 
@@ -999,7 +852,6 @@ namespace Transport.Direct {
 
       }
 
-      [DirectMethod]
       [ParseAsJson]
       public string ReplicateWaybills(JObject o) {
 
@@ -1027,9 +879,7 @@ namespace Transport.Direct {
          return "";
 
       }
-
       
-      [DirectMethod]
       [ParseAsJson]
       public string ReplicateWaybill(JObject o) {
 

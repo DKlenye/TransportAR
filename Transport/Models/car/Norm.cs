@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Castle.ActiveRecord;
-using Castle.ActiveRecord.Queries;
 using Kdn.Ext.Attributes;
 using NHibernate.Criterion;
 using Iesi.Collections.Generic;
-
 
 namespace Transport.Models {
 
@@ -13,10 +11,8 @@ namespace Transport.Models {
     public class Norm : ActiveRecordBase<Norm>, Interfaces.IOwnered
     {
 
-
         public Norm()
         {
-            //NormConsumption = new SortedSet<NormConsumption>();
             NormFuels = new List<int>();
         }
 
@@ -57,15 +53,7 @@ namespace Transport.Models {
 
         [AllowBlank, HasMany(Table = "_NormFuels", Element = "FuelId", ColumnKey = "NormId")]
         public ICollection<int> NormFuels { get; set; }
-
-        /*
-        [AllowBlank,
-         HasMany(Table = "NormConsumption", ColumnKey = "NormId", OrderBy = "ConsumptionStartDate DESC", Inverse = true,
-             Cascade = ManyRelationCascadeEnum.Delete, Fetch = FetchEnum.SubSelect)]
-        public ISet<NormConsumption> NormConsumption { get; set; }
-
-         * */
-
+        
         #region Owner
 
         public void setOwner(int OwnerId)
@@ -119,22 +107,4 @@ namespace Transport.Models {
       public WorkType WorkType { get; set; }
    }
    
-    /*
-   [Model,ActiveRecord]
-   public class NormConsumption : ActiveRecordBase<NormConsumption>,IComparable<NormConsumption> {
-      [IdProperty,PrimaryKey]
-      public int RecId { get; set; }
-      [Property(UniqueKey = "consumption_idx")]
-      public int NormId { get; set; }
-      [Property(ColumnType="Date",UniqueKey="consumption_idx")]
-      public DateTime ConsumptionStartDate { get; set; }
-      [Property]
-      public decimal Consumption { get; set; }
-
-      public int CompareTo(NormConsumption norm) {
-         return DateTime.Compare(norm.ConsumptionStartDate, ConsumptionStartDate);
-      }
-
-   }
-    */
 }
