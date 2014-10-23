@@ -128,6 +128,7 @@
     <EmbeddedResource Include="JS\Ext\ext-all.js" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="JS\Kdn\Printer.js" />
     <EmbeddedResource Include="JS\Ext\ux\ext-lang-ru.js" />
     <EmbeddedResource Include="JS\Ext\ux\slidingtabs.js" />
     <EmbeddedResource Include="CSS\Kdn\ChromeFix.css" />

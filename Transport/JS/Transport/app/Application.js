@@ -86,37 +86,8 @@
     },
 
 
-    printWaybillTpl: function(url)
-    {
-        var URL = Ext.urlAppend("print/" + url + ".aspx", Ext.urlEncode({ WaybillId: 0 }));
-
-        Ext.Ajax.request({
-            url: URL,
-            method: 'GET',
-            success: function(e)
-            {
-                var win = window.open('', 'printer', 'menubar=0,location=0,resizable=no,scrollbars=no,status=0,width=' + screen.width + ',height=' + screen.height);
-                win.document.write(e.responseText);
-                win.document.close();
-                function CheckWindowState()
-                {
-                    if (win.document.readyState == "complete")
-                    {
-                        win.close();
-                    }
-                    else
-                    {
-                        CheckWindowState.defer(500);
-                    }
-                }
-                win.print();
-                CheckWindowState();
-            },
-            failure: function(e) {
-                Ext.Msg.show({ width: 800, title: 'Ошибка', buttons: Ext.Msg.OK, msg: e.responseText });
-            }
-        });
-        
+    printWaybillTpl: function(url) {
+        Kdn.Printer.printWaybill(url);
     }
 
 

@@ -1065,12 +1065,6 @@
     },
     
     afterClose:function(e){
-      /*
-      this.waybill = e;
-      this.waybillproperty.setData(e);
-      this.getEl().addClass('createWaybill');
-      this.setNavigation();
-      */
       this.waybillId = 0;
       this.loadWaybill();
     },
@@ -1132,39 +1126,14 @@
    
       var id = this.waybillproperty.getSource()['WaybillTypeId'];
       
-      
-	   if (!id){
-	      Ext.Msg.alert('','Не выбран бланк путевого листа');
-	   return;
-	   };
-      
-      var url = Kdn.ModelFactory.getStore('WaybillType').getById(id).get('UrlTemplate');
-      var URL = Ext.urlAppend("print/"+url+".aspx",Ext.urlEncode({WaybillId:this.waybillId}));
-	              
-      Ext.Ajax.request({
-         url: URL,
-         method: 'GET',
-         success: function(e) {
-            var win = window.open('', 'printer', 'menubar=0,location=0,resizable=no,scrollbars=no,status=0,width='+screen.width+',height='+screen.height);
-               win.document.write(e.responseText);
-               win.document.close();
-	            function CheckWindowState() {
-                  if (win.document.readyState == "complete") {
-                     win.close();
-                  }
-                  else {
-                     CheckWindowState.defer(700);
-                  }
-               }
+	  if (!id){
+	     Ext.Msg.alert('','Не выбран бланк путевого листа');
+	  return;
+	  };
 
-               setTimeout(function() { win.print(); }, 100);
-               setTimeout(function() { CheckWindowState() ; }, 100);
-         },
-         failure: function(e) {
-            Ext.Msg.show({ width: 800, title: 'Ошибка', buttons: Ext.Msg.OK, msg: e.responseText })
-         }
-      });
-      
+       var templateName = Kdn.ModelFactory.getStore('WaybillType').getById(id).get('UrlTemplate');
+       Kdn.Printer.printWaybill(templateName, this.waybillId);
+     
    },
    
    saveWaybillProperty:function(){
