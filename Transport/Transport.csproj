@@ -194,7 +194,6 @@
     <Compile Include="Models\WorkCounter.cs" />
     <Compile Include="OtherModels\dbf\BAT.cs" />
     <Compile Include="OtherModels\dbf\SHIN.cs" />
-    <Compile Include="OtherModels\dbf\PolymirGroup.cs" />
     <Compile Include="OtherModels\fseb\fsebAR.cs" />
     <Compile Include="OtherModels\fseb\Tran.cs" />
     <Compile Include="OtherModels\ogmnew\ogmnewAR.cs" />
@@ -267,13 +266,6 @@
     <Compile Include="Models\waybill\WaybillTask.cs" />
     <Compile Include="Models\WorkType.cs" />
     <Compile Include="Models\WorkUnit.cs" />
-    <Compile Include="OtherModels\dbf\PolymirRefuelling.cs" />
-    <Compile Include="OtherModels\dbf\PolymirWaybillTask.cs" />
-    <Compile Include="OtherModels\dbf\PolymirWaybill.cs" />
-    <Compile Include="OtherModels\dbf\PolymirCustomer.cs" />
-    <Compile Include="OtherModels\dbf\PolymirTransport.cs" />
-    <Compile Include="OtherModels\dbf\PolymirWay.cs" />
-    <Compile Include="OtherModels\dbf\PolymirDrivers.cs" />
     <Compile Include="OtherModels\farm\AppUser.cs" />
     <Compile Include="OtherModels\farm\common\FIO.cs" />
     <Compile Include="OtherModels\farm\common\Ownered.cs" />
@@ -430,9 +422,6 @@
     <EmbeddedResource Include="OtherModels\kdrPolymir\BIBPOLIM.hbm.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="OtherModels\dbf\PolymirDrivers.hbm.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\Driver.js" />
   </ItemGroup>
   <ItemGroup>
@@ -537,9 +526,6 @@
     <EmbeddedResource Include="JS\Transport\view\WaybillType.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="OtherModels\dbf\PolymirWay.hbm.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\RoutePoint.js" />
   </ItemGroup>
   <ItemGroup>
@@ -552,28 +538,10 @@
     <EmbeddedResource Include="OtherModels\tdbf\Customer.hbm.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="OtherModels\dbf\PolymirTransport.hbm.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="OtherModels\dbf\PolymirCustomer.hbm.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="OtherModels\dbf\PolymirWaybill.hbm.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="OtherModels\dbf\PolymirRefuelling.hbm.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="OtherModels\dbf\PolymirWaybillTask.hbm.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\WorkCounter.js" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\combo\WorkCounter.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="OtherModels\dbf\PolymirGroup.hbm.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="OtherModels\tdbf\Schedule.hbm.xml" />
