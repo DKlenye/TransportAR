@@ -148,6 +148,7 @@
     <EmbeddedResource Include="JS\Ext\ux\DateTimeField.js" />
     <EmbeddedResource Include="CSS\Kdn\superboxselect.css" />
     <EmbeddedResource Include="JS\Ext\ux\SuperBoxSelect.js" />
+    <EmbeddedResource Include="CSS\Kdn\Combo.css" />
     <Content Include="JS\Ext\ux\ux-all-debug.js" />
     <EmbeddedResource Include="JS\Ext\ux\fm.min.js" />
     <EmbeddedResource Include="JS\Ext\ux\fm.websync.min.js" />
