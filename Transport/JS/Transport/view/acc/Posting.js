@@ -96,25 +96,19 @@
                   iconCls:'icon-blue-document-word', 
                   handler:function(){
 
-                  var url = 'http://db2.lan.naftan.by/ReportServer/Pages/ReportViewer.aspx?/Transport/AccPosting&rs:Command=Render&rc:Toolbar=false&'
-                                      
                      var o = {};
                      this.getTopToolbar().items.each(function(e){ 
-                     
                         if(e.dataIndex){
                            o[e.dataIndex]=e.getValue();
                         }
-                                             
                      });
                                       
                      var params = {};                   
-                     params['rs:Format']='Excel';
                      params.month = o.period.getMonth()+1;
                      params.year = o.period.getFullYear();
                      params.accountingId = o.accounting;
-                                                                                           
-                     location.href=url+Ext.urlEncode(params);
-                     
+
+                      Kdn.Reporter.exportReport("AccPosting", params);
                   },
                   scope:this
                },

@@ -894,17 +894,14 @@
             "Кран": "RequestCrane",
             "Грузовой": "RequestFreight",
             "Пассажирский": "RequestPassengers"
-        }
+        };
 
         reportName = requestTypes[requestType];
 
-        var url = String.format('http://db2.lan.naftan.by/ReportServer/Pages/ReportViewer.aspx?/Transport/{0}&rs:Command=Render&rc:Toolbar=false&', reportName);
 
         var params = {};
-        params['rs:Format'] = 'Pdf';
         params.requestId = request.get('RequestId')
-        location.href = url + Ext.urlEncode(params);
-
+        Kdn.Reporter.exportReport(reportName, params);
     },
     printRequest: function() {
         var sel = this.RequestGrid.getSelectionModel().getSelected();

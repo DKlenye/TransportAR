@@ -1,6 +1,4 @@
 ﻿Kdn.view.Report =Ext.extend(Kdn.app.TabItem, {
-    
-    server:'db2.lan.naftan.by',
     reportName:'',
     params:[],
     afterParams:[],
@@ -57,23 +55,14 @@
                     'background-color': 'white'
                 }
             },
+            reporter:Kdn.Reporter,
             tbar: tbar.concat(defaultItems).concat(this.afterParams)
     });
       
      Kdn.view.Report.superclass.initComponent.call(this);
     },
             
-    
-    getUrl:function(params,withParameters){        
-        var p = params||{};
-        if(!withParameters===true){ 
-           // p['rc:Parameters']=false;
-            p['rc:Toolbar']=false;
-            p['rs:ClearSession']=true;
-        }                    
-        return String.format("http://{0}/ReportServer/Pages/ReportViewer.aspx?/Transport/{1}&rs:Command=Render&{2}",this.server,this.reportName,Ext.urlEncode(p));
-    },
-    
+   
     getParams:function(){
        var o = {};
         this.getTopToolbar().items.each(function(e){                   
@@ -86,31 +75,32 @@
     },
     
     getReportParams:function(){
-               
         return this.buildReportParams(this.getParams());
-                        
     },
     
     buildReportParams:function(params){
         return params;
     },
     
-    
-    goReport:function(o){
-       delete o.format;
-       this.getBody().dom.src= this.getUrl(o,false);
+    goReport:function(params){
+       this.getBody().dom.src = this.reporter.getUrl(this.reportName, params);
     },
     
-    report:function(o){
+    report:function(){
         this.goReport(this.getReportParams());      
     },
     
     reportExport:function(){    
-        var p = this.getReportParams();
-        
-        var _p = this.getParams();
-        p['rs:Format']=_p.format;
-        this.goReport(p);  
+        var params = this.getReportParams();
+        var format = params.format;
+
+        delete p.format;
+
+        this.reporter.exportReport(
+            this.reportName,
+            params,
+            format
+        );
     }
 
 });

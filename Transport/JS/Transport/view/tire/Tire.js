@@ -91,18 +91,13 @@ constructor: function(cfg) {
                     iconCls: 'icon-excel',
                     scope: movingGrid,
                     handler: function() {
-                        var url = 'http://db2.lan.naftan.by/ReportServer/Pages/ReportViewer.aspx?/Transport/TireCard&rs:Command=Render&rc:Toolbar=false&'
-
                         var sel = this.getSelectionModel().getSelected();
 
                         if (sel && sel.get('TireMovingId')) {
                             var id = sel.get('TireMovingId');
-
                             var params = {};
-                            params['rs:Format'] = 'Excel';
-                            params['rs:ClearSession'] = true;
                             params.movings = id+'';
-                            location.href = url + Ext.urlEncode(params);
+                            Kdn.Reporter.exportReport("TireCard", params);
                         }
                     }
                 })
@@ -266,18 +261,14 @@ constructor: function(cfg) {
                                     text: 'Карточки работы шин',
                                     iconCls: 'icon-excel',
                                     handler: function() {
-                                        var url = 'http://db2.lan.naftan.by/ReportServer/Pages/ReportViewer.aspx?/Transport/TireCard&rs:Command=Render&rc:Toolbar=false&';
-
                                         var sel = this.ownerCt.ownerCt.selModel.getSelections();
                                         var a = [];
                                         Ext.each(sel, function(s) {
                                             a.push(s.get('TireMovingId'));
                                         });
                                         var params = {};
-                                        params['rs:Format'] = 'Excel';
-                                        params['rs:ClearSession'] = true;
                                         params.movings = a.join(',');
-                                        location.href = url + Ext.urlEncode(params);
+                                        Kdn.Reporter.exportReport("TireCard", params);
                                     }
                                 }
                             ]

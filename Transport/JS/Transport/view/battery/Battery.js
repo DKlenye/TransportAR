@@ -75,18 +75,10 @@
                     iconCls:'icon-excel',
                     scope:movingGrid,
                     handler:function() {
-                        var url = 'http://db2.lan.naftan.by/ReportServer/Pages/ReportViewer.aspx?/Transport/BatteryCard&rs:Command=Render&rc:Toolbar=false&';
-                         
                          var sel = this.getSelectionModel().getSelected();
-                         
                          if(sel && sel.get('BatteryMovingId')){
                             var id = sel.get('BatteryMovingId');
-                            
-                            var params = {};                   
-                             params['rs:Format']='Excel';
-                             params['rs:ClearSession']=true;
-                             params.BatteryMovingId = id;
-                             location.href=url+Ext.urlEncode(params);
+                             Kdn.Reporter.exportReport("BatteryCard", {BatteryMovingId : id});
                          }
                     }
                 })

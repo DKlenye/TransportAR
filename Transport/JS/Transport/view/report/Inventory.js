@@ -1,8 +1,5 @@
 ﻿T.view.report.Inventory = Ext.extend(Kdn.app.TabItem, {
     
-    url:'http://db2.lan.naftan.by/ReportServer/Pages/ReportViewer.aspx?/Transport/Inventory&rs:Command=Render&rs:ClearSession=true&rs:Format=PDF&',
-    urlDetails:'http://db2.lan.naftan.by/ReportServer/Pages/ReportViewer.aspx?/Transport/InventoryDetails&rs:Command=Render&rs:ClearSession=true&rs:Format=EXCEL&',
-    
     initComponent:function(){
       
       Ext.apply(this,{
@@ -91,7 +88,6 @@
                      },
                      {
                          text: 'По цеху',
-                         width:100,
                          xtype: 'button',
                          iconCls: 'icon-blue-document-word',
                          handler:this.onDepartment,
@@ -99,7 +95,6 @@
                      },
                      {
                          text: 'По цеху пустая',
-                         width:100,
                          xtype: 'button',
                          iconCls: 'icon-blue-document-word',
                          handler:this.onDepartmentEmpty,
@@ -270,8 +265,9 @@
         };
 
         o = Ext.apply(o, params);
+
+        Kdn.Reporter.exportReport("Inventory", o,"PDF");
         
-        location.href = this.url + Ext.urlEncode(o);
     },
     
     printDetails:function(params) {
@@ -285,8 +281,8 @@
         };
 
         o = Ext.apply(o, params);
-        
-        location.href = this.urlDetails + Ext.urlEncode(o);
+
+        Kdn.Reporter.exportReport("InventoryDetails", o, "PDF");
     }
 });
 

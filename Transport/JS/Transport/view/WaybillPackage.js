@@ -99,9 +99,8 @@
 	            handler:function(){
 	               
 	               var id = this.textField.getValue();
-	               if(id){
-	                  var url = 'http://db2.lan.naftan.by/ReportServer/Pages/ReportViewer.aspx?/Transport/WayBillPackage&rs:Command=Render&rs:ClearSession=true&rs:Format=PDF&PackageId='+id;
-	                  location.href=url;
+	               if (id) {
+	                   Kdn.Reporter.exportReport("WayBillPackage", { PackageId: id }, "PDF");
 	               }          
 	               
 	            }           
@@ -129,12 +128,6 @@
                         sel.beginEdit();
                         sel.set('isClose',1);
                         sel.endEdit();
-                        
-                        /*
-                        var id = sel.get('PackageId');
-                        var url = 'http://db2.lan.naftan.by/ReportServer/Pages/ReportViewer.aspx?/Transport/WayBillPackage&rs:Command=Render&rs:ClearSession=true&rs:Format=PDF&PackageId=' + id;
-	                    location.href=url;
-	                    */
                     }
                 }
             );
@@ -144,8 +137,6 @@
     },
     
     onRowDblClick: Ext.emptyFn
-    
-    
     
 });
 

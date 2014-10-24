@@ -268,14 +268,9 @@
                         handler:function(){
                         
                             var reportName = 'VehicleOrder';
-                            
-                            var url = String.format('http://db2.lan.naftan.by/ReportServer/Pages/ReportViewer.aspx?/Transport/{0}&rs:Command=Render&rc:Toolbar=false&', reportName);
-
                             var params = {};
-                            params['rs:Format'] = 'Excel';
-                            params['rs:ClearSession']=true;
                             params.date = this.OrderDate.getValue();
-                            location.href = url + Ext.urlEncode(params);
+                            Kdn.Reporter.exportReport(reportName, params);
                         },
                         scope:this
                         

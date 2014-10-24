@@ -37,15 +37,11 @@
                iconCls:'icon-blue-document-word', 
                handler:function(){
 
-               var url = 'http://db2.lan.naftan.by/ReportServer/Pages/ReportViewer.aspx?/Transport/VehicleFuelRemains&rs:Command=Render&rs:Format=WORD&'
-                                      
                   var o = {};
                   this.items.each(function(e){
-                  
                      if(e.dataIndex){
                         o[e.dataIndex]=e.getValue();
                      }
-                                          
                   });
                   
                   var params = {}; 
@@ -55,10 +51,10 @@
                   params.ownerId = 1;
                   params.column = o['column']||0;
                   params.department = o['department']||0;
-                                   
-                  location.href=url+Ext.urlEncode(params);                
-                  
-                  
+
+                   Kdn.Reporter.exportReport("VehicleFuelRemains", params, "WORD");
+
+
                },
                scope:this
             }
