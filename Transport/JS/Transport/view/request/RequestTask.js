@@ -901,7 +901,7 @@
 
         var params = {};
         params.requestId = request.get('RequestId')
-        Kdn.Reporter.exportReport(reportName, params);
+        Kdn.Reporter.exportReport(reportName, params,"PDF");
     },
     printRequest: function() {
         var sel = this.RequestGrid.getSelectionModel().getSelected();
