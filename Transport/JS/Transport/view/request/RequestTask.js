@@ -900,7 +900,7 @@
 
 
         var params = {};
-        params.requestId = request.get('RequestId')
+        params.requestId = request.get('RequestId');
         Kdn.Reporter.exportReport(reportName, params,"PDF");
     },
     printRequest: function() {
