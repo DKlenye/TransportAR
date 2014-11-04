@@ -90,12 +90,13 @@
     buildReportParams:function(params){
         return params;
     },
-    
-    goReport:function(params){
-       this.getBody().dom.src = this.reporter.getUrl(this.reportName, params);
+
+    goReport: function (params) {
+        delete params.format;
+        this.getBody().dom.src = this.reporter.getUrl(this.reportName, params);
     },
-    
-    report:function(){
+
+    report: function () {
         this.goReport(this.getReportParams());      
     },
     
@@ -103,7 +104,7 @@
         var params = this.getReportParams();
         var format = params.format;
 
-        delete p.format;
+        delete params.format;
 
         this.reporter.exportReport(
             this.reportName,
