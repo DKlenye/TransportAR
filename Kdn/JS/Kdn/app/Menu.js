@@ -43,6 +43,7 @@ Kdn.app.Menu = Ext.extend(Ext.Toolbar, {
                 xtype: 'menu',
                 minWidth: 210,
                 cls: 'big-menu',
+                enableScrolling:true,
                 items: [],
                 listeners: {
                     click: this.onMenuClick.createDelegate(this)
