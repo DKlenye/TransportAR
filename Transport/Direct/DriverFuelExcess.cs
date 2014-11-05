@@ -39,7 +39,6 @@ namespace Transport.Direct
                {}
            }
 
-           var db = new PetaPoco.Database("db2");
            var rez = db.Query<DriverFuelExcessInfo>(";EXEC DriverFuelExcessInfo_Read @0,@1,@2",
                 month,
                 year,
@@ -64,7 +63,6 @@ namespace Transport.Direct
             accountingId = p.Value<int>();
          }
 
-         var db = new PetaPoco.Database("db2");
          var rez = db.Query<Models.DriverFuelExcess>(";EXEC DriverFuelExcessRead @0,@1,@2",
               month,
               year,
@@ -81,8 +79,6 @@ namespace Transport.Direct
 
          JArray models = getModels(o);
          List<object> rezult = new List<object>();
-
-         var db = new PetaPoco.Database("db2");
 
          foreach( JObject model in models ) {
             var excess = JsonConvert.DeserializeObject<DriverFuelExcess>(model.ToString());
@@ -135,7 +131,6 @@ namespace Transport.Direct
 
          string fileName =accountingId==1?"Vo885":"Vo885p";
 
-         var db = new PetaPoco.Database("db2");
          var rez = db.Query<Models.DriverFuelExcess>(";EXEC DriverFuelExcessRead @0,@1,@2",
               month,
               year,

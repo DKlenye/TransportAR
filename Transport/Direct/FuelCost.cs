@@ -28,7 +28,6 @@ namespace Transport.Direct
             accountingId = p.Value<int>();
          }
 
-          var db =new PetaPoco.Database("db2");          
           var rez = db.Query<Models.FuelFilledCost>(";EXEC FuelFilledCost_Select @month,@year,@accountingId",
                new
                {
@@ -46,8 +45,6 @@ namespace Transport.Direct
 
           JArray models = getModels(o);
           List<object> rezult = new List<object>();
-
-          var db = new PetaPoco.Database("db2"); 
 
           foreach( JObject model in models ) {
              var FuelFilledCost = JsonConvert.DeserializeObject<FuelFilledCost>(model.ToString());
@@ -88,7 +85,6 @@ namespace Transport.Direct
             accountingId = p.Value<int>();
          }
 
-          var db =new PetaPoco.Database("db2");
           var rez = db.Query<Models.FuelPriceCalculate>(";EXEC AccFuelPrice_Calculate @month,@year,@accountingId",
                new
                {
@@ -118,7 +114,6 @@ namespace Transport.Direct
              accountingId = p.Value<int>();
           }
 
-          var db = new PetaPoco.Database("db2");
           var rez = db.Query<Models.AccFuelPrice>(";EXEC AccFuelPrice_Select @month,@year,@accountingId",
                new {
                   month = month,
@@ -136,8 +131,6 @@ namespace Transport.Direct
 
           JArray models = getModels(o);
           List<object> rezult = new List<object>();
-
-          var db = new PetaPoco.Database("db2");
 
           foreach( JObject model in models ) {
              var a = JsonConvert.DeserializeObject<AccFuelPrice>(model.ToString());

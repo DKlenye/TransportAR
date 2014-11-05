@@ -25,7 +25,6 @@ namespace Transport.Direct
             year = p.Value<DateTime>().Year;            
          }
 
-          var db =new PetaPoco.Database("db2");
           var rez = db.Query<Models.AzsFuelPrice>(";EXEC AzsFuelPriceCalculate @month,@year",
                new
                {
@@ -42,8 +41,6 @@ namespace Transport.Direct
        {
           JArray models = getModels(o);
           List<object> rezult = new List<object>();
-
-          var db = new PetaPoco.Database("db2"); 
 
           foreach( JObject model in models ) {
               var FuelPrice = JsonConvert.DeserializeObject<AzsFuelPrice>(model.ToString());

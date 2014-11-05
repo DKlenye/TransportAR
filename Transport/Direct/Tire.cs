@@ -33,7 +33,6 @@ namespace Transport.Direct
 
             var id = o["filter"]["TireId"].Value<int>();
 
-            var db = new PetaPoco.Database("db2");
             var rez = db.Query<Models.BatteryCard>(";EXEC TireCard @0", id);
 
             return new DataSerializer(new List<BatteryCard>(rez));
@@ -97,7 +96,6 @@ namespace Transport.Direct
             p = o["filter"];
             var idList = JArray.Parse(p["movings"].ToString());
             var data = new Dictionary<int, JObject>();
-            var db = new PetaPoco.Database("db2");
 
             CollectionExtensions.ForEach(idList, id =>
             {

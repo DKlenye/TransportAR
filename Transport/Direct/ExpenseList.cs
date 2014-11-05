@@ -28,7 +28,6 @@ namespace Transport.Direct
                 true
             );
 
-            var db = new PetaPoco.Database("db2");
             var list = db.Query<ExpenseList>(String.Format("execute ssrs_ExpenseList {0},{1},null",date.Month,date.Year));
             
             list.ForEach(x => new Tran(

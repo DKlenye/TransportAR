@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Web;
-using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
 using Newtonsoft.Json;
@@ -9,12 +7,22 @@ using Castle.ActiveRecord;
 using NHibernate;
 using NHibernate.Criterion;
 using Kdn.Direct;
+using PetaPoco;
 
 
 namespace Transport.Direct
 {
     public partial class Direct
     {
+
+        private PetaPoco.Database db;
+
+        public Direct()
+        {
+            db = new Database("db2");
+        }
+
+
         protected override Type getModelType(JObject o)
         {
             Type t = base.getModelType(o);

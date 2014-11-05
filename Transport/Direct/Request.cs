@@ -19,7 +19,6 @@ namespace Transport.Direct
            JToken p;
 
            var date = o["date"].Value<DateTime>();
-           var db = new PetaPoco.Database("db2");
 
            var hash = new Dictionary<int, VehicleOrderDTO>();
 

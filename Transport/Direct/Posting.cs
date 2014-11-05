@@ -28,7 +28,6 @@ namespace Transport.Direct
             accountingId = p.Value<int>();
          }
 
-          var db =new PetaPoco.Database("db2");          
           var rez = db.Query<Models.AccPosting>("Select * from AccPosting where AccPeriod = @0 and AccountingId = @1",
                year*100+month,
                accountingId
@@ -53,8 +52,6 @@ namespace Transport.Direct
          if( o.TryGetValue("accounting", out p) && !String.IsNullOrEmpty(p.Value<string>())) {
             accountingId = p.Value<int>();
          }
-
-          var db =new PetaPoco.Database("db2");
 
           db.Execute(";EXEC AccPostingCalculate @month,@year,@accountingId",
                  new
@@ -86,8 +83,6 @@ namespace Transport.Direct
          }
 
      
-         var db = new PetaPoco.Database("db2");
-
          List<string> data = db.Fetch<string>(";EXEC AccPosting_XML @month,@year,@accountingId",
                 new {month,year,accountingId}
              );

@@ -12,7 +12,7 @@ namespace Transport.Direct
     {
         public DateTime? period { get; set; }
         public int? refuellingPlaceId { get; set; }
-        public int accounting { get; set; }
+        public int? accounting { get; set; }
     }
 
     public partial class Direct
@@ -21,7 +21,6 @@ namespace Transport.Direct
         public DataSerializer AccRefuellingRead(AccRefuellingReadParams par)
         {
 
-            var db = new PetaPoco.Database("db2");
             var rez =
                 db.Query<Models.AccRefuelling>(
                     "SELECT * FROM v_AccRefuelling where MONTH(RefuellingDate) = @0 and YEAR(RefuellingDate)= @1 and RefuellingPlaceId = @2 and AccountingId = @3",
@@ -38,9 +37,7 @@ namespace Transport.Direct
         [ParseAsJson]
         public DataSerializer AccRefuellingUpdate(JObject o)
         {
-
             var rezult = new List<object>();
-            var db = new PetaPoco.Database("db2");
 
             foreach (var accRefuelling in GetModels<AccRefuelling>(o))
             {

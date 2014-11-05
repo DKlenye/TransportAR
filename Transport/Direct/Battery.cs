@@ -22,7 +22,6 @@ namespace Transport.Direct
 
          id = p["BatteryId"].Value<int>();                   
 
-          var db =new PetaPoco.Database("db2");
           var rez = db.Query<Models.BatteryCard>(";EXEC BatteryCard @BatteryId",
                new
                {

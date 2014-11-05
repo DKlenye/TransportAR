@@ -22,8 +22,6 @@ namespace Transport.Direct
        {
            JToken p;
            
-           var db = new PetaPoco.Database("db2");
-
            var hash = new Dictionary<int, VehicleDayInspection>();
            var list = new List<VehicleDayInspection>();
 

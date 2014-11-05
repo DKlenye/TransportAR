@@ -24,7 +24,6 @@ namespace Transport.Direct
             year = p.Value<DateTime>().Year;            
          }
 
-          var db =new PetaPoco.Database("db2");
           var rez = db.Query<Models.RcpAzs>("SELECT * FROM v_RcpAzs where MONTH(DocDate) = @0 and YEAR (DocDate)= @1",
                month,
                year

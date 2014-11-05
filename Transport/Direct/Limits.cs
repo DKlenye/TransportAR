@@ -24,7 +24,6 @@ namespace Transport.Direct
                 year = p.Value<DateTime>().Year;
             }
 
-            var db = new PetaPoco.Database("db2");
             var rez = db.Query<KmLimits>(";exec KmLimitsSelect @0,@1",
                 month,
                 year
@@ -46,7 +45,6 @@ namespace Transport.Direct
                 year = p.Value<DateTime>().Year;
             }
 
-            var db = new PetaPoco.Database("db2");
             var rez = db.Query<FuelLimits>(";exec FuelLimitsSelect @0,@1",
                 month,
                 year
@@ -74,7 +72,6 @@ namespace Transport.Direct
                 VehicleId = p.Value<int>();
             }
 
-            var db = new PetaPoco.Database("db2");
             var rez = db.Query<KmLimitsDetails>(";exec KmLimitsDetailsSelect @0,@1,@2",
                  month,
                  year,
