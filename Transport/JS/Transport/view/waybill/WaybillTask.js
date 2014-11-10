@@ -924,7 +924,8 @@
         {
             var date = e.record.data.TaskDepartureDate,
                 consumptionEditorStore = $.ConsumptionEditor.store,
-                TkmWorkId = T.config.TkmWorkId;
+                TkmWorkId = T.config.TkmWorkId,
+                TkmWorkIdInFactory = T.config.TkmWorkIdInFactory;
 
             if (!date) {
                 return false;
@@ -934,7 +935,7 @@
                     var startDate = n.StartDate || date;
                     var endDate = n.EndDate || date;
 
-                    if (n.WorkTypeId != TkmWorkId && n.Enabled && startDate <= date && endDate >= date) {
+                    if (n.WorkTypeId != TkmWorkId && n.WorkTypeId!=TkmWorkIdInFactory && n.Enabled && startDate <= date && endDate >= date) {
                         consumptionEditorStore.add(new consumptionEditorStore.recordType({
                             id: n.NormId,
                             display: $.consumptionRenderer(n.NormId)

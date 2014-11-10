@@ -39,11 +39,11 @@ namespace Kdn.Web.Handlers
 
         string getCss(string iconsPath, string postfix)
         {
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
 
             foreach (string file in Directory.GetFiles(HostingEnvironment.MapPath(pathToIcon + "/" + iconsPath)))
             {
-                FileInfo i = new FileInfo(file);
+                var i = new FileInfo(file);
                 sb.Append(getStyle(iconsPath, i.Name, postfix));
             }
             return sb.ToString();

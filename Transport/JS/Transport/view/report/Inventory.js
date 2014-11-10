@@ -282,7 +282,7 @@
 
         o = Ext.apply(o, params);
 
-        Kdn.Reporter.exportReport("InventoryDetails", o, "PDF");
+        Kdn.Reporter.exportReport("InventoryDetails", o, "Excel");
     }
 });
 

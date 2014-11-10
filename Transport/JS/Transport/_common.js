@@ -7,5 +7,6 @@ T.config = {
    WinterIncreaseId: 2,
    DefaultRefuellingPlaceId: 7,
    TonneKilometerConsumption:1,
-   TkmWorkId:4
+   TkmWorkId:4,
+   TkmWorkIdInFactory:233
 };

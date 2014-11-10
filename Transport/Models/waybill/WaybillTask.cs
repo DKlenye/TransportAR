@@ -14,10 +14,12 @@ namespace Transport.Models
     public class WaybillTask : ActiveRecordBase<WaybillTask>
     {
         public static int WinterIncreaseId = 2;
+        public static int TripIncreaseId = 1;
         public static int MhUnitId = 2;
         public static int KmUnitId = 1;
         public static decimal TonneKilometerConsumption = 1;
         public static int TkmWorkId = 4;
+        public static int TkmWorkIdInFactory = 233;
 
         public WaybillTask()
         {
@@ -267,18 +269,8 @@ namespace Transport.Models
                     decimal weightConsumption = 0;
                     decimal trailerConsumption = 0;
                     decimal tkmConsumption = TonneKilometerConsumption;
-
-
-                    var VehicleId = new ScalarQuery<int>(typeof (Waybill),
-                        @" SELECT c.VehicleId
-                     FROM Car as c, Waybill as w
-                     WHERE c.VehicleId = w.Car.VehicleId AND w.WaybillId = ?",
-                        WaybillId
-                        ).Execute();
-
-                    var tkmNorm =
-                        Norm.FindActualNorms(VehicleId, TaskDepartureDate)
-                            .FirstOrDefault(x => x.WorkTypeId == TkmWorkId);
+                    
+                    var tkmNorm = GetTkmNorm();
 
                     if (tkmNorm != null)
                     {
@@ -446,19 +438,8 @@ namespace Transport.Models
                     decimal weightConsumption = 0;
                     decimal TrailerWeight = 0;
                     decimal tkmConsumption = TonneKilometerConsumption;
-
-
-                    var VehicleId = new ScalarQuery<int>(typeof (Waybill),
-                        @" SELECT c.VehicleId
-                     FROM Car as c, Waybill as w
-                     WHERE c.VehicleId = w.Car.VehicleId AND w.WaybillId = ?",
-                        WaybillId
-                        ).Execute();
-
-
-                    var tkmNorm =
-                        Norm.FindActualNorms(VehicleId, TaskDepartureDate)
-                            .FirstOrDefault(x => x.WorkTypeId == TkmWorkId);
+                    
+                    var tkmNorm = GetTkmNorm();
 
                     if (tkmNorm != null)
                     {
@@ -549,6 +530,40 @@ namespace Transport.Models
 
             }
         }
+
+        private int GetVehicleId()
+        {
+            return new ScalarQuery<int>(typeof (Waybill),
+                @" SELECT c.VehicleId
+                     FROM Car as c, Waybill as w
+                     WHERE c.VehicleId = w.Car.VehicleId AND w.WaybillId = ?",
+                WaybillId
+                ).Execute();
+        }
+
+        private Norm GetTkmNorm()
+        {
+             var tkmNorm = Norm.FindActualNorms(GetVehicleId(), TaskDepartureDate)
+                            .FirstOrDefault(x => x.WorkTypeId == TkmWorkId);
+            if (!isBusinessTrip())
+            {
+                var tkmNormInFactory = Norm.FindActualNorms(GetVehicleId(), TaskDepartureDate)
+                            .FirstOrDefault(x => x.WorkTypeId == TkmWorkIdInFactory);
+                if (tkmNormInFactory != null)
+                {
+                    tkmNorm = tkmNormInFactory;
+                }
+            }
+
+            return tkmNorm;
+
+        }
+
+        private bool isBusinessTrip()
+        {
+            return TaskIncreases.Any(x => x.IncreaseId == TripIncreaseId || x.IncreaseId == 60);
+        }
+
     }
 
 
