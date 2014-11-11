@@ -18,7 +18,7 @@ namespace Transport.Models
 
       public string Fio { get; set; }
       public decimal Cost { get; set; }
-
+      public int AccCost { get; set; }
       public int? SalaryPeriod { get; set; }
 
 

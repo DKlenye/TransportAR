@@ -12,7 +12,7 @@ using Transport.Models.info;
 
 namespace Transport.Direct
 {
-   public partial class Direct:Kdn.Direct.Direct
+   public partial class Direct
     {
 
        [DirectMethod]
@@ -96,6 +96,30 @@ namespace Transport.Direct
 
          return new DataSerializer(rezult);
       }
+
+       [DirectMethod]
+       [ParseAsJson]
+       public DataSerializer DriverFuelExcessPostingRead(JObject o)
+       {
+           JToken p;
+         int month = 0, year = 0, accountingId = 0;
+
+         if( o.TryGetValue("period", out p) && p.Value<DateTime?>() != null ) {
+            month = p.Value<DateTime>().Month;
+            year = p.Value<DateTime>().Year;
+         }
+         if( o.TryGetValue("accounting", out p) && !String.IsNullOrEmpty(p.Value<string>()) ) {
+            accountingId = p.Value<int>();
+         }
+
+            var rez = db.Query<Models.DriverFuelExcessPosting>(";EXEC DriverFuelExcessPostingRead @0,@1,@2",
+              month,
+              year,
+              accountingId
+            );
+
+         return new DataSerializer(new List<DriverFuelExcessPosting>(rez));
+       }
 
 
       [DirectMethod]

@@ -127,6 +127,7 @@
     <Compile Include="Models\acc\Accounting.cs" />
     <Compile Include="Models\acc\AccFuelPrice.cs" />
     <Compile Include="Models\acc\AccPosting.cs" />
+    <Compile Include="Models\acc\DriverFuelExcessPosting.cs" />
     <Compile Include="Models\acc\Salary.cs" />
     <Compile Include="Models\acc\RcpAzs.cs" />
     <Compile Include="Models\acc\DriverFuelExcess.cs" />
