@@ -1,6 +1,6 @@
 ﻿T.view.Waybill = Ext.extend(Kdn.view.BaseGrid, {
-    requireModels:'WaybillType,Customer,Trailer',
-    modelName: 'Waybill',
+    requireModels:'WaybillType,Customer,Trailer,BodyType,TransportColumn',
+    modelName: 'v_WaybillList',
     pageSize : 50,
     pageMode: 'remote',
     editor:'view.waybilleditor',
@@ -21,6 +21,14 @@
                         renderer:function (v, p, record){
                             p.css += ' t-iconColumn';
                             return String.format('<div class="icon-lock{0}">&#160;</div>', v>1 ? '' : '-unlock');
+                        },
+                        filter: {
+                            field: {
+                                xtype: 'combo.waybillstate',
+                                objectValue: false,
+                                enableClear: true
+                            },
+                            fieldEvents: ["select"]
                         }
                   },
                   {
@@ -32,7 +40,8 @@
                   },
                   {
                         header: '№(старый)',
-                        align:'center',
+                        align: 'center',
+                        hidden:true,
                         dataIndex: 'WaybillNumber',
                         width: 100,
                         editor: { xtype: 'kdn.editor.id' }
@@ -51,7 +60,27 @@
                         width: 80,
                         hidden:true,
                         editor: { xtype: 'kdn.editor.id' }
-                  },
+                    },
+                    {
+                        dataIndex: 'ColumnId',
+                        header: 'Колонна',
+                        width: 100,
+                        editor: { xtype: 'combo.transportcolumn', objectValue: false, allowBlank: true, enableClear: true },
+                        renderer: function (o) {
+                            if (!o) return null;
+                            var store = Kdn.ModelFactory.getStore('TransportColumn');
+                            var record = store.getById(o);
+                            if (record) return record.data['ColumnName']
+                        },
+                        filter: {
+                            field: {
+                                xtype: 'combo.transportcolumn',
+                                objectValue: false,
+                                enableClear: true
+                            },
+                            fieldEvents: ["select"]
+                        }
+                    },
                   {
                         header: 'ТС',
                         dataIndex: 'Car',
@@ -71,8 +100,7 @@
                            },
                            fieldEvents:["select"]                                                
                         }
-                  },    
-                  
+                  },
                     {
                         header:'№ пачки',
                         dataIndex:'PackageId',
@@ -161,9 +189,39 @@
                     {
                         header:'Бухг. период',
                         width:120,
-                        hidden:true,
                         dataIndex:'AccPeriod'
-                    }                                                       
+                    },
+                    {
+                        header: '№ приказа',
+                        width: 120,
+                        dataIndex: 'OrderNumber'
+                    },
+                    {
+                        header: 'Дата приказа',
+                        xtype:'datecolumn',
+                        width: 120,
+                        dataIndex: 'OrderDate'
+                    },
+                    {
+                        dataIndex: 'BodyTypeId',
+                        header: 'Тип кузова',
+                        width: 200,
+                        editor: { xtype: 'combo.bodytype', objectValue: false, editable: true },
+                        renderer: function (o) {
+                            if (!o) return null;
+                            var store = Kdn.ModelFactory.getStore('BodyType');
+                            var record = store.getById(o);
+                            if (record) return record.data['BodyTypeName']
+                        },
+                        filter: {
+                            field: {
+                                xtype: 'combo.bodytype',
+                                objectValue: false,
+                                enableClear: true
+                            },
+                            fieldEvents: ["select"]
+                        }
+                    }                                     
                 ]
             }),
             
@@ -218,7 +276,7 @@
                        item.fireEvent('select',item);
                    },
                   select:function(field){
-                     var store = Kdn.ModelFactory.getStore('Waybill');                                          
+                     var store = Kdn.ModelFactory.getStore('v_WaybillList');                                          
                      var startVal = field.getValue();
                      
                      if(Ext.isDate(startVal)){

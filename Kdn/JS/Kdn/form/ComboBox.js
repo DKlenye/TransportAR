@@ -25,9 +25,9 @@
 
             listeners.triggerclick = {
                 fn: function(item, trigger, index, tag, e)
-                {                    
+                {
                     this.clearValue();
-                    this.fireEvent('select');
+                    this.fireEvent('select',this,null);
                 }
             }
 

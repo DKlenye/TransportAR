@@ -178,6 +178,7 @@
     <Compile Include="Models\Umtu.cs" />
     <Compile Include="Models\UserGroup.cs" />
     <Compile Include="Models\v_Driver.cs" />
+    <Compile Include="Models\v_WaybillList.cs" />
     <Compile Include="Models\waybill\WaybillWork.cs" />
     <Compile Include="Models\waybill\WaybillWorkingTime.cs" />
     <Compile Include="Models\_PolymirWaybill.cs" />
@@ -1022,6 +1023,9 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\combo\WaybillState.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -143,7 +143,15 @@
                            var store = Kdn.ModelFactory.getStore('BodyType');
                            var record = store.getById(o);
                            if (record) return record.data['BodyTypeName']
-                        }
+                        },
+                       filter: {
+                           field: {
+                               xtype: 'combo.bodytype',
+                               objectValue: false,
+                               enableClear: true
+                           },
+                           fieldEvents: ["select"]
+                       }
                     },
                     {
                         dataIndex: 'BodyNumber',
