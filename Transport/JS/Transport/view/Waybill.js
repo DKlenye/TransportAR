@@ -193,6 +193,7 @@
                     },
                     {
                         header: '№ приказа',
+                        hidden:true,
                         width: 120,
                         dataIndex: 'OrderNumber'
                     },
@@ -200,6 +201,7 @@
                         header: 'Дата приказа',
                         xtype:'datecolumn',
                         width: 120,
+                        hidden:true,
                         dataIndex: 'OrderDate'
                     },
                     {

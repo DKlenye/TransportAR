@@ -1384,6 +1384,7 @@
                                       <PaddingBottom>2pt</PaddingBottom>
                                     </Style>
                                   </Textbox>
+                                  <rd:Selected>true</rd:Selected>
                                 </CellContents>
                               </TablixCell>
                             </TablixCells>
@@ -1616,7 +1617,7 @@
                                       <Paragraph>
                                         <TextRuns>
                                           <TextRun>
-                                            <Value>=Parameters!date.Value</Value>
+                                            <Value>17.10.2014</Value>
                                             <Style>
                                               <FontFamily>Times New Roman</FontFamily>
                                               <Format>dd.MM.yyyy</Format>
@@ -1660,7 +1661,6 @@
                                       <PaddingBottom>2pt</PaddingBottom>
                                     </Style>
                                   </Textbox>
-                                  <rd:Selected>true</rd:Selected>
                                 </CellContents>
                               </TablixCell>
                             </TablixCells>
@@ -1711,7 +1711,7 @@
                                       <Paragraph>
                                         <TextRuns>
                                           <TextRun>
-                                            <Value>1457</Value>
+                                            <Value>2090</Value>
                                             <Style>
                                               <FontFamily>Times New Roman</FontFamily>
                                             </Style>
@@ -1817,7 +1817,7 @@
                                       <Paragraph>
                                         <TextRuns>
                                           <TextRun>
-                                            <Value />
+                                            <Value>01.10.2014</Value>
                                             <Style>
                                               <FontFamily>Times New Roman</FontFamily>
                                             </Style>
@@ -1923,7 +1923,7 @@
                                       <Paragraph>
                                         <TextRuns>
                                           <TextRun>
-                                            <Value />
+                                            <Value>25.10.2014</Value>
                                             <Style>
                                               <FontFamily>Times New Roman</FontFamily>
                                             </Style>

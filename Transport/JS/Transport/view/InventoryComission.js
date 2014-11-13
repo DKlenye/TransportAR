@@ -32,35 +32,35 @@
                         header: 'Председатель',
                         width: 200,
                         renderer:T.combo.Employee.prototype.renderTpl,
-                        editor: { xtype: 'combo.employee' }
+                        editor: { xtype: 'combo.employee', enableClear:true }
                     },
                    {
                         dataIndex: 'Employee1',
                         header: '№1',
                         width: 200,
                         renderer:T.combo.Employee.prototype.renderTpl,
-                        editor: { xtype: 'combo.employee' }
+                        editor: { xtype: 'combo.employee', enableClear: true }
                     },
                     {
                         dataIndex: 'Employee2',
                         header: '№2',
                         width: 200,
                         renderer:T.combo.Employee.prototype.renderTpl,
-                        editor: { xtype: 'combo.employee' }
+                        editor: { xtype: 'combo.employee', enableClear: true }
                     },
                     {
                         dataIndex: 'Employee3',
                          header: '№3',
                         width: 200,
                         renderer:T.combo.Employee.prototype.renderTpl,
-                        editor: { xtype: 'combo.employee' }
+                        editor: { xtype: 'combo.employee', enableClear: true }
                     },
                     {
                         dataIndex: 'Employee4',
                          header: '№3',
                         width: 200,
                         renderer:T.combo.Employee.prototype.renderTpl,
-                        editor: { xtype: 'combo.employee' }
+                        editor: { xtype: 'combo.employee', enableClear: true }
                     }
                 ]
             })

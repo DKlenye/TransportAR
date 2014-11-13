@@ -261,7 +261,8 @@
             columnId: 0,
             departmentId: 0,
             driverId: 0,
-            employeeId: 0
+            employeeId: 0,
+            accountingId: 0
         };
 
         o = Ext.apply(o, params);
