@@ -41,6 +41,8 @@ namespace Transport.Models {
       public int? BodyTypeId { get; set; }
        [Property]
       public int? GroupRequestId { get; set; }
+       [Property]
+       public int? VehicleOilGroupId { get; set; }
 
 
       [Property(Index="idx_ReplicationVehicle")]
@@ -152,6 +154,8 @@ namespace Transport.Models {
 
        [Property]
       public int? GroupRequestId { get; set; }
+       [Property]
+       public int? VehicleOilGroupId { get; set; }
 
       #endregion
 

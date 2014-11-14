@@ -133,7 +133,7 @@
     <Compile Include="Models\acc\DriverFuelExcess.cs" />
     <Compile Include="Models\acc\FuelPriceCalculate.cs" />
     <Compile Include="Models\acc\FuelFilledCost.cs" />
-    <Compile Include="Models\AccGroup.cs" />
+    <Compile Include="Models\vehicleGroups\AccGroup.cs" />
     <Compile Include="Models\acc\AccRefuelling.cs" />
     <Compile Include="Models\azs\AzsFuelPrice.cs" />
     <Compile Include="Models\battery\Battery.cs" />
@@ -145,9 +145,10 @@
     <Compile Include="Models\battery\v_Battery.cs" />
     <Compile Include="Models\car\Inspection.cs" />
     <Compile Include="Models\car\NormIncrease.cs" />
-    <Compile Include="Models\ReportGroup.cs" />
+    <Compile Include="Models\car\OilNorm.cs" />
+    <Compile Include="Models\vehicleGroups\ReportGroup.cs" />
     <Compile Include="Models\dayInspection\DayInspectionTime.cs" />
-    <Compile Include="Models\ServiceGroup.cs" />
+    <Compile Include="Models\vehicleGroups\ServiceGroup.cs" />
     <Compile Include="Models\ExpenseList.cs" />
     <Compile Include="Models\info\DriverFuelExcessInfo.cs" />
     <Compile Include="Models\dayInspection\VehicleDayInspection.cs" />
@@ -155,7 +156,7 @@
     <Compile Include="Models\Kaprem_Info.cs" />
     <Compile Include="Models\MaintenanceRequest.cs" />
     <Compile Include="Models\request\v_RequestEmployee.cs" />
-    <Compile Include="Models\GroupRequest.cs" />
+    <Compile Include="Models\vehicleGroups\GroupRequest.cs" />
     <Compile Include="Models\EcologyClass.cs" />
     <Compile Include="Models\EngineType.cs" />
     <Compile Include="Models\limit\FuelLimits.cs" />
@@ -177,6 +178,7 @@
     <Compile Include="Models\tire\v_Tire.cs" />
     <Compile Include="Models\Umtu.cs" />
     <Compile Include="Models\UserGroup.cs" />
+    <Compile Include="Models\vehicleGroups\VehicleOilGroup.cs" />
     <Compile Include="Models\v_Driver.cs" />
     <Compile Include="Models\v_WaybillList.cs" />
     <Compile Include="Models\waybill\WaybillWork.cs" />
@@ -234,13 +236,13 @@
     <Compile Include="Direct\Direct.cs" />
     <Compile Include="Interfaces\IOwnered.cs" />
     <Compile Include="Mapping.cs" />
-    <Compile Include="Models\BodyType.cs" />
+    <Compile Include="Models\vehicleGroups\BodyType.cs" />
     <Compile Include="Models\car\CheckCO.cs" />
     <Compile Include="Models\car\VehicleDriver.cs" />
     <Compile Include="Models\RoutePoint.cs" />
     <Compile Include="Models\Route.cs" />
     <Compile Include="Models\Temperature.cs" />
-    <Compile Include="Models\GroupAcc.cs" />
+    <Compile Include="Models\vehicleGroups\GroupAcc.cs" />
     <Compile Include="Models\refuelling\RefuellingSheet.cs" />
     <Compile Include="Models\refuelling\Refuelling.cs" />
     <Compile Include="Models\refuelling\RefuellingPlace.cs" />
@@ -1026,6 +1028,15 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\combo\WaybillState.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\VehicleOilGroup.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\OilNorm.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\OilNorms.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -97,6 +97,11 @@ Kdn.Menu = [
                         text: "Группы для отчётов",
                         Handler: "createView",
                         HandlerCfg: "{xtype:'view.reportgroup',single:true}"
+                    },
+                    {
+                        text: "Группы по маслам",
+                        Handler: "createView",
+                        HandlerCfg: "{xtype:'view.vehicleoilgroup',single:true}"
                     }
                 ]
             }, {
@@ -115,7 +120,12 @@ Kdn.Menu = [
                         iconCls: "icon-norm",
                         Handler: "createView",
                         HandlerCfg: "{xtype:'view.norm',single:true}"
-                    }, {
+                    },{
+                        text: "Нормы расхода масел",
+                        iconCls: "icon-beaker--exclamation",
+                        Handler: "createView",
+                        HandlerCfg: "{xtype:'view.oilnorm',single:true}"
+                    },{
                         text: "Страховка",
                         iconCls: "icon-insurance",
                         Handler: "createView",
@@ -649,6 +659,11 @@ Kdn.Menu = [
                 iconCls: 'icon-blue-document-word',
                 Handler: 'createView',
                 HandlerCfg: "{xtype:'view.report.vehiclenorms',single:true}"
+            }, {
+                text: 'Список норм по маслам',
+                iconCls: 'icon-blue-document-word',
+                Handler: 'createView',
+                HandlerCfg: "{xtype:'view.report.oilnorms',single:true}"
             }, {
                 text: 'Отчёты по трансопрту',
                 iconCls: 'icon-report-white',

@@ -1,6 +1,6 @@
 ﻿T.view.Car = Ext.extend(T.view.Trailer, {
 
-requireModels: 'WaybillType,Department,TransportColumn,BodyType,WorkType,WorkUnit,GroupAcc,Fuel,ServiceGroup,ReportGroup',
+ requireModels: 'WaybillType,Department,TransportColumn,BodyType,WorkType,WorkUnit,GroupAcc,Fuel,ServiceGroup,ReportGroup',
     modelName: 'FullCar',
     editor: 'view.careditor',
     pageMode: 'remote',
@@ -324,9 +324,25 @@ requireModels: 'WaybillType,Department,TransportColumn,BodyType,WorkType,WorkUni
                 if (rec) return rec.get('GroupRequestName');
                 return null;
             }
-            
+
         },
-            
+
+        {
+            dataIndex: 'VehicleOilGroupId',
+            header: 'Группа по маслам',
+            width: 100,
+            editor: { xtype: 'combo.vehicleoilgroup', objectValue: false, enableClear: true },
+            renderer: function(v)
+            {
+                if (!v) return v;
+                var store = Kdn.ModelFactory.getStore('VehicleOilGroup'),
+                  rec = store.getById(v);
+                if (rec) return rec.get('VehicleOilGroupName');
+                return null;
+            }
+
+        },
+        
         {
             dataIndex: 'ModelHeater',
             hidden:true,

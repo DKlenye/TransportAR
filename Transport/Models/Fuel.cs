@@ -31,8 +31,10 @@ namespace Transport.Models
 
 
    [ActiveRecord(DiscriminatorValue="1")]
-   public class Petrol:Fuel{
-      
+   public class Petrol:Fuel
+   {
+       [Property]
+       public int PetrolGroupId { get; set; }
    }
 
 
@@ -53,6 +55,15 @@ namespace Transport.Models
       public int OilGroupId { get; set; }
       [Property]
       public string OilGroupName { get; set; }
+   }
+
+   [Model, ActiveRecord]
+   public class PetrolGroup : ActiveRecordBase
+   {
+       [IdProperty, PrimaryKey]
+       public int PetrolGroupId { get; set; }
+       [Property]
+       public string PetrolGroupName { get; set; }
    }
 
 

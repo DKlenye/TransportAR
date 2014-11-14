@@ -35,7 +35,9 @@ Ext.iterate([
    'BatteryRemoveReason',
    'TireRemoveReason',
    'ServiceGroup',
-   'ReportGroup'
+   'ReportGroup',
+   'VehicleOilGroup',
+   'PetrolGroup'
 ],
 T.combo.buildCombo);
 
