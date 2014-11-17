@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Castle.ActiveRecord;
-using System.Text;
-using Kdn.Attributes;
 using Kdn.Ext.Attributes;
-using Iesi.Collections.Generic;
-using Newtonsoft.Json;
 using NHibernate.Criterion;
 
 namespace Transport.Models
@@ -30,7 +26,11 @@ namespace Transport.Models
        [Property]
       public bool? isCommon { get; set; }
 
-      [Property]
+       //Распространяется на прицеп
+       [Property]
+       public bool isTrailer { get; set; }
+
+       [Property]
       public short Prcn { get; set; }
 
       [Property(ColumnType="Date")]

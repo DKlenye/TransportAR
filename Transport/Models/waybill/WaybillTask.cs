@@ -230,7 +230,7 @@ namespace Transport.Models
                     {
                         increasePrcn += increase.Prcn;
                         var i = increaseMap[increase.IncreaseId];
-                        if (!i.isNormConstant) increasePrcnWeight += increase.Prcn;
+                        if (i.isTrailer) increasePrcnWeight += increase.Prcn;
                     }
                 }
 
@@ -356,7 +356,7 @@ namespace Transport.Models
             decimal q, decimal m, decimal c, decimal increaseK)
         {
             var Pfact = S*m;
-            var P05 = Qt*((decimal) 0.5)*L;
+            var P05 = (Qt+q)*((decimal) 0.5)*L;
             var Vap = ((decimal) 0.01*(Pfact - P05)*c);
 
             var rezult = ((decimal) 0.01)*(H + (Mt + Qt*(decimal) 0.5)*c)*L*increaseK + Vap;

@@ -53,6 +53,16 @@
                         }
                     },
                     {
+                        dataIndex: 'isTrailer',
+                        header: 'Распространяется на прицеп',
+                        width: 220,
+                        editor: { xtype: 'kdn.editor.booleanfield' },
+                        renderer: function(v) {
+                            if (!Ext.isBoolean(v)) return v;
+                            return (!!v) ? 'Да' : 'Нет';
+                        }
+                    },
+                    {
                         xtype:'datecolumn',
                         dataIndex:'DateOfTerm',
                         header:'Окончание действия',

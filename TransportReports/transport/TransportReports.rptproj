@@ -393,6 +393,10 @@
       <FullPath>VehicleWorkSummary.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>WaybillCount.rdl</Name>
+      <FullPath>WaybillCount.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>WaybillDateErrors.rdl</Name>
       <FullPath>WaybillDateErrors.rdl</FullPath>
     </ProjectItem>
@@ -401,8 +405,8 @@
       <FullPath>WayBillPackage.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>WaybillCount.rdl</Name>
-      <FullPath>WaybillCount.rdl</FullPath>
+      <Name>OilNorms.rdl</Name>
+      <FullPath>OilNorms.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
