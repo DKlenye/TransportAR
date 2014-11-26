@@ -201,6 +201,10 @@
       <FullPath>NaftanService.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>OilNorms.rdl</Name>
+      <FullPath>OilNorms.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>PolymirVehicleWork.rdl</Name>
       <FullPath>PolymirVehicleWork.rdl</FullPath>
     </ProjectItem>
@@ -405,8 +409,12 @@
       <FullPath>WayBillPackage.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>OilNorms.rdl</Name>
-      <FullPath>OilNorms.rdl</FullPath>
+      <Name>VehicleWorkByDepartment.rdl</Name>
+      <FullPath>VehicleWorkByDepartment.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>OrderSumInfo.rdl</Name>
+      <FullPath>OrderSumInfo.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>

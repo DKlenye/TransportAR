@@ -847,7 +847,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox4</rd:DefaultName>
         <Top>9.1022cm</Top>
-        <Left>4.58073cm</Left>
+        <Left>4.58079cm</Left>
         <Height>0.6cm</Height>
         <Width>15.04635cm</Width>
         <ZIndex>15</ZIndex>
@@ -1927,7 +1927,7 @@
         <DataSetName>DataSet2</DataSetName>
         <Top>12.40865cm</Top>
         <Height>4.33146cm</Height>
-        <Width>19.6271cm</Width>
+        <Width>19.62714cm</Width>
         <ZIndex>21</ZIndex>
         <Style>
           <Border>
@@ -4588,7 +4588,7 @@
       <Prompt>Battery Moving Id</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <Width>19.6271cm</Width>
+  <Width>19.62714cm</Width>
   <Page>
     <PageHeight>27.94cm</PageHeight>
     <PageWidth>21.59cm</PageWidth>
