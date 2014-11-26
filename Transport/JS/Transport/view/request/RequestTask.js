@@ -72,6 +72,7 @@
 
             plain: true,
             layout: 'border',
+            border:false,
             items: [
             {
                 title: 'Заявки',
@@ -84,7 +85,7 @@
                 region: 'west',
                 width: 950,
                 collapsible:true,
-                margins: '2 0 2 2',
+                //margins: '2 0 2 2',
                 split: true,
                 store: RequestStore,
                 plugins: ['filterrow'/*, expander2*/],
@@ -227,7 +228,7 @@
                 xtype: 'grid',
                 enableDragDrop: true,                
                 region: 'center',
-                margins: '2 2 2 0',
+                //margins: '2 2 2 0',
                 split: true,
                 view: new Ext.grid.GridView({
                     scrollDelay: false,

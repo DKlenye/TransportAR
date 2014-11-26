@@ -7,6 +7,7 @@
 <script src="db/Menu.js" type="text/javascript"></script>
 <script language="javascript" type="text/javascript" src="Handlers/Direct.ashx"></script>
 <link rel="shortcut icon" href="images/icons/lorry.png" type="image/x-icon" />
+<!--[if IE]><link rel="shortcut icon" href="lorry.ico"><![endif]-->
 <title >Транспорт</title>
 </head>
 <body>

@@ -673,12 +673,20 @@ Kdn.Menu = [
                         iconCls: 'icon-blue-document-word',
                         Handler: 'createView',
                         HandlerCfg: "{xtype:'view.report.vehiclework',single:true}"
-                    }, {
+                    },
+                    {
+                        text: 'Работа транспорта по подразделениям',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.vehicleworkbydepartment',single:true}"
+                    },
+                    {
                         text: 'Работа транспорта (по группам)',
                         iconCls: 'icon-blue-document-word',
                         Handler: 'createView',
                         HandlerCfg: "{xtype:'view.report.vehicleworkbygroup',single:true}"
-                    }, {
+                    },
+                    {
                         text: 'Работа транспорта Полимира до (01.03.2013)',
                         iconCls: 'icon-blue-document-word',
                         Handler: 'createView',
@@ -753,7 +761,13 @@ Kdn.Menu = [
                 text: 'Количество путевых листов по колоннам',
                 Handler: 'createView',
                 HandlerCfg: "{xtype:'view.report.waybillcount',single:true}"
+            },
+            {
+                text: 'Стоимость услуг, оказанных сторонним организациям',
+                Handler: 'createView',
+                HandlerCfg: "{xtype:'view.report.ordersuminfo',single:true}"
             }
+
         ]
     }, {
         text: "ТО",
@@ -796,7 +810,13 @@ Kdn.Menu = [
                 text: 'Перерасход топлива',
                 Handler: 'createView',
                 HandlerCfg: "{xtype:'view.acc.driverfuelexcess',single:true}"
-            }, {
+            },
+             {
+                text: 'Детализация перерасхода топлива за год',
+                Handler: 'createView',
+                HandlerCfg: "{xtype:'view.report.driverfuelexcessdetails',single:true}"
+            },
+             {
                 text: 'Заправка(РЦП АЗС)',
                 Handler: 'createView',
                 HandlerCfg: "{xtype:'view.acc.rcpazs',single:true}"

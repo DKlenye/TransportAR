@@ -13,13 +13,22 @@ reportName: 'VehicleWorkKoefficient',
                 dataIndex: 'period',
                 value: new Date(),
                 width: 120
-            }
+            },
+            'Группа',
+            {
+                xtype:'combo.accgroup',
+                dataIndex: 'groupId',
+                objectValue:false,
+                enableClear:true
+            }   
+
    ],
 
    buildReportParams: function(params) {
         var p = {};
         p.month = params.period.getMonth() + 1;
         p.year = params.period.getFullYear();
+        p.groupId = params.groupId || 0;
         return p;
     }
 

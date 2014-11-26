@@ -145,7 +145,7 @@ namespace Transport.Models
                 Order.Desc(Projections.Property<Temperature>(x => x.key.Date)),
                 Expression.Where<Temperature>(
                     t =>
-                        t.key.Date <= targetDate && t.key.Date > Kdn.DateUtils.TodayStart(targetDate) &&
+                        t.key.Date <= targetDate.AddMinutes(1)/*добавляем минуту т.к. данные температуры могут быть  c задержкой на несколько секунд*/ && t.key.Date > Kdn.DateUtils.TodayStart(targetDate) &&
                         t.key.OwnerId == OwnerId)
                 );
 
