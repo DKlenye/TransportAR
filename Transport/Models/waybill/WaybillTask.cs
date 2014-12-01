@@ -79,8 +79,13 @@ namespace Transport.Models
         [Property]
         public decimal? Temperature { get; set; }
 
+
         [Property]
         public decimal? Consumption { get; set; }
+
+        [Property]
+        public decimal? FactConsumption { get; set; }
+
 
         //Пробег по Беларуси, если null то весь пробег по Беларуси (WorkAmount)
         [Property]
@@ -563,6 +568,12 @@ namespace Transport.Models
         {
             return TaskIncreases.Any(x => x.IncreaseId == TripIncreaseId || x.IncreaseId == 60);
         }
+
+        public static WaybillTask[] FindByWaybill(int WaybillId)
+        {
+            return FindAll(Expression.Where<WaybillTask>(x => x.WaybillId == WaybillId));
+        } 
+
 
     }
 

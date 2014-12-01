@@ -1488,9 +1488,6 @@ namespace Transport.Direct {
        public string SetRemainsForNaftanService(JObject o)
        {
 
-
-
-
            var GarageNumberList = new List<int>() { o["g"].Value<int>() };
            
            foreach (var garageNumber in GarageNumberList)
@@ -1558,6 +1555,48 @@ namespace Transport.Direct {
 
 
            return "";
+       }
+
+
+       [DirectMethod]
+       [ParseAsJson]
+       public string CalcFactConsumption(JObject o)
+       {
+           Waybill[] waybills;
+           string message = "";
+
+           using (new SessionScope(FlushAction.Never))
+           {
+
+               var wb = (IList<int>) ActiveRecordMediator<Waybill>.Execute(delegate(ISession session, object instance)
+               {
+
+                   return
+                       session.CreateSQLQuery(
+                           "SELECT DISTINCT w.WaybillId FROM Waybill w LEFT JOIN waybilltask wt ON wt.WaybillId = w.WaybillId WHERE w.AccPeriod IS NULL AND w.WaybillState> 1 AND wt.FactConsumption IS NULL")
+                           .List<int>();
+
+
+               }, null);
+
+
+               wb.ForEach(x =>
+               {
+
+                   var w = Waybill.Find(x);
+
+                   try
+                   {
+                       w.CalcFactConsumption();
+                   }
+                   catch (Exception ex)
+                   {
+                       message += w.WaybillId.ToString() + ",";
+                   }
+                   SessionScope.Current.Flush();
+               });
+           }
+           return message;
        }
 
    }

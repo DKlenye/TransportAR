@@ -7,6 +7,7 @@ using Castle.Core;
 using Kdn.Ext.Attributes;
 using NHibernate.Criterion;
 using Newtonsoft.Json.Linq;
+using NHibernate.Linq;
 using Transport.Models.waybill;
 
 namespace Transport.Models {
@@ -416,7 +417,8 @@ namespace Transport.Models {
          UserClose = (User.GetCurrent()).UserId;
          WhenClose = DateTime.Now;
          CalcWorkingTime();
-          CalcWaybillWork();
+         CalcWaybillWork();
+         CalcFactConsumption();
          SaveAndFlush();
       }
 
@@ -433,7 +435,7 @@ namespace Transport.Models {
 
          WaybillState = 1;
          ClearWorkingTime();
-          ClearWaybillWork();
+         ClearWaybillWork();
          SaveAndFlush();
 
       }
@@ -584,7 +586,7 @@ namespace Transport.Models {
                    {
                        var Dates = new List<DateTime>();
 
-                       WaybillTask.FindAll(Expression.Where<WaybillTask>(x => x.WaybillId == WaybillId)).ForEach(x =>
+                       CollectionExtensions.ForEach(WaybillTask.FindAll(Expression.Where<WaybillTask>(x => x.WaybillId == WaybillId)), x =>
                        {
                            if (!Dates.Contains(x.TaskDepartureDate))
                            {
@@ -605,7 +607,7 @@ namespace Transport.Models {
                    {
                        var Dates = new List<DateTime>();
 
-                       WaybillTask.FindAll(Expression.Where<WaybillTask>(x => x.WaybillId == WaybillId)).ForEach(x =>
+                       CollectionExtensions.ForEach(WaybillTask.FindAll(Expression.Where<WaybillTask>(x => x.WaybillId == WaybillId)), x =>
                        {
                            var _date = x.TaskDepartureDate.Date;
 
@@ -656,7 +658,7 @@ namespace Transport.Models {
            });
 
 
-           var Tasks = WaybillTask.FindAll(Expression.Where<WaybillTask>(x => x.WaybillId == WaybillId));
+           var Tasks = WaybillTask.FindByWaybill(WaybillId);
            if (Tasks.Length == 0) return;
 
 
@@ -664,9 +666,9 @@ namespace Transport.Models {
            var workUnitMap = WorkUnit.getMap();
            var Norms = Norm.FindAll(Expression.Where<Norm>(x => x.Car == Car));
            var NormsMap = new Dictionary<int, Norm>();
-           Norms.ForEach(x=>NormsMap.Add(x.NormId,x));
+           CollectionExtensions.ForEach(Norms, x=>NormsMap.Add(x.NormId,x));
            
-           Tasks.ForEach(x =>
+           CollectionExtensions.ForEach(Tasks, x =>
            {
                // var consumption = NormConsumption.FindByPrimaryKey(x.NormConsumptionId);
 
@@ -713,12 +715,72 @@ namespace Transport.Models {
            var returnRemain = WaybillFuelRemain.findByWaybillId(WaybillId).Sum(x => x.ReturnRemain??0);
            var refuelling = VehicleRefuelling.FindAll(Expression.Where<VehicleRefuelling>(x => x.WaybillId == WaybillId)).Sum(x=>x.Quantity);
            getWork(Car.VehicleId).FactConsumption = departureRemain + refuelling - returnRemain;
-           Work.ForEach(x => x.Value.SaveAndFlush());
+           CollectionExtensions.ForEach(Work, x => x.Value.SaveAndFlush());
        }
-   
+
+       //Рассчитать фактический расход топлива по каждому заданию
+       public void CalcFactConsumption()
+       {
+           var remains = WaybillFuelRemain.findByWaybillId(WaybillId).ToList();
+           var refuelling = VehicleRefuelling.FindAll(Expression.Where<VehicleRefuelling>(x => x.WaybillId == WaybillId));
+           var factConsumption = new Dictionary<int, decimal>();
+           var normConsumption = new Dictionary<int, decimal>();
+           var tasks = WaybillTask.FindByWaybill(WaybillId).ToList();
+
+           remains.ForEach(remain =>
+           {
+
+               if (remain.ReturnRemain == null)
+               {
+                   remain.ReturnRemain = 0;
+                   remain.SaveAndFlush();
+               }
+
+               if (remain.DepartureRemain == null)
+               {
+                   remain.DepartureRemain = 0;
+                   remain.SaveAndFlush();
+               }
+
+               factConsumption.Add(remain.FuelId,
+                   remain.DepartureRemain.Value +
+                   refuelling.Where(x => x.FuelId == remain.FuelId).Sum(x => x.Quantity) -
+                   remain.ReturnRemain.Value
+                   );
+
+               normConsumption.Add(remain.FuelId,
+                   tasks.Where(x=>x.FuelId==remain.FuelId).Sum(x=>x.Consumption != null ? x.Consumption.Value : 0)
+                   );
+           });
+           
+
+           tasks.ForEach(task =>
+           {
+               if (task.FuelId != null)
+               {
+                   var fuel = task.FuelId.Value;
+                   if (task.Consumption != null && normConsumption.ContainsKey(fuel) && normConsumption[fuel] != null &&
+                       normConsumption[fuel] != 0 && factConsumption.ContainsKey(fuel))
+                   {
+                       var k = factConsumption[fuel]/normConsumption[fuel];
+                       task.FactConsumption = Decimal.Round(task.Consumption.Value*k, 2, MidpointRounding.AwayFromZero);
+                       task.SaveAndFlush();
+                   }
+               }
+           });
+
+           foreach (var fact in factConsumption)
+           {
+               var tasksFact = tasks.Where(x => x.FuelId == fact.Key).Sum(x => x.FactConsumption);
+               var factDiff = fact.Value - tasksFact;
+               if(factDiff!=0)
+               {
+                   var firstTaskDiffFact = tasks.First(x => x.FuelId == fact.Key && x.FactConsumption != null);
+                   firstTaskDiffFact.FactConsumption += factDiff;
+                   firstTaskDiffFact.SaveAndFlush();
+               }
+           }
+       }
    }
-
-
-
 }
 
