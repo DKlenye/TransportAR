@@ -1384,7 +1384,6 @@
                                       <PaddingBottom>2pt</PaddingBottom>
                                     </Style>
                                   </Textbox>
-                                  <rd:Selected>true</rd:Selected>
                                 </CellContents>
                               </TablixCell>
                             </TablixCells>
@@ -1817,7 +1816,7 @@
                                       <Paragraph>
                                         <TextRuns>
                                           <TextRun>
-                                            <Value>01.10.2014</Value>
+                                            <Value>01.11.2014</Value>
                                             <Style>
                                               <FontFamily>Times New Roman</FontFamily>
                                             </Style>
@@ -1923,7 +1922,7 @@
                                       <Paragraph>
                                         <TextRuns>
                                           <TextRun>
-                                            <Value>25.10.2014</Value>
+                                            <Value>25.11.2014</Value>
                                             <Style>
                                               <FontFamily>Times New Roman</FontFamily>
                                             </Style>
@@ -1966,6 +1965,7 @@
                                       <PaddingBottom>2pt</PaddingBottom>
                                     </Style>
                                   </Textbox>
+                                  <rd:Selected>true</rd:Selected>
                                 </CellContents>
                               </TablixCell>
                             </TablixCells>
