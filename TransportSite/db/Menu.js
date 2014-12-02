@@ -706,6 +706,12 @@ Kdn.Menu = [
                         iconCls: 'icon-blue-document-word',
                         Handler: 'createView',
                         HandlerCfg: "{xtype:'view.report.vehicleworkfromstart',single:true}"
+                    },
+                    {
+                        text: 'Пробег транспорта за год',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.vehicleyearrun',single:true}"
                     }
                 ]
             }, {
