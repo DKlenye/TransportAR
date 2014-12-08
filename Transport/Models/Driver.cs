@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using Castle.ActiveRecord;
-using System.Text;
-using Kdn.Attributes;
+﻿using Castle.ActiveRecord;
 using Kdn.Ext.Attributes;
-using Iesi.Collections.Generic;
-using Newtonsoft.Json;
 
 namespace Transport.Models
 {

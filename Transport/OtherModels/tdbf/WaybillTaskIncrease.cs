@@ -1,10 +1,4 @@
-﻿using System;
-using Kdn.Ext;
-using Kdn.Ext.Attributes;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-
-namespace Transport.OtherModels.tdbf
+﻿namespace Transport.OtherModels.tdbf
 {
 
     public class WaybillTaskIncrease

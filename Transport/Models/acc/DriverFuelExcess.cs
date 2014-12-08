@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Kdn.Ext.Attributes;
 
 
 namespace Transport.Models

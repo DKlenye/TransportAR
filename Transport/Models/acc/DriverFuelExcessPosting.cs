@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Transport.Models
+﻿namespace Transport.Models
 {
 
    public class DriverFuelExcessPosting

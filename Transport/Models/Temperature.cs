@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using Castle.ActiveRecord;
-using System.Text;
-using Kdn.Attributes;
 using Kdn.Ext.Attributes;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NHibernate.Criterion;
 

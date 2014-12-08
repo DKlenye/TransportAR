@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using Castle.ActiveRecord;
-using System.Text;
-using Kdn.Attributes;
 using Kdn.Ext.Attributes;
-using Iesi.Collections.Generic;
-using Newtonsoft.Json;
 using NHibernate.Criterion;
 
 namespace Transport.Models

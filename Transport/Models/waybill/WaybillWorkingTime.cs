@@ -1,6 +1,5 @@
 ﻿using System;
 using Castle.ActiveRecord;
-using NHibernate.Mapping;
 
 namespace Transport.Models.waybill
 {

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using Castle.ActiveRecord;
-using System.Text;
+﻿using Castle.ActiveRecord;
 using Kdn.Ext.Attributes;
-using NHibernate.Criterion;
 
 namespace Transport.Models {
    [Model, ActiveRecord]

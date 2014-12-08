@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Kdn.Ext;
-using Kdn.Ext.Attributes;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using NHibernate;
-using NHibernate.Criterion;
-
-namespace Transport.OtherModels.dbf {
+﻿namespace Transport.OtherModels.dbf {
    public class SHIN {
       public int GAR_N { get; set; }         //Гар № авто
       public string GOS_N { get; set; }      //Гос № авто

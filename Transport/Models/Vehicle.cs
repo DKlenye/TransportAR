@@ -3,13 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Castle.ActiveRecord;
 using Castle.ActiveRecord.Queries;
-using System.Text;
 using Kdn.Ext.Attributes;
-using Kdn.Attributes;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NHibernate.Criterion;
-using Iesi.Collections.Generic;
 using Transport.Models.car;
 
 namespace Transport.Models {

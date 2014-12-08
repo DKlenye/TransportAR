@@ -100,11 +100,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\ARdummyModelAttribute.cs" />
     <Compile Include="DateUtils.cs" />
     <Compile Include="Direct\DataSerializer.cs" />
     <Compile Include="Direct\Direct.cs" />
-    <Compile Include="Direct\ListConverter.cs" />
     <Compile Include="Ext\Attributes\ColumnAttribute.cs" />
     <Compile Include="Ext\Attributes\AllowBlankAttribute.cs" />
     <Compile Include="Ext\Attributes\ModelAttribute.cs" />

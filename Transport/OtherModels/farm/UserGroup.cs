@@ -1,8 +1,5 @@
-﻿using System;
-using Kdn.Ext;
-using Kdn.Ext.Attributes;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using Kdn.Ext.Attributes;
+
 namespace Transport.OtherModels.farm
 {
 

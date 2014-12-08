@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using NHibernate;
-using NHibernate.Criterion;
-
-namespace Transport.Interfaces
+﻿namespace Transport.Interfaces
 {
     public interface IOwnered
     {

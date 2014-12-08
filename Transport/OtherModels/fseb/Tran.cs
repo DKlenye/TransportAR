@@ -1,7 +1,6 @@
 ﻿
 using System;
 using Castle.ActiveRecord;
-using Kdn.Ext.Attributes;
 
 namespace Transport.OtherModels.fseb
 {

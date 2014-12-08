@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using Castle.ActiveRecord;
-using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
+﻿using Castle.ActiveRecord;
 using Kdn.Ext.Attributes;
-using NHibernate.SqlCommand;
 using Expression = NHibernate.Criterion.Expression;
 
 namespace Transport.Models.car

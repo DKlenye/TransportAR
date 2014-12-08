@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Kdn.Ext.Attributes;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using NHibernate;
-using NHibernate.Impl;
-using NHibernate.Criterion;
+﻿using Kdn.Ext.Attributes;
 
 
 namespace Transport.OtherModels.tdbf

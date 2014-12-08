@@ -1,5 +1,4 @@
-﻿using System;
-using Castle.ActiveRecord;
+﻿using Castle.ActiveRecord;
 
 namespace Transport.OtherModels.tdbf
 {

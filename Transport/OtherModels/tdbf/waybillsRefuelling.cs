@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Text;
-using System;
 using Castle.ActiveRecord;
 
 namespace Transport.OtherModels.tdbf {

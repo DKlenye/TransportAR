@@ -5,20 +5,16 @@ using System.Reflection;
 using System.Collections.Generic;
 using Castle.Core;
 using Ext.Direct;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Castle.ActiveRecord;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Criterion;
-using Kdn.Direct;
 using Transport.Models;
 using Transport.OtherModels.kdr;
-using Transport.OtherModels.dbf;
 using Transport.OtherModels.kdrPolymir;
 using Farm = Transport.OtherModels.farm;
 using Tdbf = Transport.OtherModels.tdbf;
-using dbf = Transport.OtherModels.dbf;
 
 namespace Transport.Direct {
 

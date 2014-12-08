@@ -753,6 +753,11 @@ Kdn.Menu = [
                         iconCls: 'icon-blue-document-word',
                         Handler: 'createView',
                         HandlerCfg: "{xtype:'view.report.inventory',single:true}"
+                    }, {
+                        text: 'Расхождения с бухгалтерией',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.inventorydiff',single:true}"
                     }
                 ]
             }, {

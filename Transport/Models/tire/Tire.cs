@@ -1,5 +1,4 @@
-﻿using System;
-using Castle.ActiveRecord;
+﻿using Castle.ActiveRecord;
 using Kdn.Ext.Attributes;
 using Transport.Models.tire;
 

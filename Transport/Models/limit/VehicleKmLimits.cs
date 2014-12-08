@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Kdn.Ext.Attributes;
+﻿using Kdn.Ext.Attributes;
 using Castle.ActiveRecord;
 
 namespace Transport.Models.limit

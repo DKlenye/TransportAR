@@ -1,9 +1,6 @@
 ﻿using System;
-using Kdn.Ext;
-using Kdn.Ext.Attributes;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
 using NHibernate;
 
 namespace Transport.OtherModels.farm

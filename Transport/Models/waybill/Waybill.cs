@@ -7,7 +7,6 @@ using Castle.Core;
 using Kdn.Ext.Attributes;
 using NHibernate.Criterion;
 using Newtonsoft.Json.Linq;
-using NHibernate.Linq;
 using Transport.Models.waybill;
 
 namespace Transport.Models {

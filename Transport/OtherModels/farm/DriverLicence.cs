@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Kdn.Ext.Attributes;
 
 namespace Transport.OtherModels.farm

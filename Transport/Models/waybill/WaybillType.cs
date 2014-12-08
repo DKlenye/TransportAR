@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Castle.ActiveRecord;
-using System.Text;
+﻿using Castle.ActiveRecord;
 using Kdn.Ext.Attributes;
 
 namespace Transport.Models {
