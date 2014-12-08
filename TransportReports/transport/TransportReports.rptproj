@@ -93,6 +93,10 @@
       <FullPath>DoublePostingInfo.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>DriverFuelExcessDetails.rdl</Name>
+      <FullPath>DriverFuelExcessDetails.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>DriverFuelExcessInfo.rdl</Name>
       <FullPath>DriverFuelExcessInfo.rdl</FullPath>
     </ProjectItem>
@@ -243,6 +247,10 @@
     <ProjectItem>
       <Name>RequestPassengers.rdl</Name>
       <FullPath>RequestPassengers.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>ServiceAct.rdl</Name>
+      <FullPath>ServiceAct.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>ServiceScore.rdl</Name>
@@ -405,6 +413,10 @@
       <FullPath>VehicleWorkSummary.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>VehicleYearRun.rdl</Name>
+      <FullPath>VehicleYearRun.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>WaybillCount.rdl</Name>
       <FullPath>WaybillCount.rdl</FullPath>
     </ProjectItem>
@@ -417,8 +429,8 @@
       <FullPath>WayBillPackage.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>DriverFuelExcessDetails.rdl</Name>
-      <FullPath>DriverFuelExcessDetails.rdl</FullPath>
+      <Name>VehicleFuelConsumptionFactNorm.rdl</Name>
+      <FullPath>VehicleFuelConsumptionFactNorm.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
