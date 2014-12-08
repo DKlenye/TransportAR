@@ -712,6 +712,12 @@ Kdn.Menu = [
                         iconCls: 'icon-blue-document-word',
                         Handler: 'createView',
                         HandlerCfg: "{xtype:'view.report.vehicleyearrun',single:true}"
+                    },
+                    {
+                        text: 'Информация по экономии/перерасходу',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.vehiclefuelconsumptionfactnorm',single:true}"
                     }
                 ]
             }, {
