@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Reflection;
-using System.Collections.Generic;
 using System.Web;
 using Castle.ActiveRecord;
 using Castle.ActiveRecord.Framework;
-using Castle.ActiveRecord.Framework.Internal;
 using Castle.ActiveRecord.Framework.Config;
-using Kdn.Attributes;
 
 
 namespace Kdn.Web
@@ -27,25 +24,6 @@ namespace Kdn.Web
            //Добавляем в контекст ActiveRecord классы с ручными маппингами
             var assembly = GetModelsAssembly();
 
-            var dummyTypes = new List<Type>();
-
-            foreach (var type in assembly.GetTypes())
-            {
-               if (Attribute.GetCustomAttribute(type, typeof(ARdummyModelAttribute)) != null)
-               {
-                  dummyTypes.Add(type);
-               }
-            }    
-
-            ActiveRecordStarter.ModelsValidated += delegate
-            {
-               foreach (var type in dummyTypes)
-               {                    
-                  new ActiveRecordModelBuilder().CreateDummyModelFor(type);  
-               }               
-            };
-
-
             //Настраиваем профайлер (логгер) указанный в web.config раздел <log4net>
             log4net.Config.XmlConfigurator.Configure();
 
@@ -53,7 +31,7 @@ namespace Kdn.Web
             IConfigurationSource source = ActiveRecordSectionHandler.Instance;
 
             //Стартуем ActiveRecord
-            ActiveRecordStarter.Initialize(new Assembly[] { GetModelsAssembly() }, source, dummyTypes.ToArray());      
+            ActiveRecordStarter.Initialize(new Assembly[] { GetModelsAssembly() }, source);      
         
         
         } 
