@@ -56,10 +56,10 @@
       }).defer(1000);      
    },
    
-   onTemperatureLoad:function(e){
-   
+   onTemperatureLoad:function(e) {
+       console.log(e);
       this.setTitle(e.Date.format('d.m.Y H:i'));
-      this.btn.setText(e.Temp>0?'+'+e.Temp:e.Temp);
+      this.btn.setText((e.Temp>0?'+':'')+e.Temp);
    }
       
 
