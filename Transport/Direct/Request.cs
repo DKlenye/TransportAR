@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Castle.Core;
 using Ext.Direct;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -9,122 +11,42 @@ using Transport.Models;
 
 namespace Transport.Direct
 {
-   public partial class Direct:Kdn.Direct.Direct
+    public partial class Direct
     {
 
-       [DirectMethod]
-       [ParseAsJson]
-       public DataSerializer RequestTaskVehicle(JObject o)
-       {
-           JToken p;
 
-           var date = o["date"].Value<DateTime>();
 
-           var hash = new Dictionary<int, VehicleOrderDTO>();
+        [DirectMethod]
+        [ParseAsJson]
+        public DataSerializer VehicleOrderUpdate(JObject o)
+        {
 
-           var list = new List<VehicleOrderDTO>();
+            var type = typeof (VehicleOrder);
+            var models = getModels(o);
+            var rezult = new List<object>();
 
-           try
-           {
-               list = db.Fetch<Customer, v_Driver, VehicleOrderDTO, VehicleOrderDTO>(
-                   (customer,driver, x) =>
-                   {
-                       if(customer.CustomerId!=0) x.Customer = customer;
-                       if (driver.DriverId != 0) x.Driver = driver;
+            foreach (var model in models)
+            {
+                var instance = (VehicleOrder)JsonConvert.DeserializeObject(model.ToString(), type);
+                
 
-                       if (x.VehicleOrderId != null)
-                           hash.Add(x.VehicleOrderId.Value, x);
-                       return x;
-                   },
-                   ";exec VehicleOrderSelect @0",
-                   date
-                   );
-           }
-           catch (Exception ex)
-           {
-               throw ex;
-           }
+                instance.Customers.ForEach(x =>
+                {
+                    if (String.IsNullOrEmpty(x.DepartureTime))
+                    {
+                        x.DepartureTime = instance.DepartureDate.TimeOfDay.ToString().Substring(0,5);
+                    }
+                });
 
-           /*
-           var requests = db.Fetch<VehicleOrderRequests>(";exec VehicleOrderRequestsSelect @0",date);
-                      
-           foreach (var r in requests)
-           {
-               if (hash.ContainsKey(r.VehicleOrderId))
-               hash[r.VehicleOrderId].Requests.Add(v_Request.Find(r.RequestId));
-           }*/
-           
-          return new DataSerializer(list);
+                instance.UpdateAndFlush();
+                instance.Refresh();
+                rezult.Add(instance);
+            }
 
-       }
+            return new DataSerializer(rezult);
+        }
 
-       [DirectMethod]
-       [ParseAsJson]
-       public DataSerializer VehicleOrderUpdate(JObject o)
-       {
-
-          var a = getModels(o);
-          var list = new List<object>();
-           /*foreach(var _a in a){
-               var dto = JsonConvert.DeserializeObject<VehicleOrderDTO>(o["data"].ToString());
-               VehicleOrder order;
-               if (dto.VehicleOrderId == null)
-               {
-                   order = new VehicleOrder()
-                   {
-                       VehicleId = dto.VehicleId,
-                       OrderDate = dto.OrderDate
-                   };
-                   order.SaveAndFlush();
-                   dto.VehicleOrderId = order.VehicleOrderId;
-               }
-               else
-               {
-                   order = VehicleOrder.Find(dto.VehicleOrderId.Value);
-               }
-
-               if (dto.Customer == null && dto.Requests.Count == 0)
-               {
-                   //dto.BusinessTripDate = null;
-                   dto.VehicleOrderId = null;
-                   order.DeleteAndFlush();
-               }
-               else
-               {
-                   order.BusinessTripDate = dto.BusinessTripDate;
-                   order.Customer = dto.Customer;
-                   order.Requests = new List<int>();
-                   order.Driver = dto.Driver;
-                   order.SaveAndFlush();
-
-                   var duplicate = new List<v_Request>();
-                   
-                   
-                   foreach(var r in dto.Requests){
-                       if (!order.Requests.Contains(r.RequestId))
-                       {
-                           order.Requests.Add(r.RequestId);                           
-                       }
-                       else
-                       {
-                           duplicate.Add(r);
-                       }
-                   }
-
-                   foreach (var d in duplicate)
-                   {
-                       dto.Requests.Remove(d);
-                   }
-
-               }
-               
-               list.Add(dto);
-           }
-                     */
-           return new DataSerializer(list);
-       }
-
-       /*
+        /*
       [DirectMethod]
       [ParseAsJson]
        public DataSerializer RequestRead(JObject o)
@@ -155,95 +77,277 @@ namespace Transport.Direct
        }*/
 
 
-      [DirectMethod]
-      [ParseAsJson]
-      public DataSerializer RequestLoad(JObject o)
-      {
-          var id = o["id"].Value<int>();
-          var request = Request.Find(id);
+        [DirectMethod]
+        [ParseAsJson]
+        public DataSerializer RequestLoad(JObject o)
+        {
+            var id = o["id"].Value<int>();
+            var request = Request.Find(id);
 
-          return new DataSerializer(new List<object>() { request});
-      }
-
-
-      [DirectMethod]
-      [ParseAsJson]
-      public DataSerializer RefreshRequests(JObject o)
-      {
-          var list = new List<object>();
-          var requests = o["requests"].Value<JArray>();
-
-              foreach (var r in requests)
-              {
-                  var obj = JsonConvert.DeserializeObject<v_Request>(r.ToString());
-                  obj.Refresh();
-                  list.Add(obj);
-              }    
-                
-          return new DataSerializer(list);
-      }
+            return new DataSerializer(new List<object>() {request});
+        }
 
 
-      [DirectMethod]
-      [ParseAsJson]
-      public DataSerializer ConfirmRequests(JObject o)
-      {
-          var a = getModels(o);
-          var isAccept = o["isAccept"].Value<bool>();
-          var message = o["message"].Value<string>();
+        [DirectMethod]
+        [ParseAsJson]
+        public DataSerializer RefreshRequests(JObject o)
+        {
+            var list = new List<object>();
+            var requests = o["requests"].Value<JArray>();
 
-          var list = new List<object>();
+            foreach (var r in requests)
+            {
+                var obj = JsonConvert.DeserializeObject<v_Request>(r.ToString());
+                obj.Refresh();
+                list.Add(obj);
+            }
 
-          foreach (var _a in a)
-          {
-              var dto = JsonConvert.DeserializeObject<v_Request>(_a.ToString());
-              var request = Request.Find(dto.RequestId);
-
-              var status = isAccept ? RequestStatus.Confirm : RequestStatus.Return;
-
-              request.Status = status;
-              request.Events.Add(new RequestEvent()
-              {
-                  EventDate= DateTime.Now,
-                  Message=message,
-                  Status=status,
-                  Request=request
-              });
-
-              request.SaveAndFlush();
-
-              dto.Status = status;
-
-              //dto.Refresh();
-
-              list.Add(dto);
-          }
-
-          return new DataSerializer(list);
-      }
+            return new DataSerializer(list);
+        }
 
 
+        [DirectMethod]
+        [ParseAsJson]
+        public DataSerializer ConfirmRequests(JObject o)
+        {
+            var a = getModels(o);
+            var isAccept = o["isAccept"].Value<bool>();
+            var message = o["message"].Value<string>();
 
-      [DirectMethod]
-      [ParseAsJson]
-      public DataSerializer CreateOrders(JObject o)
-      {
-          var date = o["date"].Value<DateTime>();
-          VehicleOrder.Create(date);
-          return new DataSerializer(new List<object>());
-      }
+            var list = new List<object>();
 
-      [DirectMethod]
-      [ParseAsJson]
-      public DataSerializer OrderRead(JObject o)
-      {
-          var date = o["date"].Value<DateTime>();
+            foreach (var _a in a)
+            {
+                var dto = JsonConvert.DeserializeObject<v_Request>(_a.ToString());
+                var request = Request.Find(dto.RequestId);
 
-          var orders = VehicleOrder.FindAll(Expression.Where<VehicleOrder>(x => x.DepartureDate >= date && x.DepartureDate <= date.AddDays(1)));
-          
-          return new DataSerializer(orders);
-      }
+                var status = isAccept ? RequestStatus.Confirm : RequestStatus.Return;
 
+                request.Status = status;
+                request.Events.Add(new RequestEvent()
+                {
+                    EventDate = DateTime.Now,
+                    Message = message,
+                    Status = status,
+                    Request = request
+                });
+
+                request.SaveAndFlush();
+
+                dto.Status = status;
+
+                //dto.Refresh();
+
+                list.Add(dto);
+            }
+
+            return new DataSerializer(list);
+        }
+
+
+
+        [DirectMethod]
+        [ParseAsJson]
+        public DataSerializer CreateOrders(JObject o)
+        {
+            var date = o["date"].Value<DateTime>();
+            VehicleOrder.Create(date);
+            return new DataSerializer(new List<object>());
+        }
+
+
+
+
+        public class AddOrderDto
+        {
+            public GroupRequest GroupRequest { get; set; }
+            public BaseVehicle Vehicle { get; set; }
+            public DateTime Date { get; set; }
+        }
+
+        [DirectMethod]
+        public VehicleOrder AddOrder(AddOrderDto dto)
+        {
+
+           var o =  VehicleOrder.FindFirst(
+                Expression.Where<VehicleOrder>(
+                    x =>
+                        x.Vehicle.VehicleId == dto.Vehicle.VehicleId &&
+                        (x.DepartureDate >= dto.Date && x.DepartureDate <= dto.Date.AddDays(1))));
+
+            if (o == null)
+            {
+                var car = (FullCar)FullCar.Find(dto.Vehicle.VehicleId);
+
+
+
+                if (car.GroupRequestId == null)
+                {
+                    car.GroupRequestId = dto.GroupRequest.GroupRequestId;
+                    car.SaveAndFlush();
+                }
+
+                TimeSpan departureTime;
+                TimeSpan returnTime;
+
+                TimeSpan.TryParse(car.StartWork, out departureTime);
+                TimeSpan.TryParse(car.EndWork, out returnTime);
+
+                o = new VehicleOrder()
+                {
+                    DepartureDate = dto.Date.Add(departureTime.Hours == 0 ? TimeSpan.Parse("08:00") : departureTime),
+                    ReturnDate = dto.Date.Add(returnTime.Hours == 0 ? TimeSpan.Parse("16:45") : returnTime),
+                    ScheduleId = car.ScheduleId == null ? 1 : car.ScheduleId.Value,
+                    Vehicle = BaseVehicle.Find(dto.Vehicle.VehicleId), 
+                    Shift = 1
+                };
+
+                o.Save();
+
+                if (car.Customer != null)
+                {
+                    o.Customers.Add(new VehicleOrderCustomer()
+                    {
+                        Customer = car.Customer,
+                        VehicleOrderId = o.VehicleOrderId
+                    });
+                }
+
+                if (car.ResponsibleDriver != null)
+                {
+                    o.Drivers.Add(new VehicleOrderDriver()
+                    {
+                        Driver = car.ResponsibleDriver,
+                        VehicleOrderId = o.VehicleOrderId
+                    });
+                }
+
+                o.Save();
+
+            }
+
+
+            if (
+                MaintenanceRequest.FindVehicleInMaintenance(dto.Date).Any(x => x.Car.VehicleId == o.Vehicle.VehicleId))
+            {
+                o.IsInMaintenance = true;
+            }
+            
+            return o;
+        }
+
+        [DirectMethod]
+        [ParseAsJson]
+        public DataSerializer OrderRead(JObject o)
+        {
+            var date = o["date"].Value<DateTime>();
+            var orders =
+                VehicleOrder.FindAll(
+                    Expression.Where<VehicleOrder>(x => x.DepartureDate >= date && x.DepartureDate <= date.AddDays(1)));
+
+
+            var maintenance = MaintenanceRequest.FindVehicleInMaintenance(date);
+            var maintenanceMap = maintenance.Select(m => m.Car.VehicleId).ToList();
+            
+            orders.ForEach(x =>
+            {
+                x.IsInMaintenance = maintenanceMap.Contains(x.Vehicle.VehicleId);
+            });
+            
+            return new DataSerializer(orders);
+        }
+
+
+
+
+        [DirectMethod]
+        public Waybill InsertWaybillByOrder(int VehicleOrderId)
+        {
+            var order = VehicleOrder.Find(VehicleOrderId);
+            var car = (FullCar)FullCar.Find(order.Vehicle.VehicleId);
+            
+            var waybill = new Waybill()
+            {
+                WaybillId = 0,
+                Position = Waybill.GetMaxPosition(order.Vehicle.VehicleId),
+                WaybillState = 1,
+                WaybillTypeId = car.WaybillTypeId.Value,
+                Car = order.Vehicle,
+                TrailerId = car.TrailerId,
+                DepartureDate = order.DepartureDate,
+                ReturnDate = order.ReturnDate.Value,
+                ScheduleId = order.ScheduleId,
+                Shift = order.Shift
+            };
+
+            waybill.Save();
+            waybill.SetPosition();
+            order.WaybillId = waybill.WaybillId;
+            order.SaveAndFlush();
+
+            var prevWaybill = waybill.Prev();
+            if (prevWaybill != null)
+            {
+                prevWaybill.MoveRemains(waybill, prevWaybill.WaybillState < 2);
+            }
+            else
+            {
+                waybill.SetRemains();
+            }
+
+            order.Drivers.ForEach(x =>
+            {
+                var waybillDriver = new WaybillDriver()
+                {
+                    WaybillId = waybill.WaybillId,
+                    Driver = x.Driver
+                };
+                waybillDriver.Save();
+
+                waybill.ResponsibleDriver = waybillDriver.Driver;
+
+            });
+
+            var norm = Norm.FindActualNorms(waybill.Car.VehicleId, waybill.DepartureDate).FirstOrDefault(x => x.isMain);
+            int fuelId = 0;
+            if (norm != null)
+            {
+                if (norm.MainFuelId == null)
+                {
+                    foreach (var f in norm.NormFuels)
+                    {
+                        fuelId = f;
+                        break;
+                    }
+                }
+                else
+                {
+                    fuelId = norm.MainFuelId.Value;
+                }
+
+
+                order.Customers.ForEach(customer =>
+                {
+                    var task = new WaybillTask()
+                    {
+                        WaybillId = waybill.WaybillId,
+                        TaskDepartureDate = waybill.DepartureDate,
+                        Customer = customer.Customer,
+                        NormConsumptionId = norm.NormId,
+                        FuelId = fuelId,
+                        TrailerId = waybill.TrailerId,
+                        isTruck = waybill.Car.isTruck()
+                    };
+
+                    task.Save();
+                    task.CheckDefaultIncreases();
+
+                });
+
+            }
+
+            return waybill;
+        }
 
 
 

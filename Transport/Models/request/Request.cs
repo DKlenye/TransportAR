@@ -101,9 +101,7 @@ namespace Transport.Models
 
       [JoinedKey]
       public int RequestId { get; set; }
-
-
-      [Property]
+       [Property]
       public string DestinationPoint { get; set; }      //Пункт назначения
       [Property]
       public string OrderNumber { get; set; }           //№ приказа
@@ -209,17 +207,5 @@ namespace Transport.Models
       [Property]
       public RequestStatus Status { get; set; }
    }
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

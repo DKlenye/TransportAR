@@ -1,6 +1,7 @@
 ﻿using System;
 using Castle.ActiveRecord;
 using Kdn.Ext.Attributes;
+using NHibernate.Criterion;
 
 namespace Transport.Models
 {
@@ -33,5 +34,13 @@ namespace Transport.Models
         public DateTime? EndRequest { get; set; }
         [BelongsTo("DepartmentId")]
         public Department Department { get; set; }
+        
+        public static MaintenanceRequest[] FindVehicleInMaintenance(DateTime date)
+        {
+            return FindAll(
+                Expression.Where<MaintenanceRequest>(
+                    x => x.EndRequest == null || (x.RequestDate <= date && x.EndRequest >= date)));
+        }
+        
     }
 }

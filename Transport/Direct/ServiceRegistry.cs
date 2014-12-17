@@ -24,6 +24,7 @@ namespace Transport.Direct
             list.ForEach(x =>
             {
                 var k = kList.AsQueryable().FirstOrDefault(xx => xx.idrees == x.scoreNo) ?? new kaprem() { idrees = x.scoreNo };
+
                 k.kpost1 = /*x.kgr.ToString()*/"46716".PadRight(5);
                 k.sbs = "";
                 k.skop = "";

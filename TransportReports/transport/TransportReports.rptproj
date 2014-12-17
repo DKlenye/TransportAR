@@ -321,6 +321,10 @@
       <FullPath>VehicleDayWork.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>VehicleFuelConsumptionFactNorm.rdl</Name>
+      <FullPath>VehicleFuelConsumptionFactNorm.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>VehicleFuelRemains.rdl</Name>
       <FullPath>VehicleFuelRemains.rdl</FullPath>
     </ProjectItem>
@@ -429,8 +433,8 @@
       <FullPath>WayBillPackage.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>VehicleFuelConsumptionFactNorm.rdl</Name>
-      <FullPath>VehicleFuelConsumptionFactNorm.rdl</FullPath>
+      <Name>InventoryDiff.rdl</Name>
+      <FullPath>InventoryDiff.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>

@@ -8,7 +8,8 @@ Kdn.Menu = [
         Child: [
             { text: "Пользователи", iconCls: "icon-user", Handler: "createView", HandlerCfg: "{xtype:'kdn.view.user',single:true}" }
         ]
-    }, {
+    },
+    {
         text: "Справочники",
         iconCls: "icon-book_open32",
         Child: [
@@ -311,7 +312,7 @@ Kdn.Menu = [
     }, {
         text: 'Учёт материалов',
         permission: {
-            u: [1, 29, 22]
+            u: [1, 29, 22,4,61,53]
         },
         iconCls: 'icon-layers32',
         Child: [

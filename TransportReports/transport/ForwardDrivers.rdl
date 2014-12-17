@@ -69,6 +69,10 @@
           <DataField>MiddleName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="ColumnName">
+          <DataField>ColumnName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>DataSource1</DataSourceName>
@@ -337,6 +341,53 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
+                    <Textbox Name="Textbox55">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!ColumnName.Value</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                                <Color>Blue</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox55</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>WhiteSmoke</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                    <ColSpan>6</ColSpan>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell />
+                <TablixCell />
+                <TablixCell />
+                <TablixCell />
+                <TablixCell />
+              </TablixCells>
+            </TablixRow>
+            <TablixRow>
+              <Height>0.23622in</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
                     <Textbox Name="Textbox15">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -345,7 +396,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!LastName.Value+" "+Fields!FirstName.Value+" "+Fields!MiddleName.Value+ ", Таб.№ "+Fields!EmployeeNumber.Value.ToString()</Value>
-                              <Style />
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -490,7 +543,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -760,47 +812,64 @@
           <TablixMembers>
             <TablixMember />
             <TablixMember>
-              <Group Name="Group1">
+              <Group Name="Group3">
                 <GroupExpressions>
-                  <GroupExpression>=Fields!EmployeeNumber.Value</GroupExpression>
+                  <GroupExpression>=Fields!ColumnName.Value</GroupExpression>
                 </GroupExpressions>
               </Group>
               <SortExpressions>
                 <SortExpression>
-                  <Value>=Fields!EmployeeNumber.Value</Value>
+                  <Value>=Fields!ColumnName.Value</Value>
                 </SortExpression>
               </SortExpressions>
               <TablixMembers>
-                <TablixMember />
                 <TablixMember>
-                  <Group Name="Group2">
+                  <KeepWithGroup>After</KeepWithGroup>
+                </TablixMember>
+                <TablixMember>
+                  <Group Name="Group1">
                     <GroupExpressions>
-                      <GroupExpression>=Fields!GarageNumber.Value</GroupExpression>
+                      <GroupExpression>=Fields!EmployeeNumber.Value</GroupExpression>
                     </GroupExpressions>
                   </Group>
                   <SortExpressions>
                     <SortExpression>
-                      <Value>=Fields!GarageNumber.Value</Value>
+                      <Value>=Fields!EmployeeNumber.Value</Value>
                     </SortExpression>
                   </SortExpressions>
                   <TablixMembers>
+                    <TablixMember />
                     <TablixMember>
-                      <KeepWithGroup>After</KeepWithGroup>
+                      <Group Name="Group2">
+                        <GroupExpressions>
+                          <GroupExpression>=Fields!GarageNumber.Value</GroupExpression>
+                        </GroupExpressions>
+                      </Group>
+                      <SortExpressions>
+                        <SortExpression>
+                          <Value>=Fields!GarageNumber.Value</Value>
+                        </SortExpression>
+                      </SortExpressions>
+                      <TablixMembers>
+                        <TablixMember>
+                          <KeepWithGroup>After</KeepWithGroup>
+                        </TablixMember>
+                        <TablixMember>
+                          <Group Name="Details" />
+                        </TablixMember>
+                      </TablixMembers>
                     </TablixMember>
-                    <TablixMember>
-                      <Group Name="Details" />
-                    </TablixMember>
+                    <TablixMember />
                   </TablixMembers>
                 </TablixMember>
-                <TablixMember />
               </TablixMembers>
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>2.02883cm</Top>
-        <Left>0.37042cm</Left>
-        <Height>2.99999cm</Height>
+        <Top>0.89112cm</Top>
+        <Left>0cm</Left>
+        <Height>3.59999cm</Height>
         <Width>18.00357cm</Width>
         <Style>
           <Border>
@@ -841,10 +910,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox44</rd:DefaultName>
-        <Top>0.89112cm</Top>
-        <Left>0.37042cm</Left>
+        <Top>0cm</Top>
+        <Left>0cm</Left>
         <Height>0.6cm</Height>
-        <Width>17.73896cm</Width>
+        <Width>18.00357cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -857,7 +926,7 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>2.09375in</Height>
+    <Height>1.76816in</Height>
     <Style />
   </Body>
   <ReportParameters>
@@ -870,7 +939,7 @@
       <Prompt>По:</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <Width>18.55916cm</Width>
+  <Width>18.00357cm</Width>
   <Page>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>

@@ -90,6 +90,9 @@ namespace Transport.OtherModels.ogmnew
         [Property]
         public int iduser { get; set; }
 
+        [Property]
+        public int idspec { get; set; }
+
 
         [PrimaryKey(Generator = PrimaryKeyType.Assigned)]
         public int idrees { get; set; }

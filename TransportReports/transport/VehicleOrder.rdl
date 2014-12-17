@@ -45,6 +45,10 @@
           <DataField>ScheduleName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="GroupRequestName">
+          <DataField>GroupRequestName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>DataSource1</DataSourceName>
@@ -53,6 +57,9 @@
         <QueryParameters>
           <QueryParameter Name="@date">
             <Value>=Parameters!date.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@columnId">
+            <Value>=Parameters!columnId.Value</Value>
           </QueryParameter>
         </QueryParameters>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
@@ -68,7 +75,7 @@
               <Width>0.48727in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.41435in</Width>
+              <Width>1.14352in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>0.84144in</Width>
@@ -77,10 +84,10 @@
               <Width>2.46341in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.44662in</Width>
+              <Width>3.17579in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.79675in</Width>
+              <Width>1.67175in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -310,6 +317,74 @@
                     </Textbox>
                   </CellContents>
                 </TablixCell>
+              </TablixCells>
+            </TablixRow>
+            <TablixRow>
+              <Height>0.23622in</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="GroupRequestName">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!GroupRequestName.Value</Value>
+                              <Style>
+                                <FontStyle>Italic</FontStyle>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>GroupRequestName</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>Gray</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <TopBorder>
+                          <Color>Gray</Color>
+                          <Style>Solid</Style>
+                          <Width>1pt</Width>
+                        </TopBorder>
+                        <BottomBorder>
+                          <Color>Gray</Color>
+                          <Style>Solid</Style>
+                          <Width>1pt</Width>
+                        </BottomBorder>
+                        <LeftBorder>
+                          <Color>Gray</Color>
+                          <Style>Solid</Style>
+                          <Width>1pt</Width>
+                        </LeftBorder>
+                        <RightBorder>
+                          <Color>Gray</Color>
+                          <Style>Solid</Style>
+                          <Width>1pt</Width>
+                        </RightBorder>
+                        <BackgroundColor>WhiteSmoke</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                    <ColSpan>6</ColSpan>
+                    <rd:Selected>true</rd:Selected>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell />
+                <TablixCell />
+                <TablixCell />
+                <TablixCell />
+                <TablixCell />
               </TablixCells>
             </TablixRow>
             <TablixRow>
@@ -615,13 +690,28 @@
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
           <TablixMembers>
+            <TablixMember />
             <TablixMember>
-              <KeepWithGroup>After</KeepWithGroup>
-            </TablixMember>
-            <TablixMember>
-              <Group Name="Details" />
+              <Group Name="Group1">
+                <GroupExpressions>
+                  <GroupExpression>=Fields!GroupRequestName.Value</GroupExpression>
+                </GroupExpressions>
+              </Group>
+              <SortExpressions>
+                <SortExpression>
+                  <Value>=Fields!GroupRequestName.Value</Value>
+                </SortExpression>
+              </SortExpressions>
               <TablixMembers>
-                <TablixMember />
+                <TablixMember>
+                  <KeepWithGroup>After</KeepWithGroup>
+                </TablixMember>
+                <TablixMember>
+                  <Group Name="Details" />
+                  <TablixMembers>
+                    <TablixMember />
+                  </TablixMembers>
+                </TablixMember>
               </TablixMembers>
             </TablixMember>
           </TablixMembers>
@@ -632,8 +722,8 @@
         <FixedRowHeaders>true</FixedRowHeaders>
         <DataSetName>DataSet1</DataSetName>
         <Top>0.60083in</Top>
-        <Height>0.62754in</Height>
-        <Width>10.44984in</Width>
+        <Height>0.86376in</Height>
+        <Width>9.78317in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -647,9 +737,16 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Разнарядка</Value>
+                <Value>Разнарядка на </Value>
                 <Style>
                   <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>=Parameters!date.Value</Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                  <Format>dd.MM.yyyy</Format>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -662,7 +759,7 @@
         <Top>0.44133cm</Top>
         <Left>0cm</Left>
         <Height>0.6cm</Height>
-        <Width>26.51913cm</Width>
+        <Width>24.84926cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -675,7 +772,7 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>3.19945cm</Height>
+    <Height>3.72006cm</Height>
     <Style />
   </Body>
   <ReportParameters>
@@ -683,8 +780,12 @@
       <DataType>DateTime</DataType>
       <Prompt>date</Prompt>
     </ReportParameter>
+    <ReportParameter Name="columnId">
+      <DataType>Integer</DataType>
+      <Prompt>column Id</Prompt>
+    </ReportParameter>
   </ReportParameters>
-  <Width>26.54259cm</Width>
+  <Width>24.84926cm</Width>
   <Page>
     <PageHeight>21.59cm</PageHeight>
     <PageWidth>27.94cm</PageWidth>

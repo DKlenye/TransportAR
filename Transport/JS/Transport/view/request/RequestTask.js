@@ -1,20 +1,31 @@
 ﻿T.view.RequestTask = Ext.extend(Ext.Panel, {
 
-    requireModels: 'BodyType,TransportColumn',
+    requireModels: 'BodyType,TransportColumn,Vehicle,GroupRequest',
 
     constructor: function(cfg) {
         cfg = cfg || {};
         var me = this;
 
-        var OrderStore = Kdn.ModelFactory.getModel('VehicleOrder').buildStore({
+        var OrderStore = Kdn.ModelFactory.getStore('VehicleOrder',{
             autoSave: true,
             autoLoad: false,
             autoDestroy: true,
             api: {
                 read: Kdn.Direct.OrderRead,
-                update: Kdn.Direct.Update
+                update: Kdn.Direct.VehicleOrderUpdate,
+                destroy: Kdn.Direct.Destroy
             }
         });
+
+        OrderStore.on({
+            load: function(s, rec, o) {
+                var isEmpty = s.getCount() == 0;
+                me.createOrder.setDisabled(!isEmpty);
+                me.addOrder.setDisabled(isEmpty);
+                me.deleteOrder.setDisabled(isEmpty);
+            }
+        });
+
 
         var OrderDate = Ext.create({
             xtype: 'datefield',
@@ -40,7 +51,7 @@
 
         var createEditor = function(xtype) {
             var EditorDefaults = { margins: '0 0 2 0', flex: 3, cls: 'request-editor' /*title: '.', iconCls: 'icon-page'*/ };
-            return Ext.create(Ext.apply(EditorDefaults, { xtype: xtype }))
+            return Ext.create(Ext.apply(EditorDefaults, { xtype: xtype }));
         }
 
         var Editors = {
@@ -225,6 +236,7 @@
             {
                 title: 'Список транспорта',
                 cls: 'vehicleOrderGrid',
+                ref: 'vehicleOrderGrid',
                 xtype: 'grid',
                 enableDragDrop: true,                
                 region: 'center',
@@ -255,8 +267,11 @@
                             width: 100,
                             renderer: {
                                 fn: function(value, metaData, record, rowIndex, colIndex, store) {
-                                    if (me.isInTrip(record)) {
-                                        return '<span class="label label-gray">Командировка</span>'
+                                    if (record.get("IsInMaintenance")) {
+                                        return '<span class="label label-important">Ремонт</span>';
+                                    }
+                                    if (record.get("BusinessTripOrderId")) {
+                                        return '<span class="label label-black">Комманд.</span>';
                                     }
 
                                     if (me.isVehicleUsed(record)) {
@@ -281,7 +296,7 @@
                                 Ext.iterate(v, function(customer) {
                                     var c = customer.Customer;
                                     if(c && c.CustomerName){
-                                        customers.push(String.format("[<span style='color:tomato'>{0}</span>] {1}",customer.RequestId||"...",c.CustomerName));
+                                        customers.push(String.format("<span style='color:blue'>{0}</span>[<span style='color:tomato'>{1}</span>] {2}",customer.DepartureTime||'', customer.RequestId || "...", c.CustomerName));
                                         qtips.push(String.format(qtipTpl, customer.RequestId || "...", (c['CustomerName'] + '').replace(/"/g, '\'')));
                                     }
                                 });
@@ -311,6 +326,7 @@
                                 }
                             }
                         },
+                        { header: 'г.п', xtype: 'mappingcolumn', dataIndex: 'Vehicle.CapacityTonns', width: 45 },
                         { header: 'Гар.№', xtype: 'mappingcolumn', dataIndex: 'Vehicle.GarageNumber', width: 60 },
                         { header: 'Марка', xtype: 'mappingcolumn', dataIndex: 'Vehicle.Model', width: 100 },
                         { header: 'Гос.№', xtype: 'mappingcolumn', dataIndex: 'Vehicle.RegistrationNumber', width: 80 },
@@ -477,12 +493,48 @@
                         }
                     }
                 ],
-                bbar:[
+                    bbar: [
+                    '-',
                     {
-                        text:'Создать разнарядку',
+                        text: 'Создать разнарядку',
+                        iconCls: 'icon-add',
+                        ref:'../../createOrder',
                         handler:this.createOrders,
                         scope:this
-                    }
+                    },
+                    '-',
+                    {
+                        text: 'Добавить авто',
+                        ref: '../../addOrder',
+                        iconCls: 'icon-add',
+                        handler: function() {
+                            this.AddOrderWindow.show();
+                        },
+                        scope: this
+                    },
+                    '-',
+                    {
+                        text: 'Удалить авто',
+                        ref: '../../deleteOrder',
+                        iconCls: 'icon-delete',
+                        handler:function() {
+                            var grid = this.vehicleOrderGrid;
+                            var sel = grid.getSelectionModel().getSelections();
+                            if (sel) {
+                                Ext.Msg.confirm(
+                                    'Удаление строк',
+                                    'Удалить выделенные строки ?',
+                                    function (y) {
+                                        if (y == 'yes') {
+                                            grid.store.remove(sel);
+                                        }
+                                    }
+                                );
+                            }
+                        },
+                        scope:this
+                    },
+                    '-'
                 ]
             }
         ]
@@ -558,6 +610,8 @@
         
         this.OrderWindow = new T.view.OrderWindow({renderTo: this.getBody()});
 
+        
+
         this.RequestWindow = RequestWindow;
 
         var RequestGrid = this.items.get(0);
@@ -566,7 +620,21 @@
         this.RequestGrid = RequestGrid;
         this.VehicleGrid = VehicleGrid;
 
-        var me = this;
+
+        this.AddOrderWindow = new T.view.AddOrderWindow({
+            renderTo: this.VehicleGrid.getBody(),
+            listeners: {
+                'vehicleadd': function (o) {
+                    o.Date = me.OrderDate.getValue();
+
+                    Kdn.Direct.AddOrder(o, function (e) {
+                        me.OrderStore.loadData({ data: [e] }, true);
+                        me.AddOrderWindow.hide();
+                    });
+                },
+                scope:this
+            }
+        });
 
         RequestGrid.on({
             rowcontextmenu: this.onContextMenuRequest,
@@ -731,8 +799,6 @@
 
     onContextMenuRequest: function(grid, idx, e) {
 
-        //  var offsetY = this.getEl().getXY()[1];
-
         grid.getSelectionModel().selectRow(idx);
 
         var rec = grid.store.getAt(idx);
@@ -740,7 +806,6 @@
                 
         this.OrderWindow.hide();
         w.show();
-        // w.setPosition(e.getPageX(),e.getPageY()-offsetY);
         w.doConstrain();
         w.getEl().mask('Загрузка', 'x-mask-loading');
 
@@ -922,9 +987,61 @@
 Ext.reg('view.requesttask', T.view.RequestTask);
 
 
+T.view.AddOrderWindow = Ext.extend(Ext.Window, {
+
+    initComponent: function () {
+
+        this.addEvents("vehicleadd");
+
+        Ext.apply(this, {
+            constrain: true,
+            modal: true,
+            width: 400,
+            height:'auto',
+            layout: {
+                type:'form',
+                padding:'2'
+            },
+            defaults: {
+                anchor:'100%'
+            },
+            items: [
+                {
+                    xtype: "combo.car2",
+                    fieldLabel: 'Авто',
+                    dataIndex:'Vehicle'
+                },
+                {
+                    xtype: "combo.grouprequest",
+                    fieldLabel: 'Группа',
+                    dataIndex: 'GroupRequest'
+                }
+            ],
+            bbar: [
+                '->',
+                {
+                    xtype:'button.add',
+                    handler: function () {
+                        var o = {};
+                        var v = this.items.each(function(i) {
+                            o[i.dataIndex] = i.getValue();
+                        });
+
+                        if (o.Vehicle && o.GroupRequest) {
+                            this.fireEvent("vehicleadd", o);    
+                        }
+                        
+                    },
+                    scope:this
+                }
+            ]
+            });
+        T.view.AddOrderWindow.superclass.initComponent.call(this);
+
+    }
 
 
-
+});
 
 
 T.view.OrderWindow = Ext.extend(Ext.Window,{
@@ -968,12 +1085,19 @@ T.view.OrderWindow = Ext.extend(Ext.Window,{
             margins:0,
             store: new Ext.data.JsonStore({
                 idProperty:'Id',
-                fields:['Id','RequestId','Customer']
+                fields: ['Id', 'RequestId', 'Customer', 'DepartureTime']
             }),
             viewConfig:{
                 forceFit:true
             },
-            columns:[
+            columns: [
+            {
+                    header: 'Время работы',
+                    dataIndex: 'DepartureTime',
+                    width:90,
+                    fixed: true,
+                    editor: { xtype: 'kdn.editor.fulltimefield' }
+            },
             {
                 header:'№ заявки',
                 dataIndex:'RequestId',
@@ -1007,9 +1131,12 @@ T.view.OrderWindow = Ext.extend(Ext.Window,{
                     items:[
                         {
                             xtype:'datetimefield',
-                            fieldLabel:'Выезд',
+                            fieldLabel: 'Выезд',
                             anchor: null,
-                            dataIndex:'DepartureDate'
+                            dataIndex:'DepartureDate',
+                            dateConfig: {
+                                readOnly:true
+                            }
                         },
                         {
                             xtype:'datetimefield',
@@ -1064,9 +1191,10 @@ T.view.OrderWindow = Ext.extend(Ext.Window,{
         });
         
     },
-    
-    onBeforeEdit:function(e){
-        if(e.record.get('RequestId')) return false;
+
+    onBeforeEdit: function (e) {
+
+        if (e.field=="Customer" && e.record.get('RequestId') ) return false;
     },    
     
     eachFields:function(fn){
@@ -1078,7 +1206,7 @@ T.view.OrderWindow = Ext.extend(Ext.Window,{
         var customers = [],drivers=[];
         
         this.customers.store.each(function(e){
-            var o = Ext.copyTo({},e.data,'Customer,Id,RequestId');
+            var o = Ext.copyTo({}, e.data, 'Customer,Id,RequestId,DepartureTime');
             o.VehicleOrderId = rec.get('VehicleOrderId');
             o.Id = o.Id||0;
             if(o.Customer) customers.push(o); 

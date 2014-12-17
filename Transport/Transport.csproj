@@ -168,7 +168,6 @@
     <Compile Include="Models\request\VehicleOrder.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Models\request\VehicleOrderDTO.cs" />
     <Compile Include="Models\request\v_Request.cs" />
     <Compile Include="Models\request\RequestDTO.cs" />
     <Compile Include="Models\request\RequestApprover.cs" />

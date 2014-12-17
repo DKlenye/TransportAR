@@ -156,6 +156,14 @@
         row.innerHTML = this.templates.rowInner.apply(rowParams);
         
         this.fireEvent('rowupdated', this, rowIndex, record);
+    },
+
+    getRecordByIndex: function (index) {
+
+        var rowIndex = this.cursor * this.pageSize + index;
+        record = this.ds.getAt(rowIndex);
+
+        return record;
     }
 
 });

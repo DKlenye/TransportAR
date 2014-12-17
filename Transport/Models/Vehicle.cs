@@ -59,6 +59,11 @@ namespace Transport.Models {
            return BodyTypeId == 18 || BodyTypeId == 36;
        }
 
+       public int? FindTrailerId()
+       {
+           return((FullCar) FullCar.Find(VehicleId)).TrailerId;
+       }
+
    }
    
    [Model, ActiveRecord(DiscriminatorValue = "1")]

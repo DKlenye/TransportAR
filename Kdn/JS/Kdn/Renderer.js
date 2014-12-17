@@ -46,15 +46,18 @@
 
         icons: function(fnName)
         {
-            var tpl = '<img src="{0}{1}.png"/>';
+            var tpl = '<img style="cursor:pointer" src="{0}{1}.png"/>';
             var fn = function(v, metaData, record, rowIndex, colIndex, store)
             {
                 metaData.css = 'icon-cell';
                 var name = fnName(v);
-                return String.format(tpl, url, name)
+                if (Ext.isObject(name)) {
+                    return String.format(tpl, url, name.iconCls) + name.text;
+                }
+                return String.format(tpl, url, name);
             };
             return fn;
-        }        
+        }
         
     };
 })();

@@ -18,7 +18,7 @@ namespace Transport.Models {
    [Model, ActiveRecord]
    public class Waybill : ActiveRecordBase<Waybill>,Interfaces.IOwnered {
 
-      [IdProperty, PrimaryKey]
+       [IdProperty, PrimaryKey]
       public int WaybillId { get; set; }
       [BelongsTo("VehicleId",UniqueKey="VehiclePosition_idx")]
       public BaseVehicle Car { get; set; }

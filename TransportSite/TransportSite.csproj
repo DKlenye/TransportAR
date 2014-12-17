@@ -1037,8 +1037,8 @@
     <None Include="db\Transport.db" />
     <None Include="db\VO885.DBF" />
     <None Include="db\Vo885p.DBF" />
-    <None Include="fonts\Cuprum_typefamily.zip" />
-    <None Include="fonts\Russo.zip" />
+    <None Include="images\access\fonts\Cuprum_typefamily.zip" />
+    <None Include="images\access\fonts\Russo.zip" />
     <Content Include="Handlers\Websync.ashx" />
     <None Include="images\access\form\clear-trigger.psd" />
     <None Include="images\access\form\date-trigger.psd" />
@@ -1082,7 +1082,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>17379</DevelopmentServerPort>
+          <DevelopmentServerPort>38951</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
