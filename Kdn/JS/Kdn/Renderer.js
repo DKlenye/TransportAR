@@ -49,8 +49,10 @@
             var tpl = '<img style="cursor:pointer" src="{0}{1}.png"/>';
             var fn = function(v, metaData, record, rowIndex, colIndex, store)
             {
+                var name = fnName(v, record);
+                if (name == null) return name;
+
                 metaData.css = 'icon-cell';
-                var name = fnName(v);
                 if (Ext.isObject(name)) {
                     return String.format(tpl, url, name.iconCls) + name.text;
                 }

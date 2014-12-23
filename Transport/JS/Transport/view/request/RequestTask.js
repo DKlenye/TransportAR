@@ -94,16 +94,14 @@
                 loadMask: true,
                 ddGroup: 'DDGroup',
                 region: 'west',
-                width: 950,
+                width: 650,
                 collapsible:true,
-                //margins: '2 0 2 2',
                 split: true,
                 store: RequestStore,
-                plugins: ['filterrow'/*, expander2*/],
+                plugins: ['filterrow'],
                 colModel: new Ext.grid.ColumnModel({
                     defaults: { filter: {} },
                     columns: [
-                    //expander2,
                         {
                         header: '№ заявки',
                         dataIndex: 'RequestId',
@@ -112,7 +110,7 @@
                         {
                             header: 'Статус',
                             dataIndex: 'Status',
-                            width: 105,
+                            width: 30,
                             renderer: function(v) {
                                 if (v == 0) {
                                     return '<span class="label label-gray">Опубликована</span>'
@@ -235,12 +233,11 @@
             },
             {
                 title: 'Список транспорта',
-                cls: 'vehicleOrderGrid',
+                cls: 'vehicleorder-grid',
                 ref: 'vehicleOrderGrid',
                 xtype: 'grid',
                 enableDragDrop: true,                
                 region: 'center',
-                //margins: '2 2 2 0',
                 split: true,
                 view: new Ext.grid.GridView({
                     scrollDelay: false,
@@ -255,7 +252,7 @@
                 loadMask: true,
                 columnLines: true,
                 stripeRows: true,
-                plugins: ['filterrow'/*, expander*/],
+                plugins: ['filterrow'],
                 selModel: new Ext.grid.RowSelectionModel(),
                 colModel: new Ext.grid.ColumnModel({
                     defaults: { filter: {} },
@@ -270,12 +267,38 @@
                                     if (record.get("IsInMaintenance")) {
                                         return '<span class="label label-important">Ремонт</span>';
                                     }
-                                    if (record.get("BusinessTripOrderId")) {
-                                        return '<span class="label label-black">Комманд.</span>';
+                                    if (record.get("BusinessTripDepartureDate")|| record.get("ScheduleId")==6) {
+                                        return String.format('<span class="label label-black">Комманд.</span><br/><b>{0}</b>', record.get('DestRoutePoint') || '');
                                     }
 
+                                    var drivers = record.get("Drivers");
+                                    var IsSick = true;
+                                    var IsHoliday = true;
+                                    var IsHolidayDate;
+                                    
+                                    Ext.iterate(drivers, function(d) {
+                                            if (IsSick) {
+                                                IsSick = d.IsSick;
+                                            }
+                                            if (IsHoliday) {
+                                                IsHoliday = !!d.IsHoliday;
+                                                IsHolidayDate = d.IsHoliday;
+                                            }
+                                    });
+
+
+                                        if (drivers && drivers.length>0 && IsSick) {
+                                            return '<span class="label label-warning">болн</span>';
+                                        }
+
+                                        if (drivers && drivers.length > 0 &&  IsHoliday) {
+                                            return '<span class="label label-warning">отгул<br/></span>' + IsHolidayDate.format('d.m.Y') ;
+                                        }
+
+
+
                                     if (me.isVehicleUsed(record)) {
-                                        return '<span class="label label-success">Занят</span>'
+                                        return '<span class="label label-success">Занят</span>';
                                     }
                                     return null;
 
@@ -285,19 +308,27 @@
                         },
                         {
                             header: 'Заказчик',
-                            width: 170,
+                            width: 350,
                             dataIndex: 'Customers',
-                            renderer: function(v, m, r, Idx, colIdx, store) {
+                            renderer: function (v, m, r, Idx, colIdx, store) {
                                 if (v.length < 1) return null;
 
-                                var qtipTpl = "<b><span style='font-size:15px;'>[<span style='color:tomato'>{0}</span>] : {1} </span></b>";
+                                var qtipTpl = "<b><span style='font-size:15px;'>[<span style='color:tomato'>{0}</span>] : {1} {2}</span></b>";
                                 var customers = [],
                                     qtips = [];
-                                Ext.iterate(v, function(customer) {
+                                Ext.iterate(v, function (customer) {
                                     var c = customer.Customer;
-                                    if(c && c.CustomerName){
-                                        customers.push(String.format("<span style='color:blue'>{0}</span>[<span style='color:tomato'>{1}</span>] {2}",customer.DepartureTime||'', customer.RequestId || "...", c.CustomerName));
-                                        qtips.push(String.format(qtipTpl, customer.RequestId || "...", (c['CustomerName'] + '').replace(/"/g, '\'')));
+                                    if (c && c.CustomerName) {
+                                        customers.push(
+                                            String.format("<span style='color:blue'>{0}{1}</span>[<span style='color:tomato'>{2}</span>] {3}<span style='color:red'> {4}</span>",
+                                            customer.DepartureTime || '',
+                                            customer.ReturnTime?('-'+customer.ReturnTime): '',
+                                            customer.RequestId || "...",
+                                            c.CustomerName,
+                                            customer.Description || ""
+                                            )
+                                        );
+                                        qtips.push(String.format(qtipTpl, customer.RequestId || "...", (c['CustomerName'] + '').replace(/"/g, '\''), customer.Description || ""));
                                     }
                                 });
 
@@ -308,20 +339,20 @@
 
                             },
                             filter: {
-                                test: function(f, o) {
+                                test: function (f, o) {
                                     if (!f) return true;
-                                    if (!o || o.length<1) return false;
-                                    
+                                    if (!o || o.length < 1) return false;
+
                                     var flag = false;
-                                    var reg = new RegExp(f, 'i');                                    
-                                    
-                                   Ext.iterate(o,function(v){
-                                        if(reg.test(v.Customer.CustomerName)){
-                                            flag=true;
+                                    var reg = new RegExp(f, 'i');
+
+                                    Ext.iterate(o, function (v) {
+                                        if (reg.test(v.Customer.CustomerName)) {
+                                            flag = true;
                                             return false;
                                         }
-                                   });
-                                    
+                                    });
+
                                     return flag;
                                 }
                             }
@@ -338,7 +369,7 @@
 
                                 if (e.length < 1) return null;
 
-                                var qtipTpl = "<span style='font-size:14px;'><b>Цех:{0} Taб.№:{1} {2} {3} {4}</b></span>";
+                                var qtipTpl = "<span style='font-size:14px; background-color:{5}'><b>Цех:{0} Taб.№:{1} {2} {3} {4}</b></span>";
 
                                 var qtips = [],
                                     drivers = [];
@@ -347,8 +378,20 @@
                                     var d = driver.Driver,
                                         e = d.Employee;
 
-                                    qtips.push(String.format(qtipTpl, e.Department, e.EmployeeNumber, e.LastName, e.FirstName, e.MiddleName))
-                                    drivers.push(String.format("{0} {1}.{2}.", e.LastName, e.FirstName.substr(0, 1), e.MiddleName.substr(0, 1)));
+                                    qtips.push(String.format(qtipTpl,
+                                        e.Department,
+                                        e.EmployeeNumber,
+                                        e.LastName,
+                                        e.FirstName,
+                                        e.MiddleName,
+                                        driver.IsHoliday ? 'chartreuse' : (driver.IsSick ? 'tomato' : '')
+                                        ));
+                                    drivers.push(String.format("<span style='background-color:{3}'>{0} {1}.{2}.</span>",
+                                     e.LastName,
+                                     e.FirstName.substr(0, 1),
+                                     e.MiddleName.substr(0, 1),
+                                     driver.IsHoliday ? 'chartreuse' : (driver.IsSick ? 'tomato' : '')
+                                     ));
                                 });
 
                                 if (m) {
@@ -382,8 +425,11 @@
                             header: 'Выезд',
                             dataIndex: 'DepartureDate',
                             width:45,
-                            renderer:function(v){
+                            renderer: function (v, m, r, Idx, colIdx, store) {
                                 if (!v && !v.format) return null;
+
+                                var v = r.get("BusinessTripDepartureDate") || v;
+
                                 return String.format(
                                     '<span style="font-size:9pt;">{0}<br><span style="color:blue;"><b>{1}</b><span/><span/>',
                                     v.format('d.m'),
@@ -1047,7 +1093,7 @@ T.view.AddOrderWindow = Ext.extend(Ext.Window, {
 T.view.OrderWindow = Ext.extend(Ext.Window,{
     constrain: true,
     width: 600,
-    height: 650,
+    height: 680,
     closeAction: 'hide',            
     layout: {
         type:'vbox',
@@ -1062,7 +1108,7 @@ T.view.OrderWindow = Ext.extend(Ext.Window,{
             title:'Водители',
             flex:1,
             store: new Ext.data.JsonStore({
-                fields:['Driver']
+                fields: ['Driver', 'IsHoliday', 'IsSick']
             }),
             viewConfig:{
                 forceFit:true
@@ -1074,7 +1120,34 @@ T.view.OrderWindow = Ext.extend(Ext.Window,{
                      width:300,
                      editor:{xtype:'combo.driver'},
                      renderer:T.combo.Driver.prototype.renderTpl
-                }           
+                 },
+                {
+                    header:'Отгул, по',
+                    xtype:'datecolumn',
+                    width:80,
+                    fixed:true,
+                    dataIndex:'IsHoliday',
+                    editor: {
+                        xtype: 'datefield',
+                        allowBlank:true,
+                        triggersConfig: [{ iconCls: "x-form-clear-trigger", qtip: "Очистить"}],
+                        listeners: {
+                            triggerclick: {
+                                fn: function (item, trigger, index, tag, e) {
+                                    item.reset();
+                                    item.fireEvent('select');
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    header:'БЛ',
+                    xtype:'checkcolumn',
+                    width:50,
+                    fixed:true,
+                    dataIndex: 'IsSick'
+                }       
             ]
         });
         
@@ -1085,18 +1158,25 @@ T.view.OrderWindow = Ext.extend(Ext.Window,{
             margins:0,
             store: new Ext.data.JsonStore({
                 idProperty:'Id',
-                fields: ['Id', 'RequestId', 'Customer', 'DepartureTime']
+                fields: ['Id', 'RequestId', 'Customer', 'DepartureTime', 'Description', 'ReturnTime']
             }),
             viewConfig:{
                 forceFit:true
             },
             columns: [
             {
-                    header: 'Время работы',
+                    header: 'С',
                     dataIndex: 'DepartureTime',
                     width:90,
                     fixed: true,
                     editor: { xtype: 'kdn.editor.fulltimefield' }
+                },
+            {
+                header: 'По',
+                dataIndex: 'ReturnTime',
+                width: 90,
+                fixed: true,
+                editor: { xtype: 'kdn.editor.fulltimefield',enableClear:true }
             },
             {
                 header:'№ заявки',
@@ -1112,6 +1192,11 @@ T.view.OrderWindow = Ext.extend(Ext.Window,{
                     if (!v) return null;
                     return String.format("[{0}] {1}",v.CustomerId,v.CustomerName);
                 }
+            },
+            {
+                header: 'Примечание',
+                dataIndex: 'Description',
+                editor:{xtype:'textfield'}
             }
             ]
         });
@@ -1154,6 +1239,11 @@ T.view.OrderWindow = Ext.extend(Ext.Window,{
                             objectValue: false,
                             fieldLabel:'График',
                             dataIndex:'ScheduleId'
+                        },
+                        {
+                            xtype: 'textfield',
+                            fieldLabel: 'Пункт назн.',
+                            dataIndex: 'DestRoutePoint'
                         },
                         {
                             xtype:'textarea',
@@ -1206,14 +1296,14 @@ T.view.OrderWindow = Ext.extend(Ext.Window,{
         var customers = [],drivers=[];
         
         this.customers.store.each(function(e){
-            var o = Ext.copyTo({}, e.data, 'Customer,Id,RequestId,DepartureTime');
+            var o = Ext.copyTo({}, e.data, 'Customer,Id,RequestId,DepartureTime,Description,ReturnTime');
             o.VehicleOrderId = rec.get('VehicleOrderId');
             o.Id = o.Id||0;
             if(o.Customer) customers.push(o); 
         }); 
         
         this.drivers.store.each(function(e){
-            var o = Ext.copyTo({},e.data,'Driver');
+            var o = Ext.copyTo({},e.data,'Driver,IsHoliday,IsSick');
             o.VehicleOrderId = rec.get('VehicleOrderId');
             drivers.push(o); 
         }); 

@@ -179,8 +179,7 @@ namespace Transport.Direct
             {
                 var car = (FullCar)FullCar.Find(dto.Vehicle.VehicleId);
 
-
-
+                
                 if (car.GroupRequestId == null)
                 {
                     car.GroupRequestId = dto.GroupRequest.GroupRequestId;

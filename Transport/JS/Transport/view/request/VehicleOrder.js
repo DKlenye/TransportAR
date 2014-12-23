@@ -51,7 +51,8 @@
 
     var view = new Kdn.grid.PagingGridView();
 
-        Ext.apply(cfg, {
+    Ext.apply(cfg, {
+            cls:'vehicleorder-grid',
             OrderDate: OrderDate,
             OrderColumn:OrderColumn,
             store: store,
@@ -69,37 +70,65 @@
             colModel: new Ext.grid.ColumnModel({
                 defaults: { filter: {} },
                 columns: [
-                    {
-                        header: 'Статус',
-                        align: 'center',
-                        dataIndex: 'Status',
-                        width: 100,
-                        renderer: {
-                            fn: function (value, metaData, record, rowIndex, colIndex, store) {
+                     {
+                         header: 'Статус',
+                         align: 'center',
+                         dataIndex: 'Status',
+                         width: 100,
+                         renderer: {
+                             fn: function (value, metaData, record, rowIndex, colIndex, store) {
+                                 if (record.get("IsInMaintenance")) {
+                                     return '<span class="label label-important">Ремонт</span>';
+                                 }
+                                 if (record.get("BusinessTripDepartureDate") || record.get("ScheduleId") == 6) {
+                                     return String.format('<span class="label label-black">Комманд.</span><br/><b>{0}</b>', record.get('DestRoutePoint') || '');
+                                 }
 
-                                if (record.get("IsInMaintenance")) {
-                                    return '<span class="label label-important">Ремонт</span>';
-                                }
+                                 var drivers = record.get("Drivers");
+                                 var IsSick = true;
+                                 var IsHoliday = true;
+                                 var IsHolidayDate;
 
-                                if (record.get("BusinessTripOrderId")) {
-                                    return '<span class="label label-black">Комманд.</span>';
-                                }
+                                 Ext.iterate(drivers, function (d) {
+                                     if (IsSick) {
+                                         IsSick = d.IsSick;
+                                     }
+                                     if (IsHoliday) {
+                                         IsHoliday = !!d.IsHoliday;
+                                         IsHolidayDate = d.IsHoliday;
+                                     }
+                                 });
 
-                                if (me.isVehicleUsed(record)) {
-                                    return '<span class="label label-success">Занят</span>';
-                                }
-                                return null;
 
-                            },
-                            scope: this
-                        }
-                    },
+                                 if (drivers && drivers.length > 0 && IsSick) {
+                                     return '<span class="label label-warning">болн</span>';
+                                 }
+
+                                 if (drivers && drivers.length > 0 && IsHoliday) {
+                                     return '<span class="label label-warning">отгул<br/></span>' + IsHolidayDate.format('d.m.Y');
+                                 }
+
+
+                                 if (me.isVehicleUsed(record)) {
+                                     return '<span class="label label-success">Занят</span>';
+                                 }
+                                 return null;
+
+                             },
+                             scope: this
+                         }
+                     },
                     {
                         header: 'путевой лист',
                         width: '100',
                         dataIndex: 'WaybillId',
                         align: 'center',
-                        renderer: Kdn.Renderer.icons(function (v) {
+                        renderer: Kdn.Renderer.icons(function (v, r) {
+
+                            if (r.get('IsInMaintenance')) {
+                                return null;
+                            }
+
                             if (v) {
                                 return { iconCls: 'page_white_edit', text: ' ' + v };
                             }
@@ -131,66 +160,82 @@
                             }
                         }
                     },
-                    {
-                        header: 'Заказчик',
-                        width: 170,
-                        dataIndex: 'Customers',
-                        renderer: function(v, m, r, Idx, colIdx, store) {
-                            if (v.length < 1) return null;
+                     {
+                         header: 'Заказчик',
+                         width: 350,
+                         dataIndex: 'Customers',
+                         renderer: function (v, m, r, Idx, colIdx, store) {
+                             if (v.length < 1) return null;
 
-                            var qtipTpl = "<b><span style='font-size:15px;'>[<span style='color:tomato'>{0}</span>] : {1} </span></b>";
-                            var customers = [],
+                             var qtipTpl = "<b><span style='font-size:15px;'>[<span style='color:tomato'>{0}</span>] : {1} {2}</span></b>";
+                             var customers = [],
                                     qtips = [];
-                            Ext.iterate(v, function (customer) {
-                                var c = customer.Customer;
-                                if (c && c.CustomerName) {
-                                    customers.push(String.format("<span style='color:blue'>{0}</span>[<span style='color:tomato'>{1}</span>] {2}", customer.DepartureTime || '', customer.RequestId || "...", c.CustomerName));
-                                    qtips.push(String.format(qtipTpl, customer.RequestId || "...", (c['CustomerName'] + '').replace(/"/g, '\'')));
-                                }
-                            });
+                             Ext.iterate(v, function (customer) {
+                                 var c = customer.Customer;
+                                 if (c && c.CustomerName) {
+                                     customers.push(
+                                            String.format("<span style='color:blue'>{0}{1}</span>[<span style='color:tomato'>{2}</span>] {3}<span style='color:red'> {4}</span>",
+                                            customer.DepartureTime || '',
+                                            customer.ReturnTime ? ('-' + customer.ReturnTime) : '',
+                                            customer.RequestId || "...",
+                                            c.CustomerName,
+                                            customer.Description || ""
+                                            )
+                                        );
+                                     qtips.push(String.format(qtipTpl, customer.RequestId || "...", (c['CustomerName'] + '').replace(/"/g, '\''), customer.Description || ""));
+                                 }
+                             });
 
-                            m.css = 'waybill-task-customer';
-                            m.attr = 'ext:qtip="' + "<b><span style='font-size:15px;'>" + qtips.join('</br>') + "</span></b>" + '"';
+                             m.css = 'waybill-task-customer';
+                             m.attr = 'ext:qtip="' + "<b><span style='font-size:15px;'>" + qtips.join('</br>') + "</span></b>" + '"';
 
-                            return customers.join('</br>');
+                             return customers.join('</br>');
 
-                        },
-                        filter: {
-                            test: function(f, o) {
-                                if (!f) return true;
-                                if (!o || o.length < 1) return false;
+                         },
+                         filter: {
+                             test: function (f, o) {
+                                 if (!f) return true;
+                                 if (!o || o.length < 1) return false;
 
-                                var flag = false;
-                                var reg = new RegExp(f, 'i');
+                                 var flag = false;
+                                 var reg = new RegExp(f, 'i');
 
-                                Ext.iterate(o, function(v) {
-                                    if (reg.test(v.Customer.CustomerName)) {
-                                        flag = true;
-                                        return false;
-                                    }
-                                });
+                                 Ext.iterate(o, function (v) {
+                                     if (reg.test(v.Customer.CustomerName)) {
+                                         flag = true;
+                                         return false;
+                                     }
+                                 });
 
-                                return flag;
-                            }
-                        }
-                    },
+                                 return flag;
+                             }
+                         }
+                     },
+                     {
+                         header: 'Группа',
+                         width: 100,
+                         xtype:'mappingcolumn',
+                         dataIndex: 'Vehicle.GroupRequestId',
+                         filter: {
+                             field: { xtype: 'combo.grouprequest', enableClear: true, objectValue: false },
+                             fieldEvents: ["select"],
+                             test: function (filterValue, value, rec) {
+                                 if (!filterValue) return true;
+                                 return rec.get('Vehicle').GroupRequestId == filterValue;
+                             }
+                         },
+                         renderer: function (v, metaData, record, rowIndex, colIndex, store) {
+                            var store = Kdn.ModelFactory.getStore("GroupRequest"),
+                                 rec = store.getById(record.get("Vehicle").GroupRequestId);
+                             if (rec) return rec.get("GroupRequestName");
+                             return null;
+                         }
+                         
+                     },
                     { header: 'Гар.№', xtype: 'mappingcolumn', dataIndex: 'Vehicle.GarageNumber', width: 60 },
                     { header: 'Марка', xtype: 'mappingcolumn', dataIndex: 'Vehicle.Model', width: 100 },
                     { header: 'Гос.№', xtype: 'mappingcolumn', dataIndex: 'Vehicle.RegistrationNumber', width: 80 },
-                    {
-                        header: 'Группа',
-                        xtype: 'mappingcolumn',
-                        dataIndex: 'Vehicle.GroupRequestId',
-                        hidden: true,
-                        filter: {
-                            field: { xtype: 'combo.grouprequest', enableClear: true, objectValue: false },
-                            fieldEvents: ["select"],
-                            test: function(filterValue, value, rec) {
-                                if (!filterValue) return true;
-                                return rec.get('Vehicle').GroupRequestId == filterValue;
-                            }
-                        }
-                    },
+                    
                     {
                         header: '№  колонны',
                         xtype: 'mappingcolumn',
@@ -205,53 +250,65 @@
                             }
                         }
                     },
-                    {
-                        header: 'Водители',
-                        width: 130,
-                        dataIndex: 'Drivers',
-                        renderer: function(e, m, r) {
+                     {
+                         header: 'Водители',
+                         width: 130,
+                         dataIndex: 'Drivers',
+                         renderer: function (e, m, r) {
 
-                            if (e.length < 1) return null;
+                             if (e.length < 1) return null;
 
-                            var qtipTpl = "<span style='font-size:14px;'><b>Цех:{0} Taб.№:{1} {2} {3} {4}</b></span>";
+                             var qtipTpl = "<span style='font-size:14px; background-color:{5}'><b>Цех:{0} Taб.№:{1} {2} {3} {4}</b></span>";
 
-                            var qtips = [],
-                                drivers = [];
+                             var qtips = [],
+                                    drivers = [];
 
-                            Ext.iterate(e, function(driver) {
-                                var d = driver.Driver,
-                                    e = d.Employee;
+                             Ext.iterate(e, function (driver) {
+                                 var d = driver.Driver,
+                                        e = d.Employee;
 
-                                qtips.push(String.format(qtipTpl, e.Department, e.EmployeeNumber, e.LastName, e.FirstName, e.MiddleName))
-                                drivers.push(String.format("{0} {1}.{2}.", e.LastName, e.FirstName.substr(0, 1), e.MiddleName.substr(0, 1)));
-                            });
+                                 qtips.push(String.format(qtipTpl,
+                                        e.Department,
+                                        e.EmployeeNumber,
+                                        e.LastName,
+                                        e.FirstName,
+                                        e.MiddleName,
+                                        driver.IsHoliday ? 'chartreuse' : (driver.IsSick ? 'tomato' : '')
+                                        ));
+                                 drivers.push(String.format("<span style='background-color:{3}'>{0} {1}.{2}.</span>",
+                                     e.LastName,
+                                     e.FirstName.substr(0, 1),
+                                     e.MiddleName.substr(0, 1),
+                                     driver.IsHoliday ? 'chartreuse' : (driver.IsSick ? 'tomato' : '')
+                                     ));
+                             });
 
-                            if (m) {
-                                m.attr = 'ext:qtip="' + qtips.join("<br/>") + '"';
-                            }
+                             if (m) {
+                                 m.attr = 'ext:qtip="' + qtips.join("<br/>") + '"';
+                             }
 
-                            return drivers.join("<br/>");
+                             return drivers.join("<br/>");
 
-                        },
-                        filter: {
-                            test: function(f, o) {
-                                if (!f) return true;
-                                if (!o || o.length < 1) return false;
+                         },
+                         filter: {
+                             test: function (f, o) {
+                                 if (!f) return true;
+                                 if (!o || o.length < 1) return false;
 
-                                var flag = false;
-                                var reg = new RegExp(f, 'i');
+                                 var flag = false;
+                                 var reg = new RegExp(f, 'i');
 
-                                Ext.iterate(o, function(v) {
-                                    if (reg.test(v.Driver.Employee.LastName)) {
-                                        flag = true;
-                                        return false;
-                                    }
-                                });
+                                 Ext.iterate(o, function (v) {
+                                     if (reg.test(v.Driver.Employee.LastName)) {
+                                         flag = true;
+                                         return false;
+                                     }
+                                 });
 
-                                return flag;
-                            }
-                        }
-                    },
+                                 return flag;
+                             }
+                         }
+                     },
                     { header: 'См', dataIndex: 'Shift', width: 30 },
                     {
                         header: 'Выезд',

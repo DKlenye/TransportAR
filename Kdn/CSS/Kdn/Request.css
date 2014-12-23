@@ -80,6 +80,11 @@ div.freight {
     padding:5px;
 }
 
+
+.vehicleorder-grid .x-grid3-cell-inner{
+    white-space: normal; 
+}
+
 .request-editor .x-grid3-cell-inner, .request-editor .x-list-body dt, .request-detail .x-grid3-cell-inner{
     white-space: normal; 
 }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Castle.ActiveRecord;
 using Castle.Core;
-using Iesi.Collections.Generic;
 using Kdn.Ext.Attributes;
 using NHibernate.Criterion;
 using Newtonsoft.Json;
@@ -23,11 +22,9 @@ namespace Transport.Models
     [Model, ActiveRecord("t_VehicleOrder")]
     public class VehicleOrder : ActiveRecordBase<VehicleOrder>
     {
-
-
         public VehicleOrder()
         {
-            Customers = new SortedSet<VehicleOrderCustomer>();
+            Customers = new List<VehicleOrderCustomer>();
             Drivers = new List<VehicleOrderDriver>();
         }
 
@@ -57,17 +54,18 @@ namespace Transport.Models
         [AllowBlank,Property]
         public string Description { get; set; }
 
-        [Property]
-        public int? BusinessTripOrderId { get; set; }
-
+        [Property,AllowBlank]
+        public string DestRoutePoint { get; set; }
 
         [AllowBlank, HasMany(Table = "VehicleOrderCustomers", ColumnKey = "VehicleOrderId",Inverse=true,  Fetch = FetchEnum.SubSelect, Cascade=ManyRelationCascadeEnum.AllDeleteOrphan, OrderBy = "DepartureTime")]
-        public ISet<VehicleOrderCustomer> Customers { get; set; }
+        public ICollection<VehicleOrderCustomer> Customers { get; set; }
 
         [AllowBlank, HasMany(Table = "VehicleOrderDrivers", ColumnKey = "VehicleOrderId", Inverse=true,  Cascade = ManyRelationCascadeEnum.AllDeleteOrphan,  Fetch = FetchEnum.SubSelect)]
         public ICollection<VehicleOrderDriver> Drivers { get; set; }
 
         public bool IsInMaintenance { get; set; }
+        [Property]
+        public DateTime? BusinessTripDepartureDate { get; set; }
 
 
         public static VehicleOrder[] FindAllByDate(DateTime date)
@@ -83,6 +81,14 @@ namespace Transport.Models
                     x => x.ScheduleId == 6 && x.DepartureDate < date && x.ReturnDate.Value > date));
         }
 
+
+        public static VehicleOrder[] FindLastOrders(DateTime date)
+        {
+
+            var lastOrderDate = FindFirst(Order.Desc(Projections.Property<VehicleOrder>(x=>x.DepartureDate)),Expression.Where<VehicleOrder>(x => x.DepartureDate < date)).DepartureDate;
+            return FindAllByDate(lastOrderDate.Date);
+        }
+
         public static void Create(DateTime date)
         {
 
@@ -92,6 +98,7 @@ namespace Transport.Models
                 Expression.Where<VehicleOrder>(x => x.DepartureDate > date && x.DepartureDate < date.AddDays(1)));
             if (order != null) return;
             
+            /*
             var query1 = @"delete VehicleOrderCustomer where VehicleOrderId in (select VehicleOrderId from VehicleOrder where DepartureDate between :date1 and :date2)";
             var query2 = @"delete from VehicleOrderDrivers where VehicleOrderId in (select VehicleOrderId from t_VehicleOrder where DepartureDate between :date1 and :date2)";  
             var query = @"Delete VehicleOrder where DepartureDate between :date1 and :date2";
@@ -112,8 +119,9 @@ namespace Transport.Models
                 .SetDateTime("date1",date)
                 .SetDateTime("date2",date.AddDays(1))
                 .ExecuteUpdate();
+             * */
 
-          var lastOrder = FindAllByDate(date.AddDays(-1));
+          var lastOrder = FindLastOrders(date);
           var lastOrderVehicleMap = new List<int>();
           lastOrder.ForEach(x=>lastOrderVehicleMap.Add(x.Vehicle.VehicleId));
 
@@ -127,6 +135,7 @@ namespace Transport.Models
           {
               if (lastOrderVehicleMap.Count == 0 || lastOrderVehicleMap.Contains(v.VehicleId))
               {
+                  var last = lastOrder.First(x => x.Vehicle.VehicleId == v.VehicleId);
                   var car = (FullCar) v;
 
                   TimeSpan departureTime;
@@ -149,10 +158,45 @@ namespace Transport.Models
                   if (businessTripMap.Contains(v.VehicleId))
                   {
                       var trip = businessTrip.First(x => x.Vehicle.VehicleId == v.VehicleId);
-                      o.BusinessTripOrderId = trip.VehicleOrderId;
+                      o.Description = trip.Description;
+                      o.BusinessTripDepartureDate = trip.DepartureDate;
+                      o.DestRoutePoint = trip.DestRoutePoint;
+                      o.WaybillId = trip.WaybillId;
+                      o.ScheduleId = trip.ScheduleId;
+                      o.ReturnDate = trip.ReturnDate;
+
+                      trip.Drivers.ForEach(
+                          x =>
+                              o.Drivers.Add(new VehicleOrderDriver()
+                              {
+                                  VehicleOrderId = o.VehicleOrderId,
+                                  Driver = x.Driver
+                              }));
+                      trip.Customers.ForEach(
+                          x =>
+                              o.Customers.Add(new VehicleOrderCustomer()
+                              {
+                                  VehicleOrderId = o.VehicleOrderId,
+                                  Customer = x.Customer,
+                                  DepartureTime = x.DepartureTime,
+                                  RequestId = x.RequestId,
+                                  Description = x.Description,
+                              }));
+
+                      o.BusinessTripDepartureDate = trip.DepartureDate;
+
                   }
                   else
                   {
+
+                      last.Drivers.ForEach(x =>
+                             o.Drivers.Add(new VehicleOrderDriver()
+                             {
+                                 VehicleOrderId = o.VehicleOrderId,
+                                 Driver = x.Driver
+                             }));
+
+
                       if (car.Customer != null)
                       {
                           o.Customers.Add(new VehicleOrderCustomer()
@@ -163,14 +207,14 @@ namespace Transport.Models
                           });
                       }
 
-                      if (car.ResponsibleDriver != null)
+                      /*if (car.ResponsibleDriver != null)
                       {
                           o.Drivers.Add(new VehicleOrderDriver()
                           {
                               Driver = car.ResponsibleDriver,
                               VehicleOrderId = o.VehicleOrderId
                           });
-                      }
+                      }*/
                   }
                   
                   o.Save();
@@ -207,16 +251,13 @@ namespace Transport.Models
             {
                 d.DeleteAndFlush();
             }
-
             base.UpdateAndFlush();
         }
-
-
     }
 
 
     [ActiveRecord("VehicleOrderCustomers")]
-    public class VehicleOrderCustomer : ActiveRecordBase<VehicleOrderCustomer>, IComparable<VehicleOrderCustomer>
+    public class VehicleOrderCustomer : ActiveRecordBase<VehicleOrderCustomer>
     {
         [PrimaryKey]
         public int Id { get; set; }
@@ -226,15 +267,13 @@ namespace Transport.Models
         public Customer Customer { get; set; }
         [Property]
         public int? RequestId { get; set; }
-        [Property]
+        [Property, AllowBlank]
         public string DepartureTime { get; set; }
+        [Property]
+        public string ReturnTime { get; set; }
+        [Property,AllowBlank]
+        public string Description { get; set; }
 
-        public int CompareTo(VehicleOrderCustomer other)
-        {
-            if (String.IsNullOrEmpty(DepartureTime)) return -1;
-            if (String.IsNullOrEmpty(DepartureTime)) return 1;
-            return TimeSpan.Compare(TimeSpan.Parse(DepartureTime), TimeSpan.Parse(other.DepartureTime));
-        }
     }
 
 
@@ -281,6 +320,12 @@ namespace Transport.Models
 
         [JsonIgnore]
         private Driver _Driver;
+
+        [Property]
+        public DateTime? IsHoliday { get; set; }
+
+        [Property,AllowBlank]
+        public bool? IsSick { get; set; }
 
         public int VehicleOrderId
         {
