@@ -53,37 +53,30 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Castle.ActiveRecord, Version=3.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\resources\NHibernate\CastleActiveRecord\Castle.ActiveRecord.dll</HintPath>
+    <Reference Include="Castle.ActiveRecord">
+      <HintPath>..\..\..\..\..\share\TransportAR\TransportAR\TransportSite\bin\Castle.ActiveRecord.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.ActiveRecord.Web, Version=0.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\resources\NHibernate\CastleActiveRecord\Castle.ActiveRecord.Web.dll</HintPath>
+    <Reference Include="Castle.ActiveRecord.Web">
+      <HintPath>..\..\..\..\..\share\TransportAR\TransportAR\TransportSite\bin\Castle.ActiveRecord.Web.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Components.Validator, Version=2.5.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\resources\NHibernate\CastleActiveRecord\Castle.Components.Validator.dll</HintPath>
+    <Reference Include="Castle.Components.Validator">
+      <HintPath>..\..\..\..\..\share\TransportAR\TransportAR\TransportSite\bin\Castle.Components.Validator.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Core, Version=2.5.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\resources\NHibernate\CastleActiveRecord\Castle.Core.dll</HintPath>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\..\..\..\share\TransportAR\TransportAR\TransportSite\bin\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\resources\NHibernate\Iesi.Collections.dll</HintPath>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\..\..\..\..\share\TransportAR\TransportAR\TransportSite\bin\Iesi.Collections.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\resources\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=3.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\resources\NewtonSoft\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\..\..\share\TransportAR\TransportAR\TransportSite\bin\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="NHibernate, Version=3.2.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\resources\NHibernate\NHibernate.dll</HintPath>
+    <Reference Include="NHibernate">
+      <HintPath>..\..\..\..\..\share\TransportAR\TransportAR\TransportSite\bin\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -91,9 +84,8 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.SQLite, Version=1.0.76.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\resources\SQLite\System.Data.SQLite.DLL</HintPath>
+    <Reference Include="System.Data.SQLite">
+      <HintPath>..\..\..\..\..\share\TransportAR\TransportAR\TransportSite\bin\System.Data.SQLite.DLL</HintPath>
     </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Services" />

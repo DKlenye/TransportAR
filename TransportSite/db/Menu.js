@@ -121,12 +121,12 @@ Kdn.Menu = [
                         iconCls: "icon-norm",
                         Handler: "createView",
                         HandlerCfg: "{xtype:'view.norm',single:true}"
-                    },{
+                    }, {
                         text: "Нормы расхода масел",
                         iconCls: "icon-beaker--exclamation",
                         Handler: "createView",
                         HandlerCfg: "{xtype:'view.oilnorm',single:true}"
-                    },{
+                    }, {
                         text: "Страховка",
                         iconCls: "icon-insurance",
                         Handler: "createView",
@@ -312,7 +312,7 @@ Kdn.Menu = [
     }, {
         text: 'Учёт материалов',
         permission: {
-            u: [1, 29, 22,4,61,53]
+            u: [1, 29, 22, 4, 61, 53]
         },
         iconCls: 'icon-layers32',
         Child: [
@@ -487,14 +487,25 @@ Kdn.Menu = [
                 HandlerCfg: "{xtype:'view.report.accvehicleobreport',single:true}"
             }, {
                 text: 'Информация по заправке',
-                iconCls: 'icon-blue-document-word',
-                Handler: 'createView',
-                HandlerCfg: "{xtype:'view.report.refuellinginfo',single:true}"
-            }, {
-                text: 'Информация по заправке(РЦП АЗС)',
-                iconCls: 'icon-blue-document-word',
-                Handler: 'createView',
-                HandlerCfg: "{xtype:'view.report.rcpasz',single:true}"
+                iconCls: 'icon-report-white',
+                Child: [
+                    {
+                        text: 'Информация по заправке',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.refuellinginfo',single:true}"
+                    }, {
+                        text: 'Информация по заправке на дату и время',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.refuellinginfodatetime',single:true}"
+                    }, {
+                        text: 'Информация по заправке(РЦП АЗС)',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.rcpasz',single:true}"
+                    }
+                ]
             }, {
                 text: 'Пробег транспорта',
                 iconCls: 'icon-blue-document-word',
@@ -830,29 +841,29 @@ Kdn.Menu = [
                 HandlerCfg: "{xtype:'view.acc.driverfuelexcess',single:true}"
             },
              {
-                text: 'Детализация перерасхода топлива за год',
-                Handler: 'createView',
-                HandlerCfg: "{xtype:'view.report.driverfuelexcessdetails',single:true}"
-            },
+                 text: 'Детализация перерасхода топлива за год',
+                 Handler: 'createView',
+                 HandlerCfg: "{xtype:'view.report.driverfuelexcessdetails',single:true}"
+             },
              {
-                text: 'Заправка(РЦП АЗС)',
-                Handler: 'createView',
-                HandlerCfg: "{xtype:'view.acc.rcpazs',single:true}"
-            }, {
-                text: 'Заправка',
-                Handler: 'createView',
-                HandlerCfg: "{xtype:'view.acc.accrefuelling',single:true}"
+                 text: 'Заправка(РЦП АЗС)',
+                 Handler: 'createView',
+                 HandlerCfg: "{xtype:'view.acc.rcpazs',single:true}"
+             }, {
+                 text: 'Заправка',
+                 Handler: 'createView',
+                 HandlerCfg: "{xtype:'view.acc.accrefuelling',single:true}"
 
-            }, {
-                text: 'АЗС',
-                Child: [
+             }, {
+                 text: 'АЗС',
+                 Child: [
                     {
                         text: 'Расчёт цен на топливо',
                         Handler: 'createView',
                         HandlerCfg: "{xtype:'view.azsacc.fuelcost',single:true}"
                     }
                 ]
-            }
+             }
         ]
     }
 ];
