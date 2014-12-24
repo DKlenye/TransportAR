@@ -38,49 +38,39 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Castle.ActiveRecord, Version=3.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\resources\NHibernate\CastleActiveRecord\Castle.ActiveRecord.dll</HintPath>
+    <Reference Include="Castle.ActiveRecord">
+      <HintPath>..\..\..\..\..\share\TransportAR\TransportAR\TransportSite\bin\Castle.ActiveRecord.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.ActiveRecord.Web, Version=0.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\resources\NHibernate\CastleActiveRecord\Castle.ActiveRecord.Web.dll</HintPath>
+    <Reference Include="Castle.ActiveRecord.Web">
+      <HintPath>..\..\..\..\..\share\TransportAR\TransportAR\TransportSite\bin\Castle.ActiveRecord.Web.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Components.Validator, Version=2.5.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\resources\NHibernate\CastleActiveRecord\Castle.Components.Validator.dll</HintPath>
+    <Reference Include="Castle.Components.Validator">
+      <HintPath>..\..\..\..\..\share\TransportAR\TransportAR\TransportSite\bin\Castle.Components.Validator.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Core, Version=2.5.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\resources\NHibernate\CastleActiveRecord\Castle.Core.dll</HintPath>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\..\..\..\share\TransportAR\TransportAR\TransportSite\bin\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="FM, Version=2.5.0.0, Culture=neutral, PublicKeyToken=be2ad24fd77899bf, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Downloads\WebSync.4.Community\Libraries\DotNet35\FM.dll</HintPath>
+    <Reference Include="FM">
+      <HintPath>..\..\..\..\..\share\TransportAR\TransportAR\TransportSite\bin\FM.dll</HintPath>
     </Reference>
-    <Reference Include="FM.Server, Version=2.5.0.0, Culture=neutral, PublicKeyToken=be2ad24fd77899bf, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Downloads\WebSync.4.Community\Libraries\DotNet35\FM.Server.dll</HintPath>
+    <Reference Include="FM.Server">
+      <HintPath>..\..\..\..\..\share\TransportAR\TransportAR\TransportSite\bin\FM.Server.dll</HintPath>
     </Reference>
-    <Reference Include="FM.WebSync, Version=4.5.0.0, Culture=neutral, PublicKeyToken=be2ad24fd77899bf, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Downloads\WebSync.4.Community\Libraries\DotNet35\FM.WebSync.dll</HintPath>
+    <Reference Include="FM.WebSync">
+      <HintPath>..\..\..\..\..\share\TransportAR\TransportAR\TransportSite\bin\FM.WebSync.dll</HintPath>
     </Reference>
-    <Reference Include="FM.WebSync.ReturnData, Version=4.5.0.0, Culture=neutral, PublicKeyToken=be2ad24fd77899bf, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Downloads\WebSync.4.Community\Libraries\DotNet35\FM.WebSync.ReturnData.dll</HintPath>
+    <Reference Include="FM.WebSync.ReturnData">
+      <HintPath>..\..\..\..\..\share\TransportAR\TransportAR\TransportSite\bin\FM.WebSync.ReturnData.dll</HintPath>
     </Reference>
-    <Reference Include="FM.WebSync.ReturnData.Server, Version=4.5.0.0, Culture=neutral, PublicKeyToken=be2ad24fd77899bf, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Downloads\WebSync.4.Community\Libraries\DotNet35\FM.WebSync.ReturnData.Server.dll</HintPath>
+    <Reference Include="FM.WebSync.ReturnData.Server">
+      <HintPath>..\..\..\..\..\share\TransportAR\TransportAR\TransportSite\bin\FM.WebSync.ReturnData.Server.dll</HintPath>
     </Reference>
-    <Reference Include="FM.WebSync.Server, Version=4.5.0.0, Culture=neutral, PublicKeyToken=be2ad24fd77899bf, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Downloads\WebSync.4.Community\Libraries\DotNet35\FM.WebSync.Server.dll</HintPath>
+    <Reference Include="FM.WebSync.Server">
+      <HintPath>..\..\..\..\..\share\TransportAR\TransportAR\TransportSite\bin\FM.WebSync.Server.dll</HintPath>
     </Reference>
     <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\resources\NHibernate\Iesi.Collections.dll</HintPath>
+      <HintPath>..\..\..\..\..\share\TransportAR\TransportAR\TransportSite\bin\Iesi.Collections.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Kdn, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
@@ -90,15 +80,15 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=3.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\resources\Direct\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\..\..\share\TransportAR\TransportAR\TransportSite\bin\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate, Version=3.2.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\resources\NHibernate\NHibernate.dll</HintPath>
+      <HintPath>..\..\..\..\..\share\TransportAR\TransportAR\TransportSite\bin\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate.Mapping.Attributes, Version=3.2.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\resources\NHibernate\NHibernate.Mapping.Attributes.dll</HintPath>
+      <HintPath>..\..\..\..\..\share\TransportAR\TransportAR\TransportSite\bin\NHibernate.Mapping.Attributes.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -119,7 +109,7 @@
     </Reference>
     <Reference Include="System.Data.SQLite, Version=1.0.76.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\resources\SQLite\System.Data.SQLite.DLL</HintPath>
+      <HintPath>..\..\..\..\..\share\TransportAR\TransportAR\TransportSite\bin\System.Data.SQLite.DLL</HintPath>
     </Reference>
     <Reference Include="System.ServiceModel">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
