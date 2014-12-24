@@ -5,22 +5,16 @@
    params:[
             'C:',
             {
-                xtype: 'datefield',
-                dataIndex: 'startDate'
-            },
-            {
-                dataIndex: 'startTime',
-                xtype: 'kdn.editor.timefield',
+                xtype: 'datetimefield',
+                dataIndex: 'start',
+                value: new Date().clearTime()
             },
             '-',
             'По:',
             {
-                xtype: 'datefield',
-                dataIndex: 'endDate'
-            },
-            {
-                dataIndex: 'endTime',
-                xtype: 'kdn.editor.timefield',
+                xtype: 'datetimefield',
+                dataIndex: 'end',
+                value: new Date()
             },
             '-',
             'АЗС:',
@@ -47,15 +41,8 @@
    
    buildReportParams:function(params){
         var p = {};
-        p.dateStart = params.startDate;
-        p.dateFinish = params.endDate;
-
-        p.timeStart = params.startTime;
-        p.timeFinish = params.endTime;
-
-        Ext.copyTo(p, params, 'refuellingPlaceId');
+        Ext.copyTo(p, params, 'refuellingPlaceId,start,end');
         p.ownerId = 1;
-        console.log(p);     
         return p;        
     }
         
