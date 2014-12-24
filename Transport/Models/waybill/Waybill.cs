@@ -531,6 +531,10 @@ namespace Transport.Models {
            var returnTime = TimeSpan.Parse("16:45");
            var departureTime = TimeSpan.Parse("08:00");
 
+           var lunch8 = 45;
+           var lunch12 = 60;
+
+
            if (ScheduleId != null)
            {
                if (ScheduleId == 6)
@@ -579,7 +583,7 @@ namespace Transport.Models {
                {
                    if (minutes < 60*20)
                    {
-                       new WaybillWorkingTime(WaybillId, DepartureDate, minutes).SaveAndFlush();
+                       new WaybillWorkingTime(WaybillId, DepartureDate, minutes-lunch12).SaveAndFlush();
                    }
                    else
                    {
@@ -600,7 +604,7 @@ namespace Transport.Models {
                {
                    if (minutes < 60 * 20)
                    {
-                       new WaybillWorkingTime(WaybillId, DepartureDate, minutes).SaveAndFlush();
+                       new WaybillWorkingTime(WaybillId, DepartureDate, minutes-lunch8).SaveAndFlush();
                    }
                    else
                    {

@@ -1556,11 +1556,34 @@ namespace Transport.Direct {
 
        [DirectMethod]
        [ParseAsJson]
-       public string CalcFactConsumption(JObject o)
+       public string CalcWorkingTime(JObject o)
        {
-           Waybill.Find(727792).CalcFactConsumption();
-           return "";
+           var counter = 0;
+           var waybillId = db.Query<int>("select WaybillId from Waybill where AccPeriod is null");
+
+           using (new SessionScope(FlushAction.Never))
+           {
+               waybillId.ForEach(id =>
+               {
+                   var x = Waybill.Find(id);
+
+                   x.ClearWorkingTime();
+                   x.CalcWorkingTime();
+                   counter++;
+                   SessionScope.Current.Evict(x);
+                   if (counter % 100 == 0)
+                   {
+                       SessionScope.Current.Flush();
+                   }
+               });
+               SessionScope.Current.Flush();
+           }
+
+           return waybillId.Count().ToString();
        }
+
+
+
 
    }
 
