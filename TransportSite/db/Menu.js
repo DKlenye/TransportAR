@@ -521,17 +521,17 @@ Kdn.Menu = [
                 iconCls: 'icon-report-white',
                 Child: [
                     {
-                        text: 'Реестр по полимиру(78011200)',
+                        text: 'Реестр по Полимиру(78011200)',
                         iconCls: 'icon-blue-document-word',
                         Handler: 'createView',
                         HandlerCfg: "{xtype:'view.report.expense78',single:true}"
                     }, {
-                        text: 'Реестр по полимиру(78011200) сводный',
+                        text: 'Реестр по Полимиру(78011200) сводный',
                         iconCls: 'icon-blue-document-word',
                         Handler: 'createView',
                         HandlerCfg: "{xtype:'view.report.expense78summ',single:true}"
                     }, {
-                        text: 'Реестр по полимиру(78011200) цеховые',
+                        text: 'Реестр по Полимиру(78011200) цеховые',
                         iconCls: 'icon-blue-document-word',
                         Handler: 'createView',
                         HandlerCfg: "{xtype:'view.report.expense78department',single:true}"
@@ -545,7 +545,14 @@ Kdn.Menu = [
                         iconCls: 'icon-blue-document-word',
                         Handler: 'createView',
                         HandlerCfg: "{xtype:'view.report.expense90department',single:true}"
-                    }, {
+                    }, 
+                    {
+                        text: 'Реестр по Нафтану',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.expensenaftan',single:true}"
+                    },
+                    {
                         text: 'Реестр по коду затрат',
                         iconCls: 'icon-blue-document-word',
                         Handler: 'createView',
