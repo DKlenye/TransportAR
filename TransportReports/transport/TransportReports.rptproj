@@ -185,6 +185,10 @@
       <FullPath>InventoryDetails.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>InventoryDiff.rdl</Name>
+      <FullPath>InventoryDiff.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Invoice.rdl</Name>
       <FullPath>Invoice.rdl</FullPath>
     </ProjectItem>
@@ -433,8 +437,8 @@
       <FullPath>WayBillPackage.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>InventoryDiff.rdl</Name>
-      <FullPath>InventoryDiff.rdl</FullPath>
+      <Name>RefuellingInfoDateTime.rdl</Name>
+      <FullPath>RefuellingInfoDateTime.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
