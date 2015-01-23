@@ -6,10 +6,9 @@
 
         var me = this;
 
-        var store = Kdn.ModelFactory.getStore('VehicleOrder',{
+        var store = Kdn.ModelFactory.getStore('VehicleOrderDTO', {
             autoSave: true,
             autoLoad: false,
-            autoDestroy: true,
             api: {
                 read: Kdn.Direct.OrderRead,
                 update: Kdn.Direct.VehicleOrderUpdate,
@@ -136,7 +135,7 @@
                         }),
                         processEvent: function (name, e, grid, rowIndex, colIndex) {
                             if (name == "click" && e.target.tagName=="IMG") {
-                                var rec = grid.view.getRecordByIndex(rowIndex);
+                                var rec = grid.store.getAt(rowIndex);
 
                                 if (rec.get("IsInMaintenance")) {
                                     return;
@@ -153,7 +152,7 @@
                                 }
                                 else
                                 {
-                                     var id = rec.get("VehicleOrderId");
+                                     var id = rec.get("ListDetailId");
                                       me.issueWaybill(id);
                                 }
                                
@@ -315,11 +314,11 @@
                         dataIndex: 'DepartureDate',
                         width: 80,
                         renderer: function(v) {
-                            if (!v && !v.format) return null;
+                            if (!v || !v.format) return null;
                             return String.format(
                                 '<span style="font-size:9pt;">{0}<span style="color:blue;"><b>{1}</b><span/><span/>',
                                 v.format('d.m'),
-                                v.format(' H:i')
+                                 v.format('H:i') == "00:00" ? "" : v.format('H:i')
                             );
                         }
                     },
@@ -328,7 +327,7 @@
                         dataIndex: 'ReturnDate',
                         width: 80,
                         renderer: function(v) {
-                            if (!v && !v.format) return null;
+                            if (!v || !v.format) return null;
                             return String.format(
                                 '<span style="font-size:9pt;">{0}<span style="color:blue;"><b>{1}</b><span/><span/>',
                                 v.format('d.m'),

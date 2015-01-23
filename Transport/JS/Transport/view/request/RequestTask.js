@@ -6,10 +6,9 @@
         cfg = cfg || {};
         var me = this;
 
-        var OrderStore = Kdn.ModelFactory.getStore('VehicleOrder',{
+        var OrderStore = Kdn.ModelFactory.getStore('VehicleOrderDTO',{
             autoSave: true,
             autoLoad: false,
-            autoDestroy: true,
             api: {
                 read: Kdn.Direct.OrderRead,
                 update: Kdn.Direct.VehicleOrderUpdate,
@@ -18,7 +17,7 @@
         });
 
         OrderStore.on({
-            load: function(s, rec, o) {
+            load: function (s, rec, o) {
                 var isEmpty = s.getCount() == 0;
                 me.createOrder.setDisabled(!isEmpty);
                 me.addOrder.setDisabled(isEmpty);
@@ -70,6 +69,11 @@
             store: new Ext.data.JsonStore({
                 fields: ['RequestId']
             })
+        });
+
+        var DriverOutOfWorkWindow = Ext.create({
+            xtype:'window'
+
         });
 
 
@@ -363,13 +367,15 @@
                         { header: 'Гос.№', xtype: 'mappingcolumn', dataIndex: 'Vehicle.RegistrationNumber', width: 80 },
                         {
                             header: 'Водители',
-                            width: 130,
+                            width: 160,
                             dataIndex: 'Drivers',
                             renderer: function(e, m, r) {
 
                                 if (e.length < 1) return null;
 
-                                var qtipTpl = "<span style='font-size:14px; background-color:{5}'><b>Цех:{0} Taб.№:{1} {2} {3} {4}</b></span>";
+                                var qtipTpl = "<span style='font-size:14px; background-color:{5}'>  <b>Цех:{0} Taб.№:{1} {2} {3} {4}</b></span>";
+                                var tpl = "<img driverId = '{5}' style='cursor:pointer' src='images/icons/{3}.png'> <span style='font-size:14px; background-color:{4}'> {0} {1}.{2}.</span>";
+
 
                                 var qtips = [],
                                     drivers = [];
@@ -384,13 +390,16 @@
                                         e.LastName,
                                         e.FirstName,
                                         e.MiddleName,
-                                        driver.IsHoliday ? 'chartreuse' : (driver.IsSick ? 'tomato' : '')
+                                        driver.IsHoliday ? '#CBFFD2' : (driver.IsSick ? '#FFD0D0' : '')
                                         ));
-                                    drivers.push(String.format("<span style='background-color:{3}'>{0} {1}.{2}.</span>",
+
+                                    drivers.push(String.format(tpl,
                                      e.LastName,
                                      e.FirstName.substr(0, 1),
                                      e.MiddleName.substr(0, 1),
-                                     driver.IsHoliday ? 'chartreuse' : (driver.IsSick ? 'tomato' : '')
+                                     driver.IsHoliday ? 'status_away' : (driver.IsSick ? 'status_busy' : 'status-offline'),
+                                     driver.IsHoliday ? '#CBFFD2' : (driver.IsSick ? '#FFD0D0' : ''),
+                                     d.DriverId
                                      ));
                                 });
 
@@ -418,6 +427,15 @@
                                     
                                     return flag;
                                 }
+                            },
+                            processEvent: function (name, e, grid, rowIndex, colIndex) {
+                                if (name == "click" && e.target.tagName == "IMG") {
+                                    var driverId = Ext.get(e.target).getAttribute('driverId');
+                                    console.log(driverId);
+
+                                    new T.view.OutOfWorkWindow({}).show();
+
+                                }
                             }
                         },
                         { header: 'См',dataIndex: 'Shift',width:30},
@@ -426,14 +444,14 @@
                             dataIndex: 'DepartureDate',
                             width:45,
                             renderer: function (v, m, r, Idx, colIdx, store) {
-                                if (!v && !v.format) return null;
+                                if (!v || !v.format) return null;
 
                                 var v = r.get("BusinessTripDepartureDate") || v;
 
                                 return String.format(
                                     '<span style="font-size:9pt;">{0}<br><span style="color:blue;"><b>{1}</b><span/><span/>',
                                     v.format('d.m'),
-                                    v.format('H:i')
+                                    v.format('H:i') == "00:00" ? "" : v.format('H:i')
                                 );
                             }
                         },
@@ -442,7 +460,7 @@
                             dataIndex: 'ReturnDate',
                             width:45,
                             renderer:function(v){
-                                if (!v && !v.format) return null;
+                                if (!v || !v.format) return null;
                                 return String.format(
                                     '<span style="font-size:9pt;">{0}<br><span style="color:blue;"><b>{1}</b><span/><span/>',
                                     v.format('d.m'),
@@ -820,7 +838,7 @@
 
         this.OrderStore.reload({
             params: { date: date }
-        })
+        });
     },
     
     createOrders:function(){
@@ -1355,5 +1373,67 @@ T.view.OrderWindow = Ext.extend(Ext.Window,{
             f.reset();
            } 
         });
+    }       
+});
+
+
+T.view.OutOfWorkWindow = Ext.extend(Ext.Window,{
+    constrain: true,
+    width: 600,
+    height: 680,
+    closeAction: 'hide',            
+    defaults:{margins:'0 0 2 0'},
+    initComponent:function(){
+        
+        var store = Kdn.ModelFactory.getStore('DriverOutOfWork',{
+            autoSave: true,
+            autoLoad: false
+        });
+
+        Ext.apply(this,{
+           items:[
+               {
+                   xtype: 'grid',
+                   store: store,
+                   columns: [
+                       {
+                           header: 'Водитель',
+                           dataIndex: 'Driver'
+                       },
+                       {
+                           dataIndex: 'Start',
+                           header: 'C'
+                       }
+                   ]
+               }
+           ],
+           bbar:[
+            '->',
+            '-',
+            {
+                xtype:'button.save',
+                handler:this.onSave,
+                scope:this
+            },
+            '-'
+           ]
+        });
+        
+        T.view.OrderWindow.superclass.initComponent.call(this);
+        
+        this.on({
+            hide:this.onClose,
+            scope:this
+        });
+      
+        
+    },
+ 
+    onClose:function(){
+        this.clearData();
+    },
+    
+    clearData:function(){
+       
     }       
 });

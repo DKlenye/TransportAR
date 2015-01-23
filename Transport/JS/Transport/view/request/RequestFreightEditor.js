@@ -23,7 +23,8 @@
                         LoadingType: '',
                         LoadingAddress: '',
                         ContactName: '',
-                        Responsible: ''
+                        Responsible: '',
+                        Attachments:''
                     },
                     propertyNames: {
                         RequestDate: 'Выделить транспорт на дату',
@@ -34,7 +35,27 @@
                         LoadingAddress: 'Адрес загрузки',
                         ContactName: 'Контактное лицо грузоотправителя, тел',
                         Responsible: 'Ответственный за заказ, цех, тел',
-                        OrderNumber: 'Номер договора, контракта, приказа'
+                        OrderNumber: 'Номер договора, контракта, приказа',
+                        Attachments:'Файлы'
+                    },
+                    customRenderers: {
+                        Attachments: function (e) {
+                            if (e && e.length > 0) {
+                                var ar = [];
+                                Ext.iterate(e, function (i) {
+                                    ar.push(String.format("<a href='#' attachmentId='{1}'>{0}</a>", i.Name,i.Id));
+                                    console.log(i, i.Name, ar);
+                                });
+
+                                
+                                return ar.join("<br/>");
+                            }
+                        }
+                    },
+                    listeners: {
+                        beforeedit: this.onBeforeEdit,
+                        cellclick:this.onCellClick,
+                        scope:this
                     }
                 },
                 {
@@ -115,6 +136,17 @@
     {
         var grid = this.items.itemAt(1);
         grid.store.loadData(cargo,false);
+    },
+
+    onBeforeEdit:function(o) {
+        return false;
+    },
+    onCellClick:function(grid, rowIndex, columnIndex, e) {
+        var el = Ext.get(e.target);
+        if (el.dom.tagName == "A") {
+            var id = el.getAttribute("attachmentId");
+             location.href = "Handlers/Attachment.ashx?id="+id;
+        }
     }
 
 });
