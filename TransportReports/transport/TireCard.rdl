@@ -5069,7 +5069,7 @@ First(Fields!Cost.Value).ToString()+" руб.")</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>05.02.2014</Value>
+                              <Value>08.01.2015</Value>
                               <Style>
                                 <FontFamily>Times New Roman</FontFamily>
                                 <FontSize>12pt</FontSize>
@@ -5139,7 +5139,7 @@ First(Fields!Cost.Value).ToString()+" руб.")</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>№ 4</Value>
+                              <Value>№ 6</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -5202,7 +5202,6 @@ First(Fields!Cost.Value).ToString()+" руб.")</Value>
                       </Style>
                     </Textbox>
                     <ColSpan>6</ColSpan>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell />

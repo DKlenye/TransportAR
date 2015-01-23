@@ -89,6 +89,14 @@
       <FullPath>BusPassengers.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>CarInfo.rdl</Name>
+      <FullPath>CarInfo.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>DistributionListPrint.rdl</Name>
+      <FullPath>DistributionListPrint.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>DoublePostingInfo.rdl</Name>
       <FullPath>DoublePostingInfo.rdl</FullPath>
     </ProjectItem>
@@ -107,6 +115,10 @@
     <ProjectItem>
       <Name>DriversBusinessTrip.rdl</Name>
       <FullPath>DriversBusinessTrip.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>DriversHolidayWork.rdl</Name>
+      <FullPath>DriversHolidayWork.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>DriversWorkingTime.rdl</Name>
@@ -159,6 +171,10 @@
     <ProjectItem>
       <Name>ExpenseListDepartment.rdl</Name>
       <FullPath>ExpenseListDepartment.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>ExpenseNaftan.rdl</Name>
+      <FullPath>ExpenseNaftan.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>ExpensePolymirActualWork.rdl</Name>
@@ -297,8 +313,8 @@
       <FullPath>TireWarrantlyEnd.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>TransportConsumption.rdl</Name>
-      <FullPath>TransportConsumption.rdl</FullPath>
+      <Name>TransportQuarterConsumption.rdl</Name>
+      <FullPath>TransportQuarterConsumption.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>ttn1.rdl</Name>
@@ -315,6 +331,10 @@
     <ProjectItem>
       <Name>VehicleCountByBodyType.rdl</Name>
       <FullPath>VehicleCountByBodyType.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>VehicleCountByServiceGroup.rdl</Name>
+      <FullPath>VehicleCountByServiceGroup.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>VehicleCountInfo.rdl</Name>
@@ -421,6 +441,10 @@
       <FullPath>VehicleWorkKoefficient.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>VehicleWorkList.rdl</Name>
+      <FullPath>VehicleWorkList.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>VehicleWorkSummary.rdl</Name>
       <FullPath>VehicleWorkSummary.rdl</FullPath>
     </ProjectItem>
@@ -441,8 +465,8 @@
       <FullPath>WayBillPackage.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>ExpenseNaftan.rdl</Name>
-      <FullPath>ExpenseNaftan.rdl</FullPath>
+      <Name>OrderSumInfoBySchedule.rdl</Name>
+      <FullPath>OrderSumInfoBySchedule.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>

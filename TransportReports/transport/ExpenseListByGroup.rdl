@@ -88,6 +88,9 @@
           <QueryParameter Name="@accountingId">
             <Value>=Parameters!accountingId.Value</Value>
           </QueryParameter>
+          <QueryParameter Name="@c46only">
+            <Value>=Parameters!c46only.Value</Value>
+          </QueryParameter>
         </QueryParameters>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
@@ -2822,7 +2825,7 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>1.10105cm</Top>
+        <Top>1.97418cm</Top>
         <Left>0.5207cm</Left>
         <Height>5.11749cm</Height>
         <Width>31.39345cm</Width>
@@ -2864,8 +2867,41 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
+      <Textbox Name="Textbox9">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>цех 46</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox9</rd:DefaultName>
+        <Top>1.10105cm</Top>
+        <Left>0.5207cm</Left>
+        <Height>0.6cm</Height>
+        <Width>24.23742cm</Width>
+        <ZIndex>2</ZIndex>
+        <Visibility>
+          <Hidden>=iif(Parameters!c46only.Value=1,False,True)</Hidden>
+        </Visibility>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
-    <Height>2.56283in</Height>
+    <Height>2.93783in</Height>
     <Style />
   </Body>
   <ReportParameters>
@@ -2887,6 +2923,10 @@
     <ReportParameter Name="accountingId">
       <DataType>Integer</DataType>
       <Prompt>accounting Id</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="c46only">
+      <DataType>Integer</DataType>
+      <Prompt>c46only</Prompt>
     </ReportParameter>
   </ReportParameters>
   <Code>Function ToTime(i As Integer) As String
