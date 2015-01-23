@@ -39,7 +39,13 @@ namespace Transport.Models
         {
             return FindAll(
                 Expression.Where<MaintenanceRequest>(
-                    x => x.EndRequest == null || (x.RequestDate <= date && x.EndRequest >= date)));
+                    x => x.RequestDate <= date && (x.EndRequest == null || x.EndRequest >= date)));
+        }
+
+        public static MaintenanceRequest FindByVehicle(BaseVehicle vehicle, DateTime date)
+        {
+            return FindFirst( Expression.Where<MaintenanceRequest>(
+                    x => x.Car==vehicle && x.RequestDate <= date && (x.EndRequest == null || x.EndRequest >= date)));
         }
         
     }

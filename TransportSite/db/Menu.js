@@ -441,12 +441,12 @@ Kdn.Menu = [
             }, {
                 text: 'Обработка заявок',
                 Handler: 'createView',
-                HandlerCfg: "{xtype:'view.requesttask',single:true}",
+                HandlerCfg: "{xtype:'view.vehicledistributiontask',single:true}",
                 iconCls: 'icon-page_go'
             }, {
                 text: 'Разнарядка',
                 Handler: 'createView',
-                HandlerCfg: "{xtype:'view.vehicleorder',single:true}",
+                HandlerCfg: "{xtype:'view.dispatchertask',single:true}",
                 iconCls: 'icon-document_layout'
             }, {
                 text: 'Отчёты',
@@ -619,7 +619,16 @@ Kdn.Menu = [
                         iconCls: 'icon-blue-document-word',
                         Handler: 'createView',
                         HandlerCfg: "{xtype:'view.report.vehiclelist',single:true}"
-                    }, {
+                    },
+                {
+                    
+                    text: 'Список транспорта(по группам)',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.vehicleworklist',single:true}"
+                },
+                    
+                     {
                         text: 'Список транспорта (водители, нормы)',
                         iconCls: 'icon-blue-document-word',
                         Handler: 'createView',
@@ -671,7 +680,20 @@ Kdn.Menu = [
                         iconCls: 'icon-blue-document-word',
                         Handler: 'createView',
                         HandlerCfg: "{xtype:'view.report.vehiclebyreportgroup',single:true}"
+                    },
+                    {
+                        text: 'Информация по легковому транспорту',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.carinfo',single:true}"
+                    },
+                    {
+                        text: 'Количество транспорта в разрезе групп по услугам',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.vehiclecountbyservicegroup',single:true}"
                     }
+
                 ]
             }, {
                 text: 'Список норм',
@@ -737,6 +759,12 @@ Kdn.Menu = [
                         iconCls: 'icon-blue-document-word',
                         Handler: 'createView',
                         HandlerCfg: "{xtype:'view.report.vehiclefuelconsumptionfactnorm',single:true}"
+                    },
+                    {
+                        text: 'Расход топлива за квартал',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.transportquarterconsumption',single:true}"
                     }
                 ]
             }, {
@@ -763,6 +791,12 @@ Kdn.Menu = [
                         iconCls: 'icon-blue-document-word',
                         Handler: 'createView',
                         HandlerCfg: "{xtype:'view.report.driversbusinesstrip',single:true}"
+                    },
+                    {
+                        text: 'Работа в выходные и праздничные дни',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.driversholidaywork',single:true}"
                     }
                 ]
             }, {

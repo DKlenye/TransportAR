@@ -12,5 +12,8 @@ namespace Transport.Models
         [Property]
         public string GroupRequestName { get; set; }
 
+       [Property]
+       public int? OrderId { get; set; }
+
     }
 }

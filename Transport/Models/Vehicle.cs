@@ -153,6 +153,9 @@ namespace Transport.Models {
       [Property]
       public int? AccGroupId { get; set; } //Актуальная
 
+      [Property]
+      public int? AccGroupNewId { get; set; } //2
+
        [Property]
       public int? GroupRequestId { get; set; }
        [Property]

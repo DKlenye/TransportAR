@@ -46,22 +46,38 @@ namespace Transport.Models
 
       public string CustomerName { get { return Customer==null?"":Customer.CustomerName; } }
 
-      [Property]
+      public IEnumerable<RequestAttachments> Attachments { get; set; }
+
+       [Property]
       public bool isDeleted { get; set; }
 
       [HasMany(typeof(RequestEvent), Table = "RequestEvent", ColumnKey = "RequestId", Fetch = FetchEnum.SubSelect, Cascade=ManyRelationCascadeEnum.AllDeleteOrphan)]
       public ICollection<RequestEvent> Events { get; set; }
 
       public virtual string type { get { return this.GetType().Name; } }
-      
 
+
+       public void Confirm( string message)
+       {
+           Events.Add(new RequestEvent()
+           {
+               EventDate = DateTime.Now,
+               Message = message,
+               Request = this,
+               Status = RequestStatus.Confirm
+           });
+           Status = RequestStatus.Confirm;
+       }
    }
 
    [ActiveRecord]
     public class RequestPassengers : Request {
 
-      [JoinedKey]
-      public int RequestId { get; set; }
+       [JoinedKey]
+       public int RequestId
+       {
+           get { return base.RequestId; } set { base.RequestId = value; }
+       }
 
        [Property]
        public string DestinationPoint { get; set; }      //Пункт назначения
@@ -99,8 +115,12 @@ namespace Transport.Models
    [ActiveRecord]
     public class RequestFreight : Request {
 
-      [JoinedKey]
-      public int RequestId { get; set; }
+       [JoinedKey]
+       public int RequestId
+       {
+           get { return base.RequestId; }
+           set { base.RequestId = value; }
+       }
        [Property]
       public string DestinationPoint { get; set; }      //Пункт назначения
       [Property]
@@ -148,8 +168,12 @@ namespace Transport.Models
    [ActiveRecord]
     public class RequestCrane : Request {
 
-      [JoinedKey]
-      public int RequestId { get; set; }
+       [JoinedKey]
+       public int RequestId
+       {
+           get { return base.RequestId; }
+           set { base.RequestId = value; }
+       }
 
       [Property]
        public string LicenceNumber { get; set; }         //номер лицензии

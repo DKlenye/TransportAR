@@ -423,7 +423,21 @@ Ext.override(Ext.form.NumberField, {
 
         Ext.form.NumberField.superclass.initEvents.call(this);
     }
-}); 
+});
+
+
+Ext.apply(Date.prototype, {
+
+    getQuarter:function() {
+        return Math.ceil((this.getMonth() + 1) / 3);
+    },
+
+    getPreviousQuarter:function() {
+        return this.add(Date.MONTH, -3).getQuarter();
+    }
+
+});
+
 
 
 /*

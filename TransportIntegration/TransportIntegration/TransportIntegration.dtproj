@@ -83,13 +83,23 @@
       <References />
     </DtsPackage>
     <DtsPackage FormatVersion="3">
-      <Name>Package1.dtsx</Name>
-      <FullPath>Package1.dtsx</FullPath>
+      <Name>Расчёт шин.dtsx</Name>
+      <FullPath>Расчёт шин.dtsx</FullPath>
       <References />
     </DtsPackage>
     <DtsPackage FormatVersion="3">
-      <Name>Расчёт шин.dtsx</Name>
-      <FullPath>Расчёт шин.dtsx</FullPath>
+      <Name>Работники.dtsx</Name>
+      <FullPath>Работники.dtsx</FullPath>
+      <References />
+    </DtsPackage>
+    <DtsPackage FormatVersion="3">
+      <Name>Услуги сторонним.dtsx</Name>
+      <FullPath>Услуги сторонним.dtsx</FullPath>
+      <References />
+    </DtsPackage>
+    <DtsPackage FormatVersion="3">
+      <Name>Package2.dtsx</Name>
+      <FullPath>Package2.dtsx</FullPath>
       <References />
     </DtsPackage>
   </DTSPackages>

@@ -1,5 +1,5 @@
-﻿T.view.GroupRequest = Ext.extend(Kdn.view.BaseGrid, {
-    modelName: 'GroupRequest',
+﻿T.view.GroupAccNew = Ext.extend(Kdn.view.BaseGrid, {
+    modelName: 'GroupAccNew',
     constructor: function(cfg) {
         cfg = cfg || {};
         Ext.apply(cfg, {
@@ -8,30 +8,24 @@
                defaults:{filter:{}},            
                 columns: [
                     {
-                        dataIndex: 'GroupRequestId',
+                        dataIndex: 'GroupAccId',
                         header: 'Код',
                         width: 130,
                         editor: { xtype: 'kdn.editor.id' }
                     },
                     {
-                        dataIndex: 'GroupRequestName',
+                        dataIndex: 'GroupAccName',
                         header: 'Наименование',
                         width: 300,
                         editor: { xtype: 'kdn.editor.textfield' }
-                    },
-                    {
-                        dataIndex: 'OrderId',
-                        header: 'Порядок сортировки',
-                        width: 300,
-                        editor: { xtype: 'kdn.editor.numberfield' }
                     }
                 ]
             })
         });
 
-        T.view.GroupRequest.superclass.constructor.call(this, cfg);
+            T.view.GroupAccNew.superclass.constructor.call(this, cfg);
 
     }
 });
 
-Ext.reg('view.grouprequest', T.view.GroupRequest);
+    Ext.reg('view.groupaccnew', T.view.GroupAccNew);

@@ -87,7 +87,7 @@ T.view.CarEditor = Ext.extend(Kdn.editor.ModelEditor, {
 	                  buildPropEditor(['CostCode'],
 	                     {iconCls:'icon-coins',title:'Бухг. настройки'}
 	                  ),
-	                  buildPropEditor(['RefuellingGroupId', 'AccGroupId','BodyTypeId','Category', 'ServiceGroupId', 'GroupRequestId','ReportGroupId','VehicleOilGroupId'],
+	                  buildPropEditor(['RefuellingGroupId', 'AccGroupId', 'AccGroupNewId', 'BodyTypeId', 'Category', 'ServiceGroupId', 'GroupRequestId', 'ReportGroupId', 'VehicleOilGroupId'],
 	                     { iconCls: 'icon-category-group', title: 'Тип/Категория/Группировка' }
 	                  )   
 	               ]	               

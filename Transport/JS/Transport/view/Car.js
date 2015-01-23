@@ -283,6 +283,19 @@
             }
         },
         {
+            dataIndex: 'AccGroupNewId',
+            header: 'Группа по бухг.учёту(2)',
+            width: 100,
+            editor: { xtype: 'combo.accgroupnew', objectValue: false, enableClear: true },
+            renderer: function (v) {
+                if (!v) return v;
+                var store = Kdn.ModelFactory.getStore('AccGroupNew'),
+                  rec = store.getById(v);
+                if (rec) return rec.get('AccGroupName');
+                return null;
+            }
+        },
+        {
             dataIndex: 'ServiceGroupId',
             header: 'Группа по услугам',
             width: 100,

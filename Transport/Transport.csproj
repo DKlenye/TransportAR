@@ -102,6 +102,7 @@
     <Compile Include="Direct\Battery.cs" />
     <Compile Include="Direct\Azs.cs" />
     <Compile Include="Direct\DayInspection.cs" />
+    <Compile Include="Direct\Distribution.cs" />
     <Compile Include="Direct\Driver.cs" />
     <Compile Include="Direct\MaintenanceRequest.cs" />
     <Compile Include="Direct\ExpenseList.cs" />
@@ -124,6 +125,12 @@
     <Compile Include="Models\acc\DriverFuelExcess.cs" />
     <Compile Include="Models\acc\FuelPriceCalculate.cs" />
     <Compile Include="Models\acc\FuelFilledCost.cs" />
+    <Compile Include="Models\request\RequestAttachments.cs" />
+    <Compile Include="Models\request\DriverOutOfWork.cs" />
+    <Compile Include="Models\request\VehicleOrderDTO.cs" />
+    <Compile Include="Models\vehicleDistribution\DistributionCustomers.cs" />
+    <Compile Include="Models\vehicleDistribution\DistributionListDetails.cs" />
+    <Compile Include="Models\vehicleDistribution\DistributionList.cs" />
     <Compile Include="Models\vehicleGroups\AccGroup.cs" />
     <Compile Include="Models\acc\AccRefuelling.cs" />
     <Compile Include="Models\azs\AzsFuelPrice.cs" />
@@ -137,6 +144,7 @@
     <Compile Include="Models\car\Inspection.cs" />
     <Compile Include="Models\car\NormIncrease.cs" />
     <Compile Include="Models\car\OilNorm.cs" />
+    <Compile Include="Models\vehicleGroups\AccGroupNew.cs" />
     <Compile Include="Models\vehicleGroups\ReportGroup.cs" />
     <Compile Include="Models\dayInspection\DayInspectionTime.cs" />
     <Compile Include="Models\vehicleGroups\ServiceGroup.cs" />
@@ -295,6 +303,7 @@
     <Compile Include="OtherModels\tdbf\WaybillTaskIncrease.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="OtherModels\kdr\personal1.cs" />
+    <Compile Include="Web\Handlers\Attachment.cs" />
     <Compile Include="Web\Handlers\JS.cs" />
     <Compile Include="Web\WaybillTpl.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -1051,6 +1060,54 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\report\ExpenseNaftan.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\DriversHolidayWork.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\vehicleDistribution\DistributionTask.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\vehicleDistribution\RequestGrid.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\vehicleDistribution\DistributionList.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\vehicleDistribution\RequestEditWindow.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\vehicleDistribution\DistributionEditWindow.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\vehicleDistribution\DistributionAddWindow.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\vehicleDistribution\DriverOutOfWorkWindow.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\vehicleDistribution\RequestAcceptWindow.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\VehicleCountByServiceGroup.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\CarInfo.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\TransportQuarterConsumption.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\GroupAccNew.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\combo\AccGroupNew.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\VehicleWorkList.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\vehicleDistribution\DispatcherTask.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

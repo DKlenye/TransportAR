@@ -82,8 +82,10 @@
       }
       
       if(main.isDispClosed()){
-         var denyModifyFields = ['DepartureDate','DepartureTime'];
-          if ([1, 2].indexOf(e.row) != -1) return false;
+          var denyModifyFields = ['DepartureDate', 'DepartureTime', 'ReturnDate', 'ReturnTime', 'ScheduleId', 'Shift'];
+          if (denyModifyFields.indexOf(e.record.id) != -1) {
+             return false;
+         }
       }
       
     },

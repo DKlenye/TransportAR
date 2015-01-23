@@ -546,7 +546,7 @@ namespace Transport.Models {
                    else
                    {
                        var i = 0;
-                       while (i != daycount)
+                       while (i <= daycount)
                        {
                            var min = 8*60;
 
@@ -558,7 +558,7 @@ namespace Transport.Models {
                                }
                                else
                                {
-                                   min = (int) (DepartureDate.Date.Add(returnTime) - DepartureDate).TotalMinutes;
+                                   min = (int) (DepartureDate.Date.Add(returnTime) - DepartureDate).TotalMinutes-lunch8;
                                }
                            }
                            else if (i == daycount)
@@ -569,7 +569,7 @@ namespace Transport.Models {
                                }
                                else
                                {
-                                   min = (int) (ReturnDate - ReturnDate.Date.Add(departureTime)).TotalMinutes;
+                                   min = (int) (ReturnDate - ReturnDate.Date.Add(departureTime)).TotalMinutes-lunch8;
                                }
                            }
 
