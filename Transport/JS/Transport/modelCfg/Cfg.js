@@ -44,7 +44,13 @@
           field: 'MaintenanceRequestId',
           direction: 'DESC'
         }
+      },
+  GroupRequest: {
+      sortInfo: {
+          field: 'OrderId',
+          direction: 'ASC'
       }
+  }
    });
    
    

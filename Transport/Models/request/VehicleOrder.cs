@@ -125,9 +125,6 @@ namespace Transport.Models
           var lastOrderVehicleMap = new List<int>();
           lastOrder.ForEach(x=>lastOrderVehicleMap.Add(x.Vehicle.VehicleId));
 
-          var businessTrip =  FindBusinessTripForDate(date);
-          var businessTripMap = new List<int>();
-          businessTrip.ForEach(x => businessTripMap.Add(x.Vehicle.VehicleId));
 
           var vehicles = FullCar.FindAll(Expression.Where<FullCar>(x => x.GroupRequestId != null && x.OwnerId == 1 && x.WriteOffDate == null));
             
@@ -154,41 +151,7 @@ namespace Transport.Models
                   };
 
                   o.Save();
-
-                  if (businessTripMap.Contains(v.VehicleId))
-                  {
-                      var trip = businessTrip.First(x => x.Vehicle.VehicleId == v.VehicleId);
-                      o.Description = trip.Description;
-                      o.BusinessTripDepartureDate = trip.DepartureDate;
-                      o.DestRoutePoint = trip.DestRoutePoint;
-                      o.WaybillId = trip.WaybillId;
-                      o.ScheduleId = trip.ScheduleId;
-                      o.ReturnDate = trip.ReturnDate;
-
-                      trip.Drivers.ForEach(
-                          x =>
-                              o.Drivers.Add(new VehicleOrderDriver()
-                              {
-                                  VehicleOrderId = o.VehicleOrderId,
-                                  Driver = x.Driver
-                              }));
-                      trip.Customers.ForEach(
-                          x =>
-                              o.Customers.Add(new VehicleOrderCustomer()
-                              {
-                                  VehicleOrderId = o.VehicleOrderId,
-                                  Customer = x.Customer,
-                                  DepartureTime = x.DepartureTime,
-                                  RequestId = x.RequestId,
-                                  Description = x.Description,
-                              }));
-
-                      o.BusinessTripDepartureDate = trip.DepartureDate;
-
-                  }
-                  else
-                  {
-
+                  
                       last.Drivers.ForEach(x =>
                              o.Drivers.Add(new VehicleOrderDriver()
                              {
@@ -207,15 +170,7 @@ namespace Transport.Models
                           });
                       }
 
-                      /*if (car.ResponsibleDriver != null)
-                      {
-                          o.Drivers.Add(new VehicleOrderDriver()
-                          {
-                              Driver = car.ResponsibleDriver,
-                              VehicleOrderId = o.VehicleOrderId
-                          });
-                      }*/
-                  }
+                     
                   
                   o.Save();
               }

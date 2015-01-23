@@ -1,45 +1,53 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using Castle.Core;
 using Ext.Direct;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NHibernate.Criterion;
 using Kdn.Direct;
+using NHibernate.Hql.Ast.ANTLR;
 using Transport.Models;
+using Transport.Models.request;
 
 namespace Transport.Direct
 {
     public partial class Direct
     {
-
-
+        
 
         [DirectMethod]
         [ParseAsJson]
         public DataSerializer VehicleOrderUpdate(JObject o)
         {
 
-            var type = typeof (VehicleOrder);
+            var type = typeof (VehicleOrderDTO);
             var models = getModels(o);
             var rezult = new List<object>();
 
             foreach (var model in models)
             {
-                var instance = (VehicleOrder)JsonConvert.DeserializeObject(model.ToString(), type);
+                var instance = (VehicleOrderDTO)JsonConvert.DeserializeObject(model.ToString(), type);
                 
-
                 instance.Customers.ForEach(x =>
                 {
                     if (String.IsNullOrEmpty(x.DepartureTime))
                     {
                         x.DepartureTime = instance.DepartureDate.TimeOfDay.ToString().Substring(0,5);
                     }
+
+                    var z = VehicleOrderCustomer.Find(x.Id);
+                    
                 });
 
-                instance.UpdateAndFlush();
-                instance.Refresh();
+
+
+
+
+
                 rezult.Add(instance);
             }
 
@@ -83,6 +91,9 @@ namespace Transport.Direct
         {
             var id = o["id"].Value<int>();
             var request = Request.Find(id);
+
+            var attachments = RequestAttachments.FindByRequest(request.RequestId);
+            request.Attachments = attachments;
 
             return new DataSerializer(new List<object>() {request});
         }
@@ -156,14 +167,6 @@ namespace Transport.Direct
         }
 
 
-
-
-        public class AddOrderDto
-        {
-            public GroupRequest GroupRequest { get; set; }
-            public BaseVehicle Vehicle { get; set; }
-            public DateTime Date { get; set; }
-        }
 
         [DirectMethod]
         public VehicleOrder AddOrder(AddOrderDto dto)
@@ -240,23 +243,58 @@ namespace Transport.Direct
         public DataSerializer OrderRead(JObject o)
         {
             var date = o["date"].Value<DateTime>();
+
+            var maintenance = MaintenanceRequest.FindVehicleInMaintenance(date);
+            var maintenanceMap = maintenance.Select(m => m.Car.VehicleId).ToList();
+
+            var businessTrip = VehicleOrder.FindBusinessTripForDate(date);
+            var businessTripMap = businessTrip.Select(m => m.Vehicle.VehicleId).ToList();
+
+
             var orders =
                 VehicleOrder.FindAll(
                     Expression.Where<VehicleOrder>(x => x.DepartureDate >= date && x.DepartureDate <= date.AddDays(1)));
 
-
-            var maintenance = MaintenanceRequest.FindVehicleInMaintenance(date);
-            var maintenanceMap = maintenance.Select(m => m.Car.VehicleId).ToList();
-            
-            orders.ForEach(x =>
+            return new DataSerializer(orders.Select(x =>
             {
-                x.IsInMaintenance = maintenanceMap.Contains(x.Vehicle.VehicleId);
-            });
-            
-            return new DataSerializer(orders);
+                var dto = new VehicleOrderDTO();
+
+                if (maintenanceMap.Contains(x.Vehicle.VehicleId))
+                {
+                    var maintenanceFirst = maintenance.First(m => m.Car == x.Vehicle);
+
+                    dto.VehicleOrderId = x.VehicleOrderId;
+                    dto.IsInMaintenance = true;
+                    dto.DepartureDate = maintenanceFirst.RequestDate.Value;
+                    dto.ReturnDate = maintenanceFirst.EndRequest;
+                    dto.Vehicle = x.Vehicle;
+
+                    dto.Drivers = x.Drivers;
+                    return dto;
+
+
+                }
+                
+                var order = businessTripMap.Contains(x.Vehicle.VehicleId)
+                    ? businessTrip.First(t => t.Vehicle == x.Vehicle)
+                    : x;
+
+                dto.VehicleOrderId = order.VehicleOrderId;
+                dto.DepartureDate = order.DepartureDate;
+                dto.ReturnDate = order.ReturnDate;
+                dto.Vehicle = order.Vehicle;
+                dto.ScheduleId = x.ScheduleId;
+                dto.Shift = x.Shift;
+                dto.DestRoutePoint = x.DestRoutePoint;
+                dto.Customers = order.Customers;
+                dto.Drivers = order.Drivers;
+                dto.Description = order.Description;
+
+                return dto;
+
+
+            }).ToList());
         }
-
-
 
 
         [DirectMethod]
