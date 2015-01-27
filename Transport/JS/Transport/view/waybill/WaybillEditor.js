@@ -1053,29 +1053,24 @@
                 Ext.Msg.confirm(
                     'Закрытие путевого листа',
                     'Разность между датами выезда и возращения более 15 дней!<br/> Вы действительно хотите закрыть путевой лист?',
-                    function (m) { if (m == 'yes') this.CheakDatePeriod(departureDateTime, returnDateTime); },
+                    function (m) { if (m == 'yes') this.CheckDatePeriod(departureDateTime, returnDateTime); },
                     this
                 );
             } 
             else {
-                this.CheakDatePeriod(departureDateTime, returnDateTime);   
+                this.CheckDatePeriod(departureDateTime, returnDateTime);   
             }
         }
     },
 
     //Проверка на перечесение периода закрываемого путевого листа с периодами других путевых листов
-    CheakDatePeriod: function (departureDateTime, returnDateTime) {
-        Kdn.Direct.CheakDatePeriod({
-            dateStart: departureDateTime,
-            dateEnd: returnDateTime,
-            vehicleId: this.vehicleId,
-            waybillId: this.waybillId
-        }, this.onAfterCheakDatePeriod.createDelegate(this));
+    CheckDatePeriod: function (departureDateTime, returnDateTime) {
+        Kdn.Direct.CheckDatePeriod(this.waybillId, this.onAfterCheckDatePeriod.createDelegate(this));
     },
 
 
-    onAfterCheakDatePeriod: function (e) {
-        if (e.result == 0) {
+    onAfterCheckDatePeriod: function (e) {
+        if (e == 0) {
             this.closeWindow.items.each(function(i) {
                 if (i.xtype == 'grid') {
                     if (i.view && i.view.refresh)
