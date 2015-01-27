@@ -21,6 +21,13 @@
             columnLines: true,
             stripeRows: true,
             plugins: ['filterrow'],
+            viewConfig:{
+                getRowClass: function(record, rowIndex, rp, ds) {
+                    var date = Date.parseDate(String.format('{0} {1}', new Date().format('d.m.Y'), me.lastChange.getValue()), 'd.m.Y H:i');
+                    var changeDate = record.get('LastChange');
+                    return changeDate && changeDate>date ? 'red' : '';
+                }
+            },
             selModel: new Ext.grid.RowSelectionModel(),
             listeners: {
                     rowcontextmenu: this.onContext,
@@ -70,7 +77,7 @@
                         }
                     }
                 },*/
-                '-', 'Колонна',
+                'Колонна',
                 {
                     xtype: 'combo.transportcolumn',
                     ref:'../column',
@@ -91,7 +98,22 @@
                         }
                     }
                 },
+                '-',
+                'Время изменений',
+                {
+                  xtype: 'kdn.editor.fulltimefield',
+                  width:70,
+                  value:new Date(),
+                  ref: '../lastChange',
+                  listeners: {
+                      select:function() {
+                         me.getView().refresh();
+                      }
+                  }
+                },
+                '-',
                 '->',
+                '-',
                  {
                     text: 'Печать',
                     iconCls: 'icon-printer',
@@ -103,7 +125,8 @@
                         Kdn.Reporter.exportReport(reportName, params);
                     },
                     scope: this
-                }
+                },
+                '-'
             ],
             bbar: [
                 '-',
@@ -290,7 +313,7 @@
                     if (e && e.length < 1) return null;
 
                     var qtipTpl = "<span style='font-size:14px; background-color:{5}'>  <b>Цех:{0} Taб.№:{1} {2} {3} {4}</b></span>";
-                    var tpl = "<img driverId = '{6}' style='cursor:pointer' src='images/icons/{3}.png'> <span style='font-size:14px; background-color:{5}'>{4} {0} {1}.{2}.</span>";
+                    var tpl = "<img driverId = '{6}' style='cursor:pointer' src='images/icons/{3}.png'> <span style='font-size:14px; background-color:{5}'>{4} <span style='color:red'>{7}</span> {0} {1}.{2}.</span>";
 
                     var statusImages = {
                         0: 'bullet_white', //свободен
@@ -329,7 +352,8 @@
                             statusImages[driver.Cause],
                             driver.Cause == 0 ? "" : "(" + (!!driver.Start ? driver.Start.format('d.m') : "...") + "-" + (!!driver.End ? driver.End.format('d.m') : "...") + ")",
                             statusColors[driver.Cause],
-                            d.DriverId
+                            d.DriverId,
+                            driver.Description || '&nbsp'
                         ));
                     });
 
@@ -427,6 +451,12 @@
                 dataIndex: 'Description',
                 header: 'Примечание',
                 width: 120
+            },
+            {
+                header:'Изменено',
+                dataIndex:'LastChange',
+                xtype:'datecolumn',
+                format:'d.m H:i:s'
             },
             {
                 header: '№  колонны',

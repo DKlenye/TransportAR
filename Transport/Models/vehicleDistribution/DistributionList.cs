@@ -93,7 +93,14 @@ namespace Transport.Models
                         ScheduleId = car.ScheduleId == null ? 1 : car.ScheduleId.Value
                     };
 
-                    d.Drivers.ForEach(x=>detail.Drivers.Add(x));
+                    detail.SaveAndFlush();
+
+
+                    d.Drivers.ForEach(x=>detail.Drivers.Add(new DistributionDrivers()
+                    {
+                        Driver = x.Driver,
+                        ListDetailId = detail.ListDetailId,
+                    }));
 
                     detail.SaveAndFlush();
 

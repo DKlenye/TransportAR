@@ -63,6 +63,8 @@ namespace Transport.Direct
         public ICollection<DistributionDriverDto> Drivers { get; set; }
 
         public bool? IsInMaintenance { get; set; }
+
+        public DateTime? LastChange { get; set; }
     }
 
     public class DistributionCustomerDto
@@ -80,6 +82,7 @@ namespace Transport.Direct
     public class DistributionDriverDto
     {
         public Driver Driver { get; set; }
+        public string Description { get; set; }
         public OutOfWorkCause Cause { get; set; }
         public DateTime? Start { get; set; }
         public DateTime? End { get; set; }
@@ -124,8 +127,8 @@ namespace Transport.Direct
                         Shift = x.Shift,
                         ScheduleId = x.ScheduleId,
                         DestRoutePoint = x.DestRoutePoint,
-                        WaybillId = x.WaybillId
-                        
+                        WaybillId = x.WaybillId,
+                        LastChange = x.LastChange
                     };
 
                     if (businessTripMap != null && businessTripMap.ContainsKey(x.Car.VehicleId))
@@ -149,7 +152,7 @@ namespace Transport.Direct
                             RequestId = customer.RequestId,
                             ReturnTime = customer.ReturnTime
                         }));
-                        b.Drivers.ForEach(driver => dto.Drivers.Add(new DistributionDriverDto() {Driver = driver}));
+                        b.Drivers.ForEach(driver => dto.Drivers.Add(new DistributionDriverDto() {Driver = driver.Driver}));
 
                         return dto;
 
@@ -157,19 +160,19 @@ namespace Transport.Direct
 
                     x.Drivers.ForEach(d =>
                     {
-                        var driverDto = new DistributionDriverDto() {Driver = d};
+                        var driverDto = new DistributionDriverDto() {Driver = d.Driver,Description = d.Description};
 
-                        if (vacationMap.ContainsKey(d.DriverId))
+                        if (vacationMap.ContainsKey(d.Driver.DriverId))
                         {
-                            var v = vacationMap[d.DriverId];
+                            var v = vacationMap[d.Driver.DriverId];
                             driverDto.Cause = OutOfWorkCause.Vacation;
                             driverDto.Start = v.StartDate;
                             driverDto.End = v.EndDate;
                         }
 
-                        if (outOfWorkMap.ContainsKey(d.DriverId))
+                        if (outOfWorkMap.ContainsKey(d.Driver.DriverId))
                         {
-                            var oow = outOfWorkMap[d.DriverId];
+                            var oow = outOfWorkMap[d.Driver.DriverId];
                             driverDto.Cause = oow.Cause;
                             driverDto.Start = oow.StartDate;
                             driverDto.End = oow.EndDate;
@@ -231,6 +234,7 @@ namespace Transport.Direct
             dto.DepartureDate = list.ListDate.Add(TimeSpan.Parse(detail.DepartureTime));
             dto.DestRoutePoint = detail.DestRoutePoint;
             dto.WaybillId = detail.WaybillId;
+            dto.LastChange = detail.LastChange;
 
             if (businessTrip != null)
             {
@@ -251,7 +255,7 @@ namespace Transport.Direct
                     RequestId = customer.RequestId,
                     ReturnTime = customer.ReturnTime
                 }));
-                businessTrip.Drivers.ForEach(driver => dto.Drivers.Add(new DistributionDriverDto() {Driver = driver}));
+                businessTrip.Drivers.ForEach(driver => dto.Drivers.Add(new DistributionDriverDto() {Driver = driver.Driver}));
 
                 return dto;
 
@@ -259,19 +263,19 @@ namespace Transport.Direct
 
             detail.Drivers.ForEach(d =>
             {
-                var driverDto = new DistributionDriverDto() {Driver = d};
+                var driverDto = new DistributionDriverDto() {Driver = d.Driver,Description = d.Description};
 
-                if (vacationMap.ContainsKey(d.DriverId))
+                if (vacationMap.ContainsKey(d.Driver.DriverId))
                 {
-                    var v = vacationMap[d.DriverId];
+                    var v = vacationMap[d.Driver.DriverId];
                     driverDto.Cause = OutOfWorkCause.Vacation;
                     driverDto.Start = v.StartDate;
                     driverDto.End = v.EndDate;
                 }
 
-                if (outOfWorkMap.ContainsKey(d.DriverId))
+                if (outOfWorkMap.ContainsKey(d.Driver.DriverId))
                 {
-                    var oow = outOfWorkMap[d.DriverId];
+                    var oow = outOfWorkMap[d.Driver.DriverId];
                     driverDto.Cause = oow.Cause;
                     driverDto.Start = oow.StartDate;
                     driverDto.End = oow.EndDate;
@@ -357,22 +361,31 @@ namespace Transport.Direct
                 customersMap.ForEach(x => detail.Customers.Remove(x.Value));
 
 
-                var driversMap = detail.Drivers.Map(x => x.DriverId);
+                var driversMap = detail.Drivers.Map(x => x.Driver.DriverId);
 
                 dto.Drivers.ForEach(x =>
                 {
-                    if (!driversMap.ContainsKey(x.Driver.DriverId))
+                    if (driversMap.ContainsKey(x.Driver.DriverId))
                     {
-                        db.Execute("insert into DistributionDrivers (ListDetailId,DriverId) values(@0,@1)", detail.ListDetailId,
-                            x.Driver.DriverId);
+                        var driver = driversMap[x.Driver.DriverId];
+                        driver.Description = x.Description;
+                        driversMap.Remove(x.Driver.DriverId);
                     }
-                    driversMap.Remove(x.Driver.DriverId);
+                    else
+                    {
+                        detail.Drivers.Add(
+                            new DistributionDrivers()
+                            {
+                                Driver = x.Driver,
+                                Description = x.Description,
+                                ListDetailId = detail.ListDetailId
+                            });
+                    }
                 });
 
+                driversMap.ForEach(x => detail.Drivers.Remove(x.Value));
 
-                driversMap.ForEach(
-                    x => db.Execute("delete from DistributionDrivers where ListDetailId = @0 and DriverId = @1",
-                        detail.ListDetailId, x.Value.DriverId));
+                detail.LastChange = DateTime.Now;
 
                 detail.SaveAndFlush();
                 detail.Refresh();
@@ -410,8 +423,7 @@ namespace Transport.Direct
 
             return new DataSerializer(new Object[] {});
         }
-
-
+        
         public class AddOrderDto
         {
             public GroupRequest GroupRequest { get; set; }
@@ -473,7 +485,7 @@ namespace Transport.Direct
 
                 if (car.ResponsibleDriver != null)
                 {
-                    detail.Drivers.Add(car.ResponsibleDriver);
+                    detail.Drivers.Add(new DistributionDrivers(){Driver = car.ResponsibleDriver});
                 }
 
                 detail.SaveAndFlush();
@@ -562,7 +574,7 @@ namespace Transport.Direct
                 var waybillDriver = new WaybillDriver()
                 {
                     WaybillId = waybill.WaybillId,
-                    Driver = x
+                    Driver = x.Driver
                 };
                 waybillDriver.Save();
 

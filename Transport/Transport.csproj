@@ -127,7 +127,6 @@
     <Compile Include="Models\acc\FuelFilledCost.cs" />
     <Compile Include="Models\request\RequestAttachments.cs" />
     <Compile Include="Models\request\DriverOutOfWork.cs" />
-    <Compile Include="Models\request\VehicleOrderDTO.cs" />
     <Compile Include="Models\vehicleDistribution\DistributionCustomers.cs" />
     <Compile Include="Models\vehicleDistribution\DistributionListDetails.cs" />
     <Compile Include="Models\vehicleDistribution\DistributionList.cs" />
@@ -164,9 +163,6 @@
     <Compile Include="Models\limit\VehicleFuelLimits.cs" />
     <Compile Include="Models\limit\VehicleKmLimits.cs" />
     <Compile Include="Models\limit\VehicleLimits.cs" />
-    <Compile Include="Models\request\VehicleOrder.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Models\request\v_Request.cs" />
     <Compile Include="Models\request\RequestDTO.cs" />
     <Compile Include="Models\request\RequestApprover.cs" />

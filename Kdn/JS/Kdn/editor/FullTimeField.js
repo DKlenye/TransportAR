@@ -45,6 +45,7 @@
         var v = this.el.dom.value;
         var d = this.parseDate(v);
         if (Ext.isDate(d)) this.setValue(d);
+        this.fireEvent('select');
     },
         
     assertValue : function(){

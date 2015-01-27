@@ -146,6 +146,19 @@
                     }
                 },
                 '-',
+                'Время изменений',
+                {
+                    xtype: 'kdn.editor.fulltimefield',
+                    width: 70,
+                    value: new Date(),
+                    ref: '../lastChange',
+                    listeners: {
+                        select: function () {
+                            me.getView().refresh();
+                        }
+                    }
+                },
+                '-',
                 {
                     text: 'Печать',
                     iconCls: 'icon-printer',

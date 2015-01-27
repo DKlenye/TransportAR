@@ -62,16 +62,20 @@
                     title: 'Водители',
                     flex: 1,
                     store: new Ext.data.JsonStore({
-                        fields: ['Driver']
+                        fields: ['Driver','Description']
                     }),
                     viewConfig: {
                         forceFit: true
                     },
                     columns: [
                         {
+                            header: 'Примечание',
+                            dataIndex: 'Description',
+                            editor: { xtype: 'textfield' }
+                        },
+                        {
                             header: 'Водитель',
                             dataIndex: 'Driver',
-                            width: 300,
                             editor: { xtype: 'combo.driver' },
                             renderer: T.combo.Driver.prototype.renderTpl
                         }
@@ -189,8 +193,9 @@
         }); 
         
         this.drivers.store.each(function(e){
-            var o = Ext.copyTo({Cause:0},e.data,'Driver');
+            var o = Ext.copyTo({ Cause: 0 }, e.data, 'Driver,Description');
             o.VehicleOrderId = rec.get('ListDetailId');
+            o.Id = o.Id || 0;
             drivers.push(o); 
         }); 
         

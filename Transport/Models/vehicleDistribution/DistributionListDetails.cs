@@ -10,7 +10,7 @@ namespace Transport.Models
 
         public DistributionListDetails()
         {
-            Drivers = new List<Driver>();
+            Drivers = new List<DistributionDrivers>();
             Customers = new List<DistributionCustomers>();
         }
 
@@ -48,22 +48,31 @@ namespace Transport.Models
         [HasMany(Table = "DistributionCustomers", ColumnKey = "ListDetailId", Inverse = true, Fetch = FetchEnum.SubSelect, OrderBy = "DepartureTime", Cascade = ManyRelationCascadeEnum.AllDeleteOrphan)]
         public ICollection<DistributionCustomers> Customers { get; set; }
 
-        [HasAndBelongsToMany(typeof(Driver),
-        Table = "DistributionDrivers", ColumnKey = "ListDetailId", Fetch =FetchEnum.SubSelect, ColumnRef = "DriverId", Cascade = ManyRelationCascadeEnum.AllDeleteOrphan)]
-        public ICollection<Driver> Drivers { get; set; }
+        [HasMany(Table = "DistributionDrivers", ColumnKey = "ListDetailId", Inverse = true, Fetch = FetchEnum.SubSelect, Cascade = ManyRelationCascadeEnum.AllDeleteOrphan)]
+        public ICollection<DistributionDrivers> Drivers { get; set; }
 
         [Property]
         public bool IsDispatcherCheck { get; set; }
 
+        [Property]
+        public DateTime? LastChange { get; set; }
+
     }
 
 
-
-
-
-
+    [ActiveRecord]
     public class DistributionDrivers
     {
+        [PrimaryKey]
+        public int Id { get; set; }
+        [Property]
+        public int ListDetailId { get; set; }
 
+        [BelongsTo("DriverId")]
+        public Driver Driver { get; set; }
+
+        [Property]
+        public string Description { get; set; }
     }
+    
 }
