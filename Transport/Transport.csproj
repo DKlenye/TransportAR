@@ -68,7 +68,6 @@
     <Reference Include="Iesi.Collections">
       <HintPath>..\..\..\..\..\share\TransportAR\TransportAR\TransportSite\bin\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="Kdn, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\resources\log4net.dll</HintPath>
@@ -1002,6 +1001,10 @@
     <ProjectReference Include="..\Ext.Direct\Ext.Direct.csproj">
       <Project>{653B211D-FEFA-483B-A284-6431C8598ED4}</Project>
       <Name>Ext.Direct</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kdn\Kdn.csproj">
+      <Project>{644CB925-F10B-4F8B-A050-8F480BE4C2B5}</Project>
+      <Name>Kdn</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -8,6 +8,7 @@ using Newtonsoft.Json.Linq;
 using Castle.ActiveRecord;
 using NHibernate.Criterion;
 using Transport.Models;
+using Kdn.Direct;
 
 
 namespace Transport.Direct
@@ -518,8 +519,31 @@ namespace Transport.Direct
       }
 
 
-      
-
+      [DirectMethod]
+      [ParseAsJson]
+      public JObject CheakDatePeriod(JObject o)
+      {
+          var obj = new JObject();
+          obj["result"] = -1;
+          JToken dateStart, dateEnd, vehicleId,waybillId;
+          if ((o.TryGetValue("dateStart", out dateStart) && dateStart.Value<DateTime?>() != null) &&
+             (o.TryGetValue("dateEnd", out dateEnd) && dateEnd.Value<DateTime?>() != null) &&
+             (o.TryGetValue("vehicleId", out vehicleId) && vehicleId.Value<int?>() != null)&&
+              (o.TryGetValue("waybillId", out waybillId) && waybillId.Value<int?>() != null))
+          {
+              var rez = db.ExecuteScalar<object>(";EXEC IntersectionDatePeriodWaybill @dateStart,@dateEnd,@vehicleId,@waybillId",
+                   new
+                   {
+                       dateStart = dateStart.Value<DateTime?>(),
+                       dateEnd = dateEnd.Value<DateTime?>(),
+                       vehicleId = vehicleId.Value<int?>(),
+                       waybillId = waybillId.Value<int?>()
+                   }
+              );
+              obj["result"] = rez.ToString();
+          }
+          return obj;
+      }
 
    }
 }

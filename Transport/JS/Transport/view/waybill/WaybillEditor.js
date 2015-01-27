@@ -947,7 +947,7 @@
       });
     },
     
-   close:function(){
+   close:function() {
      
      
      var combo = this.closeComboWaybillPackage;
@@ -983,13 +983,25 @@
      }
 
 
-       var $ = this,
+        var $ = this,
            data = {},
            errorMesage = [],
            departureDate = $.waybillproperty.getSource()['DepartureDate'],
-           returnDate = $.waybillproperty.getSource()['ReturnDate'];
-        
-        
+           returnDate = $.waybillproperty.getSource()['ReturnDate'],
+           departureTime = $.waybillproperty.getSource()['DepartureTime'],
+           returnTime = $.waybillproperty.getSource()['ReturnTime'];
+
+        var departureDateTime = new Date(departureDate.getFullYear(), departureDate.getMonth(), departureDate.getDate(),
+                                 departureTime.split(":")[0], departureTime.split(":")[1], 0, 0);
+        var returnDateTime = new Date(returnDate.getFullYear(), returnDate.getMonth(), returnDate.getDate(),
+                                 returnTime.split(":")[0], returnTime.split(":")[1], 0, 0);
+        //Разность дат в днях, вначале находим разность в милисекундах 
+        var returnDepartureDateDiff = (returnDateTime.getTime() - departureDateTime.getTime());
+
+        if (returnDepartureDateDiff < 0) {
+            errorMesage.push('<b>Дата возращения</b> меньше <b>даты выезда</b>');
+        }
+
         $.tasks.store.each(function(r) {
             var consumptionId = r.get('NormConsumptionId');
             if(consumptionId){
@@ -1034,22 +1046,54 @@
        $.remains.setNullRemains();
         
         if(errorMesage.length>0){
-         Ext.Msg.alert('Сообщение',errorMesage.join("</br>"));
+            Ext.Msg.alert('Сообщение',errorMesage.join("</br>"));
         }
-        else{
-        
-         this.closeWindow.items.each(function(i){
-            if(i.xtype=='grid'){
-               if(i.view && i.view.refresh) i.view.refresh();
+        else {
+            //Если разность даты выезда и даты возвращения более 15 дней
+            if ((returnDepartureDateDiff / (1000 * 60 * 60 * 24)) > 14) {
+                Ext.Msg.confirm(
+                    'Закрытие путевого листа',
+                    'Разность между датами выезда и возращения более 15 дней!<br/> Вы действительно хотите закрыть путевой лист?',
+                    function (m) { if (m == 'yes') this.CheakDatePeriod(departureDateTime, returnDateTime); },
+                    this
+                );
+            } 
+            else {
+                this.CheakDatePeriod(departureDateTime, returnDateTime);   
             }
-         });
-        
-          this.closeWindow.show(this.button.close.getEl());
         }
-     
-
     },
-    
+
+    //Проверка на перечесение периода закрываемого путевого листа с периодами других путевых листов
+    CheakDatePeriod: function (departureDateTime, returnDateTime) {
+        Kdn.Direct.CheakDatePeriod({
+            dateStart: departureDateTime,
+            dateEnd: returnDateTime,
+            vehicleId: this.vehicleId,
+            waybillId: this.waybillId
+        }, this.onAfterCheakDatePeriod.createDelegate(this));
+    },
+
+
+    onAfterCheakDatePeriod: function (e) {
+        if (e.result == 0) {
+            this.closeWindow.items.each(function(i) {
+                if (i.xtype == 'grid') {
+                    if (i.view && i.view.refresh)
+                        i.view.refresh();
+                }
+            });
+            this.closeWindow.show(this.button.close.getEl());
+        } else {
+            Ext.Msg.alert('Сообщение', 'Период закрываемого путевого листа пересекается с периодами диругих путевых листов');    
+        }
+    },
+
+
+
+   
+
+
     _close:function(){
       
       
@@ -1081,7 +1125,7 @@
          'Внимание!!!<br/>При открытии путевого листа, все последующие путевые будут открыты!',
          function(m){if(m=='yes') this.open();},
          this
-      );
+      );    
     },
     
     open:function(){
