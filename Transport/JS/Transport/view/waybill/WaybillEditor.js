@@ -986,15 +986,14 @@
         var $ = this,
            data = {},
            errorMesage = [],
-           departureDate = $.waybillproperty.getSource()['DepartureDate'],
-           returnDate = $.waybillproperty.getSource()['ReturnDate'],
-           departureTime = $.waybillproperty.getSource()['DepartureTime'],
-           returnTime = $.waybillproperty.getSource()['ReturnTime'];
+           source = $.waybillproperty.getSource(),
+           departureDate = source['DepartureDate'],
+           returnDate = source['ReturnDate'],
+           departureTime = source['DepartureTime'],
+           returnTime = source['ReturnTime'];
 
-        var departureDateTime = new Date(departureDate.getFullYear(), departureDate.getMonth(), departureDate.getDate(),
-                                 departureTime.split(":")[0], departureTime.split(":")[1], 0, 0);
-        var returnDateTime = new Date(returnDate.getFullYear(), returnDate.getMonth(), returnDate.getDate(),
-                                 returnTime.split(":")[0], returnTime.split(":")[1], 0, 0);
+        var departureDateTime = Kdn.parseDate(departureDate,departureTime);
+        var returnDateTime =  Kdn.parseDate(returnDate, returnTime);
         //Разность дат в днях, вначале находим разность в милисекундах 
         var returnDepartureDateDiff = (returnDateTime.getTime() - departureDateTime.getTime());
 
@@ -1085,7 +1084,7 @@
             });
             this.closeWindow.show(this.button.close.getEl());
         } else {
-            Ext.Msg.alert('Сообщение', 'Период закрываемого путевого листа пересекается с периодами диругих путевых листов');    
+            Ext.Msg.alert('Сообщение', 'Период закрываемого путевого листа пересекается с периодами других путевых листов');    
         }
     },
 
