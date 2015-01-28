@@ -836,6 +836,11 @@ Kdn.Menu = [
                 text: 'Стоимость услуг, оказанных сторонним организациям',
                 Handler: 'createView',
                 HandlerCfg: "{xtype:'view.report.ordersuminfo',single:true}"
+            },
+            {
+                text: 'Заправка по малой механизации',
+                Handler: 'createView',
+                HandlerCfg: "{xtype:'view.report.smallmechrefuelling',single:true}"
             }
 
         ]

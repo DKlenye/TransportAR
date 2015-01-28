@@ -233,6 +233,10 @@
       <FullPath>OrderSumInfo.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>OrderSumInfoBySchedule.rdl</Name>
+      <FullPath>OrderSumInfoBySchedule.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>PolymirVehicleWork.rdl</Name>
       <FullPath>PolymirVehicleWork.rdl</FullPath>
     </ProjectItem>
@@ -465,8 +469,8 @@
       <FullPath>WayBillPackage.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>OrderSumInfoBySchedule.rdl</Name>
-      <FullPath>OrderSumInfoBySchedule.rdl</FullPath>
+      <Name>SmallMechRefuelling.rdl</Name>
+      <FullPath>SmallMechRefuelling.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
