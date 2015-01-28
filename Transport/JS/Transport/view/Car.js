@@ -378,6 +378,25 @@ _getStore: function()
     });
 
     return T.view.Car.superclass._getStore.call(this);
+},
+
+_getTbar: function () {
+    var tBar = T.view.Car.superclass._getTbar.call(this);
+    return tBar.concat([{
+        iconCls: 'icon-lorry_error',
+        text: 'Показывать списанные',
+        pressed: true,
+        enableToggle: true,
+        scope: this,
+        handler: function (field) {
+            var store = this.store;
+            store.reload({
+                params: {
+                    sqlFilter: field.pressed ? "" : "WriteOffDate is null"
+                }
+            });
+        }
+    }]);
 }
 
 });
