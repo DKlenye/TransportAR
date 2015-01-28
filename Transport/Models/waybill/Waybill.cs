@@ -793,8 +793,9 @@ namespace Transport.Models {
                    x =>
                        x.Car == Car && x.WaybillId != WaybillId &&
                        (
-                           (x.DepartureDate >= DepartureDate && x.DepartureDate <= ReturnDate) ||
-                           (x.ReturnDate >= DepartureDate && x.ReturnDate <= ReturnDate)
+                           (x.DepartureDate >= DepartureDate && x.DepartureDate < ReturnDate) ||
+                           (x.ReturnDate > DepartureDate && x.ReturnDate <= ReturnDate) ||
+                           (x.DepartureDate <= DepartureDate && x.ReturnDate >= ReturnDate)
                            )
                    )
                );
