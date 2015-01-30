@@ -124,6 +124,7 @@
     <Compile Include="Models\acc\DriverFuelExcess.cs" />
     <Compile Include="Models\acc\FuelPriceCalculate.cs" />
     <Compile Include="Models\acc\FuelFilledCost.cs" />
+    <Compile Include="Models\car\OilNormVehicle.cs" />
     <Compile Include="Models\request\RequestAttachments.cs" />
     <Compile Include="Models\request\DriverOutOfWork.cs" />
     <Compile Include="Models\vehicleDistribution\DistributionCustomers.cs" />
@@ -1110,6 +1111,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\report\SmallMechRefuelling.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\car\NormOil.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\colModel\NormOil.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
