@@ -117,7 +117,8 @@ T.view.CarEditor = Ext.extend(Kdn.editor.ModelEditor, {
 	            {iconCls: 'icon-lorry_error', title: 'Лимиты на пробег', xtype: 'panel', xtype: 'view.car.kmlimits' },
 	            {iconCls:'icon-insurance',title:'Страховка',xtype:'view.car.insurance'},
 	            {iconCls:'icon-co2',title:'Проверка СО',xtype:'view.car.checkco'},
-	            {iconCls:'icon-norm',title:'Нормы расхода топлива',xtype:'view.car.norm'},
+	            {iconCls: 'icon-norm', title: 'Нормы расхода топлива', xtype: 'view.car.norm' },
+                { iconCls: 'icon-oil', title: 'Нормы расхода масел', xtype: 'view.car.normoil' },
 	            {iconCls:'icon-TO',title:'Техосмотр',xtype:'panel',xtype:'view.car.inspection'} 
 	         ]
 	      }
