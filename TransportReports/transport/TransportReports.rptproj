@@ -193,6 +193,10 @@
       <FullPath>ForwardDrivers.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>FuelIncomeOrder.rdl</Name>
+      <FullPath>FuelIncomeOrder.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Inventory.rdl</Name>
       <FullPath>Inventory.rdl</FullPath>
     </ProjectItem>
@@ -287,6 +291,10 @@
     <ProjectItem>
       <Name>SmallMechFuelConsumption.rdl</Name>
       <FullPath>SmallMechFuelConsumption.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>SmallMechRefuelling.rdl</Name>
+      <FullPath>SmallMechRefuelling.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>TireCard.rdl</Name>
@@ -469,8 +477,8 @@
       <FullPath>WayBillPackage.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>SmallMechRefuelling.rdl</Name>
-      <FullPath>SmallMechRefuelling.rdl</FullPath>
+      <Name>ServiceWaybillsByYear.rdl</Name>
+      <FullPath>ServiceWaybillsByYear.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>

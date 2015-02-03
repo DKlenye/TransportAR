@@ -21,7 +21,7 @@
                         header: 'Группа масла',
                         width: 150,
                         editor: { xtype: 'combo.oilgroup', objectValue: false },
-                        renderer: Kdn.Renderer.store('OilGroup', 'OilGroupName'),
+                        renderer: Kdn.Renderer.store('OilGroup', 'OilGroupName')
                     },
                     {
                         dataIndex:'Norm',

@@ -838,6 +838,11 @@ Kdn.Menu = [
                 HandlerCfg: "{xtype:'view.report.ordersuminfo',single:true}"
             },
             {
+                text: 'Услуги сторонним организациям за год в разрезе заказчика',
+                Handler: 'createView',
+                HandlerCfg: "{xtype:'view.report.servicewaybillsbyyear',single:true}"
+            },
+            {
                 text: 'Заправка по малой механизации',
                 Handler: 'createView',
                 HandlerCfg: "{xtype:'view.report.smallmechrefuelling',single:true}"
@@ -863,7 +868,7 @@ Kdn.Menu = [
     }, {
         text: "Бухгалтерия",
         permission: {
-            u: [1, 15, 16]
+            u: [1, 15, 16,67]
         },
         iconCls: "icon-coins32",
         Handler: null,
