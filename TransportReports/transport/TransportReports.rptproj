@@ -261,6 +261,10 @@
       <FullPath>RefuellingInfoDateTime.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>VehicleNorms.rdl</Name>
+      <FullPath>VehicleNorms.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>RequestCount.rdl</Name>
       <FullPath>RequestCount.rdl</FullPath>
     </ProjectItem>
@@ -287,6 +291,10 @@
     <ProjectItem>
       <Name>SmallMechFuelConsumption.rdl</Name>
       <FullPath>SmallMechFuelConsumption.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>SmallMechRefuelling.rdl</Name>
+      <FullPath>SmallMechRefuelling.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>TireCard.rdl</Name>
@@ -389,10 +397,6 @@
       <FullPath>VehicleList.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>VehicleNorms.rdl</Name>
-      <FullPath>VehicleNorms.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
       <Name>VehicleNotUsing.rdl</Name>
       <FullPath>VehicleNotUsing.rdl</FullPath>
     </ProjectItem>
@@ -467,10 +471,6 @@
     <ProjectItem>
       <Name>WayBillPackage.rdl</Name>
       <FullPath>WayBillPackage.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>SmallMechRefuelling.rdl</Name>
-      <FullPath>SmallMechRefuelling.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
