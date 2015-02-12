@@ -145,7 +145,7 @@ T.view.DriverEditor = Ext.extend(Kdn.editor.ModelEditor, {
          }
       });  
       
-     this.setMode('update');
+      this.setMode('update');
       
 	}
 	

@@ -1,5 +1,10 @@
-﻿using Ext.Direct;
+﻿using System;
+using System.Collections.Generic;
+using Castle.ActiveRecord;
+using Ext.Direct;
+using Kdn.Direct;
 using Newtonsoft.Json.Linq;
+using NHibernate.Criterion;
 using Transport.Models;
 
 namespace Transport.Direct
@@ -17,6 +22,20 @@ namespace Transport.Direct
                 v.SetPosition();
             }
             return "";
+        }
+
+
+        [DirectMethod]
+        public DataSerializer GetVehicleReoling(int vehicleId)
+        {
+            /*var selectVehicleReoilling = VehicleReoilling.FindAll(
+                Expression.Where<VehicleReoilling>(
+                    x=>
+                        x.Vehicle.VehicleId == vehicleId
+                )
+            );
+            return new DataSerializer(selectVehicleReoilling);*/
+            return null;
         }
     }
 }

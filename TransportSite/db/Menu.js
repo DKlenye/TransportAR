@@ -863,6 +863,30 @@ Kdn.Menu = [
                 text: 'Контроль выхода транспорта на линию',
                 Handler: 'createView',
                 HandlerCfg: "{xtype:'view.inspection.vehicledayinspection',single:true}"
+            }, {
+                 text: 'Выдача масла',
+                 iconCls: "icon-oiltank",
+                 Handler: 'createView',
+                 HandlerCfg: "{xtype:'view.oilwork',single:true}"
+            }, {
+                text: 'Отчеты',
+                Handler: null,
+                HandlerCfg: null,
+                iconCls: 'icon-report-white',
+                Child: [
+                    {
+                        text: 'Отчёт о фактической замене масел и смазок',
+                        Handler: 'createView',
+                        iconCls: 'icon-blue-document-word',
+                        //HandlerCfg: "{xtype:'view.acc.fuelcost',single:true}"
+                    },
+                    {
+                        text: 'Журнал оперативного учёта расхода масла',
+                        Handler: 'createView',
+                        iconCls: 'icon-blue-document-word',
+                        //HandlerCfg: "{xtype:'view.acc.fuelcost',single:true}"
+                    }
+                ]
             }
         ]
     }, {

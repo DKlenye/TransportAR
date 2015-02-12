@@ -173,6 +173,7 @@
     <Compile Include="Models\Umtu.cs" />
     <Compile Include="Models\UserGroup.cs" />
     <Compile Include="Models\vehicleGroups\VehicleOilGroup.cs" />
+    <Compile Include="Models\VehicleReoilling.cs" />
     <Compile Include="Models\v_Driver.cs" />
     <Compile Include="Models\v_WaybillList.cs" />
     <Compile Include="Models\waybill\WaybillWork.cs" />
@@ -1120,6 +1121,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\report\ServiceWaybillsByYear.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\OilWork.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
