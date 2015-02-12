@@ -265,10 +265,6 @@
       <FullPath>RefuellingInfoDateTime.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>VehicleNorms.rdl</Name>
-      <FullPath>VehicleNorms.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
       <Name>RequestCount.rdl</Name>
       <FullPath>RequestCount.rdl</FullPath>
     </ProjectItem>
@@ -401,6 +397,10 @@
       <FullPath>VehicleList.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>VehicleNorms.rdl</Name>
+      <FullPath>VehicleNorms.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>VehicleNotUsing.rdl</Name>
       <FullPath>VehicleNotUsing.rdl</FullPath>
     </ProjectItem>
@@ -475,6 +475,14 @@
     <ProjectItem>
       <Name>WayBillPackage.rdl</Name>
       <FullPath>WayBillPackage.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>CarBalanceCost.rdl</Name>
+      <FullPath>CarBalanceCost.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>CarInputOut.rdl</Name>
+      <FullPath>CarInputOut.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>

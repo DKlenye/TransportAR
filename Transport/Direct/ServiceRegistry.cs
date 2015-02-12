@@ -9,7 +9,7 @@ using Transport.OtherModels.ogmnew;
 
 namespace Transport.Direct
 {
-    public partial class Direct : Kdn.Direct.Direct
+    public partial class Direct 
     {
         [DirectMethod]
         [ParseAsJson]

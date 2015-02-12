@@ -626,7 +626,23 @@ Kdn.Menu = [
                         iconCls: 'icon-blue-document-word',
                         Handler: 'createView',
                         HandlerCfg: "{xtype:'view.report.vehicleworklist',single:true}"
+                    },
+                {
+                    text: 'Список легкового транспорта(баллансовая стоимость)',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.carballancecost',single:true}"
+
+                    },
+                {
+                 
+                        text: 'Ввод/списание легкового транспорта',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.carinputout',single:true}"
+                    
                 },
+
                     
                      {
                         text: 'Список транспорта (водители, нормы)',

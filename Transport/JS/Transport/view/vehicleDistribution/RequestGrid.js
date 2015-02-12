@@ -58,12 +58,14 @@
                 {
                     header: 'Тип',
                     dataIndex: 'RequestType',
-                    width: 90 
+                    width: 90,
+                    filter:{}
                 },
                 {
                     header: 'Заказчик',
                     dataIndex: 'CustomerName',
-                    width: 170
+                    width: 170,
+                    filter:{}
                 },
                 {
                     header: 'Дата поездки',
@@ -100,7 +102,8 @@
                 {
                     header: 'Опубликовал, ФИО',
                     dataIndex: 'UserFio',
-                    width: 180
+                    width: 180,
+                    filter:{}
                 },
                 {
                     header: 'На подпись, ФИО',

@@ -23,7 +23,16 @@
             objectValue: false,
             width: 400,
             dataIndex: 'columns'
+        },
+        '-',
+        {
+            fieldLabel: 'Показывать по группам',
+            labelWidth:140,
+            xtype:'checkbox',
+            dataIndex: 'showInGroup',
+            checked:true
         }
+        
     ],
 
     buildReportParams: function(params) {
@@ -31,7 +40,7 @@
         p.start = params.start;
         p.end = params.end;
         p.columns = params.columns.join(',');
-
+        p.showInGroup = params.showInGroup;
         return p;
     }
 

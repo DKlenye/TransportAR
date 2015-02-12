@@ -42,6 +42,7 @@
                     split: true,
                     margins: '2 0 2 2',
                     xtype: 'grid',
+                    ref:'../requestGrid',
                     columnLines: true,
                     stripeRows: true,
                     loadMask: true,
@@ -145,28 +146,16 @@
                             width: 180
                        }
                    ],
-                    /* tbar: [
-                    {
-                    text: 'Обновить',
-                    iconCls: 'icon-refresh',
-                    handler: function()
-                    {
-                    this.RequestStore.reload();
-                    },
-                    scope:this
-                    }
-                    '-',
-                    {
-                    text:'Принять',
-                    iconCls: 'icon-accept'
-                    },
-                    '-',
-                    {
-                    text:'Отклонить',
-                    iconCls: 'icon-cancel'
-                    },
-                    '-'
-                    ],*/
+                    tbar: [
+                        {
+                            text: 'Открыть для печати',
+                            iconCls: 'icon-doc_pdf',
+                            handler: function() {
+                                this.printRequest();
+                            },
+                            scope: this
+                        }
+                    ],
                     bbar: new Ext.PagingToolbar({
                         displayInfo: true,
                         pageSize: 50,
@@ -370,9 +359,27 @@
         this.Detail.items.insert(0, editor);
         editor.show();
         this.Detail.doLayout();
+    },
+
+    printRequest: function () {
+        var request = this.RequestGrid.getSelectionModel().getSelected();
+        if (!request) return;
+        var requestTypes = {
+            "Кран": "RequestCrane",
+            "Грузовой": "RequestFreight",
+            "Пассажирский": "RequestPassengers"
+        },
+            id = request.get('RequestId'),
+            type = requestTypes[request.get('RequestType')];
+
+        this.print(id, type);
+    },
+
+    print: function (id, type) {
+        var params = {};
+        params.requestId = id;
+        Kdn.Reporter.exportReport(type, params, "PDF");
     }
-
-
 
 });
 
