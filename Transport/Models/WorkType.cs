@@ -31,7 +31,10 @@ namespace Transport.Models
         [Property]
         public ReplicationSource? ReplicationSource { get; set; }
 
-
+        public WorkUnit GetWorkUnit()
+        {
+            return WorkUnit.Find(WorkUnitId);
+        }
 
         public static WorkType GetPolymirWork(string replicationId)
         {

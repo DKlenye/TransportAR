@@ -1,6 +1,5 @@
 ﻿T.view.VehicleReoillingGrid = Ext.extend(Kdn.view.BaseGrid, {
-    //requireModels: 'TireModel,TireStandard,TireMaker',
-    //editor: 'view.tireeditor',
+    editor: 'view.oilworkeditor',
     modelName: 'VehicleReoilling',
     pageSize: 50,
     pageMode: 'remote',
@@ -8,15 +7,17 @@
         cfg = cfg || {};
         me = this;
 
-
         cfg.ComboCar = Ext.create({
+                dataIndex: 'vehicle',
 	            xtype:'combo.car',
 	            width:300,
 	            listeners:{
 	                scope: me,
                     select: function (rec) {                                      
-                        this.vehicleId = rec.data.VehicleId;
-                        this.updateVehicleReoling();
+                        this.VehicleId = rec.data.VehicleId;
+                        this.body.unmask();  
+                        this.addButtonVehicleReoling.setDisabled(false);
+                        this.reload();
                     }
 	            }
         });
@@ -87,23 +88,19 @@
                         editor: { xtype: 'kdn.editor.decimalfield' }
                     },
                     {
-                        dataIndex: 'VehicleId',
+                        dataIndex: 'OilChange',
                         align: 'center',
-                        header: 'Авто',
-                        //hidden: true,
-                        editor: {
-                             hidden:true,
-                             xtype: 'kdn.editor.numberfield',
-                             defaultvalue:this.VehicleId
-                             
-                        }
-                        
+                        header: 'Назначение',
+                        renderer: function (o) {
+                            if (!o) return 'Доливка';
+                            return 'Замена';
+                        },
                     }
                 ]
             })
         });
 
-        T.view.Tire.superclass.constructor.call(this, cfg);
+        T.view.VehicleReoillingGrid.superclass.constructor.call(this, cfg);
 
          this.on({
             viewready:me.onAfterRender,
@@ -111,6 +108,29 @@
             single:true
         });
     },
+
+
+    initComponent:function(){
+
+        var provider = Kdn.Direct;
+        var cfg = {
+            autoLoad:false,
+            autoSave:true,
+            api: {
+                create: provider['Create'],
+                read: provider['GetVehicleReoling'],
+                update: provider['Update'],
+                destroy: provider['Destroy']
+            }
+       };
+       
+       var store =  Kdn.ModelFactory.getStore('VehicleReoilling', cfg);
+       Ext.apply(this,{
+            store:store
+       });
+
+       T.view.VehicleReoillingGrid.superclass.initComponent.call(this);
+    },  
 
     _getTbar: function () {
 
@@ -137,14 +157,8 @@
                 iconCls: 'icon-add',
                 handler: this.onAdd,
                 scope: this,
-                cls: 'add_btn'
-            },
-            '-',
-            {
-                text: 'Клонировать',
-                iconCls: 'icon-page_copy',
-                handler: this.onClone,
-                scope: this
+                cls: 'add_btn',
+                ref: '../addButtonVehicleReoling'
             },
             '-',
             {
@@ -153,7 +167,8 @@
                 handler: this.onEdit,
                 scope: this,
                 cls: 'edit_btn',
-                disabled: true
+                disabled: true,
+                ref: '../editButtonVehicleReoling'
             },
             '-',
             {
@@ -162,69 +177,109 @@
                 handler: this.onDelete,
                 scope: this,
                 cls: 'delete_btn',
-                disabled: true
+                disabled: true,
+                ref: '../removeButtonVehicleReoling'
             },
             '-',
             {
                 xtype: 'tbspacer',
                 width: 20
+            },
+            {
+                text: 'Ввести замену',
+                iconCls: 'icon-norm',
+                handler: this.onAddChangeOil,
+                scope: this,
+                cls: 'norm_btn',
+                hidden: true,
+                ref: '../addChangeOil'
+            },
+            {
+                text: 'Убрать замену',
+                iconCls: 'icon-paintcan',
+                handler: this.onRemoveChangeOil,
+                scope: this,
+                cls: 'paintcan_btn',
+                hidden: true,
+                ref: '../removeChangeOil'
             }
         ];
     },
 
     onAfterRender: function() {
+        this.addButtonVehicleReoling.setDisabled(true);
         this.ComboCar.focus.defer(300,this.ComboCar,[true]);
+        this.body.mask();
+        this.VehicleId = 0;
+        this.reload();
     },
-
-
-    updateVehicleReoling: function() {
-        //if (this.vehicleId) {
-            var store = Kdn.ModelFactory.getStore('VehicleReoilling');
-            store.reload({
-                params: {
-                    sqlFilter: String.format("VehicleId = {0}",
-                        this.vehicleId
-                    ),
-                    start: 0
-                }
-            });
-       // }
-    },
-
-    _getStore: function()
+    
+    
+    reload: function()
     {
-         var cfg= {
-             autoLoad:false,
-             autoSave:true
-         };         
-         if(this.pageSize && this.pageMode!='local'){
-            Ext.apply(cfg,{
-               baseParams:{
-                  start:0,
-                  limit:this.pageSize
-               },
-               remoteSort:true
-            });
-         }
-         
-        return Kdn.ModelFactory.getStore(this.modelName,cfg);
+        var store = Kdn.ModelFactory.getStore('VehicleReoilling');
+        store.reload({ params: {'VehicleId':this.VehicleId} });
+    },
+    
+    onRowDblClick: function () {
+        if(!this.editButtonVehicleReoling.disabled)
+            T.view.VehicleReoillingGrid.superclass.onRowDblClick.call(this);    
     },
 
-     onAdd: function() {
-         //this.editor.customEditors.VehicleId.value = this.VehicleId;
-        Kdn.Application .createView({
-            xtype: this.editor,
-            grid: this,
-            title: this.getInsertText(),
-            iconCls: 'icon-add',
-            withContainer:false
+    onAddChangeOil: function() {
+        //alert('Добавление замены масла');
+        var winAddChangeOil = new T.view.OilWorkAddChangeForm({
+            VehicleId: this.VehicleId
         });
+        winAddChangeOil.show(this);
+    },
 
-
-    },  
+    onRemoveChangeOil: function() {
+        alert('Удаление замены масла');
+    }
 
 });
 Ext.reg('view.vehiclereoillinggrid', T.view.VehicleReoillingGrid);
+
+
+T.view.OilWorkAddChangeForm = Ext.extend(Ext.Window, {
+    initComponent: function() {
+        Ext.apply(this, {
+            title: 'Добавление замены масла',
+            padding: 10,
+            waitMsgTarget: true,
+            items:[
+                {
+                    xtype: 'kdn.editor.datefield',
+                    fieldLabel: 'Дата замены',
+                    name: 'Date',
+                    width: 250
+                },
+                {
+                    xtype: 'kdn.editor.numberfield',
+                    fieldLabel: 'Следующая замена через',
+                    name: 'Duration'
+                },
+                {
+                    xtype: 'combo.norm',
+                    fieldLabel: 'Норма',
+                    name: 'Norm',
+                    VehicleId: this.VehicleId
+                },
+                {
+                    xtype: 'kdn.editor.numberfield',
+                    fieldLabel: 'Коэффициент,%',
+                    name: 'Percentage'
+                }
+            ]
+        });
+
+
+        T.view.OilWorkAddChangeForm.superclass.initComponent.call(this);
+    },
+});
+
+
 
 
 T.view.OilWork = Ext.extend(Ext.Panel, {
@@ -237,7 +292,8 @@ T.view.OilWork = Ext.extend(Ext.Panel, {
             items: [
                 {
                     region: 'center',
-                    xtype: 'view.vehiclereoillinggrid'
+                    xtype: 'view.vehiclereoillinggrid',
+                    ref:'VehicleReoillingGrid'
                 },
                 {
                     region: 'south',
@@ -251,7 +307,27 @@ T.view.OilWork = Ext.extend(Ext.Panel, {
         });
 
         T.view.OilWork.superclass.constructor.call(this, cfg);
-    },
+
+        this.VehicleReoillingGrid.getSelectionModel().on({
+            selectionchange: this.onSelectionChangeReoillingGrid,
+            scope: this
+        });
+    },  
+
+    onSelectionChangeReoillingGrid: function(sel) {
+        var rec = sel.getSelected();
+        if (rec) {
+            var isNoEdit;
+            rec.data.RefuellingPlace ? isNoEdit = true : isNoEdit = false;
+            this.VehicleReoillingGrid.editButtonVehicleReoling.setDisabled(isNoEdit);
+            this.VehicleReoillingGrid.removeButtonVehicleReoling.setDisabled(isNoEdit);
+
+            var isAddChangeOil;
+            rec.data.OilChange ? isAddChangeOil = false : isAddChangeOil = true;
+            this.VehicleReoillingGrid.addChangeOil.setVisible(isAddChangeOil);
+            this.VehicleReoillingGrid.removeChangeOil.setVisible(!isAddChangeOil);
+        }
+    }
 });
 
 Ext.reg('view.oilwork', T.view.OilWork);

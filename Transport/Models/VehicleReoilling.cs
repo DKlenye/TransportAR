@@ -62,5 +62,8 @@ namespace Transport.Models
 
         [Property, AllowBlank]
         public int? AbstractRefuellingDocId { get; set; }
+
+        [BelongsTo("OilChangeId")]
+        public OilChange OilChange { get; set; }
     }
 }
