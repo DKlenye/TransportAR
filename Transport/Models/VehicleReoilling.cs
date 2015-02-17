@@ -5,6 +5,7 @@ using System.Text;
 using Castle.ActiveRecord;
 using Kdn.Ext.Attributes;
 using NHibernate.Criterion;
+using NHibernate.Type;
 
 
 namespace Transport.Models
@@ -63,7 +64,21 @@ namespace Transport.Models
         [Property, AllowBlank]
         public int? AbstractRefuellingDocId { get; set; }
 
-        [BelongsTo("OilChangeId")]
-        public OilChange OilChange { get; set; }
+        public bool IsOilChange
+        {
+            get
+            {
+                if(OilChange.FindAll(
+                        Expression.Where<OilChange>(
+                        x =>
+                            x.ReoillingId == this.ReoillingId
+                        )   
+                    ).Count()!=0
+                )
+                    return true;
+                else
+                    return false; 
+            }
+        }
     }
 }

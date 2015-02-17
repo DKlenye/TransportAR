@@ -8,7 +8,7 @@ using Kdn.Ext.Attributes;
 namespace Transport.Models
 {
     [ActiveRecord, Model]
-    public class OilChange
+    public class OilChange : ActiveRecordBase<OilChange>
     {
         [IdProperty, PrimaryKey]
         public int OilChangeId { get; set; }
@@ -19,10 +19,13 @@ namespace Transport.Models
         [Property]
         public int Duration { get; set; }
 
-        [BelongsTo("NormId")]
-        public Norm Norm { get; set; }
+        [Property]
+        public int NormId { get; set; }
 
         [Property, AllowBlank]
         public int? Percentage { get; set; }
+
+        [Property]
+        public int ReoillingId { get; set; }
     }
 }

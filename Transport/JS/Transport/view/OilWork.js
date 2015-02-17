@@ -13,18 +13,27 @@
 	            width:300,
 	            listeners:{
 	                scope: me,
-                    select: function (rec) {                                      
-                        this.VehicleId = rec.data.VehicleId;
-                        this.body.unmask();  
-                        this.addButtonVehicleReoling.setDisabled(false);
-                        this.reload();
+                    select: function (rec) {
+                        if (rec) {
+                            this.VehicleId = rec.data.VehicleId;
+                            this.body.unmask();
+                            this.addButtonVehicleReoling.setDisabled(false);
+                            this.addChangeOil.setVisible(false);
+                            this.removeChangeOil.setVisible(false);
+                            this.reload();
+                        }
                     }
 	            }
         });
 
 
         Ext.apply(cfg, {
-
+            viewConfig: {
+                getRowClass: function(record, index) {
+                    var val = record.data.IsOilChange;
+                    return val?'red':'';
+                }
+            },
             colModel: new Ext.grid.ColumnModel({
                 defaults: { filter: {} },
                 columns: [
@@ -88,13 +97,13 @@
                         editor: { xtype: 'kdn.editor.decimalfield' }
                     },
                     {
-                        dataIndex: 'OilChange',
+                        dataIndex: 'IsOilChange',
                         align: 'center',
                         header: 'Назначение',
                         renderer: function (o) {
                             if (!o) return 'Доливка';
                             return 'Замена';
-                        },
+                        }
                     }
                 ]
             })
@@ -206,6 +215,17 @@
         ];
     },
 
+    onDelete: function() {
+        if(!this.IsOilChange)
+            T.view.VehicleReoillingGrid.superclass.onDelete.call(this);
+        else {
+            Ext.Msg.alert('Удаление данных о выдаче масла',
+                          'Удаление невозможно,т.к выдача масла используется как замена.<br/> ' +
+                                'Удалите данные о замене масла, после чего повторите операцию.'
+            );
+        }          
+    },
+
     onAfterRender: function() {
         this.addButtonVehicleReoling.setDisabled(true);
         this.ComboCar.focus.defer(300,this.ComboCar,[true]);
@@ -227,49 +247,85 @@
     },
 
     onAddChangeOil: function() {
-        //alert('Добавление замены масла');
         var winAddChangeOil = new T.view.OilWorkAddChangeForm({
-            VehicleId: this.VehicleId
+            VehicleId: this.VehicleId,
+            ReoillingId: this.ReoillingId,
+            VehicleReoillingGrid: this
         });
-        winAddChangeOil.show(this);
+        winAddChangeOil.show(this.addChangeOil.getEl());
     },
 
     onRemoveChangeOil: function() {
-        alert('Удаление замены масла');
+        Ext.Msg.confirm(
+                    'Удаление замены масла',
+                    '<br/> Вы действительно хотите удалить данные о замене масла?',
+                    function(m) {
+                         if (m == 'yes') this.removeOilChange   ();
+                    },
+                    this
+        );
+    },
+
+    removeOilChange: function() {
+        var store = Kdn.ModelFactory.getStore('OilChange');
+        var index = store.find('ReoillingId',this.ReoillingId);
+        if (index != -1)
+            store.removeAt(index);
+        this.reload();
+        this.addChangeOil.setVisible(false);
+        this.removeChangeOil.setVisible(false);
     }
 
 });
 Ext.reg('view.vehiclereoillinggrid', T.view.VehicleReoillingGrid);
 
 
+
+//Форма добавления замены масла для выбранной выдачи масла
 T.view.OilWorkAddChangeForm = Ext.extend(Ext.Window, {
     initComponent: function() {
         Ext.apply(this, {
             title: 'Добавление замены масла',
             padding: 10,
-            waitMsgTarget: true,
+            modal: true,
+            resizable:false,
             items:[
                 {
                     xtype: 'kdn.editor.datefield',
                     fieldLabel: 'Дата замены',
                     name: 'Date',
+                    ref: 'Date',
                     width: 250
                 },
                 {
                     xtype: 'kdn.editor.numberfield',
                     fieldLabel: 'Следующая замена через',
-                    name: 'Duration'
+                    name: 'Duration',
+                    ref: 'Duration'
                 },
                 {
                     xtype: 'combo.norm',
                     fieldLabel: 'Норма',
                     name: 'Norm',
-                    VehicleId: this.VehicleId
+                    ref: 'Norm',
+                    VehicleId: this.VehicleId,
+                    width: 320,
+                    listeners: {
+                        select: this.onComboBoxNormSelect,
+                        scope: this
+                    },
                 },
                 {
                     xtype: 'kdn.editor.numberfield',
                     fieldLabel: 'Коэффициент,%',
-                    name: 'Percentage'
+                    ref: 'Percentage',
+                    name: 'Percentage',
+                    allowBlank:true
+                },
+                {
+                    xtype:'button.add',
+                    handler: this.onAddChangeOil,
+                    scope: this
                 }
             ]
         });
@@ -277,6 +333,39 @@ T.view.OilWorkAddChangeForm = Ext.extend(Ext.Window, {
 
         T.view.OilWorkAddChangeForm.superclass.initComponent.call(this);
     },
+
+    onComboBoxNormSelect: function (rec) {
+        this.NormId = rec.data.NormId;
+    },
+
+    onAddChangeOil:function() {
+        if (!this.Date || this.Date.getValue()=="") {
+            Ext.Msg.alert('Сообщение', 'Поле "дата замены" обязательно для заполнения!');
+            return;
+        }
+        if (!this.Duration || this.Duration.getValue()=="") {
+            Ext.Msg.alert('Сообщение', 'Поле "следующая замена через" обязательно для заполнения!');
+            return;
+        }
+        if (!this.NormId || this.NormId=="") {
+            Ext.Msg.alert('Сообщение', 'Выберите норму расхода топлива!');
+            return;
+        }
+        
+        var store = Kdn.ModelFactory.getStore('OilChange', {autoLoad:false});
+        var record = new store.recordType();
+
+        record.data.Date = this.Date.getValue();
+        record.data.Duration = this.Duration.getValue();
+        record.data.NormId = this.NormId;
+        record.data.Percentage = this.Percentage?this.Percentage.getValue():0;
+        record.data.ReoillingId = this.ReoillingId;
+
+        store.add(record);
+
+        this.VehicleReoillingGrid.reload();
+        this.close();
+    }
 });
 
 
@@ -323,9 +412,13 @@ T.view.OilWork = Ext.extend(Ext.Panel, {
             this.VehicleReoillingGrid.removeButtonVehicleReoling.setDisabled(isNoEdit);
 
             var isAddChangeOil;
-            rec.data.OilChange ? isAddChangeOil = false : isAddChangeOil = true;
+            rec.data.IsOilChange ? isAddChangeOil = false : isAddChangeOil = true;
             this.VehicleReoillingGrid.addChangeOil.setVisible(isAddChangeOil);
             this.VehicleReoillingGrid.removeChangeOil.setVisible(!isAddChangeOil);
+
+            this.VehicleReoillingGrid.ReoillingId = rec.data.ReoillingId;
+            this.VehicleReoillingGrid.IsOilChange = rec.data.IsOilChange;
+
         }
     }
 });
