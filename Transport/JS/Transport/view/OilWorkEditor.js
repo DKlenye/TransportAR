@@ -39,9 +39,9 @@
          if (!record['store']) store.insert(0, record);
               
          me.record = record;
-         
-      if (me.closeAfterSave) me.closeMe();
-	}	
+
+         if (me.closeAfterSave) me.closeMe();
+    }	
 
 });
 

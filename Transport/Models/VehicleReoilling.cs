@@ -63,7 +63,8 @@ namespace Transport.Models
 
         [Property, AllowBlank]
         public int? AbstractRefuellingDocId { get; set; }
-
+        
+        [AllowBlank]
         public bool IsOilChange
         {
             get

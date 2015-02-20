@@ -868,7 +868,7 @@ Kdn.Menu = [
                  iconCls: "icon-oiltank",
                  Handler: 'createView',
                  HandlerCfg: "{xtype:'view.oilwork',single:true}"
-            }, {
+            }/*, {
                 text: 'Отчеты',
                 Handler: null,
                 HandlerCfg: null,
@@ -878,16 +878,16 @@ Kdn.Menu = [
                         text: 'Отчёт о фактической замене масел и смазок',
                         Handler: 'createView',
                         iconCls: 'icon-blue-document-word',
-                        //HandlerCfg: "{xtype:'view.acc.fuelcost',single:true}"
+                        HandlerCfg: "{xtype:'view.acc.fuelcost',single:true}"
                     },
                     {
                         text: 'Журнал оперативного учёта расхода масла',
                         Handler: 'createView',
                         iconCls: 'icon-blue-document-word',
-                        //HandlerCfg: "{xtype:'view.acc.fuelcost',single:true}"
+                        HandlerCfg: "{xtype:'view.acc.fuelcost',single:true}"
                     }
                 ]
-            }
+            }*/
         ]
     }, {
         text: "Бухгалтерия",

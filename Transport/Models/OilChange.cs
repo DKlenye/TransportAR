@@ -14,9 +14,6 @@ namespace Transport.Models
         public int OilChangeId { get; set; }
 
         [Property]
-        public DateTime Date { get; set; }
-
-        [Property]
         public int Duration { get; set; }
 
         [Property]

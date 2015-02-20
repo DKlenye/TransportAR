@@ -3,27 +3,33 @@
     modelName: 'VehicleReoilling',
     pageSize: 50,
     pageMode: 'remote',
-    constructor: function (cfg) {
+
+    constructor: function(cfg) {
         cfg = cfg || {};
         me = this;
 
         cfg.ComboCar = Ext.create({
-                dataIndex: 'vehicle',
-	            xtype:'combo.car',
-	            width:300,
-	            listeners:{
-	                scope: me,
-                    select: function (rec) {
-                        if (rec) {
-                            this.VehicleId = rec.data.VehicleId;
-                            this.body.unmask();
-                            this.addButtonVehicleReoling.setDisabled(false);
-                            this.addChangeOil.setVisible(false);
-                            this.removeChangeOil.setVisible(false);
-                            this.reload();
-                        }
+            dataIndex: 'vehicle',
+            xtype: 'combo.car',
+            width: 300,
+            listeners: {
+                scope: me,
+                select: function(rec) {
+                    if (rec) {
+                        this.VehicleId = rec.data.VehicleId;
+
+                        this.OilWorkPanel.VehicleReoillingGrid.body.unmask();
+                        this.OilWorkPanel.OilStandartConsuptionGrid.body.unmask();
+
+                        this.addButtonVehicleReoling.setDisabled(false);
+                        this.addChangeOil.setVisible(false);
+                        this.removeChangeOil.setVisible(false);
+
+                        this.reload();
+                        this.reloadoilStandartConsuptionStore();
                     }
-	            }
+                }
+            }
         });
 
 
@@ -31,7 +37,7 @@
             viewConfig: {
                 getRowClass: function(record, index) {
                     var val = record.data.IsOilChange;
-                    return val?'red':'';
+                    return val ? 'red' : '';
                 }
             },
             colModel: new Ext.grid.ColumnModel({
@@ -58,7 +64,7 @@
                         align: 'center',
                         width: 200,
                         header: 'Место выдачи',
-                        renderer: function (v) {
+                        renderer: function(v) {
                             if (!v) return null;
                             return v.RefuellingPlaceName;
                         }
@@ -84,11 +90,11 @@
                         header: 'Масло',
                         dataIndex: 'Fuel',
                         width: 220,
-                        renderer: function (o) {
+                        renderer: function(o) {
                             if (!o) return null;
                             return o.FuelName;
                         },
-                        editor: { xtype: 'combo.fuel' }
+                        editor: { xtype: 'combo.oil' }
                     },
                     {
                         dataIndex: 'Quantity',
@@ -100,7 +106,7 @@
                         dataIndex: 'IsOilChange',
                         align: 'center',
                         header: 'Назначение',
-                        renderer: function (o) {
+                        renderer: function(o) {
                             if (!o) return 'Доливка';
                             return 'Замена';
                         }
@@ -111,37 +117,45 @@
 
         T.view.VehicleReoillingGrid.superclass.constructor.call(this, cfg);
 
-         this.on({
-            viewready:me.onAfterRender,
-            scope:me,
-            single:true
+        this.on({
+            viewready: me.onAfterRender,
+            scope: me,
+            single: true
         });
     },
 
 
-    initComponent:function(){
-
+    initComponent: function() {
+        var me = this;
         var provider = Kdn.Direct;
         var cfg = {
-            autoLoad:false,
-            autoSave:true,
+            autoLoad: false,
+            autoSave: true,
             api: {
                 create: provider['Create'],
                 read: provider['GetVehicleReoling'],
                 update: provider['Update'],
                 destroy: provider['Destroy']
+            },
+            listeners: {
+              save:me.onVehicleReolingStoreSave,
+              scope:me  
             }
-       };
-       
-       var store =  Kdn.ModelFactory.getStore('VehicleReoilling', cfg);
-       Ext.apply(this,{
-            store:store
-       });
+        };
 
-       T.view.VehicleReoillingGrid.superclass.initComponent.call(this);
-    },  
+        var store = Kdn.ModelFactory.getStore('VehicleReoilling', cfg);
+        Ext.apply(me, {
+            store: store
+        });
 
-    _getTbar: function () {
+        T.view.VehicleReoillingGrid.superclass.initComponent.call(me);
+    },
+
+    onVehicleReolingStoreSave:function() {
+        this.reloadoilStandartConsuptionStore();
+    },
+
+    _getTbar: function() {
 
         return [
             '-',
@@ -215,8 +229,10 @@
         ];
     },
 
+
     onDelete: function() {
-        if(!this.IsOilChange)
+        var rec = this.store.data.map[this.ReoillingId];
+        if(!rec.data.IsOilChange)
             T.view.VehicleReoillingGrid.superclass.onDelete.call(this);
         else {
             Ext.Msg.alert('Удаление данных о выдаче масла',
@@ -229,12 +245,22 @@
     onAfterRender: function() {
         this.addButtonVehicleReoling.setDisabled(true);
         this.ComboCar.focus.defer(300,this.ComboCar,[true]);
-        this.body.mask();
+        this.OilWorkPanel.VehicleReoillingGrid.body.mask();
+        this.OilWorkPanel.OilStandartConsuptionGrid.body.mask();
         this.VehicleId = 0;
         this.reload();
     },
     
-    
+    reloadoilStandartConsuptionStore: function()
+    {
+        if (this.VehicleId > 0) {
+            this.OilWorkPanel.oilStandartConsuptionStore.reload({
+                params: { 'VehicleId': this.VehicleId }
+            });
+        }
+    },
+
+
     reload: function()
     {
         var store = Kdn.ModelFactory.getStore('VehicleReoilling');
@@ -254,28 +280,39 @@
         });
         winAddChangeOil.show(this.addChangeOil.getEl());
     },
-
+    
     onRemoveChangeOil: function() {
         Ext.Msg.confirm(
                     'Удаление замены масла',
                     '<br/> Вы действительно хотите удалить данные о замене масла?',
                     function(m) {
-                         if (m == 'yes') this.removeOilChange   ();
+                         if (m == 'yes') this.removeOilChange();
                     },
                     this
         );
     },
 
     removeOilChange: function() {
-        var store = Kdn.ModelFactory.getStore('OilChange');
+        var store = this.getOilChangeStore(true);
         var index = store.find('ReoillingId',this.ReoillingId);
         if (index != -1)
             store.removeAt(index);
-        this.reload();
-        this.addChangeOil.setVisible(false);
+        this.addChangeOil.setVisible(true);
         this.removeChangeOil.setVisible(false);
+    },
+    
+    getOilChangeStore: function(autoLoad) {
+        var me = this; 
+        var store = Kdn.ModelFactory.getStore('OilChange', {autoLoad:autoLoad});
+        store.on({
+            save: function(store, batch, data ) {
+                me.reload();
+                me.reloadoilStandartConsuptionStore();
+            },
+            single: true
+        });
+        return store;
     }
-
 });
 Ext.reg('view.vehiclereoillinggrid', T.view.VehicleReoillingGrid);
 
@@ -291,13 +328,6 @@ T.view.OilWorkAddChangeForm = Ext.extend(Ext.Window, {
             resizable:false,
             items:[
                 {
-                    xtype: 'kdn.editor.datefield',
-                    fieldLabel: 'Дата замены',
-                    name: 'Date',
-                    ref: 'Date',
-                    width: 250
-                },
-                {
                     xtype: 'kdn.editor.numberfield',
                     fieldLabel: 'Следующая замена через',
                     name: 'Duration',
@@ -311,7 +341,7 @@ T.view.OilWorkAddChangeForm = Ext.extend(Ext.Window, {
                     VehicleId: this.VehicleId,
                     width: 320,
                     listeners: {
-                        select: this.onComboBoxNormSelect,
+                            select: this.onComboBoxNormSelect,
                         scope: this
                     },
                 },
@@ -338,24 +368,19 @@ T.view.OilWorkAddChangeForm = Ext.extend(Ext.Window, {
         this.NormId = rec.data.NormId;
     },
 
-    onAddChangeOil:function() {
-        if (!this.Date || this.Date.getValue()=="") {
-            Ext.Msg.alert('Сообщение', 'Поле "дата замены" обязательно для заполнения!');
-            return;
-        }
-        if (!this.Duration || this.Duration.getValue()=="") {
+    onAddChangeOil: function() {
+        if (!this.Duration || this.Duration.getValue() == "") {
             Ext.Msg.alert('Сообщение', 'Поле "следующая замена через" обязательно для заполнения!');
             return;
         }
-        if (!this.NormId || this.NormId=="") {
+        if (!this.NormId || this.NormId == "") {
             Ext.Msg.alert('Сообщение', 'Выберите норму расхода топлива!');
             return;
         }
-        
-        var store = Kdn.ModelFactory.getStore('OilChange', {autoLoad:false});
-        var record = new store.recordType();
 
-        record.data.Date = this.Date.getValue();
+        var store = this.VehicleReoillingGrid.getOilChangeStore(false);
+       
+        var record = new store.recordType();
         record.data.Duration = this.Duration.getValue();
         record.data.NormId = this.NormId;
         record.data.Percentage = this.Percentage?this.Percentage.getValue():0;
@@ -363,7 +388,9 @@ T.view.OilWorkAddChangeForm = Ext.extend(Ext.Window, {
 
         store.add(record);
 
-        this.VehicleReoillingGrid.reload();
+        this.VehicleReoillingGrid.addChangeOil.setVisible(false);
+        this.VehicleReoillingGrid.removeChangeOil.setVisible(true);
+
         this.close();
     }
 });
@@ -372,9 +399,31 @@ T.view.OilWorkAddChangeForm = Ext.extend(Ext.Window, {
 
 
 T.view.OilWork = Ext.extend(Ext.Panel, {
+    requireModels:"OilChange",
     constructor: function(cfg) {
         var me = this;
         cfg = cfg || {};
+
+
+        me.oilStandartConsuptionStore = new Ext.data.DirectStore({
+            autoDestroy: true,
+            api: {
+                read: Kdn.Direct.GetStandartConsuption
+            },
+            idProperty: 'Id',
+            fields: [
+            'OilGroupName',
+            'DateOilChange',
+            'Quantity',
+            'Duration',
+            'OilWear',
+            'OilNorm',
+            'FuelConsumption',
+            'OilConsumptionNorm',
+            'OilConsumptionFact'
+            ],
+            root: 'data'
+        });
 
         Ext.apply(cfg, {
             layout: 'border',
@@ -382,7 +431,8 @@ T.view.OilWork = Ext.extend(Ext.Panel, {
                 {
                     region: 'center',
                     xtype: 'view.vehiclereoillinggrid',
-                    ref:'VehicleReoillingGrid'
+                    ref:'VehicleReoillingGrid',
+                    OilWorkPanel:me
                 },
                 {
                     region: 'south',
@@ -390,7 +440,63 @@ T.view.OilWork = Ext.extend(Ext.Panel, {
                     title: 'Нормативный расход масла',
                     split: true,
                     collapsible: true,
-                    stripeRows: true
+                    stripeRows: true,
+                    xtype: 'grid',
+                    columnLines: true,
+                    loadMask: true,
+                    store:me.oilStandartConsuptionStore,
+                    ref:'OilStandartConsuptionGrid',
+                    columns: [
+                        {
+                            header: 'Группа масла',
+                            dataIndex: 'OilGroupName',
+                            width: 200
+                        },
+                        {
+                            header: 'Дата посл. замены',
+                            dataIndex: 'DateOilChange',
+                            width: 140,
+                            format: 'd.m.Y',
+                            xtype: 'datecolumn'
+                        },
+                        {
+                            header: 'Заменено,л',
+                            dataIndex: 'Quantity',
+                            width: 90
+                        },
+                        {
+
+                            header: 'След. замена через',
+                            dataIndex: 'Duration',
+                            width: 150
+                        },
+                        {
+                            header: 'Износ масла',
+                            dataIndex: 'OilWear',
+                            width: 100
+                        },
+                        {
+                            header: 'Норма рас. масла',
+                            dataIndex: 'OilNorm',
+                            width: 140
+                        },
+                        {
+                            header: 'Рас. топлива,л',
+                            dataIndex: 'FuelConsumption',
+                            width: 120
+                        },
+                        {
+                            header: 'Рас. масла по норме',
+                            dataIndex: 'OilConsumptionNorm',
+                            width: 150
+                        },
+                        {
+                            header: 'Рас. масла по факту',
+                            dataIndex: 'OilConsumptionFact',
+                            width: 150
+                        }
+                    ]
+
                 }
             ]
         });
@@ -417,8 +523,6 @@ T.view.OilWork = Ext.extend(Ext.Panel, {
             this.VehicleReoillingGrid.removeChangeOil.setVisible(!isAddChangeOil);
 
             this.VehicleReoillingGrid.ReoillingId = rec.data.ReoillingId;
-            this.VehicleReoillingGrid.IsOilChange = rec.data.IsOilChange;
-
         }
     }
 });

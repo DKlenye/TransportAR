@@ -100,5 +100,21 @@ namespace Transport.Direct
             }
         }
 
+        [DirectMethod]
+        [ParseAsJson]
+        public DataSerializer GetStandartConsuption(JObject o)
+        {
+             JToken p;
+
+            int vehicleId = 0;
+            if (o.TryGetValue("VehicleId", out p))
+            {
+                vehicleId = p.Value<int>();
+                var rez = db.Query<OilStandartConsuption>(";exec OilStandartConsuption @0", vehicleId);
+                return new DataSerializer(new List<OilStandartConsuption>(rez));
+            }
+            return null;
+        }
+
     }
 }
