@@ -90,10 +90,12 @@
     <Reference Include="System.Data.SQLite">
       <HintPath>..\..\..\..\..\share\TransportAR\TransportAR\TransportSite\bin\System.Data.SQLite.DLL</HintPath>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Routing">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -125,6 +127,8 @@
     <Compile Include="Models\acc\FuelPriceCalculate.cs" />
     <Compile Include="Models\acc\FuelFilledCost.cs" />
     <Compile Include="Models\car\OilNormVehicle.cs" />
+    <Compile Include="Models\OilChange.cs" />
+    <Compile Include="Models\OilStandartConsuption.cs" />
     <Compile Include="Models\request\RequestAttachments.cs" />
     <Compile Include="Models\request\DriverOutOfWork.cs" />
     <Compile Include="Models\vehicleDistribution\DistributionCustomers.cs" />
@@ -173,6 +177,7 @@
     <Compile Include="Models\Umtu.cs" />
     <Compile Include="Models\UserGroup.cs" />
     <Compile Include="Models\vehicleGroups\VehicleOilGroup.cs" />
+    <Compile Include="Models\VehicleReoilling.cs" />
     <Compile Include="Models\v_Driver.cs" />
     <Compile Include="Models\v_WaybillList.cs" />
     <Compile Include="Models\waybill\WaybillWork.cs" />
@@ -1129,6 +1134,16 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\report\CarYearConsumption.js" />
+    <EmbeddedResource Include="JS\Transport\view\OilWork.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\OilWorkEditor.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\combo\Norm.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\combo\Oil.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
