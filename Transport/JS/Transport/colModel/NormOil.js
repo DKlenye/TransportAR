@@ -5,7 +5,7 @@
       Ext.apply(cfg,{
          columns: ((cfg.columns||[]).concat(this.getColumns()))
       });
-      T.colModel.Insurance.superclass.constructor.call(this,cfg);
+     T.colModel.NormOil.superclass.constructor.call(this, cfg);
    },
    
    getColumns:function(){
