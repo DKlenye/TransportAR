@@ -1,4 +1,4 @@
-﻿Ext.ns('Kdn');
+Ext.ns('Kdn');
 
 Kdn.Menu = [
     {
@@ -781,6 +781,12 @@ Kdn.Menu = [
                         iconCls: 'icon-blue-document-word',
                         Handler: 'createView',
                         HandlerCfg: "{xtype:'view.report.transportquarterconsumption',single:true}"
+                    },
+                    {
+                        text: 'Расход топлива легкового транспорта за год',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.caryearconsumption',single:true}"
                     }
                 ]
             }, {

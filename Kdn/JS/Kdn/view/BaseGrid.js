@@ -1,4 +1,4 @@
-﻿Kdn.view.BaseGrid = Ext.extend(Ext.grid.GridPanel, {
+Kdn.view.BaseGrid = Ext.extend(Ext.grid.GridPanel, {
     pageSize:0,
     pageMode:'local',
     initComponent: function()
@@ -259,8 +259,7 @@
                 cls: 'delete_btn',
                 disabled: true
             },
-            '-'//,
-            //'->',
+           // '-',
             //exportButton
             
             

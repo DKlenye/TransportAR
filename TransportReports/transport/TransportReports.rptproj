@@ -89,8 +89,16 @@
       <FullPath>BusPassengers.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>CarBalanceCost.rdl</Name>
+      <FullPath>CarBalanceCost.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>CarInfo.rdl</Name>
       <FullPath>CarInfo.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>CarInputOut.rdl</Name>
+      <FullPath>CarInputOut.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>DistributionListPrint.rdl</Name>
@@ -477,12 +485,8 @@
       <FullPath>WayBillPackage.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>CarBalanceCost.rdl</Name>
-      <FullPath>CarBalanceCost.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>CarInputOut.rdl</Name>
-      <FullPath>CarInputOut.rdl</FullPath>
+      <Name>CarYearConsumption.rdl</Name>
+      <FullPath>CarYearConsumption.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
