@@ -912,7 +912,7 @@ Kdn.Menu = [
                                 text: 'Детализированный',
                                 Handler: 'createView',
                                 iconCls: 'icon-blue-document-word',
-                                HandlerCfg: "{xtype:'panel'}"
+                                HandlerCfg: "{xtype:'view.report.reoillingfactdetails',single:true}"
                             }
                         ]   
                     }

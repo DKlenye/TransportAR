@@ -277,6 +277,10 @@
       <FullPath>RefuellingInfoDateTime.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>ReoillingFact.rdl</Name>
+      <FullPath>ReoillingFact.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>RequestCount.rdl</Name>
       <FullPath>RequestCount.rdl</FullPath>
     </ProjectItem>
@@ -489,8 +493,8 @@
       <FullPath>WayBillPackage.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>ReoillingFact.rdl</Name>
-      <FullPath>ReoillingFact.rdl</FullPath>
+      <Name>ReoillingFactDetails.rdl</Name>
+      <FullPath>ReoillingFactDetails.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
