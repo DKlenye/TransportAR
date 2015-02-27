@@ -921,7 +921,7 @@ Kdn.Menu = [
                         text: 'Журнал оперативного учёта расхода масла',
                         Handler: 'createView',
                         iconCls: 'icon-blue-document-word',
-                        HandlerCfg: "{xtype:'panel'}"
+                        HandlerCfg: "{xtype:'view.report.reoillingjournal',single:true}"
                     }
                 ]
             }
