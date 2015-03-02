@@ -1,4 +1,4 @@
-﻿Ext.ns('Ext.ux.grid');
+Ext.ns('Ext.ux.grid');
 
 /**
  * @class Ext.ux.grid.GridSummary
@@ -9,9 +9,11 @@
 Ext.ux.grid.GridSummary = Ext.extend(Ext.util.Observable, {
    /**
     * @cfg {String} position
-    * The position where the summary row should be rendered (defaults to 'top').
-    * The only other supported value is 'bottom'.
+    * The position where the summary row should be rendered (defaults to 'bottom').
+    * The only other supported value is 'top'.
     */
+    position:"bottom",
+
     /**
      * @cfg {Number} scrollBarWidth
      * Configurable scrollbar width (used only in the event the Ext.getScrollBarWidth() method is not available)
@@ -360,7 +362,7 @@ Ext.ux.grid.GridSummary = Ext.extend(Ext.util.Observable, {
         delete this.oldY;
     }
 });
-Ext.reg('gridsummary', Ext.ux.grid.GridSummary);
+Ext.preg('gridsummary', Ext.ux.grid.GridSummary);
 
 /*
  * all Calculation methods are called on each Record in the Store
