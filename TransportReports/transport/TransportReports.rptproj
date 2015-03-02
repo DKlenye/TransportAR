@@ -101,6 +101,10 @@
       <FullPath>CarInputOut.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>CarYearConsumption.rdl</Name>
+      <FullPath>CarYearConsumption.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>DistributionListPrint.rdl</Name>
       <FullPath>DistributionListPrint.rdl</FullPath>
     </ProjectItem>
@@ -485,8 +489,8 @@
       <FullPath>WayBillPackage.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>CarYearConsumption.rdl</Name>
-      <FullPath>CarYearConsumption.rdl</FullPath>
+      <Name>CarMonthConsumption.rdl</Name>
+      <FullPath>CarMonthConsumption.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
