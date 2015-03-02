@@ -138,6 +138,7 @@ namespace Transport.Direct
                         dto.ListDetailId = b.ListDetailId;
                         dto.DepartureDate = DistributionList.Find(b.ListId)
                             .ListDate.Add(TimeSpan.Parse(b.DepartureTime));
+                        dto.ReturnDate = b.ReturnDate;
                         dto.ScheduleId = b.ScheduleId;
                         dto.Description = b.Description;
                         dto.DestRoutePoint = b.DestRoutePoint;
@@ -244,6 +245,7 @@ namespace Transport.Direct
                 dto.ScheduleId = businessTrip.ScheduleId;
                 dto.Description = businessTrip.Description;
                 dto.DestRoutePoint = businessTrip.DestRoutePoint;
+                dto.ReturnDate = businessTrip.ReturnDate;
 
                 businessTrip.Customers.ForEach(customer => dto.Customers.Add(new DistributionCustomerDto()
                 {

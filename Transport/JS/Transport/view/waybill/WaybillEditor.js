@@ -1,5 +1,5 @@
-﻿T.view.waybill.WaybillEditor = Ext.extend(Kdn.editor.ModelEditor, {
-   requireModels:'User,Car,Schedule,Driver,FullTrailer,Fuel,RefuellingPlace,WorkCounter,WorkUnit,WorkType,Customer,Increase,WaybillType',
+T.view.waybill.WaybillEditor = Ext.extend(Kdn.editor.ModelEditor, {
+    requireModels: 'User,Car,Schedule,Driver,FullTrailer,Fuel,RefuellingPlace,WorkCounter,WorkUnit,WorkType,Customer,Increase,WaybillType,AdvanceReportItem',
  
    vehicle:null,
    waybill:null,
@@ -177,18 +177,37 @@
          mainView:this,
          title:'Движение ГСМ'
      });
+
+     cfg.advanceReport = Ext.create({
+         xtype: 'view.waybill.waybilladvancereport',
+         title: 'Авансовый отчёт',
+         mainView:this
+     });
      
+
+     var tabItems = [
+                cfg.remains,
+               cfg.refuelling,
+               cfg.summary
+       ];
+
+     // Разрешаем доступ только логисту 
+     //TODO Переделать !!!!
+     var UserId = Kdn.getUser().UserId;
+     if ([1, 61].indexOf(UserId) != -1) {
+         tabItems.push(cfg.advanceReport);
+     } else {
+         delete (cfg.advanceReport);
+     }
+
+
      cfg.fueltab = Ext.create({  
          xtype:'view.waybill.waybilltab',
          deferredRender:false,
          margins: '3 0 0 0',
          flex:3,
          activeTab:0,
-         items:[
-	            cfg.remains,
-               cfg.refuelling,
-               cfg.summary
-	      ]
+         items:tabItems
 	   });
 	   
 	   cfg.tasks = Ext.create({
@@ -204,8 +223,8 @@
 	      split:true,
          margins:'0 3 3 3'
 	   });
-	   
-    
+
+       
      cfg.closeComboWaybillPackage = Ext.create({
      
       xtype:'combo.waybillpackage',
@@ -544,7 +563,8 @@
          'refuelling',
          'remains',
          'tasks',
-         'summary'
+         'summary',
+         'advanceReport'
       ],fn,this);
     },
     
@@ -884,12 +904,16 @@
     
     refreshAll:function(){
       
-         this.refreshNormConsumption();
-         this.refreshRefuelling();
-         this.refreshFact();
-         this.refreshDiff();
-         this.summary.refreshSummary();
-      
+        this.refreshNormConsumption();
+        this.refreshRefuelling();
+        this.refreshFact();
+        this.refreshDiff();
+        this.summary.refreshSummary();
+
+        if (this.advanceReport) {
+            this.advanceReport.refresh();
+        }
+
     },
     
     refreshDiff: function() {

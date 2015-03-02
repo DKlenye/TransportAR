@@ -97,14 +97,14 @@ namespace Transport.Direct
             var idList = JArray.Parse(p["movings"].ToString());
             var data = new Dictionary<int, JObject>();
 
-            CollectionExtensions.ForEach(idList, id =>
+            idList.ForEach(id =>
             {
-                var moving = TireMoving.Find(id.Value<int>());
+                var moving = TireMoving.Find(Extensions.Value<int>(id));
                 var rez =
                     db.Query<TireWorkVM>(";EXEC VehicleTireWork_Select @0", moving.TireId)
-                        .Where(x => x.TireMovingId == id.Value<int>());
+                        .Where(x => x.TireMovingId == Extensions.Value<int>(id));
 
-                CollectionExtensions.ForEach(rez, r =>
+                rez.ForEach(r =>
                 {
                     var period = r.y*100 + r.m;
                     JObject record;

@@ -1,4 +1,4 @@
-﻿
+
 T.view.waybill.WaybillFuelRemain = Ext.extend(Kdn.editor.LocalGrid, {
     startEditColumn:2,    
     constructor: function(cfg) {

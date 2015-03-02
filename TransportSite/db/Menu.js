@@ -787,7 +787,14 @@ Kdn.Menu = [
                         iconCls: 'icon-blue-document-word',
                         Handler: 'createView',
                         HandlerCfg: "{xtype:'view.report.caryearconsumption',single:true}"
+                    },
+                    {
+                        text: 'Расход топлива легкового транспорта за период',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.carmonthconsumption',single:true}"
                     }
+                    
                 ]
             }, {
                 text: 'Отчёты по водителям',

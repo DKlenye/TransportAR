@@ -1,4 +1,4 @@
-﻿T.view.VehicleReoillingGrid = Ext.extend(Kdn.view.BaseGrid, {
+T.view.VehicleReoillingGrid = Ext.extend(Kdn.view.BaseGrid, {
     editor: 'view.oilworkeditor',
     modelName: 'VehicleReoilling',
     pageSize: 50,
@@ -343,7 +343,7 @@ T.view.OilWorkAddChangeForm = Ext.extend(Ext.Window, {
                     listeners: {
                             select: this.onComboBoxNormSelect,
                         scope: this
-                    },
+                    }
                 },
                 {
                     xtype: 'kdn.editor.numberfield',
@@ -427,6 +427,7 @@ T.view.OilWork = Ext.extend(Ext.Panel, {
 
         Ext.apply(cfg, {
             layout: 'border',
+            border:false,
             items: [
                 {
                     region: 'center',
