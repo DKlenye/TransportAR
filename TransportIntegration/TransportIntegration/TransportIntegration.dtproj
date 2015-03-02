@@ -107,5 +107,10 @@
       <FullPath>Контрагенты NSD2.dtsx</FullPath>
       <References />
     </DtsPackage>
+    <DtsPackage FormatVersion="3">
+      <Name>Авансовый отчёт.dtsx</Name>
+      <FullPath>Авансовый отчёт.dtsx</FullPath>
+      <References />
+    </DtsPackage>
   </DTSPackages>
 </Project>
