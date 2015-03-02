@@ -248,7 +248,8 @@ namespace Transport.Models {
             "WaybillFuelRemain",
             "WaybillDriver",
             "WaybillTask",
-            "VehicleRefuelling"
+            "VehicleRefuelling",
+            "WaybillAdvanceReport"
          };
          JObject obj = Info(details);
 

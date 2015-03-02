@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Castle.ActiveRecord;
 using Ext.Direct;
 using Kdn.Direct;
@@ -94,10 +95,9 @@ namespace Transport.Direct
 
                 return new DataSerializer(jVehicleNorms);
             }
-            else
-            {
-                return null;
-            }
+            
+            return null;
+            
         }
 
         [DirectMethod]
@@ -111,7 +111,7 @@ namespace Transport.Direct
             {
                 vehicleId = p.Value<int>();
                 var rez = db.Query<OilStandartConsuption>(";exec OilStandartConsuption @0", vehicleId);
-                return new DataSerializer(new List<OilStandartConsuption>(rez));
+                return new DataSerializer(rez.ToList());
             }
             return null;
         }
