@@ -1154,6 +1154,13 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\report\CarMonthConsumption.js" />
+    <EmbeddedResource Include="JS\Transport\view\report\ReoillingFact.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\ReoillingFactDetails.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\ReoillingJournal.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -277,6 +277,14 @@
       <FullPath>RefuellingInfoDateTime.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>ReoillingFact.rdl</Name>
+      <FullPath>ReoillingFact.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>ReoillingFactDetails.rdl</Name>
+      <FullPath>ReoillingFactDetails.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>RequestCount.rdl</Name>
       <FullPath>RequestCount.rdl</FullPath>
     </ProjectItem>
@@ -491,6 +499,10 @@
     <ProjectItem>
       <Name>CarMonthConsumption.rdl</Name>
       <FullPath>CarMonthConsumption.rdl</FullPath>
+    </ProjectItem>
+	<ProjectItem>
+      <Name>ReoillingJournalOperationalAccounting.rdl</Name>
+      <FullPath>ReoillingJournalOperationalAccounting.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
