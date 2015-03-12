@@ -346,7 +346,7 @@
 						<tbody>
 							<tr>
 								<td class="pre-lined">Для&nbsp;расчетов</td>
-								<td class="lined">&nbsp;<% Response.Write(DstRoutPoint()); %></td>
+								<td class="lined" style="text-align: left;">&nbsp;<% Response.Write(DstRoutPoint()); %></td>
 							</tr>
 						</tbody>
 					</table>

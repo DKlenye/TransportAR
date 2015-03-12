@@ -793,6 +793,18 @@ Kdn.Menu = [
                         iconCls: 'icon-blue-document-word',
                         Handler: 'createView',
                         HandlerCfg: "{xtype:'view.report.carmonthconsumption',single:true}"
+                    },
+                     {
+                        text: 'Дни в работе (с начала эксплуатации)',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.vehicleworkingtimefromstart',single:true}"
+                    },
+                    {
+                        text: 'Коэффициент использования грузового транспорта',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.truckeffiency',single:true}"
                     }
                     
                 ]
@@ -848,11 +860,11 @@ Kdn.Menu = [
                         HandlerCfg: "{xtype:'view.report.inventorydiff',single:true}"
                     }
                 ]
-            }, {
+            },/* {
                 text: 'Коэффициент выхода транспорта на линию',
                 Handler: 'createView',
                 HandlerCfg: "{xtype:'view.report.vehicleworkkoefficient',single:true}"
-            }, {
+            }*/ {
                 text: 'Путевые листы с перекрывающимися датами',
                 Handler: 'createView',
                 HandlerCfg: "{xtype:'view.report.waybilldateerrors',single:true}"

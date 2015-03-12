@@ -17,22 +17,24 @@ body, td  {
 }
 
 
-#prn_waybillType{ position: absolute; top: 12mm; left: 32mm; }
-#prn_stamp{ position: absolute; top: 17mm; left: 7mm; }
-#prn_garageNumber{ position: absolute; top: 30mm; left: 192mm; }
-#prn_model{ position: absolute; top: 39mm; left: 58mm; }
-#prn_registrationNumber{ position: absolute; top: 39mm; left: 130mm; }
-#prn_waybillNumber{ position: absolute; top: 12mm; left: 6mm; }
-#prn_formNumber{ position: absolute; top: 12mm; left: 42mm; }
-#prn_departureDate{ position: absolute; top: 30mm; left: 72mm; }
-#prn_departureTime{ position: absolute; top: 93mm; left: 21mm; }
-#prn_fuelRemains{ position: absolute; top: 120mm; left: 31mm; }
-#prn_returnTime{ position: absolute; top: 93mm; left: 42mm; }
-#prn_returnDate{ position: absolute; top: 30mm; left: 130mm; }
-#prn_drivers{ position: absolute; top: 47mm; left: 46mm; }
-#prn_customerId{ position: absolute; top: 56mm; left: 46mm; }
-#prn_customerName{ position: absolute; top: 56mm; left: 62mm; }
+#prn_waybillType{ position: absolute; top: 0mm; left: 32mm; }
+#prn_waybillNumber{ position: absolute; top: 5mm; left: 58mm; }
+#prn_stamp{ position: absolute; top: 5mm; left: 2mm; }
+#prn_departureDate{ position: absolute; top: 16mm; left: 72mm; }
+#prn_returnDate{ position: absolute; top: 16mm; left: 130mm; }
+#prn_model{ position: absolute; top: 25mm; left: 58mm; }
+#prn_registrationNumber{ position: absolute; top: 25mm; left: 130mm; }
+#prn_drivers{ position: absolute; top: 33mm; left: 46mm; }
+#prn_garageNumber{ position: absolute; top: 25mm; left: 172mm; }
+#prn_customerId{ position: absolute; top: 42mm; left: 46mm; }
+#prn_customerName{ position: absolute; top: 42mm; left: 62mm; }
+#prn_departureTime{ position: absolute; top: 75mm; left: 11mm; }
+#prn_returnTime{ position: absolute; top: 75mm; left: 31mm; }
 
+#prn_formNumber{ position: absolute; top: 12mm; left: 42mm; }
+
+#prn_fuelName{ position: absolute; top: 100mm; left: 15mm; }
+#prn_fuelRemain{ position: absolute; top: 100mm; left: 45mm; }
  
 </style>
  
@@ -64,9 +66,14 @@ body, td  {
   <span style="width: 25mm"><%Response.Write(DepartureDate("MMMM")); %></span><%Response.Write(DepartureDate("yyyy")); %></div>
   <div offset="true" id="prn_departureTime"><%Response.Write(DepartureDate("HH:mm")); %></div>
   
+   <div offset="true" id="prn_fuelName"><%Response.Write(FuelName()); %></div>
+   <div offset="true" id="prn_fuelRemain"><%Response.Write(FuelRemains()); %></div>
+  
+<!--
   <div offset="true" id="prn_fuelRemains"><div>
   <span style="width:60mm;"><%Response.Write(FuelName()); %>       </span>   <%Response.Write(FuelRemains()); %>               </div>
   </div>
+  -->
   
   <div offset="true" id="prn_returnTime"><%Response.Write(ReturnDate("HH:mm")); %> </div>
   <div offset="true" id="prn_returnDate"> по <%Response.Write(ReturnDate("dd.MM.yyyy")); %></div>

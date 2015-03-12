@@ -1,4 +1,4 @@
-﻿T.colModel.Norm = Ext.extend(Ext.grid.ColumnModel, {
+T.colModel.Norm = Ext.extend(Ext.grid.ColumnModel, {
    
   constructor:function(cfg){
       cfg = cfg||{};
@@ -156,7 +156,8 @@
                         width: 80,
                         align:'center',
                         editor: {
-                            xtype: 'kdn.editor.decimalfield'
+                            xtype: 'kdn.editor.decimalfield',
+                            decimalPrecision:3
                         }  
                         
                     },

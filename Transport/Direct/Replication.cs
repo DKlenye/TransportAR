@@ -116,7 +116,7 @@ namespace Transport.Direct {
        public string CalcWorkingTime(JObject o)
        {
            var counter = 0;
-           var waybillId = db.Query<int>("select WaybillId from Waybill where AccPeriod is null and WaybillState>1");
+           var waybillId = db.Query<int>("SELECT WaybillId FROM Waybill w INNER JOIN Vehicle v ON v.VehicleId = w.VehicleId AND v.GarageNumber IN (1135,1089,1087,1442) WHERE YEAR(w.ReturnDate) = 2013");
 
            using (new SessionScope(FlushAction.Never))
            {

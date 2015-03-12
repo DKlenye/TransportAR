@@ -188,7 +188,7 @@ namespace Transport.Direct
                         var m = maintenanceMap[x.Car.VehicleId];
                         dto.IsInMaintenance = true;
                         dto.DepartureDate = m.RequestDate.Value;
-                        return dto;
+                        
                     }
 
                     x.Customers.ForEach(customer => dto.Customers.Add(new DistributionCustomerDto()
@@ -290,7 +290,7 @@ namespace Transport.Direct
             {
                 dto.IsInMaintenance = true;
                 dto.DepartureDate = maintenance.RequestDate.Value;
-                return dto;
+                
             }
 
             detail.Customers.ForEach(customer => dto.Customers.Add(new DistributionCustomerDto()
@@ -527,6 +527,7 @@ namespace Transport.Direct
                     };
                     customer.Save();
                     detail.Customers.Add(customer);
+                    detail.LastChange = DateTime.Now;
                 }
             });
 
@@ -541,6 +542,11 @@ namespace Transport.Direct
             var detail = DistributionListDetails.Find(listDetailId);
             var list = DistributionList.Find(detail.ListId);
             var car = (FullCar)FullCar.Find(detail.Car.VehicleId);
+
+            var vacationMap =
+                db.Query<DriversVacation>(";EXEC DriversVacation_Select @0 ,@1", list.ListDate, 0).Map(x => x.DriverId);
+            var outOfWorkMap = DriverOutOfWork.FindByDate(list.ListDate).Map(x => x.Driver.DriverId);
+
 
             var waybill = new Waybill()
             {
@@ -573,15 +579,17 @@ namespace Transport.Direct
 
             detail.Drivers.ForEach(x =>
             {
-                var waybillDriver = new WaybillDriver()
+                if (!vacationMap.ContainsKey(x.Driver.DriverId) && !outOfWorkMap.ContainsKey(x.Driver.DriverId))
                 {
-                    WaybillId = waybill.WaybillId,
-                    Driver = x.Driver
-                };
-                waybillDriver.Save();
+                    var waybillDriver = new WaybillDriver()
+                    {
+                        WaybillId = waybill.WaybillId,
+                        Driver = x.Driver
+                    };
+                    waybillDriver.Save();
 
-                waybill.ResponsibleDriver = waybillDriver.Driver;
-
+                    waybill.ResponsibleDriver = waybillDriver.Driver;
+                }
             });
 
             var norm = Norm.FindActualNorms(waybill.Car.VehicleId, waybill.DepartureDate).FirstOrDefault(x => x.isMain);

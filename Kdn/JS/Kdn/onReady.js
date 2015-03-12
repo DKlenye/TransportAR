@@ -45,6 +45,6 @@ Ext.onReady(function() {
     }
 
     Kdn.removeStartMask.defer(150);
-    Kdn.ChromeFrame();
+   // Kdn.ChromeFrame();
 
 });

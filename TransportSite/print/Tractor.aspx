@@ -158,9 +158,12 @@
                     <tr>
                         <td>&nbsp;</td>
                         <td class="pre-lined">Машинист&nbsp;(ответственное&nbsp;лицо)</td>
-                        <td class="lined" style="width:100mm"><span><%Response.Write(DriverFio(1)); %></span>&nbsp;&nbsp;&nbsp;<span><%Response.Write(DriverLicence(1)); %></span></td>
+                        <td class="lined" style="width:100mm; font-size: 7pt; font-weight: bold;">
+                            <span><%Response.Write(DriverFio(1)); %></span>&nbsp;&nbsp;&nbsp;<span><%Response.Write(DriverLicence(1)); %></span><br/>
+                            <span><%Response.Write(DriverFio(2)); %></span>&nbsp;&nbsp;&nbsp;<span><%Response.Write(DriverLicence(2)); %></span>
+                        </td>
                         <td class="pre-lined">Табельный&nbsp;номер</td>
-                        <td class="lined" style="width:20mm"><span><%Response.Write(DriverTab(1)); %></span></td>
+                        <td class="lined" style="width:20mm; font-size: 7pt; font-weight: bold;"><span><%Response.Write(DriverTab(1)); %></span>&nbsp;<br/><span><%Response.Write(DriverTab(2)); %></span></td>
                         <td class="pre-lined">Стажер</td>
                         <td class="lined" style="width:55mm"></td>
                         <td>&nbsp;</td>
@@ -196,23 +199,23 @@
                     <tr class="header rectangle">
                         <td rowspan="2" style="width:10mm;">время</td>
                         <td rowspan="2" style="width:15mm;">показания машино- (мото) счётчика</td>
-                        <td style="font-size:7pt; width:20mm;">сдал, механик (уполномоченное лицо)</td>
+                        <td style="font-size:6pt; width:20mm;">сдал, механик (уполномоченное лицо)</td>
                         <td rowspan="2" style="width:10mm;">время</td>
                         <td rowspan="2" style="width:15mm;">показания машино- (мото) счётчика</td>
-                        <td style="font-size:7pt; width:20mm;">принял, механик (уполномоченное лицо)</td>
+                        <td style="font-size:6pt; width:20mm;">принял, механик (уполномоченное лицо)</td>
                         <td rowspan="2">наличие при выезде</td>
                         <td colspan="3">выдано</td>
                         <td rowspan="2" style="width:15mm;">наличие при возвращение</td>
                     </tr>
                     <tr class="header rectangle">
-                        <td style="font-size:7pt; width:20mm;">принял, машинист (уполномоченное лицо)</td>
-                        <td style="font-size:7pt; width:20mm;">сдал, машинист (уполномоченное лицо)</td>
+                        <td style="font-size:6pt; width:20mm;">принял, машинист (уполномоченное лицо)</td>
+                        <td style="font-size:6pt; width:20mm;">сдал, машинист (уполномоченное лицо)</td>
                         <td>марка топлива</td>
                         <td>количество<br/>топлива, л</td>
                         <td>подпись заправщика</td>
                     </tr>
                     <tr>
-                        <td><span><%Response.Write(DepartureDate("dd.MM.yyyy")); %></span></td><td><span><%Response.Write(CustomerName()); %></span></td><td>&nbsp;</td><td><span><%Response.Write(DepartureDate("HH:mm")); %></span></td><td><span><%Response.Write(DepartureMh()); %></span></td>
+                        <td><span>&nbsp;</span></td><td><span><%Response.Write(CustomerName()); %></span></td><td>&nbsp;</td><td><span><%Response.Write(DepartureDate("HH:mm")); %></span></td><td><span><%Response.Write(DepartureMh()); %></span></td>
                             <td><table cellpadding="0" cellspacing="0"><tr><td style="border-width: 0pt 0pt 1pt 0pt">&nbsp;</td></tr><tr><td style="border-width:0pt;">&nbsp;</td></tr></table></td>
                         <td><span><%Response.Write(ReturnDate("HH:mm")); %></span></td><td>&nbsp;</td>
                             <td><table cellpadding="0" cellspacing="0"><tr><td style="border-width: 0pt 0pt 1pt 0pt">&nbsp;</td></tr><tr><td style="border-width:0pt;">&nbsp;</td></tr></table></td>

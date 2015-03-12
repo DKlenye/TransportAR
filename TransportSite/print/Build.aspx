@@ -251,9 +251,9 @@
                                                         <td>прибытия на объект</td>
                                                         <td>убытия с объекта</td>
                                                     </tr>
-                                                    <tr><td style="text-align:left;">Выезд<br/>на объект</td><td><span class="dataText"><% Response.Write(DepartureKm());%><br/></span></td><td>
+                                                    <tr><td style="text-align:left;">Выезд<br/>на объект</td><td><span class="dataText"><% Response.Write(DepartureKm());%><br/></span> <% Response.Write(DepartureMh());%></td><td>
                                                         &nbsp;</td><td><span class="dataText"><% Response.Write(DepartureDate("HH:mm"));%></span></td><td>
-                                                        &nbsp;</td><td>&nbsp;</td><td>&nbsp;<% Response.Write(DepartureMh());%></td></tr>
+                                                        &nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
                                                     <tr><td style="text-align:left;">Возвращение<br/>с объекта</td><td>&nbsp;</td><td>&nbsp;</td><td><span class="dataText"><% Response.Write(ReturnDate("HH:mm"));%></span></td><td>
                                                         &nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
                                                 </tbody>

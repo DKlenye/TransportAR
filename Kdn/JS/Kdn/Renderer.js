@@ -1,11 +1,16 @@
-﻿(function()
+(function()
 {
 
     var url = "images/icons/";
 
     Kdn.Renderer = {
+        
+        url : "images/icons/",
+        tpl : '<img style="{2}" src="{0}{1}.png"/>',
 
-
+        getIconImage:function(name,style) {
+            return String.format(this.tpl, this.url, name, style||"");
+        },
 
         object: function(propName)
         {
@@ -31,7 +36,7 @@
 
         icon: function(name, interceptor)
         {
-            var tpl = '<img src="{0}{1}.png"/>';
+            var tpl = '<img src="{0}{1}.png"/>  ';
             var fn = function(v, metaData, record, rowIndex, colIndex, store)
             {
                 metaData.css = 'icon-cell';
