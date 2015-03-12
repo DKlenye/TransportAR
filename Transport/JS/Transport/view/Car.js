@@ -1,4 +1,4 @@
-﻿T.view.Car = Ext.extend(T.view.Trailer, {
+T.view.Car = Ext.extend(T.view.Trailer, {
 
  requireModels: 'WaybillType,Department,TransportColumn,BodyType,WorkType,WorkUnit,GroupAcc,Fuel,ServiceGroup,ReportGroup',
     modelName: 'FullCar',
@@ -362,6 +362,20 @@
             header: 'Марка отопителя',
             width: 100,
             editor: { xtype: 'kdn.editor.textfield', allowBlank: true }
+        },
+
+        {
+            dataIndex: 'TransmissionType',
+            hidden: true,
+            header: 'Тип КПП',
+            width: 100,
+            editor: { xtype: 'combo.transmissiontype',objectValue:false, enableClear:true , allowBlank: true },
+            renderer: function (v) {
+                return {
+                    1: 'Механическая',
+                    2: 'Автоматическая'
+                }[v];
+            }
         }
 
         ]);

@@ -213,14 +213,23 @@ namespace Transport.Models {
       public decimal? CapacityTonns { get; set; }
       #endregion
 
-      [Property]
+       [Property]
+       public TransmissionType? TransmissionType { get; set; }
+
+       [Property]
       public int? ReplicationId { get; set; }
       [Property]
       public ReplicationSource? ReplicationSource { get; set; }
 
    }
 
-   [Model,ActiveRecord(DiscriminatorValue="1")]
+    public enum TransmissionType
+    {
+        Manual = 1,
+        Auto = 2
+    }
+
+    [Model,ActiveRecord(DiscriminatorValue="1")]
    public class FullCar : Vehicle {
 
       [AllowBlank,BelongsTo("DriverId")]

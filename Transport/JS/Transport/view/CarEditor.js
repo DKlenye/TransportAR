@@ -1,4 +1,4 @@
-﻿
+
 T.view.CarEditor = Ext.extend(Kdn.editor.ModelEditor, {
 
    mode:null,// create update
@@ -75,8 +75,8 @@ T.view.CarEditor = Ext.extend(Kdn.editor.ModelEditor, {
 	                  buildPropEditor(['Customer', 'WaybillTypeId', 'TrailerId', 'PackageTypeId', 'ScheduleId', 'StartWork', 'EndWork'],
 	                     {iconCls:'icon-roadworks',title:'Закрепление, настройки работы'}
 	                  ),
-	                  buildPropEditor(['BodyNumber','EngineModel','EngineNumber','ChassisNumber','CabinNumber','Color','EnginePower','EngineVolume','EngineTypeId','EcologyClassId','ModelHeater'],
-	                     {iconCls:'icon-gear_in',title:'Кузов, Двигатель'}
+	                  buildPropEditor(['BodyNumber', 'EngineModel', 'EngineNumber', 'ChassisNumber', 'CabinNumber', 'Color', 'EnginePower', 'EngineVolume', 'EngineTypeId', 'EcologyClassId', 'ModelHeater', 'TransmissionType'],
+	                     {iconCls:'icon-gear_in',title:'Кузов, Двигатель, Трансмиссия'}
 	                  ),	
 	                  buildPropEditor(['FuelVolume','CoolantVolume','EngineOilVolume','HydraulicOilVolume'],
 	                     {iconCls:'icon-beaker-empty',title:'Заправочные объёмы'}
