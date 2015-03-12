@@ -1,4 +1,4 @@
-﻿
+
 T.view.NormEditor = Ext.extend(Kdn.editor.ModelEditor, {
    closeAfterSave:false,
    getItems:function(){	
@@ -29,7 +29,7 @@ T.view.NormEditor = Ext.extend(Kdn.editor.ModelEditor, {
                   {
                      dataIndex:'Consumption',
                      header:'Расход, л',
-                     editor:{xtype:'kdn.editor.numberfield'},
+                     editor: { xtype: 'kdn.editor.numberfield', decimalPrecision: 3 },
                      width:150
                   },
                   {
