@@ -47,7 +47,7 @@ namespace Transport.Web
                               
                foreach (var rem in remains)
                {
-                  if( rem.FuelId == 7 ) continue; //Не печатаем керосин 
+                  if( rem.FuelId == 7 || rem.FuelId==4 ) continue; //Не печатаем керосин и Н80
 
                      remain = rem;
                      break;
