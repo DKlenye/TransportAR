@@ -1,4 +1,4 @@
-﻿T.view.Customer = Ext.extend(Kdn.view.BaseGrid, {
+T.view.Customer = Ext.extend(Kdn.view.BaseGrid, {
     modelName: 'Customer',
     pageSize: 50,
     constructor: function(cfg) {
@@ -25,6 +25,12 @@
                         header: 'Наименование заказчика',
                         width: 300,
                         editor: { xtype: 'kdn.editor.textfield' }
+                    },
+                    {
+                        dataIndex: 'CustomerName1',
+                        header: 'Наименование сокр.',
+                        width: 200,
+                        editor: { xtype: 'kdn.editor.textfield',allowBlank:true }
                     },
                     {
                         dataIndex: 'CostCode',

@@ -1,4 +1,4 @@
-﻿T.view.vehicleDistribution.RequestGrid = Ext.extend(Ext.grid.GridPanel, {
+T.view.vehicleDistribution.RequestGrid = Ext.extend(Ext.grid.GridPanel, {
 
     constructor:function(cfg) {
         cfg = cfg || {};
@@ -62,9 +62,15 @@
                     filter:{}
                 },
                 {
+                    header: 'Тип транспорта',
+                    dataIndex: 'VehicleType',
+                    width: 130,
+                    filter: {}
+                },
+                {
                     header: 'Заказчик',
                     dataIndex: 'CustomerName',
-                    width: 170,
+                    width: 140,
                     filter:{}
                 },
                 {

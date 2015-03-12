@@ -1,4 +1,4 @@
-﻿T.view.waybill.WaybillTask = Ext.extend(Kdn.editor.LocalGrid, {
+T.view.waybill.WaybillTask = Ext.extend(Kdn.editor.LocalGrid, {
     startEditColumn: 2,
     addPosition: 'last',
     selectionModel: 'Cell',
@@ -309,7 +309,7 @@
                             var tip = String.format("<b><span style='font-size:15px;'>[{0}] : {1} <span style='color:tomato'> {2}</span></span></b>", o['CustomerId'], (o['CustomerName'] + '').replace(/"/g, '\''), o['CostCode']);
                             meta.attr = 'ext:qtip="' + tip + '"';
 
-                            return o['CustomerName'];
+                            return o['CustomerName1'] || o['CustomerName'];
                         }
                     },
                     {

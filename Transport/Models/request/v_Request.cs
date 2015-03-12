@@ -25,12 +25,14 @@ namespace Transport.Models
         public string CustomerId { get; set; }
         [Property]
         public string CustomerName { get; set; }
-
+        
         [Property]
         public bool isLinked { get; set; }
 
+        [Property]
+        public string VehicleType { get; set; }
 
-        
+
 
         [Property]
       public DateTime? PublishDate { get; set; }
