@@ -29,6 +29,10 @@
           <DataField>CustomerName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="CapacityTonns">
+          <DataField>CapacityTonns</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
         <Field Name="RequestId">
           <DataField>RequestId</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
@@ -117,11 +121,31 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
-                              <Style />
+                              <Value>Разнарядка на</Value>
+                              <Style>
+                                <FontSize>12pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value xml:space="preserve"> </Value>
+                              <Style>
+                                <FontSize>12pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>=Parameters!date.Value</Value>
+                              <Style>
+                                <FontSize>12pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                                <Format>dd.MM.yyyy</Format>
+                              </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox65</rd:DefaultName>
@@ -137,6 +161,7 @@
                       </Style>
                     </Textbox>
                     <ColSpan>4</ColSpan>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell />
@@ -159,7 +184,6 @@
                               <Value>=Fields!GroupRequestName.Value</Value>
                               <Style>
                                 <FontStyle>Italic</FontStyle>
-                                <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -218,7 +242,8 @@
                             <TextRun>
                               <Value>=Fields!Model.Value</Value>
                               <Style>
-                                <FontSize>9pt</FontSize>
+                                <FontStyle>Italic</FontStyle>
+                                <FontSize>7pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                               </Style>
                             </TextRun>
@@ -232,7 +257,8 @@
                             <TextRun>
                               <Value>=Fields!RegistrationNumber.Value</Value>
                               <Style>
-                                <FontSize>9pt</FontSize>
+                                <FontStyle>Italic</FontStyle>
+                                <FontSize>7pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                               </Style>
                             </TextRun>
@@ -241,6 +267,14 @@
                               <Style>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>=iif(Fields!CapacityTonns.Value=0,"","(г.п. "+ Round(Fields!CapacityTonns.Value,2).ToString()+" т.)")</Value>
+                              <Style>
+                                <FontStyle>Italic</FontStyle>
+                                <FontSize>7pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -301,7 +335,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -340,7 +373,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.19792in</Height>
+              <Height>0.22917in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -353,7 +386,7 @@
                             <TextRun>
                               <Value>=Fields!DepartureTime.Value</Value>
                               <Style>
-                                <FontSize>7pt</FontSize>
+                                <FontSize>8pt</FontSize>
                                 <Color>Blue</Color>
                               </Style>
                             </TextRun>
@@ -367,7 +400,7 @@
                             <TextRun>
                               <Value>=Fields!ReturnTime.Value</Value>
                               <Style>
-                                <FontSize>7pt</FontSize>
+                                <FontSize>8pt</FontSize>
                                 <Color>Blue</Color>
                               </Style>
                             </TextRun>
@@ -421,9 +454,7 @@
                             </TextRun>
                             <TextRun>
                               <Value>=Fields!CustomerName.Value</Value>
-                              <Style>
-                                <FontSize>7pt</FontSize>
-                              </Style>
+                              <Style />
                             </TextRun>
                             <TextRun>
                               <Value xml:space="preserve"> </Value>
@@ -434,7 +465,7 @@
                             <TextRun>
                               <Value>=Fields!Description.Value</Value>
                               <Style>
-                                <FontSize>8pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -516,8 +547,8 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Height>0.86458in</Height>
-        <Width>7.20277in</Width>
+        <Height>0.89583in</Height>
+        <Width>7.20276in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -525,7 +556,7 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>2.40771cm</Height>
+    <Height>2.27541cm</Height>
     <Style />
   </Body>
   <ReportParameters>
@@ -538,7 +569,7 @@
       <Prompt>date</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <Width>18.29503cm</Width>
+  <Width>18.29504cm</Width>
   <Page>
     <PageHeight>27.94cm</PageHeight>
     <PageWidth>21cm</PageWidth>

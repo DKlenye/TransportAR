@@ -1229,7 +1229,7 @@ where TransportColumn.ColumnId=@ColumnId</CommandText>
         <DataSetName>DataSet1</DataSetName>
         <Top>1.37667in</Top>
         <Left>0.26458cm</Left>
-        <Height>1.38167in</Height>
+        <Height>1.38166in</Height>
         <Width>10.92708in</Width>
         <Style />
       </Tablix>
@@ -1390,7 +1390,7 @@ where TransportColumn.ColumnId=@ColumnId</CommandText>
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>9.73138cm</Height>
+    <Height>7.21784cm</Height>
     <Style />
   </Body>
   <ReportParameters>
