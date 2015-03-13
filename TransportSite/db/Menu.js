@@ -500,6 +500,11 @@ Kdn.Menu = [
                         Handler: 'createView',
                         HandlerCfg: "{xtype:'view.report.refuellinginfodatetime',single:true}"
                     }, {
+                        text: 'Информация по заправке гаражного номера',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.refuellingreoillinginfovehicle',single:true}"
+                    }, {
                         text: 'Информация по заправке(РЦП АЗС)',
                         iconCls: 'icon-blue-document-word',
                         Handler: 'createView',
