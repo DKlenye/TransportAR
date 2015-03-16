@@ -363,6 +363,11 @@ Kdn.Menu = [
                         iconCls: 'icon-blue-document-word',
                         Handler: 'createView',
                         HandlerCfg: "{xtype:'view.report.tireumtugn',single:true}"
+                    }, {
+                        text: 'Список транспорта с двумя комплектами шин(зима, лето)',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.vehicletirestwosets',single:true}"
                     }
                 ]
             }, '-', {
