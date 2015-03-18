@@ -144,9 +144,12 @@ Ext.override(Ext.data.Store,{
             sorters = [{direction: direction, field: sortInfo.field}];
         }
 
+        console.log(sorters)
+
         //create a sorter function for each sorter field/direction combo
         for (var i=0, j = sorters.length; i < j; i++) {
             //если не маппинг, то сортируем по дефолту
+            
             if(this.fields.get(sorters[i].field)){
                sortFns.push(this.createSortFunction(sorters[i].field, sorters[i].direction));
             }
@@ -422,6 +425,47 @@ Ext.override(Ext.form.NumberField, {
         }
 
         Ext.form.NumberField.superclass.initEvents.call(this);
+    }
+});
+
+
+Ext.override(Ext.form.ComboBox, {
+     doQuery : function(q, forceAll){
+        q = Ext.isEmpty(q) ? '' : q;
+        var qe = {
+            query: q,
+            forceAll: forceAll,
+            combo: this,
+            cancel:false
+        };
+        if(this.fireEvent('beforequery', qe)===false || qe.cancel){
+            return false;
+        }
+        q = qe.query;
+        forceAll = qe.forceAll;
+        if(forceAll === true || (q.length >= this.minChars)){
+            if(this.lastQuery !== q){
+                this.lastQuery = q;
+                if(this.mode == 'local'){
+                    this.selectedIndex = -1;
+                    if(forceAll){
+                        this.store.clearFilter();
+                    }else{
+                        this.store.filter(this.displayField, q, true);
+                    }
+                    this.onLoad();
+                }else{
+                    this.store.baseParams[this.queryParam] = q;
+                    this.store.load({
+                        params: this.getParams(q)
+                    });
+                    this.expand();
+                }
+            }else{
+                this.selectedIndex = -1;
+                this.onLoad();
+            }
+        }
     }
 });
 
