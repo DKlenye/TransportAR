@@ -1,4 +1,4 @@
-﻿T.view.RequestMagazine = Ext.extend(Ext.Panel, {
+T.view.RequestMagazine = Ext.extend(Ext.Panel, {
 
     constructor: function(cfg)
     {
@@ -244,7 +244,45 @@
                                 ]
                             },
                             {
-                                title: 'Путевые листы'
+                                title: 'Путевые листы',
+                                columnLines: true,
+                                stripeRows: true,
+                                viewConfig: {
+                                    forceFit: true
+                                },
+                                xtype: 'grid',
+                                store: new Ext.data.JsonStore({
+                                    fields: [
+                                        'WaybillId','DepartureDate', 'GarageNumber', 'Model','RegistrationNumber'
+                                    ]
+                                }),
+                                columns: [
+                                    {
+                                        header: '№ П.Л.',
+                                        dataIndex:'WaybillId'
+                                    },
+                                    {
+                                        header: 'Дата выезда',
+                                        dataIndex: 'DepartureDate',
+                                        xtype: 'datecolumn',
+                                        format: 'd.m.Y H:i',
+                                        width: 130,
+                                        fixed: true
+                                    },
+                                    {
+                                        header: 'Гар. №',
+                                        dataIndex: 'GarageNumber'
+                                    },
+                                    {
+                                        header: 'Марка',
+                                        dataIndex: 'Model'
+                                    },
+                                     {
+                                         header: 'Гос. №',
+                                         dataIndex: 'RegistrationNumber'
+                                     }
+                                   
+                                ]
                             }
                         ]
                     }

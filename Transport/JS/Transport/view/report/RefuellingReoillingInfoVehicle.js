@@ -1,4 +1,4 @@
-﻿T.view.report.RefuellingReoillingInfoVehicle = Ext.extend(Kdn.view.Report, {
+T.view.report.RefuellingReoillingInfoVehicle = Ext.extend(Kdn.view.Report, {
 
    reportName: 'RefuellingReoillingInfoVehicle',
    
@@ -9,7 +9,20 @@
                 xtype: 'numberfield',
                 dataIndex: 'GarageNumber'
             },
-          '-'
+          '-',
+           'C:',
+            {
+                xtype: 'datefield',
+                dataIndex: 'Start',
+                value: new Date().getFirstDateOfMonth().clearTime()
+            },
+            '-',
+            'По:',
+            {
+                xtype: 'datefield',
+                dataIndex: 'End',
+                value: new Date().clearTime()
+            }
    ]
 });
 
