@@ -17,6 +17,10 @@
           <DataField>GarageNumber</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
+        <Field Name="OrderId">
+          <DataField>OrderId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
         <Field Name="Model">
           <DataField>Model</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -69,8 +73,20 @@
           <DataField>IsInMaintenance</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="trailerGN">
+          <DataField>trailerGN</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
         <Field Name="RequestName">
           <DataField>RequestName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="trailerRN">
+          <DataField>trailerRN</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="trailerModel">
+          <DataField>trailerModel</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
@@ -161,7 +177,6 @@
                       </Style>
                     </Textbox>
                     <ColSpan>4</ColSpan>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell />
@@ -277,6 +292,22 @@
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
+                            <TextRun>
+                              <Value xml:space="preserve"> </Value>
+                              <Style>
+                                <FontStyle>Italic</FontStyle>
+                                <FontSize>7pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>=iif(Fields!trailerGN.Value=0,"","Прицеп: ["+Fields!trailerGN.Value.ToString()+"]"+Fields!trailerModel.Value+" "+Fields!trailerRN.Value)</Value>
+                              <Style>
+                                <FontStyle>Italic</FontStyle>
+                                <FontSize>7pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
                           </TextRuns>
                           <Style>
                             <TextAlign>Left</TextAlign>
@@ -297,6 +328,7 @@
                       </Style>
                     </Textbox>
                     <ColSpan>2</ColSpan>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell />
@@ -509,12 +541,12 @@
             <TablixMember>
               <Group Name="Group1">
                 <GroupExpressions>
-                  <GroupExpression>=Fields!GroupRequestName.Value</GroupExpression>
+                  <GroupExpression>=Fields!OrderId.Value</GroupExpression>
                 </GroupExpressions>
               </Group>
               <SortExpressions>
                 <SortExpression>
-                  <Value>=Fields!GroupRequestName.Value</Value>
+                  <Value>=Fields!OrderId.Value</Value>
                 </SortExpression>
               </SortExpressions>
               <TablixMembers>
