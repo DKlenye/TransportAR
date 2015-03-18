@@ -281,6 +281,10 @@
       <FullPath>RefuellingInfoDateTime.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>RefuellingReoillingInfoVehicle.rdl</Name>
+      <FullPath>RefuellingReoillingInfoVehicle.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>ReoillingFact.rdl</Name>
       <FullPath>ReoillingFact.rdl</FullPath>
     </ProjectItem>
@@ -505,8 +509,8 @@
       <FullPath>WayBillPackage.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>RefuellingReoillingInfoVehicle.rdl</Name>
-      <FullPath>RefuellingReoillingInfoVehicle.rdl</FullPath>
+      <Name>VehicleTiresTwoSets.rdl</Name>
+      <FullPath>VehicleTiresTwoSets.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
