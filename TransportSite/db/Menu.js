@@ -150,10 +150,20 @@ Kdn.Menu = [
                         text: 'Типы двигателей',
                         Handler: "createView",
                         HandlerCfg: "{xtype:'view.enginetype',single:true}"
-                    }, {
+                    },
+                    {
+                        text: 'Типы КПП',
+                        Handler: "createView",
+                        HandlerCfg: "{xtype:'view.transmissiontype',single:true}"
+                    },{
                         text: 'Классы экологичности',
                         Handler: "createView",
                         HandlerCfg: "{xtype:'view.ecologyclass',single:true}"
+                    },
+                    {
+                        text: 'Марки (модели) транспортных средств',
+                        Handler: "createView",
+                        HandlerCfg: "{xtype:'view.vehiclemodel',single:true}"
                     }
                 ]
             }, {
@@ -950,7 +960,30 @@ Kdn.Menu = [
                 ]
             }
         ]
-    }, {
+    },
+    {
+        text: 'Услуги',
+        permission: {
+            u: [1,61]
+        },
+        iconCls: 'icon-reseller_account_template32',
+        Child: [
+            {
+                text: 'Рассчёт тарифов на услуги транспорта',
+                Handler: 'createView',
+                HandlerCfg: "{xtype:'view.calculatetariff',single:true}"
+            },
+            {
+                text: 'Коэффициенты по статьям затрат',
+                Handler: 'createView',
+                HandlerCfg: "{xtype:'view.tariffcostitem',single:true}"
+
+            }
+        ]
+    },
+    
+    
+    {
         text: "Бухгалтерия",
         permission: {
             u: [1, 15, 16,67]

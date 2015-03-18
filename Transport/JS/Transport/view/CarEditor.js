@@ -56,7 +56,9 @@ T.view.CarEditor = Ext.extend(Kdn.editor.ModelEditor, {
 	                  'ColumnId',
 	                  'ResponsibleDriver',
 	                  'PolymirSHU',
-	                  'WriteOffDate'     
+                      'NotUsedDate',
+	                  'WriteOffDate'
+                      
 	               ],
 	               {region:'center',split:true,margins:'0'}
 	            ),
@@ -87,7 +89,7 @@ T.view.CarEditor = Ext.extend(Kdn.editor.ModelEditor, {
 	                  buildPropEditor(['CostCode'],
 	                     {iconCls:'icon-coins',title:'Бухг. настройки'}
 	                  ),
-	                  buildPropEditor(['RefuellingGroupId', 'AccGroupId', 'AccGroupNewId', 'BodyTypeId', 'Category', 'ServiceGroupId', 'GroupRequestId', 'ReportGroupId', 'VehicleOilGroupId'],
+	                  buildPropEditor(['RefuellingGroupId', 'AccGroupId', 'AccGroupNewId', 'BodyTypeId', 'Category', 'ServiceGroupId', 'GroupRequestId', 'ReportGroupId', 'VehicleOilGroupId', 'VehicleModelId'],
 	                     { iconCls: 'icon-category-group', title: 'Тип/Категория/Группировка' }
 	                  )   
 	               ]	               

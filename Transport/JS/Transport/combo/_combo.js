@@ -1,4 +1,4 @@
-﻿T.combo.buildCombo = function(modelName){   
+T.combo.buildCombo = function(modelName){   
       T.combo[modelName] = Ext.extend(Kdn.form.ComboBox, {
        initComponent: function() {
            Ext.applyIf(this, {
@@ -37,7 +37,9 @@ Ext.iterate([
    'ServiceGroup',
    'ReportGroup',
    'VehicleOilGroup',
-   'PetrolGroup'
+   'PetrolGroup',
+   'TransmissionType',
+   'VehicleModel'
 ],
 T.combo.buildCombo);
 

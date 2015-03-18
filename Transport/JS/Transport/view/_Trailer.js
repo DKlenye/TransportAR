@@ -1,5 +1,5 @@
-﻿T.view.Trailer = Ext.extend(Kdn.view.BaseGrid, {
-    requireModels:'Department,TransportColumn,BodyType',
+T.view.Trailer = Ext.extend(Kdn.view.BaseGrid, {
+    requireModels: 'Department,TransportColumn,BodyType,VehicleModel',
     modelName: 'FullTrailer',
     constructor: function(cfg) {
         cfg = cfg || {};
@@ -227,7 +227,16 @@
                         xtype:'datecolumn',
                         width: 120,
                         editor: { xtype: 'kdn.editor.datefield',allowBlank:true }
+                    },
+                    {
+                        dataIndex: 'VehicleModelId',
+                        header: 'Марка (модель) для расчёта тарифов',
+                        width: 120,
+                        hidden:true,
+                        editor: { xtype: 'combo.vehiclemodel', editable: true, allowBlank: true, objectValue: false, enableClear:true},
+                        renderer: Kdn.Renderer.store("VehicleModel", "VehicleModelName")
                     }
+
                     
                 ]
     }

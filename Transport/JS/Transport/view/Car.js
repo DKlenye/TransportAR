@@ -1,6 +1,6 @@
 T.view.Car = Ext.extend(T.view.Trailer, {
 
- requireModels: 'WaybillType,Department,TransportColumn,BodyType,WorkType,WorkUnit,GroupAcc,Fuel,ServiceGroup,ReportGroup',
+    requireModels: 'WaybillType,Department,TransportColumn,BodyType,WorkType,WorkUnit,GroupAcc,Fuel,ServiceGroup,ReportGroup,TransmissionType,VehicleModel',
     modelName: 'FullCar',
     editor: 'view.careditor',
     pageMode: 'remote',
@@ -369,15 +369,21 @@ T.view.Car = Ext.extend(T.view.Trailer, {
             hidden: true,
             header: 'Тип КПП',
             width: 100,
-            editor: { xtype: 'combo.transmissiontype',objectValue:false, enableClear:true , allowBlank: true },
-            renderer: function (v) {
-                return {
-                    1: 'Механическая',
-                    2: 'Автоматическая'
-                }[v];
-            }
-        }
+            editor: { xtype: 'combo.transmissiontype', enableClear:true , allowBlank: true },
+            renderer: Kdn.Renderer.object("TransmissionTypeName")
+        },
 
+            {
+                dataIndex: 'NotUsedDate',
+                xtype:'datecolumn',
+                hidden: true,
+                header: 'Дата вывода из эксплуатации',
+                editor: {
+                    xtype: 'datefield',
+                    allowBlank: true
+                }
+            }
+        
         ]);
 
 
