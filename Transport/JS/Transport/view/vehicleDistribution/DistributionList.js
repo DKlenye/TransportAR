@@ -511,6 +511,12 @@ T.view.vehicleDistribution.VehicleDistributionList = Ext.extend(Ext.grid.GridPan
                     return null;
                 }
             },
+        {
+            dataIndex: 'TrailerId',
+            header: 'Прицеп',
+            width: 120,
+            renderer: T.combo.Trailer.prototype.renderTpl
+        },
             {
                 dataIndex: 'Description',
                 header: 'Примечание',
@@ -591,7 +597,7 @@ T.view.vehicleDistribution.VehicleDistributionList = Ext.extend(Ext.grid.GridPan
                 xtype: 'view.distributioneditwindow',
                 constrain: true,
                 width: 600,
-                height: 680,
+                height: 720,
                 closeAction: 'hide',
                 renderTo: this.windowConstrain.getBody()
             });

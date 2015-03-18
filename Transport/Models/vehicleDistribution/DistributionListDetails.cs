@@ -57,6 +57,9 @@ namespace Transport.Models
         [Property]
         public DateTime? LastChange { get; set; }
 
+        [Property]
+        public int? TrailerId { get; set; }
+
     }
 
 

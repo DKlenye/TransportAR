@@ -1,4 +1,4 @@
-﻿T.view.vehicleDistribution.DistributionEditWindow = Ext.extend(Ext.Window, {
+T.view.vehicleDistribution.DistributionEditWindow = Ext.extend(Ext.Window, {
     constructor: function(cfg) {
         cfg = cfg || {};
         Ext.apply(cfg, {
@@ -44,6 +44,13 @@
                             objectValue: false,
                             fieldLabel: 'График',
                             dataIndex: 'ScheduleId'
+                        },
+                        {
+                            xtype: 'combo.trailer',
+                            enableClear:true,
+                            objectValue: false,
+                            fieldLabel: 'Прицеп',
+                            dataIndex: 'TrailerId'
                         },
                         {
                             xtype: 'textfield',
@@ -186,7 +193,7 @@
         var customers = [],drivers=[];
         
         this.customers.store.each(function(e){
-            var o = Ext.copyTo({}, e.data, 'Id,ListDetailId,RequestId,Customer,DepartureTime,Description,ReturnTime');
+            var o = Ext.copyTo({}, e.data, 'Id,ListDetailId,RequestId,Customer,DepartureTime,Description,ReturnTime,TrailerId');
             o.VehicleOrderId = rec.get('ListDetailId');
             o.Id = o.Id||0;
             if(o.Customer) customers.push(o); 

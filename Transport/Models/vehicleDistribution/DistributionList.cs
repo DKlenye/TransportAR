@@ -5,7 +5,6 @@ using Castle.ActiveRecord;
 using Castle.ActiveRecord.Queries;
 using Castle.Core;
 using NHibernate.Criterion;
-using NHibernate.Util;
 using Transport.Direct;
 
 namespace Transport.Models
@@ -90,7 +89,8 @@ namespace Transport.Models
                         ReturnDate = date.Add(returnTime.Hours == 0 ? TimeSpan.Parse("16:45") : returnTime),
                         DepartureTime = date.Add(departureTime.Hours == 0 ? TimeSpan.Parse("08:00") : departureTime).ToString("HH:mm"),
                         Shift = 1,
-                        ScheduleId = car.ScheduleId == null ? 1 : car.ScheduleId.Value
+                        ScheduleId = car.ScheduleId == null ? 1 : car.ScheduleId.Value,
+                        TrailerId = car.TrailerId
                     };
 
                     detail.SaveAndFlush();

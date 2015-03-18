@@ -49,6 +49,7 @@ namespace Transport.Direct
         public int ScheduleId { get; set; }
         public short Shift { get; set; }
         public int? WaybillId { get; set; }
+        public int? TrailerId { get; set; }
 
         [AllowBlank]
         public string Description { get; set; }
@@ -128,7 +129,8 @@ namespace Transport.Direct
                         ScheduleId = x.ScheduleId,
                         DestRoutePoint = x.DestRoutePoint,
                         WaybillId = x.WaybillId,
-                        LastChange = x.LastChange
+                        LastChange = x.LastChange,
+                        TrailerId = x.TrailerId
                     };
 
                     if (businessTripMap != null && businessTripMap.ContainsKey(x.Car.VehicleId))
@@ -153,7 +155,33 @@ namespace Transport.Direct
                             RequestId = customer.RequestId,
                             ReturnTime = customer.ReturnTime
                         }));
-                        b.Drivers.ForEach(driver => dto.Drivers.Add(new DistributionDriverDto() {Driver = driver.Driver}));
+                        b.Drivers.ForEach(driver =>
+                        {
+                            var driverDto = new DistributionDriverDto()
+                            {
+                                Driver = driver.Driver,
+                                Description = driver.Description
+                            };
+
+                            if (vacationMap.ContainsKey(driver.Driver.DriverId))
+                            {
+                                var v = vacationMap[driver.Driver.DriverId];
+                                driverDto.Cause = OutOfWorkCause.Vacation;
+                                driverDto.Start = v.StartDate;
+                                driverDto.End = v.EndDate;
+                            }
+
+                            if (outOfWorkMap.ContainsKey(driver.Driver.DriverId))
+                            {
+                                var oow = outOfWorkMap[driver.Driver.DriverId];
+                                driverDto.Cause = oow.Cause;
+                                driverDto.Start = oow.StartDate;
+                                driverDto.End = oow.EndDate;
+                            }
+
+                            dto.Drivers.Add(driverDto);
+
+                        });
 
                         return dto;
 
@@ -236,6 +264,7 @@ namespace Transport.Direct
             dto.DestRoutePoint = detail.DestRoutePoint;
             dto.WaybillId = detail.WaybillId;
             dto.LastChange = detail.LastChange;
+            dto.TrailerId = detail.TrailerId;
 
             if (businessTrip != null)
             {
@@ -257,7 +286,28 @@ namespace Transport.Direct
                     RequestId = customer.RequestId,
                     ReturnTime = customer.ReturnTime
                 }));
-                businessTrip.Drivers.ForEach(driver => dto.Drivers.Add(new DistributionDriverDto() {Driver = driver.Driver}));
+                businessTrip.Drivers.ForEach(d =>
+                {
+                    var driverDto = new DistributionDriverDto() { Driver = d.Driver, Description = d.Description };
+
+                    if (vacationMap.ContainsKey(d.Driver.DriverId))
+                    {
+                        var v = vacationMap[d.Driver.DriverId];
+                        driverDto.Cause = OutOfWorkCause.Vacation;
+                        driverDto.Start = v.StartDate;
+                        driverDto.End = v.EndDate;
+                    }
+
+                    if (outOfWorkMap.ContainsKey(d.Driver.DriverId))
+                    {
+                        var oow = outOfWorkMap[d.Driver.DriverId];
+                        driverDto.Cause = oow.Cause;
+                        driverDto.Start = oow.StartDate;
+                        driverDto.End = oow.EndDate;
+                    }
+
+                    dto.Drivers.Add(driverDto);
+                });
 
                 return dto;
 
@@ -329,6 +379,7 @@ namespace Transport.Direct
                 detail.DestRoutePoint = dto.DestRoutePoint;
                 detail.ScheduleId = dto.ScheduleId;
                 detail.Shift = dto.Shift;
+                detail.TrailerId = dto.TrailerId;
 
                 var customersMap = detail.Customers.Map(x => x.Id);
 
@@ -555,11 +606,12 @@ namespace Transport.Direct
                 WaybillState = 1,
                 WaybillTypeId = car.WaybillTypeId.Value,
                 Car = detail.Car,
-                TrailerId = car.TrailerId,
+                TrailerId = detail.TrailerId,
                 DepartureDate = list.ListDate.Add(TimeSpan.Parse(detail.DepartureTime)),
                 ReturnDate = detail.ReturnDate,
                 ScheduleId = detail.ScheduleId,
-                Shift = detail.Shift
+                Shift = detail.Shift,
+                
             };
 
             waybill.Save();
