@@ -76,49 +76,55 @@ namespace Transport.Models
                 previousDetails.ForEach(d =>
                 {
                     var car = (FullCar)vehiclesMap[d.Car.VehicleId];
-                    TimeSpan departureTime;
-                    TimeSpan returnTime;
-
-                    TimeSpan.TryParse(car.StartWork, out departureTime);
-                    TimeSpan.TryParse(car.EndWork, out returnTime);
-
-                    var detail = new DistributionListDetails()
+                    if (car != null)
                     {
-                        ListId = list.ListId,
-                        Car = d.Car,
-                        ReturnDate = date.Add(returnTime.Hours == 0 ? TimeSpan.Parse("16:45") : returnTime),
-                        DepartureTime = date.Add(departureTime.Hours == 0 ? TimeSpan.Parse("08:00") : departureTime).ToString("HH:mm"),
-                        Shift = 1,
-                        ScheduleId = car.ScheduleId == null ? 1 : car.ScheduleId.Value,
-                        TrailerId = car.TrailerId
-                    };
-
-                    detail.SaveAndFlush();
 
 
-                    d.Drivers.ForEach(x=>detail.Drivers.Add(new DistributionDrivers()
-                    {
-                        Driver = x.Driver,
-                        ListDetailId = detail.ListDetailId,
-                    }));
+                        TimeSpan departureTime;
+                        TimeSpan returnTime;
 
-                    detail.SaveAndFlush();
+                        TimeSpan.TryParse(car.StartWork, out departureTime);
+                        TimeSpan.TryParse(car.EndWork, out returnTime);
 
-                    if (car.Customer != null)
-                    {
-                        detail.Customers.Add(new DistributionCustomers()
+                        var detail = new DistributionListDetails()
                         {
-                            Customer = car.Customer,
+                            ListId = list.ListId,
+                            Car = d.Car,
+                            ReturnDate = date.Add(returnTime.Hours == 0 ? TimeSpan.Parse("16:45") : returnTime),
+                            DepartureTime =
+                                date.Add(departureTime.Hours == 0 ? TimeSpan.Parse("08:00") : departureTime)
+                                    .ToString("HH:mm"),
+                            Shift = 1,
+                            ScheduleId = car.ScheduleId == null ? 1 : car.ScheduleId.Value,
+                            TrailerId = car.TrailerId
+                        };
+
+                        detail.SaveAndFlush();
+
+
+                        d.Drivers.ForEach(x => detail.Drivers.Add(new DistributionDrivers()
+                        {
+                            Driver = x.Driver,
                             ListDetailId = detail.ListDetailId,
-                            DepartureTime = detail.DepartureTime
-                        });
+                        }));
+
+                        detail.SaveAndFlush();
+
+                        if (car.Customer != null)
+                        {
+                            detail.Customers.Add(new DistributionCustomers()
+                            {
+                                Customer = car.Customer,
+                                ListDetailId = detail.ListDetailId,
+                                DepartureTime = detail.DepartureTime
+                            });
+                        }
+
+
+                        detail.SaveAndFlush();
+
+                        details.Add(detail);
                     }
-
-
-                    detail.SaveAndFlush();
-
-                    details.Add(detail);
-
                 });
 
                 return details;

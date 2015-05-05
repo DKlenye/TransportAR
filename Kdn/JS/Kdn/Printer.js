@@ -1,4 +1,4 @@
-﻿(function()
+(function()
 {
     Kdn.Printer = {
     
@@ -27,8 +27,8 @@
                 }
             };
 
-            setTimeout(function () { printWindow.print(); }, 100);
-            setTimeout(function () { checkWindowState(); }, 100);
+            setTimeout(function () { printWindow.print(); }, 250);
+            setTimeout(function () { checkWindowState(); }, 250);
         },
 
         printWaybill: function (templateName, waybillId) {

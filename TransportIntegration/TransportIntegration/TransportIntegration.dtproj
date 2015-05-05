@@ -98,11 +98,6 @@
       <References />
     </DtsPackage>
     <DtsPackage FormatVersion="3">
-      <Name>Package2.dtsx</Name>
-      <FullPath>Package2.dtsx</FullPath>
-      <References />
-    </DtsPackage>
-    <DtsPackage FormatVersion="3">
       <Name>Контрагенты NSD2.dtsx</Name>
       <FullPath>Контрагенты NSD2.dtsx</FullPath>
       <References />

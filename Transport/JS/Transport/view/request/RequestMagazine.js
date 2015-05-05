@@ -31,8 +31,17 @@ T.view.RequestMagazine = Ext.extend(Ext.Panel, {
 
         this.selectDelay = new Ext.util.DelayedTask(this.onSelect, this);
 
-        Ext.apply(cfg, {
 
+        var WaybillsStore = Kdn.ModelFactory.getModel("RequestWaybillDto").buildStore({
+            autoLoad: false,
+            autoSave: true,
+            api: {
+                read: Kdn.Direct.RequestWaybillLoad
+            }
+        });
+
+        Ext.apply(cfg, {
+            WaybillsStore: WaybillsStore,
             RequestStore: RequestStore,
             Editors: Editors,
             layout: 'border',
@@ -42,7 +51,7 @@ T.view.RequestMagazine = Ext.extend(Ext.Panel, {
                     split: true,
                     margins: '2 0 2 2',
                     xtype: 'grid',
-                    ref:'../requestGrid',
+                    ref: '../requestGrid',
                     columnLines: true,
                     stripeRows: true,
                     loadMask: true,
@@ -50,102 +59,95 @@ T.view.RequestMagazine = Ext.extend(Ext.Panel, {
                     plugins: ['filterrow'],
                     //view: new Ext.ux.grid.BufferView({ scrollDelay: false }),
                     columns: [
-                       {
-                           header: '№ заявки',
-                           dataIndex: 'RequestId',
-                           width: 70,
-                           filter: {}
-                       },
-                       {
-                           header: 'Статус',
-                           dataIndex: 'Status',
-                           width: 105,
-                           renderer: function(v)
-                           {
-                                if (v == 0)
-                               {
-                                   return '<span class="label label-gray">Опубликована</span>'
-                               }                           
-                               if (v == 1)
-                               {
-                                   return '<span class="label label-warning">Подписана</span>'
-                               }
-                               if (v == 2)
-                               {
-                                   return '<span class="label label-success">Принята</span>'
-                               }
-                               if (v == 3)
-                               {
-                                   return '<span class="label label-important">Возвращена</span>'
-                               }
+                        {
+                            header: '№ заявки',
+                            dataIndex: 'RequestId',
+                            width: 70,
+                            filter: {}
+                        },
+                        {
+                            header: 'Статус',
+                            dataIndex: 'Status',
+                            width: 105,
+                            renderer: function(v) {
+                                if (v == 0) {
+                                    return '<span class="label label-gray">Опубликована</span>';
+                                }
+                                if (v == 1) {
+                                    return '<span class="label label-warning">Подписана</span>';
+                                }
+                                if (v == 2) {
+                                    return '<span class="label label-success">Принята</span>';
+                                }
+                                if (v == 3) {
+                                    return '<span class="label label-important">Возвращена</span>';
+                                }
 
-                           },
-                           filter: {}
-                       },
-                       {
-                           header: 'Тип',
-                           dataIndex: 'RequestType',
-                           width: 100,
-                           filter: {}
-                           /*renderer: Kdn.Renderer.icons(function(e)
+                            },
+                            filter: {}
+                        },
+                        {
+                            header: 'Тип',
+                            dataIndex: 'RequestType',
+                            width: 100,
+                            filter: {}
+                            /*renderer: Kdn.Renderer.icons(function(e)
                            {
                                if (e == 'Кран') return 'crane';
                                if (e == 'Грузовой') return 'Truck';
                                if (e == 'Пассажирский') return 'carPassenger';
                            })*/
-                       },
-                       {
-                           header: 'Заказчик',
-                           dataIndex: 'CustomerName',
-                           width: 220,
-                           filter: {}
-                       },
-                       {
-                           header: 'Дата поездки',
-                           xtype: 'datecolumn',
-                           dataIndex: 'RequestDate',
-                           filter: {
-                               field: {
-                                   xtype: 'datefield',
-                                   triggersConfig: [{ iconCls: "x-form-clear-trigger", qtip: "Очистить"}],
-                                   listeners: {
-                                       triggerclick: {
-                                           fn: function(item, trigger, index, tag, e)
-                                           {
-                                               item.reset();
-                                               item.fireEvent('select');
-                                           }
-                                       }
-                                   }
-                               },
-                               fieldEvents: ["select"],
-                               test: function(filterValue, value)
-                               {
-                                   if (!filterValue) return true;
-                                   return value.clearTime() - filterValue.clearTime() == 0;
-                               }
-                           },
-                           width: 120
-                       },
-                       {
-                           header: 'ФИО отправителя',
-                           dataIndex: 'UserFio',
-                           width: 200,
-                           filter: {}
-                       },
-                       {
-                           header: 'Опубликовано',
-                           xtype: 'datecolumn',
-                           format: 'd.m.Y H:i',
-                           dataIndex: 'PublishDate',
-                           width: 130
-                       },                       
-                       {
+                        },
+                        {
+                            header: 'Заказчик',
+                            dataIndex: 'CustomerName',
+                            width: 220,
+                            filter: {}
+                        },
+                        {
+                            header: 'Дата поездки',
+                            xtype: 'datecolumn',
+                            dataIndex: 'RequestDate',
+                            filter: {
+                                field: {
+                                    xtype: 'datefield',
+                                    triggersConfig: [{ iconCls: "x-form-clear-trigger", qtip: "Очистить" }],
+                                    listeners: {
+                                        triggerclick: {
+                                            fn: function(item, trigger, index, tag, e) {
+                                                item.reset();
+                                                item.fireEvent('select');
+                                            }
+                                        }
+                                    }
+                                },
+                                fieldEvents: ["select"],
+                                test: function(filterValue, value) {
+                                    if (!filterValue) return true;
+                                    return value.clearTime() - filterValue.clearTime() == 0;
+                                }
+                            },
+                            width: 120
+                        },
+                        {
+                            header: 'ФИО отправителя',
+                            dataIndex: 'UserFio',
+                            width: 200,
+                            filter: {}
+                        },
+                        {
+                            header: 'Опубликовано',
+                            xtype: 'datecolumn',
+                            format: 'd.m.Y H:i',
+                            dataIndex: 'PublishDate',
+                            width: 130
+                        },
+                        {
                             header: 'На подпись, ФИО',
                             dataIndex: 'Approver',
                             width: 180
-                       }
-                   ],
+                        }
+                    ],
                     tbar: [
                         {
                             text: 'Открыть для печати',
@@ -162,134 +164,143 @@ T.view.RequestMagazine = Ext.extend(Ext.Panel, {
                         store: RequestStore
                     })
                 },
-               {
-                   region: 'east',
-                   margins: '2 2 2 0',
-                   split: true,
-                   collapsible: true,
-                   collapseMode: 'mini',
-                   hideCollapseTool: true,
-                   width: 600,
-                   layout: {
-                       type: 'vbox',
-                       padding: '2',
-                       align: 'stretch'
-                   },
-                   defaults: { margins: '0 0 2 0' },
-                   items: [
-                    Editors.Empty,
-                    {
-                        flex: 2,
-                        margins: 0,
-                        xtype: 'tabpanel',
-                        cls: 'request-detail',
-                        collapsible: true,
-                        collapseMode: 'mini',
-                        hideCollapseTool: true,
-                        region: 'south',
-                        split: true,
-                        activeTab: 0,
-                        items: [
-                            {
-                                title: 'События по заявке',
-                                columnLines: true,
-                                stripeRows: true,
-                                viewConfig: {
-                                    forceFit: true
-                                },
-                                xtype: 'grid',
-                                store: new Ext.data.JsonStore({
-                                    fields: [
-                                        'EventDate', 'Message', 'Status'
-                                    ]
-                                }),
-                                columns: [
-                                    {
-                                        header: 'Дата',
-                                        dataIndex: 'EventDate',
-                                        xtype: 'datecolumn',
-                                        format: 'd.m.Y H:i',
-                                        width: 130,
-                                        fixed: true
+                {
+                    region: 'east',
+                    margins: '2 2 2 0',
+                    split: true,
+                    collapsible: true,
+                    collapseMode: 'mini',
+                    hideCollapseTool: true,
+                    width: 600,
+                    layout: {
+                        type: 'vbox',
+                        padding: '2',
+                        align: 'stretch'
+                    },
+                    defaults: { margins: '0 0 2 0' },
+                    items: [
+                        Editors.Empty,
+                        {
+                            flex: 2,
+                            margins: 0,
+                            xtype: 'tabpanel',
+                            cls: 'request-detail',
+                            collapsible: true,
+                            collapseMode: 'mini',
+                            hideCollapseTool: true,
+                            region: 'south',
+                            split: true,
+                            activeTab: 0,
+                            items: [
+                                {
+                                    title: 'События по заявке',
+                                    columnLines: true,
+                                    stripeRows: true,
+                                    viewConfig: {
+                                        forceFit: true
                                     },
-                                    {
-                                        header: 'Статус',
-                                        dataIndex: 'Status',
-                                        width: 120,
-                                        fixed: true,
-                                        renderer: function(v)
+                                    xtype: 'grid',
+                                    store: new Ext.data.JsonStore({
+                                        fields: [
+                                            'EventDate', 'Message', 'Status'
+                                        ]
+                                    }),
+                                    columns: [
                                         {
-                                             if (v == 0)
-                                               {
-                                                   return '<span class="label label-gray">Опубликована</span>'
-                                               }                           
-                                               if (v == 1)
-                                               {
-                                                   return '<span class="label label-warning">Подписана</span>'
-                                               }
-                                               if (v == 2)
-                                               {
-                                                   return '<span class="label label-success">Принята</span>'
-                                               }
-                                               if (v == 3)
-                                               {
-                                                   return '<span class="label label-important">Возвращена</span>'
-                                               }
+                                            header: 'Дата',
+                                            dataIndex: 'EventDate',
+                                            xtype: 'datecolumn',
+                                            format: 'd.m.Y H:i',
+                                            width: 130,
+                                            fixed: true
+                                        },
+                                        {
+                                            header: 'Статус',
+                                            dataIndex: 'Status',
+                                            width: 120,
+                                            fixed: true,
+                                            renderer: function(v) {
+                                                if (v == 0) {
+                                                    return '<span class="label label-gray">Опубликована</span>';
+                                                }
+                                                if (v == 1) {
+                                                    return '<span class="label label-warning">Подписана</span>';
+                                                }
+                                                if (v == 2) {
+                                                    return '<span class="label label-success">Принята</span>';
+                                                }
+                                                if (v == 3) {
+                                                    return '<span class="label label-important">Возвращена</span>';
+                                                }
+                                            }
+                                        },
+                                        {
+                                            header: 'Сообщение',
+                                            dataIndex: 'Message'
                                         }
-                                    },
-                                    {
-                                        header: 'Сообщение',
-                                        dataIndex: 'Message'
-                                    }
-                                ]
-                            },
-                            {
-                                title: 'Путевые листы',
-                                columnLines: true,
-                                stripeRows: true,
-                                viewConfig: {
-                                    forceFit: true
-                                },
-                                xtype: 'grid',
-                                store: new Ext.data.JsonStore({
-                                    fields: [
-                                        'WaybillId','DepartureDate', 'GarageNumber', 'Model','RegistrationNumber'
                                     ]
-                                }),
-                                columns: [
-                                    {
-                                        header: '№ П.Л.',
-                                        dataIndex:'WaybillId'
+                                },
+                                {
+                                    title: 'Путевые листы',
+                                    columnLines: true,
+                                    stripeRows: true,
+                                    viewConfig: {
+                                        forceFit: true
                                     },
-                                    {
-                                        header: 'Дата выезда',
-                                        dataIndex: 'DepartureDate',
-                                        xtype: 'datecolumn',
-                                        format: 'd.m.Y H:i',
-                                        width: 130,
-                                        fixed: true
-                                    },
-                                    {
-                                        header: 'Гар. №',
-                                        dataIndex: 'GarageNumber'
-                                    },
-                                    {
-                                        header: 'Марка',
-                                        dataIndex: 'Model'
-                                    },
-                                     {
-                                         header: 'Гос. №',
-                                         dataIndex: 'RegistrationNumber'
-                                     }
-                                   
-                                ]
-                            }
-                        ]
-                    }
-                   ]
-               }
+                                    xtype: 'grid',
+                                    store: WaybillsStore,
+                                    columns: [
+                                        {
+                                            xtype: 'actioncolumn',
+                                            icon: 'images/icons/page_white_edit.png',
+                                            tooltip: 'Открыть',
+                                            fixed: true,
+                                            width: 40,
+                                            handler: function(grid, rowIndex, colIndex) {
+                                                var rec = grid.store.getAt(rowIndex);
 
-           ]
+                                                Kdn.Application.createView({
+                                                    xtype: 'view.waybilleditor',
+                                                    mode: 'update',
+                                                    withContainer: false,
+                                                    waybillId: rec.get('WaybillId')
+                                                });
+                                            }
+                                        },
+                                        {
+                                            header: '№ П.Л.',
+                                            dataIndex: 'WaybillId'
+                                        },
+                                        {
+                                            header: 'Дата выезда',
+                                            dataIndex: 'DepartureDate',
+                                            xtype: 'datecolumn',
+                                            format: 'd.m.Y H:i',
+                                            width: 130,
+                                            fixed: true
+                                        },
+                                        {
+                                            header: 'Гар. №',
+                                            xtype: 'mappingcolumn',
+                                            dataIndex: 'Vehicle.GarageNumber'
+                                        },
+                                        {
+                                            header: 'Марка',
+                                            xtype: 'mappingcolumn',
+                                            dataIndex: 'Vehicle.Model'
+                                        },
+                                        {
+                                            header: 'Гос. №',
+                                            xtype: 'mappingcolumn',
+                                            dataIndex: 'Vehicle.RegistrationNumber'
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
         });
 
         T.view.RequestMagazine.superclass.constructor.call(this, cfg);
@@ -345,12 +356,22 @@ T.view.RequestMagazine = Ext.extend(Ext.Panel, {
         {
             this.Detail.getEl().unmask();
             this.loadRequest(rec.id);
+            this.loadWaybillList(rec.id);
         }
         else
         {
             this.replaceEditor(this.Editors.Empty);
             this.Detail.getEl().mask();
         }
+
+    },
+
+    loadWaybillList:function(id) {
+        this.WaybillsStore.reload({
+            params: {
+                id: id
+            }
+        });
 
     },
 

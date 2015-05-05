@@ -1,5 +1,5 @@
-﻿T.view.vehicleDistribution.VehicleDistributionTask = Ext.extend(Ext.Panel, {
-    requireModels:["Schedule"],
+T.view.vehicleDistribution.VehicleDistributionTask = Ext.extend(Ext.Panel, {
+    requireModels:["Schedule,WaybillType"],
     constructor: function(cfg) {
         cfg = cfg || {};
 

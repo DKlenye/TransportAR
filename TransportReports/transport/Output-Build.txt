@@ -1,0 +1,3 @@
+------ Skipped Build: Project: TransportReports, Configuration: Debug ------
+Project not selected to build for this solution configuration 
+========== Build: 0 succeeded or up-to-date, 0 failed, 1 skipped ==========

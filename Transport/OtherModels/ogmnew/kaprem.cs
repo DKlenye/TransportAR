@@ -1,9 +1,10 @@
 ﻿using System;
 using Castle.ActiveRecord;
+using PetaPoco;
 
 namespace Transport.OtherModels.ogmnew
 {
-    [ActiveRecord(Where = "rees='c'")]
+    [ActiveRecord(Table = "Kaprem.dbf", Where = "rees='c'")]
     public class kaprem:ogmnewAR<kaprem>
     {
         
@@ -94,7 +95,7 @@ namespace Transport.OtherModels.ogmnew
         public int idspec { get; set; }
 
 
-        [PrimaryKey(Generator = PrimaryKeyType.Assigned)]
+        [Castle.ActiveRecord.PrimaryKey(Generator = PrimaryKeyType.Assigned)]
         public int idrees { get; set; }
     }
 }

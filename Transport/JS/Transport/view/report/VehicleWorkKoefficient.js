@@ -1,19 +1,23 @@
-﻿T.view.report.VehicleWorkKoefficient = Ext.extend(Kdn.view.Report, {
+T.view.report.VehicleWorkKoefficient = Ext.extend(Kdn.view.Report, {
 
 reportName: 'VehicleWorkKoefficient',
 
     params: [
             '-',
-            'Период:',
-            {
-                xtype: 'datefield',
-                plugins: 'monthPickerPlugin',
-                format: 'F Y',
-                width: 250,
-                dataIndex: 'period',
-                value: new Date(),
-                width: 120
-            },
+            'C:',
+        {
+            xtype: 'datefield',
+            dataIndex: 'start',
+            value: new Date(),
+            width: 130
+        },
+        'По',
+        {
+            xtype: 'datefield',
+            dataIndex: 'end',
+            value: new Date(),
+            width: 130
+        },
             'Группа',
             {
                 xtype:'combo.accgroup',
@@ -26,8 +30,7 @@ reportName: 'VehicleWorkKoefficient',
 
    buildReportParams: function(params) {
         var p = {};
-        p.month = params.period.getMonth() + 1;
-        p.year = params.period.getFullYear();
+       Ext.copyTo(p, params, "start,end");
         p.groupId = params.groupId || 0;
         return p;
     }

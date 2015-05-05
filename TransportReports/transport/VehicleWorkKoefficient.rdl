@@ -17,9 +17,17 @@
           <DataField>VehicleCount</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
+        <Field Name="dayCount">
+          <DataField>dayCount</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
         <Field Name="DepartmentName">
           <DataField>DepartmentName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="dayCountAll">
+          <DataField>dayCountAll</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="SumDayCount">
           <DataField>SumDayCount</DataField>
@@ -29,17 +37,21 @@
           <DataField>koeff</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
+        <Field Name="Fond">
+          <DataField>Fond</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>DataSource1</DataSourceName>
         <CommandType>StoredProcedure</CommandType>
         <CommandText>ssrs_VehicleWorkKoefficient</CommandText>
         <QueryParameters>
-          <QueryParameter Name="@month">
-            <Value>=Parameters!month.Value</Value>
+          <QueryParameter Name="@start">
+            <Value>=Parameters!start.Value</Value>
           </QueryParameter>
-          <QueryParameter Name="@year">
-            <Value>=Parameters!year.Value</Value>
+          <QueryParameter Name="@end">
+            <Value>=Parameters!end.Value</Value>
           </QueryParameter>
           <QueryParameter Name="@groupId">
             <Value>=Parameters!groupId.Value</Value>
@@ -557,14 +569,6 @@
     <Style />
   </Body>
   <ReportParameters>
-    <ReportParameter Name="month">
-      <DataType>Integer</DataType>
-      <Prompt>month</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="year">
-      <DataType>Integer</DataType>
-      <Prompt>year</Prompt>
-    </ReportParameter>
     <ReportParameter Name="groupId">
       <DataType>Integer</DataType>
       <Prompt>group Id</Prompt>
@@ -575,6 +579,14 @@
           <LabelField>AccGroupName</LabelField>
         </DataSetReference>
       </ValidValues>
+    </ReportParameter>
+    <ReportParameter Name="start">
+      <DataType>DateTime</DataType>
+      <Prompt>start</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="end">
+      <DataType>DateTime</DataType>
+      <Prompt>end</Prompt>
     </ReportParameter>
   </ReportParameters>
   <Width>6.9375in</Width>

@@ -215,7 +215,7 @@
                         <td>подпись заправщика</td>
                     </tr>
                     <tr>
-                        <td><span>&nbsp;</span></td><td><span><%Response.Write(CustomerName()); %></span></td><td>&nbsp;</td><td><span><%Response.Write(DepartureDate("HH:mm")); %></span></td><td><span><%Response.Write(DepartureMh()); %></span></td>
+                        <td><span>&nbsp;</span></td><td><span style="font-size: 10pt;"><%Response.Write(CustomerNames()); %></span></td><td>&nbsp;</td><td><span><%Response.Write(DepartureDate("HH:mm")); %></span></td><td><span><%Response.Write(DepartureMh()); %></span></td>
                             <td><table cellpadding="0" cellspacing="0"><tr><td style="border-width: 0pt 0pt 1pt 0pt">&nbsp;</td></tr><tr><td style="border-width:0pt;">&nbsp;</td></tr></table></td>
                         <td><span><%Response.Write(ReturnDate("HH:mm")); %></span></td><td>&nbsp;</td>
                             <td><table cellpadding="0" cellspacing="0"><tr><td style="border-width: 0pt 0pt 1pt 0pt">&nbsp;</td></tr><tr><td style="border-width:0pt;">&nbsp;</td></tr></table></td>

@@ -1,4 +1,4 @@
-﻿T.view.waybill.WaybillInsertForm = Ext.extend(Ext.Panel,{
+T.view.waybill.WaybillInsertForm = Ext.extend(Ext.Panel,{
    layout:'form',
   // margins:'3',
    autoScroll:true,
@@ -28,7 +28,7 @@
                   text:'Выдать',
                   anchor:null,
                   iconCls:'icon-print32',
-                  width:110,
+                  width: 110,
                   handler:this.onIssueButtonClick,
                   scope:this
       });

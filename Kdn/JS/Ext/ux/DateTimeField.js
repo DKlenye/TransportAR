@@ -152,7 +152,7 @@ Ext.ux.form.DateTime = Ext.extend(Ext.form.Field, {
                                 }
                         }
                 }, this.timeConfig);
-                this.tf = new Ext.form.TimeField(timeConfig);
+                            this.tf = new Kdn.editor.FullTimeField(timeConfig);
                 this.tf.ownerCt = this;
                 delete (this.timeFormat);
 

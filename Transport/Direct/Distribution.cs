@@ -30,6 +30,28 @@ namespace Transport.Direct
         }
     }
 
+
+    public class WaybillInsertDto
+    {
+        public int ListDetailId { get; set; }
+        public BaseVehicle Vehicle { get; set; }
+        public DateTime DepartureDate { get; set; }
+        public DateTime ReturnDate { get; set; }
+        public int ScheduleId { get; set; }
+        public short Shift { get; set; }
+        public int? TrailerId { get; set; }
+        public int WaybillTypeId { get; set; }
+
+        public int? DstRoutePoint { get; set; }
+        public int? SrcRoutePoint { get; set; }
+
+        public Driver[] Drivers { get; set; }
+        public Customer[] Customers { get; set; }
+    }
+
+
+
+
     [Model]
     public class DistributionListDto
     {
@@ -48,7 +70,8 @@ namespace Transport.Direct
         public DateTime ReturnDate { get; set; }
         public int ScheduleId { get; set; }
         public short Shift { get; set; }
-        public int? WaybillId { get; set; }
+         [AllowBlank]
+        public int[] Waybills { get; set; }
         public int? TrailerId { get; set; }
 
         [AllowBlank]
@@ -66,6 +89,8 @@ namespace Transport.Direct
         public bool? IsInMaintenance { get; set; }
 
         public DateTime? LastChange { get; set; }
+        [AllowBlank]
+        public int[] ApproveWaybills { get; set; }
     }
 
     public class DistributionCustomerDto
@@ -77,6 +102,7 @@ namespace Transport.Direct
         public string DepartureTime { get; set; }
         public string ReturnTime { get; set; }
         public string Description { get; set; }
+        public string WorkObject { get; set; }
     }
 
 
@@ -128,7 +154,8 @@ namespace Transport.Direct
                         Shift = x.Shift,
                         ScheduleId = x.ScheduleId,
                         DestRoutePoint = x.DestRoutePoint,
-                        WaybillId = x.WaybillId,
+                        Waybills = x.Waybills.ToArray(),
+                        ApproveWaybills = x.ApproveWaybills.ToArray(),
                         LastChange = x.LastChange,
                         TrailerId = x.TrailerId
                     };
@@ -151,6 +178,7 @@ namespace Transport.Direct
                             Customer = customer.Customer,
                             DepartureTime = customer.DepartureTime,
                             Description = customer.Description,
+                            WorkObject = customer.WorkObject,
                             ListDetailId = customer.ListDetailId,
                             RequestId = customer.RequestId,
                             ReturnTime = customer.ReturnTime
@@ -225,6 +253,7 @@ namespace Transport.Direct
                         Customer = customer.Customer,
                         DepartureTime = customer.DepartureTime,
                         Description = customer.Description,
+                        WorkObject = customer.WorkObject,
                         ListDetailId = customer.ListDetailId,
                         RequestId = customer.RequestId,
                         ReturnTime = customer.ReturnTime
@@ -262,7 +291,8 @@ namespace Transport.Direct
             dto.ReturnDate = detail.ReturnDate;
             dto.DepartureDate = list.ListDate.Add(TimeSpan.Parse(detail.DepartureTime));
             dto.DestRoutePoint = detail.DestRoutePoint;
-            dto.WaybillId = detail.WaybillId;
+            dto.Waybills = detail.Waybills.ToArray();
+            dto.ApproveWaybills = detail.ApproveWaybills.ToArray();
             dto.LastChange = detail.LastChange;
             dto.TrailerId = detail.TrailerId;
 
@@ -281,6 +311,7 @@ namespace Transport.Direct
                     Id = customer.Id,
                     Customer = customer.Customer,
                     DepartureTime = customer.DepartureTime,
+                    WorkObject = customer.WorkObject,
                     Description = customer.Description,
                     ListDetailId = customer.ListDetailId,
                     RequestId = customer.RequestId,
@@ -349,6 +380,7 @@ namespace Transport.Direct
                 Customer = customer.Customer,
                 DepartureTime = customer.DepartureTime,
                 Description = customer.Description,
+                WorkObject = customer.WorkObject,
                 ListDetailId = customer.ListDetailId,
                 RequestId = customer.RequestId,
                 ReturnTime = customer.ReturnTime
@@ -391,6 +423,7 @@ namespace Transport.Direct
                         customer.RequestId = x.RequestId;
                         customer.ReturnTime = x.ReturnTime;
                         customer.DepartureTime = x.DepartureTime;
+                        customer.WorkObject = x.WorkObject;
                         customer.Customer = x.Customer;
                         customer.Description = x.Description;
 
@@ -403,6 +436,7 @@ namespace Transport.Direct
                             {
                                 Customer = x.Customer,
                                 DepartureTime = x.DepartureTime,
+                                WorkObject = x.WorkObject,
                                 Description = x.Description,
                                 ListDetailId = detail.ListDetailId,
                                 RequestId = x.RequestId,
@@ -439,6 +473,8 @@ namespace Transport.Direct
                 driversMap.ForEach(x => detail.Drivers.Remove(x.Value));
 
                 detail.LastChange = DateTime.Now;
+
+                detail.ApproveWaybills.Clear();
 
                 detail.SaveAndFlush();
                 detail.Refresh();
@@ -587,17 +623,12 @@ namespace Transport.Direct
 
 
         [DirectMethod]
-        public Waybill InsertWaybillByDetail(int listDetailId)
+        public Waybill InsertWaybillByDetail(WaybillInsertDto dto)
         {
 
-            var detail = DistributionListDetails.Find(listDetailId);
-            var list = DistributionList.Find(detail.ListId);
-            var car = (FullCar)FullCar.Find(detail.Car.VehicleId);
-
-            var vacationMap =
-                db.Query<DriversVacation>(";EXEC DriversVacation_Select @0 ,@1", list.ListDate, 0).Map(x => x.DriverId);
-            var outOfWorkMap = DriverOutOfWork.FindByDate(list.ListDate).Map(x => x.Driver.DriverId);
-
+           
+            var car = (FullCar)FullCar.Find(dto.Vehicle.VehicleId);
+            var detail = DistributionListDetails.Find(dto.ListDetailId);
 
             var waybill = new Waybill()
             {
@@ -605,19 +636,23 @@ namespace Transport.Direct
                 Position = Waybill.GetMaxPosition(car.VehicleId),
                 WaybillState = 1,
                 WaybillTypeId = car.WaybillTypeId.Value,
-                Car = detail.Car,
-                TrailerId = detail.TrailerId,
-                DepartureDate = list.ListDate.Add(TimeSpan.Parse(detail.DepartureTime)),
-                ReturnDate = detail.ReturnDate,
-                ScheduleId = detail.ScheduleId,
-                Shift = detail.Shift,
+                Car = dto.Vehicle,
+                TrailerId = dto.TrailerId,
+                DepartureDate = dto.DepartureDate,
+                ReturnDate = dto.ReturnDate,
+                ScheduleId = dto.ScheduleId,
+                Shift = dto.Shift,
                 
             };
 
             waybill.Save();
             waybill.SetPosition();
-            detail.WaybillId = waybill.WaybillId;
+            
+            detail.Waybills.Add(waybill.WaybillId);
+            detail.ApproveWaybills.Add(waybill.WaybillId);
             detail.SaveAndFlush();
+
+
 
             var prevWaybill = waybill.Prev();
             if (prevWaybill != null)
@@ -629,19 +664,15 @@ namespace Transport.Direct
                 waybill.SetRemains();
             }
 
-            detail.Drivers.ForEach(x =>
+            dto.Drivers.ForEach(d =>
             {
-                if (!vacationMap.ContainsKey(x.Driver.DriverId) && !outOfWorkMap.ContainsKey(x.Driver.DriverId))
-                {
                     var waybillDriver = new WaybillDriver()
                     {
                         WaybillId = waybill.WaybillId,
-                        Driver = x.Driver
+                        Driver = d
                     };
                     waybillDriver.Save();
-
                     waybill.ResponsibleDriver = waybillDriver.Driver;
-                }
             });
 
             var norm = Norm.FindActualNorms(waybill.Car.VehicleId, waybill.DepartureDate).FirstOrDefault(x => x.isMain);
@@ -662,13 +693,13 @@ namespace Transport.Direct
                 }
 
 
-                detail.Customers.ForEach(customer =>
+                dto.Customers.ForEach(customer =>
                 {
                     var task = new WaybillTask()
                     {
                         WaybillId = waybill.WaybillId,
                         TaskDepartureDate = waybill.DepartureDate,
-                        Customer = customer.Customer,
+                        Customer = customer,
                         NormConsumptionId = norm.NormId,
                         FuelId = fuelId,
                         TrailerId = waybill.TrailerId,
@@ -686,6 +717,20 @@ namespace Transport.Direct
         }
 
         
+        [DirectMethod]
+        public void ApproveWaybill(int waybillId, int listDetailId)
+        {
+            var detail = DistributionListDetails.Find(listDetailId);
+            if (detail.ApproveWaybills.Contains(waybillId))
+            {
+                detail.ApproveWaybills.Remove(waybillId);
+            }
+            else
+            {
+                detail.ApproveWaybills.Add(waybillId);
+            }
+            detail.SaveAndFlush();
+        }
 
 
     }

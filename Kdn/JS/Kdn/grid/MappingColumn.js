@@ -1,5 +1,6 @@
-﻿Kdn.grid.MappingColumn = Ext.extend(Ext.grid.Column, {
+Kdn.grid.MappingColumn = Ext.extend(Ext.grid.Column, {
 
+   tpl :'{0}',
 
    renderer:function(v,p,rec){
                 
@@ -17,7 +18,7 @@
          }
       });     
       
-      return obj;       
+      return String.format(this.tpl,obj||'');       
    }
 
 });

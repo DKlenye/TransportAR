@@ -93,6 +93,10 @@
       <FullPath>CarBalanceCost.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>CargoInfo.rdl</Name>
+      <FullPath>CargoInfo.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>CarInfo.rdl</Name>
       <FullPath>CarInfo.rdl</FullPath>
     </ProjectItem>
@@ -317,6 +321,14 @@
       <FullPath>ServiceAct.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>ServiceCounteragentCheck.rdl</Name>
+      <FullPath>ServiceCounteragentCheck.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>ServiceEmployeeCheck.rdl</Name>
+      <FullPath>ServiceEmployeeCheck.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>ServiceScore.rdl</Name>
       <FullPath>ServiceScore.rdl</FullPath>
     </ProjectItem>
@@ -327,6 +339,10 @@
     <ProjectItem>
       <Name>SmallMechRefuelling.rdl</Name>
       <FullPath>SmallMechRefuelling.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>TechnicalCoefficient.rdl</Name>
+      <FullPath>TechnicalCoefficient.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>TireCard.rdl</Name>
@@ -359,6 +375,10 @@
     <ProjectItem>
       <Name>TransportQuarterConsumption.rdl</Name>
       <FullPath>TransportQuarterConsumption.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>TruckEffiency.rdl</Name>
+      <FullPath>TruckEffiency.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>ttn1.rdl</Name>
@@ -429,6 +449,10 @@
       <FullPath>VehicleList.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>VehicleListByColumn.rdl</Name>
+      <FullPath>VehicleListByColumn.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>VehicleNorms.rdl</Name>
       <FullPath>VehicleNorms.rdl</FullPath>
     </ProjectItem>
@@ -465,6 +489,14 @@
       <FullPath>VehicleServiceGroup.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>VehiclesWork.rdl</Name>
+      <FullPath>VehiclesWork.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>VehicleTiresTwoSets.rdl</Name>
+      <FullPath>VehicleTiresTwoSets.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>VehicleWork.rdl</Name>
       <FullPath>VehicleWork.rdl</FullPath>
     </ProjectItem>
@@ -479,6 +511,10 @@
     <ProjectItem>
       <Name>VehicleWorkFromStart.rdl</Name>
       <FullPath>VehicleWorkFromStart.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>VehicleWorkingTimeFromStart.rdl</Name>
+      <FullPath>VehicleWorkingTimeFromStart.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>VehicleWorkKoefficient.rdl</Name>
@@ -509,8 +545,12 @@
       <FullPath>WayBillPackage.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>VehicleTiresTwoSets.rdl</Name>
-      <FullPath>VehicleTiresTwoSets.rdl</FullPath>
+      <Name>WorkCoefficient.rdl</Name>
+      <FullPath>WorkCoefficient.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>WaybillCustomerWorkingTimeInfo.rdl</Name>
+      <FullPath>WaybillCustomerWorkingTimeInfo.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>

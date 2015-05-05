@@ -1,4 +1,4 @@
-﻿T.view.waybill.WaybillDriver = Ext.extend(Kdn.editor.LocalGrid, {
+T.view.waybill.WaybillDriver = Ext.extend(Kdn.editor.LocalGrid, {
     constructor: function(cfg) {
         cfg = cfg || {};
         
@@ -14,7 +14,7 @@
                stripeRows:true,
                columnLines:true,
                columns:[
-                  {header:'Водители',dataIndex:'Driver',renderer:T.combo.Driver.prototype.renderTpl},
+                  {header:'Водители',dataIndex:'Driver',renderer:T.combo.Driver.prototype.renderTpl}
                ],
                store:cfg.vehicleDriversStore 
             }

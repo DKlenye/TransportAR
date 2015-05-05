@@ -41,6 +41,10 @@
           <DataField>RequestId</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
+        <Field Name="WorkObject">
+          <DataField>WorkObject</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="DepartureTime">
           <DataField>DepartureTime</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -328,7 +332,6 @@
                       </Style>
                     </Textbox>
                     <ColSpan>2</ColSpan>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell />
@@ -487,6 +490,16 @@
                             <TextRun>
                               <Value>=Fields!CustomerName.Value</Value>
                               <Style />
+                            </TextRun>
+                            <TextRun>
+                              <Value xml:space="preserve"> </Value>
+                              <Style />
+                            </TextRun>
+                            <TextRun>
+                              <Value>=Fields!WorkObject.Value</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                             <TextRun>
                               <Value xml:space="preserve"> </Value>

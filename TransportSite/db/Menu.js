@@ -373,11 +373,6 @@ Kdn.Menu = [
                         iconCls: 'icon-blue-document-word',
                         Handler: 'createView',
                         HandlerCfg: "{xtype:'view.report.tireumtugn',single:true}"
-                    }, {
-                        text: 'Список транспорта с двумя комплектами шин(зима, лето)',
-                        iconCls: 'icon-blue-document-word',
-                        Handler: 'createView',
-                        HandlerCfg: "{xtype:'view.report.vehicletirestwosets',single:true}"
                     }
                 ]
             }, '-', {
@@ -490,17 +485,7 @@ Kdn.Menu = [
                 iconCls: 'icon-blue-document-word',
                 Handler: 'createView',
                 HandlerCfg: "{xtype:'view.report.vehiclefuelremainsbygaragenumber',single:true}"
-            }, {
-                text: 'Оборотная ведомость',
-                iconCls: 'icon-blue-document-word',
-                Handler: 'createView',
-                HandlerCfg: "{xtype:'view.report.accfuelobreport',single:true}"
-            }, {
-                text: 'Оборотная ведомость(детализация)',
-                iconCls: 'icon-blue-document-word',
-                Handler: 'createView',
-                HandlerCfg: "{xtype:'view.report.accvehicleobreport',single:true}"
-            }, {
+            },  {
                 text: 'Информация по заправке',
                 iconCls: 'icon-report-white',
                 Child: [
@@ -599,38 +584,66 @@ Kdn.Menu = [
                         HandlerCfg: "{xtype:'view.report.expenseunknown',single:true}"
                     }
                 ]
-            }, {
-                text: 'Накопительная ведомость',
-                iconCls: 'icon-blue-document-word',
-                Handler: 'createView',
-                HandlerCfg: "{xtype:'view.report.expenselist',single:true}"
-            }, {
-                text: 'Накопительная ведомость(цеховые)',
-                iconCls: 'icon-blue-document-word',
-                Handler: 'createView',
-                HandlerCfg: "{xtype:'view.report.expenselistdepartment',single:true}"
-            }, {
-                text: 'Накопительная ведомость(Группы по услугам)',
-                iconCls: 'icon-blue-document-word',
-                Handler: 'createView',
-                HandlerCfg: "{xtype:'view.report.expenselistbygroup',single:true}"
-            }, {
-                text: 'Информация 12-тр',
-                iconCls: 'icon-blue-document-word',
-                Handler: 'createView',
-                HandlerCfg: "{xtype:'view.report.12trinfo',single:true}"
-            }, {
-                text: 'Информация 12-тр (Дни в работе)',
-                iconCls: 'icon-blue-document-word',
-                Handler: 'createView',
-                HandlerCfg: "{xtype:'view.report.12trdaycount',single:true}"
-            }, {
-                text: 'Информация 4-тр',
-                iconCls: 'icon-blue-document-word',
-                Handler: 'createView',
-                HandlerCfg: "{xtype:'view.report.4trinfo',single:true}"
+            },
+            {
+                text: 'Ведомости по бухгалтерии',
+                iconCls: 'icon-report-white',
+                Child: [
+                   {
+                       text: 'Оборотная ведомость',
+                       iconCls: 'icon-blue-document-word',
+                       Handler: 'createView',
+                       HandlerCfg: "{xtype:'view.report.accfuelobreport',single:true}"
+                   }, {
+                       text: 'Оборотная ведомость(детализация)',
+                       iconCls: 'icon-blue-document-word',
+                       Handler: 'createView',
+                       HandlerCfg: "{xtype:'view.report.accvehicleobreport',single:true}"
+                   },
+                   {
+                       text: 'Накопительная ведомость',
+                       iconCls: 'icon-blue-document-word',
+                       Handler: 'createView',
+                       HandlerCfg: "{xtype:'view.report.expenselist',single:true}"
+                   }, {
+                       text: 'Накопительная ведомость(цеховые)',
+                       iconCls: 'icon-blue-document-word',
+                       Handler: 'createView',
+                       HandlerCfg: "{xtype:'view.report.expenselistdepartment',single:true}"
+                   }, {
+                       text: 'Накопительная ведомость(Группы по услугам)',
+                       iconCls: 'icon-blue-document-word',
+                       Handler: 'createView',
+                       HandlerCfg: "{xtype:'view.report.expenselistbygroup',single:true}"
+                   }
+                ]
+            },
+            
+             {
+                text: 'Статистика',
+                iconCls: 'icon-report-white',
+                Child: [
+                   {
+                       text: 'Информация 12-тр',
+                       iconCls: 'icon-blue-document-word',
+                       Handler: 'createView',
+                       HandlerCfg: "{xtype:'view.report.12trinfo',single:true}"
+                   }, {
+                       text: 'Информация 12-тр (Дни в работе)',
+                       iconCls: 'icon-blue-document-word',
+                       Handler: 'createView',
+                       HandlerCfg: "{xtype:'view.report.12trdaycount',single:true}"
+                   }, {
+                       text: 'Информация 4-тр',
+                       iconCls: 'icon-blue-document-word',
+                       Handler: 'createView',
+                       HandlerCfg: "{xtype:'view.report.4trinfo',single:true}"
 
-            }, {
+                   }
+                ]
+            },
+            
+            {
                 text: 'Списки транспорта',
                 iconCls: 'icon-report-white',
                 Child: [
@@ -640,6 +653,14 @@ Kdn.Menu = [
                         Handler: 'createView',
                         HandlerCfg: "{xtype:'view.report.vehiclelist',single:true}"
                     },
+                     {
+                        text: 'Список транспорта по колоннам',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.vehiclelistbycolumn',single:true}"
+                    },
+
+
                 {
                     
                     text: 'Список транспорта(по группам)',
@@ -742,7 +763,7 @@ Kdn.Menu = [
                 Handler: 'createView',
                 HandlerCfg: "{xtype:'view.report.oilnorms',single:true}"
             }, {
-                text: 'Отчёты по трансопрту',
+                text: 'Отчёты по транспорту',
                 iconCls: 'icon-report-white',
                 Child: [
                     {
@@ -778,7 +799,14 @@ Kdn.Menu = [
                         iconCls: 'icon-blue-document-word',
                         Handler: 'createView',
                         HandlerCfg: "{xtype:'view.report.vehicledaywork',single:true}"
-                    }, {
+                    },
+                {
+                    text: 'Работа транспорта за период по гаражным номерам',
+                    iconCls: 'icon-blue-document-word',
+                    Handler: 'createView',
+                    HandlerCfg: "{xtype:'view.report.vehicleswork',single:true}"
+                },
+                    {
                         text: 'Работа транспорта (с начала эксплуатации)',
                         iconCls: 'icon-blue-document-word',
                         Handler: 'createView',
@@ -821,10 +849,10 @@ Kdn.Menu = [
                         HandlerCfg: "{xtype:'view.report.vehicleworkingtimefromstart',single:true}"
                     },
                     {
-                        text: 'Коэффициент использования грузового транспорта',
+                        text: 'Информация по перевозке груза',
                         iconCls: 'icon-blue-document-word',
                         Handler: 'createView',
-                        HandlerCfg: "{xtype:'view.report.truckeffiency',single:true}"
+                        HandlerCfg: "{xtype:'view.report.cargoinfo',single:true}"
                     }
                     
                 ]
@@ -880,14 +908,6 @@ Kdn.Menu = [
                         HandlerCfg: "{xtype:'view.report.inventorydiff',single:true}"
                     }
                 ]
-            },/* {
-                text: 'Коэффициент выхода транспорта на линию',
-                Handler: 'createView',
-                HandlerCfg: "{xtype:'view.report.vehicleworkkoefficient',single:true}"
-            }*/ {
-                text: 'Путевые листы с перекрывающимися датами',
-                Handler: 'createView',
-                HandlerCfg: "{xtype:'view.report.waybilldateerrors',single:true}"
             }, {
                 text: 'Количество путевых листов по колоннам',
                 Handler: 'createView',
@@ -907,6 +927,51 @@ Kdn.Menu = [
                 text: 'Заправка по малой механизации',
                 Handler: 'createView',
                 HandlerCfg: "{xtype:'view.report.smallmechrefuelling',single:true}"
+            },
+
+            {
+                text: 'Показатели работы транспорта',
+                iconCls: 'icon-report-white',
+                Child: [
+                   {
+                       text: 'Коэффициент выхода транспорта на линию',
+                       iconCls: 'icon-blue-document-word',
+                       Handler: 'createView',
+                       HandlerCfg: "{xtype:'view.report.vehicleworkkoefficient',single:true}"
+                   },
+                    {
+                        text: 'Коэффициент использования грузового транспорта',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.truckeffiency',single:true}"
+                    }, {
+                        text: 'Коэффициент технической готовности',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.technicalcoefficient',single:true}"
+                    },
+                    {
+                        text: 'Коэффициент использования рабочего времени',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.workcoefficient',single:true}"
+                    }
+                ]
+                },
+                 {
+                text: 'Проверка актов выполненных работ с путевыми листами',
+                Handler: 'createView',
+                HandlerCfg: "{xtype:'view.report.servicecounteragentcheck',single:true}"
+            }, {
+             text: 'Проверка заказов по услугам с путевыми листами',
+                Handler: 'createView',
+                HandlerCfg: "{xtype:'view.report.serviceemployeecheck',single:true}"
+            },
+            {
+                text: 'Время в наряде по путевым листам (для проверки)',
+                Handler: 'createView',
+                HandlerCfg: "{xtype:'view.report.waybillcustomerworkingtimeInfo',single:true}"
+                
             }
 
         ]

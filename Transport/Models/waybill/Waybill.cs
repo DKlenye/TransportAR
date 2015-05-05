@@ -249,7 +249,8 @@ namespace Transport.Models {
             "WaybillDriver",
             "WaybillTask",
             "VehicleRefuelling",
-            "WaybillAdvanceReport"
+            "WaybillAdvanceReport",
+            "WaybillCustomerWorkingTime"
          };
          JObject obj = Info(details);
 
@@ -521,6 +522,120 @@ namespace Transport.Models {
            s.CreateQuery(query).ExecuteUpdate();
        }
 
+
+       public int GetWorkingTimeMinutes()
+       {
+           int rezultMinutes = 0;
+           
+           var minutes = (int)(ReturnDate - DepartureDate).TotalMinutes;
+           var daycount = (int)(ReturnDate - DepartureDate).TotalDays;
+
+           var returnTime = TimeSpan.Parse("16:45");
+           var departureTime = TimeSpan.Parse("08:00");
+
+           var lunch8 = 45;
+           var lunch12 = 60;
+
+
+           if (ScheduleId != null)
+           {
+               if (ScheduleId == 6)
+               {
+                   if (minutes < 60 * 20)
+                   {
+                       rezultMinutes += minutes;
+                   }
+                   else
+                   {
+                       var i = 0;
+                       while (i <= daycount)
+                       {
+                           var min = 8 * 60;
+
+                           if (i == 0)
+                           {
+                               if (DepartureDate.TimeOfDay > returnTime)
+                               {
+                                   min = (int)(DepartureDate.AddDays(1).Date - DepartureDate).TotalMinutes;
+                               }
+                               else
+                               {
+                                   min = (int)(DepartureDate.Date.Add(returnTime) - DepartureDate).TotalMinutes - lunch8;
+                               }
+                           }
+                           else if (i == daycount)
+                           {
+                               if (ReturnDate.TimeOfDay < departureTime)
+                               {
+                                   min = (int)(ReturnDate - ReturnDate.Date).TotalMinutes;
+                               }
+                               else
+                               {
+                                   min = (int)(ReturnDate - ReturnDate.Date.Add(departureTime)).TotalMinutes - lunch8;
+                               }
+                           }
+
+                           rezultMinutes += min;
+                           i++;
+                       }
+                   }
+               }
+
+               else if (ScheduleId == 3 || ScheduleId == 4)
+               {
+                   if (minutes < 60 * 20)
+                   {
+                       rezultMinutes+=minutes - (minutes >= 12 * 60 ? lunch12 : 0);
+                   }
+                   else
+                   {
+                       var Dates = new List<DateTime>();
+
+                       CollectionExtensions.ForEach(WaybillTask.FindAll(Expression.Where<WaybillTask>(x => x.WaybillId == WaybillId)), x =>
+                       {
+                           if (!Dates.Contains(x.TaskDepartureDate))
+                           {
+                               rezultMinutes+=12 * 60;
+                               Dates.Add(x.TaskDepartureDate);
+                           }
+                       });
+                   }
+               }
+
+               else if (ScheduleId == 1 || ScheduleId == 7)
+               {
+                   if (minutes < 60 * 20)
+                   {
+                       rezultMinutes+=minutes - (minutes >= 525 ? lunch8 : 0);
+                   }
+                   else
+                   {
+                       var Dates = new List<DateTime>();
+
+                       CollectionExtensions.ForEach(WaybillTask.FindAll(Expression.Where<WaybillTask>(x => x.WaybillId == WaybillId)), x =>
+                       {
+                           var _date = x.TaskDepartureDate.Date;
+
+                           if (!Dates.Contains(_date))
+                           {
+                               rezultMinutes+=8 * 60;
+                               Dates.Add(_date);
+                           }
+                       });
+                   }
+               }
+
+               else if (ScheduleId == 5)
+               {
+                   rezultMinutes+= 12 * 60;
+               }
+           }
+
+           return rezultMinutes;
+
+       }
+
+
        public void CalcWorkingTime()
        {
            var minutes = (int) (ReturnDate - DepartureDate).TotalMinutes;
@@ -584,7 +699,7 @@ namespace Transport.Models {
                {
                    if (minutes < 60*20)
                    {
-                       new WaybillWorkingTime(WaybillId, DepartureDate, minutes-lunch12).SaveAndFlush();
+                       new WaybillWorkingTime(WaybillId, DepartureDate, minutes-(minutes>=12*60?lunch12:0)).SaveAndFlush();
                    }
                    else
                    {
@@ -605,7 +720,7 @@ namespace Transport.Models {
                {
                    if (minutes < 60 * 20)
                    {
-                       new WaybillWorkingTime(WaybillId, DepartureDate, minutes-lunch8).SaveAndFlush();
+                       new WaybillWorkingTime(WaybillId, DepartureDate, minutes - (minutes>=525?lunch8:0)).SaveAndFlush();
                    }
                    else
                    {
@@ -630,6 +745,9 @@ namespace Transport.Models {
                }
            }
        }
+
+
+
 
 
        public void CalcWaybillWork()

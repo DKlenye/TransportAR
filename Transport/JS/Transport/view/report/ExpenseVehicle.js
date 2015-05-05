@@ -1,4 +1,4 @@
-﻿
+
 
 T.view.report.ExpenseVehicle = Ext.extend(Kdn.view.Report, {
 
@@ -12,24 +12,34 @@ T.view.report.ExpenseVehicle = Ext.extend(Kdn.view.Report, {
                 dataIndex: 'garagenumber'
             },
             '-',
-            'Период:',
+            'Период c:',
             {
                 xtype: 'datefield',
                 plugins: 'monthPickerPlugin',
                 format: 'F Y',
                 width: 250,
-                dataIndex: 'period',
+                dataIndex: 'start',
                 value: new Date(),
                 width: 120
             },
-            '-'
+            '-',
+            'Период по:',
+            {
+                xtype: 'datefield',
+                plugins: 'monthPickerPlugin',
+                format: 'F Y',
+                width: 250,
+                dataIndex: 'end',
+                value: new Date(),
+                width: 120
+            },
    ],
 
     buildReportParams: function(params) {
         var p = {};
-        p.month = params.period.getMonth() + 1;
-        p.year = params.period.getFullYear();
-        p.garagenumber = params.garagenumber;
+        p.start = params.start.getFullYear() * 100 + params.start.getMonth() + 1;
+        p.end = params.end.getFullYear() * 100 + params.end.getMonth() + 1;
+        p.garagenumber = params.garagenumber;        
         p.ownerId = 1;
         return p;
     }

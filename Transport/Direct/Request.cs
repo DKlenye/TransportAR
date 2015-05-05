@@ -1,17 +1,82 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Castle.Core;
+using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
 using Ext.Direct;
+using Kdn.Ext.Attributes;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Kdn.Direct;
+using NHibernate.Criterion;
+using NHibernate.Mapping.ByCode.Impl;
+using NHibernate.SqlTypes;
 using Transport.Models;
+using Transport.OtherModels.tdbf;
 
 namespace Transport.Direct
 {
+    [Model]
+    public class RequestWaybillDto
+    {
+        [IdProperty]
+        public int WaybillId { get; set; }
+        public DateTime DepartureDate { get; set; }
+        public BaseVehicle Vehicle { get; set; }
+    }
+
+
+
     public partial class Direct
     {
 
+        [DirectMethod]
+        public string GetRequestType(int id)
+        {
+            return Request.Find(id).type;
+        }
 
+
+        [DirectMethod]
+        [ParseAsJson]
+        public DataSerializer RequestWaybillLoad(JObject o)
+        {
+            var id = o["id"].Value<int>();
+
+            var request = Request.Find(id);
+            var customers =
+                DistributionCustomers.FindAll(
+                    Restrictions.Where<DistributionCustomers>(x => x.RequestId == request.RequestId));
+
+            var waybills = new List<int>();
+            var rezult = new List<RequestWaybillDto>();
+
+            customers.ForEach(c=>
+            {
+                var detail = DistributionListDetails.Find(c.ListDetailId);
+                waybills.AddRange(detail.Waybills);
+            });
+
+            waybills.ForEach(x =>
+            {
+                if (WaybillTask.FindFirst(
+                    Restrictions.Where<WaybillTask>(wt => wt.WaybillId == x && wt.Customer == request.Customer)) != null)
+                {
+                    var waybill = Waybill.Find(x);
+                    rezult.Add(new RequestWaybillDto()
+                    {
+                        WaybillId = waybill.WaybillId,
+                        DepartureDate = waybill.DepartureDate,
+                        Vehicle = waybill.Car
+                    });
+                }
+            });
+
+            return new DataSerializer(rezult);
+        }
+
+
+        
         [DirectMethod]
         [ParseAsJson]
         public DataSerializer RequestLoad(JObject o)

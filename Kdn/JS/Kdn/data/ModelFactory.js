@@ -18,10 +18,12 @@ Kdn.data.ModelFactory = function() {
 };
 
 Ext.extend(Kdn.data.ModelFactory, Ext.util.Observable, {
-   
-   onReceiveData:function(e) {
+
+    onReceiveData: function (e) {
+
        var data = e.getData();
        var model = this.getModel(data.model);
+
        var store = model.store;
        if (store) {
            var record = store.getById(data.id); //должно быть так

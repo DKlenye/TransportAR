@@ -883,7 +883,7 @@ T.view.waybill.WaybillTask = Ext.extend(Kdn.editor.LocalGrid, {
 
 
         if (main.isAccClosed()) {
-            var allowModifyAccFields = ['SrcRoutPoint', 'DstRoutPoint'];
+            var allowModifyAccFields = ['SrcRoutPoint', 'DstRoutPoint', 'CargoName'];
             if (allowModifyAccFields.indexOf(e.field) == -1) return false;
         }
 

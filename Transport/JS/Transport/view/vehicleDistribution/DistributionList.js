@@ -4,7 +4,7 @@ T.view.vehicleDistribution.VehicleDistributionList = Ext.extend(Ext.grid.GridPan
 
         var me = this;
 
-        var store = Kdn.ModelFactory.getModel('DistributionListDto').buildStore({
+        var store = Kdn.ModelFactory.getStore('DistributionListDto', {
             autoSave: true,
             autoLoad: false,
             api: {
@@ -13,7 +13,7 @@ T.view.vehicleDistribution.VehicleDistributionList = Ext.extend(Ext.grid.GridPan
                 destroy: Kdn.Direct.DistributionListDestroy
             },
             listeners: {
-                save:function() {
+                save: function() {
                     me.getSelectionModel().clearSelections();
                 }
             }
@@ -26,23 +26,23 @@ T.view.vehicleDistribution.VehicleDistributionList = Ext.extend(Ext.grid.GridPan
             columnLines: true,
             stripeRows: true,
             plugins: ['filterrow'],
-            viewConfig:{
-                getRowClass: function (record, rowIndex, rp, ds) {
+            viewConfig: {
+                getRowClass: function(record, rowIndex, rp, ds) {
 
                     var date = Date.parseDate(String.format('{0} {1}', new Date().format('d.m.Y'), me.lastChange.getValue()), 'd.m.Y H:i');
                     var changeDate = record.get('LastChange');
 
-                    return changeDate && changeDate>date ? 'red1' : '';
+                    return changeDate && changeDate > date ? 'red1' : '';
                 }
             },
             selModel: new Ext.grid.RowSelectionModel(),
             listeners: {
-                    rowcontextmenu: this.onContext,
-                    rowdblclick: this.onContext,
-                    scope: this
-                },
+                rowcontextmenu: this.onContext,
+                rowdblclick: this.onContext,
+                scope: this
+            },
             colModel: new Ext.grid.ColumnModel({
-                defaults: { filter: {},sortable:false },
+                defaults: { filter: {}, sortable: false },
                 columns: this.getColumns()
             }),
             tbar: [
@@ -87,7 +87,7 @@ T.view.vehicleDistribution.VehicleDistributionList = Ext.extend(Ext.grid.GridPan
                 'Колонна',
                 {
                     xtype: 'combo.transportcolumn',
-                    ref:'../column',
+                    ref: '../column',
                     enableClear: true,
                     objectValue: false,
                     listeners: {
@@ -108,23 +108,23 @@ T.view.vehicleDistribution.VehicleDistributionList = Ext.extend(Ext.grid.GridPan
                 '-',
                 'Время изменений',
                 {
-                  xtype: 'kdn.editor.fulltimefield',
-                  width:70,
-                  value:new Date(),
-                  ref: '../lastChange',
-                  listeners: {
-                      select:function() {
-                         me.getView().refresh();
-                      }
-                  }
+                    xtype: 'kdn.editor.fulltimefield',
+                    width: 70,
+                    value: new Date(),
+                    ref: '../lastChange',
+                    listeners: {
+                        select: function() {
+                            me.getView().refresh();
+                        }
+                    }
                 },
                 '-',
                 '->',
                 '-',
-                 {
+                {
                     text: 'Печать',
                     iconCls: 'icon-printer',
-                    handler: function () {
+                    handler: function() {
                         var reportName = 'DistributionListPrint';
                         var params = {};
                         params.date = this.listDate.getValue();
@@ -180,33 +180,33 @@ T.view.vehicleDistribution.VehicleDistributionList = Ext.extend(Ext.grid.GridPan
             ]
 
         });
-            T.view.vehicleDistribution.VehicleDistributionList.superclass.constructor.call(this, cfg);
+        T.view.vehicleDistribution.VehicleDistributionList.superclass.constructor.call(this, cfg);
 
-            this.mon(store, {
-                load: this.onStoreLoad,
-                scope: this
-            });
-        },
+        this.mon(store, {
+            load: this.onStoreLoad,
+            scope: this
+        });
+    },
 
-        getColumns: function () {
+    getColumns: function() {
 
-            var me = this;
+        var me = this;
 
         return [
+            { header: 'Гар.№', xtype: 'mappingcolumn', dataIndex: 'Vehicle.GarageNumber', width: 60, tpl: '<b>{0}</b>' },
             {
                 header: 'Статус',
                 align: 'center',
                 dataIndex: 'Status',
                 width: 100,
                 renderer: {
-                    fn: function (value, metaData, record) {
+                    fn: function(value, metaData, record) {
 
                         var label = "";
 
                         if (record.get("IsInMaintenance")) {
-                            label =  '<span class="label label-important">Ремонт</span>';
-                        }
-                        else if (record.get("BusinessTripDepartureDate") || record.get("ScheduleId") == 6) {
+                            label = '<span class="label label-important">Ремонт</span>';
+                        } else if (record.get("BusinessTripDepartureDate") || record.get("ScheduleId") == 6) {
                             label = String.format('<span class="label label-black">Комманд.</span><br/><b>{0}</b>', record.get('DestRoutePoint') || '');
                         } else {
 
@@ -234,7 +234,7 @@ T.view.vehicleDistribution.VehicleDistributionList = Ext.extend(Ext.grid.GridPan
                                 if (outOfWorkCount != drivers.length) {
                                     var customers = record.get('Customers');
                                     if (customers && customers.length > 0) {
-                                        label =  '<span class="label label-success">Занят</span>';
+                                        label = '<span class="label label-success">Занят</span>';
                                     }
                                 }
                             }
@@ -250,45 +250,74 @@ T.view.vehicleDistribution.VehicleDistributionList = Ext.extend(Ext.grid.GridPan
             {
                 header: 'путевой лист',
                 width: '100',
-                dataIndex: 'WaybillId',
+                dataIndex: 'Waybills',
                 align: 'center',
-                renderer: Kdn.Renderer.icons(function (v, r) {
 
-                    if (r.get('IsInMaintenance')) {
-                        return null;
-                    }
+                renderer: function(v, metaData, record, rowIndex, colIndex, store) {
 
-                    if (v) {
-                        return { iconCls: 'page_white_edit', text: ' ' + v };
+                    var url = Kdn.Renderer.url;
+                    var uncheckImage = 'images/default/menu/unchecked.gif';
+                    var checkImage = 'images/default/menu/checked.gif';
+                    var tpl = '<img style="cursor:pointer" src="{0}{1}.png" waybillId="{2}"/> {3} <img approve="true" style="cursor:pointer" src="{4}" waybillId="{5}"/>';
+                    var editIcon = "page_white_edit";
+                    var addIcon = "page_white_add";
+                    
+                    var approved = record.get("ApproveWaybills");
+
+
+                    var edit = v.map(function (x) {
+
+                        var isApproved = approved.indexOf(x) != -1;
+
+                        return String.format(tpl, url, editIcon, x, x,isApproved?checkImage:uncheckImage, x);
+                    });
+
+                    if (!record.get('IsInMaintenance')) {
+                        edit.push(String.format('<img style="cursor:pointer" src="{0}{1}.png"/>', url, addIcon));
                     }
-                    return 'page_white_add';
-                }),
+                    
+                    metaData.css = 'icon-cell';
+
+                    return edit.join("<br/>");
+                },
+
                 processEvent: function (name, e, grid, rowIndex, colIndex) {
-                    if (name == "click" && e.target.tagName == "IMG") {
-                        var rec = grid.store.getAt(rowIndex);
 
-                        if (rec.get("IsInMaintenance")) {
-                            return;
-                        }
+                    var target = e.target;
+                    var rec = grid.store.getAt(rowIndex);
 
-                        var waybillId = rec.get("WaybillId");
-                        if (waybillId) {
-                            Kdn.Application.createView({
-                                xtype: 'view.waybilleditor',
-                                mode: 'update',
-                                withContainer: false,
-                                waybillId: waybillId
+                    if (name == "click" && target.tagName == "IMG") {
+
+                        var waybillId = target.getAttribute("waybillId");
+                        var listDetailId = rec.id;
+
+
+                        if (target.getAttribute("approve")) {
+
+                            Kdn.Direct.ApproveWaybill(waybillId, listDetailId, function() {
+                                me.refreshDetail(listDetailId);
                             });
-                        }
-                        else {
 
-                            Ext.Msg.confirm("Выдача путевого листа", "Выдать путевой лист?", function (o) {
-                                if (o == "yes") {
-                                    var id = rec.get("ListDetailId");
-                                    me.issueWaybill(id);
+
+                        } else {
+                        
+                            if (waybillId) {
+                                Kdn.Application.createView({
+                                    xtype: 'view.waybilleditor',
+                                    mode: 'update',
+                                    withContainer: false,
+                                    waybillId: waybillId
+                                });
+                            } else {
+
+                                if (rec.get("IsInMaintenance")) {
+                                    return;
                                 }
-                            });
-                            
+
+                                var window = me.getWaybillInsertWindow().show();
+                                window.fill(rec);
+                                window.show();
+                            }
                         }
 
                     }
@@ -296,7 +325,7 @@ T.view.vehicleDistribution.VehicleDistributionList = Ext.extend(Ext.grid.GridPan
             },
             {
                 header: 'Заказчик',
-                width: 350,
+                width: 300,
                 dataIndex: 'Customers',
                 renderer: function(v, m, r, Idx, colIdx, store) {
 
@@ -305,13 +334,16 @@ T.view.vehicleDistribution.VehicleDistributionList = Ext.extend(Ext.grid.GridPan
                         qtips = [];
                     Ext.iterate(v, function(customer) {
                         var c = customer.Customer;
+
                         if (c && c.CustomerName) {
                             customers.push(
-                                String.format("<span style='color:blue'>{0}{1}</span>[<span style='color:tomato'>{2}</span>] {3}<span style='color:red'> {4}</span>",
+                                String.format("<span style='color:blue'>{0}{1}</span>[<span style='color:tomato'>{2} {3}</span>] {4} <b>{5}</b> <span style='color:red'> {6}</span>",
                                     customer.DepartureTime || '',
                                     customer.ReturnTime ? ('-' + customer.ReturnTime) : '',
+                                    (!!customer.RequestId) ? String.format('<img style="cursor:pointer" src="{0}{1}.png" requestId="{2}"/>', Kdn.Renderer.url, 'doc_pdf', customer.RequestId):'',
                                     customer.RequestId || "...",
-                                    c.CustomerName1 || c.CustomerName,
+                                    (c.CustomerName1 || c.CustomerName),
+                                    (customer.WorkObject||""),
                                     customer.Description || ""
                                 )
                             );
@@ -323,11 +355,18 @@ T.view.vehicleDistribution.VehicleDistributionList = Ext.extend(Ext.grid.GridPan
                     m.attr = 'ext:qtip="' + "<b><span style='font-size:15px;'>" + qtips.join('</br>') + "</span></b>" + '"';
 
                     if (r.get("Description")) {
-                        customers.push('<b><span style="color:red">'+r.get("Description")+'</span></b>');
+                        customers.push('<b><span style="color:red">' + r.get("Description") + '</span></b>');
                     }
 
                     return customers.join('</br>');
 
+                },
+                processEvent: function (name, e, grid, rowIndex, colIndex) {
+                    var target = e.target;
+                    if (name == "click" && target.tagName == "IMG") {
+                        var requestId = target.getAttribute("requestId");
+                        me.printRequest(requestId);
+                    }
                 },
                 filter: {
                     test: function(f, o) {
@@ -337,8 +376,9 @@ T.view.vehicleDistribution.VehicleDistributionList = Ext.extend(Ext.grid.GridPan
                         var flag = false;
                         var reg = new RegExp(f, 'i');
 
-                        Ext.iterate(o, function(v) {
-                            if (reg.test(v.Customer.CustomerName)) {
+                        Ext.iterate(o, function (v) {
+
+                            if (reg.test(v.Customer.CustomerName) || reg.test(v.RequestId)) {
                                 flag = true;
                                 return false;
                             }
@@ -466,7 +506,6 @@ T.view.vehicleDistribution.VehicleDistributionList = Ext.extend(Ext.grid.GridPan
                 }
             },
             { header: 'Гос.№', xtype: 'mappingcolumn', dataIndex: 'Vehicle.RegistrationNumber', width: 80 },
-            { header: 'Гар.№', xtype: 'mappingcolumn', dataIndex: 'Vehicle.GarageNumber', width: 60 },
             { header: 'Марка', xtype: 'mappingcolumn', dataIndex: 'Vehicle.Model', width: 100 },
             { header: 'См', dataIndex: 'Shift', width: 30 },
             {
@@ -511,23 +550,23 @@ T.view.vehicleDistribution.VehicleDistributionList = Ext.extend(Ext.grid.GridPan
                     return null;
                 }
             },
-        {
-            dataIndex: 'TrailerId',
-            header: 'Прицеп',
-            width: 120,
-            renderer: T.combo.Trailer.prototype.renderTpl
-        },
+            {
+                dataIndex: 'TrailerId',
+                header: 'Прицеп',
+                width: 120,
+                renderer: T.combo.Trailer.prototype.renderTpl
+            },
             {
                 dataIndex: 'Description',
                 header: 'Примечание',
                 width: 120,
-                hidden:true
+                hidden: true
             },
             {
-                header:'Изменено',
-                dataIndex:'LastChange',
-                xtype:'datecolumn',
-                format:'d.m H:i:s'
+                header: 'Изменено',
+                dataIndex: 'LastChange',
+                xtype: 'datecolumn',
+                format: 'd.m H:i:s'
             },
             {
                 header: '№  колонны',
@@ -553,16 +592,19 @@ T.view.vehicleDistribution.VehicleDistributionList = Ext.extend(Ext.grid.GridPan
         });
     },
 
-    sortStore: function () {
+    sortStore: function() {
 
         var gStore = Kdn.ModelFactory.getStore("GroupRequest");
         var getGroup = function (rec) {
-            var group = gStore.getById(rec.get("Vehicle").GroupRequestId);
+
+            var groupRequestId = rec.get("Vehicle").GroupRequestId;
+            if (!groupRequestId) return 0;
+                var group = gStore.getById(groupRequestId);
             return group.get("OrderId");
         };
 
 
-        this.store.data.sort('ASC',function(rec1,rec2) {
+        this.store.data.sort('ASC', function(rec1, rec2) {
             var rez = getGroup(rec1) - getGroup(rec2);
             if (rez == 0) {
                 return rec1.get("Vehicle").GarageNumber - rec2.get("Vehicle").GarageNumber;
@@ -583,7 +625,7 @@ T.view.vehicleDistribution.VehicleDistributionList = Ext.extend(Ext.grid.GridPan
                 renderTo: this.windowConstrain.getBody(),
                 listeners: {
                     'outofworkchange': this.onOutOfWorkChange,
-                    scope:this
+                    scope: this
                 }
             });
         }
@@ -591,12 +633,12 @@ T.view.vehicleDistribution.VehicleDistributionList = Ext.extend(Ext.grid.GridPan
     },
 
     getEditWindow: function() {
-    
+
         if (!this.editWindow) {
             this.editWindow = Ext.create({
                 xtype: 'view.distributioneditwindow',
                 constrain: true,
-                width: 600,
+                width: 700,
                 height: 720,
                 closeAction: 'hide',
                 renderTo: this.windowConstrain.getBody()
@@ -605,7 +647,7 @@ T.view.vehicleDistribution.VehicleDistributionList = Ext.extend(Ext.grid.GridPan
         return this.editWindow;
     },
 
-    getAddWindow:function() {
+    getAddWindow: function() {
         if (!this.addWindow) {
             this.addWindow = Ext.create({
                 xtype: 'view.distributionaddwindow',
@@ -623,9 +665,28 @@ T.view.vehicleDistribution.VehicleDistributionList = Ext.extend(Ext.grid.GridPan
         return this.addWindow;
     },
 
+    getWaybillInsertWindow: function () {
+        if (!this.waybillInsertWindow) {
+            this.waybillInsertWindow = Ext.create({
+                title:'Выдача путевого листа',
+                xtype: 'view.waybillinsertwindow',
+                constrain: true,
+                width: 600,
+                height: 700,
+                closeAction: 'hide',
+                renderTo: this.windowConstrain.getBody(),
+                listeners: {
+                    'waybillinsert': this.issueWaybill,
+                    scope: this
+                }
+            });
+        }
+        return this.waybillInsertWindow;
+    },
 
-    onStoreLoad: function (s, rec, o) {
-        var count = !s.data?0:s.getCount();
+
+    onStoreLoad: function(s, rec, o) {
+        var count = !s.data ? 0 : s.getCount();
         this.createOrder.setDisabled(count != 0);
         this.addOrder.setDisabled(count == 0);
         this.deleteOrder.setDisabled(count == 0);
@@ -636,7 +697,7 @@ T.view.vehicleDistribution.VehicleDistributionList = Ext.extend(Ext.grid.GridPan
 
     },
 
-    onContext: function (grid, idx, e) {
+    onContext: function(grid, idx, e) {
         var window = this.getEditWindow();
         var rec = this.store.getAt(idx);
         window.showDetail(rec);
@@ -644,34 +705,42 @@ T.view.vehicleDistribution.VehicleDistributionList = Ext.extend(Ext.grid.GridPan
         return false;
     },
 
-    createOrders:function(){
-       var date = this.listDate.getValue();
+    createOrders: function() {
+        var date = this.listDate.getValue();
         this.getEl().mask('Создание разнарядки', 'x-mask-loading');
-      Kdn.Direct.DistributionListCreate(date,this.onCreateOrders.createDelegate(this));              
+        Kdn.Direct.DistributionListCreate(date, this.onCreateOrders.createDelegate(this));
     },
-    
-    onCreateOrders:function(){
+
+    onCreateOrders: function() {
         this.getEl().unmask();
         this.reload();
     },
 
-    refreshDetail:function(id) {
+    refreshDetail: function(id) {
         Kdn.Direct.DistributionListDetailRead(id, this.onRefreshDetail.createDelegate(this));
     },
 
-    onRefreshDetail:function(e) {
+    onRefreshDetail: function(e) {
         var r = this.store.getById(e.ListDetailId);
         this.store.reader.update(r, e);
 
+        var data = {
+            model: this.store.model.name,
+            action: 'update',
+            record: r.data,
+            id: r.id
+        };
+
+        Kdn.ModelFactory.publishData(data);
     },
 
-    onOutOfWorkChange: function (driver) {
+    onOutOfWorkChange: function(driver) {
 
         var recs = [], me = this;
         this.store.each(function(r) {
             var d = r.get("Drivers");
             if (d) {
-                d.map(function (_d) {
+                d.map(function(_d) {
                     if (driver.DriverId == _d.Driver.DriverId) {
                         recs.push(r);
                     }
@@ -679,44 +748,48 @@ T.view.vehicleDistribution.VehicleDistributionList = Ext.extend(Ext.grid.GridPan
             }
         });
 
-        Ext.iterate(recs, function (i) {
+        Ext.iterate(recs, function(i) {
             var id = i.get("ListDetailId");
             me.refreshDetail(id);
         });
 
     },
 
-    onVehicleAdd:function(v) {
+    onVehicleAdd: function(v) {
         var me = this;
         v.Date = this.listDate.getValue();
 
-        Kdn.Direct.DistributionListAdd(v, function (e) {
+        Kdn.Direct.DistributionListAdd(v, function(e) {
             me.store.loadData({ data: [e] }, true);
             me.getAddWindow().hide();
         });
     },
 
-     issueWaybill: function (ListDetailId) {
-        if (ListDetailId) {
-            this.ListDetailId = ListDetailId;
+    issueWaybill: function(data) {
+
+        if (data) {
+            this.ListDetailId = data.ListDetailId;
+            this.getWaybillInsertWindow().hide();
             this.getEl().mask("Выдача путевого листа", "x-mask-loading");
-            Kdn.Direct.InsertWaybillByDetail(ListDetailId, this.onWaybillInserted.createDelegate(this));
+            Kdn.Direct.InsertWaybillByDetail(data, this.onWaybillInserted.createDelegate(this));
         }
     },
 
-    onWaybillInserted: function (waybill) {
+    onWaybillInserted: function(waybill) {
 
         var rec = this.store.getById(this.ListDetailId);
+        this.refreshDetail(this.ListDetailId);
+
         rec.data["WaybillId"] = waybill.WaybillId;
         this.view.refresh();
 
         this.getEl().unmask();
 
         var $ = this;
-        var printFn = function () {
+        var printFn = function() {
             $.print(waybill);
         };
-        var editFn = function () {
+        var editFn = function() {
             Kdn.Application.createView({
                 xtype: 'view.waybilleditor',
                 mode: 'update',
@@ -728,7 +801,10 @@ T.view.vehicleDistribution.VehicleDistributionList = Ext.extend(Ext.grid.GridPan
         if (this.notify) {
             this.notify.close();
         }
-        this.notify = Ext.Msg.notify({
+
+        //временно убираем всплывающее окно. Если оно нужно, то раскомментировать код.
+
+       /* this.notify = Ext.Msg.notify({
             waybill: waybill,
             html: String.format('Выдан бланк путевого листа № <b><span style="color:green">{0}</span></b><br/> на дату <b>{1} <span style="color:blue">{2}</span></b><br/> Гаражный № <b>{3}</b> ', waybill.WaybillId, waybill.DepartureDate.format('d.m.Y'), waybill.DepartureDate.format('H:i'), waybill.Car.GarageNumber),
             autoHide: false,
@@ -752,7 +828,7 @@ T.view.vehicleDistribution.VehicleDistributionList = Ext.extend(Ext.grid.GridPan
                     handler: editFn
                 }, '-'
             ]
-        });
+        });*/
 
         if (waybill) {
             this.print(waybill);
@@ -760,43 +836,22 @@ T.view.vehicleDistribution.VehicleDistributionList = Ext.extend(Ext.grid.GridPan
 
     },
 
-    print: function (waybill) {
+    print: function(waybill) {
 
         var id = waybill['WaybillTypeId']
         if (!id) {
             Ext.Msg.alert('', 'Не выбран бланк путевого листа');
             return;
         };
-
         var url = Kdn.ModelFactory.getStore('WaybillType').getById(id).get('UrlTemplate');
-        var URL = Ext.urlAppend("print/" + url + ".aspx", Ext.urlEncode({ WaybillId: waybill.WaybillId }));
+        Kdn.Printer.printWaybill(url,waybill.WaybillId);
+    },
 
-        Ext.Ajax.request({
-            url: URL,
-            method: 'GET',
-            success: function (e) {
-                var win = window.open('', 'printer', 'menubar=0,location=0,resizable=no,scrollbars=no,status=0,width=' + screen.width + ',height=' + screen.height);
-                win.document.write(e.responseText);
-                win.document.close();
-
-                function CheckWindowState() {
-                    if (win.document.readyState == "complete") {
-                        win.close();
-                    } else {
-                        CheckWindowState.defer(500);
-                    }
-                }
-
-                setTimeout(function () { win.print(); }, 100);
-                setTimeout(function () { CheckWindowState(); }, 100);
-            },
-            failure: function (e) {
-                Ext.Msg.show({ width: 800, title: 'Ошибка', buttons: Ext.Msg.OK, msg: e.responseText })
-            }
+    printRequest: function (id) {
+        Kdn.Direct.GetRequestType(id, function(type) {
+            Kdn.Reporter.exportReport(type, {requestId:id}, "PDF");
         });
-
     }
-
 
 });
 

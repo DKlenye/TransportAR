@@ -188,6 +188,7 @@
     <Compile Include="Models\waybill\CashBoxData.cs" />
     <Compile Include="Models\waybill\CashBoxDataDto.cs" />
     <Compile Include="Models\waybill\WaybillAdvanceReport.cs" />
+    <Compile Include="Models\waybill\WaybillCustomerWorkingTime.cs" />
     <Compile Include="Models\waybill\WaybillWork.cs" />
     <Compile Include="Models\waybill\WaybillWorkingTime.cs" />
     <Compile Include="Models\_PolymirWaybill.cs" />
@@ -1190,6 +1191,39 @@
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\combo\TariffCostItemType.js" />
     <EmbeddedResource Include="JS\Transport\view\report\VehicleTiresTwoSets.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\vehicleDistribution\WaybillInsertWindow.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\CargoInfo.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\TechnicalCoefficient.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\waybill\WaybillInsertCustomer.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\WorkCoefficient.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\ServiceCounteragentCheck.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\ServiceEmployeeCheck.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\VehiclesWork.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\waybill\WaybillCustomerWorkingTime.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\VehicleListByColumn.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\WaybillCustomerWorkingTimeInfo.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

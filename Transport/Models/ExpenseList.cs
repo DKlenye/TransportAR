@@ -14,5 +14,6 @@
         public decimal Cost { get; set; }
         public int accmonth { get; set; }
         public int accyear { get; set; }
+        public int M { get; set; }
     }
 }

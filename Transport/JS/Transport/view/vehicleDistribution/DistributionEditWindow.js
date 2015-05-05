@@ -96,7 +96,7 @@ T.view.vehicleDistribution.DistributionEditWindow = Ext.extend(Ext.Window, {
                     margins: 0,
                     store: new Ext.data.JsonStore({
                         idProperty: 'Id',
-                        fields: ['Id', 'ListDetailId', 'RequestId', 'Customer', 'DepartureTime', 'Description', 'ReturnTime']
+                        fields: ['Id', 'ListDetailId', 'RequestId', 'Customer', 'DepartureTime', 'Description', 'ReturnTime','WorkObject']
                     }),
                     viewConfig: {
                         forceFit: true
@@ -130,6 +130,11 @@ T.view.vehicleDistribution.DistributionEditWindow = Ext.extend(Ext.Window, {
                                 if (!v) return null;
                                 return String.format("[{0}] {1}", v.CustomerId, v.CustomerName);
                             }
+                        },
+                        {
+                            header: 'Объект',
+                            dataIndex: 'WorkObject',
+                            editor: { xtype: 'textfield' }
                         },
                         {
                             header: 'Примечание',
@@ -193,7 +198,7 @@ T.view.vehicleDistribution.DistributionEditWindow = Ext.extend(Ext.Window, {
         var customers = [],drivers=[];
         
         this.customers.store.each(function(e){
-            var o = Ext.copyTo({}, e.data, 'Id,ListDetailId,RequestId,Customer,DepartureTime,Description,ReturnTime,TrailerId');
+            var o = Ext.copyTo({}, e.data, 'Id,ListDetailId,RequestId,Customer,DepartureTime,Description,ReturnTime,TrailerId,WorkObject');
             o.VehicleOrderId = rec.get('ListDetailId');
             o.Id = o.Id||0;
             if(o.Customer) customers.push(o); 

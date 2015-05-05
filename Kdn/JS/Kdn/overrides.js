@@ -37,7 +37,15 @@ Ext.override(Ext.data.Store,{
    
    hasChanges:function(){
       return this.modified.concat(this.removed).length>0;
-   }   
+   },
+
+   getData:function() {
+       var data = [];
+       this.each(function(rec) {
+           data.push(rec.data);
+       });
+       return data;
+   }
    
 });
 
@@ -144,7 +152,6 @@ Ext.override(Ext.data.Store,{
             sorters = [{direction: direction, field: sortInfo.field}];
         }
 
-        console.log(sorters)
 
         //create a sorter function for each sorter field/direction combo
         for (var i=0, j = sorters.length; i < j; i++) {

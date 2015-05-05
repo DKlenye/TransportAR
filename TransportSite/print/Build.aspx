@@ -210,7 +210,7 @@
                                 <table cellpadding="0" cellspacing="0">
                                     <tr>
                                         <td valign="top" rowspan="2" class="pre-lined">Арендатор</td>
-                                        <td class="lined">&nbsp; <%Response.Write(CustomerName()); %></td>
+                                        <td style="text-align: left; font-weight: bold; font-size:10pt; " class="lined">&nbsp; <%Response.Write(CustomerNames()); %></td>
                                     </tr>
                                     <tr>
                                     <td class="subscript">наименование</td>
@@ -221,7 +221,7 @@
                                 <table cellpadding="0" cellspacing="0">
                                     <tr>
                                         <td valign="top" rowspan="2" class="pre-lined">Объект&nbsp;работ</td>
-                                        <td style="text-align:left;" class="lined">&nbsp;&nbsp;&nbsp;<span class="dataText"><%Response.Write(CustomerName());%></span></td>
+                                        <td style="text-align: left; font-weight: bold; font-size:10pt;" class="lined">&nbsp;&nbsp;&nbsp;<span class="dataText"><%Response.Write(ObjectNames());%></span></td>
                                     </tr>
                                     <tr>
                                     <td class="subscript">наименование, адрес</td>
@@ -539,7 +539,7 @@
                                         <tbody>
                                             <tr>
                                                 <td rowspan="2" class="pre-lined" style="vertical-align:top;">Арендатор&nbsp;</td>
-                                                <td class="lined">&nbsp;<%Response.Write(CustomerName()); %></td>
+                                                <td class="lined" style="font-size: 7pt;">&nbsp;<%Response.Write(CustomerNames()); %></td>
                                             </tr>
                                             <tr>                                                
                                                 <td class="subscript">наименование организации</td>
@@ -665,7 +665,7 @@
                                         <tbody>
                                             <tr>
                                                 <td rowspan="2" class="pre-lined" style="vertical-align:top;">Арендатор&nbsp;</td>
-                                                <td class="lined">&nbsp;<%Response.Write(CustomerName()); %></td>
+                                                <td class="lined">&nbsp;<%Response.Write(CustomerNames()); %></td>
                                             </tr>
                                             <tr>                                                
                                                 <td class="subscript">наименование организации</td>

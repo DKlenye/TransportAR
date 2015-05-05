@@ -447,6 +447,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -1616,7 +1617,7 @@ If i = 0 Then
 	Dim minutes = Int(i Mod 60)
 	Return System.[String].Format("{0}:{1}", hours, minutes)
 End Function</Code>
-  <Width>20.50521cm</Width>
+  <Width>20.50522cm</Width>
   <Page>
     <PageHeight>27.94cm</PageHeight>
     <PageWidth>21.59cm</PageWidth>

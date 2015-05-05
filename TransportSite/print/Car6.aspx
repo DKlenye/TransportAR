@@ -243,7 +243,7 @@
                                         <tr>
                                             
                                             <td class="pre-lined">Заказчик&nbsp;1</td>
-                                            <td class="lined">&nbsp;<span class="dataText"><%Response.Write(CustomerName()); %></span></td>
+                                            <td class="lined">&nbsp;<span class="dataText"><%Response.Write(CustomerNames()); %></span></td>
                                             <td class="pre-lined">код</td>
                                             <td style="width:22mm;" class="rectangle"></td>
                                         </tr>

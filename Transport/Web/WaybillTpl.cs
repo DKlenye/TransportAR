@@ -2,7 +2,10 @@
 using System.Globalization;
 using System.Collections.Specialized;
 using System.Collections.Generic;
+using System.Linq;
+using Castle.Core;
 using NHibernate.Criterion;
+using PetaPoco;
 using Transport.Models;
 
 
@@ -13,7 +16,8 @@ namespace Transport.Web
     public class WaybillTpl : System.Web.UI.Page
     {
         protected Waybill waybill;
-        protected WaybillTask task; 
+        protected WaybillTask task;
+        protected IList<WaybillTask> tasks;
         protected Vehicle vehicle;
         protected Trailer trailer;
         protected IList<WaybillFuelRemain> remains;
@@ -21,10 +25,15 @@ namespace Transport.Web
         protected IList<WaybillCounter> counters;
         protected IList<WaybillDriver> waybillDrivers;
 
+        private PetaPoco.Database db;
+
         int _WaybillId = 0;
 
         protected void Page_Load(object sender, EventArgs e)
-        {            
+        {      
+      
+            db = new Database("db2");
+
             try
             {
                 NameValueCollection par = Context.Request.QueryString;
@@ -56,7 +65,7 @@ namespace Transport.Web
                counters = WaybillCounter.findByWaybillId(waybill.WaybillId);
                waybillDrivers = WaybillDriver.findByWaybillId(waybill.WaybillId);
                task = WaybillTask.FindFirst(Order.Asc("TaskId"), Expression.Where<WaybillTask>(x => x.WaybillId == waybill.WaybillId));
-
+               tasks = WaybillTask.FindByWaybill(waybill.WaybillId);
 
             }
 
@@ -67,6 +76,78 @@ namespace Transport.Web
         {
             if (waybill!=null) return waybill.WaybillId.ToString();
             return "";
+        }
+
+        public string CustomerNames()
+        {
+
+            if (waybill == null) return "";
+
+            var rezult = new List<string>();
+            var customers = new List<Customer>();
+
+            tasks.ForEach(x =>
+            {
+                if (x.Customer!=null && !customers.Contains(x.Customer))
+                {
+                    customers.Add(x.Customer);
+                }
+            });
+
+            customers.ForEach(x => rezult.Add(String.IsNullOrEmpty(x.CustomerName1) ? x.CustomerName : x.CustomerName1));
+
+            return String.Join(", ", rezult.ToArray());
+
+
+        }
+
+        public string ObjectNames()
+        {
+
+            if (waybill == null) return "";
+
+            var rezult = new Dictionary<int, string>();
+            try
+            {
+                var listDetailId =
+                    db.ExecuteScalar<int>(
+                        "SELECT isnull(listDetailId,0) FROM DistributionListWaybills dlw WHERE dlw.WaybillId = @0",
+                        waybill.WaybillId);
+                if (listDetailId != 0)
+                {
+                    var detail = DistributionListDetails.Find(listDetailId);
+                    var map = new Dictionary<int, string>();
+
+                    detail.Customers.ForEach(x =>
+                    {
+                        if (map.ContainsKey(x.Customer.CustomerId))
+                        {
+                            map[x.Customer.CustomerId] += ", "+x.WorkObject;
+                        }
+                        else
+                        {
+                            map.Add(x.Customer.CustomerId, x.WorkObject);
+                        }
+                    });
+
+                    tasks.ForEach(x =>
+                    {
+                        if (x.Customer != null)
+                        {
+                            if (!rezult.ContainsKey(x.Customer.CustomerId) && map.ContainsKey(x.Customer.CustomerId))
+                            {
+                                rezult.Add(x.Customer.CustomerId, map[x.Customer.CustomerId]);
+                            }
+                        }
+                    });
+                }
+            }
+            catch 
+            {
+                return "";
+            }
+
+            return String.Join(",", rezult.Values.Where(x=>!String.IsNullOrEmpty(x)).ToArray());
         }
 
         public string CustomerName() {

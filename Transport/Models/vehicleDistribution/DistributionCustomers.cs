@@ -20,6 +20,8 @@ namespace Transport.Models
         public string ReturnTime { get; set; }
         [Property, AllowBlank]
         public string Description { get; set; }
+        [Property,AllowBlank]
+        public string WorkObject { get; set; }
 
     }
 }

@@ -388,7 +388,7 @@
                                     <td>26</td>                                   
                                 </tr>
                                 <tr>
-                                    <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+                                    <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td style="text-align: left">&nbsp;<% Response.Write(CustomerNames());%></td><td>&nbsp;</td>
                                 </tr>
                                 <tr>
                                     <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>

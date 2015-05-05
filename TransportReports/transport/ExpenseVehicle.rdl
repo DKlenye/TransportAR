@@ -17,8 +17,8 @@
           <DataField>CustomerName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="FuelName">
-          <DataField>FuelName</DataField>
+        <Field Name="fuelName">
+          <DataField>fuelName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="WaybillId">
@@ -29,13 +29,13 @@
           <DataField>CustomerId</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="fuelId">
-          <DataField>fuelId</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
         <Field Name="Debet">
           <DataField>Debet</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="fuelId">
+          <DataField>fuelId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="km">
           <DataField>km</DataField>
@@ -47,27 +47,27 @@
         </Field>
         <Field Name="cons">
           <DataField>cons</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="cost">
           <DataField>cost</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="ActualCost">
           <DataField>ActualCost</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="AdvanceReport">
           <DataField>AdvanceReport</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="Tax">
           <DataField>Tax</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="ServiceSumm">
           <DataField>ServiceSumm</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
       </Fields>
       <Query>
@@ -78,11 +78,11 @@
           <QueryParameter Name="@garagenumber">
             <Value>=Parameters!garagenumber.Value</Value>
           </QueryParameter>
-          <QueryParameter Name="@month">
-            <Value>=Parameters!month.Value</Value>
+          <QueryParameter Name="@start">
+            <Value>=Parameters!start.Value</Value>
           </QueryParameter>
-          <QueryParameter Name="@year">
-            <Value>=Parameters!year.Value</Value>
+          <QueryParameter Name="@end">
+            <Value>=Parameters!end.Value</Value>
           </QueryParameter>
           <QueryParameter Name="@ownerId">
             <Value>=Parameters!ownerId.Value</Value>
@@ -1522,14 +1522,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="FuelName">
+                    <Textbox Name="fuelName">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!FuelName.Value</Value>
+                              <Value>=Fields!fuelName.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -1538,7 +1538,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>FuelName</rd:DefaultName>
+                      <rd:DefaultName>fuelName</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -2792,7 +2792,19 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>="Затраты по автомобилю за "+Parameters!month.Label+" "+Parameters!year.Value.ToString()+"г."</Value>
+                <Value>Затраты по автомобилю за период с </Value>
+                <Style />
+              </TextRun>
+              <TextRun>
+                <Value>=Parameters!start.Value</Value>
+                <Style />
+              </TextRun>
+              <TextRun>
+                <Value> по </Value>
+                <Style />
+              </TextRun>
+              <TextRun>
+                <Value>=Parameters!end.Value</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -3012,7 +3024,7 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>3.26815in</Height>
+    <Height>3.26816in</Height>
     <Style />
   </Body>
   <ReportParameters>
@@ -3020,24 +3032,17 @@
       <DataType>Integer</DataType>
       <Prompt>garagenumber</Prompt>
     </ReportParameter>
-    <ReportParameter Name="month">
-      <DataType>Integer</DataType>
-      <Prompt>month</Prompt>
-      <ValidValues>
-        <DataSetReference>
-          <DataSetName>monthDS</DataSetName>
-          <ValueField>Id</ValueField>
-          <LabelField>MonthName</LabelField>
-        </DataSetReference>
-      </ValidValues>
-    </ReportParameter>
-    <ReportParameter Name="year">
-      <DataType>Integer</DataType>
-      <Prompt>year</Prompt>
-    </ReportParameter>
     <ReportParameter Name="ownerId">
       <DataType>Integer</DataType>
       <Prompt>owner Id</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="start">
+      <DataType>Integer</DataType>
+      <Prompt>start</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="end">
+      <DataType>Integer</DataType>
+      <Prompt>end</Prompt>
     </ReportParameter>
   </ReportParameters>
   <Width>29.51208cm</Width>

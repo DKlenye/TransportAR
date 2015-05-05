@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Castle.ActiveRecord;
+using Kdn.Ext.Attributes;
 
 namespace Transport.Models
 {
@@ -29,10 +30,14 @@ namespace Transport.Models
         [Property]
         public DateTime ReturnDate { get; set; }
 
-        //Путевой лист выданный на основании разнарядки
-        [Property]
-        public int? WaybillId { get; set; }
+        //Путевой листы выданные на основании разнарядки
+        [AllowBlank, HasMany(Table = "DistributionListWaybills", Element = "WaybillId", ColumnKey = "ListDetailId")]
+        public ICollection<int> Waybills { get; set; }
 
+        //Путевой листы подтверждённые диспетчером
+        [AllowBlank, HasMany(Table = "DistributionListWaybillsApprove", Element = "WaybillId", ColumnKey = "ListDetailId")]
+        public ICollection<int> ApproveWaybills { get; set; }
+        
         [Property]
         public int ScheduleId { get; set; }
 

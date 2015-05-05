@@ -1,4 +1,4 @@
-﻿T.view.WaybillType = Ext.extend(Kdn.view.BaseGrid, {
+T.view.WaybillType = Ext.extend(Kdn.view.BaseGrid, {
     modelName: 'WaybillType',
     constructor: function(cfg) {
         cfg = cfg || {};

@@ -1,14 +1,40 @@
-﻿   T.view.waybill.WaybillInsertDriver = Ext.extend(Kdn.editor.LocalGrid, {
-    startEditColumn:1,
-    clicksToEdit:2,
+   T.view.waybill.WaybillInsertDriver = Ext.extend(Kdn.editor.LocalGrid, {
+    startEditColumn:2,
+    clicksToEdit: 2,
+    enableAdd:true,
     constructor: function(cfg) {
         cfg = cfg || {};
+
+
+        var me = this;
+
         Ext.apply(cfg, {
+
+            tbar  : cfg.enableAdd!==false && this.enableAdd?[
+                {
+                    xtype: 'button.add',
+                    handler: this.add,
+                    scope: this
+                }
+            ]:null,
+
             viewConfig:{
                forceFit:true
             }, 
             colModel: new Ext.grid.ColumnModel({
-               columns:[
+                columns: [
+                {
+                    xtype: 'actioncolumn',
+                    icon: 'images/icons/delete.png',
+                    tooltip: 'Удалить',
+                    fixed: true,
+                    width: 40,
+                    handler: function (grid, rowIndex, colIndex) {
+                        var rec = me.store.getAt(rowIndex);
+                        me.store.remove(rec);
+                    }
+
+                },
                   {
                     dataIndex:'sel',
                     header:'&nbsp;',
@@ -45,9 +71,7 @@
          scope:this
       });
       
-      
-        
-        T.view.waybill.WaybillInsertDriver.superclass.constructor.call(this, cfg);
+      T.view.waybill.WaybillInsertDriver.superclass.constructor.call(this, cfg);
     },    
     
     

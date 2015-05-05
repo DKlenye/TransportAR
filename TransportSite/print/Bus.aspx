@@ -304,7 +304,7 @@
                                                 <td>марка<br/>ТСМ</td>
                                                 <td>код<br/>марки</td>
                                                 <td>коли-<br/>чество,л</td>
-                                                <td>подпись<br/>(штамп)<br/>уполномо-<br/>ченного лица<br/>(№ чека АЗС)</td>
+                                                <td style="font-size: 7pt;">подпись<br/>(штамп)<br/>уполномо-<br/>ченного лица<br/>(№ чека АЗС)</td>
                                                 <td>при<br/>выезде</td>
                                                 <td>при<br/>возвраще-<br/>нии</td>
                                             </tr>
@@ -416,8 +416,7 @@
                             <td>51</td>
                             <td>52</td>
                         </tr>
-                        <tr><td style="font-size:6pt"><%Response.Write(String.Format("{0} {1}",DstRoutPoint(),CustomerName())); %>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                        <tr><td style="font-size:8pt"><%Response.Write(String.Format("{0} {1}",DstRoutPoint(),CustomerNames())); %>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
                     </tbody>                
                 </table>
             </td></tr>
