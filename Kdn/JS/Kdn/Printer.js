@@ -19,16 +19,18 @@
             printWindow.document.write(html);
             printWindow.document.close();
 
-            var checkWindowState = function() {
-                if (printWindow.document.readyState == "complete") {
-                    printWindow.close();
-                } else {
-                    checkWindowState.defer(700);
-                }
-            };
+            //printWindow.document.addEventListener("keydown", function () { printWindow.close(); }, false);
 
-            setTimeout(function () { printWindow.print(); }, 250);
-            setTimeout(function () { checkWindowState(); }, 250);
+            console.log(html,new Date().format("s:u"));
+
+            setTimeout(function() {
+                console.log('print', new Date().format("s:u"));
+                printWindow.print();
+                console.log('afterprint', new Date().format("s:u"));
+                setTimeout(function () { printWindow.close(); console.log('close', new Date().format("s:u")); }, 1000);
+               //printWindow.document.addEventListener("mousemove", closeFn, false);
+            }, 500);
+           //--disable-print-preview
         },
 
         printWaybill: function (templateName, waybillId) {

@@ -14,5 +14,6 @@
     <form id="form1" runat="server">
         <% Response.Write(Kdn.Web.WebHelper.getLoadIndicator()); %>
     </form>
+    
 </body>
 </html>

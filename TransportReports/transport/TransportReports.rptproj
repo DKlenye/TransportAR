@@ -53,6 +53,10 @@
       <FullPath>AzsFuelMovingExt.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>AzsNaftanFuelMoving.rdl</Name>
+      <FullPath>AzsNaftanFuelMoving.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>AzsPeriodRefuelling.rdl</Name>
       <FullPath>AzsPeriodRefuelling.rdl</FullPath>
     </ProjectItem>
@@ -119,6 +123,10 @@
     <ProjectItem>
       <Name>DoublePostingInfo.rdl</Name>
       <FullPath>DoublePostingInfo.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>DriverFuelConsumptionFactNorm.rdl</Name>
+      <FullPath>DriverFuelConsumptionFactNorm.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>DriverFuelExcessDetails.rdl</Name>
@@ -321,6 +329,10 @@
       <FullPath>ServiceAct.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>ServiceCalculation.rdl</Name>
+      <FullPath>ServiceCalculation.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>ServiceCounteragentCheck.rdl</Name>
       <FullPath>ServiceCounteragentCheck.rdl</FullPath>
     </ProjectItem>
@@ -473,6 +485,10 @@
       <FullPath>VehicleOrderDrivers.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>VehiclePerformance.rdl</Name>
+      <FullPath>VehiclePerformance.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>VehicleRun.rdl</Name>
       <FullPath>VehicleRun.rdl</FullPath>
     </ProjectItem>
@@ -537,6 +553,10 @@
       <FullPath>WaybillCount.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>WaybillCustomerWorkingTimeInfo.rdl</Name>
+      <FullPath>WaybillCustomerWorkingTimeInfo.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>WaybillDateErrors.rdl</Name>
       <FullPath>WaybillDateErrors.rdl</FullPath>
     </ProjectItem>
@@ -549,8 +569,8 @@
       <FullPath>WorkCoefficient.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>WaybillCustomerWorkingTimeInfo.rdl</Name>
-      <FullPath>WaybillCustomerWorkingTimeInfo.rdl</FullPath>
+      <Name>VehicleWorkingTimePeriod.rdl</Name>
+      <FullPath>VehicleWorkingTimePeriod.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>

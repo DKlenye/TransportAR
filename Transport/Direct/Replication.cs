@@ -116,7 +116,8 @@ namespace Transport.Direct {
        public string CalcWorkingTime(JObject o)
        {
            var counter = 0;
-           var waybillId = new List<int>() {738706};//  db.Query<int>("SELECT WaybillId FROM Waybill w WHERE w.WaybillState>1 AND year(w.ReturnDate)=2015 AND w.WaybillId IN (738706) ");}
+           var waybillId =
+               db.Query<int>("SELECT WaybillId FROM Waybill w WHERE w.WaybillState>1 AND year(w.ReturnDate)=2012");
 
            using (new SessionScope(FlushAction.Never))
            {
@@ -126,11 +127,12 @@ namespace Transport.Direct {
 
                    x.ClearWorkingTime();
                    x.CalcWorkingTime();
+                   
 
-                   var par = new JObject();
-                   par.Add("WaybillId", id);
+                   //var par = new JObject();
+                   //par.Add("WaybillId", id);
 
-                   customerWorkingTimeRead(par);
+                   //customerWorkingTimeRead(par);
 
                    counter++;
                    SessionScope.Current.Evict(x);

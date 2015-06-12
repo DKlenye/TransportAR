@@ -804,7 +804,7 @@ T.view.vehicleDistribution.VehicleDistributionList = Ext.extend(Ext.grid.GridPan
 
         //временно убираем всплывающее окно. Если оно нужно, то раскомментировать код.
 
-       /* this.notify = Ext.Msg.notify({
+        this.notify = Ext.Msg.notify({
             waybill: waybill,
             html: String.format('Выдан бланк путевого листа № <b><span style="color:green">{0}</span></b><br/> на дату <b>{1} <span style="color:blue">{2}</span></b><br/> Гаражный № <b>{3}</b> ', waybill.WaybillId, waybill.DepartureDate.format('d.m.Y'), waybill.DepartureDate.format('H:i'), waybill.Car.GarageNumber),
             autoHide: false,
@@ -828,7 +828,7 @@ T.view.vehicleDistribution.VehicleDistributionList = Ext.extend(Ext.grid.GridPan
                     handler: editFn
                 }, '-'
             ]
-        });*/
+        });
 
         if (waybill) {
             this.print(waybill);

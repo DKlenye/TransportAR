@@ -62,26 +62,18 @@
     </DataSet>
     <DataSet Name="DataSet2">
       <Fields>
-        <Field Name="AccGroupId">
-          <DataField>AccGroupId</DataField>
+        <Field Name="ReportGroupId">
+          <DataField>ReportGroupId</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="AccGroupName">
-          <DataField>AccGroupName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CostCode">
-          <DataField>CostCode</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CustomerCostCode">
-          <DataField>CustomerCostCode</DataField>
+        <Field Name="ReportGroupName">
+          <DataField>ReportGroupName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
       <Query>
         <DataSourceName>DataSource1</DataSourceName>
-        <CommandText>select * from accgroup</CommandText>
+        <CommandText>select * from ReportGroup</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
     </DataSet>
@@ -575,8 +567,8 @@
       <ValidValues>
         <DataSetReference>
           <DataSetName>DataSet2</DataSetName>
-          <ValueField>AccGroupId</ValueField>
-          <LabelField>AccGroupName</LabelField>
+          <ValueField>ReportGroupId</ValueField>
+          <LabelField>ReportGroupName</LabelField>
         </DataSetReference>
       </ValidValues>
     </ReportParameter>

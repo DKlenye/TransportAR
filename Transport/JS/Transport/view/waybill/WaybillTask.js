@@ -246,32 +246,31 @@ T.view.waybill.WaybillTask = Ext.extend(Kdn.editor.LocalGrid, {
                             scope: this,
                             fn: function(value, meta, rec) {
 
-                            value = value || "";
-                                
+                                value = value || "";
+
                                 /*meta.style += "padding:0px;";
                             return "<img src=\"images/icons/edit.png\"/>";*/
-                            var vehicleCostCode = this.mainView.vehicle.CostCode||"";
-                            var customer = rec.get("Customer");
-                            var customerCostCode = "";
-                            var returnCostCode = "";
-                            
-                            if (customer) {
-                                customerCostCode = customer.CostCode;
-                            } else {
-                                return value;
-                            }
-                            
-                            if (!!value.trim()) {
-                                returnCostCode = value;
-                                meta.css = 'waybill-task-hand-costcode';
-                            }
-                            else if (!!vehicleCostCode.trim() && !customer.isPolymir && customerCostCode.substr(0, 2) != "90") {
-                                returnCostCode = vehicleCostCode;
-                                meta.css = 'waybill-task-vehicle-costcode';
-                            } else {
-                                returnCostCode = customerCostCode;
-                                meta.css = 'waybill-task-customer';
-                            }
+                                var vehicleCostCode = this.mainView.vehicle.CostCode || "";
+                                var customer = rec.get("Customer");
+                                var customerCostCode = "";
+                                var returnCostCode = "";
+
+                                if (customer) {
+                                    customerCostCode = customer.CostCode;
+                                } else {
+                                    return value;
+                                }
+
+                                if (!!value.trim()) {
+                                    returnCostCode = value;
+                                    meta.css = 'waybill-task-hand-costcode';
+                                } else if (!!vehicleCostCode.trim() && !customer.isPolymir && customerCostCode.substr(0, 2) != "90") {
+                                    returnCostCode = vehicleCostCode;
+                                    meta.css = 'waybill-task-vehicle-costcode';
+                                } else {
+                                    returnCostCode = customerCostCode;
+                                    meta.css = 'waybill-task-customer';
+                                }
 
                                 return returnCostCode;
                             }
@@ -283,7 +282,7 @@ T.view.waybill.WaybillTask = Ext.extend(Kdn.editor.LocalGrid, {
                             allowBlank: true,
                             minLength: 8,
                             maxLength: 8,
-                            baseChars : "0123456789"
+                            baseChars: "0123456789"
                         }
                         /*listeners: {
                             click: function(column, view, rowIndex, e) {
@@ -682,7 +681,7 @@ T.view.waybill.WaybillTask = Ext.extend(Kdn.editor.LocalGrid, {
         // Разрешаем доступ только бухгалтеру
         //TODO Переделать !!!!
         var UserId = Kdn.getUser().UserId;
-        if ([1, 15, 16].indexOf(UserId) == -1) {
+        if ([1, 15, 16, 106].indexOf(UserId) == -1) {
             this.getColumnModel().setHidden(0, true);
         }
 
@@ -889,7 +888,7 @@ T.view.waybill.WaybillTask = Ext.extend(Kdn.editor.LocalGrid, {
 
 
         if (main.isDispClosed()) {
-            var allowModifyFields = ['Customer', 'Passengers', 'SrcRoutPoint', 'DstRoutPoint', 'CargoName','CostCode'];
+            var allowModifyFields = ['Customer', 'Passengers', 'SrcRoutPoint', 'DstRoutPoint', 'CargoName', 'CostCode'];
             if (allowModifyFields.indexOf(e.field) == -1) return false;
         }
 
@@ -935,7 +934,7 @@ T.view.waybill.WaybillTask = Ext.extend(Kdn.editor.LocalGrid, {
                     var startDate = n.StartDate || date;
                     var endDate = n.EndDate || date;
 
-                    if (n.WorkTypeId != TkmWorkId && n.WorkTypeId!=TkmWorkIdInFactory && n.Enabled && startDate <= date && endDate >= date) {
+                    if (n.WorkTypeId != TkmWorkId && n.WorkTypeId != TkmWorkIdInFactory && n.Enabled && startDate <= date && endDate >= date) {
                         consumptionEditorStore.add(new consumptionEditorStore.recordType({
                             id: n.NormId,
                             display: $.consumptionRenderer(n.NormId)
@@ -1125,6 +1124,8 @@ T.view.waybill.WaybillTask = Ext.extend(Kdn.editor.LocalGrid, {
 
         case 'TaskIncreases':
         {
+
+
             var isTrip = false, TripIncreaseId = 1;
             this.store.each(function(rec) {
                 Ext.iterate(rec.get('TaskIncreases'), function(increaseRec) {
@@ -1140,9 +1141,10 @@ T.view.waybill.WaybillTask = Ext.extend(Kdn.editor.LocalGrid, {
             var mainView = this.mainView;
             var ScheduleId = mainView.waybillproperty.getSource()['ScheduleId'];
 
-            if (isTrip && ScheduleId != 6) mainView.waybillproperty.setProperty('ScheduleId', 6);
+            ///убрал автоматическую установку коммандировки
+            /*if (isTrip && ScheduleId != 6) mainView.waybillproperty.setProperty('ScheduleId', 6);
             if (!isTrip && ScheduleId == 6) mainView.waybillproperty.setProperty('ScheduleId', 1);
-
+            */
 
             this.store.save();
             this.store.autoSave = true;

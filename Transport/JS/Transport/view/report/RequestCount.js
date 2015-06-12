@@ -1,4 +1,4 @@
-﻿T.view.report.RequestCount = Ext.extend(Kdn.view.Report,{
+T.view.report.RequestCount = Ext.extend(Kdn.view.Report,{
    
    reportName:'RequestCount',
    

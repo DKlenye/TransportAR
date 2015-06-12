@@ -849,6 +849,12 @@ Kdn.Menu = [
                         HandlerCfg: "{xtype:'view.report.vehicleworkingtimefromstart',single:true}"
                     },
                     {
+                        text: 'Дни в работе (за период)',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.vehicleworktimeperiod',single:true}"
+                    },
+                    {
                         text: 'Информация по перевозке груза',
                         iconCls: 'icon-blue-document-word',
                         Handler: 'createView',
@@ -886,6 +892,12 @@ Kdn.Menu = [
                         iconCls: 'icon-blue-document-word',
                         Handler: 'createView',
                         HandlerCfg: "{xtype:'view.report.driversholidaywork',single:true}"
+                    },
+                    {
+                        text:'Информация о перерасходе(экономии) топлива',
+                         iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.driverfuelconsumptionfactnorm',single:true}"
                     }
                 ]
             }, {
@@ -955,6 +967,13 @@ Kdn.Menu = [
                         iconCls: 'icon-blue-document-word',
                         Handler: 'createView',
                         HandlerCfg: "{xtype:'view.report.workcoefficient',single:true}"
+                    },
+                    {
+                        text: 'Общий отчёт',
+                        
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.vehicleperformance',single:true}"
                     }
                 ]
                 },
@@ -971,7 +990,22 @@ Kdn.Menu = [
                 text: 'Время в наряде по путевым листам (для проверки)',
                 Handler: 'createView',
                 HandlerCfg: "{xtype:'view.report.waybillcustomerworkingtimeInfo',single:true}"
-                
+
+            },
+            {
+                text: 'Движение ГСМ АЗС Полимир кг',
+                Handler: 'createView',
+                HandlerCfg: "{xtype:'view.report.azsfuelmoving',single:true}"
+            },
+            {
+                text: 'Движение ГСМ АЗС Полимир л',
+                Handler: 'createView',
+                HandlerCfg: "{xtype:'view.report.azsfuelmovingext',single:true}"
+            },
+            {
+                text: 'Хозрасчёт',
+                Handler: 'createView',
+                HandlerCfg: "{xtype:'view.report.servicecalculation',single:true}"
             }
 
         ]
@@ -1056,7 +1090,7 @@ Kdn.Menu = [
     {
         text: "Бухгалтерия",
         permission: {
-            u: [1, 15, 16,67]
+            u: [1, 15, 16,67,106]
         },
         iconCls: "icon-coins32",
         Handler: null,

@@ -54,6 +54,9 @@ namespace Transport.Models
         [Property]
         public int? GarageNumber { get; set; }
 
+        [Property]
+        public DateTime? RemoveDate { get; set; }
+
         [Property(Length = 150), AllowBlank]
         public string Description { get; set; }
 

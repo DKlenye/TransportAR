@@ -20,7 +20,7 @@ reportName: 'VehicleWorkKoefficient',
         },
             'Группа',
             {
-                xtype:'combo.accgroup',
+                xtype: 'combo.reportgroup',
                 dataIndex: 'groupId',
                 objectValue:false,
                 enableClear:true

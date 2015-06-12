@@ -1,4 +1,4 @@
-﻿T.view.report.VehicleFuelConsumptionFactNorm = Ext.extend(Kdn.view.Report, {
+T.view.report.VehicleFuelConsumptionFactNorm = Ext.extend(Kdn.view.Report, {
    
    reportName:'VehicleFuelConsumptionFactNorm',
    
@@ -23,7 +23,15 @@
             {
                 xtype: 'numberfield',
                 dataIndex: 'diff'
-            }
+            },
+            '-',
+            'Гаражные номера через запятую',
+       {
+           xtype:'textfield',
+           dataIndex: 'garageNumbers',
+           value:' ',
+           selectOnFocus:true
+       }
    ]
         
 });

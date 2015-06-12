@@ -122,11 +122,11 @@ namespace Transport.Web
                     {
                         if (map.ContainsKey(x.Customer.CustomerId))
                         {
-                            map[x.Customer.CustomerId] += ", "+x.WorkObject;
+                            map[x.Customer.CustomerId] += ", "+x.WorkObject + "["+x.DepartureTime+"]";
                         }
                         else
                         {
-                            map.Add(x.Customer.CustomerId, x.WorkObject);
+                            map.Add(x.Customer.CustomerId, x.WorkObject + "["+x.DepartureTime+"]");
                         }
                     });
 

@@ -991,7 +991,7 @@ ORDER BY w.VehicleId,w.ReturnDate</CommandText>
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>1.50708in</Height>
+    <Height>1.5in</Height>
     <Style />
   </Body>
   <Width>5.85417in</Width>

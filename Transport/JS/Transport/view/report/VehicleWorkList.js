@@ -1,4 +1,4 @@
-﻿T.view.report.VehicleWorkList = Ext.extend(Kdn.view.Report, {
+T.view.report.VehicleWorkList = Ext.extend(Kdn.view.Report, {
     reportName: 'VehicleWorkList',
 
     params: [

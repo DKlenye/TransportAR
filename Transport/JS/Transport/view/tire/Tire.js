@@ -1,4 +1,4 @@
-﻿
+
 T.view.Tire = Ext.extend(Kdn.view.MasterDetails, {
 requireModels:'TireModel,TireStandard,TireMaker',
 constructor: function(cfg) {
@@ -445,7 +445,12 @@ editor:'view.tireeditor',
     constructor: function(cfg) {
         cfg = cfg || {};
         Ext.apply(cfg, {
-
+            viewConfig: {
+                getRowClass: function (record, rowIndex, rp, ds) {
+                    var cls = 'notActual';
+                    return record.get('RemoveDate') ? cls : '';
+                }
+            },
             colModel: new Ext.grid.ColumnModel({
                defaults:{filter:{}},
                 columns: [
@@ -672,9 +677,24 @@ editor:'view.tireeditor',
             },
             '-',
             {
-                xtype:'tbspacer',
-                width:20
-            }
+                xtype: 'tbspacer',
+                width: 20
+            }, '-',
+            {
+                iconCls: '',
+                text: 'Показывать списанные',
+                pressed: true,
+                enableToggle: true,
+                scope: this,
+                handler: function (field) {
+                    var store = this.store;
+                    store.reload({
+                        params: {
+                            sqlFilter: field.pressed ? "" : "RemoveDate is null"
+                        }
+                    });
+                }
+            }, '-'
             
         ]
     }

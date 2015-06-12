@@ -1,4 +1,4 @@
-﻿T.view.report.DriversWorkingTime = Ext.extend(Kdn.view.Report, {
+T.view.report.DriversWorkingTime = Ext.extend(Kdn.view.Report, {
 
 reportName: 'DriversWorkingTime',
 
@@ -26,13 +26,12 @@ reportName: 'DriversWorkingTime',
    ],
 
     buildReportParams: function(params) {
-        var p = {};
-        p.month = params.period.getMonth() + 1;
-        p.year = params.period.getFullYear();
-        
-        p.driverId = (params.driverId|| {}).DriverId || 0;
-
-        return p;
+        return {
+            format:params.format,
+            month:params.period.getMonth()+1,
+            year:params.period.getFullYear(),
+            driverId: (params.driverId || {}).DriverId || 0
+        };
     }
 
 });

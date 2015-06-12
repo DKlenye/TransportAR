@@ -168,6 +168,13 @@ T.colModel.Norm = Ext.extend(Ext.grid.ColumnModel, {
                      xtype:'checkcolumn',
                      width:100
                  },
+      {
+          header: 'Временная',
+          align: 'center',
+          dataIndex: 'IsTemp',
+          xtype: 'checkcolumn',
+          width: 100
+      },
             {
                 header: 'Действует с',
                 align: 'center',

@@ -2934,7 +2934,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -3829,7 +3828,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>ОАО "Нафтан" от 26.05.2009 № 656</Value>
+                              <Value>ОАО "Нафтан" от 15.04.2011 № 5126</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>

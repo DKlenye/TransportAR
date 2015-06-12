@@ -51,12 +51,16 @@ Kdn.app.Menu = Ext.extend(Ext.Toolbar, {
             };
 
             Ext.iterate(node.Child, function(child) {
-                menu.items.push(Ext.applyIf(child, {
-                    xtype: 'menuitem',
-                    iconCls: 'icon-table',
-                    menu: this.getNodeMenu(child)
-                })
+
+                if (Kdn.app.permission.check(child)) {
+                    menu.items.push(Ext.applyIf(child, {
+                        xtype: 'menuitem',
+                        iconCls: 'icon-table',
+                        menu: this.getNodeMenu(child)
+                    })
                 );
+                }
+                
             }, this);
             return menu;
         }

@@ -53,7 +53,10 @@ namespace Transport.Models {
 
         [AllowBlank, HasMany(Table = "_NormFuels", Element = "FuelId", ColumnKey = "NormId")]
         public ICollection<int> NormFuels { get; set; }
-        
+
+        [Property]
+        public bool? IsTemp { get; set; }
+
         #region Owner
 
         public void setOwner(int OwnerId)

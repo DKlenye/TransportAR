@@ -1,4 +1,4 @@
-﻿T.view.Battery = Ext.extend(Kdn.view.MasterDetails,{
+T.view.Battery = Ext.extend(Kdn.view.MasterDetails,{
     requireModels: 'BatteryMaker,BatteryType,BatteryRemoveReason',
     constructor: function(cfg)
     {

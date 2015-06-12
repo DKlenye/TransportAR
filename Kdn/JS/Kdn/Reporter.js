@@ -1,4 +1,4 @@
-﻿(function() {
+(function() {
 
     var serverName = 'db2.lan.naftan.by',
         folderName = 'Transport',
@@ -31,7 +31,8 @@
 
         },
 
-        exportReport: function(reportName, params, format) {
+        exportReport: function (reportName, params, format) {
+
             var formatParams = {
                 "rs:Format": format || defaultExportFormat
             };

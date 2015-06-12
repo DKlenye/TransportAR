@@ -1,4 +1,4 @@
-﻿Kdn.view.Report =Ext.extend(Kdn.app.TabItem, {
+Kdn.view.Report =Ext.extend(Kdn.app.TabItem, {
     reportName:'',
     params:[],
     afterParams:[],
@@ -99,8 +99,9 @@
     report: function () {
         this.goReport(this.getReportParams());      
     },
-    
-    reportExport:function(){    
+
+    reportExport: function () {    
+
         var params = this.getReportParams();
         var format = params.format;
 

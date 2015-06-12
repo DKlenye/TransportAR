@@ -75,7 +75,8 @@ namespace Transport.Models
 
                 previousDetails.ForEach(d =>
                 {
-                    var car = (FullCar)vehiclesMap[d.Car.VehicleId];
+                    
+                    var car = vehiclesMap.ContainsKey(d.Car.VehicleId)?(FullCar)vehiclesMap[d.Car.VehicleId]:null;
                     if (car != null)
                     {
 
