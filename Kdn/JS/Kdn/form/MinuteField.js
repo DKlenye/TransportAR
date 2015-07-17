@@ -2,22 +2,14 @@ Kdn.form.MinuteField = Ext.extend(Ext.form.TextField, {
     selectOnFocus:true,
     getValue : function(){
         var v = Kdn.form.MinuteField.superclass.getValue.call(this);
-        console.log("get1", v);
-        console.log("get2", this.timeToMinute(v));
-
         return this.timeToMinute(v);
     },
 
     setValue: function (value) {
 
-
-        console.log("set1", value);
-        
         if (Ext.isNumber(value)) {
             value = this.minuteToTime(value);
         }
-
-        console.log("set2", value)
 
         return Kdn.form.MinuteField.superclass.setValue.call(this, value);
     },
@@ -32,15 +24,29 @@ Kdn.form.MinuteField = Ext.extend(Ext.form.TextField, {
     timeToMinute: function (time) {
 
         var hours, minutes;
-        
-    if (time.indexOf(":") != -1) {
-        hours = parseInt(time.split(":")[0]);
-        minutes = parseInt(time.split(":")[1]);
-    } else {
 
-        minutes = parseInt(time.substr(time.length - 2, 2));
-        hours = parseInt(time.substring(0, time.length - 2));
-    }
+        if (time.indexOf(":") != -1) {
+            hours = parseInt(time.split(":")[0]);
+            minutes = parseInt(time.split(":")[1]);
+        } else {
+
+
+            var hours, minutes;
+            var strTime = time + "";
+
+
+            if (strTime.length == 1 || strTime.length == 2) {
+                hours = parseInt(strTime);
+                minutes = 0;
+            } else if (strTime.length == 3) {
+                minutes = parseInt(strTime.substr(strTime.length - 2, 2));
+                hours = parseInt(strTime.substring(0, strTime.length - 1));
+            } else {
+
+                minutes = parseInt(time.substr(time.length - 2, 2));
+                hours = parseInt(time.substring(0, time.length - 2));
+            }
+        }
 
         minutes = Math.min(minutes, 60);
 

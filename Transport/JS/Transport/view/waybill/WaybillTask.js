@@ -78,7 +78,7 @@ T.view.waybill.WaybillTask = Ext.extend(Kdn.editor.LocalGrid, {
         var IncreasesEditor = Ext.create({
             taskIncreaseStore: null,
             xtype: 'netmulticombo',
-            listWidth: 300,
+            listWidth: 450,
             valueField: 'IncreaseId',
             displayField: 'IncreaseName',
             triggerAction: 'all',

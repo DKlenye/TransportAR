@@ -117,7 +117,13 @@ namespace Transport.Direct {
        {
            var counter = 0;
            var waybillId =
-               db.Query<int>("SELECT WaybillId FROM Waybill w WHERE w.WaybillState>1 AND year(w.ReturnDate)=2012");
+               db.Query<int>(@"SELECT
+	                            TOP 500 
+	                            w.WaybillId 
+                            FROM Waybill w 
+                            inner join Vehicle v on v.VehicleId = w.VehicleId and v.ownerId = 1
+                            LEFT JOIN WaybillCustomerWorkingTime wcwt on wcwt.WaybillId = w.WaybillId 
+                            WHERE w.accPeriod between 201306 AND 201412 AND wcwt.WaybillId IS null");
 
            using (new SessionScope(FlushAction.Never))
            {
@@ -125,15 +131,22 @@ namespace Transport.Direct {
                {
                    var x = Waybill.Find(id);
 
-                   x.ClearWorkingTime();
-                   x.CalcWorkingTime();
-                   
+                   try
+                   {
+                       x.ClearWorkingTime();
 
-                   //var par = new JObject();
-                   //par.Add("WaybillId", id);
+                       x.CalcWorkingTime();
 
-                   //customerWorkingTimeRead(par);
 
+                       var par = new JObject();
+                       par.Add("WaybillId", id);
+
+                       customerWorkingTimeRead(par);
+
+                   }
+                   catch 
+                   {
+                   }
                    counter++;
                    SessionScope.Current.Evict(x);
                    if (counter % 100 == 0)

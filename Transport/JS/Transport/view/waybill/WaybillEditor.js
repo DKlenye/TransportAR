@@ -1048,7 +1048,9 @@ T.view.waybill.WaybillEditor = Ext.extend(Kdn.editor.ModelEditor, {
             departureDate = source['DepartureDate'],
             returnDate = source['ReturnDate'],
             departureTime = source['DepartureTime'],
-            returnTime = source['ReturnTime'];
+            returnTime = source['ReturnTime'],
+            schedule = source['ScheduleId'],
+            isBusinessTrip = false;
 
         var departureDateTime = Kdn.parseDate(departureDate, departureTime);
         var returnDateTime = Kdn.parseDate(returnDate, returnTime);
@@ -1077,6 +1079,14 @@ T.view.waybill.WaybillEditor = Ext.extend(Kdn.editor.ModelEditor, {
             var taskDate = r.get('TaskDepartureDate');
             if (taskDate.clearTime() < departureDate || taskDate.clearTime() > returnDate) {
                 errorMesage.push('Неверная дата задания <b>' + taskDate.format('d.m.Y') + '</b>');
+            }
+
+            if (!isBusinessTrip) {
+                Ext.iterate(r.get('TaskIncreases'), function(i) {
+                    if (i.IncreaseId == 1) {
+                        isBusinessTrip = true;
+                    }
+                });
             }
 
         });
@@ -1113,7 +1123,18 @@ T.view.waybill.WaybillEditor = Ext.extend(Kdn.editor.ModelEditor, {
                     this
                 );
             } else {
-                this.CheckDatePeriod(departureDateTime, returnDateTime);
+
+                if (isBusinessTrip && schedule!=6) {
+                    Ext.Msg.confirm(
+                        'Закрытие путевого листа',
+                        'Путевой лист не отмечен как коммандировка<br/> Вы действительно хотите закрыть путевой лист?',
+                        function(m) { if (m == 'yes') this.CheckDatePeriod(departureDateTime, returnDateTime); },
+                        this
+                    );
+                } else {
+                    this.CheckDatePeriod(departureDateTime, returnDateTime);    
+                }
+
             }
         }
     },

@@ -625,11 +625,15 @@ namespace Transport.Direct
         [DirectMethod]
         public Waybill InsertWaybillByDetail(WaybillInsertDto dto)
         {
-
-           
             var car = (FullCar)FullCar.Find(dto.Vehicle.VehicleId);
             var detail = DistributionListDetails.Find(dto.ListDetailId);
-
+            
+            detail.Customers.Where(x=>x.RequestId!=null).ForEach(x =>
+            {
+                var request = Request.Find(x.RequestId);
+                request.Inprogress();
+            });
+                
             var waybill = new Waybill()
             {
                 WaybillId = 0,

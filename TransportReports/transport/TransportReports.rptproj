@@ -533,6 +533,10 @@
       <FullPath>VehicleWorkingTimeFromStart.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>VehicleWorkingTimePeriod.rdl</Name>
+      <FullPath>VehicleWorkingTimePeriod.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>VehicleWorkKoefficient.rdl</Name>
       <FullPath>VehicleWorkKoefficient.rdl</FullPath>
     </ProjectItem>
@@ -569,8 +573,8 @@
       <FullPath>WorkCoefficient.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>VehicleWorkingTimePeriod.rdl</Name>
-      <FullPath>VehicleWorkingTimePeriod.rdl</FullPath>
+      <Name>ExpenseListByYear.rdl</Name>
+      <FullPath>ExpenseListByYear.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>

@@ -1,0 +1,79 @@
+<html>
+
+<head>
+  <title>путевые листы</title>
+
+  <meta http-equiv="EXPIRES" content="Tue, 04 Dec 1996 21:29:02 GMT">
+  <meta http-equiv="content-Type" content="text/html; charset=windows-1251">
+
+  <link href="common/xmlform.css" type="text/css" rel="stylesheet" />
+
+</head>
+
+<script language="JavaScript" src="common/xmlcookies.js"></script>
+<script language="JavaScript">
+
+var wnd;
+function openMaxWindow() {
+
+  wnd = window.open("waybillsWindow.html","w","toolbar=no, scrollbars=no, status=no, resizable=no, fullscreen=yes");
+  return false;
+}
+
+function Loaded() {
+
+	var the1st = getCookie("theWeather", "");
+
+	if (the1st == "done") {
+
+		setTimeout('openMaxWindow()', 300);
+
+	}
+	else {
+
+    document.getElementById("normalWay").style.display = "none";
+		document.getElementById("gotoWeather").style.display = "block";
+
+		var d = new Date();
+		d = new Date(d.getYear(), d.getMonth(), d.getDate(), 23, 59);
+
+    setCookie("theWeather", "done", d.toUTCString());
+
+    setTimeout('location.href = "xmlgrid.aspx?xml=theWeather/theWeather.xml"',1000);
+
+	}
+
+}
+</script>
+
+<style type="text/css">
+A {
+  color: blue;
+  text-decoration: underline;
+}
+</style>
+
+<body xtopmargin="0" xleftmargin="0" xmarginwidth="30%" xmarginheight=0 style="margin-left: 30%" onload="Loaded()">
+
+
+
+<h3>Обработка путевых листов.</h3>
+
+<p id="normalWay">
+
+<a href="#" onclick="return openMaxWindow()">Начать</a>
+<br>
+<br>
+Обработка путевых листов производится в полноэкранном режиме.<br>
+Для возврата в меню нажмите кнопку <b>выход</b> в окне обработки путевых листов.
+</p>
+
+<div id="gotoWeather" style="display: none; width: 55%;">
+
+<h3>Для работы с путевыми листами необходимо ввести <a href="xmlgrid.aspx?xml=theWeather/theWeather.xml">среднесуточную температуру воздуха</a>.</h3>
+
+</div>
+
+</body>
+
+</html>

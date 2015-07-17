@@ -1,0 +1,264 @@
+<div class="info" style="margin-right: 12px;">
+<a href="xmlgrid.aspx?xml=refuellingPolymir/refuellingWaybillsLog.xml">Открыть реестр</a> выдачи ГСМ по путевым листам.
+<br/><br/>
+<iframe id="pageNoFrame" width="110" height="92" frameborder="no" scrolling="no" src="_bgFFFFE1.html"></iframe>
+</div>
+
+<style type="text/css">
+.bigBoldFont {
+  font-size: 22px;
+  font-weight: bold;
+  border: 1px solid black;
+  padding: 2px 4px;
+}
+.boldFont {
+  font-size: 16px;
+  font-weight: bold;
+  border: 1px solid black;
+  padding: 2px 4px;
+}
+
+.boldFont1 {
+  font-weight: bold;
+  border: 0px solid black;
+  padding: 2px 4px;
+}
+
+.findTop {
+  background-color: infobackground;
+  color: infotext;
+  padding: 2px 8 px;
+  border: 1px solid black;
+}
+
+.remFuel {
+  font-weight: bold;
+	border: 0px;
+	padding-left: 16px;
+}
+
+.remFuelAlert {
+  font-weight: bold;
+	background: red;
+	color: yellow;
+	border: 0px;
+	padding-left: 16px;
+}
+
+.textFuel {
+	border: 0px;
+}
+</style>
+
+
+<script language="JavaScript" src="common/xmlcookies.js"></script>
+<script language="JavaScript">
+
+window_on_load = window.onload;
+window.onload = this_Loaded;
+
+window_on_submit = document.getElementsByTagName("form")[0].onsubmit;
+
+var onButtonProc1Click = null; 
+
+var cookieName1= "refuellingWSheet";
+var cookieName2= "refuellingWFuel";
+var cookieName3= "refuellingWGroup";
+var cookieName4= "refuellingWDate";
+//
+//
+//
+function this_Loaded() {
+  // visual
+  document.getElementById("_garnom").style.width = "76px";
+  document.getElementById("_waybill").style.width = "282px";
+
+  document.getElementById("refuellingDate").className = "bigBoldFont";
+  document.getElementById("sheetNumber").className = "bigBoldFont";
+  try {
+    document.getElementById("fuelSelect").className = "bigBoldFont";
+  }
+  catch(ex) { ; }
+  document.getElementById("groupAccName").className = "boldFont1";
+  document.getElementById("facility").className = "boldFont1";
+
+  document.getElementById("quantity").style.fontSize = "16px";
+  document.getElementById("quantity").style.fontWeight = "bold";
+
+  var el = document.createElement("hr");
+  document.getElementById("facility").parentElement.appendChild(el);
+  var el = document.createElement("hr");
+  document.getElementById("sheetNumber").parentElement.appendChild(el);
+  var el = document.createElement("hr");
+  document.getElementById("driverId").parentElement.appendChild(el);
+
+  //
+  //
+  if (window_on_load) window_on_load();
+  //
+  //
+	if (document.getElementById("remFuel").value.indexOf("!") < 0)
+		document.getElementById("remFuel").className = "remFuel";
+  else {
+		document.getElementById("remFuel").className = "remFuelAlert";  
+        		//document.getElementById("proc1").style.display='none';
+        }
+        
+	if (document.getElementById("textFuel").value.indexOf("!") < 0)
+		document.getElementById("textFuel").className = "textFuel";
+  else {
+		document.getElementById("textFuel").className = "remFuelAlert";  
+        		//document.getElementById("proc1").style.display='none';
+        }
+
+        
+  
+  document.getElementById("remFuel").readOnly = true; 	
+  document.getElementById("textFuel").readOnly = true;
+
+  if (document.getElementById("proc1") != null) {
+    
+    //  submit
+    //
+    document.getElementsByTagName("form")[0].onsubmit = function() {
+
+      if ((document.getElementById('__ACTION').value.length>0) && (document.getElementById("quantity").value==0)) {
+        setFocusToQuantity();
+        return false;
+      }
+
+      document.getElementById("proc1").value = "выдача...";
+      document.getElementById("proc1").disabled = true;
+
+      if (window_on_submit != null)
+        return window_on_submit();
+      else 
+        return true;
+    }
+    //
+    // /submit
+
+    // записать параметры в cookie перед тем, как отправить данные
+    onButtonProc1Click = document.getElementById("proc1").onclick;
+    document.getElementById("proc1").onclick = this_Proc1Click;
+    document.getElementById("proc1").className="buttonparamsopen";
+
+    var prnBtn = document.createElement("a");
+    prnBtn.href = "javascript: openCartWindow()";
+    prnBtn.appendChild(document.createTextNode("__Ведомость"));
+    //
+    document.getElementById("proc1").parentElement.appendChild(prnBtn);
+
+    // обработка Enter когда в поле поиска
+    // ?!?!?
+    //
+
+    setFocusToQuantity();
+
+  }
+  else {
+    document.getElementById("_garnom").select();
+    document.getElementById("_garnom").focus();
+  }
+
+  //
+  // нужна ли печать карточки
+  //
+  var prnSheet = getCookie(cookieName1,"*");
+  prnSheet = parseInt(prnSheet);
+  if (!isNaN(prnSheet)) {
+    openCartWindow(prnSheet, getCookie(cookieName2,""), getCookie(cookieName3,""), getCookie(cookieName4,""));
+  }
+
+  setCookie(cookieName1,"*",cookieExpire);
+
+
+  document.onkeydown = function() {
+    if (event.keyCode == 13) {
+      if (document.getElementById("proc1") != null) {
+        event.returnValue=false;
+        document.getElementById("proc1").click();
+      }
+    }
+  }
+
+
+}
+
+function setFocusToQuantity() {
+  document.getElementById("quantity").select();
+  document.getElementById("quantity").focus();
+}
+
+//
+// записываем параметры в cookie
+//
+function this_Proc1Click() {
+
+  setCookie(cookieName1, document.getElementById("sheetNumber").value, cookieExpire);
+
+  var sobj = document.getElementById("fuelSelect");
+  setCookie(cookieName2,  sobj.options[sobj.selectedIndex].text, cookieExpire);
+  setCookie(cookieName3, document.getElementById("groupAccName").value, cookieExpire);
+  setCookie(cookieName4, document.getElementById("refuellingDate").value, cookieExpire);
+  if (onButtonProc1Click != null) onButtonProc1Click();
+  
+  
+  
+  
+  
+
+}
+//
+//
+//
+var prnSheet;
+var prnFuel;
+var prnGroup;
+var prnDate;
+var nDate;
+function openCartWindow(ASheet, AFuel, AGroup, ADate) {
+	
+	
+    prnSheet  = parseInt(ASheet);
+    prnFuel   = AFuel;
+    prnGroup  = AGroup;
+    prnDate		= ADate;
+
+    if (isNaN(prnSheet)) {
+      prnSheet = document.getElementById("sheetNumber").value;
+
+      var sobj = document.getElementById("fuelSelect");
+      prnFuel = sobj.options(sobj.selectedIndex).text;
+      prnGroup = document.getElementById("groupAccName").value;
+		
+		prnDate = document.getElementById("refuellingDate").value;
+
+    }
+
+    nDate = new Date();
+    document.getElementById("pageNoFrame").src="xmlformatom.aspx?xml=refuellingPolymir/refuellingWaybillsSheetPageNo.xml&__ACTION=true&_sheet="+prnSheet+"&_data="+nDate.getTime();
+
+}
+
+function setCurrentPageNumber(APageNo) {
+
+	var page = parseInt(APageNo);
+	if ( isNaN(page) ) {
+		page = -1;
+	}
+
+  var p = [];
+  
+  p.push("_page="+page);
+  p.push('_sheet='+prnSheet);
+  p.push('_fuel='+prnFuel);
+  p.push('_group='+prnGroup);
+  p.push('_date='+prnDate)
+  p.push('refresh='+nDate.getTime())
+    
+  var wnd = window.open("refuellingSheet.aspx?xml=refuellingPolymir/refuellingWaybillsSheet1.xml&__ACTION=true&"+p.join('&'),"refuellingCart","tools=no, resizable=yes, scrollbars=yes");
+  wnd.focus();
+}
+
+</script>

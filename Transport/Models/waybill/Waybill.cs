@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using Castle.ActiveRecord;
 using Castle.ActiveRecord.Queries;
 using Castle.Core;
@@ -8,6 +9,7 @@ using Kdn.Ext.Attributes;
 using NHibernate.Criterion;
 using Newtonsoft.Json.Linq;
 using Transport.Models.waybill;
+using Expression = NHibernate.Criterion.Expression;
 
 namespace Transport.Models {
 
@@ -421,8 +423,26 @@ namespace Transport.Models {
          CalcWaybillWork();
          CalcFactConsumption();
          SaveAndFlush();
-      }
 
+
+          
+         var db = new PetaPoco.Database("db2");
+           
+          
+         var listDetailId = db.Fetch<int>(
+                       "SELECT listDetailId FROM DistributionListWaybills dlw WHERE dlw.WaybillId = @0",
+                       WaybillId);
+         if (listDetailId.Count>0)
+         {
+             var detail = DistributionListDetails.Find(listDetailId.First());
+             detail.Customers.Where(x=>x.RequestId!=null).ForEach(x =>
+             {
+                 var request = Request.Find(x.RequestId);
+                 request.Executed();
+             });
+         }
+      }
+          
 
       public void DispOpen() {
          var nextWaybills = Waybill.FindAll(Expression.Where<Waybill>(x => x.WaybillState == 2 && x.Position > Position && x.Car == Car));
@@ -707,10 +727,10 @@ namespace Transport.Models {
 
                        CollectionExtensions.ForEach(WaybillTask.FindAll(Expression.Where<WaybillTask>(x => x.WaybillId == WaybillId)), x =>
                        {
-                           if (!Dates.Contains(x.TaskDepartureDate))
+                           if (!Dates.Contains(x.TaskDepartureDate.Date))
                            {
                                new WaybillWorkingTime(WaybillId, x.TaskDepartureDate, 12*60).SaveAndFlush();
-                               Dates.Add(x.TaskDepartureDate);
+                               Dates.Add(x.TaskDepartureDate.Date);
                            }
                        });
                    }

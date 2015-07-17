@@ -71,18 +71,23 @@ T.view.RequestMagazine = Ext.extend(Ext.Panel, {
                             width: 105,
                             renderer: function(v) {
                                 if (v == 0) {
-                                    return '<span class="label label-gray">Опубликована</span>';
+                                    return '<span class="label label-gray">Опубликована</span>'
                                 }
                                 if (v == 1) {
-                                    return '<span class="label label-warning">Подписана</span>';
+                                    return '<span class="label label-warning">Подписана</span>'
                                 }
                                 if (v == 2) {
-                                    return '<span class="label label-success">Принята</span>';
+                                    return '<span class="label label-success">Принята</span>'
                                 }
                                 if (v == 3) {
-                                    return '<span class="label label-important">Возвращена</span>';
+                                    return '<span class="label label-important">Возвращена</span>'
                                 }
-
+                                if (v == 5) {
+                                    return '<span class="label label-success">В работе</span>'
+                                }
+                                if (v == 6) {
+                                    return '<span class="label label-success">Выполнена</span>'
+                                }
                             },
                             filter: {}
                         },
@@ -232,6 +237,13 @@ T.view.RequestMagazine = Ext.extend(Ext.Panel, {
                                                 if (v == 3) {
                                                     return '<span class="label label-important">Возвращена</span>';
                                                 }
+                                                if (v == 5) {
+                                                    return '<span class="label label-success">В работе</span>'
+                                                }
+                                                if (v == 6) {
+                                                    return '<span class="label label-success">Выполнена</span>'
+                                                }
+
                                             }
                                         },
                                         {

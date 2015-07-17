@@ -68,6 +68,28 @@ namespace Transport.Models
            });
            Status = RequestStatus.Confirm;
        }
+
+       public void Inprogress()
+       {
+           Events.Add(new RequestEvent()
+           {
+               EventDate = DateTime.Now,
+               Request = this,
+               Status = RequestStatus.Inprogress
+           });
+           Status = RequestStatus.Inprogress;
+       }
+
+       public void Executed()
+       {
+           Events.Add(new RequestEvent()
+           {
+               EventDate = DateTime.Now,
+               Request = this,
+               Status = RequestStatus.Executed
+           });
+           Status = RequestStatus.Executed;
+       }
    }
 
    [ActiveRecord]

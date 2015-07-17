@@ -44,7 +44,12 @@ T.view.vehicleDistribution.RequestGrid = Ext.extend(Ext.grid.GridPanel, {
                         if (v == 3) {
                             return '<span class="label label-important">Возвращена</span>'
                         }
-
+                        if (v == 5) {
+                            return '<span class="label label-success">В работе</span>'
+                        }
+                        if (v == 6) {
+                            return '<span class="label label-success">Выполнена</span>'
+                        }
                     }
                 },
                 {

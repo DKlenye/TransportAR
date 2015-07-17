@@ -1006,6 +1006,11 @@ Kdn.Menu = [
                 text: 'Хозрасчёт',
                 Handler: 'createView',
                 HandlerCfg: "{xtype:'view.report.servicecalculation',single:true}"
+            },
+            {
+                text: 'Объёмы работ для БП',
+                Handler: 'createView',
+                HandlerCfg: "{xtype:'view.report.expenselistbyyear',single:true}"
             }
 
         ]
