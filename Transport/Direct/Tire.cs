@@ -21,11 +21,11 @@ namespace Transport.Direct
             public TireSeason? Season { get; set; }
             public DateTime InstallDate { get; set; }
             public DateTime? RemoveDate { get; set; }
+            public string RemoveReason { get; set; }
+            public bool IsWriteOff { get; set; }
         }
 
-
-
-
+        
         [DirectMethod]
         [ParseAsJson]
         public DataSerializer TireCardRead(JObject o)
@@ -45,6 +45,7 @@ namespace Transport.Direct
             JToken p; int id = 0;
             p = o["filter"];
             id = p["TireId"].Value<int>();
+            var showObsolete = p["showObsolete"].Value<bool>();
             var data = new List<VihicleTire>();
 
             var currentMoving = TireMoving.FindOne(Restrictions.Where<TireMoving>(x => x.TireMovingId == Tire.Find(id).TireMovingId));
@@ -54,6 +55,9 @@ namespace Transport.Direct
                 CollectionExtensions.ForEach(movings, x =>
                 {
                     var tire = Tire.Find(x.TireId);
+                    var cm = TireMoving.Find(tire.TireMovingId);
+                    var reason = cm.TireRemoveReasonId==null?null:TireRemoveReason.Find(cm.TireRemoveReasonId);
+                    
                     var vt = new VihicleTire()
                     {
                         TireMovingId = x.TireMovingId,
@@ -62,7 +66,17 @@ namespace Transport.Direct
                         FactoryNumber = tire.FactoryNumber,
                         Season = tire.Season
                     };
-                    data.Add(vt);
+
+                    if (reason != null)
+                    {
+                        vt.RemoveReason = reason.TireRemoveReasonName;
+                        vt.IsWriteOff = reason.isWriteOff;
+                    }
+
+                    if (!showObsolete && reason != null && reason.isWriteOff)
+                    {
+                    }
+                    else data.Add(vt);
                 });
             }
 

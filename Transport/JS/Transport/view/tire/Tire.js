@@ -129,7 +129,7 @@ constructor: function(cfg) {
         api: {
             read: Kdn.Direct.VehicleTiresRead
         },
-        fields: ['FactoryNumber', 'Season', 'TireMovingId', 'InstallDate', 'RemoveDate'],
+        fields: ['FactoryNumber', 'Season', 'TireMovingId', 'InstallDate', 'RemoveDate','RemoveReason','IsWriteOff'],
         root: 'data'
     });
 
@@ -217,11 +217,17 @@ constructor: function(cfg) {
                             columnLines: true,
                             stripeRows: true,
                             region: 'west',
-                            width:500,
+                            width:700,
                             split:true,
                             border:false,
                             store: VehicleTiresStore,
-                            sm:sm,
+                            sm: sm,
+                            viewConfig: {
+                                getRowClass: function (record, rowIndex, rp, ds) {
+                                    var cls = 'notActual';
+                                    return record.get('IsWriteOff') ? cls : '';
+                                }
+                            },
                             columns: [
                                 sm,
                                  {
@@ -254,7 +260,12 @@ constructor: function(cfg) {
                                      dataIndex: 'RemoveDate',
                                      xtype: 'datecolumn',
                                      width: 100
-                                 }
+                                 },
+                                {
+                                    header: 'Причина снятия',
+                                    dataIndex: 'RemoveReason',
+                                    width: 250
+                                }
                             ],
                             tbar: [
                                 {
@@ -428,6 +439,19 @@ onTireWorkUpdate: function(s, r) {
 
 onTireWorkSave:function() {
    // this.onVehicleTiresSelect(this.VehicleTiresSM);
+},
+
+refreshView: function (view) {
+    this.refreshBuffer.push(view);
+    if (view.store && this.filterValue) {
+        var filter = {};
+        filter[this.dataIndexKey] = this.filterValue;
+        filter["showObsolete"] = this.masterView.showObsolete.pressed;
+
+        view.store.reload({
+            params: { filter: filter }
+        });
+    }
 }
 
 });
@@ -448,7 +472,7 @@ editor:'view.tireeditor',
             viewConfig: {
                 getRowClass: function (record, rowIndex, rp, ds) {
                     var cls = 'notActual';
-                    return record.get('RemoveDate') ? cls : '';
+                    return record.get('isWriteOff') ? cls : '';
                 }
             },
             colModel: new Ext.grid.ColumnModel({
@@ -683,6 +707,7 @@ editor:'view.tireeditor',
             {
                 iconCls: '',
                 text: 'Показывать списанные',
+                ref:'/showObsolete',
                 pressed: true,
                 enableToggle: true,
                 scope: this,
@@ -690,7 +715,7 @@ editor:'view.tireeditor',
                     var store = this.store;
                     store.reload({
                         params: {
-                            sqlFilter: field.pressed ? "" : "RemoveDate is null"
+                            sqlFilter: field.pressed ? "" : "isWriteOff = 0"
                         }
                     });
                 }

@@ -24,6 +24,7 @@ namespace Transport.Web
         protected WaybillFuelRemain remain = null;
         protected IList<WaybillCounter> counters;
         protected IList<WaybillDriver> waybillDrivers;
+        protected int? mainFuelId;
 
         private PetaPoco.Database db;
 
@@ -57,15 +58,30 @@ namespace Transport.Web
                foreach (var rem in remains)
                {
                   if( rem.FuelId == 7 || rem.FuelId==4 ) continue; //Не печатаем керосин и Н80
-
+                  if(rem.DepartureRemain==0) continue;
                      remain = rem;
                      break;
-               }               
+               }
+
+                if (remain == null)
+                {
+                    remain = remains.FirstOrDefault(x => x.FuelId != 7 || x.FuelId != 4);
+                }
+
                
                counters = WaybillCounter.findByWaybillId(waybill.WaybillId);
                waybillDrivers = WaybillDriver.findByWaybillId(waybill.WaybillId);
                task = WaybillTask.FindFirst(Order.Asc("TaskId"), Expression.Where<WaybillTask>(x => x.WaybillId == waybill.WaybillId));
                tasks = WaybillTask.FindByWaybill(waybill.WaybillId);
+
+                var mainnorm = 
+                    Norm.FindActualNorms(vehicle.VehicleId, waybill.DepartureDate)
+                        .FirstOrDefault(x => x.MainFuelId != null && x.isMain);
+
+                if (mainnorm != null)
+                {
+                    mainFuelId = mainnorm.MainFuelId;
+                }
 
             }
 
@@ -388,6 +404,12 @@ namespace Transport.Web
         public string FuelName()
         {
             if (waybill != null && remain !=null ){
+
+                if (mainFuelId != null)
+                {
+                    return Fuel.Find(mainFuelId.Value).FuelName;
+                }
+                
                return Fuel.Find(remain.FuelId).FuelName;                              
             }
             return "";

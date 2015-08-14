@@ -103,6 +103,11 @@ Kdn.Menu = [
                         text: "Группы по маслам",
                         Handler: "createView",
                         HandlerCfg: "{xtype:'view.vehicleoilgroup',single:true}"
+                    },
+                    {
+                        text: "Группы по бизнес плану",
+                        Handler: "createView",
+                        HandlerCfg: "{xtype:'view.businessplangroup',single:true}"
                     }
                 ]
             }, {
@@ -859,6 +864,11 @@ Kdn.Menu = [
                         iconCls: 'icon-blue-document-word',
                         Handler: 'createView',
                         HandlerCfg: "{xtype:'view.report.cargoinfo',single:true}"
+                    }, {
+                        text: 'Средний пробег за период',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.averageconsumption',single:true}"
                     }
                     
                 ]
@@ -970,11 +980,17 @@ Kdn.Menu = [
                     },
                     {
                         text: 'Общий отчёт',
-                        
                         iconCls: 'icon-blue-document-word',
                         Handler: 'createView',
                         HandlerCfg: "{xtype:'view.report.vehicleperformance',single:true}"
-                    }
+                    },
+                    {
+                        text: 'Общий отчёт (бизнес план)',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.vehicleperformancebusinessplan',single:true}"
+                    }   
+
                 ]
                 },
                  {
@@ -1011,6 +1027,11 @@ Kdn.Menu = [
                 text: 'Объёмы работ для БП',
                 Handler: 'createView',
                 HandlerCfg: "{xtype:'view.report.expenselistbyyear',single:true}"
+            },
+            {
+                text: 'Список путевых листов по заказчку',
+                Handler: 'createView',
+                HandlerCfg: "{xtype:'view.report.waybilllistbycustomer',single:true}"
             }
 
         ]

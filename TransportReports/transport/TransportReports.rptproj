@@ -45,6 +45,10 @@
       <FullPath>AccVehicleObReport.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>AverageConsumption.rdl</Name>
+      <FullPath>AverageConsumption.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>AzsFuelMoving.rdl</Name>
       <FullPath>AzsFuelMoving.rdl</FullPath>
     </ProjectItem>
@@ -195,6 +199,10 @@
     <ProjectItem>
       <Name>ExpenseListByGroup.rdl</Name>
       <FullPath>ExpenseListByGroup.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>ExpenseListByYear.rdl</Name>
+      <FullPath>ExpenseListByYear.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>ExpenseListDepartment.rdl</Name>
@@ -565,6 +573,10 @@
       <FullPath>WaybillDateErrors.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>WaybillListByCustomer.rdl</Name>
+      <FullPath>WaybillListByCustomer.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>WayBillPackage.rdl</Name>
       <FullPath>WayBillPackage.rdl</FullPath>
     </ProjectItem>
@@ -573,8 +585,8 @@
       <FullPath>WorkCoefficient.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>ExpenseListByYear.rdl</Name>
-      <FullPath>ExpenseListByYear.rdl</FullPath>
+      <Name>VehiclePerformanceBusinessPlan.rdl</Name>
+      <FullPath>VehiclePerformanceBusinessPlan.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>

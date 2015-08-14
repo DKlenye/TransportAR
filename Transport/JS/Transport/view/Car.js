@@ -355,6 +355,20 @@ T.view.Car = Ext.extend(T.view.Trailer, {
             }
 
         },
+        {
+            dataIndex: 'BusinessPlanGroupId',
+            header: 'Группа по бизнес плану',
+            width: 100,
+            editor: { xtype: 'combo.businessplangroup', objectValue: false, enableClear: true },
+            renderer: function (v) {
+                if (!v) return v;
+                var store = Kdn.ModelFactory.getStore('BusinessPlanGroup'),
+                  rec = store.getById(v);
+                if (rec) return rec.get('BusinessPlanGroupName');
+                return null;
+            }
+
+        },
         
         {
             dataIndex: 'ModelHeater',

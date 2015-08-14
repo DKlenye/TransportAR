@@ -158,6 +158,10 @@ namespace Transport.Models {
 
        [Property]
       public int? GroupRequestId { get; set; }
+
+       [Property]
+       public int? BusinessPlanGroupId { get; set; }
+
        [Property]
        public int? VehicleOilGroupId { get; set; }
 
