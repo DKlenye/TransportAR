@@ -1032,6 +1032,11 @@ Kdn.Menu = [
                 text: 'Список путевых листов по заказчку',
                 Handler: 'createView',
                 HandlerCfg: "{xtype:'view.report.waybilllistbycustomer',single:true}"
+            },
+            {
+                text: 'Объем работ по заказчкам',
+                Handler: 'createView',
+                HandlerCfg: "{xtype:'view.report.waybilllistcustomers',single:true}"
             }
 
         ]
