@@ -1616,7 +1616,7 @@
                                       <Paragraph>
                                         <TextRuns>
                                           <TextRun>
-                                            <Value />
+                                            <Value>11.08.2015</Value>
                                             <Style>
                                               <FontFamily>Times New Roman</FontFamily>
                                             </Style>
@@ -1709,7 +1709,7 @@
                                       <Paragraph>
                                         <TextRuns>
                                           <TextRun>
-                                            <Value />
+                                            <Value>1625</Value>
                                             <Style>
                                               <FontFamily>Times New Roman</FontFamily>
                                             </Style>
@@ -1815,7 +1815,7 @@
                                       <Paragraph>
                                         <TextRuns>
                                           <TextRun>
-                                            <Value />
+                                            <Value>01.08.2015</Value>
                                             <Style>
                                               <FontFamily>Times New Roman</FontFamily>
                                             </Style>
@@ -1964,7 +1964,6 @@
                                       <PaddingBottom>2pt</PaddingBottom>
                                     </Style>
                                   </Textbox>
-                                  <rd:Selected>true</rd:Selected>
                                 </CellContents>
                               </TablixCell>
                             </TablixCells>
