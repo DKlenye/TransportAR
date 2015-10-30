@@ -55,8 +55,7 @@ namespace Transport.Direct
                 CollectionExtensions.ForEach(movings, x =>
                 {
                     var tire = Tire.Find(x.TireId);
-                    var cm = TireMoving.Find(tire.TireMovingId);
-                    var reason = cm.TireRemoveReasonId==null?null:TireRemoveReason.Find(cm.TireRemoveReasonId);
+                    var reason = x.TireRemoveReasonId==null?null:TireRemoveReason.Find(x.TireRemoveReasonId);
                     
                     var vt = new VihicleTire()
                     {
@@ -73,7 +72,7 @@ namespace Transport.Direct
                         vt.IsWriteOff = reason.isWriteOff;
                     }
 
-                    if (!showObsolete && reason != null && reason.isWriteOff)
+                    if (!showObsolete && reason != null)
                     {
                     }
                     else data.Add(vt);

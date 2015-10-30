@@ -1,5 +1,5 @@
 T.view.Battery = Ext.extend(Kdn.view.MasterDetails,{
-    requireModels: 'BatteryMaker,BatteryType,BatteryRemoveReason',
+    requireModels: 'BatteryMaker,BatteryType,BatteryRemoveReason,BatteryTechState',
     constructor: function(cfg)
     {
         cfg = cfg || {};
@@ -36,7 +36,21 @@ T.view.Battery = Ext.extend(Kdn.view.MasterDetails,{
                                     xtype:'combo.vehicle',
                                     enableClear:true
                                  }
-                              
+
+                     },
+                     {
+                         dataIndex: 'WorkUnitId',
+                         align: 'center',
+                         header: 'Ед. работы',
+                         width: 200,
+                         editor: { xtype: 'combo.workunit', objectValue: false },
+                         renderer: function (o) {
+                             if (!o && !Ext.isObject(o)) return null;
+                             var store = Kdn.ModelFactory.getStore('WorkUnit'),
+                                record = store.getById(o);
+                             if (record) return String.format("({1}) {0}", record.data.WorkUnitName, record.data.UnitName);
+                             return o;
+                         }
                      },
                      {
                         header:'Дата установки',
@@ -51,7 +65,8 @@ T.view.Battery = Ext.extend(Kdn.view.MasterDetails,{
                         dataIndex:'RemoveDate',
                         editor:{xtype:'datefield'},
                         width:120
-                     },
+                    },
+
                      {
                         header:'Причина снятия',
                         dataIndex:'BatteryRemoveReasonId',
@@ -64,7 +79,32 @@ T.view.Battery = Ext.extend(Kdn.view.MasterDetails,{
                            return null;
                         },
                         width:200
-                     }
+                    },
+                     {
+                        header:'Тех. состояние',
+                        dataIndex: 'BatteryTechStateId',
+                        renderer:function(v, metaData, record, rowIndex, colIndex, store){
+                           if (!v) {
+
+                               var removeReason = record.get("BatteryRemoveReasonId");
+                               if (removeReason) {
+                                   var reason = Kdn.ModelFactory.getStore('BatteryRemoveReason'),
+                                    techState = reason.getById(removeReason).get('State');
+                                    if (techState) {
+                                        return techState.BatteryTechStateName;
+                                    }
+                               }
+
+                               return null;
+                           }
+                           var s = Kdn.ModelFactory.getStore('BatteryTechState'),
+                               r = s.getById(v);
+                           if(r) return r.get('BatteryTechStateName');
+                           return null;
+                        },
+                        editor:{xtype:'combo.batterytechstate', objectValue:false, allowBlank:true, enableClear:true},
+                        width:200
+                      }
                   ]                  
               });
               
@@ -111,7 +151,7 @@ T.view.Battery = Ext.extend(Kdn.view.MasterDetails,{
                        api:{
                            read:Kdn.Direct.BatteryCardRead
                        },
-                       fields:['VehicleString','InstallDate','RemoveDate','mName','y','Work','SummaryWork'],
+                       fields: ['VehicleString', 'InstallDate', 'RemoveDate', 'mName', 'y', 'WorkKm', 'SummaryWorkKm', 'WorkMh', 'SummaryWorkMh'],
                        root: 'data'
                   }),
                   columns:[
@@ -139,12 +179,21 @@ T.view.Battery = Ext.extend(Kdn.view.MasterDetails,{
                         dataIndex:'y'                        
                      },
                      {
-                        header:'км/маш.ч',
-                        dataIndex:'Work'                        
+                        header:'км (моточас)',
+                        dataIndex:'WorkKm',
+                        renderer: function (value, metaData, record, rowIndex, colIndex, store) {
+                            if (record.get('WorkKm') == null) return;
+                            return String.format('{0} (<span style = "color:blue;">{1}</span>)', record.get('WorkKm'), record.get('WorkMh'));
+                        }                        
                      },
                      {
-                        header:'c нач. экспл.',
-                        dataIndex:'SummaryWork'                        
+                         header: 'c нач. экспл. км (моточас)',
+                        dataIndex:'SummaryWorkKm',
+                        width:200      ,
+                        renderer: function (value, metaData, record, rowIndex, colIndex, store) {
+                            if (record.get('SummaryWorkKm') == null) return;
+                            return String.format('{0} (<span style = "color:blue;">{1}</span>)', record.get('SummaryWorkKm'), record.get('SummaryWorkMh'));
+                        }                  
                      }
                   ],
                   tbar:[
@@ -242,20 +291,6 @@ T.view.BatteryGrid = Ext.extend(Kdn.view.BaseGrid, {
                         }
                     },
                     {
-                        dataIndex: 'WorkUnitId',
-                        align:'center',
-                        header: 'Ед. работы',
-                        width: 100,
-                        editor: { xtype: 'combo.workunit', objectValue:false },
-                        renderer: function(o) {
-                            if (!o && !Ext.isObject(o)) return null;
-                            var store = Kdn.ModelFactory.getStore('WorkUnit'),
-                                record = store.getById(o);                              
-                                if (record) return String.format("({1}) {0}",record.data.WorkUnitName,record.data.UnitName);                              
-                                return o;
-                        }
-                    },
-                    {
                         dataIndex: 'BatteryTypeId',
                         header: 'Тип АКБ',
                         width: 90,
@@ -279,9 +314,17 @@ T.view.BatteryGrid = Ext.extend(Kdn.view.BaseGrid, {
                     },                   
                     {
                         hidden:true,
-                        dataIndex: 'Norm',
+                        dataIndex: 'KmNorm',
                         align:'center',
-                        header: 'Норма, (км/маш.ч.)',
+                        header: 'Норма (км)',
+                        width: 80,
+                        editor: { xtype: 'kdn.editor.numberfield' }
+                    },
+                    {
+                        hidden: true,
+                        dataIndex: 'MhNorm',
+                        align: 'center',
+                        header: 'Норма (моточас)',
                         width: 80,
                         editor: { xtype: 'kdn.editor.numberfield' }
                     },
@@ -295,9 +338,17 @@ T.view.BatteryGrid = Ext.extend(Kdn.view.BaseGrid, {
                     },
                     {
                         hidden:true,
-                        dataIndex: 'InitWork',
+                        dataIndex: 'InitKmWork',
                         align:'center',
-                        header: 'Наработка на начало, (км/маш.ч)',
+                        header: 'Наработка на начало, км',
+                        width: 70,
+                        editor: { xtype: 'kdn.editor.numberfield', allowBlank: true }
+                    },
+                    {
+                        hidden: true,
+                        dataIndex: 'InitMhWork',
+                        align: 'center',
+                        header: 'Наработка на начало, моточас',
                         width: 70,
                         editor: { xtype: 'kdn.editor.numberfield', allowBlank: true }
                     },
@@ -461,9 +512,8 @@ T.view.BatteryGrid = Ext.extend(Kdn.view.BaseGrid, {
         return 'Добавление :: АКБ';
     },
 
-    getEditText: function()
-    {
-        return 'Редактирование :: АКБ'
+    getEditText: function() {
+        return 'Редактирование :: АКБ';
     }
     
 });

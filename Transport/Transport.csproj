@@ -107,7 +107,9 @@
     <Compile Include="Direct\Driver.cs" />
     <Compile Include="Direct\MaintenanceRequest.cs" />
     <Compile Include="Direct\ExpenseList.cs" />
+    <Compile Include="Direct\Norms.cs" />
     <Compile Include="Direct\ServiceRegistry.cs" />
+    <Compile Include="Direct\TariffCalculation.cs" />
     <Compile Include="Direct\Test.cs" />
     <Compile Include="Direct\Limits.cs" />
     <Compile Include="Direct\Request.cs" />
@@ -126,13 +128,17 @@
     <Compile Include="Models\acc\DriverFuelExcess.cs" />
     <Compile Include="Models\acc\FuelPriceCalculate.cs" />
     <Compile Include="Models\acc\FuelFilledCost.cs" />
+    <Compile Include="Models\battery\BatteryTechState.cs" />
     <Compile Include="Models\car\OilNormVehicle.cs" />
     <Compile Include="Models\OilChange.cs" />
     <Compile Include="Models\OilStandartConsuption.cs" />
     <Compile Include="Models\request\RequestAttachments.cs" />
     <Compile Include="Models\request\DriverOutOfWork.cs" />
+    <Compile Include="Models\service\TariffCalculation.cs" />
     <Compile Include="Models\service\TariffCostItem.cs" />
     <Compile Include="Models\service\TariffCostItemType.cs" />
+    <Compile Include="Models\service\TariffPetrolPrice.cs" />
+    <Compile Include="Models\tire\TireTechState.cs" />
     <Compile Include="Models\TransmissionType.cs" />
     <Compile Include="Models\vehicleGroups\BusinessPlanGroup.cs" />
     <Compile Include="Models\VehicleModel.cs" />
@@ -1258,6 +1264,24 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\report\WaybillListCustomers.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\VehicleRefuelling.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\service\CalculateTariffEditor.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\service\TariffPetrolPrice.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\ExpenseListVehicleCount.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\tire\TireTechState.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\battery\BatteryTechState.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

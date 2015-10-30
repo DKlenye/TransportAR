@@ -934,7 +934,18 @@ T.view.waybill.WaybillTask = Ext.extend(Kdn.editor.LocalGrid, {
                     var startDate = n.StartDate || date;
                     var endDate = n.EndDate || date;
 
-                    if (n.WorkTypeId != TkmWorkId && n.WorkTypeId != TkmWorkIdInFactory && n.Enabled && startDate <= date && endDate >= date) {
+                    var annuallyActual = false;
+                    if (n.Annually && n.StartDate && n.EndDate) {
+
+                        var annuallyStart = Date.parseDate(String.format('{0}.{1}.{2}', n.StartDate.format('d'), n.StartDate.format('m'), date.getFullYear()), 'd.m.Y');
+                        var annuallyEnd = Date.parseDate(String.format('{0}.{1}.{2}', n.EndDate.format('d'), n.EndDate.format('m'), date.getFullYear()), 'd.m.Y');
+
+                        annuallyActual = annuallyStart <= date && annuallyEnd >= date;
+                    }
+                    
+                    var dateActual = startDate <= date && endDate >= date;
+
+                    if (n.WorkTypeId != TkmWorkId && n.WorkTypeId != TkmWorkIdInFactory && n.Enabled && ( dateActual || annuallyActual )) {
                         consumptionEditorStore.add(new consumptionEditorStore.recordType({
                             id: n.NormId,
                             display: $.consumptionRenderer(n.NormId)

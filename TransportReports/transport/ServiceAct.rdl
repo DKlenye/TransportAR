@@ -1832,7 +1832,6 @@
                       </Style>
                     </Textbox>
                     <ColSpan>12</ColSpan>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell />
@@ -5960,8 +5959,13 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Height>6.15855in</Height>
-        <Width>9.91667in</Width>
+        <SortExpressions>
+          <SortExpression>
+            <Value>=Fields!departureDate.Value</Value>
+          </SortExpression>
+        </SortExpressions>
+        <Height>6.15853in</Height>
+        <Width>9.91668in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -5969,7 +5973,7 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>15.64271cm</Height>
+    <Height>15.64272cm</Height>
     <Style />
   </Body>
   <ReportParameters>
@@ -5978,7 +5982,7 @@
       <Prompt>score No</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <Width>25.18833cm</Width>
+  <Width>25.18837cm</Width>
   <Page>
     <PageHeight>21.59cm</PageHeight>
     <PageWidth>27.94cm</PageWidth>

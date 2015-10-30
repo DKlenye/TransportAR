@@ -69,6 +69,10 @@
       <FullPath>AzsSheetRegister.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>BatteryCard(old).rdl</Name>
+      <FullPath>BatteryCard(old).rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>BatteryCard.rdl</Name>
       <FullPath>BatteryCard.rdl</FullPath>
     </ProjectItem>
@@ -207,6 +211,10 @@
     <ProjectItem>
       <Name>ExpenseListDepartment.rdl</Name>
       <FullPath>ExpenseListDepartment.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>ExpenseListVehicleCount.rdl</Name>
+      <FullPath>ExpenseListVehicleCount.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>ExpenseNaftan.rdl</Name>
@@ -361,6 +369,10 @@
       <FullPath>SmallMechRefuelling.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>TariffCalculation.rdl</Name>
+      <FullPath>TariffCalculation.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>TechnicalCoefficient.rdl</Name>
       <FullPath>TechnicalCoefficient.rdl</FullPath>
     </ProjectItem>
@@ -501,6 +513,10 @@
       <FullPath>VehiclePerformanceBusinessPlan.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>VehicleRefuelling.rdl</Name>
+      <FullPath>VehicleRefuelling.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>VehicleRun.rdl</Name>
       <FullPath>VehicleRun.rdl</FullPath>
     </ProjectItem>
@@ -581,16 +597,16 @@
       <FullPath>WaybillListByCustomer.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>WaybillListCustomers.rdl</Name>
+      <FullPath>WaybillListCustomers.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>WayBillPackage.rdl</Name>
       <FullPath>WayBillPackage.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>WorkCoefficient.rdl</Name>
       <FullPath>WorkCoefficient.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>WaybillListCustomers.rdl</Name>
-      <FullPath>WaybillListCustomers.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>

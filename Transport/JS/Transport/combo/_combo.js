@@ -40,7 +40,9 @@ Ext.iterate([
    'PetrolGroup',
    'TransmissionType',
    'VehicleModel',
-   'BusinessPlanGroup'
+   'BusinessPlanGroup',
+   'TireTechState',
+   'BatteryTechState'
 ],
 T.combo.buildCombo);
 

@@ -490,6 +490,101 @@ Ext.apply(Date.prototype, {
 });
 
 
+Ext.apply(Ext.Component.prototype,{
+    initComponent: function () {
+
+        /* start overrride
+        Добавлена возможность устанавливать конфиг в прототип класса. 
+        При каждом создании класса конфиг клонируется. 
+        Это позволяет избежать конфликта с создаваемыми объектами.
+    
+        Конфликта можно избежать определив инициализацию конфига в конструкторе или в initComponent
+
+        Ext.define(Ext.ux.MyComponent,{
+        extend:'Ext.Component',
+        initComponent:function(){
+        Ext.apply(this,{
+        prop:'someProp'
+        });
+        this.callParent();
+        }
+        });
+
+        Чтобы не переопределять функцию initComponent теперь можно написать так 
+
+        Ext.define(Ext.ux.MyComponent,{
+        extend:'Ext.Component',
+        config:{
+        prop:'someProp'
+        }
+        });
+
+        
+        */
+        if (this.config) {
+            Ext.applyIf(this, Ext.clone(this.config));
+        }
+        // end override
+        if (this.listeners) {
+            this.on(this.listeners);
+            delete this.listeners;
+        }
+
+        this.enableBubble(this.bubbleEvents);
+
+        /**/
+        this.refs = new Ext.util.MixedCollection();
+        /**/
+    },
+
+
+
+    initRef: function () {
+
+        if (this.ref && !this.refOwner) {
+            var levels = this.ref.split('/'),
+                last = levels.length,
+                i = 0,
+                t = this;
+
+            while (t && i < last) {
+                t = t.ownerCt;
+                ++i;
+            }
+            if (t) {
+                var name = this.refName = levels[--i];
+                t[name] = this;
+                /**
+                * @type Ext.Container
+                * @property refOwner
+                * The ancestor Container into which the {@link #ref} reference was inserted if this Component
+                * is a child of a Container, and has been configured with a <code>ref</code>.
+                */
+
+                /**/
+                t.refs.add(name, this);
+                /**/
+
+                this.refOwner = t;
+            }
+        }
+    },
+
+
+    removeRef: function () {
+        if (this.refOwner && this.refName) {
+            delete this.refOwner[this.refName];
+
+            /**/
+            this.refOwner.refs.remove(this);
+            /**/
+
+            delete this.refOwner;
+        }
+    }
+
+});
+
 
 /*
 if(!Ext.isDefined(Ext.chromeVersion)){

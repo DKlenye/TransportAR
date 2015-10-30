@@ -4,9 +4,15 @@ Kdn.Menu = [
     {
         MenuId: 0,
         text: "Программа",
+        permission: {},
         iconCls: "icon-application_xp32",
         Child: [
-            { text: "Пользователи", iconCls: "icon-user", Handler: "createView", HandlerCfg: "{xtype:'kdn.view.user',single:true}" }
+            {
+                text: "Пользователи",
+                iconCls: "icon-user",
+                Handler: "createView", 
+                HandlerCfg: "{xtype:'kdn.view.user',single:true}"
+            }
         ]
     },
     {
@@ -244,7 +250,7 @@ Kdn.Menu = [
             }
         ]
     }, {
-        text: "Путевые листы",
+        text: "Путевые",
         iconCls: "icon-page_white_gear32",
         Child: [
             {
@@ -325,7 +331,7 @@ Kdn.Menu = [
             }
         ]
     }, {
-        text: 'Учёт материалов',
+        text: 'Материалы',
         permission: {
             u: [1, 29, 22, 4, 61, 53]
         },
@@ -349,7 +355,14 @@ Kdn.Menu = [
                 iconCls: 'icon-table',
                 Handler: 'createView',
                 HandlerCfg: "{xtype:'view.tireremovereason',single:true}"
-            }, {
+            },
+        {
+            text: 'Тех. состояния шин',
+            iconCls: 'icon-table',
+            Handler: 'createView',
+            HandlerCfg: "{xtype:'view.tiretechstate',single:true}"
+        },
+            {
                 text: 'Отчёты',
                 iconCls: 'icon-report-white',
                 Child: [
@@ -400,7 +413,14 @@ Kdn.Menu = [
                 iconCls: 'icon-table',
                 Handler: 'createView',
                 HandlerCfg: "{xtype:'view.batteryremovereason',single:true}"
-            }, {
+            },
+            {
+                text: 'Тех. состояния АКБ',
+                iconCls: 'icon-table',
+                Handler: 'createView',
+                HandlerCfg: "{xtype:'view.batterytechstate',single:true}"
+            },
+            {
                 text: 'Отчёты',
                 iconCls: 'icon-report-white',
                 Child: [
@@ -514,6 +534,12 @@ Kdn.Menu = [
                         iconCls: 'icon-blue-document-word',
                         Handler: 'createView',
                         HandlerCfg: "{xtype:'view.report.rcpasz',single:true}"
+                    },
+                    {
+                        text: 'Информация по заправке гаражного номера(маршрут)',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.vehiclerefuelling',single:true}"
                     }
                 ]
             }, {
@@ -620,7 +646,13 @@ Kdn.Menu = [
                        iconCls: 'icon-blue-document-word',
                        Handler: 'createView',
                        HandlerCfg: "{xtype:'view.report.expenselistbygroup',single:true}"
-                   }
+                   },
+                    {
+                        text: 'Накопительная ведомость(количество транспорта)',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.expenselistvehiclecount',single:true}"
+                    }
                 ]
             },
             
@@ -1099,10 +1131,16 @@ Kdn.Menu = [
     {
         text: 'Услуги',
         permission: {
-            u: [1,61]
+            u: [61,1]
         },
         iconCls: 'icon-reseller_account_template32',
         Child: [
+            {
+                text: 'Цены на топливо для расчёта тарифов',
+                Handler: 'createView',
+                HandlerCfg: "{xtype:'view.tariffpetrolprice',single:true}"
+                
+            },
             {
                 text: 'Рассчёт тарифов на услуги транспорта',
                 Handler: 'createView',

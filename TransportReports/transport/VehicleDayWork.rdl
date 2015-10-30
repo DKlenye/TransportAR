@@ -628,7 +628,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>hрасход, л</Value>
+                              <Value>расход, л</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>

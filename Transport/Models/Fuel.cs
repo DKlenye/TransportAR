@@ -1,5 +1,8 @@
-﻿using Castle.ActiveRecord;
+﻿using System.Linq;
+using Castle.ActiveRecord;
+using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
 using Kdn.Ext.Attributes;
+using Expression = NHibernate.Criterion.Expression;
 
 namespace Transport.Models
 {
@@ -32,7 +35,7 @@ namespace Transport.Models
    {
        [Property]
        public int PetrolGroupId { get; set; }
-   }
+       }
 
 
    [Model,ActiveRecord(DiscriminatorValue = "2")]

@@ -13,5 +13,8 @@ namespace Transport.Models.tire
         [Property]
         public bool isWriteOff { get; set; }
 
+        [BelongsTo("TireTechStateId"), AllowBlank]
+        public TireTechState State { get; set; }
+
     }
 }

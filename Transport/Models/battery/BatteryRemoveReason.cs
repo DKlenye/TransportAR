@@ -1,5 +1,6 @@
 ﻿using Castle.ActiveRecord;
 using Kdn.Ext.Attributes;
+using Transport.Models.battery;
 
 namespace Transport.Models
 {
@@ -12,5 +13,8 @@ namespace Transport.Models
        public string BatteryRemoveReasonName { get; set; }
        [Property]
        public bool isWriteOff { get; set; }
+
+       [BelongsTo("BatteryTechStateId"),AllowBlank]
+       public BatteryTechState State { get; set; }
     }
 }

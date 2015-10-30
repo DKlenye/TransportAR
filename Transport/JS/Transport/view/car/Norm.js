@@ -1,4 +1,4 @@
-﻿T.view.car.NormGrid = Ext.extend(Kdn.grid.LocalEditorGrid, {
+T.view.car.NormGrid = Ext.extend(Kdn.grid.LocalEditorGrid, {
 
     constructor: function(cfg) {
         cfg = cfg || {};
@@ -7,23 +7,33 @@
         
         Ext.apply(cfg, {
             viewConfig:{
-                getRowClass: function(record, rowIndex, rp, ds){
+                getRowClass: function (record, rowIndex, rp, ds) {
+
                     var cls = 'notActual';
                     var now = new Date().clearTime();
+
+                    var isActual = record.get("IsActual");
                     
                     var startDate = record.get("StartDate") || now;
-                    var endDate = record.get("EndDate") || now;
 
-                    var isEnabled = startDate <= now && endDate >= now;
-                    var isFuture = startDate > now;
+                    var isFuture = startDate > now || record.get('Annually') ;
                     
-                    return record.get('Enabled')? (isEnabled?'green':(isFuture?'yellow':'red')) :cls;
+                    return record.get('Enabled')? (isActual?'green':(isFuture?'yellow':'red')) :cls;
                 }
             },
             colModel: new T.colModel.Norm({increaseRenderer:cfg.increaseRenderer}),
             store:Kdn.ModelFactory.getModel('Norm').buildStore({
                autoLoad:false,
-               autoSave:false
+               autoSave: false,
+               api: {
+                   create: Kdn.Direct.Create,
+                   read: Kdn.Direct.ReadNorms,
+                   update: Kdn.Direct.Update,
+                   destroy: Kdn.Direct.Destroy
+                },
+               baseParams: {
+                   ShowObsolete: false
+               }
             }),
             loadMask:true,
             region:'center',
@@ -83,6 +93,19 @@
                     handler: this.onRemove,
                     scope: this
                 },
+                '-',
+                {
+                    xtype:'tbspacer',
+                    width:20
+                },
+                '-',
+                {
+                    text: 'Показать недействующие',
+                    iconCls:'icon-water--exclamation',
+                    enableToggle: true,
+                    handler: this.onShowObsolete,
+                    scope: this
+                },
                 '-'
             ]
     },
@@ -94,6 +117,11 @@
             clone.NormId = null;
             this.store.add(new this.store.recordType(clone));
         }
+    },
+
+    onShowObsolete: function (field) {
+        this.store.setBaseParam('ShowObsolete', field.pressed);
+        this.store.reload({params: { ShowObsolete: field.pressed } });
     }
 
 });

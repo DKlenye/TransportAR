@@ -41,11 +41,19 @@ namespace Transport.Models
 
         //Норма на пробег(машиночасы)
         [Property]
-        public int Norm { get; set; }
+        public int KmNorm { get; set; }
+
+        //Норма на пробег(машиночасы)
+        [Property]
+        public int MhNorm { get; set; }
 
         //Начальный пробег(машиночасы)
         [Property]
-        public int InitWork { get; set; }
+        public int InitKmWork { get; set; }
+        
+        //Начальный пробег(машиночасы)
+        [Property]
+        public int InitMhWork { get; set; }
 
         //Номер документа
         [Property, AllowBlank]
@@ -101,13 +109,14 @@ namespace Transport.Models
             bat.BatteryTypeId = BatteryTypeId;
             bat.Cost = Cost;
             bat.Doc = Doc;
-            bat.InitWork = InitWork;
+            bat.InitKmWork = InitKmWork;
+            bat.InitMhWork = InitMhWork;
             bat.MakeDate = MakeDate;
             bat.MonthStart = MonthStart;
-            bat.Norm = Norm;
+            bat.KmNorm = KmNorm;
+            bat.MhNorm = MhNorm;
             bat.OwnerId = OwnerId;
             bat.Warrantly = Warrantly;
-            bat.WorkUnitId = WorkUnitId;
 
             bat.SaveAndFlush();
 
@@ -125,13 +134,14 @@ namespace Transport.Models
                 BatteryTypeId = BatteryTypeId,
                 Cost = Cost,
                 Doc = Doc,
-                InitWork = InitWork,
+                InitKmWork = InitKmWork,
+                InitMhWork = MhNorm,
                 MakeDate = MakeDate,
                 MonthStart = MonthStart,
-                Norm = Norm,
+                KmNorm = KmNorm,
+                MhNorm = MhNorm,
                 OwnerId = OwnerId,
-                Warrantly = Warrantly,
-                WorkUnitId = WorkUnitId
+                Warrantly = Warrantly
             };
 
             bat.Save();

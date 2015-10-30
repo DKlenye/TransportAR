@@ -187,7 +187,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -288,8 +287,9 @@
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
         <Top>0.31944in</Top>
+        <Left>0.36458in</Left>
         <Height>0.75in</Height>
-        <Width>2.91667in</Width>
+        <Width>2.91666in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -303,7 +303,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Пробег транспорта за </Value>
+                <Value>Пробег транспорта (в том числе прицепов) за </Value>
                 <Style />
               </TextRun>
               <TextRun>
@@ -320,7 +320,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox7</rd:DefaultName>
         <Height>0.25in</Height>
-        <Width>2.91667in</Width>
+        <Width>3.80209in</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -333,7 +333,7 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>1.06944in</Height>
+    <Height>1.13194in</Height>
     <Style />
   </Body>
   <ReportParameters>
@@ -342,7 +342,7 @@
       <Prompt>year</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <Width>2.91667in</Width>
+  <Width>3.91667in</Width>
   <Page>
     <LeftMargin>1in</LeftMargin>
     <RightMargin>1in</RightMargin>

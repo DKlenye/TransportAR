@@ -2,6 +2,7 @@
 using Castle.ActiveRecord;
 using Kdn.Ext.Attributes;
 using NHibernate.Criterion;
+using Transport.Models.tire;
 
 namespace Transport.Models
 {
@@ -26,6 +27,9 @@ namespace Transport.Models
 
         [Property]
         public int? TireRemoveReasonId { get; set; }
+
+        [Property]
+        public int? TireTechStateId { get; set; }
 
         [Property, AllowBlank]
         public bool? IsSpare { get; set; }

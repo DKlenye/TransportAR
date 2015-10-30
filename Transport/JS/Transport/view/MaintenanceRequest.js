@@ -1,4 +1,4 @@
-﻿T.view.MaintenanceRequest = Ext.extend(Kdn.view.BaseGrid, {
+T.view.MaintenanceRequest = Ext.extend(Kdn.view.BaseGrid, {
     modelName: 'MaintenanceRequest',
     editor: 'view.maintenancerequesteditor',
     pageSize: 50,
@@ -248,7 +248,7 @@
 
                     var params = {};
                     params.DepartmentId = o.department.DepartmentId;
-                    Kdn.Reporter.exportReport("MaintenanceRequestList", params, "PDF");
+                    Kdn.Reporter.exportReport("MaintenanceRequestList", params, "EXCEL");
                 },
                 scope: this
             },

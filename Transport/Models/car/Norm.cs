@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Castle.ActiveRecord;
 using Kdn.Ext.Attributes;
 using NHibernate.Criterion;
@@ -57,6 +58,9 @@ namespace Transport.Models {
         [Property]
         public bool? IsTemp { get; set; }
 
+        [Property]
+        public bool? Annually { get; set; }
+
         #region Owner
 
         public void setOwner(int OwnerId)
@@ -70,6 +74,25 @@ namespace Transport.Models {
 
         #endregion
 
+        
+        public bool IsActual {
+            get { return CheckActual(DateTime.Now); }
+        }
+
+        public bool CheckActual(DateTime date)
+        {
+            var dateActual = (StartDate == null || StartDate <= date) && (EndDate == null || EndDate.Value >= date);
+            var annuallyActual = false;
+            if ( Annually!=null && Annually.Value && StartDate != null && EndDate != null)
+            {
+                var annuallyStart = new DateTime(date.Year,StartDate.Value.Month,StartDate.Value.Day);
+                var annuallyEnd = new DateTime(date.Year,EndDate.Value.Month, EndDate.Value.Day);
+
+                annuallyActual = annuallyStart <= date && annuallyEnd >= date;
+            }
+
+            return Enabled && (dateActual || annuallyActual) ;
+        }
 
         public WorkType GetWorkType()
         {
@@ -79,8 +102,7 @@ namespace Transport.Models {
         public static Norm[] FindActualNorms(int VehicleId, DateTime Date)
         {
             return FindAll(
-                Restrictions.Where<Norm>(
-                    x => x.Car.VehicleId == VehicleId && x.Enabled && (x.StartDate==null || x.StartDate<=Date) && (x.EndDate == null || x.EndDate.Value >= Date)));
+                Restrictions.Where<Norm>(x => x.Car.VehicleId == VehicleId)).ToList().Where(x => x.CheckActual(Date)).ToArray();
         }
 
         public override void Delete()

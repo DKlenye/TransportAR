@@ -1,4 +1,5 @@
-﻿T.view.BatteryRemoveReason = Ext.extend(Kdn.view.BaseGrid, {
+T.view.BatteryRemoveReason = Ext.extend(Kdn.view.BaseGrid, {
+    requireModels: 'BatteryTechState',
     modelName: 'BatteryRemoveReason',
     constructor: function(cfg) {
         cfg = cfg || {};
@@ -30,6 +31,13 @@
                         editor : {
                            xtype:'kdn.editor.booleanfield'                           
                         }
+                   },
+                    {
+                        dataIndex: 'State',
+                        header: 'Тех. состояние',
+                        renderer: Kdn.Renderer.object("BatteryTechStateName"),
+                        width: 200,
+                        editor: { xtype: 'combo.batterytechstate', allowBlank: true }
                     }
                 ]
             })

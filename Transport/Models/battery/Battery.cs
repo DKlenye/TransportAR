@@ -35,16 +35,21 @@ namespace Transport.Models
         [Property]
         public short MonthStart { get; set; }
 
+        //Норма на пробег
         [Property]
-        public int WorkUnitId { get; set; }
+        public int KmNorm { get; set; }
 
-        //Норма на пробег(машиночасы)
+        //Норма на машиночасы
         [Property]
-        public int Norm { get; set; }
+        public int MhNorm { get; set; }
 
-        //Начальный пробег(машиночасы)
+        //Начальный пробег
         [Property]
-        public int InitWork { get; set; }
+        public int InitKmWork { get; set; }
+
+        //Начальные машиночасы
+        [Property]
+        public int InitMhWork { get; set; }
 
         //Номер документа
         [Property,AllowBlank]

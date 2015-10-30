@@ -1,4 +1,5 @@
-﻿T.view.TireRemoveReason = Ext.extend(Kdn.view.BaseGrid, {
+T.view.TireRemoveReason = Ext.extend(Kdn.view.BaseGrid, {
+    requireModels: 'TireTechState',
     modelName: 'TireRemoveReason',
     constructor: function(cfg) {
         cfg = cfg || {};
@@ -30,6 +31,13 @@
                         editor : {
                            xtype:'kdn.editor.booleanfield'                           
                         }
+                    },
+                    {
+                        dataIndex: 'State',
+                        header: 'Тех. состояние',
+                        renderer:Kdn.Renderer.object("TireTechStateName"),
+                        width: 200,
+                        editor: { xtype: 'combo.tiretechstate', allowBlank:true }  
                     }
                 ]
             })

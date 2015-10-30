@@ -1,6 +1,5 @@
-
 T.view.Tire = Ext.extend(Kdn.view.MasterDetails, {
-requireModels:'TireModel,TireStandard,TireMaker',
+requireModels:'TireModel,TireStandard,TireMaker,TireRemoveReason,TireTechState',
 constructor: function(cfg) {
     cfg = cfg || {};
 
@@ -27,10 +26,10 @@ constructor: function(cfg) {
                          renderer: function(e) {
                              if (!e) return e;
                              return String.format("[{0}] {1} {2}",
-                                    e.GarageNumber,
-                                    e.Model,
-                                    e.RegistrationNumber
-                                 )
+                                 e.GarageNumber,
+                                 e.Model,
+                                 e.RegistrationNumber
+                             );
                          },
                          editor: {
                              xtype: 'combo.vehicle',
@@ -79,6 +78,30 @@ constructor: function(cfg) {
                              if (r) return r.get('TireRemoveReasonName');
                              return null;
                          },
+                         width: 200
+                     },
+                     {
+                         header: 'Тех. состояние',
+                         dataIndex: 'TireTechStateId',
+                         renderer: function (v, metaData, record, rowIndex, colIndex, store) {
+                             if (!v) {
+                                 var removeReason = record.get("TireRemoveReasonId");
+                                 if (removeReason) {
+                                     var reason = Kdn.ModelFactory.getStore('TireRemoveReason'),
+                                    techState = reason.getById(removeReason).get('State');
+                                     if (techState) {
+                                         return techState.TireTechStateName;
+                                     }
+                                 }
+
+                                 return null;
+                             }
+                             var s = Kdn.ModelFactory.getStore('TireTechState'),
+                               r = s.getById(v);
+                             if (r) return r.get('TireTechStateName');
+                             return null;
+                         },
+                         editor: { xtype: 'combo.tiretechstate', objectValue: false, allowBlank: true, enableClear: true },
                          width: 200
                      }
                   ]
@@ -609,9 +632,21 @@ editor:'view.tireeditor',
                        dataIndex: 'IsInStock',
                        align: 'center',
                        header: 'На складе',
-                       width: 100,
+                       width: 120,
                        renderer: Kdn.CheckRenderer,
-                       editor: { xtype: 'kdn.editor.booleanfield', renderer: Kdn.CheckRenderer, allowBlank: true }
+                       filter: {
+                           field: new Kdn.form.ComboBox({
+                               displayField: 'name',
+                               valueField: 'id',
+                               objectValue: false,
+                               enableClear: true,
+                               store: new Ext.data.ArrayStore({
+                                   fields: ['id', 'name'],
+                                   data: [[1, 'На складе']]
+                               })
+                           }),
+                           fieldEvents: ["select"]
+                       }
                    },
                     {
                         dataIndex: 'Wear',
@@ -726,5 +761,3 @@ editor:'view.tireeditor',
 });
 
 Ext.reg('view.tiregrid', T.view.TireGrid);
-
-

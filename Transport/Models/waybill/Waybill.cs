@@ -837,7 +837,7 @@ namespace Transport.Models {
                        else
                        {
                            waybillWork.MachineHour += (x.WorkAmount ?? 0);
-                           waybillWork.MotoHour += (x.WorkAmount ?? 0)*(decimal) 0.7;
+                           waybillWork.MotoHour += (x.WorkAmount ?? 0);
                        }
                    }
                    waybillWork.NormConsumption += x.Consumption ?? 0;

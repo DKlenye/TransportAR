@@ -25,11 +25,18 @@ namespace Transport.Models
 
       [Property, AllowBlank]
       public string BatGarageNumber { get; set; }
+      
+      [Property]
+      public int WorkUnitId { get; set; }
 
       [Property]
       public int? BatteryRemoveReasonId { get; set; }
-
+       
       [Property]
+      public int? BatteryTechStateId { get; set; }
+
+
+       [Property]
       public bool? IsWriteOff { get; set; }
 
        [AllowBlank]

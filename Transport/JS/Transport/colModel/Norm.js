@@ -194,7 +194,14 @@ T.colModel.Norm = Ext.extend(Ext.grid.ColumnModel, {
                 editor: {
                 xtype: 'kdn.form.datefield'
                 }
-            },
+        },
+            {
+              header: 'Ежегодно',
+              align: 'center',
+              dataIndex: 'Annually',
+              xtype: 'checkcolumn',
+              width: 100
+          },
           {
               header: 'Примечание',
               dataIndex: 'Description',
@@ -202,7 +209,7 @@ T.colModel.Norm = Ext.extend(Ext.grid.ColumnModel, {
                editor: {
                    xtype: 'textfield'
                }
-          }
+           }
           ]
    }
    
