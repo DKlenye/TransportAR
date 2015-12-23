@@ -41,19 +41,19 @@ namespace Transport.Models
 
         //Норма на пробег(машиночасы)
         [Property]
-        public int KmNorm { get; set; }
+        public int? KmNorm { get; set; }
 
         //Норма на пробег(машиночасы)
         [Property]
-        public int MhNorm { get; set; }
+        public int? MhNorm { get; set; }
 
         //Начальный пробег(машиночасы)
         [Property]
-        public int InitKmWork { get; set; }
+        public int? InitKmWork { get; set; }
         
         //Начальный пробег(машиночасы)
         [Property]
-        public int InitMhWork { get; set; }
+        public int? InitMhWork { get; set; }
 
         //Номер документа
         [Property, AllowBlank]
@@ -117,7 +117,6 @@ namespace Transport.Models
             bat.MhNorm = MhNorm;
             bat.OwnerId = OwnerId;
             bat.Warrantly = Warrantly;
-
             bat.SaveAndFlush();
 
             Refresh();
@@ -150,6 +149,7 @@ namespace Transport.Models
             {
                 BatteryId = bat.BatteryId,
                 InstallDate = InstallDate.Value,
+                WorkUnitId = WorkUnitId,
                 Vehicle = Vehicle
             };
 

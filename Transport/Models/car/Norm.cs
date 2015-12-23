@@ -75,7 +75,7 @@ namespace Transport.Models {
         #endregion
 
         
-        public bool IsActual {
+        public bool? IsActual {
             get { return CheckActual(DateTime.Now); }
         }
 

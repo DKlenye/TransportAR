@@ -37,19 +37,19 @@ namespace Transport.Models
 
         //Норма на пробег
         [Property]
-        public int KmNorm { get; set; }
+        public int? KmNorm { get; set; }
 
         //Норма на машиночасы
         [Property]
-        public int MhNorm { get; set; }
+        public int? MhNorm { get; set; }
 
         //Начальный пробег
         [Property]
-        public int InitKmWork { get; set; }
+        public int? InitKmWork { get; set; }
 
         //Начальные машиночасы
         [Property]
-        public int InitMhWork { get; set; }
+        public int? InitMhWork { get; set; }
 
         //Номер документа
         [Property,AllowBlank]

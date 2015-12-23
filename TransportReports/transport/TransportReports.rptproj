@@ -45,6 +45,10 @@
       <FullPath>AccVehicleObReport.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>afa_ConsumptionByDebit.rdl</Name>
+      <FullPath>afa_ConsumptionByDebit.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>AverageConsumption.rdl</Name>
       <FullPath>AverageConsumption.rdl</FullPath>
     </ProjectItem>
@@ -123,6 +127,10 @@
     <ProjectItem>
       <Name>CarYearConsumption.rdl</Name>
       <FullPath>CarYearConsumption.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>CustomerWorkInfo.rdl</Name>
+      <FullPath>CustomerWorkInfo.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>DistributionListPrint.rdl</Name>
@@ -277,12 +285,20 @@
       <FullPath>OilNorms.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>OrdersMagazine.rdl</Name>
+      <FullPath>OrdersMagazine.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>OrderSumInfo.rdl</Name>
       <FullPath>OrderSumInfo.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>OrderSumInfoBySchedule.rdl</Name>
       <FullPath>OrderSumInfoBySchedule.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>PackageWorkInfo.rdl</Name>
+      <FullPath>PackageWorkInfo.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>PolymirVehicleWork.rdl</Name>
@@ -391,6 +407,10 @@
     <ProjectItem>
       <Name>TireRemove.rdl</Name>
       <FullPath>TireRemove.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>TireSeasonReplace.rdl</Name>
+      <FullPath>TireSeasonReplace.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>TireUmtu.rdl</Name>
@@ -585,6 +605,10 @@
       <FullPath>WaybillCount.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>WaybillCountByGroup.rdl</Name>
+      <FullPath>WaybillCountByGroup.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>WaybillCustomerWorkingTimeInfo.rdl</Name>
       <FullPath>WaybillCustomerWorkingTimeInfo.rdl</FullPath>
     </ProjectItem>
@@ -607,6 +631,10 @@
     <ProjectItem>
       <Name>WorkCoefficient.rdl</Name>
       <FullPath>WorkCoefficient.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>PackageFuelInfo.rdl</Name>
+      <FullPath>PackageFuelInfo.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>

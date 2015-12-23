@@ -416,6 +416,21 @@ T.view.BatteryGrid = Ext.extend(Kdn.view.BaseGrid, {
                         width: 110
                     },
                     {
+                        dataIndex: 'WorkUnitId',
+                        hidden: true,
+                        align: 'center',
+                        header: 'Ед. работы',
+                        width: 200,
+                        editor: { xtype: 'combo.workunit', objectValue: false },
+                        renderer: function (o) {
+                            if (!o && !Ext.isObject(o)) return null;
+                            var store = Kdn.ModelFactory.getStore('WorkUnit'),
+                                record = store.getById(o);
+                            if (record) return String.format("({1}) {0}", record.data.WorkUnitName, record.data.UnitName);
+                            return o;
+                        }
+                    },
+                    {
                         dataIndex: 'InstallDate',
                         hidden:true,
                         xtype:'datecolumn',

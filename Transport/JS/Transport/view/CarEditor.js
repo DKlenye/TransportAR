@@ -50,12 +50,12 @@ T.view.CarEditor = Ext.extend(Kdn.editor.ModelEditor, {
 	                  'MakeYear',
 	                  'ServiceDocNumber',
 	                  'RegSertificate',
+                      'PolymirSHU',
 	                  'RegEnd',
 	                  'DepartmentId',
 	                  'Disposal',
 	                  'ColumnId',
 	                  'ResponsibleDriver',
-	                  'PolymirSHU',
                       'NotUsedDate',
 	                  'WriteOffDate'
                       
@@ -74,7 +74,7 @@ T.view.CarEditor = Ext.extend(Kdn.editor.ModelEditor, {
 	                  border:false 
 	               },
 	               items:[
-	                  buildPropEditor(['Customer', 'WaybillTypeId', 'TrailerId', 'PackageTypeId', 'ScheduleId', 'StartWork', 'EndWork'],
+	                  buildPropEditor(['Customer', 'WaybillTypeId', 'TrailerId', 'PackageTypeId', 'ScheduleId', 'StartWork', 'EndWork', 'DinnerMinutes'],
 	                     {iconCls:'icon-roadworks',title:'Закрепление, настройки работы'}
 	                  ),
 	                  buildPropEditor(['BodyNumber', 'EngineModel', 'EngineNumber', 'ChassisNumber', 'CabinNumber', 'Color', 'EnginePower', 'EngineVolume', 'EngineTypeId', 'EcologyClassId', 'ModelHeater', 'TransmissionType'],
@@ -167,7 +167,7 @@ T.view.CarEditor = Ext.extend(Kdn.editor.ModelEditor, {
 	
 	   this.ComboCar = Ext.create({
 	            xtype:'combo.car',
-	            width:300,
+	            width:500,
 	            listeners:{
 	               scope:this,
 	               select:this.onCarSelect

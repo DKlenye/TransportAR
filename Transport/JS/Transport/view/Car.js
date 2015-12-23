@@ -191,6 +191,13 @@ T.view.Car = Ext.extend(T.view.Trailer, {
             hidden: true
         },
         {
+            dataIndex: 'DinnerMinutes',
+            header: 'Время обеда, мин',
+            width: 100,
+            editor: { xtype: 'kdn.editor.numberfield', allowBlank: true },
+            hidden: true
+        },
+        {
             dataIndex: 'CapacityPassengers',
             header: 'Кол-во пассажиров, чел',
             width: 100,
@@ -235,10 +242,10 @@ T.view.Car = Ext.extend(T.view.Trailer, {
         },
         {
             dataIndex: 'PolymirSHU',
-            header: 'Участок(Полимир)',
+            header: 'Собственник',
             width: 100,
             'hidden': true,
-            editor: { xtype: 'kdn.editor.textfield', allowBlank: true }
+            editor: { xtype: 'combo.polymirshu', allowBlank: true, objectValue: false, enableClear: true }
         },
         {
             dataIndex: 'CostCode',

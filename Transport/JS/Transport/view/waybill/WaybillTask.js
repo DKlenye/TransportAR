@@ -1007,31 +1007,35 @@ T.view.waybill.WaybillTask = Ext.extend(Kdn.editor.LocalGrid, {
 
             taskIncreaseStore.removeAll();
 
-            if (norm.isMain) {
-                increaseStore.each(function(i) {
-                    if (i.get('isCommon')) {
-                        taskIncreaseStore.add(new taskIncreaseStore.recordType(Kdn.clone(i.data), i.id));
+            //на временные нормы никакая надбавка не распространяется
+            if (!norm.IsTemp) {
+
+                if (norm.isMain) {
+                    increaseStore.each(function(i) {
+                        if (i.get('isCommon')) {
+                            taskIncreaseStore.add(new taskIncreaseStore.recordType(Kdn.clone(i.data), i.id));
+                        }
+                    });
+                }
+
+                Ext.iterate(norm.increases, function(i) {
+
+                    if (!i.Const) {
+
+                        var increase = increaseStore.getById(i.IncreaseId);
+                        var data = Kdn.clone(i);
+                        data.IncreaseName = increase.get('IncreaseName');
+
+
+                        var defaultIncrease = taskIncreaseStore.getById(data.IncreaseId);
+                        if (defaultIncrease) {
+                            defaultIncrease.set('Prcn', data.Prcn);
+                        } else {
+                            taskIncreaseStore.add(new taskIncreaseStore.recordType(data, data.IncreaseId));
+                        }
                     }
                 });
             }
-
-            Ext.iterate(norm.increases, function(i) {
-
-                if (!i.Const) {
-
-                    var increase = increaseStore.getById(i.IncreaseId);
-                    var data = Kdn.clone(i);
-                    data.IncreaseName = increase.get('IncreaseName');
-
-
-                    var defaultIncrease = taskIncreaseStore.getById(data.IncreaseId);
-                    if (defaultIncrease) {
-                        defaultIncrease.set('Prcn', data.Prcn);
-                    } else {
-                        taskIncreaseStore.add(new taskIncreaseStore.recordType(data, data.IncreaseId));
-                    }
-                }
-            });
             break;
         }
 

@@ -1,4 +1,4 @@
-﻿Kdn.view.BaseGrid = Ext.extend(Ext.grid.GridPanel, {
+Kdn.view.BaseGrid = Ext.extend(Ext.grid.GridPanel, {
     pageSize: 0,
     pageMode: 'local',
     initComponent: function () {
@@ -186,11 +186,11 @@
 
     _getTbar: function () {
 
-        /* var exportButton = new Ext.ux.Exporter.Button({
+         var exportButton = new Ext.ux.Exporter.Button({
         store: this.store,
         exportFunction:'exportStore',
         text     : "Экспорт в excel"
-        });*/
+        });
 
 
 
@@ -244,9 +244,9 @@
             },
           
            
-            '-'//,
-        //'->',
-        //exportButton
+            '-',
+        '->',
+        exportButton
 
         ]
     },

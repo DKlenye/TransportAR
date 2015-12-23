@@ -7,7 +7,6 @@
         <ConnectString>Data Source=db2;Initial Catalog=transport</ConnectString>
       </ConnectionProperties>
       <rd:DataSourceID>50b72b47-c611-4687-8689-dacd15d1d5bf</rd:DataSourceID>
-      <rd:SecurityType>DataBase</rd:SecurityType>
     </DataSource>
   </DataSources>
   <DataSets>
@@ -115,6 +114,90 @@
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
     </DataSet>
+    <DataSet Name="DataSet1">
+      <Fields>
+        <Field Name="EmployeeId">
+          <DataField>EmployeeId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Fio">
+          <DataField>Fio</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <CommandText>SELECT 
+	e.EmployeeId,
+	e.Fio
+FROM (
+SELECT DISTINCT EmployeeId FROM SmallMechFuelReport 
+)a
+INNER JOIN v_Employee e ON e.EmployeeId = a.EmployeeId AND e.DismissDate IS null</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+    </DataSet>
+    <DataSet Name="DataSet2">
+      <Fields>
+        <Field Name="FuelId">
+          <DataField>FuelId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="FuelName">
+          <DataField>FuelName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DSC">
+          <DataField>DSC</DataField>
+          <rd:TypeName>System.Byte</rd:TypeName>
+        </Field>
+        <Field Name="WeightCoeff">
+          <DataField>WeightCoeff</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="OilGroupId">
+          <DataField>OilGroupId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="PetrolGroupId">
+          <DataField>PetrolGroupId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ReplicationId">
+          <DataField>ReplicationId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ReplicationSource">
+          <DataField>ReplicationSource</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ShortFuelName">
+          <DataField>ShortFuelName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="UnitId">
+          <DataField>UnitId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="FuelGroupId">
+          <DataField>FuelGroupId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="NormId">
+          <DataField>NormId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Hide">
+          <DataField>Hide</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <CommandText>select * from Fuel where Dsc=1</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+    </DataSet>
   </DataSets>
   <Body>
     <ReportItems>
@@ -122,39 +205,39 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.73315cm</Width>
+              <Width>0.68234in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.59167cm</Width>
+              <Width>0.62664in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.22907cm</Width>
+              <Width>0.48389in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.95771cm</Width>
+              <Width>0.77075in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>5.41211cm</Width>
+              <Width>2.13075in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.30657cm</Width>
+              <Width>0.5144in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.52209cm</Width>
+              <Width>0.59925in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.25751cm</Width>
+              <Width>0.49508in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.35032cm</Width>
+              <Width>0.53162in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.38979cm</Width>
+              <Width>0.54716in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.6cm</Height>
+              <Height>0.23622in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -341,7 +424,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>1.65834cm</Height>
+              <Height>0.65289in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -705,7 +788,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.6cm</Height>
+              <Height>0.23622in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1038,7 +1121,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.52062cm</Height>
+              <Height>0.20497in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -2015,10 +2098,24 @@
     <ReportParameter Name="FuelId">
       <DataType>Integer</DataType>
       <Prompt>Топливо</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>DataSet2</DataSetName>
+          <ValueField>FuelId</ValueField>
+          <LabelField>FuelName</LabelField>
+        </DataSetReference>
+      </ValidValues>
     </ReportParameter>
     <ReportParameter Name="EmployeeId">
       <DataType>Integer</DataType>
       <Prompt>Работник</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>DataSet1</DataSetName>
+          <ValueField>EmployeeId</ValueField>
+          <LabelField>Fio</LabelField>
+        </DataSetReference>
+      </ValidValues>
     </ReportParameter>
   </ReportParameters>
   <Width>18.9cm</Width>

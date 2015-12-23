@@ -90,6 +90,7 @@
     <Reference Include="System.Data.SQLite">
       <HintPath>..\..\..\..\..\share\TransportAR\TransportAR\TransportSite\bin\System.Data.SQLite.DLL</HintPath>
     </Reference>
+    <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Routing">
@@ -102,6 +103,7 @@
     <Compile Include="Direct\AccRefuelling.cs" />
     <Compile Include="Direct\Battery.cs" />
     <Compile Include="Direct\Azs.cs" />
+    <Compile Include="Direct\RequestApprover.cs" />
     <Compile Include="Direct\DayInspection.cs" />
     <Compile Include="Direct\Distribution.cs" />
     <Compile Include="Direct\Driver.cs" />
@@ -138,6 +140,8 @@
     <Compile Include="Models\service\TariffCostItem.cs" />
     <Compile Include="Models\service\TariffCostItemType.cs" />
     <Compile Include="Models\service\TariffPetrolPrice.cs" />
+    <Compile Include="Models\tire\TireCard.cs" />
+    <Compile Include="Models\tire\TireSeasonReplace.cs" />
     <Compile Include="Models\tire\TireTechState.cs" />
     <Compile Include="Models\TransmissionType.cs" />
     <Compile Include="Models\vehicleGroups\BusinessPlanGroup.cs" />
@@ -1282,6 +1286,30 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\battery\BatteryTechState.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\combo\PolymirSHU.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\tire\TireSeasonReplace.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\combo\Vehicle2.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\combo\MultiTireMoving.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\tire\TireSeasonReplaceEditor.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\CustomerWorkInfo.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\_PackageWorkInfo.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\PackageFuelInfo.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

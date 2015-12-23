@@ -118,11 +118,11 @@
                                     <table cellpadding="0" cellspacing="0">
                                         <tbody>
                                             <tr>
-                                            <td align="center"><div style="border: 2px solid #88A1C0; text-align: center; font: normal 11px Times New Roman;z-index:10000; width:150pt;" >
-                                                Открытое акционерное общество &quot;НАФТАН&quot;<br/>
-                                                Республика Беларусь,Витебская обл.<br/>
-                                                211440,г.Новополоцк, тел. 59-83-09
-</div></td>
+                                            <td align="center">
+                                                
+                                                <%Response.Write(Stamp()); %>
+
+                                            </td>
                                                 <td style="width:40mm;"></td>
                                                 <td style="width:30mm;text-align:center; font-family: Tahoma; font-size:12pt;"><span><%Response.Write(WaybillCode());%></span></td>
                                                 <td style="width:60mm">
@@ -251,10 +251,10 @@
                                                         <td>прибытия на объект</td>
                                                         <td>убытия с объекта</td>
                                                     </tr>
-                                                    <tr><td style="text-align:left;">Выезд<br/>на объект</td><td><span class="dataText"><% Response.Write(DepartureKm());%></span> </td><td>
+                                                    <tr><td style="text-align:left; font-size: 9px; width:100px;" >Выезд на объект</td><td><span class="dataText"><% Response.Write(DepartureKm());%></span> </td><td>
                                                         &nbsp;</td><td><span class="dataText"><% Response.Write(DepartureDate("HH:mm"));%></span></td><td>
                                                         &nbsp;</td><td>&nbsp;</td><td>&nbsp; <% Response.Write(DepartureMh());%></td></tr>
-                                                    <tr><td style="text-align:left;">Возвращение<br/>с объекта</td><td>&nbsp;</td><td>&nbsp;</td><td><span class="dataText"><% Response.Write(ReturnDate("HH:mm"));%></span></td><td>
+                                                    <tr><td style="text-align:left; font-size: 9px;">Возвращение с объекта</td><td>&nbsp;</td><td>&nbsp;</td><td><span class="dataText"><% Response.Write(ReturnDate("HH:mm"));%></span></td><td>
                                                         &nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
                                                 </tbody>
                                             </table>

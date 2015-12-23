@@ -67,13 +67,7 @@
                         <tr>
                         
                             <td style="width:70mm">
-									<div style="border: 2px solid #88A1C0; text-align: center; font: normal 11px Times New Roman;z-index:10000; width:150pt;" >
-Открытое акционерное общество <br/>
-"НАФТАН"<br/>
-Республика Беларусь,Витебская обл.<br/>
-211440,г.Новополоцк<br/>
-тел. 59-83-09
-</div>
+									<%Response.Write(Stamp()); %>
 								</td>
 								<td>
 								    <table cellpadding="0" cellspacing="0">

@@ -9,7 +9,6 @@ using PetaPoco;
 using Transport.Models;
 
 
-
 namespace Transport.Web
 {
 
@@ -20,7 +19,7 @@ namespace Transport.Web
         protected IList<WaybillTask> tasks;
         protected Vehicle vehicle;
         protected Trailer trailer;
-        protected IList<WaybillFuelRemain> remains;
+        protected IList<WaybillFuelRemain> remains = new List<WaybillFuelRemain>();
         protected WaybillFuelRemain remain = null;
         protected IList<WaybillCounter> counters;
         protected IList<WaybillDriver> waybillDrivers;
@@ -51,11 +50,26 @@ namespace Transport.Web
             if( waybill != null ) {
                vehicle = Vehicle.Find(waybill.Car.VehicleId);
 
+                var norms = Norm.FindActualNorms(vehicle.VehicleId, waybill.DepartureDate);
+                var actualFuels = new List<int>();
+                norms.ForEach(x=>actualFuels.AddRange(x.NormFuels));
+                
                if( waybill.TrailerId != null ) trailer = (Trailer)Trailer.Find(waybill.TrailerId.Value);
 
-               remains = WaybillFuelRemain.FindAll(Order.Desc(Projections.Property<WaybillFuelRemain>(x=>x.key.FuelId)), Expression.Where<WaybillFuelRemain>(x => x.key.WaybillId == waybill.WaybillId));
-                              
-               foreach (var rem in remains)
+               var _remains = WaybillFuelRemain.FindAll(Order.Desc(Projections.Property<WaybillFuelRemain>(x=>x.key.FuelId)), Expression.Where<WaybillFuelRemain>(x => x.key.WaybillId == waybill.WaybillId));
+
+                _remains.ForEach(x =>
+                {
+                    if (!actualFuels.Contains(x.FuelId) && x.DepartureRemain == 0)
+                    {
+                    }
+                    else
+                    {
+                        remains.Add(x);
+                    }
+                });
+
+               foreach (var rem in _remains)
                {
                   if( rem.FuelId == 7 || rem.FuelId==4 ) continue; //Не печатаем керосин и Н80
                   if(rem.DepartureRemain==0) continue;
@@ -415,6 +429,23 @@ namespace Transport.Web
             return "";
         }
 
+        public string FuelName1()
+        {
+            if (remains.Count > 0)
+            {
+                return Fuel.Find(remains[0].FuelId).FuelName;
+            }
+            return "";
+        }
+        public string FuelName2()
+        {
+            if (remains.Count > 1)
+            {
+                return Fuel.Find(remains[1].FuelId).FuelName;
+            }
+            return "";
+        }
+
         public string AllFuelName()
         {
             if (waybill != null && remain != null)
@@ -486,12 +517,22 @@ namespace Transport.Web
             return "59-83-09";
         }
 
+        public string OrganizationName()
+        {
+            var targetSpecTransDate = new DateTime(2015, 12, 1);
+
+            var SpecTransColumns = new List<int>() {6, 7, 8};
+
+            return waybill.DepartureDate >= targetSpecTransDate && vehicle.ColumnId!=null && SpecTransColumns.Contains(vehicle.ColumnId.Value)
+                ? @"УП ""Нафтан-Спецтранс"""
+                : @"Открытое акционерное общество ""НАФТАН""";
+        }
+
         public String Stamp()
         {
-            return String.Format("{0}{1}<br/>{2}<br/>{3}<br/>{4},{5}{6}",
+            return String.Format("{0}{1}<br/>{2}<br/>{3},{4}{5}",
                     "<div style=\"border: 2px solid #88A1C0; text-align: center; font: normal 12px Times New Roman;z-index:10000; width:170pt;\">",
-                    "Открытое акционерное общество",
-                    "\"НАФТАН\"",
+                    OrganizationName(),
                     "Республика Беларусь,Витебская обл.",
                     "211440,г.Новополоцк ",
                     "тел. " + Phone(),

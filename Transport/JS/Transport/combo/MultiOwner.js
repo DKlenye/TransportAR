@@ -1,4 +1,4 @@
-﻿T.combo.MultiOwner = Ext.extend(Ext.net.MultiCombo, {
+T.combo.MultiOwner = Ext.extend(Ext.net.MultiCombo, {
     initComponent: function() {
         Ext.apply(this, {
             displayField: 'OwnerName',

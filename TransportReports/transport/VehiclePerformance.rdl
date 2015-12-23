@@ -147,7 +147,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.29165in</Width>
+              <Width>1.39583in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>0.79167in</Width>
@@ -1017,7 +1017,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!ColumnName.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -3270,7 +3272,7 @@
         <DataSetName>DataSet1</DataSetName>
         <Top>0.44792in</Top>
         <Height>1.88542in</Height>
-        <Width>19.34375in</Width>
+        <Width>19.44793in</Width>
         <Style>
           <Border>
             <Style>None</Style>

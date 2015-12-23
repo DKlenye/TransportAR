@@ -1,6 +1,6 @@
-﻿T.view.report.WaybillCount = Ext.extend(Kdn.view.Report, {
+T.view.report.WaybillCount = Ext.extend(Kdn.view.Report, {
 
-reportName: 'WaybillCount',
+reportName  : 'WaybillCount',
 
 params: [
         'C:',
@@ -24,10 +24,19 @@ params: [
                 objectValue: false,
                 width: 400,
                 dataIndex: 'columns'
+            },
+            '-',
+            'По группам',
+            {
+                xtype:'checkbox',
+                ref:'./isInGroups'
             }
    ],
 
-    buildReportParams: function(params) {
+            buildReportParams: function (params) {
+
+                this.reportName = this.isInGroups.checked ? "WaybillCountByGroup" : "WaybillCount";
+
         var p = {};
         p.startDate = params.startDate;
         p.endDate = params.endDate;

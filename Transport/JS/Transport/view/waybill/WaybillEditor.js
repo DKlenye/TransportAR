@@ -88,7 +88,7 @@ T.view.waybill.WaybillEditor = Ext.extend(Kdn.editor.ModelEditor, {
 
         cfg.ComboCar = Ext.create({
             xtype: 'combo.car',
-            width: 300,
+            width: 500,
             listeners: {
                 scope: me,
                 select: me.onCarSelect
@@ -621,7 +621,7 @@ T.view.waybill.WaybillEditor = Ext.extend(Kdn.editor.ModelEditor, {
 
     onVehicleLoad: function(e) {
         this.vehicle = e;
-        this.ComboCar.setValue(Ext.copyTo({}, e, 'VehicleId,Model,GarageNumber,InventoryNumber,RegistrationNumber'));
+        this.ComboCar.setValue(Ext.copyTo({}, e, 'VehicleId,Model,GarageNumber,InventoryNumber,RegistrationNumber,ColumnId'));
         this.applyVehicleSettings();
 
         this.body.unmask();

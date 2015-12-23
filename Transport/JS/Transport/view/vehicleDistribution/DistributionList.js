@@ -122,6 +122,20 @@ T.view.vehicleDistribution.VehicleDistributionList = Ext.extend(Ext.grid.GridPan
                 '->',
                 '-',
                 {
+                    text: 'Печать (грузовой)',
+                    iconCls: 'icon-printer',
+                    handler: function () {
+                        var reportName = 'DistributionListPrint';
+                        var params = {};
+                        params.date = this.listDate.getValue();
+                        params.columnId = 0;
+                        params.groupRequestId = 1;
+                        Kdn.Reporter.exportReport(reportName, params);
+                    },
+                    scope: this
+                },
+                '-',
+                {
                     text: 'Печать',
                     iconCls: 'icon-printer',
                     handler: function() {
@@ -129,6 +143,7 @@ T.view.vehicleDistribution.VehicleDistributionList = Ext.extend(Ext.grid.GridPan
                         var params = {};
                         params.date = this.listDate.getValue();
                         params.columnId = this.column.getValue() || 0;
+                        params.groupRequestId = 0;
                         Kdn.Reporter.exportReport(reportName, params);
                     },
                     scope: this

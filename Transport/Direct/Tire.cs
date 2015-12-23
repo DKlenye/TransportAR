@@ -33,9 +33,9 @@ namespace Transport.Direct
 
             var id = o["filter"]["TireId"].Value<int>();
 
-            var rez = db.Query<Models.BatteryCard>(";EXEC TireCard @0", id);
+            var rez = db.Query<Models.TireCard>(";EXEC TireCard @0", id);
 
-            return new DataSerializer(new List<BatteryCard>(rez));
+            return new DataSerializer(new List<TireCard>(rez));
         }
 
         [DirectMethod]
@@ -197,6 +197,14 @@ namespace Transport.Direct
 
             return new DataSerializer(new List<object>());
         }
+
+
+        [DirectMethod]
+        public Tire[]  GetVehicleTires(BaseVehicle vehicle)
+        {
+            return TireMoving.FindByVehicle(vehicle).Select( x=>Tire.Find(x.TireId)).ToArray();
+        }
+
 
     }
 }

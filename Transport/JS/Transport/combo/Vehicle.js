@@ -1,4 +1,4 @@
-﻿T.combo.Vehicle = Ext.extend(Kdn.form.ComboGrid ,{
+T.combo.Vehicle = Ext.extend(Kdn.form.ComboGrid ,{
    listWidth:530,
    pageSize : 30,
    minHeight:450,

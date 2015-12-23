@@ -4,7 +4,7 @@ Kdn.Menu = [
     {
         MenuId: 0,
         text: "Программа",
-        permission: {},
+        permission: { u: [1] },
         iconCls: "icon-application_xp32",
         Child: [
             {
@@ -361,6 +361,12 @@ Kdn.Menu = [
             iconCls: 'icon-table',
             Handler: 'createView',
             HandlerCfg: "{xtype:'view.tiretechstate',single:true}"
+        },
+        {
+            text: 'Сезонная замена',
+            iconCls: 'icon-table',
+            Handler: 'createView',
+            HandlerCfg: "{xtype:'view.tireseasonreplace',single:true}"
         },
             {
                 text: 'Отчёты',
@@ -837,6 +843,25 @@ Kdn.Menu = [
                         Handler: 'createView',
                         HandlerCfg: "{xtype:'view.report.vehicledaywork',single:true}"
                     },
+                    {
+                        text: 'Работа транспорта (по заказчикам)',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.customerworkinfo',single:true}"
+                    },
+                    {
+                        text: 'Работа транспорта (по пачке п.л.)',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.packageworkinfo',single:true}"
+                    },
+                    {
+                        text: 'Движение топлива (по пачке п.л.)',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.packagefuelinfo',single:true}"
+                    },
+                    
                 {
                     text: 'Работа транспорта за период по гаражным номерам',
                     iconCls: 'icon-blue-document-word',
@@ -1159,7 +1184,7 @@ Kdn.Menu = [
     {
         text: "Бухгалтерия",
         permission: {
-            u: [1, 15, 16,67,106]
+            u: [1, 15, 16,67,106,111]
         },
         iconCls: "icon-coins32",
         Handler: null,

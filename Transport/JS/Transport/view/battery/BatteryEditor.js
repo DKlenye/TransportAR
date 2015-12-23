@@ -1,4 +1,4 @@
-﻿T.view.BatteryEditor = Ext.extend(Kdn.editor.ModelEditor, {
+T.view.BatteryEditor = Ext.extend(Kdn.editor.ModelEditor, {
    
    initComponent:function(){	   
 	   T.view.BatteryEditor.superclass.initComponent.call(this);
@@ -25,8 +25,10 @@
 	         var source = this.getSource();
 	         Ext.apply(source,{
 	            Warrantly:rec.get('Warrantly'),
-	            Norm: (source.WorkUnitId && source.WorkUnitId==1)?rec.get('KmNorm'):rec.get('MhNorm'),
-	            InitWork:0,
+	            MhNorm: rec.get('MhNorm'),
+	            KmNorm:rec.get('KmNorm'),
+                InitKmWork: 0,
+                InitMhWork:0,
 	            MonthStart:0
 	         });
 	         this.setSource(source);

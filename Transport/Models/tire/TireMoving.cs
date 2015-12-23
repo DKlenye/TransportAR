@@ -61,5 +61,10 @@ namespace Transport.Models
             var tire = Tire.Find(TireId);
             tire.TireMovingId = moving.TireMovingId;
         }
+
+        public static TireMoving[] FindByVehicle(BaseVehicle vehicle)
+        {
+            return FindAll(Expression.Where<TireMoving>(x => x.Vehicle == vehicle && x.TireRemoveReasonId == null));
+        }
     }
 }

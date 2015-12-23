@@ -273,6 +273,14 @@
           <DataField>ReportGroupId</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
+        <Field Name="TransmissionTypeId">
+          <DataField>TransmissionTypeId</DataField>
+          <rd:TypeName>System.Byte</rd:TypeName>
+        </Field>
+        <Field Name="TransmissionType">
+          <DataField>TransmissionType</DataField>
+          <rd:TypeName>System.Byte</rd:TypeName>
+        </Field>
         <Field Name="DepartmentName">
           <DataField>DepartmentName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -281,11 +289,27 @@
           <DataField>VehicleOilGroupId</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
+        <Field Name="NotUsed">
+          <DataField>NotUsed</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="NotUsedDate">
+          <DataField>NotUsedDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="VehicleModelId">
+          <DataField>VehicleModelId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="BusinessPlanGroupId">
+          <DataField>BusinessPlanGroupId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>DataSource1</DataSourceName>
-        <CommandText>select v.*,isnull(t.BodyTypeName,' НЕТ ГРУППЫ') BodyTypeName,c.ColumnName,d.DepartmentName from Vehicle v
-left join BodyType t on t.BodyTypeId = v.BodyTypeId
+        <CommandText>select v.*,isnull(t.GroupRequestName,' НЕТ ГРУППЫ') BodyTypeName,c.ColumnName,d.DepartmentName from Vehicle v
+left join GroupRequest t on t.GroupRequestId = v.GroupRequestId
 left join TransportColumn c on c.ColumnId =  v.ColumnId
 left join Department d on d.DepartmentId = v.DepartmentId
 where v.OwnerId = 1 and v.writeOffDate is null
@@ -929,17 +953,20 @@ order by v.ColumnId,v.GarageNumber</CommandText>
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>1.1425in</Height>
+    <Height>2.90195cm</Height>
     <Style />
   </Body>
-  <Width>10.58001in</Width>
+  <Width>26.87323cm</Width>
   <Page>
-    <LeftMargin>1in</LeftMargin>
-    <RightMargin>1in</RightMargin>
-    <TopMargin>1in</TopMargin>
-    <BottomMargin>1in</BottomMargin>
+    <PageHeight>27.94cm</PageHeight>
+    <PageWidth>21.59cm</PageWidth>
+    <LeftMargin>0.5cm</LeftMargin>
+    <RightMargin>0.5cm</RightMargin>
+    <TopMargin>0.5cm</TopMargin>
+    <BottomMargin>0.5cm</BottomMargin>
+    <ColumnSpacing>1.27cm</ColumnSpacing>
     <Style />
   </Page>
   <rd:ReportID>57f985e9-d2a9-4068-8123-e53f46b0a80e</rd:ReportID>
-  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
 </Report>

@@ -39,6 +39,8 @@ namespace Transport.Models {
       public int? GroupRequestId { get; set; }
        [Property]
        public int? VehicleOilGroupId { get; set; }
+       [AllowBlank, Property]
+       public string PolymirSHU { get; set; }
 
 
       [Property(Index="idx_ReplicationVehicle")]
@@ -82,7 +84,11 @@ namespace Transport.Models {
       public string StartWork { get; set; }
       [AllowBlank, Property(Length = 5)]
       public string EndWork { get; set; }
-      [Property]
+
+      [AllowBlank,Property]
+      public int? DinnerMinutes { get; set; }
+
+       [Property]
       public int? TrailerId { get; set; }
       [Property]
       public int? WaybillTypeId { get; set; }
@@ -310,6 +316,8 @@ namespace Transport.Models {
       public string StartWork { get; set; }
       [AllowBlank, Property(Length = 5)]
       public string EndWork { get; set; }
+      [AllowBlank, Property]
+      public int? DinnerMinutes { get; set; }
 
 
       #endregion

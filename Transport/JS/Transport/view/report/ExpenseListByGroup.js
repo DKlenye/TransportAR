@@ -1,4 +1,4 @@
-﻿T.view.report.ExpenseListByGroup = Ext.extend(T.view.report.AccFuelObReport, {
+T.view.report.ExpenseListByGroup = Ext.extend(T.view.report.AccFuelObReport, {
     reportName: 'ExpenseListByGroup',
     params: [
         '-',
@@ -22,7 +22,7 @@
                 mode: 'local',
                 store: new Ext.data.ArrayStore({
                     fields: ['id', 'name'],
-                    data: [[0, 'Общая'], [1, 'Бухгалтерия ОАО"Нафтан"'], [2, 'Бухгалтерия ОАО"Полимир"']]
+                    data: [[0, 'Общая'], [1, 'Бухгалтерия ОАО"Нафтан"'], [2, 'Бухгалтерия ОАО"Полимир"'], [3, 'УП "Нафтан-Спецтранс"']]
                 }),
                 value: 0,
                 valueField: 'id',

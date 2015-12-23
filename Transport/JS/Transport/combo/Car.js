@@ -1,10 +1,32 @@
-﻿T.combo.Car = Ext.extend(Kdn.form.ComboGrid ,{
-   listWidth:530,
+T.combo.Car = Ext.extend(Kdn.form.ComboGrid ,{
+   listWidth:730,
    pageSize : 30,
    minHeight:450,
-   minListWidth:450,
+   minListWidth:550,
    enableKeyEvents: true,
-   renderTpl:'[{GarageNumber}] {Model} {RegistrationNumber}',
+   //renderTpl: '[{GarageNumber}] {Model} {RegistrationNumber} {PolymirSHU}',
+
+   renderTpl: function (e) {
+
+       var store = Kdn.ModelFactory.getStore('TransportColumn');
+
+       if (e) {
+
+           var column = store.getById(e.ColumnId);
+           var columnName = '';
+
+           if (column) columnName = column.get('ColumnName');
+
+           return String.format('[{0}] {1} {2} {3}',
+             e.GarageNumber,
+             e.Model,
+             e.RegistrationNumber,
+             columnName
+         );
+       }
+       return '';
+   },
+
    columns:[
                {
                   dataIndex:'GarageNumber',
@@ -27,8 +49,16 @@
                   header:'Инв. №',
                   width:100,
                   fixed:true
-               }
-            ],
+              },
+               {
+                    
+                   dataIndex: 'ColumnId',
+                   header: 'Колонна',
+                   width: 200,
+                   fixed: true,
+                   renderer:Kdn.Renderer.store("TransportColumn","ColumnName")
+                 }
+   ],
    /*
    initView:function(){
       

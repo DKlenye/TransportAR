@@ -105,6 +105,9 @@
           <QueryParameter Name="@columnId">
             <Value>=Parameters!columnId.Value</Value>
           </QueryParameter>
+          <QueryParameter Name="@groupRequestId">
+            <Value>=Parameters!groupRequestId.Value</Value>
+          </QueryParameter>
         </QueryParameters>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
@@ -162,6 +165,22 @@
                                 <Format>dd.MM.yyyy</Format>
                               </Style>
                             </TextRun>
+                            <TextRun>
+                              <Value xml:space="preserve"> </Value>
+                              <Style>
+                                <FontSize>12pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                                <Format>dd.MM.yyyy</Format>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>=iif(Parameters!groupRequestId.Value=0," ","Грузовые")</Value>
+                              <Style>
+                                <FontSize>12pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                                <Format>dd.MM.yyyy</Format>
+                              </Style>
+                            </TextRun>
                           </TextRuns>
                           <Style>
                             <TextAlign>Center</TextAlign>
@@ -181,6 +200,7 @@
                       </Style>
                     </Textbox>
                     <ColSpan>4</ColSpan>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell />
@@ -612,6 +632,10 @@
     <ReportParameter Name="date">
       <DataType>DateTime</DataType>
       <Prompt>date</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="groupRequestId">
+      <DataType>Integer</DataType>
+      <Prompt>group Request Id</Prompt>
     </ReportParameter>
   </ReportParameters>
   <Width>18.29504cm</Width>

@@ -1,4 +1,4 @@
-﻿T.view.report.Inventory = Ext.extend(Kdn.app.TabItem, {
+T.view.report.Inventory = Ext.extend(Kdn.app.TabItem, {
     
     initComponent:function(){
       
@@ -12,6 +12,34 @@
                 value:Date.parseDate('01.11','d.m'),
                 dataIndex:'inventoryDate'
             },
+
+             {
+                 fieldLabel: 'Формат',
+                 xtype: 'combo',
+                 width: 90,
+                 typeAhead: true,
+                 triggerAction: 'all',
+                 lazyRender: true,
+                 mode: 'local',
+                 store: new Ext.data.ArrayStore({
+                     fields: ['format', 'iconCls', ],
+                     data: [['Excel', 'icon-excel'], ['Word', 'icon-blue-document-word'], ['Pdf', 'icon-doc_pdf']]
+                 }),
+                 tpl: '<tpl for="."><div class="x-combo-list-item icon-combo-item {iconCls}">{format}</div></tpl>',
+                 value: 'Pdf',
+                 valueField: 'format',
+                 displayField: 'format',
+                 dataIndex: 'format',
+                 listeners: {
+                     select: function (item, record, index) {
+                         this.setIconCls(record.get('iconCls'));
+                     },
+                     afterrender: function () {
+                         this.setIconCls('icon-doc_pdf');
+                     }
+                 }
+             },
+
             {             
                  xtype:'compositefield',
                  items:[
@@ -267,7 +295,10 @@
 
         o = Ext.apply(o, params);
 
-        Kdn.Reporter.exportReport("Inventory", o,"PDF");
+
+        var format = this.getParams().get('format').getValue();
+
+        Kdn.Reporter.exportReport("Inventory", o,format);
         
     },
     

@@ -4,6 +4,7 @@ using System.Text;
 using System.Reflection;
 using System.Collections.Generic;
 using Castle.Core;
+using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
 using Ext.Direct;
 using Newtonsoft.Json.Linq;
 using Castle.ActiveRecord;
@@ -108,8 +109,50 @@ namespace Transport.Direct {
 
       }
 
-       
- 
+
+
+       [DirectMethod]
+       [ParseAsJson]
+       public string ReplicateCustomers(JObject o)
+       {
+
+           var counter = 0;
+           var customers = Customer.FindAll(NHibernate.Criterion.Expression.Where<Customer>(x=>x.ReplicationId == null));
+           
+           var dbsrv2 = buildCustomSession(TDBFSettings);
+
+
+          using (new SessionScope(FlushAction.Never))
+           {
+               customers.ForEach(customer =>
+               {
+
+                   var c2 = new Tdbf.Customer()
+                   {
+                       customerName = customer.CustomerName,
+                       ownerId = 1,
+                       inputsDebit = customer.CostCode,
+                       excessCredit = "",
+                       excessDebit = ""
+                   };
+
+                   dbsrv2.Save(c2);
+                   
+                   customer.ReplicationSource = ReplicationSource.dbsrv2;
+                   customer.ReplicationId = c2.customerId;
+                   customer.Save();
+
+                   counter++;
+                   if (counter % 100 == 0)
+                   {
+                       SessionScope.Current.Flush();
+                   }
+               });
+               SessionScope.Current.Flush();
+           }
+           return "";
+       }
+
 
        [DirectMethod]
        [ParseAsJson]

@@ -556,6 +556,14 @@ namespace Transport.Models {
            var lunch8 = 45;
            var lunch12 = 60;
 
+           var lunchMinutes = ((FullCar)FullCar.Find(Car.VehicleId)).DinnerMinutes;
+
+           if (lunchMinutes != null && lunchMinutes.Value > 0)
+           {
+               lunch8 = lunchMinutes.Value;
+               lunch12 = lunchMinutes.Value;
+           }
+
 
            if (ScheduleId != null)
            {
@@ -669,6 +677,14 @@ namespace Transport.Models {
 
            var lunch8 = 45;
            var lunch12 = 60;
+
+           var lunchMinutes = ((FullCar) FullCar.Find(Car.VehicleId)).DinnerMinutes;
+           
+           if (lunchMinutes != null && lunchMinutes.Value > 0)
+           {
+               lunch8 = lunchMinutes.Value;
+               lunch12 = lunchMinutes.Value;
+           }
 
 
            if (ScheduleId != null)

@@ -128,6 +128,8 @@ namespace Transport.Models
             // var normCounsumption = NormConsumption.Find(NormConsumptionId);
             var norm = Norm.Find(NormConsumptionId);
 
+            if (norm.IsTemp != null && norm.IsTemp.Value) return;
+
             var query = new ScalarQuery<DateTime>(typeof (Waybill),
                 @" SELECT DepartureDate
                FROM Waybill
@@ -173,7 +175,7 @@ namespace Transport.Models
                 }
             }
 
-            var targetWinterDate = new DateTime(2015, 12, 01);
+            var targetWinterDate = new DateTime(2015, 11, 01);
 
             if (Temperature != null && Temperature < 0 && norm.isMain &&
                 (TaskDepartureDate.Month <= 3 || TaskDepartureDate > targetWinterDate))
@@ -482,6 +484,9 @@ namespace Transport.Models
             if (NormConsumptionId != null)
             {
                 var norm = Norm.Find(NormConsumptionId);
+
+                if (norm.IsTemp!=null && norm.IsTemp.Value) return;
+
                 var normIncreases = NormIncrease.FindByNorm(norm.NormId);
                 var taskMap = new Dictionary<int, WaybillTaskIncrease>();
                 var increaseMap = Increase.getMap();

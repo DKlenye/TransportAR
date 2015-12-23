@@ -40,18 +40,20 @@ namespace Transport.Direct
 
                 foreach (var driver in drivers)
                 {
-                    if (driver.Driver.Employee.DismissDate == null)
-                    {
+                    //if (driver.Driver.Employee.DismissDate == null)
+                    //{
                         ActualDrivers.Add(driver);
-                    }
-                    else
-                    {
-                        if (car.DriverId == driver.Driver.DriverId)
+                    //}
+                   // else
+                   // {
+                        //непонятка с спецтранс, уволенных водителей не удаляем
+
+                       /* if (car.DriverId == driver.Driver.DriverId)
                         {
                             car.DriverId = null;
                         }
-                        driver.Delete();
-                    }
+                        driver.Delete();*/
+                   // }
                 }
 
 

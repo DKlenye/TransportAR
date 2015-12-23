@@ -33,6 +33,12 @@ T.view.Customer = Ext.extend(Kdn.view.BaseGrid, {
                         editor: { xtype: 'kdn.editor.textfield',allowBlank:true }
                     },
                     {
+                        dataIndex: 'Description',
+                        header: 'Примечание',
+                        width: 200,
+                        editor: { xtype: 'kdn.editor.textfield', allowBlank: true }
+                    },
+                    {
                         dataIndex: 'CostCode',
                         header: 'Код затрат',
                         width: 100,

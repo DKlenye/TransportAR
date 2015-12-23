@@ -1,4 +1,4 @@
-﻿T.view.waybill.WaybillCounter = Ext.extend(Kdn.editor.LocalGrid, {
+T.view.waybill.WaybillCounter = Ext.extend(Kdn.editor.LocalGrid, {
     startEditColumn:1,    
     constructor: function(cfg) {
         cfg = cfg || {};
