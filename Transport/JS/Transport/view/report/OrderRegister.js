@@ -1,15 +1,15 @@
 
-T.view.report.CustomerWorkInfo = Ext.extend(Kdn.view.Report, {
+T.view.report.OrderRegister = Ext.extend(Kdn.view.Report, {
 
-reportName: 'CustomerWorkInfo',
+    reportName: 'OrderRegister',
 
     params: [
        '-',
-             'Гар.№:',
+             'Диспетчер',
             {
-               xtype:'textfield',              
-               width:100,
-               dataIndex:'garageNumber'
+               xtype: 'combo.registerdispatcher',              
+               width:120,
+               dataIndex:'User'
             },
             '-',
             'Заказчик',
@@ -42,21 +42,25 @@ reportName: 'CustomerWorkInfo',
    buildReportParams: function(params) {
        var p = {};
 
-       var customerId = 0;
+       var customerId = 0, userId = 0;
        
        if (params.Customer) {
            customerId = params.Customer.CustomerId;
        }
 
+       if (params.User) {
+           userId = params.User.UserId;
+       }
 
-        p.Start = params.start;
-        p.End = params.end;
-        p.customerId = customerId;
-        p.garageNumber = params.garageNumber||" ";
+        p.start = params.start;
+        p.end = params.end;
+        p.CustomerId = customerId;
+        p.userId = userId;
+        p.format = params.format;
 
         return p;
     }
 
 });
 
-Ext.reg('view.report.customerworkinfo', T.view.report.CustomerWorkInfo);
+Ext.reg('view.report.orderregister', T.view.report.OrderRegister);

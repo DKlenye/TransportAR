@@ -46,7 +46,7 @@
 FROM Vehicle v
 inner JOIN AccGroup ag ON ag.AccGroupId = v.AccGroupId
 LEFT JOIN ServiceGroup sg ON sg.ServiceGroupId = v.ServiceGroupId
-WHERE v.OwnerId = 1 AND (v.WriteOffDate IS NULL OR v.WriteOffDate&gt;'01.01.2014')</CommandText>
+WHERE v.OwnerId = 1 AND (v.WriteOffDate IS NULL OR v.WriteOffDate&gt;'01.01.2014') and v.columnId between 6 and 11</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
     </DataSet>
@@ -167,101 +167,6 @@ WHERE v.OwnerId = 1 AND (v.WriteOffDate IS NULL OR v.WriteOffDate&gt;'01.01.2014
                           <Style>Solid</Style>
                         </Border>
                         <BackgroundColor>WhiteSmoke</BackgroundColor>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-              </TablixCells>
-            </TablixRow>
-            <TablixRow>
-              <Height>0.25in</Height>
-              <TablixCells>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox10">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value />
-                              <Style />
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox10</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox11">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value />
-                              <Style />
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox11</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox12">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value />
-                              <Style />
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox12</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -607,43 +512,6 @@ WHERE v.OwnerId = 1 AND (v.WriteOffDate IS NULL OR v.WriteOffDate&gt;'01.01.2014
               </TablixHeader>
               <TablixMembers>
                 <TablixMember>
-                  <TablixHeader>
-                    <Size>1.52083in</Size>
-                    <CellContents>
-                      <Textbox Name="Textbox14">
-                        <CanGrow>true</CanGrow>
-                        <KeepTogether>true</KeepTogether>
-                        <Paragraphs>
-                          <Paragraph>
-                            <TextRuns>
-                              <TextRun>
-                                <Value />
-                                <Style />
-                              </TextRun>
-                            </TextRuns>
-                            <Style />
-                          </Paragraph>
-                        </Paragraphs>
-                        <rd:DefaultName>Textbox14</rd:DefaultName>
-                        <Style>
-                          <Border>
-                            <Color>LightGrey</Color>
-                            <Style>Solid</Style>
-                          </Border>
-                          <PaddingLeft>2pt</PaddingLeft>
-                          <PaddingRight>2pt</PaddingRight>
-                          <PaddingTop>2pt</PaddingTop>
-                          <PaddingBottom>2pt</PaddingBottom>
-                        </Style>
-                      </Textbox>
-                    </CellContents>
-                  </TablixHeader>
-                  <TablixMembers>
-                    <TablixMember />
-                  </TablixMembers>
-                  <KeepWithGroup>After</KeepWithGroup>
-                </TablixMember>
-                <TablixMember>
                   <Group Name="Group2">
                     <GroupExpressions>
                       <GroupExpression>=Fields!ServiceGroupName.Value</GroupExpression>
@@ -699,10 +567,8 @@ WHERE v.OwnerId = 1 AND (v.WriteOffDate IS NULL OR v.WriteOffDate&gt;'01.01.2014
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>0.11125in</Top>
-        <Left>0.00708in</Left>
-        <Height>1in</Height>
-        <Width>7.3575in</Width>
+        <Height>0.75in</Height>
+        <Width>7.35749in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -710,7 +576,7 @@ WHERE v.OwnerId = 1 AND (v.WriteOffDate IS NULL OR v.WriteOffDate&gt;'01.01.2014
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>1.20833in</Height>
+    <Height>0.75in</Height>
     <Style />
   </Body>
   <Width>7.36458in</Width>

@@ -17,7 +17,7 @@ namespace Transport.Direct
         {
             DateTime date = new DateTime(o["year"].Value<int>(), o["month"].Value<int>(),1);
 
-            string destPath = @"\\Pump\buh_acc$\ARM\RFS\fseb\";
+            string destPath = @"\\fs.lan.naftan.by\ARM\RFS\fseb\";
             string sourcePath = @"..\db\";
             string fileName = "Tran.dbf";
             

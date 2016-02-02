@@ -240,13 +240,7 @@ T.view.Car = Ext.extend(T.view.Trailer, {
             hidden: 'true',
             renderer: T.combo.Trailer.prototype.renderTpl
         },
-        {
-            dataIndex: 'PolymirSHU',
-            header: 'Собственник',
-            width: 100,
-            'hidden': true,
-            editor: { xtype: 'combo.polymirshu', allowBlank: true, objectValue: false, enableClear: true }
-        },
+        
         {
             dataIndex: 'CostCode',
             header: 'Код затрат',

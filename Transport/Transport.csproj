@@ -103,6 +103,7 @@
     <Compile Include="Direct\AccRefuelling.cs" />
     <Compile Include="Direct\Battery.cs" />
     <Compile Include="Direct\Azs.cs" />
+    <Compile Include="Direct\Dispatcher.cs" />
     <Compile Include="Direct\RequestApprover.cs" />
     <Compile Include="Direct\DayInspection.cs" />
     <Compile Include="Direct\Distribution.cs" />
@@ -1310,6 +1311,18 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\report\PackageFuelInfo.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\DriversWorkingTimeByCustomer.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\WaybillCountByCustomer.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\OrderRegister.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\combo\RegisterDispatcher.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

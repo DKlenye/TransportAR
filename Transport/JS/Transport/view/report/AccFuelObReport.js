@@ -1,4 +1,4 @@
-﻿T.view.report.AccFuelObReport = Ext.extend(Kdn.view.Report,{
+T.view.report.AccFuelObReport = Ext.extend(Kdn.view.Report,{
    
    reportName:'AccFuelObReport',
    
@@ -24,7 +24,7 @@
                mode: 'local',
                store: new Ext.data.ArrayStore({
                    fields: ['id','name'],
-                   data: [[0,'Общая'],[1,'Бухгалтерия ОАО"Нафтан"'],[2,'Бухгалтерия ОАО"Полимир"']]
+                   data: [[0, 'Общая'], [1, 'Бухгалтерия ОАО"Нафтан"'], [2, 'Бухгалтерия ОАО"Полимир"'], [3, 'Бухгалтерия УП"Нафтан-Спецтранс"']]
                 }),
                 value:0,
                 valueField: 'id',

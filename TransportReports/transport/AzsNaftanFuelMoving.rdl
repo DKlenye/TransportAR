@@ -254,7 +254,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>ОАО"Нафтан" ц.46        </Value>
+                <Value>ОАО"Нафтан" ц.18        </Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontSize>11pt</FontSize>
@@ -1434,7 +1434,6 @@
                                               <PaddingBottom>2pt</PaddingBottom>
                                             </Style>
                                           </Textbox>
-                                          <rd:Selected>true</rd:Selected>
                                         </CellContents>
                                       </TablixHeader>
                                       <TablixMembers>
@@ -1909,7 +1908,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>начальник цеха Гончар И.В.</Value>
+                <Value>начальник цеха №18 Иофик В.Б.</Value>
                 <Style>
                   <FontSize>11pt</FontSize>
                 </Style>

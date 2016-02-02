@@ -85,6 +85,12 @@ T.view.Trailer = Ext.extend(Kdn.view.BaseGrid, {
                                return value == filterValue;
                            }                          
                         }
+                   },
+                    {
+                        dataIndex: 'PolymirSHU',
+                        header: 'Собственник',
+                        width: 100,
+                        editor: { xtype: 'combo.polymirshu', allowBlank: true, objectValue: false, enableClear: true }
                     },
                     {
                         header: 'Гар.№',

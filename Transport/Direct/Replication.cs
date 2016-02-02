@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Reflection;
@@ -109,8 +110,13 @@ namespace Transport.Direct {
 
       }
 
-
-
+       [DirectMethod]
+       [ParseAsJson]
+       public string[] FSTest(JObject o)
+       {
+           return Directory.GetDirectories(@"\\\\fs.lan.naftan.by\\ARM");
+       }
+       
        [DirectMethod]
        [ParseAsJson]
        public string ReplicateCustomers(JObject o)

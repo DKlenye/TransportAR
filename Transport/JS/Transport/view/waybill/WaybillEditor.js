@@ -370,6 +370,8 @@ T.view.waybill.WaybillEditor = Ext.extend(Kdn.editor.ModelEditor, {
                     },
                     columns: [
                         { xtype: 'mappingcolumn', dataIndex: 'Customer.CustomerName', header: 'Заказчик' },
+                        { dataIndex: 'OrderSerial', header: 'Серия', editor: { xtype: 'textfield', allowBlank: true }, fixed: true, width: 60 },
+                        { dataIndex: 'OrderNumber', header: '№ заказ-наряда', editor: { xtype: 'textfield', allowBlank: true }, fixed: true, width: 130 },
                         {
                             header: 'Время в наряде',
                             dataIndex: 'Minutes',

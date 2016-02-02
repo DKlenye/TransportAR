@@ -169,6 +169,10 @@
       <FullPath>DriversWorkingTime.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>DriversWorkingTimeByCustomer.rdl</Name>
+      <FullPath>DriversWorkingTimeByCustomer.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>DriverWork.rdl</Name>
       <FullPath>DriverWork.rdl</FullPath>
     </ProjectItem>
@@ -295,6 +299,10 @@
     <ProjectItem>
       <Name>OrderSumInfoBySchedule.rdl</Name>
       <FullPath>OrderSumInfoBySchedule.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>PackageFuelInfo.rdl</Name>
+      <FullPath>PackageFuelInfo.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>PackageWorkInfo.rdl</Name>
@@ -605,6 +613,10 @@
       <FullPath>WaybillCount.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>WaybillCountByCustomer.rdl</Name>
+      <FullPath>WaybillCountByCustomer.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>WaybillCountByGroup.rdl</Name>
       <FullPath>WaybillCountByGroup.rdl</FullPath>
     </ProjectItem>
@@ -633,8 +645,8 @@
       <FullPath>WorkCoefficient.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>PackageFuelInfo.rdl</Name>
-      <FullPath>PackageFuelInfo.rdl</FullPath>
+      <Name>OrderRegister.rdl</Name>
+      <FullPath>OrderRegister.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>

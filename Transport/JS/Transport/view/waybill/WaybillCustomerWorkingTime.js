@@ -33,6 +33,17 @@ T.view.waybill.WaybillCustomerWorkingTime = Ext.extend(Kdn.editor.LocalGrid, {
                         return e.CustomerName;
                     },
                     editor:{xtype:'combo.customer'}
+                }, {
+                    dataIndex: 'OrderSerial',
+                    header: 'Серия',
+                    width: 60,
+                    editor: { xtype: 'textfield', allowBlank: true }
+                },
+                {
+                    dataIndex: 'OrderNumber',
+                    header: '№ заказ-наряда',
+                    width: 130,
+                    editor: { xtype: 'textfield', allowBlank: true }
                 },
                 {
                     dataIndex: 'Minutes',

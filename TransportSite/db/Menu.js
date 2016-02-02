@@ -314,7 +314,13 @@ Kdn.Menu = [
                 Handler: "createView",
                 HandlerCfg: "{xtype:'view.info.driverfuelexcess',single:true}"
 
-            }
+            },
+             {
+                 text: 'Реестр заказ-нарядов',
+                 iconCls: 'icon-blue-document-word',
+                 Handler: 'createView',
+                 HandlerCfg: "{xtype:'view.report.orderregister',single:true}"
+             }
         ]
     }, {
         text: 'Лимиты',
@@ -333,7 +339,7 @@ Kdn.Menu = [
     }, {
         text: 'Материалы',
         permission: {
-            u: [1, 29, 22, 4, 61, 53]
+            u: [1, 29, 22, 4, 61, 53,69]
         },
         iconCls: 'icon-layers32',
         Child: [
@@ -934,6 +940,12 @@ Kdn.Menu = [
                 iconCls: 'icon-report-white',
                 Child: [
                     {
+                        text: 'Ведомость учёта отработанного времени по п.л. (время в наряде)',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.driverworkingtimebycustomer',single:true}"
+                    },
+                    {
                         text: 'Ведомость учёта отработанного времени по п.л.',
                         iconCls: 'icon-blue-document-word',
                         Handler: 'createView',
@@ -991,6 +1003,11 @@ Kdn.Menu = [
                 text: 'Количество путевых листов по колоннам',
                 Handler: 'createView',
                 HandlerCfg: "{xtype:'view.report.waybillcount',single:true}"
+            },
+            {
+                text: 'Количество путевых листов по заказчикам',
+                Handler: 'createView',
+                HandlerCfg: "{xtype:'view.report.waybillcountbycustomer',single:true}"
             },
             {
                 text: 'Стоимость услуг, оказанных сторонним организациям',

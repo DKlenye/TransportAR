@@ -520,9 +520,10 @@ namespace Transport.Web
         public string OrganizationName()
         {
             var targetSpecTransDate = new DateTime(2015, 12, 1);
-
             var SpecTransColumns = new List<int>() {6, 7, 8};
 
+            if (waybill == null) return @"УП ""Нафтан-Спецтранс""";
+            
             return waybill.DepartureDate >= targetSpecTransDate && vehicle.ColumnId!=null && SpecTransColumns.Contains(vehicle.ColumnId.Value)
                 ? @"УП ""Нафтан-Спецтранс"""
                 : @"Открытое акционерное общество ""НАФТАН""";

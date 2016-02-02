@@ -718,7 +718,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum(Fields!Quantity.Value)</Value>
+                              <Value>=First(Fields!Quantity.Value)</Value>
                               <Style>
                                 <Format>0.00;- 0.00</Format>
                               </Style>
@@ -752,7 +752,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum(Fields!ReturnRemain.Value)</Value>
+                              <Value>=First(Fields!ReturnRemain.Value)</Value>
                               <Style>
                                 <Format>0.00;- 0.00</Format>
                               </Style>
@@ -786,7 +786,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum(Fields!Norm.Value)</Value>
+                              <Value>=First(Fields!Norm.Value)</Value>
                               <Style>
                                 <Format>0.00;- 0.00</Format>
                               </Style>
@@ -820,7 +820,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum(Fields!Fact.Value)</Value>
+                              <Value>=First(Fields!Fact.Value)</Value>
                               <Style>
                                 <Format>0.00;- 0.00</Format>
                               </Style>
@@ -878,6 +878,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -2273,7 +2274,7 @@
                                                   <Paragraph>
                                                     <TextRuns>
                                                       <TextRun>
-                                                        <Value>=Sum(Fields!DepartureRemain.Value)</Value>
+                                                        <Value>=First(Fields!DepartureRemain.Value)</Value>
                                                         <Style>
                                                           <Format>0.00;- 0.00</Format>
                                                         </Style>
@@ -2525,7 +2526,7 @@
         <DataSetName>DataSet1</DataSetName>
         <Top>0.34375in</Top>
         <Height>1.9758in</Height>
-        <Width>12.03101in</Width>
+        <Width>12.03102in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2592,7 +2593,7 @@ If i = 0 Then
 	Dim minutes = Int(i Mod 60)
 	Return System.[String].Format("{0}:{1}", hours, minutes)
 End Function</Code>
-  <Width>30.55878cm</Width>
+  <Width>30.55879cm</Width>
   <Page>
     <PageHeight>21.59cm</PageHeight>
     <PageWidth>27.94cm</PageWidth>
