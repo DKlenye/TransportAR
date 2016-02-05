@@ -96,10 +96,13 @@
       </Fields>
       <Query>
         <DataSourceName>DB2</DataSourceName>
-        <CommandText>exec ssrs_VehicleNorms @date</CommandText>
+        <CommandText>exec ssrs_VehicleNorms @date,@columns</CommandText>
         <QueryParameters>
           <QueryParameter Name="@date">
             <Value>=Parameters!date.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@columns">
+            <Value>=Parameters!columns.Value</Value>
           </QueryParameter>
         </QueryParameters>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
@@ -179,6 +182,9 @@
         <QueryParameters>
           <QueryParameter Name="@date">
             <Value>=Parameters!date.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@columns">
+            <Value>=Parameters!columns.Value</Value>
           </QueryParameter>
         </QueryParameters>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
@@ -3828,7 +3834,7 @@
         <Top>5.49487cm</Top>
         <Left>0cm</Left>
         <Height>2.84978cm</Height>
-        <Width>41.4773cm</Width>
+        <Width>41.47731cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -3849,6 +3855,10 @@
     <ReportParameter Name="date">
       <DataType>DateTime</DataType>
       <Prompt>date</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="columns">
+      <DataType>String</DataType>
+      <Prompt>columns</Prompt>
     </ReportParameter>
   </ReportParameters>
   <Width>42.27108cm</Width>

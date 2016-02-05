@@ -1324,6 +1324,12 @@
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\combo\RegisterDispatcher.js" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\12TRDayCount_SpecTrans.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\12TRInfo_SpecTrans.js" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

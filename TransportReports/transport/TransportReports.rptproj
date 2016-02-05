@@ -289,6 +289,10 @@
       <FullPath>OilNorms.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>OrderRegister.rdl</Name>
+      <FullPath>OrderRegister.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>OrdersMagazine.rdl</Name>
       <FullPath>OrdersMagazine.rdl</FullPath>
     </ProjectItem>
@@ -645,8 +649,12 @@
       <FullPath>WorkCoefficient.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>OrderRegister.rdl</Name>
-      <FullPath>OrderRegister.rdl</FullPath>
+      <Name>12TRInfo_SpecTrans.rdl</Name>
+      <FullPath>12TRInfo_SpecTrans.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>12TRDayCount_SpecTrans.rdl</Name>
+      <FullPath>12TRDayCount_SpecTrans.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>

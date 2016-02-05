@@ -682,12 +682,24 @@ Kdn.Menu = [
                        iconCls: 'icon-blue-document-word',
                        Handler: 'createView',
                        HandlerCfg: "{xtype:'view.report.12trdaycount',single:true}"
-                   }, {
+                   },
+                   {
+                       text: 'Информация 12-тр (Спецтранс)',
+                       iconCls: 'icon-blue-document-word',
+                       Handler: 'createView',
+                       HandlerCfg: "{xtype:'view.report.12trinfospectrans',single:true}"
+                   },
+                    {
+                        text: 'Информация 12-тр (Дни в работе)(Спецтранс)',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.12trdaycountspectrans',single:true}"
+                    },
+                    {
                        text: 'Информация 4-тр',
                        iconCls: 'icon-blue-document-word',
                        Handler: 'createView',
                        HandlerCfg: "{xtype:'view.report.4trinfo',single:true}"
-
                    }
                 ]
             },
