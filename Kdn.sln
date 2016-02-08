@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kdn", "Kdn\Kdn.csproj", "{644CB925-F10B-4F8B-A050-8F480BE4C2B5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Transport", "Transport\Transport.csproj", "{E31A6B35-1010-40A7-916C-044CD8DBB594}"
@@ -12,6 +14,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransportSite", "TransportS
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ext.Direct", "Ext.Direct\Ext.Direct.csproj", "{653B211D-FEFA-483B-A284-6431C8598ED4}"
+EndProject
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "TransportIntegration", "TransportIntegration\TransportIntegration\TransportIntegration.dtproj", "{B143CF2C-5938-4312-93DC-46B71AE998EE}"
+EndProject
+Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "TransportReports", "TransportReports\transport\TransportReports.rptproj", "{818D95CA-ADE4-4887-945A-F08DC9F8F550}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +59,26 @@ Global
 		{653B211D-FEFA-483B-A284-6431C8598ED4}.Development|Any CPU.Build.0 = Debug|Any CPU
 		{653B211D-FEFA-483B-A284-6431C8598ED4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{653B211D-FEFA-483B-A284-6431C8598ED4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B143CF2C-5938-4312-93DC-46B71AE998EE}.Debug|Any CPU.ActiveCfg = Development
+		{B143CF2C-5938-4312-93DC-46B71AE998EE}.Debug|Any CPU.Build.0 = Development
+		{B143CF2C-5938-4312-93DC-46B71AE998EE}.DebugLocal|Any CPU.ActiveCfg = Development
+		{B143CF2C-5938-4312-93DC-46B71AE998EE}.DebugLocal|Any CPU.Build.0 = Development
+		{B143CF2C-5938-4312-93DC-46B71AE998EE}.Development|Any CPU.ActiveCfg = Development
+		{B143CF2C-5938-4312-93DC-46B71AE998EE}.Development|Any CPU.Build.0 = Development
+		{B143CF2C-5938-4312-93DC-46B71AE998EE}.Release|Any CPU.ActiveCfg = Development
+		{B143CF2C-5938-4312-93DC-46B71AE998EE}.Release|Any CPU.Build.0 = Development
+		{818D95CA-ADE4-4887-945A-F08DC9F8F550}.Debug|Any CPU.ActiveCfg = Debug
+		{818D95CA-ADE4-4887-945A-F08DC9F8F550}.Debug|Any CPU.Build.0 = Debug
+		{818D95CA-ADE4-4887-945A-F08DC9F8F550}.Debug|Any CPU.Deploy.0 = Debug
+		{818D95CA-ADE4-4887-945A-F08DC9F8F550}.DebugLocal|Any CPU.ActiveCfg = DebugLocal
+		{818D95CA-ADE4-4887-945A-F08DC9F8F550}.DebugLocal|Any CPU.Build.0 = DebugLocal
+		{818D95CA-ADE4-4887-945A-F08DC9F8F550}.DebugLocal|Any CPU.Deploy.0 = DebugLocal
+		{818D95CA-ADE4-4887-945A-F08DC9F8F550}.Development|Any CPU.ActiveCfg = DebugLocal
+		{818D95CA-ADE4-4887-945A-F08DC9F8F550}.Development|Any CPU.Build.0 = DebugLocal
+		{818D95CA-ADE4-4887-945A-F08DC9F8F550}.Development|Any CPU.Deploy.0 = DebugLocal
+		{818D95CA-ADE4-4887-945A-F08DC9F8F550}.Release|Any CPU.ActiveCfg = Release
+		{818D95CA-ADE4-4887-945A-F08DC9F8F550}.Release|Any CPU.Build.0 = Release
+		{818D95CA-ADE4-4887-945A-F08DC9F8F550}.Release|Any CPU.Deploy.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
