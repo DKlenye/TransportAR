@@ -653,6 +653,10 @@
       <Name>WorkCoefficient.rdl</Name>
       <FullPath>WorkCoefficient.rdl</FullPath>
     </ProjectItem>
+    <ProjectItem>
+      <Name>OrdersObReport.rdl</Name>
+      <FullPath>OrdersObReport.rdl</FullPath>
+    </ProjectItem>
   </Reports>
   <Configurations>
     <Configuration>

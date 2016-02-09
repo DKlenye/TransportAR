@@ -7,8 +7,8 @@ T.view.report.OrderRegister = Ext.extend(Kdn.view.Report, {
        '-',
              'Диспетчер',
             {
-               xtype: 'combo.registerdispatcher',              
-               width:120,
+               xtype: 'combo.multiregisterdispatcher',              
+               width:150,
                dataIndex:'User'
             },
             '-',
@@ -23,7 +23,6 @@ T.view.report.OrderRegister = Ext.extend(Kdn.view.Report, {
             'Период:',
             {
                xtype:'datefield',
-               width:250,
                dataIndex:'start',
                value:new Date(),
                width:120
@@ -31,7 +30,6 @@ T.view.report.OrderRegister = Ext.extend(Kdn.view.Report, {
             '-', 
             {
                xtype:'datefield',
-               width:250,
                dataIndex:'end',
                value:new Date(),
                width:120
@@ -42,14 +40,14 @@ T.view.report.OrderRegister = Ext.extend(Kdn.view.Report, {
    buildReportParams: function(params) {
        var p = {};
 
-       var customerId = 0, userId = 0;
+       var customerId = 0, userId = "";
        
        if (params.Customer) {
            customerId = params.Customer.CustomerId;
        }
 
        if (params.User) {
-           userId = params.User.UserId;
+           userId = params.User.join(',');
        }
 
         p.start = params.start;
