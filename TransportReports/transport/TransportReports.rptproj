@@ -661,9 +661,8 @@
       <Options>
         <OutputPath>bin\Debug</OutputPath>
         <TargetServerVersion>SSRS2008</TargetServerVersion>
-        <TargetServerURL>http://db2/</TargetServerURL>
+        <TargetServerURL>http://db2.lan.naftan.by/ReportServer</TargetServerURL>
         <TargetFolder>Transport</TargetFolder>
-        <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
       </Options>
     </Configuration>
     <Configuration>
