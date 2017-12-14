@@ -15,5 +15,8 @@ namespace Transport.Models
        [Property]
        public int? OrderId { get; set; }
 
+       [Property]
+       public int? AgreementId { get; set; }
+
     }
 }

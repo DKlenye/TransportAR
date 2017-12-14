@@ -320,6 +320,12 @@ Kdn.Menu = [
                  iconCls: 'icon-blue-document-word',
                  Handler: 'createView',
                  HandlerCfg: "{xtype:'view.report.orderregister',single:true}"
+             },
+             {
+                 text: 'Заправка',
+                 Handler: 'createView',
+                 HandlerCfg: "{xtype:'view.acc.accrefuelling',single:true}"
+
              }
         ]
     }, {
@@ -334,12 +340,84 @@ Kdn.Menu = [
                 text: 'Лимиты на выдачу топлива',
                 Handler: 'createView',
                 HandlerCfg: "{xtype:'view.limit.vehiclefuellimits',single:true}"
+            },
+            {
+                text: 'Отчёты',
+                iconCls: 'icon-report-white',
+                Child: [
+                    {
+                        text: 'Отчёт по лимитам легкового транспорта Нафтан-Спецтранс',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.nstcarlimit',single:true}"
+                    },
+                    {
+                        text: 'Отчёт по лимитам транспорта Нафтан-Спецтранс по подразделениям',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.nstcostlimit',single:true}"
+                    },
+                     {
+                         text: 'Детализация использования транспорта Нафтан-Спецтранс',
+                         iconCls: 'icon-blue-document-word',
+                         Handler: 'createView',
+                         HandlerCfg: "{xtype:'view.report.nstlimitdetails',single:true}"
+                     },
+                    {
+                        text: 'Детализация использования транспорта Нафтан-Спецтранс (по датам)',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.nstlimitdetailsbydate',single:true}"
+                    },
+                     {
+                         text: 'Детализация использования транспорта Нафтан-Спецтранс + Заказчик нафтана',
+                         iconCls: 'icon-blue-document-word',
+                         Handler: 'createView',
+                         HandlerCfg: "{xtype:'view.report.nstlimitdetailswithcustomer',single:true}"
+                     },
+                     {
+                         text: 'Общий отчёт по использованию транспорта Нафтан-Спецтранс',
+                         iconCls: 'icon-blue-document-word',
+                         Handler: 'createView',
+                         HandlerCfg: "{xtype:'view.report.nstalllimit',single:true}"
+                     },
+                     {
+                         text: 'Отчёт об использовании пассажирского транспорта Нафтан-Спецтранс',
+                         iconCls: 'icon-blue-document-word',
+                         Handler: 'createView',
+                         HandlerCfg: "{xtype:'view.report.nstcarwork',single:true}"
+                     },
+                    {
+                        text: 'Отчёт об использовании пассажирского транспорта Нафтан-Спецтранс (по подразделениям)',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.nstcarworkbydepartment',single:true}"
+                    },
+                    {
+                        text: 'Детализация использования легкового транспорта Нафтан-Спецтранс',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.nstcarworkdetails',single:true}"
+                    },
+                     {
+                         text: 'Детализация использования транспорта Нафтан-Спецтранс по гаражному номеру' ,
+                         iconCls: 'icon-blue-document-word',
+                         Handler: 'createView',
+                         HandlerCfg: "{xtype:'view.report.nstworkdetailsbygaragenumber',single:true}"
+                     },
+                     {
+                         text: 'Детализация использования транспорта Нафтан-Спецтранс по типу ТС',
+                         iconCls: 'icon-blue-document-word',
+                         Handler: 'createView',
+                         HandlerCfg: "{xtype:'view.report.nstworkdetails',single:true}"
+                     }
+                ]
             }
         ]
     }, {
         text: 'Материалы',
         permission: {
-            u: [1, 29, 22, 4, 61, 53,69]
+            u: [1, 29, 22, 4, 61, 53,69,44,146,151]
         },
         iconCls: 'icon-layers32',
         Child: [
@@ -467,6 +545,7 @@ Kdn.Menu = [
         ]
     }, {
         text: "Заявки",
+       
         iconCls: "icon-page_gear32",
         Handler: null,
         HandlerCfg: null,
@@ -485,16 +564,6 @@ Kdn.Menu = [
                 Handler: 'createView',
                 HandlerCfg: "{xtype:'view.requestmagazine',single:true}",
                 iconCls: 'icon-page_copy'
-            }, {
-                text: 'Обработка заявок',
-                Handler: 'createView',
-                HandlerCfg: "{xtype:'view.vehicledistributiontask',single:true}",
-                iconCls: 'icon-page_go'
-            }, {
-                text: 'Разнарядка',
-                Handler: 'createView',
-                HandlerCfg: "{xtype:'view.dispatchertask',single:true}",
-                iconCls: 'icon-document_layout'
             }, {
                 text: 'Отчёты',
                 iconCls: 'icon-report-white',
@@ -554,17 +623,30 @@ Kdn.Menu = [
                         HandlerCfg: "{xtype:'view.report.vehiclerefuelling',single:true}"
                     }
                 ]
-            }, {
-                text: 'Пробег транспорта',
-                iconCls: 'icon-blue-document-word',
-                Handler: 'createView',
-                HandlerCfg: "{xtype:'view.report.vehiclerun',single:true}"
-            }, {
-                text: 'Пробег транспорта (ежедневный)',
-                iconCls: 'icon-blue-document-word',
-                Handler: 'createView',
-                HandlerCfg: "{xtype:'view.report.vehiclerundetails',single:true}"
-            }, {
+            },
+            {
+                text: 'Пробеги',
+                iconCls: 'icon-report-white',
+                Child: [
+                     {
+                         text: 'Пробег транспорта',
+                         iconCls: 'icon-blue-document-word',
+                         Handler: 'createView',
+                         HandlerCfg: "{xtype:'view.report.vehiclerun',single:true}"
+                     }, {
+                         text: 'Пробег транспорта (ежедневный)',
+                         iconCls: 'icon-blue-document-word',
+                         Handler: 'createView',
+                         HandlerCfg: "{xtype:'view.report.vehiclerundetails',single:true}"
+                     }, {
+                         text: 'Пробег лекговых автомобилей (ежедневный)',
+                         iconCls: 'icon-blue-document-word',
+                         Handler: 'createView',
+                         HandlerCfg: "{xtype:'view.report.runbyday',single:true}"
+                     }
+                ]
+            },
+            {
                 text: 'Реестры путевых листов',
                 iconCls: 'icon-report-white',
                 Child: [
@@ -648,7 +730,15 @@ Kdn.Menu = [
                        iconCls: 'icon-blue-document-word',
                        Handler: 'createView',
                        HandlerCfg: "{xtype:'view.report.expenselist',single:true}"
-                   }, {
+                   },
+                    {
+                        text: 'Накопительная ведомость по видам топлива',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.expenselistbyfuel',single:true}"
+                    },
+
+                    {
                        text: 'Накопительная ведомость(цеховые)',
                        iconCls: 'icon-blue-document-word',
                        Handler: 'createView',
@@ -922,6 +1012,12 @@ Kdn.Menu = [
                         Handler: 'createView',
                         HandlerCfg: "{xtype:'view.report.carmonthconsumption',single:true}"
                     },
+                    {
+                        text: 'Расход топлива по подразделениям',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.vehiclefuelconsumption',single:true}"
+                    },
                      {
                         text: 'Дни в работе (с начала эксплуатации)',
                         iconCls: 'icon-blue-document-word',
@@ -944,6 +1040,12 @@ Kdn.Menu = [
                         iconCls: 'icon-blue-document-word',
                         Handler: 'createView',
                         HandlerCfg: "{xtype:'view.report.averageconsumption',single:true}"
+                    },
+                    {
+                        text: 'Время в наряде',
+                        iconCls: 'icon-blue-document-word',
+                        Handler: 'createView',
+                        HandlerCfg: "{xtype:'view.report.nstworkingtime',single:true}"
                     }
                     
                 ]
@@ -1123,11 +1225,24 @@ Kdn.Menu = [
                 text: 'Объем работ по заказчкам',
                 Handler: 'createView',
                 HandlerCfg: "{xtype:'view.report.waybilllistcustomers',single:true}"
-            }
+            },
+            {
+                text: 'Использование транспорта УП"Нафтан-Спецтранс',
+                Handler: 'createView',
+                HandlerCfg: "{xtype:'view.report.naftanspectransworkinfo',single:true}"
+            },
+             {
+                 text: 'Количество документов по услугам УП"Нафтан-Спецтранс',
+                 Handler: 'createView',
+                 HandlerCfg: "{xtype:'view.report.servicewaybillcount',single:true}"
+             }
 
         ]
     }, {
         text: "ТО",
+        permission: {
+            u: []
+        },
         iconCls: "icon-setting_tools32",
         Handler: null,
         HandlerCfg: null,
@@ -1213,7 +1328,7 @@ Kdn.Menu = [
     {
         text: "Бухгалтерия",
         permission: {
-            u: [1, 15, 16,67,106,111]
+            u: [1, 15, 16,67,106,111,74]
         },
         iconCls: "icon-coins32",
         Handler: null,

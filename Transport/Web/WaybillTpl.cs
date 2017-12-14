@@ -339,6 +339,16 @@ namespace Transport.Web
             
         }
 
+        public string VehicleInventory()
+        {
+            if (waybill != null)
+            {
+                return vehicle.InventoryNumber;
+            }
+            return "";
+
+        }
+
         public string DriverFio(int i)
         {
 
@@ -519,12 +529,8 @@ namespace Transport.Web
 
         public string OrganizationName()
         {
-            var targetSpecTransDate = new DateTime(2015, 12, 1);
-            var SpecTransColumns = new List<int>() {6, 7, 8};
-
-            if (waybill == null) return @"УП ""Нафтан-Спецтранс""";
             
-            return waybill.DepartureDate >= targetSpecTransDate && vehicle.ColumnId!=null && SpecTransColumns.Contains(vehicle.ColumnId.Value)
+            return isSpecTrans
                 ? @"УП ""Нафтан-Спецтранс"""
                 : @"Открытое акционерное общество ""НАФТАН""";
         }
@@ -540,6 +546,119 @@ namespace Transport.Web
                     "</div>"                
                 );
         }
-        
+
+        public string Approved()
+        {
+            return isSpecTrans?"": @"<table class=""form-head"" cellpadding=""0"" cellspacing=""0"">
+                                                        <tbody>
+                                                            
+                                                            <tr>
+                                                                <td style=""text-align:left;"">
+                                                                    УТВЕРЖДЕНО
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style=""text-align:left;"">
+                                                                    Приказ генерального директора от 30.08.2007 № 727
+                                                                </td>
+                                                            </tr>
+                                                             <tr>
+                                                                <td style=""height:1mm"">&nbsp;</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>";
+        }
+
+        public string Approved1()
+        {
+            return isSpecTrans ? "" : @"<table class=""form-head"" cellpadding=""0"" cellspacing=""0"">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    Приложение 1
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    К инструкции о порядке оформления
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    путевого листа строительной машины
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style=""text-align:left;"">
+                                                                    УТВЕРЖДЕНО
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style=""text-align:left;"">
+                                                                    Приказ генерального директора от 18.04.2012 № 640
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>";
+        }
+
+
+        public string Approved(string number)
+        {
+            return isSpecTrans?"": @"<table class=""form-head"" cellpadding=""0"" cellspacing=""0"">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    Приложение "+number+
+                                                                @"</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    К инструкции о порядке оформления
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    транспортных документов
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style=""text-align:left;"">
+                                                                    УТВЕРЖДЕНО
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style=""text-align:left;"">
+                                                                    Приказ генерального директора от 08.02.2012 № 213
+                                                                </td>
+                                                            </tr>
+                                                             <tr>
+                                                                <td style=""height:1mm"">&nbsp;</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>;";
+        }
+
+        private bool isSpecTrans
+        {
+            get
+            {
+                if (waybill == null) return true;
+
+                var targetSpecTransDate = new DateTime(2015, 12, 1);
+                var SpecTransColumns = new List<int>() { 6, 7, 8 };
+                return
+                    waybill.DepartureDate >= targetSpecTransDate &&
+                    vehicle.ColumnId != null &&
+                    SpecTransColumns.Contains(vehicle.ColumnId.Value);
+            }
+        }
+
+
+        public String Lessor()
+        {
+            return isSpecTrans ? @"УП ""Нафтан-Спецтранс""" : @"ОАО ""НАФТАН""";
+        }
+
     }
 }

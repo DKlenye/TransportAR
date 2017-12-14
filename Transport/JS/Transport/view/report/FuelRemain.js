@@ -30,7 +30,33 @@
                dataIndex:'department',
                objectValue:false,
                enableClear:true
-            },
+            },             
+           {
+               xtype: 'combo',
+               width: 90,
+               typeAhead: true,
+               triggerAction: 'all',
+               lazyRender: true,
+               mode: 'local',
+               store: new Ext.data.ArrayStore({
+                   fields: ['format','iconCls', ],
+                   data: [['Excel','icon-excel'], ['Word','icon-blue-document-word'], ['Pdf','icon-doc_pdf']]
+               }),
+               tpl: '<tpl for="."><div class="x-combo-list-item icon-combo-item {iconCls}">{format}</div></tpl>',
+               value: 'Word',
+               valueField: 'format',
+               displayField: 'format',
+               dataIndex: 'format',
+               listeners: {
+                   select: function(item, record, index) {
+                       this.setIconCls(record.get('iconCls'));
+                   },
+                   afterrender:function() {
+                       this.setIconCls('icon-blue-document-word');
+                   }
+               }
+           },
+
             {
                text:'Сформировать',
                xtype:'button',
@@ -50,9 +76,12 @@
                   params.year = o.period.getFullYear();
                   params.ownerId = 1;
                   params.column = o['column']||0;
-                  params.department = o['department']||0;
+                  params.department = o['department'] || 0;
 
-                   Kdn.Reporter.exportReport("VehicleFuelRemains", params, "WORD");
+                   var format = o.format;
+
+
+                   Kdn.Reporter.exportReport("VehicleFuelRemains", params, format);
 
 
                },

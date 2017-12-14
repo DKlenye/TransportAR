@@ -223,8 +223,8 @@ T.view.vehicleDistribution.RequestGrid = Ext.extend(Ext.grid.GridPanel, {
         if (!this.editWindow) {
             this.editWindow = Ext.create({
                 xtype: 'view.requesteditwindow',
-                width: 600,
-                height: 650,
+                width: 800,
+                height: 700,
                 closeAction: 'hide',
                 renderTo: this.windowConstrain.getBody(),
                 listeners: {
@@ -273,7 +273,8 @@ T.view.vehicleDistribution.RequestGrid = Ext.extend(Ext.grid.GridPanel, {
         var requestTypes = {
                 "Кран": "RequestCrane",
                 "Грузовой": "RequestFreight",
-                "Пассажирский": "RequestPassengers"
+                "Пассажирский": "RequestPassengers",
+                "Международный": "RequestInternational"
             },
             id = request.get('RequestId'),
             type = requestTypes[request.get('RequestType')];

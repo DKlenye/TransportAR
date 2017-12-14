@@ -1,56 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition">
-  <DataSources>
-    <DataSource Name="DataSource1">
-      <DataSourceReference>db2</DataSourceReference>
-      <rd:DataSourceID>ee1bc901-e3a3-46d0-b09d-fb6ebbb13cab</rd:DataSourceID>
-    </DataSource>
-  </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet1">
-      <Fields>
-        <Field Name="AccGroupName">
-          <DataField>AccGroupName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CostCode">
-          <DataField>CostCode</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="ServiceGroupName">
-          <DataField>ServiceGroupName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="GarageNumber">
-          <DataField>GarageNumber</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="RegistrationNumber">
-          <DataField>RegistrationNumber</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Model">
-          <DataField>Model</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource1</DataSourceName>
-        <CommandText>SELECT 
-	ag.AccGroupName,
-    ag.CostCode,
-    isnull(sg.ServiceGroupName,'НЕТ ГРУППЫ' )ServiceGroupName,
-    v.GarageNumber,
-    v.RegistrationNumber,
-    v.Model
-FROM Vehicle v
-inner JOIN AccGroup ag ON ag.AccGroupId = v.AccGroupId
-LEFT JOIN ServiceGroup sg ON sg.ServiceGroupId = v.ServiceGroupId
-WHERE v.OwnerId = 1 AND (v.WriteOffDate IS NULL OR v.WriteOffDate&gt;'01.01.2014') and v.columnId between 6 and 11</CommandText>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-    </DataSet>
-  </DataSets>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <Body>
     <ReportItems>
       <Tablix Name="Tablix1">
@@ -587,6 +536,59 @@ WHERE v.OwnerId = 1 AND (v.WriteOffDate IS NULL OR v.WriteOffDate&gt;'01.01.2014
     <BottomMargin>1in</BottomMargin>
     <Style />
   </Page>
-  <rd:ReportID>eb0c18a5-5a53-4e32-bf3b-84526df9cc7a</rd:ReportID>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource1">
+      <DataSourceReference>db2</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>ee1bc901-e3a3-46d0-b09d-fb6ebbb13cab</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet1">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <CommandText>SELECT 
+	ag.AccGroupName,
+    ag.CostCode,
+    isnull(sg.ServiceGroupName,'НЕТ ГРУППЫ' )ServiceGroupName,
+    v.GarageNumber,
+    v.RegistrationNumber,
+    v.Model
+FROM Vehicle v
+left JOIN AccGroup ag ON ag.AccGroupId = v.AccGroupId
+LEFT JOIN ServiceGroup sg ON sg.ServiceGroupId = v.ServiceGroupId
+WHERE v.OwnerId = 1 AND (v.WriteOffDate IS NULL OR v.WriteOffDate&gt;'01.01.2014') and v.columnId &gt;=6</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="AccGroupName">
+          <DataField>AccGroupName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CostCode">
+          <DataField>CostCode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ServiceGroupName">
+          <DataField>ServiceGroupName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="GarageNumber">
+          <DataField>GarageNumber</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="RegistrationNumber">
+          <DataField>RegistrationNumber</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Model">
+          <DataField>Model</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>eb0c18a5-5a53-4e32-bf3b-84526df9cc7a</rd:ReportID>
 </Report>

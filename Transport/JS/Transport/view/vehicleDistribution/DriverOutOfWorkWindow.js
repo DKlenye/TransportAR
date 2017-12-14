@@ -30,6 +30,7 @@
 
                            var rowColors = {
                                0: '',
+                               1: 'green',
                                2: 'red',
                                3: 'yellow'
                            };
@@ -60,6 +61,7 @@
                             header: 'Тип документа',
                             renderer:function(v) {
                                 var values = {
+                                    1:'Отпуск',
                                     2: 'Больничный',
                                     3: 'Отгул'
                                 };
@@ -74,7 +76,7 @@
                                 mode: 'local',
                                 store: new Ext.data.ArrayStore({
                                     fields: ['id', 'name'],
-                                    data: [[2, 'Больничный'], [3, 'Отгул"']]
+                                    data: [[1, 'Отпуск'],[2, 'Больничный'], [3, 'Отгул"']]
                                 }),
                                 valueField: 'id',
                                 displayField: 'name'

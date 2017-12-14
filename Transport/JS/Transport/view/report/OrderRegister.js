@@ -15,6 +15,7 @@ T.view.report.OrderRegister = Ext.extend(Kdn.view.Report, {
             'Заказчик',
             {
                 xtype: 'combo.customer',
+                showNotActual:true,
                 enableClear: true,
                 width:150,
                 dataIndex:'Customer'        
@@ -34,8 +35,15 @@ T.view.report.OrderRegister = Ext.extend(Kdn.view.Report, {
                value:new Date(),
                width:120
            },
-           '-'
-   ],
+           '-',
+        'Показать время в наряде',
+        {
+            xtype: 'checkbox',
+            checked: false,
+            dataIndex: 'ShowTime',
+            value: false
+        }
+    ],
 
    buildReportParams: function(params) {
        var p = {};
@@ -50,6 +58,7 @@ T.view.report.OrderRegister = Ext.extend(Kdn.view.Report, {
            userId = params.User.join(',');
        }
 
+       p.ShowTime = params.ShowTime;
         p.start = params.start;
         p.end = params.end;
         p.CustomerId = customerId;

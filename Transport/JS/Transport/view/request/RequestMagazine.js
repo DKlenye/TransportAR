@@ -26,7 +26,8 @@ T.view.RequestMagazine = Ext.extend(Ext.Panel, {
             Empty: createEditor('container'),
             RequestFreight: createEditor('view.requestfreighteditor'),
             RequestCrane: createEditor('view.requestcraneeditor'),
-            RequestPassengers: createEditor('view.requestpassengerseditor')
+            RequestPassengers: createEditor('view.requestpassengerseditor'),
+            RequestInternational: createEditor('view.requestinternationaleditor')
         }
 
         this.selectDelay = new Ext.util.DelayedTask(this.onSelect, this);
@@ -238,10 +239,10 @@ T.view.RequestMagazine = Ext.extend(Ext.Panel, {
                                                     return '<span class="label label-important">Возвращена</span>';
                                                 }
                                                 if (v == 5) {
-                                                    return '<span class="label label-success">В работе</span>'
+                                                    return '<span class="label label-success">В работе</span>';
                                                 }
                                                 if (v == 6) {
-                                                    return '<span class="label label-success">Выполнена</span>'
+                                                    return '<span class="label label-success">Выполнена</span>';
                                                 }
 
                                             }
@@ -438,7 +439,8 @@ T.view.RequestMagazine = Ext.extend(Ext.Panel, {
         var requestTypes = {
             "Кран": "RequestCrane",
             "Грузовой": "RequestFreight",
-            "Пассажирский": "RequestPassengers"
+            "Пассажирский": "RequestPassengers",
+            "Международный":"RequestInternational"
         },
             id = request.get('RequestId'),
             type = requestTypes[request.get('RequestType')];

@@ -13,7 +13,7 @@ namespace Transport.Models {
     * Класс используется для того, чтобы Hibernate не загружал лишнюю информацию из базы
     * в классах, использующих ссылку на транспорт 
     */
-   [Model,ActiveRecord("Vehicle",DiscriminatorColumn="DSC",DiscriminatorType="short",DiscriminatorValue="0")]
+   [Model,ActiveRecord("Vehicle",DiscriminatorColumn="DSC",DiscriminatorType="short",DiscriminatorValue="0", Where = "isnull(ColumnId,5) not in (6,7,8,12,13)")]
    public class BaseVehicle : ActiveRecordBase<BaseVehicle>, Interfaces.IOwnered {
       [IdProperty,PrimaryKey]
       public int VehicleId { get; set; }
@@ -68,7 +68,7 @@ namespace Transport.Models {
 
    }
    
-   [Model, ActiveRecord(DiscriminatorValue = "1")]
+   [Model, ActiveRecord(DiscriminatorValue = "1", Where = "isnull(ColumnId,5) not in (6,7,8,12,13)")]
    public class Car : BaseVehicle {
 
       [AllowBlank, BelongsTo("CustomerId")]
@@ -98,16 +98,10 @@ namespace Transport.Models {
 
    }
 
-   [Model, ActiveRecord(DiscriminatorValue = "2")]
+   [Model, ActiveRecord(DiscriminatorValue = "2", Where = "isnull(ColumnId,5) not in (6,7,8,12,13)")]
    public class Trailer : BaseVehicle { }
-   
 
-
-
-
-
-
-   [ActiveRecord(DiscriminatorColumn="DSC",DiscriminatorType="short",DiscriminatorValue="0")]
+   [ActiveRecord(DiscriminatorColumn = "DSC", DiscriminatorType = "short", DiscriminatorValue = "0", Where = "isnull(ColumnId,5) not in (6,7,8,12,13)")]
    public abstract class Vehicle : ActiveRecordBase<Vehicle>, Interfaces.IOwnered {
       [IdProperty, PrimaryKey]
       public int VehicleId { get; set; }
@@ -238,8 +232,8 @@ namespace Transport.Models {
       public ReplicationSource? ReplicationSource { get; set; }
 
    }
-    
-    [Model,ActiveRecord(DiscriminatorValue="1")]
+
+    [Model, ActiveRecord(DiscriminatorValue = "1", Where = "isnull(ColumnId,5) not in (6,7,8,12,13)")]
    public class FullCar : Vehicle {
 
       [AllowBlank,BelongsTo("DriverId")]
@@ -377,7 +371,7 @@ namespace Transport.Models {
 
    }
 
-   [Model,ActiveRecord(DiscriminatorValue="2")]
+   [Model, ActiveRecord(DiscriminatorValue = "2", Where = "isnull(ColumnId,5) not in (6,7,8,12,13)")]
    public class FullTrailer : Vehicle { }
 
 

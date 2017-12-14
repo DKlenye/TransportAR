@@ -1,68 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition">
-  <DataSources>
-    <DataSource Name="DataSource1">
-      <DataSourceReference>dbsrv2</DataSourceReference>
-      <rd:DataSourceID>80722a93-203c-4ffd-a0c9-345dd29ba2ab</rd:DataSourceID>
-    </DataSource>
-  </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet1">
-      <Fields>
-        <Field Name="NoDoc">
-          <DataField>NoDoc</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="volume">
-          <DataField>volume</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="density">
-          <DataField>density</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="cost">
-          <DataField>cost</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="incomePlaceName">
-          <DataField>incomePlaceName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="FuelSortName">
-          <DataField>FuelSortName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="fuelName">
-          <DataField>fuelName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="mass">
-          <DataField>mass</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="summ">
-          <DataField>summ</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="id">
-          <DataField>id</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource1</DataSourceName>
-        <CommandType>StoredProcedure</CommandType>
-        <CommandText>ssrs_FuelIncomeOrder</CommandText>
-        <QueryParameters>
-          <QueryParameter Name="@id">
-            <Value>=Parameters!id.Value</Value>
-          </QueryParameter>
-        </QueryParameters>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-    </DataSet>
-  </DataSets>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <Body>
     <ReportItems>
       <Tablix Name="Tablix1">
@@ -2404,6 +2341,7 @@
                               <Value>=Fields!cost.Value</Value>
                               <Style>
                                 <FontStyle>Italic</FontStyle>
+                                <Format>0.00;(0.00)</Format>
                               </Style>
                             </TextRun>
                             <TextRun>
@@ -2413,7 +2351,7 @@
                             <TextRun>
                               <Value>=Fields!summ.Value</Value>
                               <Style>
-                                <Format>0;(0)</Format>
+                                <Format>0.00;(0.00)</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2844,7 +2782,7 @@
                               <Value>=Sum(Fields!summ.Value)</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>0;(0)</Format>
+                                <Format>0.00;(0.00)</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -3149,18 +3087,18 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>3.19259in</Width>
+              <Width>8.10918cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.36458in</Width>
+              <Width>3.46603cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.63008in</Width>
+              <Width>4.1404cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.26747in</Height>
+              <Height>0.67937cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -3287,7 +3225,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.07997in</Height>
+              <Height>0.20312cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -3379,7 +3317,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -3497,7 +3435,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -3599,7 +3537,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -3732,7 +3670,7 @@
         <Top>2.23251cm</Top>
         <Left>6.64612cm</Left>
         <Height>2.68249cm</Height>
-        <Width>15.71561cm</Width>
+        <Width>15.71562cm</Width>
         <ZIndex>2</ZIndex>
         <Style>
           <Border>
@@ -3744,12 +3682,12 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.79675in</Width>
+              <Width>7.10374cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -3783,7 +3721,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -3817,7 +3755,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -3879,24 +3817,24 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>3.53125in</Width>
+              <Width>8.96938cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.1405in</Width>
+              <Width>0.35687cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.422in</Width>
+              <Width>6.15188cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.19792in</Width>
+              <Width>0.50272cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.27083in</Width>
+              <Width>8.30791cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.4133in</Height>
+              <Height>1.04978cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -4004,7 +3942,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -4154,7 +4092,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -4304,7 +4242,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -4464,7 +4402,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -4626,7 +4564,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -4786,7 +4724,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -4948,7 +4886,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -5098,7 +5036,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -5291,12 +5229,6 @@
     <Height>18.14443cm</Height>
     <Style />
   </Body>
-  <ReportParameters>
-    <ReportParameter Name="id">
-      <DataType>Integer</DataType>
-      <Prompt>id</Prompt>
-    </ReportParameter>
-  </ReportParameters>
   <Width>24.57135cm</Width>
   <Page>
     <PageHeight>21.59cm</PageHeight>
@@ -5308,6 +5240,77 @@
     <ColumnSpacing>1.27cm</ColumnSpacing>
     <Style />
   </Page>
-  <rd:ReportID>7651e9fa-660e-4cdf-8a35-e961730e7c11</rd:ReportID>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource1">
+      <DataSourceReference>dbsrv2</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>80722a93-203c-4ffd-a0c9-345dd29ba2ab</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet1">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@id">
+            <Value>=Parameters!id.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandType>StoredProcedure</CommandType>
+        <CommandText>ssrs_FuelIncomeOrder</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="NoDoc">
+          <DataField>NoDoc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="volume">
+          <DataField>volume</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="density">
+          <DataField>density</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="cost">
+          <DataField>cost</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="incomePlaceName">
+          <DataField>incomePlaceName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FuelSortName">
+          <DataField>FuelSortName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="fuelName">
+          <DataField>fuelName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="mass">
+          <DataField>mass</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="summ">
+          <DataField>summ</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="id">
+          <DataField>id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportParameters>
+    <ReportParameter Name="id">
+      <DataType>Integer</DataType>
+      <Prompt>id</Prompt>
+    </ReportParameter>
+  </ReportParameters>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>7651e9fa-660e-4cdf-8a35-e961730e7c11</rd:ReportID>
 </Report>

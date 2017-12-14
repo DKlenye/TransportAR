@@ -1,51 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition">
-  <DataSources>
-    <DataSource Name="DataSource1">
-      <DataSourceReference>db2</DataSourceReference>
-      <rd:DataSourceID>4b940bac-935a-44d3-8f02-87bd6e07e456</rd:DataSourceID>
-    </DataSource>
-  </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet1">
-      <Fields>
-        <Field Name="m">
-          <DataField>m</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="y">
-          <DataField>y</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="FuelName">
-          <DataField>FuelName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="RefuellingGroupName">
-          <DataField>RefuellingGroupName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Fact">
-          <DataField>Fact</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource1</DataSourceName>
-        <CommandType>StoredProcedure</CommandType>
-        <CommandText>ssrs_TransportQuarterConsumption</CommandText>
-        <QueryParameters>
-          <QueryParameter Name="@quarter">
-            <Value>=Parameters!quarter.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@year">
-            <Value>=Parameters!year.Value</Value>
-          </QueryParameter>
-        </QueryParameters>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-    </DataSet>
-  </DataSets>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <Body>
     <ReportItems>
       <Tablix Name="Tablix1">
@@ -920,19 +874,31 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Расход топлива за </Value>
+                <Value>Расход топлива c </Value>
                 <Style>
                   <FontWeight>Bold</FontWeight>
                 </Style>
               </TextRun>
               <TextRun>
-                <Value>=Parameters!quarter.Value</Value>
+                <Value>=Parameters!monthStart.Value</Value>
                 <Style>
                   <FontWeight>Bold</FontWeight>
                 </Style>
               </TextRun>
               <TextRun>
-                <Value> кв. </Value>
+                <Value> по </Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>=Parameters!monthEnd.Value</Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value xml:space="preserve"> </Value>
                 <Style>
                   <FontWeight>Bold</FontWeight>
                 </Style>
@@ -973,16 +939,6 @@
     <Height>1.545in</Height>
     <Style />
   </Body>
-  <ReportParameters>
-    <ReportParameter Name="quarter">
-      <DataType>Integer</DataType>
-      <Prompt>quarter</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="year">
-      <DataType>Integer</DataType>
-      <Prompt>year</Prompt>
-    </ReportParameter>
-  </ReportParameters>
   <Width>5.1875in</Width>
   <Page>
     <LeftMargin>1in</LeftMargin>
@@ -991,6 +947,78 @@
     <BottomMargin>1in</BottomMargin>
     <Style />
   </Page>
-  <rd:ReportID>3879b85d-5b25-4c64-9673-4758b79648ba</rd:ReportID>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource1">
+      <DataSourceReference>db2</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>4b940bac-935a-44d3-8f02-87bd6e07e456</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet1">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@monthStart">
+            <Value>=Parameters!monthStart.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@monthEnd">
+            <Value>=Parameters!monthEnd.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@year">
+            <Value>=Parameters!year.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@columns">
+            <Value>=Parameters!columns.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandType>StoredProcedure</CommandType>
+        <CommandText>ssrs_TransportQuarterConsumption</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="m">
+          <DataField>m</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="y">
+          <DataField>y</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="FuelName">
+          <DataField>FuelName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="RefuellingGroupName">
+          <DataField>RefuellingGroupName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Fact">
+          <DataField>Fact</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportParameters>
+    <ReportParameter Name="year">
+      <DataType>Integer</DataType>
+      <Prompt>year</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="columns">
+      <DataType>String</DataType>
+      <Prompt>columns</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="monthStart">
+      <DataType>Integer</DataType>
+      <Prompt>month Start</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="monthEnd">
+      <DataType>Integer</DataType>
+      <Prompt>month End</Prompt>
+    </ReportParameter>
+  </ReportParameters>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>3879b85d-5b25-4c64-9673-4758b79648ba</rd:ReportID>
 </Report>

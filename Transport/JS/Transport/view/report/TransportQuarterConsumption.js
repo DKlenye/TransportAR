@@ -2,25 +2,33 @@
 
     reportName: 'TransportQuarterConsumption',
    
-   params:[
+    params: [
+            
         '-',
-        'Квартал:',
+        {
+            xtype: 'daterangefield2',
+            dataIndex: 'date',
+            value: new Date()
+        },
+            '-',
+            'Колонна:',
             {
-               xtype:'numberfield',
-               dataIndex:'quarter',
-               value: new Date().getPreviousQuarter(),
-               baseChars: '1234',
-               maxValue: 4,
-               width:120
-            },
-          'Год:',
-            {
-                xtype: 'numberfield',
-                dataIndex: 'year',
-                value: new Date().getFullYear() - (new Date().getMonth()==0?1:0),
-                width: 120 
+                xtype: 'combo.multicolumn',
+                objectValue: false,
+                width: 400,
+                dataIndex: 'columns'
             }
-   ]
+   ],
+   buildReportParams: function (params) {
+
+       var p = {};
+       p.monthStart = params.date.start.getMonth() + 1;
+       p.monthEnd = params.date.end.getMonth() + 1;
+       p.year = params.date.start.getFullYear();
+       p.columns = params.columns.join(',');
+       p.format = params.format;
+       return p;
+   }
         
 });
 

@@ -21,7 +21,7 @@ namespace Transport.Models
       public string FactoryNumber { get; set; }
       
       [Property]
-      public int? Cost { get; set; }
+      public decimal? Cost { get; set; }
 
       [Property]
       public int? TireMakerId { get; set; }

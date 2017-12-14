@@ -1,232 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition">
-  <DataSources>
-    <DataSource Name="DataSource1">
-      <DataSourceReference>dbsrv2</DataSourceReference>
-      <rd:DataSourceID>4f382334-2ba4-43d5-b4d1-ad78b8936c95</rd:DataSourceID>
-    </DataSource>
-  </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet1">
-      <Fields>
-        <Field Name="tollRoad">
-          <DataField>tollRoad</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="travelExpense">
-          <DataField>travelExpense</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="taxtollRoad">
-          <DataField>taxtollRoad</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="taxtravelExpense">
-          <DataField>taxtravelExpense</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource1</DataSourceName>
-        <CommandText>SELECT 
-	tollRoad,
-	travelExpense,
-	taxtollRoad,
-	taxtravelExpense
- FROM serviceWaybillsInfo 
-WHERE scoreNo = @scoreId</CommandText>
-        <QueryParameters>
-          <QueryParameter Name="@scoreId">
-            <Value>=Parameters!scoreId.Value</Value>
-          </QueryParameter>
-        </QueryParameters>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-    </DataSet>
-    <DataSet Name="DataSet3">
-      <Fields>
-        <Field Name="customerId">
-          <DataField>customerId</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="nameContragent">
-          <DataField>nameContragent</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="inn">
-          <DataField>inn</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="pind">
-          <DataField>pind</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Addres">
-          <DataField>Addres</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="account">
-          <DataField>account</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="namebank">
-          <DataField>namebank</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="nameCity">
-          <DataField>nameCity</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="BIK">
-          <DataField>BIK</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource1</DataSourceName>
-        <CommandText>select TOP 1 i.customerId,cc.customerName nameContragent,r.inn,r.pind,r.Addres,i.account,i.namebank,i.nameCity,i.BIK from customersServiceInfo i
-inner join custcontragent c on c.customerId = i.customerId
-inner join rcontragent r on r.idContragent = c.idContragent
-left join customers cc on cc.customerId = i.customerId
-where i.customerId = (select customerId from serviceScore where scoreNo=@scoreId)
-AND i.nameBank NOT LIKE '%не сущ%'
-order by i.idAccount desc</CommandText>
-        <QueryParameters>
-          <QueryParameter Name="@scoreId">
-            <Value>=Parameters!scoreId.Value</Value>
-          </QueryParameter>
-        </QueryParameters>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-    </DataSet>
-    <DataSet Name="DataSet2">
-      <Fields>
-        <Field Name="osn">
-          <DataField>osn</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="agreedate">
-          <DataField>agreedate</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource1</DataSourceName>
-        <CommandText>SELECT TOP 1 osn,dbo.DateToStr(CONVERT(SMALLDATETIME,datd,20)) as agreedate FROM NSD2_Agree na
-INNER JOIN custcontragent c ON c.idContragent = na.kgr
-INNER JOIN customers cc ON cc.customerId = c.customerId AND cc.customerId = (select customerId from serviceScore where scoreNo=@scoreId)
-WHERE na.kprod='999910' AND CONVERT(SMALLDATETIME,datd,20) &lt;= (select scoredate from serviceScore where scoreNo=@scoreId) AND osn NOT LIKE'ПОЛИМИР%'
-ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
-        <QueryParameters>
-          <QueryParameter Name="@scoreId">
-            <Value>=Parameters!scoreId.Value</Value>
-          </QueryParameter>
-        </QueryParameters>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-    </DataSet>
-    <DataSet Name="DataSet4">
-      <Fields>
-        <Field Name="waybills">
-          <DataField>waybills</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource1</DataSourceName>
-        <CommandText>DECLARE @str VARCHAR(200)
-		SET @str=''
-
-		SELECT 
-				@str = @str+' '+cast(waybillnumber AS VARCHAR(10))+','
-			FROM serviceWaybill
-		WHERE ScoreNo = @scoreId
-
-		SELECT SUBSTRING(@str,1,LEN(@str)-1) as waybills</CommandText>
-        <QueryParameters>
-          <QueryParameter Name="@scoreId">
-            <Value>=Parameters!scoreId.Value</Value>
-          </QueryParameter>
-        </QueryParameters>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-    </DataSet>
-    <DataSet Name="DataSet5">
-      <Fields>
-        <Field Name="scoreNo">
-          <DataField>scoreNo</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="scoreDate">
-          <DataField>scoreDate</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="customerId">
-          <DataField>customerId</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="serviceMonth">
-          <DataField>serviceMonth</DataField>
-          <rd:TypeName>System.Byte</rd:TypeName>
-        </Field>
-        <Field Name="serviceYear">
-          <DataField>serviceYear</DataField>
-          <rd:TypeName>System.Int16</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource1</DataSourceName>
-        <CommandText>		SELECT 
-*
-		FROM serviceScore WHERE scoreNo = @scoreId</CommandText>
-        <QueryParameters>
-          <QueryParameter Name="@scoreId">
-            <Value>=Parameters!scoreId.Value</Value>
-          </QueryParameter>
-        </QueryParameters>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-    </DataSet>
-  </DataSets>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <Body>
     <ReportItems>
       <Tablix Name="Tablix1">
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.58008in</Width>
+              <Width>6.5534cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.11133in</Width>
+              <Width>2.82278cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.61133in</Width>
+              <Width>1.55278cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.02291in</Width>
+              <Width>2.59819cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.88217in</Width>
+              <Width>2.24071cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.93425in</Width>
+              <Width>2.37299cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.44887in</Width>
+              <Width>1.14013cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.66341in</Width>
+              <Width>1.68506cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.11133in</Width>
+              <Width>2.82278cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.11133in</Width>
+              <Width>2.82278cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.18414in</Height>
+              <Height>0.46772cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -371,7 +183,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.19455in</Height>
+              <Height>0.49416cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -572,7 +384,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.19455in</Height>
+              <Height>0.49416cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -862,7 +674,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.17372in</Height>
+              <Height>0.44125cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1154,7 +966,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1322,7 +1134,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1565,7 +1377,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1627,7 +1439,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1689,7 +1501,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1751,7 +1563,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1797,7 +1609,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1843,7 +1655,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1889,7 +1701,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1946,7 +1758,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -2008,7 +1820,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -2060,7 +1872,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -2117,7 +1929,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -2163,7 +1975,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -2209,7 +2021,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -2255,7 +2067,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -2368,7 +2180,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.30577in</Height>
+              <Height>0.77666cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -2490,7 +2302,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -2685,7 +2497,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -2746,7 +2558,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.59039in</Height>
+              <Height>1.49959cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -3356,7 +3168,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -3629,7 +3441,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
                             <TextRun>
                               <Value>=Sum(Fields!travelExpense.Value)</Value>
                               <Style>
-                                <Format>0;(0)</Format>
+                                <Format>0.00;(0.00)</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -3737,7 +3549,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
                             <TextRun>
                               <Value>=Sum(Fields!taxtravelExpense.Value)</Value>
                               <Style>
-                                <Format>0;(0)</Format>
+                                <Format>0.00;(0.00)</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -3797,7 +3609,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -4070,7 +3882,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
                             <TextRun>
                               <Value>=Sum(Fields!tollRoad.Value)</Value>
                               <Style>
-                                <Format>0;(0)</Format>
+                                <Format>0.00;(0.00)</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -4085,26 +3897,6 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <TopBorder>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                          <Width>1pt</Width>
-                        </TopBorder>
-                        <BottomBorder>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                          <Width>1pt</Width>
-                        </BottomBorder>
-                        <LeftBorder>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                          <Width>1pt</Width>
-                        </LeftBorder>
-                        <RightBorder>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                          <Width>1pt</Width>
-                        </RightBorder>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -4178,7 +3970,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
                             <TextRun>
                               <Value>=Sum(Fields!taxtollRoad.Value)</Value>
                               <Style>
-                                <Format>0;(0)</Format>
+                                <Format>0.00;(0.00)</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -4238,7 +4030,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -4513,7 +4305,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
                             <TextRun>
                               <Value>=Sum(Fields!tollRoad.Value, "DataSet1")+Sum(Fields!travelExpense.Value, "DataSet1")</Value>
                               <Style>
-                                <Format>0;(0)</Format>
+                                <Format>0.00;(0.00)</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -4601,7 +4393,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
                             <TextRun>
                               <Value>=Sum(Fields!taxtollRoad.Value, "DataSet1")+Sum(Fields!taxtravelExpense.Value, "DataSet1")</Value>
                               <Style>
-                                <Format>0;(0)</Format>
+                                <Format>0.00;(0.00)</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -4661,7 +4453,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -4713,7 +4505,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.13205in</Height>
+              <Height>0.33541cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -5028,7 +4820,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.20497in</Height>
+              <Height>0.52062cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -5264,7 +5056,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.21539in</Height>
+              <Height>0.54709cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -5500,7 +5292,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -5742,7 +5534,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.20497in</Height>
+              <Height>0.52062cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -5978,7 +5770,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.19455in</Height>
+              <Height>0.49416cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -6214,7 +6006,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.19455in</Height>
+              <Height>0.49416cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -6541,7 +6333,7 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.19455in</Height>
+              <Height>0.49416cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -6675,10 +6467,8 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>0cm</Top>
-        <Left>0cm</Left>
-        <Height>21.37977cm</Height>
-        <Width>26.61159cm</Width>
+        <Height>21.37976cm</Height>
+        <Width>26.6116cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -6689,6 +6479,207 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
     <Height>21.37977cm</Height>
     <Style />
   </Body>
+  <Width>26.61161cm</Width>
+  <Page>
+    <PageHeight>21cm</PageHeight>
+    <PageWidth>29.7cm</PageWidth>
+    <LeftMargin>0.5cm</LeftMargin>
+    <RightMargin>0.5cm</RightMargin>
+    <TopMargin>0.5cm</TopMargin>
+    <BottomMargin>0.5cm</BottomMargin>
+    <ColumnSpacing>1.27cm</ColumnSpacing>
+    <Style />
+  </Page>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource1">
+      <DataSourceReference>db2</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>4f382334-2ba4-43d5-b4d1-ad78b8936c95</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet1">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@scoreId">
+            <Value>=Parameters!scoreId.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>SELECT 
+	tollRoad,
+	travelExpense,
+	taxtollRoad,
+	taxtravelExpense
+ FROM serviceWaybillsInfo 
+WHERE scoreNo = @scoreId</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="tollRoad">
+          <DataField>tollRoad</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="travelExpense">
+          <DataField>travelExpense</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="taxtollRoad">
+          <DataField>taxtollRoad</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="taxtravelExpense">
+          <DataField>taxtravelExpense</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="DataSet3">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@scoreId">
+            <Value>=Parameters!scoreId.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>select TOP 1 i.customerId,cc.customerName nameContragent,r.inn,r.pind,r.Addres,i.account,i.namebank,i.nameCity,i.BIK from customersServiceInfo i
+inner join custcontragent c on c.customerId = i.customerId
+inner join rcontragent r on r.idContragent = c.idContragent
+left join customers cc on cc.customerId = i.customerId
+where i.customerId = (select customerId from serviceScore where scoreNo=@scoreId)
+AND i.nameBank NOT LIKE '%не сущ%'
+order by i.idAccount desc</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="customerId">
+          <DataField>customerId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="nameContragent">
+          <DataField>nameContragent</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="inn">
+          <DataField>inn</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="pind">
+          <DataField>pind</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Addres">
+          <DataField>Addres</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="account">
+          <DataField>account</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="namebank">
+          <DataField>namebank</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="nameCity">
+          <DataField>nameCity</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BIK">
+          <DataField>BIK</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="DataSet2">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@scoreId">
+            <Value>=Parameters!scoreId.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>SELECT TOP 1 osn,dbo.DateToStr(CONVERT(SMALLDATETIME,datd,20)) as agreedate FROM NSD2_Agree na
+INNER JOIN custcontragent c ON c.idContragent = na.kgr
+INNER JOIN customers cc ON cc.customerId = c.customerId AND cc.customerId = (select customerId from serviceScore where scoreNo=@scoreId)
+WHERE na.kprod='999910' AND CONVERT(SMALLDATETIME,datd,20) &lt;= (select scoredate from serviceScore where scoreNo=@scoreId) AND osn NOT LIKE'ПОЛИМИР%'
+ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="osn">
+          <DataField>osn</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="agreedate">
+          <DataField>agreedate</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="DataSet4">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@scoreId">
+            <Value>=Parameters!scoreId.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>DECLARE @str VARCHAR(200)
+		SET @str=''
+
+		SELECT 
+				@str = @str+' '+cast(waybillnumber AS VARCHAR(10))+','
+			FROM serviceWaybill
+		WHERE ScoreNo = @scoreId
+
+		SELECT SUBSTRING(@str,1,LEN(@str)-1) as waybills</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="waybills">
+          <DataField>waybills</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="DataSet5">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@scoreId">
+            <Value>=Parameters!scoreId.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>		SELECT 
+*
+		FROM serviceScore WHERE scoreNo = @scoreId</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="scoreNo">
+          <DataField>scoreNo</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="scoreDate">
+          <DataField>scoreDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="customerId">
+          <DataField>customerId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="serviceMonth">
+          <DataField>serviceMonth</DataField>
+          <rd:TypeName>System.Byte</rd:TypeName>
+        </Field>
+        <Field Name="serviceYear">
+          <DataField>serviceYear</DataField>
+          <rd:TypeName>System.Int16</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
   <ReportParameters>
     <ReportParameter Name="scoreId">
       <DataType>Integer</DataType>
@@ -6845,17 +6836,6 @@ ORDER BY CONVERT(SMALLDATETIME,datd,20) desc</CommandText>
 
         Return s.Trim()
     End Function</Code>
-  <Width>26.61159cm</Width>
-  <Page>
-    <PageHeight>21cm</PageHeight>
-    <PageWidth>29.7cm</PageWidth>
-    <LeftMargin>0.5cm</LeftMargin>
-    <RightMargin>0.5cm</RightMargin>
-    <TopMargin>0.5cm</TopMargin>
-    <BottomMargin>0.5cm</BottomMargin>
-    <ColumnSpacing>1.27cm</ColumnSpacing>
-    <Style />
-  </Page>
-  <rd:ReportID>555efa4c-8532-47eb-81bf-68579a8a9590</rd:ReportID>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>555efa4c-8532-47eb-81bf-68579a8a9590</rd:ReportID>
 </Report>

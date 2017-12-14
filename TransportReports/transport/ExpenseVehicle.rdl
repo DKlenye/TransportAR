@@ -1,198 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition">
-  <DataSources>
-    <DataSource Name="DataSource1">
-      <DataSourceReference>db2</DataSourceReference>
-      <rd:DataSourceID>4eb8e3e7-4059-4138-9b83-67889999019e</rd:DataSourceID>
-    </DataSource>
-  </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet1">
-      <Fields>
-        <Field Name="DepartureDate">
-          <DataField>DepartureDate</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="CustomerName">
-          <DataField>CustomerName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="fuelName">
-          <DataField>fuelName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="WaybillId">
-          <DataField>WaybillId</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="CustomerId">
-          <DataField>CustomerId</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Debet">
-          <DataField>Debet</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="fuelId">
-          <DataField>fuelId</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="km">
-          <DataField>km</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="mh">
-          <DataField>mh</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="cons">
-          <DataField>cons</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="minutes">
-          <DataField>minutes</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="cost">
-          <DataField>cost</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="ActualCost">
-          <DataField>ActualCost</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="AdvanceReport">
-          <DataField>AdvanceReport</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Tax">
-          <DataField>Tax</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="ServiceSumm">
-          <DataField>ServiceSumm</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource1</DataSourceName>
-        <CommandType>StoredProcedure</CommandType>
-        <CommandText>ssrs_ExpenseVehicle</CommandText>
-        <QueryParameters>
-          <QueryParameter Name="@garagenumber">
-            <Value>=Parameters!garagenumber.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@start">
-            <Value>=Parameters!start.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@end">
-            <Value>=Parameters!end.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@ownerId">
-            <Value>=Parameters!ownerId.Value</Value>
-          </QueryParameter>
-        </QueryParameters>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-    </DataSet>
-    <DataSet Name="monthDS">
-      <Fields>
-        <Field Name="Id">
-          <DataField>Id</DataField>
-          <rd:TypeName>System.Byte</rd:TypeName>
-        </Field>
-        <Field Name="MonthName">
-          <DataField>MonthName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource1</DataSourceName>
-        <CommandText>select * from monthes</CommandText>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-    </DataSet>
-    <DataSet Name="DataSet2">
-      <Fields>
-        <Field Name="GarageNumber">
-          <DataField>GarageNumber</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Model">
-          <DataField>Model</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="RegistrationNumber">
-          <DataField>RegistrationNumber</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource1</DataSourceName>
-        <CommandText>select GarageNumber, Model, RegistrationNumber from Vehicle where GarageNumber = @garagenumber and ownerId = @ownerId</CommandText>
-        <QueryParameters>
-          <QueryParameter Name="@garagenumber">
-            <Value>=Parameters!garagenumber.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@ownerId">
-            <Value>=Parameters!ownerId.Value</Value>
-          </QueryParameter>
-        </QueryParameters>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-    </DataSet>
-  </DataSets>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <Body>
     <ReportItems>
       <Tablix Name="Tablix1">
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>0.85578in</Width>
+              <Width>2.17368cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.10578in</Width>
+              <Width>2.80868cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.81759in</Width>
+              <Width>2.07668cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.63776in</Width>
+              <Width>1.61991cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.7433in</Width>
+              <Width>1.88798cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.93217in</Width>
+              <Width>2.36771cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.82801in</Width>
+              <Width>2.10315cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.85925in</Width>
+              <Width>2.18249cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.97383in</Width>
+              <Width>2.47353cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>2.49999cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>2.49999cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.88009in</Width>
+              <Width>2.23543cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.77592in</Width>
+              <Width>1.97084cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>2.49999cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.74664in</Height>
+              <Height>1.89647cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -701,7 +559,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1196,7 +1054,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1461,7 +1319,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.26747in</Height>
+              <Height>0.67937cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1707,7 +1565,7 @@
                             <TextRun>
                               <Value>=Fields!cost.Value</Value>
                               <Style>
-                                <Format>#,0</Format>
+                                <Format>#,0.00</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1741,7 +1599,7 @@
                             <TextRun>
                               <Value>=Fields!ActualCost.Value</Value>
                               <Style>
-                                <Format>#,0</Format>
+                                <Format>#,0.00</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1775,7 +1633,7 @@
                             <TextRun>
                               <Value>=Fields!AdvanceReport.Value</Value>
                               <Style>
-                                <Format>#,0</Format>
+                                <Format>#,0.00</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1809,7 +1667,7 @@
                             <TextRun>
                               <Value>=Fields!cost.Value+Fields!ActualCost.Value+Fields!AdvanceReport.Value</Value>
                               <Style>
-                                <Format>#,0</Format>
+                                <Format>#,0.00</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1843,7 +1701,7 @@
                             <TextRun>
                               <Value>=Fields!ServiceSumm.Value+Fields!Tax.Value</Value>
                               <Style>
-                                <Format>#,0</Format>
+                                <Format>#,0.00</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1877,7 +1735,7 @@
                             <TextRun>
                               <Value>=Fields!Tax.Value</Value>
                               <Style>
-                                <Format>#,0</Format>
+                                <Format>#,0.00</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1911,7 +1769,7 @@
                             <TextRun>
                               <Value>=Fields!ServiceSumm.Value-(Fields!cost.Value+Fields!ActualCost.Value+Fields!AdvanceReport.Value)</Value>
                               <Style>
-                                <Format>#,0</Format>
+                                <Format>#,0.00</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1937,7 +1795,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -2162,7 +2020,7 @@
                               <Value>=Sum(Fields!cost.Value)</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>#,0</Format>
+                                <Format>#,0.00</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2197,7 +2055,7 @@
                               <Value>=Sum(Fields!ActualCost.Value)</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>#,0</Format>
+                                <Format>#,0.00</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2232,7 +2090,7 @@
                               <Value>=Sum(Fields!AdvanceReport.Value)</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>#,0</Format>
+                                <Format>#,0.00</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2267,7 +2125,7 @@
                               <Value>=Sum(Fields!cost.Value+Fields!ActualCost.Value+Fields!AdvanceReport.Value)</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>#,0</Format>
+                                <Format>#,0.00</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2302,7 +2160,7 @@
                               <Value>=Sum(Fields!ServiceSumm.Value+Fields!Tax.Value)</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>#,0</Format>
+                                <Format>#,0.00</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2337,7 +2195,7 @@
                               <Value>=Sum(Fields!Tax.Value)</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>#,0</Format>
+                                <Format>#,0.00</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2372,7 +2230,7 @@
                               <Value>=Sum(Fields!ServiceSumm.Value-(Fields!cost.Value+Fields!ActualCost.Value+Fields!AdvanceReport.Value))</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>#,0</Format>
+                                <Format>#,0.00</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2398,7 +2256,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -2660,7 +2518,7 @@
                               <Value>=Sum(Fields!cost.Value)</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>#,0</Format>
+                                <Format>#,0.00</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2696,7 +2554,7 @@
                               <Value>=Sum(Fields!ActualCost.Value)</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>#,0</Format>
+                                <Format>#,0.00</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2732,7 +2590,7 @@
                               <Value>=Sum(Fields!AdvanceReport.Value)</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>#,0</Format>
+                                <Format>#,0.00</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2768,7 +2626,7 @@
                               <Value>=Sum(Fields!cost.Value+Fields!ActualCost.Value+Fields!AdvanceReport.Value)</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>#,0</Format>
+                                <Format>#,0.00</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2804,7 +2662,7 @@
                               <Value>=Sum(Fields!ServiceSumm.Value+Fields!Tax.Value)</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>#,0</Format>
+                                <Format>#,0.00</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2840,7 +2698,7 @@
                               <Value>=Sum(Fields!Tax.Value)</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>#,0</Format>
+                                <Format>#,0.00</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2876,7 +2734,7 @@
                               <Value>=Sum(Fields!ServiceSumm.Value-(Fields!cost.Value+Fields!ActualCost.Value+Fields!AdvanceReport.Value))</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>#,0</Format>
+                                <Format>#,0.00</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2956,7 +2814,6 @@
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
         <Top>3.32528cm</Top>
-        <Left>0cm</Left>
         <Height>4.97583cm</Height>
         <Width>31.40006cm</Width>
         <Style>
@@ -3207,6 +3064,161 @@
     <Height>3.26816in</Height>
     <Style />
   </Body>
+  <Width>32.01208cm</Width>
+  <Page>
+    <PageHeight>21cm</PageHeight>
+    <PageWidth>29.7cm</PageWidth>
+    <LeftMargin>0cm</LeftMargin>
+    <RightMargin>0cm</RightMargin>
+    <TopMargin>0cm</TopMargin>
+    <BottomMargin>0cm</BottomMargin>
+    <ColumnSpacing>0.13cm</ColumnSpacing>
+    <Style />
+  </Page>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource1">
+      <DataSourceReference>db2</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>4eb8e3e7-4059-4138-9b83-67889999019e</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet1">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@garagenumber">
+            <Value>=Parameters!garagenumber.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@start">
+            <Value>=Parameters!start.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@end">
+            <Value>=Parameters!end.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@ownerId">
+            <Value>=Parameters!ownerId.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandType>StoredProcedure</CommandType>
+        <CommandText>ssrs_ExpenseVehicle</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="DepartureDate">
+          <DataField>DepartureDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="CustomerName">
+          <DataField>CustomerName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="fuelName">
+          <DataField>fuelName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="WaybillId">
+          <DataField>WaybillId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="CustomerId">
+          <DataField>CustomerId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Debet">
+          <DataField>Debet</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="fuelId">
+          <DataField>fuelId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="km">
+          <DataField>km</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="mh">
+          <DataField>mh</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="cons">
+          <DataField>cons</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="minutes">
+          <DataField>minutes</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="cost">
+          <DataField>cost</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ActualCost">
+          <DataField>ActualCost</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="AdvanceReport">
+          <DataField>AdvanceReport</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Tax">
+          <DataField>Tax</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ServiceSumm">
+          <DataField>ServiceSumm</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="monthDS">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <CommandText>select * from monthes</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="Id">
+          <DataField>Id</DataField>
+          <rd:TypeName>System.Byte</rd:TypeName>
+        </Field>
+        <Field Name="MonthName">
+          <DataField>MonthName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="DataSet2">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@garagenumber">
+            <Value>=Parameters!garagenumber.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@ownerId">
+            <Value>=Parameters!ownerId.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>select GarageNumber, Model, RegistrationNumber from Vehicle where GarageNumber = @garagenumber and ownerId = @ownerId</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="GarageNumber">
+          <DataField>GarageNumber</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Model">
+          <DataField>Model</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="RegistrationNumber">
+          <DataField>RegistrationNumber</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
   <ReportParameters>
     <ReportParameter Name="garagenumber">
       <DataType>Integer</DataType>
@@ -3235,17 +3247,6 @@ If i = 0 Then
 	Dim minutes = Int(i Mod 60)
 	Return System.[String].Format("{0}:{1}", hours, minutes)
 End Function</Code>
-  <Width>32.01208cm</Width>
-  <Page>
-    <PageHeight>21cm</PageHeight>
-    <PageWidth>29.7cm</PageWidth>
-    <LeftMargin>0cm</LeftMargin>
-    <RightMargin>0cm</RightMargin>
-    <TopMargin>0cm</TopMargin>
-    <BottomMargin>0cm</BottomMargin>
-    <ColumnSpacing>0.13cm</ColumnSpacing>
-    <Style />
-  </Page>
-  <rd:ReportID>cdaed07a-d8b1-41a7-ad98-32cacea49108</rd:ReportID>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>cdaed07a-d8b1-41a7-ad98-32cacea49108</rd:ReportID>
 </Report>

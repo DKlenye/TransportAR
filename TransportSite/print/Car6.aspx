@@ -99,38 +99,7 @@
 								    <span class="dataText"><%Response.Write(WaybillCode()); %></span>
 								</td>
                              <td style="width:60mm">
-                                                    <table class="form-head" cellpadding="0" cellspacing="0">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>
-                                                                    Приложение 3
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    К инструкции о порядке оформления
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    транспортных документов
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td style="text-align:left;">
-                                                                    УТВЕРЖДЕНО
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td style="text-align:left;">
-                                                                    Приказ генерального директора от 08.02.2012 № 213
-                                                                </td>
-                                                            </tr>
-                                                             <tr>
-                                                                <td style="height:1mm">&nbsp;</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
+                                                    <%Response.Write(Approved("3")); %>
                                                 </td>
                         </tr>
                     </tbody>

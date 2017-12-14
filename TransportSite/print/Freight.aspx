@@ -78,38 +78,7 @@
                         </td>
                         <td style="text-align:center; font-size:12pt;">&nbsp;<span><%Response.Write(WaybillCode()); %></span></td>
                         <td style="width:60mm">
-                                                    <table class="form-head" cellpadding="0" cellspacing="0">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>
-                                                                    Приложение 2
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    К инструкции о порядке оформления
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    транспортных документов
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td style="text-align:left;">
-                                                                    УТВЕРЖДЕНО
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td style="text-align:left;">
-                                                                    Приказ генерального директора от 08.02.2012 № 213
-                                                                </td>
-                                                            </tr>
-                                                             <tr>
-                                                                <td style="height:1mm">&nbsp;</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
+                                                    <%Response.Write(Approved("2")); %>
                                                 </td>
                     </tr>
                     </tbody>
@@ -462,7 +431,7 @@
                                 <td>44</td>
                                 <td>45</td>                                
                             </tr>
-                            <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                            <tr><td>&nbsp;</td><td><%Response.Write(DriverTab(1)); %>&nbsp;<%Response.Write(DriverFio(1)); %></td><td><%Response.Write(TrailerRegNumber()); %></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td><%Response.Write(SrcRoutePoint()); %></td><td><%Response.Write(DstRoutPoint()); %></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
                             <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
                             <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
                             <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>

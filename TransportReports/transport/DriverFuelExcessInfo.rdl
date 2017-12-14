@@ -1,125 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition">
-  <DataSources>
-    <DataSource Name="DataSource1">
-      <DataSourceReference>db2</DataSourceReference>
-      <rd:DataSourceID>85efde8d-b63b-407f-9c30-b24e8aaf16c9</rd:DataSourceID>
-    </DataSource>
-  </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet1">
-      <Fields>
-        <Field Name="Cost">
-          <DataField>cost</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="GarageNumber">
-          <DataField>GarageNumber</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Department">
-          <DataField>Department</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="EmployeeNumber">
-          <DataField>EmployeeNumber</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="WaybillId">
-          <DataField>WaybillId</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="LastName">
-          <DataField>LastName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="DepartureDate">
-          <DataField>DepartureDate</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="FuelName">
-          <DataField>FuelName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="FirstName">
-          <DataField>FirstName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="MiddleName">
-          <DataField>MiddleName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="cons">
-          <DataField>cons</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource1</DataSourceName>
-        <CommandType>StoredProcedure</CommandType>
-        <CommandText>ssrs_DriverFuelExcessInfo</CommandText>
-        <QueryParameters>
-          <QueryParameter Name="@month">
-            <Value>=Parameters!month.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@year">
-            <Value>=Parameters!year.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@accountingId">
-            <Value>=Parameters!accountingId.Value</Value>
-          </QueryParameter>
-        </QueryParameters>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-    </DataSet>
-    <DataSet Name="monthDS">
-      <Fields>
-        <Field Name="Id">
-          <DataField>Id</DataField>
-          <rd:TypeName>System.Byte</rd:TypeName>
-        </Field>
-        <Field Name="MonthName">
-          <DataField>MonthName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource1</DataSourceName>
-        <CommandText>select * from monthes</CommandText>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-    </DataSet>
-  </DataSets>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <Body>
     <ReportItems>
       <Tablix Name="Tablix1">
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.73983in</Width>
+              <Width>4.41917cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.75in</Width>
+              <Width>1.905cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.83842in</Width>
+              <Width>2.12959cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.04675in</Width>
+              <Width>2.65874cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.00508in</Width>
+              <Width>2.5529cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.78634in</Width>
+              <Width>1.9973cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.94258in</Width>
+              <Width>2.39415cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -166,7 +76,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -301,7 +211,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -507,7 +417,7 @@
                             <TextRun>
                               <Value>=Fields!Cost.Value</Value>
                               <Style>
-                                <Format>#,0;(#,0)</Format>
+                                <Format>#,0.00;(#,0.00)</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -533,7 +443,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -620,7 +530,7 @@
                               <Value>=Sum(Fields!Cost.Value)</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>#,0;(#,0)</Format>
+                                <Format>#,0.00;(#,0.00)</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -646,7 +556,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -735,7 +645,7 @@
                               <Value>=Sum(Fields!Cost.Value)</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>#,0;(#,0)</Format>
+                                <Format>#,0.00;(#,0.00)</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -762,7 +672,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -851,7 +761,7 @@
                               <Value>=Sum(Fields!Cost.Value)</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>#,0'р.';(#,0'р.')</Format>
+                                <Format>#,0.00;(#,0.00)</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -907,7 +817,7 @@
                 </SortExpression>
               </SortExpressions>
               <TablixHeader>
-                <Size>0.03125in</Size>
+                <Size>0.07938cm</Size>
                 <CellContents>
                   <Textbox Name="Group1">
                     <CanGrow>true</CanGrow>
@@ -940,7 +850,7 @@
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>0.03125in</Size>
+                    <Size>0.07938cm</Size>
                     <CellContents>
                       <Textbox Name="Textbox64">
                         <CanGrow>true</CanGrow>
@@ -987,7 +897,7 @@
                     </SortExpression>
                   </SortExpressions>
                   <TablixHeader>
-                    <Size>0.03125in</Size>
+                    <Size>0.07938cm</Size>
                     <CellContents>
                       <Textbox Name="Group2">
                         <CanGrow>true</CanGrow>
@@ -1031,7 +941,7 @@
                 </TablixMember>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>0.03125in</Size>
+                    <Size>0.07938cm</Size>
                     <CellContents>
                       <Textbox Name="Textbox116">
                         <CanGrow>true</CanGrow>
@@ -1070,7 +980,7 @@
             </TablixMember>
             <TablixMember>
               <TablixHeader>
-                <Size>0.03125in</Size>
+                <Size>0.07938cm</Size>
                 <CellContents>
                   <Textbox Name="Textbox22">
                     <CanGrow>true</CanGrow>
@@ -1103,7 +1013,7 @@
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>0.03125in</Size>
+                    <Size>0.07938cm</Size>
                     <CellContents>
                       <Textbox Name="Textbox117">
                         <CanGrow>true</CanGrow>
@@ -1145,8 +1055,8 @@
         <FixedRowHeaders>true</FixedRowHeaders>
         <DataSetName>DataSet1</DataSetName>
         <Left>0.22966cm</Left>
-        <Height>3.6cm</Height>
-        <Width>18.21562cm</Width>
+        <Height>3.59999cm</Height>
+        <Width>18.21561cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1157,27 +1067,6 @@
     <Height>1.48958in</Height>
     <Style />
   </Body>
-  <ReportParameters>
-    <ReportParameter Name="month">
-      <DataType>Integer</DataType>
-      <Prompt>month</Prompt>
-      <ValidValues>
-        <DataSetReference>
-          <DataSetName>monthDS</DataSetName>
-          <ValueField>Id</ValueField>
-          <LabelField>MonthName</LabelField>
-        </DataSetReference>
-      </ValidValues>
-    </ReportParameter>
-    <ReportParameter Name="year">
-      <DataType>Integer</DataType>
-      <Prompt>year</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="accountingId">
-      <DataType>Integer</DataType>
-      <Prompt>accounting Id</Prompt>
-    </ReportParameter>
-  </ReportParameters>
   <Width>18.6957cm</Width>
   <Page>
     <PageHeader>
@@ -1537,6 +1426,119 @@ iif(Parameters!accountingId.Value=1,
     <ColumnSpacing>0.13cm</ColumnSpacing>
     <Style />
   </Page>
-  <rd:ReportID>07e94380-c46a-47de-b74e-c0deb14bf0ee</rd:ReportID>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource1">
+      <DataSourceReference>db2</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>85efde8d-b63b-407f-9c30-b24e8aaf16c9</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet1">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@month">
+            <Value>=Parameters!month.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@year">
+            <Value>=Parameters!year.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@accountingId">
+            <Value>=Parameters!accountingId.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandType>StoredProcedure</CommandType>
+        <CommandText>ssrs_DriverFuelExcessInfo</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="Cost">
+          <DataField>cost</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="GarageNumber">
+          <DataField>GarageNumber</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Department">
+          <DataField>Department</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="EmployeeNumber">
+          <DataField>EmployeeNumber</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="WaybillId">
+          <DataField>WaybillId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="LastName">
+          <DataField>LastName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DepartureDate">
+          <DataField>DepartureDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="FuelName">
+          <DataField>FuelName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FirstName">
+          <DataField>FirstName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MiddleName">
+          <DataField>MiddleName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="cons">
+          <DataField>cons</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="monthDS">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <CommandText>select * from monthes</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="Id">
+          <DataField>Id</DataField>
+          <rd:TypeName>System.Byte</rd:TypeName>
+        </Field>
+        <Field Name="MonthName">
+          <DataField>MonthName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportParameters>
+    <ReportParameter Name="month">
+      <DataType>Integer</DataType>
+      <Prompt>month</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>monthDS</DataSetName>
+          <ValueField>Id</ValueField>
+          <LabelField>MonthName</LabelField>
+        </DataSetReference>
+      </ValidValues>
+    </ReportParameter>
+    <ReportParameter Name="year">
+      <DataType>Integer</DataType>
+      <Prompt>year</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="accountingId">
+      <DataType>Integer</DataType>
+      <Prompt>accounting Id</Prompt>
+    </ReportParameter>
+  </ReportParameters>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>07e94380-c46a-47de-b74e-c0deb14bf0ee</rd:ReportID>
 </Report>

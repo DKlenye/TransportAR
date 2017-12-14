@@ -1,100 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition">
-  <DataSources>
-    <DataSource Name="DataSource1">
-      <DataSourceReference>db2</DataSourceReference>
-      <rd:DataSourceID>f05e0b82-61e9-4b77-aa7d-bfdd65a9e359</rd:DataSourceID>
-    </DataSource>
-  </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet1">
-      <Fields>
-        <Field Name="WaybillId">
-          <DataField>WaybillId</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="VehicleId">
-          <DataField>VehicleId</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="AccountingId">
-          <DataField>AccountingId</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="GarageNumber">
-          <DataField>GarageNumber</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="FuelId">
-          <DataField>FuelId</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Remain">
-          <DataField>Remain</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="DriverId">
-          <DataField>DriverId</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="EmployeeId">
-          <DataField>EmployeeId</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="FullFio">
-          <DataField>FullFio</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="FuelName">
-          <DataField>FuelName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Department">
-          <DataField>Department</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="EmployeeNumber">
-          <DataField>EmployeeNumber</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="DepartureDate">
-          <DataField>DepartureDate</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="Price">
-          <DataField>Price</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Cost">
-          <DataField>Cost</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource1</DataSourceName>
-        <CommandType>StoredProcedure</CommandType>
-        <CommandText>ssrs_InventoryDetails</CommandText>
-        <QueryParameters>
-          <QueryParameter Name="@columnId">
-            <Value>=Parameters!columnId.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@departmentId">
-            <Value>=Parameters!departmentId.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@driverId">
-            <Value>=Parameters!driverId.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@accountingId">
-            <Value>=Parameters!accountingId.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@date">
-            <Value>=Parameters!date.Value</Value>
-          </QueryParameter>
-        </QueryParameters>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-    </DataSet>
-  </DataSets>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <Body>
     <ReportItems>
       <Textbox Name="Textbox1">
@@ -1074,7 +979,7 @@
                             <TextRun>
                               <Value>=Fields!Cost.Value</Value>
                               <Style>
-                                <Format>0;- 0</Format>
+                                <Format>0.00;- 0.00</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1095,6 +1000,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -1222,7 +1128,7 @@
                               <Value>=Sum(Fields!Cost.Value)</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>0;- 0</Format>
+                                <Format>0.00;- 0.00</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1243,6 +1149,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -1341,7 +1248,7 @@
                               <Value>=Sum(Fields!Cost.Value)</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>0;- 0</Format>
+                                <Format>0.00;- 0.00</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1362,6 +1269,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -1454,7 +1362,7 @@
                               <Value>=Sum(Fields!Cost.Value)</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>0;- 0</Format>
+                                <Format>0.00;- 0.00</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1475,6 +1383,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -1856,6 +1765,111 @@
     <Height>2.2675in</Height>
     <Style />
   </Body>
+  <Width>9.59041in</Width>
+  <Page>
+    <LeftMargin>1in</LeftMargin>
+    <RightMargin>1in</RightMargin>
+    <TopMargin>1in</TopMargin>
+    <BottomMargin>1in</BottomMargin>
+    <Style />
+  </Page>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource1">
+      <DataSourceReference>db2</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>f05e0b82-61e9-4b77-aa7d-bfdd65a9e359</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet1">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@columnId">
+            <Value>=Parameters!columnId.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@departmentId">
+            <Value>=Parameters!departmentId.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@driverId">
+            <Value>=Parameters!driverId.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@accountingId">
+            <Value>=Parameters!accountingId.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@date">
+            <Value>=Parameters!date.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandType>StoredProcedure</CommandType>
+        <CommandText>ssrs_InventoryDetails</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="WaybillId">
+          <DataField>WaybillId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="VehicleId">
+          <DataField>VehicleId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="AccountingId">
+          <DataField>AccountingId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="GarageNumber">
+          <DataField>GarageNumber</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="FuelId">
+          <DataField>FuelId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Remain">
+          <DataField>Remain</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="DriverId">
+          <DataField>DriverId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="EmployeeId">
+          <DataField>EmployeeId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="FullFio">
+          <DataField>FullFio</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FuelName">
+          <DataField>FuelName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Department">
+          <DataField>Department</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="EmployeeNumber">
+          <DataField>EmployeeNumber</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DepartureDate">
+          <DataField>DepartureDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Price">
+          <DataField>Price</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Cost">
+          <DataField>Cost</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
   <ReportParameters>
     <ReportParameter Name="columnId">
       <DataType>Integer</DataType>
@@ -1878,14 +1892,6 @@
       <Prompt>date</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <Width>9.59041in</Width>
-  <Page>
-    <LeftMargin>1in</LeftMargin>
-    <RightMargin>1in</RightMargin>
-    <TopMargin>1in</TopMargin>
-    <BottomMargin>1in</BottomMargin>
-    <Style />
-  </Page>
-  <rd:ReportID>864bed82-90c3-4e66-8a9b-e56f3fd11c7b</rd:ReportID>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>864bed82-90c3-4e66-8a9b-e56f3fd11c7b</rd:ReportID>
 </Report>

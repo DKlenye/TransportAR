@@ -15,6 +15,7 @@
                     margins: '2 2 2 2',
                     xtype: 'kdn.grid.propertygrid',
                     source: {
+                        RequestTypeName:'',
                         RequestDate: '',
                         DestinationPoint: '',
                         PassengerAmount: '',
@@ -24,19 +25,26 @@
                         TripPurpose: '',
                         SeatPlace:'',
                         SecondedPeople : '',
-                        Order:''
+                        Order: '',
+                        OtherInformation: '',
+                        ConfirmTelFax: '',
+                        ConfirmEmail:''
                     },
                     propertyNames: {
+                        RequestTypeName:"Вид заявки",
                         DestinationPoint: 'Пункт назначения',
                         RequestDate: 'Выделить транспорт на дату',
                         ChildAmount: 'Количество детей',
                         PassengerAmount: 'Количество пассажиров',
-                        TripDuration: 'Срок командировки (дней)',
+                        TripDuration: 'Срок фрахтования (дней)',
                         TripPurpose: 'Цель поездки',
-                        CustomerName:'Наименование заказчика',
+                        CustomerName:'Наименование заказчика (цель)',
                         Order:'Номер, дата, название приказа о командировании',
                         SecondedPeople:'ФИО командируемых, номер телефона',
-                        SeatPlace:'Место и время посадки'
+                        SeatPlace: 'Место и время посадки',
+                        OtherInformation: "Другая информация",
+                        ConfirmTelFax: "Подтверждение о принятии заявки направить на тел.",
+                        ConfirmEmail: "Подтверждение о принятии заявки направить на эл. почту"
                     }
                 }
             ]

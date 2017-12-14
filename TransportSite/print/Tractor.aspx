@@ -80,24 +80,7 @@
                         </td>
                         <td style="text-align:center; font-size:12pt;">&nbsp;<span><%Response.Write(WaybillCode()); %></span></td>
                         <td style="width:60mm">
-                                                    <table class="form-head" cellpadding="0" cellspacing="0">
-                                                        <tbody>
-                                                            
-                                                            <tr>
-                                                                <td style="text-align:left;">
-                                                                    УТВЕРЖДЕНО
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td style="text-align:left;">
-                                                                    Приказ генерального директора от 30.08.2007 № 727
-                                                                </td>
-                                                            </tr>
-                                                             <tr>
-                                                                <td style="height:1mm">&nbsp;</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
+                                                 <%Response.Write(Approved()); %>   
                                                 </td>
                     </tr>
                     </tbody>
@@ -215,7 +198,7 @@
                         <td>подпись заправщика</td>
                     </tr>
                     <tr>
-                        <td><span>&nbsp;</span></td><td><span style="font-size: 10pt;"><%Response.Write(CustomerNames()); %></span></td><td>&nbsp;</td><td><span><%Response.Write(DepartureDate("HH:mm")); %></span></td><td><span><%Response.Write(DepartureMh()); %></span></td>
+                        <td><span>&nbsp;<%Response.Write(DepartureDate("dd.MM")); %></span></td><td><span style="font-size: 10pt;"><%Response.Write(CustomerNames()); %></span></td><td>&nbsp;</td><td><span><%Response.Write(DepartureDate("HH:mm")); %></span></td><td><span><%Response.Write(DepartureMh()); %></span></td>
                             <td><table cellpadding="0" cellspacing="0"><tr><td style="border-width: 0pt 0pt 1pt 0pt">&nbsp;</td></tr><tr><td style="border-width:0pt;">&nbsp;</td></tr></table></td>
                         <td><span><%Response.Write(ReturnDate("HH:mm")); %></span></td><td>&nbsp;</td>
                             <td><table cellpadding="0" cellspacing="0"><tr><td style="border-width: 0pt 0pt 1pt 0pt">&nbsp;</td></tr><tr><td style="border-width:0pt;">&nbsp;</td></tr></table></td>
@@ -520,7 +503,7 @@
                                   <td>маш.-час</td>
                                    <td>мото-час.</td>
                             </tr>
-                            <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                            <tr><td><span>&nbsp;<%Response.Write(DepartureDate("dd.MM")); %></span></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
                             <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
                             <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
                             <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>

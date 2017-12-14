@@ -423,7 +423,7 @@ _getTbar: function () {
         pressed: true,
         enableToggle: true,
         scope: this,
-        handler: function (field) {
+        handler: function(field) {
             var store = this.store;
             store.reload({
                 params: {
@@ -431,7 +431,16 @@ _getTbar: function () {
                 }
             });
         }
-    }]);
+    },
+        '->',
+    {
+        iconCls: 'icon-excel',
+        text: 'Экспорт в Excel',
+        handler: function () {
+            Kdn.Reporter.exportReport("VehicleListAll");
+        }
+    }
+    ]);
 }
 
 });

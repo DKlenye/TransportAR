@@ -119,6 +119,7 @@
     <EmbeddedResource Include="JS\Ext\ext-all.js" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="JS\Kdn\form\DateRangeField2.js" />
     <EmbeddedResource Include="JS\Kdn\form\DateRangeField.js" />
     <EmbeddedResource Include="JS\Kdn\form\MinuteField.js" />
     <EmbeddedResource Include="JS\Kdn\Reporter.js" />

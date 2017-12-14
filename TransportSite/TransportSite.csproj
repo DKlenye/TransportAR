@@ -138,6 +138,11 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Scripts\ext-base.js" />
+    <EmbeddedResource Include="Scripts\ext-all.js" />
+    <EmbeddedResource Include="Scripts\Net.js" />
+    <EmbeddedResource Include="Scripts\Net1.js" />
+    <Content Include="Scripts\app.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

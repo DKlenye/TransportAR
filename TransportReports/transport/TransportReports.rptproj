@@ -46,6 +46,10 @@
       <FullPath>AccFuelObReport.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>AccObReport.rdl</Name>
+      <FullPath>AccObReport.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>AccPosting.rdl</Name>
       <FullPath>AccPosting.rdl</FullPath>
     </ProjectItem>
@@ -108,6 +112,14 @@
     <ProjectItem>
       <Name>BatteryWarrantlyEnd.rdl</Name>
       <FullPath>BatteryWarrantlyEnd.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>BNC.rdl</Name>
+      <FullPath>BNC.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>BNCUso.rdl</Name>
+      <FullPath>BNCUso.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>BusPassengers.rdl</Name>
@@ -222,6 +234,10 @@
       <FullPath>ExpenseList.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>ExpenseListByFuel.rdl</Name>
+      <FullPath>ExpenseListByFuel.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>ExpenseListByGroup.rdl</Name>
       <FullPath>ExpenseListByGroup.rdl</FullPath>
     </ProjectItem>
@@ -262,6 +278,14 @@
       <FullPath>FuelIncomeOrder.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>FuelMovingProv.rdl</Name>
+      <FullPath>FuelMovingProv.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>FuelMovingProvAll.rdl</Name>
+      <FullPath>FuelMovingProvAll.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Inventory.rdl</Name>
       <FullPath>Inventory.rdl</FullPath>
     </ProjectItem>
@@ -294,8 +318,68 @@
       <FullPath>NaftanService.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>NaftanSpectransWorkInfo.rdl</Name>
+      <FullPath>NaftanSpectransWorkInfo.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>NSTAllLimit.rdl</Name>
+      <FullPath>NSTAllLimit.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>NSTCarLimit.rdl</Name>
+      <FullPath>NSTCarLimit.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>NSTCarWork.rdl</Name>
+      <FullPath>NSTCarWork.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>NSTCarWorkByDepartment.rdl</Name>
+      <FullPath>NSTCarWorkByDepartment.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>NstCarWorkDetails.rdl</Name>
+      <FullPath>NstCarWorkDetails.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>NSTCostLimit.rdl</Name>
+      <FullPath>NSTCostLimit.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>NSTLimitDetails.rdl</Name>
+      <FullPath>NSTLimitDetails.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>NSTLimitDetailsByDate.rdl</Name>
+      <FullPath>NSTLimitDetailsByDate.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>NSTLimitDetailsWithCustomer.rdl</Name>
+      <FullPath>NSTLimitDetailsWithCustomer.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>NSTWorkDetails1.rdl</Name>
+      <FullPath>NSTWorkDetails1.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>NSTWorkDetailsByGarageNumber.rdl</Name>
+      <FullPath>NSTWorkDetailsByGarageNumber.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>NSTWorkingTime.rdl</Name>
+      <FullPath>NSTWorkingTime.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>OilNorms.rdl</Name>
       <FullPath>OilNorms.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>OrderDeduction.rdl</Name>
+      <FullPath>OrderDeduction.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>OrderDeductionSum.rdl</Name>
+      <FullPath>OrderDeductionSum.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>OrderRegister.rdl</Name>
@@ -304,6 +388,10 @@
     <ProjectItem>
       <Name>OrdersMagazine.rdl</Name>
       <FullPath>OrdersMagazine.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>OrdersObReport.rdl</Name>
+      <FullPath>OrdersObReport.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>OrderSumInfo.rdl</Name>
@@ -320,6 +408,10 @@
     <ProjectItem>
       <Name>PolymirVehicleWork.rdl</Name>
       <FullPath>PolymirVehicleWork.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>ProvPrint.rdl</Name>
+      <FullPath>ProvPrint.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>RcpAzs.rdl</Name>
@@ -370,8 +462,32 @@
       <FullPath>RequestFreight.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>RequestInternational.rdl</Name>
+      <FullPath>RequestInternational.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>RequestInternational1.rdl</Name>
+      <FullPath>RequestInternational1.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>RequestInternational2.rdl</Name>
+      <FullPath>RequestInternational2.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>RequestInternational3.rdl</Name>
+      <FullPath>RequestInternational3.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>RequestInternational4.rdl</Name>
+      <FullPath>RequestInternational4.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>RequestPassengers.rdl</Name>
       <FullPath>RequestPassengers.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>RunByDay.rdl</Name>
+      <FullPath>RunByDay.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>ServiceAct.rdl</Name>
@@ -392,6 +508,10 @@
     <ProjectItem>
       <Name>ServiceScore.rdl</Name>
       <FullPath>ServiceScore.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>ServiceWaybillCount.rdl</Name>
+      <FullPath>ServiceWaybillCount.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>SmallMechFuelConsumption.rdl</Name>
@@ -442,6 +562,10 @@
       <FullPath>TireWarrantlyEnd.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>TransportConsolidateReport.rdl</Name>
+      <FullPath>TransportConsolidateReport.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>TransportQuarterConsumption.rdl</Name>
       <FullPath>TransportQuarterConsumption.rdl</FullPath>
     </ProjectItem>
@@ -482,6 +606,10 @@
       <FullPath>VehicleDayWork.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>VehicleFuelConsumption.rdl</Name>
+      <FullPath>VehicleFuelConsumption.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>VehicleFuelConsumptionFactNorm.rdl</Name>
       <FullPath>VehicleFuelConsumptionFactNorm.rdl</FullPath>
     </ProjectItem>
@@ -516,6 +644,10 @@
     <ProjectItem>
       <Name>VehicleList.rdl</Name>
       <FullPath>VehicleList.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>VehicleListAll.rdl</Name>
+      <FullPath>VehicleListAll.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>VehicleListByColumn.rdl</Name>
@@ -654,8 +786,12 @@
       <FullPath>WorkCoefficient.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>OrdersObReport.rdl</Name>
-      <FullPath>OrdersObReport.rdl</FullPath>
+      <Name>NSTWorkDetails2.rdl</Name>
+      <FullPath>NSTWorkDetails2.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>NSTWorkDetails3.rdl</Name>
+      <FullPath>NSTWorkDetails3.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
@@ -665,7 +801,7 @@
       <Options>
         <OutputPath>bin\Debug</OutputPath>
         <TargetServerVersion>SSRS2008</TargetServerVersion>
-        <TargetServerURL>http://db2.lan.naftan.by/ReportServer</TargetServerURL>
+        <TargetServerURL>http://db2/ReportServer</TargetServerURL>
         <TargetFolder>Transport</TargetFolder>
       </Options>
     </Configuration>

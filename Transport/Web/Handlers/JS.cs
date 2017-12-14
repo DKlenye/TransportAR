@@ -27,8 +27,9 @@ namespace Transport.Web.Handlers
 
             ScriptReader.assembly = Assembly.GetExecutingAssembly();
 
-            context.Response.Write(ScriptReader.GetScripts("Transport.JS.Transport"));
-            context.Response.Write("Kdn.Application = Transport.app.Application");
+           context.Response.Write(ScriptReader.GetScripts("Transport.JS.Transport"));
+           context.Response.Write("Kdn.Application = Transport.app.Application");
+             
         }
 
 

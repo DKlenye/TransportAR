@@ -15,6 +15,7 @@ reportName: 'CustomerWorkInfo',
             'Заказчик',
             {
                 xtype: 'combo.customer',
+                showNotActual:true,
                 enableClear: true,
                 width:150,
                 dataIndex:'Customer'        

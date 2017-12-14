@@ -1,5 +1,5 @@
 T.view.waybill.WaybillEditor = Ext.extend(Kdn.editor.ModelEditor, {
-    requireModels: 'User,Car,Schedule,Driver,FullTrailer,Fuel,RefuellingPlace,WorkCounter,WorkUnit,WorkType,Customer,Increase,WaybillType,AdvanceReportItem',
+    requireModels: 'GroupRequest,ServiceAgreement,User,Car,Schedule,Driver,FullTrailer,Fuel,RefuellingPlace,WorkCounter,WorkUnit,WorkType,Customer,Increase,WaybillType,AdvanceReportItem',
 
     vehicle: null,
     waybill: null,
@@ -203,11 +203,19 @@ T.view.waybill.WaybillEditor = Ext.extend(Kdn.editor.ModelEditor, {
             title: 'Время в наряде',
             mainView: this
         });
+        
+        cfg.waybillInvoice = Ext.create({
+            xtype: 'view.waybill.waybillinvoice',
+            title: 'ТТН',
+            mainView: this
+        });
+
 
         var tabItems = [
             cfg.remains,
             cfg.refuelling,
             cfg.waybillCustomerWorkingtime,
+            cfg.waybillInvoice,
             cfg.summary
         ];
 
@@ -613,7 +621,8 @@ T.view.waybill.WaybillEditor = Ext.extend(Kdn.editor.ModelEditor, {
             'tasks',
             'summary',
             'advanceReport',
-            'waybillCustomerWorkingtime'
+            'waybillCustomerWorkingtime',
+            'waybillInvoice'
         ], fn, this);
     },
 
@@ -628,9 +637,34 @@ T.view.waybill.WaybillEditor = Ext.extend(Kdn.editor.ModelEditor, {
 
         this.body.unmask();
         this.loadWaybill();
+
+        this.setCustomerAgreement(e);
+
         this.waybillproperty.focusTask.delay(50);
 
     },
+    
+    setCustomerAgreement:function(vehicle) {
+        //если машина спецтранса то устанавливаем договор
+        var editor = this.tasks.CustomerEditor;
+
+        if ([6, 7, 8, 12, 13].includes(vehicle.ColumnId)) {
+            
+            var store = Kdn.ModelFactory.getStore('GroupRequest');
+            var group = store.getById(vehicle.GroupRequestId);
+            var agreement = 0;
+
+            if (group) {
+                agreement = group.get('AgreementId') || 0;
+            }
+            editor.serviceAgreement = agreement;
+        } else {
+            editor.serviceAgreement = 0;
+        }
+
+
+    },
+
 
     applyVehicleSettings: function() {
 

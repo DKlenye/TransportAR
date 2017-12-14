@@ -36,6 +36,9 @@ namespace Transport.Models
         [Property]
         public int? PolymirId { get; set; }
 
+        [BelongsTo("PurposeId"),AllowBlank]
+        public v_ServicePurpose Purpose { get; set; }
+
         [Property,AllowBlank]
         public string Description { get; set; }
 

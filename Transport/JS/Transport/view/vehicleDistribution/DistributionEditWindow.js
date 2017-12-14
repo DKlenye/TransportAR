@@ -1,7 +1,14 @@
 T.view.vehicleDistribution.DistributionEditWindow = Ext.extend(Ext.Window, {
     constructor: function(cfg) {
         cfg = cfg || {};
+
+        var CustomerEditor = Ext.create({            
+             xtype: 'combo.customer' 
+        });
+
+
         Ext.apply(cfg, {
+            CustomerEditor:CustomerEditor,
             layout: {
                 type: 'vbox',
                 padding: '2',
@@ -125,7 +132,7 @@ T.view.vehicleDistribution.DistributionEditWindow = Ext.extend(Ext.Window, {
                         {
                             header: 'Заказчик',
                             dataIndex: 'Customer',
-                            editor: { xtype: 'combo.customer' },
+                            editor: CustomerEditor,
                             renderer: function(v) {
                                 if (!v) return null;
                                 return String.format("[{0}] {1}", v.CustomerId, v.CustomerName);
@@ -164,7 +171,27 @@ T.view.vehicleDistribution.DistributionEditWindow = Ext.extend(Ext.Window, {
         this.fillData(rec);
     },
 
-     fillData:function(rec){
+    fillData: function (rec) {
+
+        var vehicle = rec.get('Vehicle');
+        var editor = this.CustomerEditor;
+        
+        if ([6, 7, 8, 12, 13].includes(vehicle.ColumnId)) {
+
+            var store = Kdn.ModelFactory.getStore('GroupRequest');
+            var group = store.getById(vehicle.GroupRequestId);
+            var agreement = 0;
+
+            if (group) {
+                agreement = group.get('AgreementId') || 0;
+            }
+            editor.serviceAgreement = agreement;
+        } else {
+            editor.serviceAgreement = 0;
+        }
+
+
+
         this.fillCustomers(rec.get('Customers'));   
         this.fillDrivers(rec.get('Drivers')); 
         

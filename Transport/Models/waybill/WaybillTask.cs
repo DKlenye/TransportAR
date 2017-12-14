@@ -175,7 +175,7 @@ namespace Transport.Models
                 }
             }
 
-            var targetWinterDate = new DateTime(2015, 11, 01);
+            var targetWinterDate = new DateTime(2017, 11, 01);
 
             if (Temperature != null && Temperature < 0 && norm.isMain &&
                 (TaskDepartureDate.Month <= 3 || TaskDepartureDate > targetWinterDate))

@@ -252,7 +252,8 @@ namespace Transport.Models {
             "WaybillTask",
             "VehicleRefuelling",
             "WaybillAdvanceReport",
-            "WaybillCustomerWorkingTime"
+            "WaybillCustomerWorkingTime",
+            "WaybillInvoice"
          };
          JObject obj = Info(details);
 
@@ -412,6 +413,18 @@ namespace Transport.Models {
       }
 
       public void DispClose() {
+          
+          var tasks = WaybillTask.FindByWaybill(WaybillId).ToList();
+
+          if (tasks.Count > 1)
+          {
+              if (tasks.Any(x => x.Consumption == null))
+              {
+                  throw new Exception("Найдены выполненные работы, в которых нет расхода топлива, если эти строки не отображаются на экране обновите путевой лист и отредактируйте задания, после чего закройте путевой лист");
+              }
+          }
+
+
          var next = Next();
          if( next != null) {
             MoveRemains(next);
@@ -558,7 +571,7 @@ namespace Transport.Models {
 
            var lunchMinutes = ((FullCar)FullCar.Find(Car.VehicleId)).DinnerMinutes;
 
-           if (lunchMinutes != null && lunchMinutes.Value > 0)
+           if (lunchMinutes != null)
            {
                lunch8 = lunchMinutes.Value;
                lunch12 = lunchMinutes.Value;
@@ -680,7 +693,7 @@ namespace Transport.Models {
 
            var lunchMinutes = ((FullCar) FullCar.Find(Car.VehicleId)).DinnerMinutes;
            
-           if (lunchMinutes != null && lunchMinutes.Value > 0)
+           if (lunchMinutes != null)
            {
                lunch8 = lunchMinutes.Value;
                lunch12 = lunchMinutes.Value;

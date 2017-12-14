@@ -161,9 +161,10 @@
                               dataIndex:'Cost',
                               width:130,
                               xtype:'numbercolumn',
-                              format:'0,000',
+                              format:'0,000.00',
                               editor:{
-                                 xtype:'numberfield'
+                                  xtype: 'numberfield',
+                                  decimalPrecision: 2
                               }
                            },
                            {
@@ -172,9 +173,10 @@
                               dataIndex:'Diff',
                               width:130,
                               xtype:'numbercolumn',
-                              format:'0,000',
+                              format:'0,000.00',
                               editor:{
-                                 xtype:'numberfield'
+                                  xtype: 'numberfield',
+                                  decimalPrecision:2
                               }
                            }
                         ] 

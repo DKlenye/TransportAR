@@ -320,7 +320,7 @@ namespace Transport.Models.service
         public decimal TrailerMZ { get; set; }
 
         [Property, AllowBlank]
-        public int TireCost { get; set; }
+        public decimal TireCost { get; set; }
         [Property, AllowBlank]
         public int TireNorm { get; set; }
         [Property, AllowBlank]
@@ -587,7 +587,7 @@ namespace Transport.Models.service
 
 
             int kmNorm = 0;
-            int cost = 0;
+            decimal cost = 0;
 
             carTires.ToList().ForEach(x =>
             {

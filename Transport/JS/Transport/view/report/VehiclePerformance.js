@@ -19,8 +19,8 @@ T.view.report.VehiclePerformance = Ext.extend(Kdn.view.Report, {
             dataIndex: 'columns'
         },
         '-',
+        'Показывать детализацию',
         {
-            fieldLabel: 'Показывать детализацию',
             labelWidth: 150,
             xtype: 'checkbox',
             dataIndex: 'withDetails',

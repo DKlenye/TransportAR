@@ -419,6 +419,7 @@ namespace Transport.Direct
             if (o.TryGetValue("WaybillId", out p) && p.Value<int?>() != null)
             {
                 var waybill = Waybill.Find(p.Value<int>());
+
                 waybill.DispClose();
 
                 JO = JObject.FromObject(waybill);

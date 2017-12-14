@@ -14,7 +14,8 @@
             Empty: createEditor('container'),
             RequestFreight: createEditor('view.requestfreighteditor'),
             RequestCrane: createEditor('view.requestcraneeditor'),
-            RequestPassengers: createEditor('view.requestpassengerseditor')
+            RequestPassengers: createEditor('view.requestpassengerseditor'),
+            RequestInternational: createEditor('view.requestinternationaleditor')
         };
         
         Ext.apply(cfg, {

@@ -1,161 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition">
-  <DataSources>
-    <DataSource Name="DataSource1">
-      <DataSourceReference>db2</DataSourceReference>
-      <rd:DataSourceID>980d2ebc-f08e-479b-ac5d-d0e536517856</rd:DataSourceID>
-    </DataSource>
-  </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet1">
-      <Fields>
-        <Field Name="RequestId">
-          <DataField>RequestId</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="RequestDate">
-          <DataField>RequestDate</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="Status">
-          <DataField>Status</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="UserFio">
-          <DataField>UserFio</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="UserLogin">
-          <DataField>UserLogin</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="ApproverEmployeeId">
-          <DataField>ApproverEmployeeId</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="ApproverFio">
-          <DataField>ApproverFio</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="ApproverLogin">
-          <DataField>ApproverLogin</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="PublishDate">
-          <DataField>PublishDate</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="ApproveDate">
-          <DataField>ApproveDate</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="IsDeleted">
-          <DataField>IsDeleted</DataField>
-          <rd:TypeName>System.Boolean</rd:TypeName>
-        </Field>
-        <Field Name="RequestTaskId">
-          <DataField>RequestTaskId</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="CustomerId">
-          <DataField>CustomerId</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="CustomerName">
-          <DataField>CustomerName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="ID_day">
-          <DataField>_day</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="MonthName">
-          <DataField>MonthName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="ID_year">
-          <DataField>_year</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource1</DataSourceName>
-        <CommandType>StoredProcedure</CommandType>
-        <CommandText>ssrs_Request</CommandText>
-        <QueryParameters>
-          <QueryParameter Name="@requestId">
-            <Value>=Parameters!requestId.Value</Value>
-          </QueryParameter>
-        </QueryParameters>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-    </DataSet>
-    <DataSet Name="DataSet2">
-      <Fields>
-        <Field Name="RequestId">
-          <DataField>RequestId</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="DestinationPoint">
-          <DataField>DestinationPoint</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="PassengerAmount">
-          <DataField>PassengerAmount</DataField>
-          <rd:TypeName>System.Int16</rd:TypeName>
-        </Field>
-        <Field Name="ChildAmount">
-          <DataField>ChildAmount</DataField>
-          <rd:TypeName>System.Int16</rd:TypeName>
-        </Field>
-        <Field Name="TripPurpose">
-          <DataField>TripPurpose</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="SeatPlace">
-          <DataField>SeatPlace</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="TripDuration">
-          <DataField>TripDuration</DataField>
-          <rd:TypeName>System.Int16</rd:TypeName>
-        </Field>
-        <Field Name="SecondedPeople">
-          <DataField>SecondedPeople</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="OrderNumber">
-          <DataField>OrderNumber</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="OrderDate">
-          <DataField>OrderDate</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="OrderName">
-          <DataField>OrderName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="ID_date">
-          <DataField>_date</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource1</DataSourceName>
-        <CommandText>Select 
-	*,
-	CONVERT(varchar(10),OrderDate,104) _date
-from RequestPassengers where RequestId = @RequestId</CommandText>
-        <QueryParameters>
-          <QueryParameter Name="@RequestId">
-            <Value>=Parameters!requestId.Value</Value>
-          </QueryParameter>
-        </QueryParameters>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-    </DataSet>
-  </DataSets>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <Body>
     <ReportItems>
       <Textbox Name="Textbox6">
@@ -178,7 +22,7 @@ from RequestPassengers where RequestId = @RequestId</CommandText>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox6</rd:DefaultName>
-        <Top>1.90292in</Top>
+        <Top>1.65292in</Top>
         <Left>1.85083in</Left>
         <Height>0.25in</Height>
         <Width>4.05208in</Width>
@@ -210,7 +54,7 @@ from RequestPassengers where RequestId = @RequestId</CommandText>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox7</rd:DefaultName>
-        <Top>2.2675in</Top>
+        <Top>2.0175in</Top>
         <Left>0.21542in</Left>
         <Height>0.29167in</Height>
         <Width>7.55208in</Width>
@@ -247,7 +91,7 @@ from RequestPassengers where RequestId = @RequestId</CommandText>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox8</rd:DefaultName>
-        <Top>2.58694in</Top>
+        <Top>2.33694in</Top>
         <Left>0.2154in</Left>
         <Height>0.28125in</Height>
         <Width>7.55208in</Width>
@@ -287,7 +131,7 @@ from RequestPassengers where RequestId = @RequestId</CommandText>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox9</rd:DefaultName>
-        <Top>2.86819in</Top>
+        <Top>2.61819in</Top>
         <Left>0.2154in</Left>
         <Height>0.25in</Height>
         <Width>7.55208in</Width>
@@ -324,7 +168,7 @@ from RequestPassengers where RequestId = @RequestId</CommandText>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox8</rd:DefaultName>
-        <Top>3.13208in</Top>
+        <Top>2.88208in</Top>
         <Left>0.21541in</Left>
         <Height>0.28125in</Height>
         <Width>7.55208in</Width>
@@ -364,7 +208,7 @@ from RequestPassengers where RequestId = @RequestId</CommandText>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox9</rd:DefaultName>
-        <Top>3.41333in</Top>
+        <Top>3.16333in</Top>
         <Left>0.2154in</Left>
         <Height>0.25in</Height>
         <Width>7.55208in</Width>
@@ -400,7 +244,7 @@ from RequestPassengers where RequestId = @RequestId</CommandText>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox9</rd:DefaultName>
-        <Top>3.96889in</Top>
+        <Top>3.71889in</Top>
         <Left>0.2154in</Left>
         <Height>0.25in</Height>
         <Width>7.55208in</Width>
@@ -437,7 +281,7 @@ from RequestPassengers where RequestId = @RequestId</CommandText>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox8</rd:DefaultName>
-        <Top>3.67722in</Top>
+        <Top>3.42722in</Top>
         <Left>0.2154in</Left>
         <Height>0.29167in</Height>
         <Width>7.55208in</Width>
@@ -476,7 +320,7 @@ from RequestPassengers where RequestId = @RequestId</CommandText>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>4.28833in</Top>
+        <Top>4.03833in</Top>
         <Left>0.2154in</Left>
         <Height>0.34028in</Height>
         <Width>7.55208in</Width>
@@ -517,7 +361,7 @@ from RequestPassengers where RequestId = @RequestId</CommandText>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox8</rd:DefaultName>
-        <Top>4.62861in</Top>
+        <Top>4.37861in</Top>
         <Left>0.2154in</Left>
         <Height>0.25in</Height>
         <Width>7.55208in</Width>
@@ -558,7 +402,7 @@ from RequestPassengers where RequestId = @RequestId</CommandText>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox8</rd:DefaultName>
-        <Top>4.93417in</Top>
+        <Top>4.68417in</Top>
         <Left>0.21544in</Left>
         <Height>0.28125in</Height>
         <Width>7.55204in</Width>
@@ -599,7 +443,7 @@ from RequestPassengers where RequestId = @RequestId</CommandText>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox8</rd:DefaultName>
-        <Top>5.27097in</Top>
+        <Top>5.02097in</Top>
         <Left>1.71543in</Left>
         <Height>0.35417in</Height>
         <Width>6.05208in</Width>
@@ -636,7 +480,7 @@ from RequestPassengers where RequestId = @RequestId</CommandText>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox20</rd:DefaultName>
-        <Top>5.27097in</Top>
+        <Top>5.02097in</Top>
         <Left>0.21544in</Left>
         <Height>0.35417in</Height>
         <Width>1.37847in</Width>
@@ -669,7 +513,7 @@ from RequestPassengers where RequestId = @RequestId</CommandText>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox20</rd:DefaultName>
-        <Top>5.66681in</Top>
+        <Top>5.41681in</Top>
         <Left>0.21543in</Left>
         <Height>0.28125in</Height>
         <Width>1.37847in</Width>
@@ -706,7 +550,7 @@ from RequestPassengers where RequestId = @RequestId</CommandText>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox8</rd:DefaultName>
-        <Top>5.66681in</Top>
+        <Top>5.41681in</Top>
         <Left>1.7154in</Left>
         <Height>0.28125in</Height>
         <Width>6.05208in</Width>
@@ -747,7 +591,7 @@ from RequestPassengers where RequestId = @RequestId</CommandText>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox8</rd:DefaultName>
-        <Top>5.98972in</Top>
+        <Top>5.73972in</Top>
         <Left>0.2154in</Left>
         <Height>0.25in</Height>
         <Width>7.55208in</Width>
@@ -788,7 +632,7 @@ from RequestPassengers where RequestId = @RequestId</CommandText>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox8</rd:DefaultName>
-        <Top>6.30917in</Top>
+        <Top>6.05917in</Top>
         <Left>2.34043in</Left>
         <Height>0.29514in</Height>
         <Width>5.42708in</Width>
@@ -825,7 +669,7 @@ from RequestPassengers where RequestId = @RequestId</CommandText>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox20</rd:DefaultName>
-        <Top>6.30917in</Top>
+        <Top>6.05917in</Top>
         <Left>0.21544in</Left>
         <Height>0.29514in</Height>
         <Width>2.01388in</Width>
@@ -858,10 +702,10 @@ from RequestPassengers where RequestId = @RequestId</CommandText>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox20</rd:DefaultName>
-        <Top>6.67375in</Top>
-        <Left>0.2154in</Left>
+        <Top>6.96541in</Top>
+        <Left>0.21548in</Left>
         <Height>0.25in</Height>
-        <Width>4.13888in</Width>
+        <Width>7.49298in</Width>
         <ZIndex>18</ZIndex>
         <Style>
           <Border>
@@ -892,8 +736,8 @@ from RequestPassengers where RequestId = @RequestId</CommandText>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox27</rd:DefaultName>
-        <Top>6.95153in</Top>
-        <Left>0.21544in</Left>
+        <Top>7.28486in</Top>
+        <Left>0.2154in</Left>
         <Height>0.87847in</Height>
         <Width>7.55207in</Width>
         <ZIndex>19</ZIndex>
@@ -929,8 +773,8 @@ from RequestPassengers where RequestId = @RequestId</CommandText>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox8</rd:DefaultName>
-        <Top>8.20312in</Top>
-        <Left>0.21544in</Left>
+        <Top>9.35788in</Top>
+        <Left>0.23447in</Left>
         <Height>0.25in</Height>
         <Width>7.55208in</Width>
         <ZIndex>20</ZIndex>
@@ -1065,7 +909,7 @@ from RequestPassengers where RequestId = @RequestId</CommandText>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox5</rd:DefaultName>
-        <Top>1.50521in</Top>
+        <Top>1.25521in</Top>
         <Left>3.08854in</Left>
         <Height>0.27083in</Height>
         <Width>1.65625in</Width>
@@ -1125,17 +969,152 @@ from RequestPassengers where RequestId = @RequestId</CommandText>
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
+      <Textbox Name="Textbox26">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Ответственный за использование транспорта</Value>
+                <Style>
+                  <FontFamily>Times New Roman</FontFamily>
+                  <FontSize>14pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox20</rd:DefaultName>
+        <Top>6.42375in</Top>
+        <Left>0.21548in</Left>
+        <Height>0.47222in</Height>
+        <Width>2.40971in</Width>
+        <ZIndex>26</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox28">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!Responsible.Value, "DataSet1")</Value>
+                <Style>
+                  <FontFamily>Times New Roman</FontFamily>
+                  <FontSize>14pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                  <TextDecoration>None</TextDecoration>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox8</rd:DefaultName>
+        <Top>6.42375in</Top>
+        <Left>2.75521in</Left>
+        <Height>0.47222in</Height>
+        <Width>5.01235in</Width>
+        <ZIndex>27</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <BottomBorder>
+            <Color>Gray</Color>
+            <Style>Solid</Style>
+          </BottomBorder>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox1">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!OtherInformation.Value, "DataSet1")</Value>
+                <Style>
+                  <FontFamily>Times New Roman</FontFamily>
+                  <FontSize>14pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox1</rd:DefaultName>
+        <Top>21.51097cm</Top>
+        <Left>0.59555cm</Left>
+        <Height>2.08167cm</Height>
+        <Width>19.18205cm</Width>
+        <ZIndex>28</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox29">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Доп сведения</Value>
+                <Style>
+                  <FontFamily>Times New Roman</FontFamily>
+                  <FontSize>14pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox20</rd:DefaultName>
+        <Top>8.17722in</Top>
+        <Left>0.2154in</Left>
+        <Height>0.25in</Height>
+        <Width>7.49298in</Width>
+        <ZIndex>29</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
-    <Height>21.93396cm</Height>
+    <Height>24.40402cm</Height>
     <Style />
   </Body>
-  <ReportParameters>
-    <ReportParameter Name="requestId">
-      <DataType>String</DataType>
-      <Prompt>request Id</Prompt>
-    </ReportParameter>
-  </ReportParameters>
-  <Width>19.89667cm</Width>
+  <Width>19.77783cm</Width>
   <Page>
     <PageHeight>27.94cm</PageHeight>
     <PageWidth>21.59cm</PageWidth>
@@ -1146,6 +1125,206 @@ from RequestPassengers where RequestId = @RequestId</CommandText>
     <ColumnSpacing>1.27cm</ColumnSpacing>
     <Style />
   </Page>
-  <rd:ReportID>b54fd06a-c450-4afa-94c1-b5ba11afa87f</rd:ReportID>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource1">
+      <DataSourceReference>db2</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>980d2ebc-f08e-479b-ac5d-d0e536517856</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet1">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@requestId">
+            <Value>=Parameters!requestId.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandType>StoredProcedure</CommandType>
+        <CommandText>ssrs_Request</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="RequestId">
+          <DataField>RequestId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="RequestDate">
+          <DataField>RequestDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="RequestTime">
+          <DataField>RequestTime</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Status">
+          <DataField>Status</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="UserFio">
+          <DataField>UserFio</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="UserLogin">
+          <DataField>UserLogin</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ApproverEmployeeId">
+          <DataField>ApproverEmployeeId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ApproverFio">
+          <DataField>ApproverFio</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ApproverLogin">
+          <DataField>ApproverLogin</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PublishDate">
+          <DataField>PublishDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="ApproveDate">
+          <DataField>ApproveDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="IsDeleted">
+          <DataField>IsDeleted</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="RequestTaskId">
+          <DataField>RequestTaskId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="CustomerId">
+          <DataField>CustomerId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="CustomerName">
+          <DataField>CustomerName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="OtherInformation">
+          <DataField>OtherInformation</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ID_day">
+          <DataField>_day</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="RequestTypeId">
+          <DataField>RequestTypeId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="MonthName">
+          <DataField>MonthName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="UserEmployeeId">
+          <DataField>UserEmployeeId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ID_year">
+          <DataField>_year</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Type">
+          <DataField>Type</DataField>
+          <rd:TypeName>System.Byte</rd:TypeName>
+        </Field>
+        <Field Name="DirectionId">
+          <DataField>DirectionId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="AgreementPurposeId">
+          <DataField>AgreementPurposeId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="DepartmentGroupId">
+          <DataField>DepartmentGroupId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Responsible">
+          <DataField>Responsible</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="DataSet2">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@RequestId">
+            <Value>=Parameters!requestId.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>Select 
+	*,
+	CONVERT(varchar(10),OrderDate,104) _date
+from RequestPassengers where RequestId = @RequestId</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="RequestId">
+          <DataField>RequestId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="DestinationPoint">
+          <DataField>DestinationPoint</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PassengerAmount">
+          <DataField>PassengerAmount</DataField>
+          <rd:TypeName>System.Int16</rd:TypeName>
+        </Field>
+        <Field Name="ChildAmount">
+          <DataField>ChildAmount</DataField>
+          <rd:TypeName>System.Int16</rd:TypeName>
+        </Field>
+        <Field Name="TripPurpose">
+          <DataField>TripPurpose</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SeatPlace">
+          <DataField>SeatPlace</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TripDuration">
+          <DataField>TripDuration</DataField>
+          <rd:TypeName>System.Int16</rd:TypeName>
+        </Field>
+        <Field Name="SecondedPeople">
+          <DataField>SecondedPeople</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="OrderNumber">
+          <DataField>OrderNumber</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="OrderDate">
+          <DataField>OrderDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="OrderName">
+          <DataField>OrderName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ID_date">
+          <DataField>_date</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportParameters>
+    <ReportParameter Name="requestId">
+      <DataType>String</DataType>
+      <Prompt>request Id</Prompt>
+    </ReportParameter>
+  </ReportParameters>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>b54fd06a-c450-4afa-94c1-b5ba11afa87f</rd:ReportID>
 </Report>

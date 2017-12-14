@@ -1,5 +1,6 @@
 T.view.vehicleDistribution.VehicleDistributionList = Ext.extend(Ext.grid.GridPanel, {
-    constructor: function(cfg) {
+    requireModels: 'GroupRequest',
+    constructor: function (cfg) {
         cfg = cfg || {};
 
         var me = this;
@@ -130,7 +131,20 @@ T.view.vehicleDistribution.VehicleDistributionList = Ext.extend(Ext.grid.GridPan
                         params.date = this.listDate.getValue();
                         params.columnId = 0;
                         params.groupRequestId = 1;
-                        Kdn.Reporter.exportReport(reportName, params);
+                        Kdn.Reporter.exportReport(reportName, params, 'pdf');
+                    },
+                    scope: this
+                },
+                {
+                    text: 'Печать (трактора)',
+                    iconCls: 'icon-printer',
+                    handler: function () {
+                        var reportName = 'DistributionListPrint';
+                        var params = {};
+                        params.date = this.listDate.getValue();
+                        params.columnId = 0;
+                        params.groupRequestId = 2;
+                        Kdn.Reporter.exportReport(reportName, params, 'pdf');
                     },
                     scope: this
                 },
@@ -144,7 +158,7 @@ T.view.vehicleDistribution.VehicleDistributionList = Ext.extend(Ext.grid.GridPan
                         params.date = this.listDate.getValue();
                         params.columnId = this.column.getValue() || 0;
                         params.groupRequestId = 0;
-                        Kdn.Reporter.exportReport(reportName, params);
+                        Kdn.Reporter.exportReport(reportName, params, 'pdf');
                     },
                     scope: this
                 },
@@ -349,15 +363,22 @@ T.view.vehicleDistribution.VehicleDistributionList = Ext.extend(Ext.grid.GridPan
                         qtips = [];
                     Ext.iterate(v, function(customer) {
                         var c = customer.Customer;
+                        var customerName = c.CustomerName1 || c.CustomerName;
 
-                        if (c && c.CustomerName) {
+                        var i = customerName.indexOf('[');
+                        if (i > 0) {
+                            customerName = '<b>' + customerName.substr(0, i) + '</b>' + customerName.substr(i);
+                        }
+
+
+                        if (c && customerName) {
                             customers.push(
                                 String.format("<span style='color:blue'>{0}{1}</span>[<span style='color:tomato'>{2} {3}</span>] {4} <b>{5}</b> <span style='color:red'> {6}</span>",
                                     customer.DepartureTime || '',
                                     customer.ReturnTime ? ('-' + customer.ReturnTime) : '',
                                     (!!customer.RequestId) ? String.format('<img style="cursor:pointer" src="{0}{1}.png" requestId="{2}"/>', Kdn.Renderer.url, 'doc_pdf', customer.RequestId):'',
                                     customer.RequestId || "...",
-                                    (c.CustomerName1 || c.CustomerName),
+                                    customerName,
                                     (customer.WorkObject||""),
                                     customer.Description || ""
                                 )
@@ -392,8 +413,7 @@ T.view.vehicleDistribution.VehicleDistributionList = Ext.extend(Ext.grid.GridPan
                         var reg = new RegExp(f, 'i');
 
                         Ext.iterate(o, function (v) {
-
-                            if (reg.test(v.Customer.CustomerName) || reg.test(v.RequestId)) {
+                            if (reg.test(v.Customer.CustomerName) || reg.test(v.RequestId) || reg.test(v.WorkObject)) {
                                 flag = true;
                                 return false;
                             }
@@ -654,7 +674,7 @@ T.view.vehicleDistribution.VehicleDistributionList = Ext.extend(Ext.grid.GridPan
                 xtype: 'view.distributioneditwindow',
                 constrain: true,
                 width: 700,
-                height: 720,
+                height: 680,
                 closeAction: 'hide',
                 renderTo: this.windowConstrain.getBody()
             });

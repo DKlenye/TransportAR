@@ -126,35 +126,7 @@
                                                 <td style="width:40mm;"></td>
                                                 <td style="width:30mm;text-align:center; font-family: Tahoma; font-size:12pt;"><span><%Response.Write(WaybillCode());%></span></td>
                                                 <td style="width:60mm">
-                                                    <table class="form-head" cellpadding="0" cellspacing="0">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>
-                                                                    Приложение 1
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    К инструкции о порядке оформления
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    путевого листа строительной машины
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td style="text-align:left;">
-                                                                    УТВЕРЖДЕНО
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td style="text-align:left;">
-                                                                    Приказ генерального директора от 18.04.2012 № 640
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
+                                                    <%Response.Write(Approved1()); %>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -185,7 +157,7 @@
                                         <td valign="top" rowspan="2" class="pre-lined">Строительная&nbsp;машина</td>
                                         <td style="text-align:left;"class="lined">&nbsp;&nbsp;&nbsp;<span class="dataText"><%Response.Write(VehicleModel());%>&nbsp;<%Response.Write(VehicleRegistrationNumber());%></span></td>
                                         <td valign="top" rowspan="2"class="pre-lined">&nbsp;Инвентарный&nbsp;номер</td>
-                                        <td class="lined" style="width:35mm;">&nbsp;&nbsp;&nbsp;<span class="dataText">Гаражный №&nbsp;<%Response.Write(VehicleGarageNumber());%></span></td>
+                                        <td class="lined" style="width:35mm;">&nbsp;&nbsp;&nbsp;<span class="dataText"><%Response.Write(VehicleInventory()); %> (Гар. №&nbsp;<%Response.Write(VehicleGarageNumber());%>)</span></td>
                                     </tr>
                                     <tr>
                                     <td class="subscript">наименование, марка государственный номер</td>
@@ -489,7 +461,7 @@
                                         <tbody>
                                             <tr>
                                                 <td class="pre-lined">Арендодатель</td>
-                                                <td class="lined">ОАО&quot;Нафтан&quot;&nbsp;</td>
+                                                <td class="lined" style="font-size:9pt;"><%Response.Write(Lessor()); %>&nbsp;</td>
                                             </tr>
                                             <tr>
                                                 <td class="subscript">&nbsp;</td>
@@ -615,7 +587,7 @@
                                         <tbody>
                                             <tr>
                                                 <td class="pre-lined">Арендодатель</td>
-                                                <td class="lined">ОАО&quot;Нафтан&quot;&nbsp;</td>
+                                                <td class="lined" style="font-size:9pt;"><%Response.Write(Lessor()); %>&nbsp;</td>
                                             </tr>
                                             <tr>
                                                 <td class="subscript">&nbsp;</td>

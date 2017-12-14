@@ -25,7 +25,7 @@ namespace Transport.Models
         public bool? isWriteOff { get; set; }
 
         [Property]
-        public int? Cost { get; set; }
+        public decimal? Cost { get; set; }
 
         [Property]
         public int? TireMakerId { get; set; }

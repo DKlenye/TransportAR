@@ -290,7 +290,7 @@
 							<td>20</td>
 						</tr>
 						<tr>							
-							<td>&nbsp;</td><td>&nbsp;<span class="dataText"><%Response.Write(DepartureDate("HH:mm")); %></span></td><td>&nbsp;<span class="dataText"><%Response.Write(ReturnDate("HH:mm")); %></span></td><td>&nbsp;</td><td>&nbsp;<span class="dataText"><%Response.Write(DepartureKm()); %></span></td><td>&nbsp;</td><td>&nbsp;</td><td style="font-size:7pt;">&nbsp;<span class="dataText"><%Response.Write(AllFuelRemains(true)); %></span></td><td>&nbsp;</td><td style="font-size:7pt;">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+							<td><span><%Response.Write(DepartureDate("dd.MM")); %></span></td><td>&nbsp;<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;<span class="dataText"><%Response.Write(DepartureKm()); %></span></td><td>&nbsp;</td><td>&nbsp;</td><td style="font-size:7pt;">&nbsp;<span class="dataText"><%Response.Write(AllFuelRemains(true)); %></span></td><td>&nbsp;</td><td>&nbsp;</td><td style="font-size:7pt;">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 						</tr>						
 						<tr>							
 							<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
@@ -323,10 +323,10 @@
 							<td colspan="3">
 								»того за период<br/>
                                 c&nbsp;
-                                <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>
+                                <u>&nbsp;&nbsp;<%Response.Write(DepartureDate("dd.MM")); %>&nbsp;&nbsp;</u>
                                 &nbsp;по&nbsp;
-                                <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>
-                                &nbsp;20<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>г.
+                                <u>&nbsp;&nbsp;<%Response.Write(ReturnDate("dd.MM"));%>&nbsp;&nbsp;</u>
+                                &nbsp;20<u>&nbsp;<%Response.Write(DepartureDate("yy")); %>&nbsp;</u>г.
 							</td>
 							<td>&nbsp;</td><td>X</td><td>X</td><td>&nbsp;</td><td>X</td><td>X</td><td>&nbsp;</td><td>X</td><td>&nbsp;</td><td>
                             &nbsp;</td><td>&nbsp;</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td><td>X</td>						
@@ -382,7 +382,7 @@
                                     <td>26</td>                                   
                                 </tr>
                                 <tr>
-                                    <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td style="text-align: left">&nbsp;<% Response.Write(CustomerNames());%></td><td>&nbsp;</td>
+                                    <td>&nbsp;<%Response.Write(DepartureDate("dd.MM"));%></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td style="text-align: left">&nbsp;<% Response.Write(CustomerNames());%></td><td>&nbsp;</td>
                                 </tr>
                                 <tr>
                                     <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>

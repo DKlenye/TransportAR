@@ -138,6 +138,10 @@
     <Compile Include="Models\OilStandartConsuption.cs" />
     <Compile Include="Models\request\RequestAttachments.cs" />
     <Compile Include="Models\request\DriverOutOfWork.cs" />
+    <Compile Include="Models\request\RequestType.cs" />
+    <Compile Include="Models\ServiceDepartment.cs" />
+    <Compile Include="Models\ServiceAgreement.cs" />
+    <Compile Include="Models\ServicePurpose.cs" />
     <Compile Include="Models\service\TariffCalculation.cs" />
     <Compile Include="Models\service\TariffCostItem.cs" />
     <Compile Include="Models\service\TariffCostItemType.cs" />
@@ -202,6 +206,7 @@
     <Compile Include="Models\waybill\CashBoxDataDto.cs" />
     <Compile Include="Models\waybill\WaybillAdvanceReport.cs" />
     <Compile Include="Models\waybill\WaybillCustomerWorkingTime.cs" />
+    <Compile Include="Models\waybill\WaybillInvoice.cs" />
     <Compile Include="Models\waybill\WaybillWork.cs" />
     <Compile Include="Models\waybill\WaybillWorkingTime.cs" />
     <Compile Include="Models\_PolymirWaybill.cs" />
@@ -1333,6 +1338,75 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\combo\MultiRegisterDispatcher.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\waybill\WaybillInvoice.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\NaftanSpectransWorkInfo.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\ServiceWaybillCount.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\combo\ServiceAgreement.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\combo\ServicePurpose.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\RunByDay.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\NSTCarLimit.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\NSTCostLimit.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\combo\ServiceDepartment.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\NSTLimitDetails.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\NSTAllLimit.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\NSTLimitDetailsByDate.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\request\RequestInternationalEditor.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\NSTLimitDetailsWithCustomer.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\combo\NaftanCustomer.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\ExpenseListByFuel.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\NSTWorkingTime.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\VehicleFuelConsumption.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\NSTCarWork.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\NSTCarWorkDetails.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\NSTWorkDetailsByGaragenumber.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\NSTCarWorkByDepartment.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\report\NSTWorkDetails.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

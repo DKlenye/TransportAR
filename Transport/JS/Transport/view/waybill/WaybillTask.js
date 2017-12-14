@@ -224,9 +224,13 @@ T.view.waybill.WaybillTask = Ext.extend(Kdn.editor.LocalGrid, {
 
             }
         });
-
+        
+        var CustomerEditor = Ext.create({
+            xtype: 'combo.customer'
+        });
 
         Ext.apply(cfg, {
+            CustomerEditor:CustomerEditor,
             FuelEditor: FuelEditor,
             ConsumptionEditor: ConsumptionEditor,
             IncreasesEditor: IncreasesEditor,
@@ -300,7 +304,7 @@ T.view.waybill.WaybillTask = Ext.extend(Kdn.editor.LocalGrid, {
                         header: 'заказчик',
                         width: 170,
                         dataIndex: 'Customer',
-                        editor: { xtype: 'combo.customer' },
+                        editor: CustomerEditor,
                         renderer: function(o, meta, r) {
                             meta.css = 'waybill-task-customer';
                             if (!o && !Ext.isObject(o)) return null;

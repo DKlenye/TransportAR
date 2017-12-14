@@ -15,28 +15,55 @@
                     margins: '2 2 2 2',
                     xtype: 'kdn.grid.propertygrid',
                     source: {
+                        RequestTypeName:'',
+                        WithInvoice: '',
                         RequestDate: '',
+                        LoadingTime: '',
+                        Shipper: '',
+                        Consignee: '',
+                        ConsigneeContactName: '',
+                        DeliveryTime:'',
                         DestinationPoint:'',
                         VehicleType: '',
+                        VehicleCount: '',
+                        VehicleCapacityTonns:"",
                         CustomerName: '',
                         OrderNumber: '№ 321 от 12.12.2012',
                         LoadingType: '',
                         LoadingAddress: '',
                         ContactName: '',
                         Responsible: '',
-                        Attachments:''
+                        Attachments: '',
+                        MobileConnection: '',
+                        LocationInfo: '',
+                        ChangesInfo: '',
+                        OtherInformation:''
                     },
                     propertyNames: {
+                        RequestTypeName: "Вид заявки",
+                        WithInvoice:'оформление ТТН',
                         RequestDate: 'Выделить транспорт на дату',
+                        LoadingTime: "Время подачи ТС под загрузку",
+                        Shipper: "Грузоотправитель",
+                        ContactName: 'Контактное лицо грузоотправителя, тел',
+                        Consignee: "Грузополучатель",
+                        ConsigneeContactName: "Контактное лицо грузополучателя, тел",
+                        DeliveryTime:"Срок доставки груза",
                         DestinationPoint: 'Пункт назначения',
                         VehicleType: 'Тип транспортного средства',
+                        VehicleCount: 'Количество ТС',
+                        VehicleCapacityTonns:'Грузоподъёмность ТС',
                         CustomerName: 'Наименование заказчика',
                         LoadingType: 'Способ загрузки',
                         LoadingAddress: 'Адрес загрузки',
-                        ContactName: 'Контактное лицо грузоотправителя, тел',
                         Responsible: 'Ответственный за заказ, цех, тел',
                         OrderNumber: 'Номер договора, контракта, приказа',
-                        Attachments:'Файлы'
+                        Attachments: 'Файлы',
+                        MobileConnection: 'Наличие постоянной мобильной обратной связи обязательно',
+                        LocationInfo: 'Сообщать о прибытии на погрузку\разгрузку, ежедневное местонахождение ТС',
+                        ChangesInfo: 'Незамедлительно информировать о всех изменениях в процессе выполнения перевозки',
+                        OtherInformation:'Дополнительные условия'
+                        
                     },
                     customRenderers: {
                         Attachments: function (e) {
@@ -69,7 +96,7 @@
                     iconCls: 'icon-package',
                     store: new Ext.data.JsonStore({
                             fields: [
-                                'CargoName', 'Weight', 'Length', 'Width', 'Height', 'Volume'
+                                'CargoName', 'Weight', 'Length', 'Width', 'Height', 'Volume','NumberOfPackages','KindOfPacking','Cost','SpecialProperties'
                             ]
                         }),
                     viewConfig:{
@@ -77,16 +104,24 @@
                     },
                     colModel:new Ext.grid.ColumnModel({
                         defaults:{
-                            fixed:true,
-                            width:70,
+                            //fixed:true,
+                            //width:70,
                             align:'center'
                         },
                         columns: [
                             {
                                 header: 'Наименование',
                                 dataIndex: 'CargoName',
-                                fixed:false,
+                               // fixed:false,
                                 align:'left'
+                            }, 
+                            {
+                                header: 'Вид упаковки',
+                                dataIndex: 'KindOfPacking'
+                            },
+                            {
+                                header: 'Кол гр. мест',
+                                dataIndex: 'NumberOfPackages'
                             },
                             {
                                 header: 'Вес,т',
@@ -107,7 +142,15 @@
                                 {
                                     header: 'Объём,м3',
                                     dataIndex: 'Volume'
-                                }
+                                },
+                            {
+                                header: 'Стоимость',
+                                dataIndex: 'Cost'
+                            },
+                             {
+                                 header: 'Особые свойства',
+                                 dataIndex: 'SpecialProperties'
+                             }
                         ]
                     })
                 }

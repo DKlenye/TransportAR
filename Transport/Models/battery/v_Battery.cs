@@ -134,7 +134,7 @@ namespace Transport.Models
                 Cost = Cost,
                 Doc = Doc,
                 InitKmWork = InitKmWork,
-                InitMhWork = MhNorm,
+                InitMhWork = InitMhWork,
                 MakeDate = MakeDate,
                 MonthStart = MonthStart,
                 KmNorm = KmNorm,

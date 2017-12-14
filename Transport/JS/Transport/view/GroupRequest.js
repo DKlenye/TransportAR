@@ -24,6 +24,11 @@
                         header: 'Порядок сортировки',
                         width: 300,
                         editor: { xtype: 'kdn.editor.numberfield' }
+                    }, {
+                        dataIndex: 'AgreementId',
+                        header: 'Договор',
+                        width: 300,
+                        editor: { xtype: 'combo.serviceagreement',objectValue:false }
                     }
                 ]
             })

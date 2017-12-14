@@ -121,8 +121,9 @@ namespace Transport.Direct
 
             foreach (var _a in a)
             {
-                var dto = JsonConvert.DeserializeObject<v_Request>(_a.ToString());
-                var request = Request.Find(dto.RequestId);
+                var str = _a.ToString();
+                var id = _a["RequestId"].Value<int>();
+                var request = Request.Find(id);
 
                 var status = isAccept ? RequestStatus.Confirm : RequestStatus.Return;
 
@@ -137,10 +138,7 @@ namespace Transport.Direct
 
                 request.SaveAndFlush();
 
-                dto.Status = status;
-
-                //dto.Refresh();
-
+                var dto = v_Request.Find(id);
                 list.Add(dto);
             }
 

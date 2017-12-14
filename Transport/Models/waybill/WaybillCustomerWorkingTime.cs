@@ -35,7 +35,7 @@ namespace Transport.Models
         public override void SaveAndFlush()
         {
 
-             if (String.IsNullOrEmpty(OrderSerial))
+            if (String.IsNullOrEmpty(OrderSerial) && Customer.SHZ=="Д1")
             {
                 OrderSerial = FindLastSerial();
             }

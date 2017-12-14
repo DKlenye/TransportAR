@@ -21,7 +21,7 @@
 
             //printWindow.document.addEventListener("keydown", function () { printWindow.close(); }, false);
 
-            console.log(html,new Date().format("s:u"));
+            //console.log(html,new Date().format("s:u"));
 
             setTimeout(function() {
                 console.log('print', new Date().format("s:u"));

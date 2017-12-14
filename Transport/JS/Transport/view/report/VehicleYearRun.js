@@ -9,8 +9,23 @@ T.view.report.VehicleYearRun = Ext.extend(Kdn.view.Report, {
             {
                 xtype: 'numberfield',
                 dataIndex: 'year'
-            }
-   ]
+            },
+        '-',
+        'Колонна:',
+        {
+            xtype: 'combo.multicolumn',
+            objectValue: false,
+            width: 400,
+            dataIndex: 'columns'
+        }
+    ],
+    buildReportParams: function (params) {
+        var p = {};
+        p.year = params.year;
+        p.columns = params.columns.join(',');
+        p.format = params.format;
+        return p;
+    }
 
 });
 

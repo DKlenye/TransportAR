@@ -17,13 +17,15 @@ namespace Kdn.Web.Handlers
 
             Func<string, string> getPath = delegate(string path){return String.Format("{0}.{1}", BasePath, path);};
 
+            
             context.Response.Write(ScriptReader.GetScript(
                 getPath("Ext.adapter.ext.ext-base-debug.js"),
-                getPath("Ext.ext-all-debug.js")
+                getPath("Ext.ext-all.js")
             ));
 
             context.Response.Write(ScriptReader.GetScripts("Kdn.JS.Ext.ux",false));
 
+            
             context.Response.Write(ScriptReader.GetScript(
                 getPath("ExtNet.Net.js"),
                 getPath("ExtNet.Net1.js")
