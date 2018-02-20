@@ -1,5 +1,5 @@
 T.view.waybill.WaybillEditor = Ext.extend(Kdn.editor.ModelEditor, {
-    requireModels: 'GroupRequest,ServiceAgreement,User,Car,Schedule,Driver,FullTrailer,Fuel,RefuellingPlace,WorkCounter,WorkUnit,WorkType,Customer,Increase,WaybillType,AdvanceReportItem',
+    requireModels: 'GroupRequest,ServiceAgreement,User,Car,Schedule,Driver,FullTrailer,Fuel,RefuellingPlace,WorkCounter,WorkUnit,WorkType,Customer,Increase,WaybillType',
 
     vehicle: null,
     waybill: null,
@@ -192,12 +192,6 @@ T.view.waybill.WaybillEditor = Ext.extend(Kdn.editor.ModelEditor, {
             title: 'Движение ГСМ'
         });
 
-        cfg.advanceReport = Ext.create({
-            xtype: 'view.waybill.waybilladvancereport',
-            title: 'Авансовый отчёт',
-            mainView: this
-        });
-
         cfg.waybillCustomerWorkingtime = Ext.create({
             xtype: 'view.waybill.waybillcustomerworkingtime',
             title: 'Время в наряде',
@@ -218,15 +212,6 @@ T.view.waybill.WaybillEditor = Ext.extend(Kdn.editor.ModelEditor, {
             cfg.waybillInvoice,
             cfg.summary
         ];
-
-        // Разрешаем доступ только логисту 
-        //TODO Переделать !!!!
-        var UserId = Kdn.getUser().UserId;
-        if ([1, 61].indexOf(UserId) != -1) {
-            tabItems.push(cfg.advanceReport);
-        } else {
-            delete (cfg.advanceReport);
-        }
 
 
         cfg.fueltab = Ext.create({
@@ -620,7 +605,6 @@ T.view.waybill.WaybillEditor = Ext.extend(Kdn.editor.ModelEditor, {
             'remains',
             'tasks',
             'summary',
-            'advanceReport',
             'waybillCustomerWorkingtime',
             'waybillInvoice'
         ], fn, this);
@@ -985,11 +969,7 @@ T.view.waybill.WaybillEditor = Ext.extend(Kdn.editor.ModelEditor, {
         this.refreshFact();
         this.refreshDiff();
         this.summary.refreshSummary();
-
-        if (this.advanceReport) {
-            this.advanceReport.refresh();
-        }
-
+        
     },
 
     refreshDiff: function() {

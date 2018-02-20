@@ -84,8 +84,12 @@
                '-',
                {
                   text:'Рассчитать', 
-                  handler:function(){
-                     Kdn.Direct.AccPostingCalculate(this.getParams());
+                  handler: function () {
+                      var me = this;
+                      me.
+                     Kdn.Direct.AccPostingCalculate(this.getParams(),function() {
+                         me.reload();
+                     });
                   },
                   scope:this
                },

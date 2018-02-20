@@ -46,21 +46,6 @@
                         width: 120,
                         renderer: Kdn.CheckRenderer,
                         editor: { xtype: 'kdn.editor.booleanfield',renderer:Kdn.TrueFalseRenderer }
-                    },
-                    {
-                        dataIndex: 'Groups',
-                        header: 'Группы пользователя',
-                        width: 200,
-                        editor:{xtype:'kdn.editor.usergroup'},
-                        renderer:function(o){
-                           if(!o) return o;
-                           var a = [],store = Kdn.ModelFactory.getStore('UserGroup');
-                           Ext.iterate(o,function(e){
-                              a.push(store.getById(e).data.UserGroupName);
-                           });
-                           return a.join('<br/>');                           
-                           
-               }
                     }
         ]
     }

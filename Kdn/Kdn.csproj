@@ -232,7 +232,6 @@
   <ItemGroup>
     <EmbeddedResource Include="CSS\Kdn\Menu.css" />
     <EmbeddedResource Include="JS\Kdn\view\User.js" />
-    <EmbeddedResource Include="JS\Kdn\view\UserGroup.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ext.Direct\Ext.Direct.csproj">

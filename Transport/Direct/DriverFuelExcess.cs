@@ -173,9 +173,6 @@ namespace Transport.Direct
          catch( Exception ex ) {
             return ex.Message;
          }
-         /*new OleDbCommand(String.Format("delete from {0}",fileName), c).ExecuteNonQuery();
-         new OleDbCommand(String.Format("SET EXCLUSIVE ON ; pack {0}.dbf", fileName), c).ExecuteNonQuery();*/
-
 
          string msg = "";
 

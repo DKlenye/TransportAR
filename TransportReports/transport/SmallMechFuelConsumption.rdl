@@ -1,243 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition">
-  <DataSources>
-    <DataSource Name="DataSource1">
-      <ConnectionProperties>
-        <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=db2;Initial Catalog=transport</ConnectString>
-      </ConnectionProperties>
-      <rd:DataSourceID>50b72b47-c611-4687-8689-dacd15d1d5bf</rd:DataSourceID>
-    </DataSource>
-  </DataSources>
-  <DataSets>
-    <DataSet Name="FuelReportDS">
-      <Fields>
-        <Field Name="ReportDate">
-          <DataField>ReportDate</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="StartRemain">
-          <DataField>StartRemain</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="Quantity">
-          <DataField>Quantity</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="SheetNumber">
-          <DataField>SheetNumber</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Mechanism">
-          <DataField>Mechanism</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Amount">
-          <DataField>Amount</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Consumption">
-          <DataField>Consumption</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="Mh">
-          <DataField>Mh</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="AllConsumption">
-          <DataField>AllConsumption</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="EndRemain">
-          <DataField>EndRemain</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource1</DataSourceName>
-        <CommandType>StoredProcedure</CommandType>
-        <CommandText>ssrs_SmallMechFuelConsumption</CommandText>
-        <QueryParameters>
-          <QueryParameter Name="@Year">
-            <Value>=Parameters!Year.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@Month">
-            <Value>=Parameters!Month.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@FuelId">
-            <Value>=Parameters!FuelId.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@EmployeeId">
-            <Value>=Parameters!EmployeeId.Value</Value>
-          </QueryParameter>
-        </QueryParameters>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-    </DataSet>
-    <DataSet Name="FuelDS">
-      <Fields>
-        <Field Name="FuelName">
-          <DataField>FuelName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource1</DataSourceName>
-        <CommandText>SELECT FuelName FROM Fuel WHERE FuelId = @FuelId</CommandText>
-        <QueryParameters>
-          <QueryParameter Name="@FuelId">
-            <Value>=Parameters!FuelId.Value</Value>
-          </QueryParameter>
-        </QueryParameters>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-    </DataSet>
-    <DataSet Name="EmployeeDS">
-      <Fields>
-        <Field Name="Fio">
-          <DataField>Fio</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="zex">
-          <DataField>zex</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource1</DataSourceName>
-        <CommandText>SELECT Fio, zex FROM v_kdl_Employees WHERE Id = @EmployeeId</CommandText>
-        <QueryParameters>
-          <QueryParameter Name="@EmployeeId">
-            <Value>=Parameters!EmployeeId.Value</Value>
-          </QueryParameter>
-        </QueryParameters>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-    </DataSet>
-    <DataSet Name="DataSet1">
-      <Fields>
-        <Field Name="EmployeeId">
-          <DataField>EmployeeId</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Fio">
-          <DataField>Fio</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource1</DataSourceName>
-        <CommandText>SELECT 
-	e.EmployeeId,
-	e.Fio
-FROM (
-SELECT DISTINCT EmployeeId FROM SmallMechFuelReport 
-)a
-INNER JOIN v_Employee e ON e.EmployeeId = a.EmployeeId AND e.DismissDate IS null</CommandText>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-    </DataSet>
-    <DataSet Name="DataSet2">
-      <Fields>
-        <Field Name="FuelId">
-          <DataField>FuelId</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="FuelName">
-          <DataField>FuelName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="DSC">
-          <DataField>DSC</DataField>
-          <rd:TypeName>System.Byte</rd:TypeName>
-        </Field>
-        <Field Name="WeightCoeff">
-          <DataField>WeightCoeff</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="OilGroupId">
-          <DataField>OilGroupId</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="PetrolGroupId">
-          <DataField>PetrolGroupId</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="ReplicationId">
-          <DataField>ReplicationId</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="ReplicationSource">
-          <DataField>ReplicationSource</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="ShortFuelName">
-          <DataField>ShortFuelName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="UnitId">
-          <DataField>UnitId</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="FuelGroupId">
-          <DataField>FuelGroupId</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="NormId">
-          <DataField>NormId</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Hide">
-          <DataField>Hide</DataField>
-          <rd:TypeName>System.Boolean</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource1</DataSourceName>
-        <CommandText>select * from Fuel where Dsc=1</CommandText>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-    </DataSet>
-  </DataSets>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <Body>
     <ReportItems>
       <Tablix Name="Tablix1">
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>0.68234in</Width>
+              <Width>1.73314cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.62664in</Width>
+              <Width>1.59167cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.48389in</Width>
+              <Width>1.22908cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.77075in</Width>
+              <Width>1.95771cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.13075in</Width>
+              <Width>5.41211cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.5144in</Width>
+              <Width>1.30658cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.59925in</Width>
+              <Width>1.5221cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.49508in</Width>
+              <Width>1.2575cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.53162in</Width>
+              <Width>1.35031cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.54716in</Width>
+              <Width>1.38979cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -424,7 +225,7 @@ INNER JOIN v_Employee e ON e.EmployeeId = a.EmployeeId AND e.DismissDate IS null
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.65289in</Height>
+              <Height>1.65834cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -788,7 +589,7 @@ INNER JOIN v_Employee e ON e.EmployeeId = a.EmployeeId AND e.DismissDate IS null
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1121,7 +922,7 @@ INNER JOIN v_Employee e ON e.EmployeeId = a.EmployeeId AND e.DismissDate IS null
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.20497in</Height>
+              <Height>0.52062cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1486,7 +1287,7 @@ INNER JOIN v_Employee e ON e.EmployeeId = a.EmployeeId AND e.DismissDate IS null
         <Top>7.45782cm</Top>
         <Left>0.11342cm</Left>
         <Height>3.37896cm</Height>
-        <Width>18.74999cm</Width>
+        <Width>18.74998cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1613,7 +1414,7 @@ INNER JOIN v_Employee e ON e.EmployeeId = a.EmployeeId AND e.DismissDate IS null
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Протокол от 12.04.2012 №8</Value>
+                <Value>Протокол №40 от 27.12.2017 </Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -2034,6 +1835,218 @@ INNER JOIN v_Employee e ON e.EmployeeId = a.EmployeeId AND e.DismissDate IS null
     <Height>6.02083in</Height>
     <Style />
   </Body>
+  <Width>18.9cm</Width>
+  <Page>
+    <PageHeight>29.7cm</PageHeight>
+    <PageWidth>21cm</PageWidth>
+    <LeftMargin>1.5cm</LeftMargin>
+    <RightMargin>0.5cm</RightMargin>
+    <TopMargin>1cm</TopMargin>
+    <BottomMargin>1cm</BottomMargin>
+    <ColumnSpacing>0.13cm</ColumnSpacing>
+    <Style />
+  </Page>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource1">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString>Data Source=db2;Initial Catalog=transport</ConnectString>
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>50b72b47-c611-4687-8689-dacd15d1d5bf</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="FuelReportDS">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@Year">
+            <Value>=Parameters!Year.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@Month">
+            <Value>=Parameters!Month.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@FuelId">
+            <Value>=Parameters!FuelId.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@EmployeeId">
+            <Value>=Parameters!EmployeeId.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandType>StoredProcedure</CommandType>
+        <CommandText>ssrs_SmallMechFuelConsumption</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="ReportDate">
+          <DataField>ReportDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="StartRemain">
+          <DataField>StartRemain</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Quantity">
+          <DataField>Quantity</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="SheetNumber">
+          <DataField>SheetNumber</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Mechanism">
+          <DataField>Mechanism</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Amount">
+          <DataField>Amount</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Consumption">
+          <DataField>Consumption</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Mh">
+          <DataField>Mh</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="AllConsumption">
+          <DataField>AllConsumption</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="EndRemain">
+          <DataField>EndRemain</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="FuelDS">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@FuelId">
+            <Value>=Parameters!FuelId.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>SELECT FuelName FROM Fuel WHERE FuelId = @FuelId</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="FuelName">
+          <DataField>FuelName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="EmployeeDS">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@EmployeeId">
+            <Value>=Parameters!EmployeeId.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>SELECT Fio, zex FROM v_kdl_Employees WHERE Id = @EmployeeId</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="Fio">
+          <DataField>Fio</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="zex">
+          <DataField>zex</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="DataSet1">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <CommandText>SELECT 
+	e.EmployeeId,
+	e.Fio
+FROM (
+SELECT DISTINCT EmployeeId FROM SmallMechFuelReport 
+)a
+INNER JOIN v_Employee e ON e.EmployeeId = a.EmployeeId AND e.DismissDate IS null</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="EmployeeId">
+          <DataField>EmployeeId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Fio">
+          <DataField>Fio</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="DataSet2">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <CommandText>select * from Fuel where Dsc=1</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="FuelId">
+          <DataField>FuelId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="FuelName">
+          <DataField>FuelName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DSC">
+          <DataField>DSC</DataField>
+          <rd:TypeName>System.Byte</rd:TypeName>
+        </Field>
+        <Field Name="WeightCoeff">
+          <DataField>WeightCoeff</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="OilGroupId">
+          <DataField>OilGroupId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="PetrolGroupId">
+          <DataField>PetrolGroupId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ReplicationId">
+          <DataField>ReplicationId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ReplicationSource">
+          <DataField>ReplicationSource</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ShortFuelName">
+          <DataField>ShortFuelName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="UnitId">
+          <DataField>UnitId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="FuelGroupId">
+          <DataField>FuelGroupId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="NormId">
+          <DataField>NormId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Hide">
+          <DataField>Hide</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
   <ReportParameters>
     <ReportParameter Name="Year">
       <DataType>Integer</DataType>
@@ -2118,18 +2131,7 @@ INNER JOIN v_Employee e ON e.EmployeeId = a.EmployeeId AND e.DismissDate IS null
       </ValidValues>
     </ReportParameter>
   </ReportParameters>
-  <Width>18.9cm</Width>
-  <Page>
-    <PageHeight>29.7cm</PageHeight>
-    <PageWidth>21cm</PageWidth>
-    <LeftMargin>1.5cm</LeftMargin>
-    <RightMargin>0.5cm</RightMargin>
-    <TopMargin>1cm</TopMargin>
-    <BottomMargin>1cm</BottomMargin>
-    <ColumnSpacing>0.13cm</ColumnSpacing>
-    <Style />
-  </Page>
   <Language>ru-RU</Language>
-  <rd:ReportID>3b3076c3-b565-493d-a309-6f0a3116136f</rd:ReportID>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>3b3076c3-b565-493d-a309-6f0a3116136f</rd:ReportID>
 </Report>

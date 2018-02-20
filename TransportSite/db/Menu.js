@@ -4,7 +4,7 @@ Kdn.Menu = [
     {
         MenuId: 0,
         text: "Программа",
-        permission: { u: [1] },
+        permission: { u: [1,168] },
         iconCls: "icon-application_xp32",
         Child: [
             {
@@ -417,7 +417,7 @@ Kdn.Menu = [
     }, {
         text: 'Материалы',
         permission: {
-            u: [1, 29, 22, 4, 61, 53,69,44,146,151]
+            u: [1, 29, 22, 4, 61, 53,69,44,146,151,168]
         },
         iconCls: 'icon-layers32',
         Child: [
@@ -471,16 +471,6 @@ Kdn.Menu = [
                         iconCls: 'icon-blue-document-word',
                         Handler: 'createView',
                         HandlerCfg: "{xtype:'view.report.tireremove',single:true}"
-                    }, {
-                        text: 'Cписок шин, полученных со склада',
-                        iconCls: 'icon-blue-document-word',
-                        Handler: 'createView',
-                        HandlerCfg: "{xtype:'view.report.tireumtu',single:true}"
-                    }, {
-                        text: 'Cписок шин, полученных со склада по гар.№',
-                        iconCls: 'icon-blue-document-word',
-                        Handler: 'createView',
-                        HandlerCfg: "{xtype:'view.report.tireumtugn',single:true}"
                     }
                 ]
             }, '-', {
@@ -529,16 +519,6 @@ Kdn.Menu = [
                         iconCls: 'icon-blue-document-word',
                         Handler: 'createView',
                         HandlerCfg: "{xtype:'view.report.batteryremove',single:true}"
-                    }, {
-                        text: 'Cписок АКБ, полученных со склада',
-                        iconCls: 'icon-blue-document-word',
-                        Handler: 'createView',
-                        HandlerCfg: "{xtype:'view.report.batteryumtu',single:true}"
-                    }, {
-                        text: 'Cписок АКБ, полученных со склада по гар.№',
-                        iconCls: 'icon-blue-document-word',
-                        Handler: 'createView',
-                        HandlerCfg: "{xtype:'view.report.batteryumtugn',single:true}"
                     }
                 ]
             }
@@ -555,11 +535,7 @@ Kdn.Menu = [
                 Handler: 'createView',
                 HandlerCfg: "{xtype:'view.requestapprover',single:true}",
                 iconCls: 'icon-reseller_programm'
-            }, {
-                text: 'Список лиц для утверждения заявок (по должностям)',
-                Handler: 'createView',
-                HandlerCfg: "{xtype:'view.v_requestemployee',single:true}"
-            }, {
+            },  {
                 text: 'Журнал заявок',
                 Handler: 'createView',
                 HandlerCfg: "{xtype:'view.requestmagazine',single:true}",
@@ -1212,11 +1188,6 @@ Kdn.Menu = [
                 HandlerCfg: "{xtype:'view.report.servicecalculation',single:true}"
             },
             {
-                text: 'Объёмы работ для БП',
-                Handler: 'createView',
-                HandlerCfg: "{xtype:'view.report.expenselistbyyear',single:true}"
-            },
-            {
                 text: 'Список путевых листов по заказчку',
                 Handler: 'createView',
                 HandlerCfg: "{xtype:'view.report.waybilllistbycustomer',single:true}"
@@ -1241,7 +1212,7 @@ Kdn.Menu = [
     }, {
         text: "ТО",
         permission: {
-            u: []
+            u: [1,168]
         },
         iconCls: "icon-setting_tools32",
         Handler: null,
@@ -1255,7 +1226,7 @@ Kdn.Menu = [
                 text: 'Контроль выхода транспорта на линию',
                 Handler: 'createView',
                 HandlerCfg: "{xtype:'view.inspection.vehicledayinspection',single:true}"
-            }, {
+            }/*, {
                  text: 'Выдача масла',
                  iconCls: "icon-oiltank",
                  Handler: 'createView',
@@ -1294,46 +1265,23 @@ Kdn.Menu = [
                         HandlerCfg: "{xtype:'view.report.reoillingjournal',single:true}"
                     }
                 ]
-            }
+            }*/
         ]
     },
-    {
-        text: 'Услуги',
-        permission: {
-            u: [61,1]
-        },
-        iconCls: 'icon-reseller_account_template32',
-        Child: [
-            {
-                text: 'Цены на топливо для расчёта тарифов',
-                Handler: 'createView',
-                HandlerCfg: "{xtype:'view.tariffpetrolprice',single:true}"
-                
-            },
-            {
-                text: 'Рассчёт тарифов на услуги транспорта',
-                Handler: 'createView',
-                HandlerCfg: "{xtype:'view.calculatetariff',single:true}"
-            },
-            {
-                text: 'Коэффициенты по статьям затрат',
-                Handler: 'createView',
-                HandlerCfg: "{xtype:'view.tariffcostitem',single:true}"
-
-            }
-        ]
-    },
-    
-    
     {
         text: "Бухгалтерия",
         permission: {
-            u: [1, 15, 16,67,106,111,74]
+            u: [1, 15, 16,67,106,111,74,168]
         },
         iconCls: "icon-coins32",
         Handler: null,
         HandlerCfg: null,
         Child: [
+        {
+            text: 'Закрытие месяца',
+            Handler: 'createView',
+            HandlerCfg: "{xtype:'view.acc.closemonth',single:true}"
+        },
             {
                 text: 'Рассчёт цен на топливо',
                 Handler: 'createView',
@@ -1365,15 +1313,6 @@ Kdn.Menu = [
                  Handler: 'createView',
                  HandlerCfg: "{xtype:'view.acc.accrefuelling',single:true}"
 
-             }, {
-                 text: 'АЗС',
-                 Child: [
-                    {
-                        text: 'Расчёт цен на топливо',
-                        Handler: 'createView',
-                        HandlerCfg: "{xtype:'view.azsacc.fuelcost',single:true}"
-                    }
-                ]
              }
         ]
     }

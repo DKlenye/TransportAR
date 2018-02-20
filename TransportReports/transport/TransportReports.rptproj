@@ -66,14 +66,6 @@
       <FullPath>AverageConsumption.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>AzsFuelMoving.rdl</Name>
-      <FullPath>AzsFuelMoving.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>AzsFuelMovingExt.rdl</Name>
-      <FullPath>AzsFuelMovingExt.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
       <Name>AzsNaftanFuelMoving.rdl</Name>
       <FullPath>AzsNaftanFuelMoving.rdl</FullPath>
     </ProjectItem>
@@ -102,24 +94,8 @@
       <FullPath>BatteryRemove.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>BatteryUmtu.rdl</Name>
-      <FullPath>BatteryUmtu.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>BatteryUmtuGN.rdl</Name>
-      <FullPath>BatteryUmtuGN.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
       <Name>BatteryWarrantlyEnd.rdl</Name>
       <FullPath>BatteryWarrantlyEnd.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>BNC.rdl</Name>
-      <FullPath>BNC.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>BNCUso.rdl</Name>
-      <FullPath>BNCUso.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>BusPassengers.rdl</Name>
@@ -298,10 +274,6 @@
       <FullPath>InventoryDiff.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Invoice.rdl</Name>
-      <FullPath>Invoice.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
       <Name>KapremList.rdl</Name>
       <FullPath>KapremList.rdl</FullPath>
     </ProjectItem>
@@ -360,6 +332,14 @@
     <ProjectItem>
       <Name>NSTWorkDetails1.rdl</Name>
       <FullPath>NSTWorkDetails1.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>NSTWorkDetails2.rdl</Name>
+      <FullPath>NSTWorkDetails2.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>NSTWorkDetails3.rdl</Name>
+      <FullPath>NSTWorkDetails3.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>NSTWorkDetailsByGarageNumber.rdl</Name>
@@ -494,16 +474,8 @@
       <FullPath>ServiceAct.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>ServiceCalculation.rdl</Name>
-      <FullPath>ServiceCalculation.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
       <Name>ServiceCounteragentCheck.rdl</Name>
       <FullPath>ServiceCounteragentCheck.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>ServiceEmployeeCheck.rdl</Name>
-      <FullPath>ServiceEmployeeCheck.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>ServiceScore.rdl</Name>
@@ -550,14 +522,6 @@
       <FullPath>TireSeasonReplace.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>TireUmtu.rdl</Name>
-      <FullPath>TireUmtu.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>TireUmtuGN.rdl</Name>
-      <FullPath>TireUmtuGN.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
       <Name>TireWarrantlyEnd.rdl</Name>
       <FullPath>TireWarrantlyEnd.rdl</FullPath>
     </ProjectItem>
@@ -572,10 +536,6 @@
     <ProjectItem>
       <Name>TruckEffiency.rdl</Name>
       <FullPath>TruckEffiency.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>ttn1.rdl</Name>
-      <FullPath>ttn1.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>VehicleByRefuellingGroup.rdl</Name>
@@ -784,14 +744,6 @@
     <ProjectItem>
       <Name>WorkCoefficient.rdl</Name>
       <FullPath>WorkCoefficient.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>NSTWorkDetails2.rdl</Name>
-      <FullPath>NSTWorkDetails2.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>NSTWorkDetails3.rdl</Name>
-      <FullPath>NSTWorkDetails3.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>

@@ -103,17 +103,12 @@
   <ItemGroup>
     <Compile Include="Direct\AccRefuelling.cs" />
     <Compile Include="Direct\Battery.cs" />
-    <Compile Include="Direct\Azs.cs" />
     <Compile Include="Direct\Dispatcher.cs" />
-    <Compile Include="Direct\RequestApprover.cs" />
     <Compile Include="Direct\DayInspection.cs" />
     <Compile Include="Direct\Distribution.cs" />
     <Compile Include="Direct\Driver.cs" />
     <Compile Include="Direct\MaintenanceRequest.cs" />
-    <Compile Include="Direct\ExpenseList.cs" />
     <Compile Include="Direct\Norms.cs" />
-    <Compile Include="Direct\ServiceRegistry.cs" />
-    <Compile Include="Direct\TariffCalculation.cs" />
     <Compile Include="Direct\Test.cs" />
     <Compile Include="Direct\Limits.cs" />
     <Compile Include="Direct\Request.cs" />
@@ -142,10 +137,6 @@
     <Compile Include="Models\ServiceDepartment.cs" />
     <Compile Include="Models\ServiceAgreement.cs" />
     <Compile Include="Models\ServicePurpose.cs" />
-    <Compile Include="Models\service\TariffCalculation.cs" />
-    <Compile Include="Models\service\TariffCostItem.cs" />
-    <Compile Include="Models\service\TariffCostItemType.cs" />
-    <Compile Include="Models\service\TariffPetrolPrice.cs" />
     <Compile Include="Models\tire\TireCard.cs" />
     <Compile Include="Models\tire\TireSeasonReplace.cs" />
     <Compile Include="Models\tire\TireTechState.cs" />
@@ -157,7 +148,6 @@
     <Compile Include="Models\vehicleDistribution\DistributionList.cs" />
     <Compile Include="Models\vehicleGroups\AccGroup.cs" />
     <Compile Include="Models\acc\AccRefuelling.cs" />
-    <Compile Include="Models\azs\AzsFuelPrice.cs" />
     <Compile Include="Models\battery\Battery.cs" />
     <Compile Include="Models\battery\BatteryMaker.cs" />
     <Compile Include="Models\battery\BatteryMoving.cs" />
@@ -176,9 +166,7 @@
     <Compile Include="Models\info\DriverFuelExcessInfo.cs" />
     <Compile Include="Models\dayInspection\VehicleDayInspection.cs" />
     <Compile Include="Models\InventoryComission.cs" />
-    <Compile Include="Models\Kaprem_Info.cs" />
     <Compile Include="Models\MaintenanceRequest.cs" />
-    <Compile Include="Models\request\v_RequestEmployee.cs" />
     <Compile Include="Models\vehicleGroups\GroupRequest.cs" />
     <Compile Include="Models\EcologyClass.cs" />
     <Compile Include="Models\EngineType.cs" />
@@ -195,21 +183,14 @@
     <Compile Include="Models\tire\TireSeason.cs" />
     <Compile Include="Models\tire\TireWork.cs" />
     <Compile Include="Models\tire\v_Tire.cs" />
-    <Compile Include="Models\Umtu.cs" />
-    <Compile Include="Models\UserGroup.cs" />
     <Compile Include="Models\vehicleGroups\VehicleOilGroup.cs" />
     <Compile Include="Models\VehicleReoilling.cs" />
     <Compile Include="Models\v_Driver.cs" />
     <Compile Include="Models\v_WaybillList.cs" />
-    <Compile Include="Models\waybill\AdvanceReportItem.cs" />
-    <Compile Include="Models\waybill\CashBoxData.cs" />
-    <Compile Include="Models\waybill\CashBoxDataDto.cs" />
-    <Compile Include="Models\waybill\WaybillAdvanceReport.cs" />
     <Compile Include="Models\waybill\WaybillCustomerWorkingTime.cs" />
     <Compile Include="Models\waybill\WaybillInvoice.cs" />
     <Compile Include="Models\waybill\WaybillWork.cs" />
     <Compile Include="Models\waybill\WaybillWorkingTime.cs" />
-    <Compile Include="Models\_PolymirWaybill.cs" />
     <Compile Include="Models\refuelling\RefuellingGroup.cs" />
     <Compile Include="Models\refuelling\VehicleRefuelling.cs" />
     <Compile Include="Models\refuelling\waybillsRefuellingSheets.cs" />
@@ -222,42 +203,9 @@
     <Compile Include="Models\tire\Tire.cs" />
     <Compile Include="Models\v_WaybillPackages.cs" />
     <Compile Include="Models\WorkCounter.cs" />
-    <Compile Include="OtherModels\dbf\BAT.cs" />
-    <Compile Include="OtherModels\dbf\SHIN.cs" />
-    <Compile Include="OtherModels\fseb\fsebAR.cs" />
-    <Compile Include="OtherModels\fseb\Tran.cs" />
-    <Compile Include="OtherModels\ogmnew\ogmnewAR.cs" />
-    <Compile Include="OtherModels\ogmnew\kaprem.cs" />
-    <Compile Include="OtherModels\tdbf\bodyType.cs" />
-    <Compile Include="OtherModels\tdbf\Refuelling.cs" />
-    <Compile Include="OtherModels\tdbf\transportFuel.cs" />
-    <Compile Include="OtherModels\tdbf\waybillsDriver.cs" />
-    <Compile Include="OtherModels\tdbf\waybillsDriversResponse.cs" />
-    <Compile Include="OtherModels\tdbf\waybillsRefuelling.cs" />
-    <Compile Include="OtherModels\tdbf\driversLicense.cs" />
-    <Compile Include="OtherModels\tdbf\DriversMedicalCertificate.cs" />
-    <Compile Include="OtherModels\tdbf\driversToResponse.cs" />
-    <Compile Include="OtherModels\tdbf\driversToTransport.cs" />
-    <Compile Include="OtherModels\tdbf\fuelNorm.cs" />
-    <Compile Include="OtherModels\tdbf\fuelNormsEx.cs" />
-    <Compile Include="OtherModels\tdbf\groupAcc.cs" />
-    <Compile Include="OtherModels\tdbf\normsIncrease.cs" />
-    <Compile Include="OtherModels\tdbf\tdbfActiveRecord.cs" />
-    <Compile Include="OtherModels\tdbf\transportFacility.cs" />
-    <Compile Include="OtherModels\tdbf\transportTrailer.cs" />
-    <Compile Include="OtherModels\tdbf\waybills.cs" />
-    <Compile Include="OtherModels\tdbf\waybillsFuelRemains.cs" />
-    <Compile Include="OtherModels\tdbf\waybillsPackages.cs" />
-    <Compile Include="OtherModels\tdbf\waybillsRefuellingSheet.cs" />
-    <Compile Include="OtherModels\tdbf\WaybillType.cs" />
-    <Compile Include="OtherModels\tdbf\Fuel.cs" />
-    <Compile Include="OtherModels\tdbf\OtherRefuelling.cs" />
-    <Compile Include="OtherModels\tdbf\Schedule.cs" />
-    <Compile Include="OtherModels\tdbf\waybillPackage.cs" />
     <Compile Include="PetaPoco\PetaPoco.cs" />
     <Compile Include="ReplicationSource.cs" />
     <Compile Include="Direct\Waybill.cs" />
-    <Compile Include="Direct\Replication.cs" />
     <Compile Include="Direct\VehicleDirect.cs" />
     <Compile Include="Direct\Direct.cs" />
     <Compile Include="Interfaces\IOwnered.cs" />
@@ -296,41 +244,7 @@
     <Compile Include="Models\waybill\WaybillTask.cs" />
     <Compile Include="Models\WorkType.cs" />
     <Compile Include="Models\WorkUnit.cs" />
-    <Compile Include="OtherModels\farm\AppUser.cs" />
-    <Compile Include="OtherModels\farm\common\FIO.cs" />
-    <Compile Include="OtherModels\farm\common\Ownered.cs" />
-    <Compile Include="OtherModels\farm\Customer.cs" />
-    <Compile Include="OtherModels\farm\Department.cs" />
-    <Compile Include="OtherModels\farm\Driver.cs" />
-    <Compile Include="OtherModels\farm\DriverLicence.cs" />
-    <Compile Include="OtherModels\farm\Fuel.cs" />
-    <Compile Include="OtherModels\farm\NormIncrease.cs" />
-    <Compile Include="OtherModels\farm\NormType.cs" />
-    <Compile Include="OtherModels\farm\People.cs" />
-    <Compile Include="OtherModels\farm\Refuelling.cs" />
-    <Compile Include="OtherModels\farm\RefuellingPlace.cs" />
-    <Compile Include="OtherModels\farm\TransportOwner.cs" />
-    <Compile Include="OtherModels\farm\UserGroup.cs" />
-    <Compile Include="OtherModels\farm\Vehicle.cs" />
-    <Compile Include="OtherModels\farm\VehicleDriver.cs" />
-    <Compile Include="OtherModels\farm\VehicleNorm.cs" />
-    <Compile Include="OtherModels\farm\Waybill.cs" />
-    <Compile Include="OtherModels\farm\WaybillCounter.cs" />
-    <Compile Include="OtherModels\farm\WaybillFuelRemain.cs" />
-    <Compile Include="OtherModels\farm\WaybillTask.cs" />
-    <Compile Include="OtherModels\farm\WaybillType.cs" />
-    <Compile Include="OtherModels\farm\WorkCounter.cs" />
-    <Compile Include="OtherModels\farm\WorkType.cs" />
-    <Compile Include="OtherModels\kdrPolymir\BIBPOLIM.cs" />
-    <Compile Include="OtherModels\tdbf\BasePeople.cs" />
-    <Compile Include="OtherModels\tdbf\Customer.cs" />
-    <Compile Include="OtherModels\tdbf\TransportSubOwner.cs" />
-    <Compile Include="OtherModels\tdbf\TheWeather.cs" />
-    <Compile Include="OtherModels\tdbf\Driver.cs" />
-    <Compile Include="OtherModels\tdbf\waybillsTasks.cs" />
-    <Compile Include="OtherModels\tdbf\WaybillTaskIncrease.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="OtherModels\kdr\personal1.cs" />
     <Compile Include="Web\Handlers\Attachment.cs" />
     <Compile Include="Web\Handlers\JS.cs" />
     <Compile Include="Web\WaybillTpl.cs">
@@ -447,17 +361,7 @@
     <EmbeddedResource Include="JS\Transport\view\Employee.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="OtherModels\kdr\personal1.hbm.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="OtherModels\kdrPolymir\BIBPOLIM.hbm.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\Driver.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="OtherModels\tdbf\BasePeople.hbm.xml" />
-    <EmbeddedResource Include="OtherModels\tdbf\Driver.hbm.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\Norm.js" />
@@ -505,9 +409,6 @@
     <EmbeddedResource Include="JS\Transport\view\Temperature.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="OtherModels\tdbf\TheWeather.hbm.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\Waybill.js" />
   </ItemGroup>
   <ItemGroup>
@@ -522,35 +423,6 @@
     <EmbeddedResource Include="JS\Transport\view\car\VehicleDriver.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="OtherModels\farm\AppUser.hbm.xml" />
-    <EmbeddedResource Include="OtherModels\farm\Customer.hbm.xml" />
-    <EmbeddedResource Include="OtherModels\farm\Department.hbm.xml" />
-    <EmbeddedResource Include="OtherModels\farm\Driver.hbm.xml" />
-    <EmbeddedResource Include="OtherModels\farm\DriverLicence.hbm.xml" />
-    <EmbeddedResource Include="OtherModels\farm\Fuel.hbm.xml" />
-    <EmbeddedResource Include="OtherModels\farm\NormIncrease.hbm.xml" />
-    <EmbeddedResource Include="OtherModels\farm\NormType.hbm.xml" />
-    <EmbeddedResource Include="OtherModels\farm\People.hbm.xml" />
-    <EmbeddedResource Include="OtherModels\farm\Refuelling.hbm.xml" />
-    <EmbeddedResource Include="OtherModels\farm\RefuellingPlace.hbm.xml" />
-    <EmbeddedResource Include="OtherModels\farm\TransportOwner.hbm.xml" />
-    <EmbeddedResource Include="OtherModels\farm\UserGroup.hbm.xml" />
-    <EmbeddedResource Include="OtherModels\farm\Vehicle.hbm.xml" />
-    <EmbeddedResource Include="OtherModels\farm\VehicleDriver.hbm.xml" />
-    <EmbeddedResource Include="OtherModels\farm\VehicleNorm.hbm.xml" />
-    <EmbeddedResource Include="OtherModels\farm\Waybill.hbm.xml" />
-    <EmbeddedResource Include="OtherModels\farm\WaybillCounter.hbm.xml" />
-    <EmbeddedResource Include="OtherModels\farm\WaybillFuelRemain.hbm.xml" />
-    <EmbeddedResource Include="OtherModels\farm\WaybillTask.hbm.xml" />
-    <EmbeddedResource Include="OtherModels\farm\WaybillType.hbm.xml" />
-    <EmbeddedResource Include="OtherModels\farm\WorkCounter.hbm.xml" />
-    <EmbeddedResource Include="OtherModels\farm\WorkType.hbm.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="OtherModels\tdbf\waybillsTasks.hbm.xml" />
-    <EmbeddedResource Include="OtherModels\tdbf\WaybillTaskIncrease.hbm.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="JS\Transport\combo\Car.js" />
   </ItemGroup>
   <ItemGroup>
@@ -563,40 +435,13 @@
     <EmbeddedResource Include="JS\Transport\view\Route.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="OtherModels\tdbf\TransportSubOwner.hbm.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="OtherModels\tdbf\Customer.hbm.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\WorkCounter.js" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\combo\WorkCounter.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="OtherModels\tdbf\Schedule.hbm.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="OtherModels\tdbf\OtherRefuelling.hbm.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="OtherModels\tdbf\Fuel.hbm.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\Schedule.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="OtherModels\tdbf\WaybillType.hbm.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="OtherModels\tdbf\transportFacility.hbm.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="OtherModels\tdbf\transportTrailer.hbm.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="OtherModels\tdbf\groupAcc.hbm.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\GroupAcc.js" />
@@ -605,26 +450,11 @@
     <EmbeddedResource Include="JS\Transport\view\RefuellingGroup.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="OtherModels\tdbf\normsIncrease.hbm.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="OtherModels\tdbf\fuelNorm.hbm.xml" />
-    <EmbeddedResource Include="OtherModels\tdbf\fuelNormsEx.hbm.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="OtherModels\tdbf\driversToResponse.hbm.xml" />
-    <EmbeddedResource Include="OtherModels\tdbf\driversToTransport.hbm.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\WaybillPackageType.js" />
     <EmbeddedResource Include="JS\Transport\app\TemperatureButton.js" />
     <EmbeddedResource Include="JS\Transport\combo\OwnerDSC.js" />
     <EmbeddedResource Include="JS\Transport\combo\WaybillPackageType.js" />
     <EmbeddedResource Include="JS\Transport\view\WaybillPackage.js" />
-    <EmbeddedResource Include="OtherModels\tdbf\waybills.hbm.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="OtherModels\tdbf\waybillsFuelRemains.hbm.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\battery\BatteryMaker.js" />
@@ -636,13 +466,7 @@
     <EmbeddedResource Include="JS\Transport\view\battery\Battery.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="OtherModels\dbf\BAT.hbm.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="JS\Transport\combo\_combo.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="OtherModels\dbf\SHIN.hbm.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\tire\TireMaker.js" />
@@ -695,13 +519,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\OilGroup.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="OtherModels\tdbf\waybillsDriver.hbm.xml" />
-    <EmbeddedResource Include="OtherModels\tdbf\waybillsDriversResponse.hbm.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="OtherModels\tdbf\transportFuel.hbm.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\report\FuelRemain.js" />
@@ -848,9 +665,6 @@
     <EmbeddedResource Include="JS\Transport\view\report\VehicleInfoByGroup.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="JS\Transport\view\azsAcc\FuelCost.js" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\battery\BatteryRemoveReason.js" />
   </ItemGroup>
   <ItemGroup>
@@ -878,9 +692,6 @@
     <EmbeddedResource Include="JS\Transport\view\request\VehicleOrder.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="JS\Transport\view\request\v_RequestEmployee.js" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\report\AccVehicleMoving.js" />
   </ItemGroup>
   <ItemGroup>
@@ -903,9 +714,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\report\BatteryRemove.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="JS\Transport\view\report\BatteryUmtu.js" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\report\VehicleRunDetails.js" />
@@ -956,16 +764,10 @@
     <EmbeddedResource Include="JS\Transport\view\inspection\VehicleDayInspection.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="JS\Transport\view\report\TireUmtu.js" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="JS\Transport\combo\TireModel.js" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\report\ExpenseListByGroup.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="JS\Transport\view\report\TireUmtuGN.js" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\ServiceGroup.js" />
@@ -1005,9 +807,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\report\ExpenseListDepartment.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="JS\Transport\view\report\BatteryUmtuGN.js" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\report\TireList.js" />
@@ -1173,9 +972,6 @@
     <EmbeddedResource Include="JS\Transport\combo\Oil.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="JS\Transport\view\waybill\WaybillAdvanceReport.js" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\report\CarMonthConsumption.js" />
     <EmbeddedResource Include="JS\Transport\view\report\ReoillingFact.js" />
   </ItemGroup>
@@ -1199,12 +995,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\VehicleModel.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="JS\Transport\view\service\CalculateTariff.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="JS\Transport\view\service\TariffCostItem.js" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\combo\TariffCostItemType.js" />
@@ -1278,12 +1068,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\report\VehicleRefuelling.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="JS\Transport\view\service\CalculateTariffEditor.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="JS\Transport\view\service\TariffPetrolPrice.js" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\report\ExpenseListVehicleCount.js" />
@@ -1407,6 +1191,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JS\Transport\view\report\NSTWorkDetails.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\Transport\view\acc\CloseMonth.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

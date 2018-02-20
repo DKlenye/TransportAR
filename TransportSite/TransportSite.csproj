@@ -143,7 +143,9 @@
     <EmbeddedResource Include="Scripts\Net.js" />
     <EmbeddedResource Include="Scripts\Net1.js" />
     <Content Include="Scripts\app.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />

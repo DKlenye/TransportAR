@@ -53,7 +53,7 @@ namespace Transport.Direct
             accountingId = p.Value<int>();
          }
 
-          db.Execute(";EXEC AccPostingCalculate @month,@year,@accountingId",
+          db.Execute(";EXEC Acc_CalculatePosting @month,@year,@accountingId",
                  new
                  {
                     month = month,

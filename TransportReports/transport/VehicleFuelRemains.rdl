@@ -1,182 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition">
-  <DataSources>
-    <DataSource Name="DataSource1">
-      <DataSourceReference>DB2</DataSourceReference>
-      <rd:DataSourceID>11482eb1-5ec9-4a04-8bf2-280b18e15444</rd:DataSourceID>
-    </DataSource>
-  </DataSources>
-  <DataSets>
-    <DataSet Name="TblDataSet">
-      <Fields>
-        <Field Name="WaybillId">
-          <DataField>WaybillId</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="DepartureDate">
-          <DataField>DepartureDate</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="GarageNumber">
-          <DataField>GarageNumber</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Model">
-          <DataField>Model</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="RegistrationNumber">
-          <DataField>RegistrationNumber</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Trip">
-          <DataField>Trip</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="FuelName">
-          <DataField>FuelName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Remain">
-          <DataField>Remain</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="Department">
-          <DataField>Department</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="EmployeeNumber">
-          <DataField>EmployeeNumber</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="LastName">
-          <DataField>LastName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="FirstName">
-          <DataField>FirstName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="MiddleName">
-          <DataField>MiddleName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource1</DataSourceName>
-        <CommandType>StoredProcedure</CommandType>
-        <CommandText>ssrs_VehicleFuelRemains</CommandText>
-        <QueryParameters>
-          <QueryParameter Name="@month">
-            <Value>=Parameters!month.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@year">
-            <Value>=Parameters!year.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@ownerId">
-            <Value>=Parameters!ownerId.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@column">
-            <Value>=Parameters!column.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@department">
-            <Value>=Parameters!department.Value</Value>
-          </QueryParameter>
-        </QueryParameters>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-    </DataSet>
-    <DataSet Name="ItogDs">
-      <Fields>
-        <Field Name="FuelName">
-          <DataField>FuelName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Remain">
-          <DataField>Remain</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource1</DataSourceName>
-        <CommandType>StoredProcedure</CommandType>
-        <CommandText>ssrs_VehicleFuelRemainsSummary</CommandText>
-        <QueryParameters>
-          <QueryParameter Name="@month">
-            <Value>=Parameters!month.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@year">
-            <Value>=Parameters!year.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@ownerId">
-            <Value>=Parameters!ownerId.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@column">
-            <Value>=Parameters!column.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@department">
-            <Value>=Parameters!department.Value</Value>
-          </QueryParameter>
-        </QueryParameters>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-    </DataSet>
-    <DataSet Name="ColimnDS">
-      <Fields>
-        <Field Name="ColumnId">
-          <DataField>ColumnId</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="FullName">
-          <DataField>FullName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource1</DataSourceName>
-        <CommandText>select ColumnId, FullName from TransportColumn
-union
-select 0, 'По подразделениям'</CommandText>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-    </DataSet>
-    <DataSet Name="DepDS">
-      <Fields>
-        <Field Name="DepartmentId">
-          <DataField>DepartmentId</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="DepartmentName">
-          <DataField>DepartmentName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource1</DataSourceName>
-        <CommandText>select DepartmentId, RTRIM(DepartmentName) as DepartmentName  from Department
-union
-select 0, 'По колоннам'</CommandText>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-    </DataSet>
-    <DataSet Name="OwnerDS">
-      <Fields>
-        <Field Name="OwnerId">
-          <DataField>OwnerId</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="OwnerName">
-          <DataField>OwnerName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource1</DataSourceName>
-        <CommandText>select OwnerId, OwnerName from TransportOwner</CommandText>
-        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
-      </Query>
-    </DataSet>
-  </DataSets>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <Body>
     <ReportItems>
       <Textbox Name="Textbox4">
@@ -259,7 +82,7 @@ select 0, 'По колоннам'</CommandText>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Протокол от 12.04.2012 №8</Value>
+                <Value>Протокол № 40 от 27.12.2017</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -409,18 +232,18 @@ select 0, 'По колоннам'</CommandText>
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>2.49999cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.91828in</Width>
+              <Width>2.33243cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.78633in</Width>
+              <Width>1.99728cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -519,7 +342,7 @@ select 0, 'По колоннам'</CommandText>
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1278,15 +1101,15 @@ select 0, 'По колоннам'</CommandText>
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>3.08842in</Width>
+              <Width>7.84459cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.69259in</Width>
+              <Width>1.75918cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.61122in</Height>
+              <Height>1.5525cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1363,7 +1186,7 @@ select 0, 'По колоннам'</CommandText>
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1439,7 +1262,7 @@ select 0, 'По колоннам'</CommandText>
           <TablixMembers>
             <TablixMember>
               <TablixHeader>
-                <Size>2.54627in</Size>
+                <Size>6.46753cm</Size>
                 <CellContents>
                   <Textbox Name="Textbox185">
                     <CanGrow>true</CanGrow>
@@ -1478,7 +1301,7 @@ select 0, 'По колоннам'</CommandText>
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>0.98425in</Size>
+                    <Size>2.5cm</Size>
                     <CellContents>
                       <Textbox Name="Textbox144">
                         <CanGrow>true</CanGrow>
@@ -1517,7 +1340,7 @@ select 0, 'По колоннам'</CommandText>
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>0.98425in</Size>
+                        <Size>2.49999cm</Size>
                         <CellContents>
                           <Textbox Name="Textbox149">
                             <CanGrow>true</CanGrow>
@@ -1556,7 +1379,7 @@ select 0, 'По колоннам'</CommandText>
                       <TablixMembers>
                         <TablixMember>
                           <TablixHeader>
-                            <Size>0.98425in</Size>
+                            <Size>2.49999cm</Size>
                             <CellContents>
                               <Textbox Name="Textbox172">
                                 <CanGrow>true</CanGrow>
@@ -1595,7 +1418,7 @@ select 0, 'По колоннам'</CommandText>
                           <TablixMembers>
                             <TablixMember>
                               <TablixHeader>
-                                <Size>0.73425in</Size>
+                                <Size>1.86499cm</Size>
                                 <CellContents>
                                   <Textbox Name="Textbox180">
                                     <CanGrow>true</CanGrow>
@@ -1634,7 +1457,7 @@ select 0, 'По колоннам'</CommandText>
                               <TablixMembers>
                                 <TablixMember>
                                   <TablixHeader>
-                                    <Size>0.78633in</Size>
+                                    <Size>1.99728cm</Size>
                                     <CellContents>
                                       <Textbox Name="Textbox189">
                                         <CanGrow>true</CanGrow>
@@ -1701,7 +1524,7 @@ select 0, 'По колоннам'</CommandText>
                 </SortExpression>
               </SortExpressions>
               <TablixHeader>
-                <Size>2.54627in</Size>
+                <Size>6.46753cm</Size>
                 <CellContents>
                   <Textbox Name="Textbox186">
                     <CanGrow>true</CanGrow>
@@ -1734,7 +1557,7 @@ select 0, 'По колоннам'</CommandText>
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>0.98425in</Size>
+                    <Size>2.5cm</Size>
                     <CellContents>
                       <Textbox Name="WaybillId3">
                         <CanGrow>true</CanGrow>
@@ -1769,7 +1592,7 @@ select 0, 'По колоннам'</CommandText>
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>0.98425in</Size>
+                        <Size>2.49999cm</Size>
                         <CellContents>
                           <Textbox Name="DepartureDate2">
                             <CanGrow>true</CanGrow>
@@ -1814,7 +1637,7 @@ select 0, 'По колоннам'</CommandText>
                             </SortExpression>
                           </SortExpressions>
                           <TablixHeader>
-                            <Size>0.98425in</Size>
+                            <Size>2.49999cm</Size>
                             <CellContents>
                               <Textbox Name="Group5">
                                 <CanGrow>true</CanGrow>
@@ -1849,7 +1672,7 @@ select 0, 'По колоннам'</CommandText>
                           <TablixMembers>
                             <TablixMember>
                               <TablixHeader>
-                                <Size>0.73425in</Size>
+                                <Size>1.86499cm</Size>
                                 <CellContents>
                                   <Textbox Name="Remain6">
                                     <CanGrow>true</CanGrow>
@@ -1884,7 +1707,7 @@ select 0, 'По колоннам'</CommandText>
                               <TablixMembers>
                                 <TablixMember>
                                   <TablixHeader>
-                                    <Size>0.78633in</Size>
+                                    <Size>1.99728cm</Size>
                                     <CellContents>
                                       <Textbox Name="Textbox191">
                                         <CanGrow>true</CanGrow>
@@ -1957,6 +1780,259 @@ select 0, 'По колоннам'</CommandText>
     <Height>7.76042in</Height>
     <Style />
   </Body>
+  <Width>28.25882cm</Width>
+  <Page>
+    <PageFooter>
+      <Height>0.97896cm</Height>
+      <PrintOnFirstPage>true</PrintOnFirstPage>
+      <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Textbox Name="Textbox14">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>стр. </Value>
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                  </Style>
+                </TextRun>
+                <TextRun>
+                  <Value>=Globals!PageNumber</Value>
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                  </Style>
+                </TextRun>
+                <TextRun>
+                  <Value>/</Value>
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                  </Style>
+                </TextRun>
+                <TextRun>
+                  <Value>=Globals!TotalPages</Value>
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Right</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox13</rd:DefaultName>
+          <Top>0.17639cm</Top>
+          <Left>22.14334cm</Left>
+          <Height>0.49417cm</Height>
+          <Width>5.95737cm</Width>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+      </ReportItems>
+      <Style>
+        <Border>
+          <Style>None</Style>
+        </Border>
+      </Style>
+    </PageFooter>
+    <PageHeight>21cm</PageHeight>
+    <PageWidth>29.7cm</PageWidth>
+    <LeftMargin>0.5cm</LeftMargin>
+    <RightMargin>0.5cm</RightMargin>
+    <TopMargin>0.5cm</TopMargin>
+    <BottomMargin>0.5cm</BottomMargin>
+    <ColumnSpacing>0.13cm</ColumnSpacing>
+    <Style />
+  </Page>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource1">
+      <DataSourceReference>DB2</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>11482eb1-5ec9-4a04-8bf2-280b18e15444</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="TblDataSet">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@month">
+            <Value>=Parameters!month.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@year">
+            <Value>=Parameters!year.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@ownerId">
+            <Value>=Parameters!ownerId.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@column">
+            <Value>=Parameters!column.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@department">
+            <Value>=Parameters!department.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandType>StoredProcedure</CommandType>
+        <CommandText>ssrs_VehicleFuelRemains</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="WaybillId">
+          <DataField>WaybillId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="DepartureDate">
+          <DataField>DepartureDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="GarageNumber">
+          <DataField>GarageNumber</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Model">
+          <DataField>Model</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="RegistrationNumber">
+          <DataField>RegistrationNumber</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Trip">
+          <DataField>Trip</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FuelName">
+          <DataField>FuelName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Remain">
+          <DataField>Remain</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Department">
+          <DataField>Department</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="EmployeeNumber">
+          <DataField>EmployeeNumber</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="LastName">
+          <DataField>LastName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FirstName">
+          <DataField>FirstName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MiddleName">
+          <DataField>MiddleName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="ItogDs">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@month">
+            <Value>=Parameters!month.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@year">
+            <Value>=Parameters!year.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@ownerId">
+            <Value>=Parameters!ownerId.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@column">
+            <Value>=Parameters!column.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@department">
+            <Value>=Parameters!department.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandType>StoredProcedure</CommandType>
+        <CommandText>ssrs_VehicleFuelRemainsSummary</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="FuelName">
+          <DataField>FuelName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Remain">
+          <DataField>Remain</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="ColimnDS">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <CommandText>select ColumnId, FullName from TransportColumn
+union
+select 0, 'По подразделениям'</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="ColumnId">
+          <DataField>ColumnId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="FullName">
+          <DataField>FullName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="DepDS">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <CommandText>select DepartmentId, RTRIM(DepartmentName) as DepartmentName  from Department
+union
+select 0, 'По колоннам'</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="DepartmentId">
+          <DataField>DepartmentId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="DepartmentName">
+          <DataField>DepartmentName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="OwnerDS">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <CommandText>select OwnerId, OwnerName from TransportOwner</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="OwnerId">
+          <DataField>OwnerId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="OwnerName">
+          <DataField>OwnerName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
   <ReportParameters>
     <ReportParameter Name="month">
       <DataType>Integer</DataType>
@@ -2069,81 +2145,7 @@ select 0, 'По колоннам'</CommandText>
       </ValidValues>
     </ReportParameter>
   </ReportParameters>
-  <Width>28.25882cm</Width>
-  <Page>
-    <PageFooter>
-      <Height>0.97896cm</Height>
-      <PrintOnFirstPage>true</PrintOnFirstPage>
-      <PrintOnLastPage>true</PrintOnLastPage>
-      <ReportItems>
-        <Textbox Name="Textbox14">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>стр. </Value>
-                  <Style>
-                    <FontSize>8pt</FontSize>
-                  </Style>
-                </TextRun>
-                <TextRun>
-                  <Value>=Globals!PageNumber</Value>
-                  <Style>
-                    <FontSize>8pt</FontSize>
-                  </Style>
-                </TextRun>
-                <TextRun>
-                  <Value>/</Value>
-                  <Style>
-                    <FontSize>8pt</FontSize>
-                  </Style>
-                </TextRun>
-                <TextRun>
-                  <Value>=Globals!TotalPages</Value>
-                  <Style>
-                    <FontSize>8pt</FontSize>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style>
-                <TextAlign>Right</TextAlign>
-              </Style>
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox13</rd:DefaultName>
-          <Top>0.17639cm</Top>
-          <Left>22.14334cm</Left>
-          <Height>0.49417cm</Height>
-          <Width>5.95737cm</Width>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-      </ReportItems>
-      <Style>
-        <Border>
-          <Style>None</Style>
-        </Border>
-      </Style>
-    </PageFooter>
-    <PageHeight>21cm</PageHeight>
-    <PageWidth>29.7cm</PageWidth>
-    <LeftMargin>0.5cm</LeftMargin>
-    <RightMargin>0.5cm</RightMargin>
-    <TopMargin>0.5cm</TopMargin>
-    <BottomMargin>0.5cm</BottomMargin>
-    <ColumnSpacing>0.13cm</ColumnSpacing>
-    <Style />
-  </Page>
   <Language>ru-RU</Language>
-  <rd:ReportID>c34a4aae-3be4-4be7-9a6d-ad5d50abd199</rd:ReportID>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>c34a4aae-3be4-4be7-9a6d-ad5d50abd199</rd:ReportID>
 </Report>

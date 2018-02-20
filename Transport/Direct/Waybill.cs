@@ -563,113 +563,7 @@ namespace Transport.Direct
             return waybill.FindIntersectionWaybills().Count();
         }
 
-        [DirectMethod]
-        [ParseAsJson]
-        public virtual DataSerializer CreateWaybillAdvanceReport(JObject o)
-        {
-            var type = typeof (WaybillAdvanceReport);
-            var models = getModels(o);
-            var rezult = new List<object>();
-
-            foreach (var model in models)
-            {
-                var instance = JsonConvert.DeserializeObject<WaybillAdvanceReport>(model.ToString());
-                if (instance.Cost != 0)
-                {
-                    instance.SaveAndFlush();
-                }
-                rezult.Add(instance);
-            }
-
-            return new DataSerializer(rezult);
-        }
-
-        [DirectMethod]
-        [ParseAsJson]
-        public virtual DataSerializer UpdateWaybillAdvanceReport(JObject o)
-        {
-            var type = typeof (WaybillAdvanceReport);
-            var models = getModels(o);
-            var rezult = new List<object>();
-
-            foreach (var model in models)
-            {
-                var instance = JsonConvert.DeserializeObject<WaybillAdvanceReport>(model.ToString());
-                instance.SaveAndFlush();
-                rezult.Add(instance);
-            }
-
-            return new DataSerializer(rezult);
-        }
-
-        [DirectMethod]
-        [ParseAsJson]
-        public DataSerializer ReadCashBoxData(JObject o)
-        {
-            JToken w;
-            if (o.TryGetValue("WaybillId", out w) && w.Value<int?>() != null)
-            {
-                var data = db.Query<CashBoxDataDto>(";exec CashBoxData_Select  @0", w.Value<int>());
-                return new DataSerializer(data.ToList());
-            }
-
-            return new DataSerializer(new List<object>());
-        }
-
-        [DirectMethod]
-        [ParseAsJson]
-        public DataSerializer AddCashBoxData(JObject o)
-        {
-            JToken w;
-            if (o.TryGetValue("data", out w))
-            {
-                var CustomerId = o["CustomerId"].Value<int>();
-                var WaybillId = o["WaybillId"].Value<int>();
-
-                db.Execute("delete from WaybillAdvanceReport where CustomerId = @0 and WaybillId = @1", CustomerId,
-                    WaybillId);
-
-                var dictionary = new Dictionary<int, WaybillAdvanceReport>();
-
-                (w as JArray).ForEach(_x =>
-                {
-                    var x = JsonConvert.DeserializeObject<CashBoxDataDto>(_x.ToString());
-
-                    var cashBox = CashBoxData.FindAll(
-                        Expression.Where<CashBoxData>(y => y.ddok == x.ddok && y.ndok == x.ndok && y.id_men == x.id_men));
-
-                    cashBox.ForEach(cb =>
-                    {
-                        WaybillAdvanceReport war;
-                        if (!dictionary.ContainsKey(cb.AdvanceReportItemId))
-                        {
-                            war = new WaybillAdvanceReport()
-                            {
-                                WaybillId = WaybillId,
-                                ReportItem = AdvanceReportItem.Find(cb.AdvanceReportItemId),
-                                Customer = Customer.Find(CustomerId),
-                                Cost = cb.stm
-                            };
-                            dictionary.Add(cb.AdvanceReportItemId, war);
-                        }
-                        else
-                        {
-                            war = dictionary[cb.AdvanceReportItemId];
-                            war.Cost += cb.stm;
-                        }
-                        war.Save();
-                    });
-                });
-
-                return new DataSerializer(WaybillAdvanceReport.findByWaybillId(WaybillId));
-
-            }
-
-            return new DataSerializer(new List<object>());
-
-
-        }
-
+      
         [DirectMethod]
         [ParseAsJson]
         public DataSerializer customerWorkingTimeRead(JObject o)
@@ -739,7 +633,6 @@ namespace Transport.Direct
             return new DataSerializer(rezultList);
 
         }
-
 
 
     }
